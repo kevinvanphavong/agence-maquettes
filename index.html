@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maquettes de refonte — Studio web · Kévin Vanphavong</title>
+<meta name="description" content="Démonstrations interactives de refonte de site web et back office pour parcs de loisirs.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#0c0d12; --surface:#15161f; --surface2:#1d1f2b; --line:#282a3a;
+  --text:#eef0f7; --muted:#9396ab; --muted2:#62647a;
+  --accent:#8b7cff; --accent2:#c084fc;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;line-height:1.6}
+h1,h2,h3,.disp{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.5px}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 26px}
+
+/* HEADER */
+.top{display:flex;align-items:center;height:78px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:700;font-size:17px}
+.brand .mk{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-size:18px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 6px 20px rgba(139,124,255,.4)}
+.brand small{display:block;font-family:'Inter';font-weight:600;font-size:10.5px;
+  color:var(--muted);letter-spacing:1.5px;margin-top:-2px}
+.top .contact{margin-left:auto;font-size:13.5px;font-weight:600;color:var(--muted)}
+
+/* HERO */
+.hero{padding:78px 0 50px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;top:-120px;right:-80px;width:420px;height:420px;
+  border-radius:50%;background:radial-gradient(circle,rgba(139,124,255,.22),transparent 65%)}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);
+  background:var(--surface);padding:7px 15px;border-radius:30px;font-size:12.5px;
+  font-weight:600;color:var(--accent2);margin-bottom:22px}
+.hero h1{font-size:48px;line-height:1.08;max-width:680px}
+.hero h1 .g{background:linear-gradient(120deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:17px;color:var(--muted);max-width:560px;margin-top:18px;font-weight:500}
+.hero .meta{display:flex;gap:30px;margin-top:30px}
+.hero .meta .m b{font-family:'Space Grotesk';font-size:22px;display:block}
+.hero .meta .m span{font-size:12px;color:var(--muted2);font-weight:600;letter-spacing:.5px}
+
+/* PROJECTS */
+.projects{padding:30px 0 70px}
+.sec-label{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--muted2);
+  text-transform:uppercase;margin-bottom:18px}
+.proj{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  overflow:hidden;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-6px)}
+.card.kp:hover{border-color:#a78bfa}
+.card.lg:hover{border-color:#ff1f3d}
+.card .visual{height:200px;position:relative;overflow:hidden;display:flex;
+  align-items:center;justify-content:center}
+.card.kp .visual{background:radial-gradient(circle at 30% 30%,#a78bfa,#7c3aed 55%,#ec4899)}
+.card.lg .visual{background:radial-gradient(circle at 70% 30%,#2a0a12,#0a0a14 60%);
+  border-bottom:1px solid var(--line)}
+.card .visual .emo{font-size:84px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
+.card.lg .visual .emo{filter:drop-shadow(0 0 26px rgba(255,31,61,.6))}
+.card .visual .scan{position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#22d3ee,transparent);
+  animation:scan 3.5s linear infinite}
+@keyframes scan{0%{top:0}100%{top:100%}}
+.card .body{padding:24px;flex:1;display:flex;flex-direction:column}
+.card .ptag{font-size:11.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:8px}
+.card.kp .ptag{color:#c084fc}
+.card.lg .ptag{color:#ff5c6f}
+.card h3{font-size:23px;margin-bottom:8px}
+.card .body p{font-size:14px;color:var(--muted);font-weight:500;flex:1}
+.card .feats{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 20px}
+.card .feats span{font-size:11.5px;font-weight:600;padding:4px 11px;border-radius:20px;
+  background:var(--surface2);border:1px solid var(--line);color:var(--muted)}
+.card .go{display:flex;align-items:center;justify-content:space-between;
+  padding:13px 18px;border-radius:12px;font-family:'Space Grotesk';font-weight:600;
+  font-size:14.5px;transition:filter .15s}
+.card.kp .go{background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff}
+.card.lg .go{background:#ff1f3d;color:#fff}
+.card .go:hover{filter:brightness(1.1)}
+.card .go .arr{font-size:18px}
+
+/* HOWTO */
+.howto{border-top:1px solid var(--line);padding:54px 0 40px}
+.howto h2{font-size:26px;margin-bottom:8px}
+.howto .lead{color:var(--muted);font-size:15px;font-weight:500;margin-bottom:26px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+.step .n{width:32px;height:32px;border-radius:9px;background:var(--surface2);
+  border:1px solid var(--line);display:flex;align-items:center;justify-content:center;
+  font-family:'Space Grotesk';font-weight:700;color:var(--accent2);margin-bottom:12px}
+.step h3{font-size:16px;margin-bottom:5px}
+.step p{font-size:13px;color:var(--muted);font-weight:500}
+
+footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
+  color:var(--muted2);font-size:12.5px;font-weight:500}
+
+@media(max-width:760px){
+  .proj,.steps{grid-template-columns:1fr}
+  .hero h1{font-size:34px}
+  .hero .meta{flex-wrap:wrap;gap:18px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="mk">◢</span>
+      <span>Studio web<small>KÉVIN VANPHAVONG</small></span>
+    </div>
+    <div class="contact">Refonte de sites &amp; back office · loisirs</div>
+  </header>
+
+  <section class="hero">
+    <span class="eyebrow">✦ Démonstrations interactives</span>
+    <h1>Des maquettes <span class="g">qui se cliquent</span>, pas des PDF qui dorment.</h1>
+    <p>Pour chaque prospect, une refonte complète du site et un back office de gestion des réservations et des clients — navigables en direct, dans le navigateur.</p>
+    <div class="meta">
+      <div class="m"><b>2</b><span>MAQUETTES</span></div>
+      <div class="m"><b>Site + back office</b><span>PÉRIMÈTRE</span></div>
+      <div class="m"><b>0</b><span>INSTALLATION</span></div>
+    </div>
+  </section>
+
+  <section class="projects">
+    <div class="sec-label">Les maquettes</div>
+    <div class="proj">
+
+      <a class="card kp" href="kids-paradise.html">
+        <div class="visual"><span class="emo">🎠</span></div>
+        <div class="body">
+          <div class="ptag">Parc de jeux enfants</div>
+          <h3>Kid's Paradise</h3>
+          <p>Refonte du site famille et back office de réservation d'anniversaires — pensé pour remplacer l'outil externe Qweekle.</p>
+          <div class="feats">
+            <span>Site refondu</span><span>Tunnel de réservation</span>
+            <span>Back office gérante</span><span>Calendrier créneaux</span>
+          </div>
+          <div class="go">Voir la maquette <span class="arr">→</span></div>
+        </div>
+      </a>
+
+      <a class="card lg" href="laser-game.html">
+        <div class="visual"><span class="scan"></span><span class="emo">🎯</span></div>
+        <div class="body">
+          <div class="ptag">Centre de laser game</div>
+          <h3>Laser Game Evolution Blois</h3>
+          <p>Site indépendant à l'identité néon et back office d'exploitation : planning des 3 labyrinthes, e-cartes cadeau, codes promo.</p>
+          <div class="feats">
+            <span>Site indépendant</span><span>Réservation 24/7</span>
+            <span>Planning labyrinthes</span><span>E-cartes &amp; promos</span>
+          </div>
+          <div class="go">Voir la maquette <span class="arr">→</span></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="howto">
+    <h2>Comment lire une maquette</h2>
+    <p class="lead">Chaque maquette est une démo complète — rien à installer.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Le site public</h3>
+        <p>La refonte telle que la verraient les clients : accueil, offres, tunnel de réservation cliquable de bout en bout.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Le back office</h3>
+        <p>En haut de page, le bouton « 🔒 Back office » bascule vers l'outil de gestion : tableau de bord, réservations, clients, créneaux.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Tout est interactif</h3>
+        <p>Réservation, calcul de prix, navigation : tout fonctionne. Les données affichées sont illustratives.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Maquettes de démonstration · données illustratives · réalisées pour la prospection commerciale.
+  </footer>
+</div>
+
+</body>
+</html>

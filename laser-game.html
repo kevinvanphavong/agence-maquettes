@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laser Game Evolution Blois — Maquette refonte site + back office</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#08080d; --surface:#111119; --surface2:#191926; --surface3:#22222f;
+  --line:#272736; --line2:#34344a;
+  --text:#eef0f8; --muted:#8b8ba6; --muted2:#5c5c75;
+  --red:#ff1f3d; --red-d:#d4112d;
+  --cyan:#22d3ee; --magenta:#e93cd6; --lime:#9ae600;
+  --glow-red:0 0 24px rgba(255,31,61,.5);
+  --glow-cyan:0 0 22px rgba(34,211,238,.45);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.disp{font-family:'Rajdhani',sans-serif;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px}
+::-webkit-scrollbar-track{background:var(--surface)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.btn{font-family:'Rajdhani';font-weight:700;font-size:16px;text-transform:uppercase;
+  letter-spacing:1px;cursor:pointer;border:none;padding:13px 28px;border-radius:8px;
+  transition:transform .15s,box-shadow .15s,filter .15s;display:inline-flex;
+  align-items:center;gap:8px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.btn:hover{transform:translateY(-2px)}
+.btn-red{background:var(--red);color:#fff;box-shadow:var(--glow-red)}
+.btn-red:hover{box-shadow:0 0 34px rgba(255,31,61,.7)}
+.btn-cyan{background:var(--cyan);color:#04141a;box-shadow:var(--glow-cyan)}
+.btn-ghost{background:transparent;color:var(--text);border:2px solid var(--line2)}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-sm{padding:8px 16px;font-size:13px}
+
+/* MODE SWITCH */
+.modebar{position:fixed;top:0;left:0;right:0;height:46px;background:#000;z-index:200;
+  display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px solid var(--line)}
+.modebar .lbl{color:var(--muted2);font-size:11px;font-weight:800;letter-spacing:2px;margin-right:8px}
+.mode-btn{font-family:'Rajdhani';font-size:14px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1px;padding:6px 18px;border-radius:6px;border:none;cursor:pointer;
+  background:transparent;color:var(--muted);transition:all .15s}
+.mode-btn.active{background:var(--red);color:#fff;box-shadow:var(--glow-red)}
+
+.screen{display:none;padding-top:46px}
+.screen.active{display:block}
+
+/* ============ SITE ============ */
+.hdr{position:sticky;top:46px;z-index:100;background:rgba(8,8,13,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:18px;height:72px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .lm{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:21px;background:linear-gradient(135deg,var(--red),var(--red-d));
+  box-shadow:var(--glow-red)}
+.logo .lt{font-family:'Rajdhani';font-weight:700;font-size:20px;line-height:1;text-transform:uppercase}
+.logo .lt small{display:block;font-family:'Inter';font-weight:700;font-size:9.5px;
+  color:var(--cyan);letter-spacing:2.5px;margin-top:2px}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{padding:9px 14px;border-radius:6px;font-weight:700;font-size:13.5px;
+  font-family:'Rajdhani';text-transform:uppercase;letter-spacing:.5px;cursor:pointer;
+  transition:color .15s}
+.nav a:hover{color:var(--cyan)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:74px 0 86px;
+  background:radial-gradient(ellipse at 75% 20%,rgba(255,31,61,.16) 0,transparent 55%),
+  radial-gradient(ellipse at 15% 90%,rgba(34,211,238,.13) 0,transparent 50%)}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:46px 46px;mask-image:radial-gradient(ellipse at 50% 40%,#000,transparent 75%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);
+  background:var(--surface);padding:7px 15px;border-radius:30px;font-weight:700;
+  font-size:12.5px;color:var(--cyan);margin-bottom:20px}
+.hero h1{font-size:62px;line-height:.98;letter-spacing:1px}
+.hero h1 .hl{color:var(--red);text-shadow:var(--glow-red)}
+.hero p.sub{font-size:17px;color:var(--muted);margin:20px 0 28px;max-width:430px;
+  font-weight:500;line-height:1.6}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:30px;margin-top:34px}
+.hero-stats .hs b{font-family:'Rajdhani';font-size:30px;display:block;color:var(--cyan)}
+.hero-stats .hs span{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1px}
+.hero-art{aspect-ratio:1/1;border-radius:14px;position:relative;overflow:hidden;
+  background:linear-gradient(155deg,#1a0810,#0a0a14 55%);border:1px solid var(--line2);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 60px rgba(255,31,61,.25),inset 0 0 80px rgba(34,211,238,.07)}
+.hero-art .big{font-size:150px;filter:drop-shadow(0 0 30px rgba(255,31,61,.7))}
+.scan{position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  animation:scan 3.5s linear infinite;box-shadow:0 0 14px var(--cyan)}
+@keyframes scan{0%{top:0}100%{top:100%}}
+.float{position:absolute;background:var(--surface);border:1px solid var(--line2);
+  border-radius:9px;padding:10px 14px;font-weight:700;font-size:12.5px;display:flex;
+  align-items:center;gap:8px}
+.float .e{font-size:18px}
+.float.f1{top:22px;left:-22px;border-color:rgba(255,31,61,.4)}
+.float.f2{bottom:34px;right:-26px;border-color:rgba(34,211,238,.4)}
+
+/* INFOBAND */
+.infoband{background:var(--red);padding:14px 0}
+.infoband .wrap{display:flex;justify-content:space-around;gap:18px;flex-wrap:wrap}
+.infoband .ib{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13.5px;color:#fff}
+.infoband .ib .e{font-size:18px}
+
+section{padding:78px 0}
+.sec-head{max-width:600px;margin:0 auto 46px;text-align:center}
+.sec-head .kicker{font-weight:800;color:var(--cyan);letter-spacing:3px;font-size:12px}
+.sec-head h2{font-size:44px;margin:10px 0 10px}
+.sec-head p{color:var(--muted);font-size:15.5px;font-weight:500}
+
+/* ACTIVITES */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.act{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:30px 26px;position:relative;overflow:hidden;transition:transform .18s,border-color .18s}
+.act:hover{transform:translateY(-6px);border-color:var(--red)}
+.act::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--acc,var(--red))}
+.act .ai{font-size:46px;margin-bottom:14px}
+.act h3{font-size:24px;margin-bottom:8px}
+.act p{font-size:13.5px;color:var(--muted);font-weight:500;line-height:1.6}
+.act .ap{margin-top:14px;font-family:'Rajdhani';font-weight:700;font-size:18px;color:var(--cyan)}
+
+/* FORMULES */
+#formules{background:linear-gradient(180deg,var(--bg),var(--surface))}
+.formules{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:start}
+.formule{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:26px 22px;position:relative;transition:transform .18s,border-color .18s}
+.formule:hover{transform:translateY(-6px)}
+.formule.star{border-color:var(--red);box-shadow:0 0 30px rgba(255,31,61,.22)}
+.formule .ribbon{position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--red);color:#fff;font-family:'Rajdhani';font-weight:700;font-size:11px;
+  text-transform:uppercase;letter-spacing:1px;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.formule .fz{font-size:38px;margin-bottom:6px}
+.formule h3{font-size:21px}
+.formule .age{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.5px}
+.formule .price{font-family:'Rajdhani';font-size:36px;color:var(--cyan);margin:12px 0 2px}
+.formule .price small{font-size:13px;color:var(--muted)}
+.formule ul{list-style:none;margin:14px 0 18px;display:flex;flex-direction:column;gap:8px}
+.formule li{font-size:12.5px;font-weight:500;color:var(--muted);display:flex;gap:7px}
+.formule li .ck{color:var(--lime);font-weight:900}
+.formule .btn{width:100%;justify-content:center;font-size:13px;padding:11px}
+
+/* PRICE STRIP */
+.pricestrip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ps{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;text-align:center}
+.ps .pe{font-size:30px}
+.ps b{display:block;font-family:'Rajdhani';font-size:17px;margin:6px 0 2px}
+.ps .pp{font-family:'Rajdhani';font-size:30px;color:var(--red)}
+.ps small{font-size:11.5px;color:var(--muted);font-weight:600}
+
+/* AVIS */
+#avis{background:var(--surface)}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.review{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:24px}
+.review .rstar{color:var(--lime);font-size:14px;letter-spacing:2px;margin-bottom:10px}
+.review p{font-size:14px;font-weight:500;color:var(--text);line-height:1.6}
+.review .rwho{margin-top:14px;font-size:12px;color:var(--muted);font-weight:700}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.info-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px}
+.info-card h3{font-size:21px;margin-bottom:16px;color:var(--cyan)}
+.info-card .iline{display:flex;gap:11px;padding:8px 0;font-weight:600;font-size:14px}
+.info-card .iline .e{font-size:17px}
+.hours .hr{display:flex;justify-content:space-between;padding:9px 0;
+  border-bottom:1px solid var(--line);font-weight:600;font-size:14px}
+.hours .hr:last-child{border:none}
+.hours .hr b{color:var(--cyan)}
+
+footer{background:#000;border-top:1px solid var(--line);padding:42px 0 26px;color:var(--muted)}
+footer .fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px;
+  padding-bottom:24px;border-bottom:1px solid var(--line)}
+footer .fcol b{color:var(--text);font-family:'Rajdhani';font-size:16px;display:block;
+  margin-bottom:9px;text-transform:uppercase}
+footer .fcol a{display:block;font-size:13px;padding:3px 0;font-weight:500;cursor:pointer}
+footer .fcol a:hover{color:var(--cyan)}
+footer .fbot{text-align:center;padding-top:20px;font-size:11.5px;font-weight:500}
+
+/* RESA MODAL */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);
+  z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
+.ov.open{display:flex}
+.resa{background:var(--surface);border:1px solid var(--line2);border-radius:14px;
+  width:680px;max-width:100%;max-height:92vh;overflow-y:auto;
+  box-shadow:0 0 60px rgba(255,31,61,.3)}
+.resa-head{background:linear-gradient(135deg,var(--red),var(--red-d));padding:20px 26px;
+  display:flex;align-items:center;gap:13px;position:sticky;top:0;z-index:2}
+.resa-head h3{font-size:21px;color:#fff}
+.resa-head .rx{margin-left:auto;width:34px;height:34px;border-radius:7px;border:none;
+  background:rgba(0,0,0,.25);color:#fff;font-size:17px;cursor:pointer}
+.steps{display:flex;gap:6px;padding:18px 26px 4px}
+.stp{flex:1;height:5px;border-radius:5px;background:var(--line)}
+.stp.on{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
+.resa-body{padding:14px 26px 26px}
+.rstep{display:none}
+.rstep.active{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rstep h4{font-size:20px;margin-bottom:3px}
+.rstep .rhint{color:var(--muted);font-size:13px;font-weight:500;margin-bottom:16px}
+.opt{display:flex;gap:12px;align-items:center;background:var(--surface2);
+  border:1px solid var(--line);border-radius:9px;padding:14px;margin-bottom:9px;
+  cursor:pointer;transition:all .14s}
+.opt:hover{border-color:var(--line2)}
+.opt.sel{border-color:var(--cyan);background:rgba(34,211,238,.07)}
+.opt .oe{font-size:26px;width:42px;text-align:center}
+.opt .on b{font-size:14.5px;font-family:'Rajdhani';font-weight:700;text-transform:uppercase}
+.opt .on span{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.opt .op{margin-left:auto;font-family:'Rajdhani';font-size:19px;color:var(--cyan);font-weight:700}
+.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:12px}
+.field label{font-weight:700;font-size:12px;display:block;margin-bottom:5px;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.field input{width:100%;padding:11px 13px;border:1px solid var(--line2);border-radius:8px;
+  font-family:'Inter';font-weight:600;font-size:14px;background:var(--bg);color:var(--text)}
+.field input:focus{outline:none;border-color:var(--cyan)}
+.daypick{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{aspect-ratio:1;border:1px solid var(--line2);border-radius:8px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;background:var(--surface2);transition:all .12s}
+.day small{font-size:9px;color:var(--muted);font-weight:800}
+.day:hover:not(.off){border-color:var(--cyan)}
+.day.sel{background:var(--cyan);color:#04141a;border-color:var(--cyan)}
+.day.sel small{color:#04141a}
+.day.off{opacity:.25;cursor:not-allowed}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.slot{padding:10px 6px;border:1px solid var(--line2);border-radius:8px;text-align:center;
+  font-weight:700;font-size:13px;cursor:pointer;background:var(--surface2);transition:all .12s}
+.slot:hover{border-color:var(--cyan)}
+.slot.sel{background:var(--cyan);color:#04141a;border-color:var(--cyan)}
+.slot.full{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.qty{display:flex;align-items:center;gap:14px}
+.qty button{width:38px;height:38px;border-radius:7px;border:1px solid var(--cyan);
+  background:transparent;color:var(--cyan);font-size:20px;font-weight:900;cursor:pointer}
+.qty .qv{font-family:'Rajdhani';font-size:28px;width:46px;text-align:center}
+.addon{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.addon:last-child{border:none}
+.addon input{width:19px;height:19px;accent-color:var(--cyan)}
+.addon .anm b{font-size:13.5px}
+.addon .anm span{display:block;font-size:11.5px;color:var(--muted);font-weight:500}
+.addon .ap{margin-left:auto;font-family:'Rajdhani';color:var(--cyan);font-weight:700;font-size:16px}
+.summary{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0}
+.sline{display:flex;justify-content:space-between;padding:5px 0;font-weight:600;font-size:13.5px}
+.sline.tot{border-top:1px solid var(--line2);margin-top:6px;padding-top:11px;
+  font-family:'Rajdhani';font-size:22px;color:var(--cyan)}
+.acompte{background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.25);
+  border-radius:8px;padding:10px 13px;font-size:12px;font-weight:600;color:var(--cyan);margin-top:8px}
+.resa-foot{display:flex;gap:10px;justify-content:space-between;margin-top:16px}
+.confirm-ok{text-align:center;padding:22px 10px}
+.confirm-ok .ce{font-size:66px;filter:drop-shadow(0 0 20px rgba(34,211,238,.6))}
+.confirm-ok h4{font-size:27px;margin:12px 0 6px;color:var(--cyan)}
+.confirm-ok p{color:var(--muted);font-weight:500;font-size:14px}
+.ref{display:inline-block;background:var(--red);color:#fff;font-family:'Rajdhani';
+  font-size:17px;padding:8px 22px;border-radius:7px;margin-top:14px;box-shadow:var(--glow-red)}
+
+/* ============ BACK OFFICE ============ */
+.bo{display:flex;min-height:calc(100vh - 46px)}
+.bo-side{width:230px;background:#000;flex-shrink:0;padding:20px 13px;
+  display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.bo-brand{display:flex;align-items:center;gap:9px;padding:0 8px 16px;
+  border-bottom:1px solid var(--line);margin-bottom:14px}
+.bo-brand .lm{width:36px;height:36px;border-radius:8px;font-size:17px;
+  background:linear-gradient(135deg,var(--red),var(--red-d));display:flex;
+  align-items:center;justify-content:center;box-shadow:var(--glow-red)}
+.bo-brand b{font-family:'Rajdhani';font-size:15px;text-transform:uppercase}
+.bo-brand small{display:block;color:var(--cyan);font-size:9px;font-weight:800;letter-spacing:1.5px}
+.bo-nav .bn{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:8px;
+  color:var(--muted);font-weight:600;font-size:13.5px;cursor:pointer;margin-bottom:3px;
+  transition:all .14s}
+.bo-nav .bn:hover{background:var(--surface2);color:var(--text)}
+.bo-nav .bn.active{background:var(--red);color:#fff}
+.bo-nav .bn .e{font-size:16px;width:22px;text-align:center}
+.bo-nav .bn .ct{margin-left:auto;background:rgba(255,255,255,.14);font-size:10.5px;
+  padding:1px 8px;border-radius:20px;font-weight:800}
+.bo-side .bo-foot{margin-top:auto;padding:12px 8px 0;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:9px}
+.bo-side .bo-foot .av{width:34px;height:34px;border-radius:7px;font-weight:800;
+  background:linear-gradient(135deg,var(--cyan),var(--magenta));display:flex;
+  align-items:center;justify-content:center;color:#04141a;font-size:13px}
+.bo-side .bo-foot b{color:var(--text);font-size:13px}
+.bo-side .bo-foot small{display:block;color:var(--muted);font-size:11px;font-weight:600}
+.bo-main{flex:1;background:var(--bg);overflow-y:auto}
+.bo-top{height:64px;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;padding:0 30px;position:sticky;top:0;z-index:5}
+.bo-top h2{font-size:21px}
+.bo-top .bo-sub{font-size:12px;color:var(--muted);font-weight:500}
+.bo-content{padding:24px 30px 50px}
+.bo-view{display:none}
+.bo-view.active{display:block;animation:fade .3s}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:11px;
+  padding:17px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:var(--kc,var(--red))}
+.kpi .ki{position:absolute;right:11px;top:11px;font-size:28px;opacity:.2}
+.kpi .kl{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.kpi .kv{font-family:'Rajdhani';font-size:31px;margin-top:5px}
+.kpi .kf{font-size:11.5px;font-weight:700;margin-top:2px}
+.kpi .kf.up{color:var(--lime)}
+.bo-cols{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.panel-h{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.panel-h h3{font-size:16px}
+.panel-h .pill{margin-left:auto;font-size:10.5px;font-weight:800;padding:3px 10px;
+  border-radius:20px;background:var(--surface3);color:var(--cyan);text-transform:uppercase;letter-spacing:.5px}
+.panel-b{padding:6px 18px 14px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:10.5px;color:var(--muted);font-weight:800;
+  text-transform:uppercase;letter-spacing:.5px;padding:10px 8px;border-bottom:1px solid var(--line2)}
+.tbl td{padding:11px 8px;border-bottom:1px solid var(--line);font-weight:600;font-size:13px}
+.tbl tr:last-child td{border:none}
+.tbl tr:hover td{background:var(--surface2)}
+.who{display:flex;align-items:center;gap:9px}
+.who .wav{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;
+  justify-content:center;font-size:14px;flex-shrink:0;background:var(--surface3)}
+.who b{font-size:13px}
+.who small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.badge{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:5px;
+  display:inline-block;text-transform:uppercase;letter-spacing:.3px}
+.b-conf{background:rgba(154,230,0,.15);color:var(--lime)}
+.b-att{background:rgba(255,170,0,.15);color:#ffb020}
+.b-new{background:rgba(34,211,238,.15);color:var(--cyan)}
+.b-done{background:rgba(140,140,170,.15);color:var(--muted)}
+.fbar{height:7px;background:var(--surface3);border-radius:5px;overflow:hidden;min-width:74px}
+.fbar i{display:block;height:100%;border-radius:5px}
+
+/* planning labyrinthes */
+.plan{display:grid;grid-template-columns:70px repeat(3,1fr);gap:8px}
+.plan .ph{font-family:'Rajdhani';font-weight:700;font-size:13px;text-align:center;
+  padding:9px 0;text-transform:uppercase;color:var(--cyan);
+  border-bottom:1px solid var(--line2)}
+.plan .pt{font-weight:700;font-size:12px;color:var(--muted);
+  display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
+.pslot{background:var(--surface2);border:1px solid var(--line);border-radius:7px;
+  min-height:48px;padding:5px;font-size:10.5px;font-weight:700}
+.pslot.book{background:rgba(255,31,61,.13);border-color:rgba(255,31,61,.4);color:#ff8a98}
+.pslot.book.cyan{background:rgba(34,211,238,.11);border-color:rgba(34,211,238,.4);color:#7fe6f5}
+.pslot.book.mag{background:rgba(233,60,214,.12);border-color:rgba(233,60,214,.4);color:#f29ae8}
+.pslot.free{color:var(--muted2);display:flex;align-items:center;justify-content:center}
+
+.toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center}
+.search{flex:1;max-width:300px;position:relative}
+.search input{width:100%;padding:10px 14px 10px 36px;border:1px solid var(--line2);
+  border-radius:8px;font-family:'Inter';font-weight:600;font-size:13px;
+  background:var(--surface);color:var(--text)}
+.search .si{position:absolute;left:12px;top:9px;font-size:14px}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line2);border-radius:8px;padding:3px}
+.seg button{border:none;background:none;font-family:'Rajdhani';font-weight:700;font-size:12.5px;
+  text-transform:uppercase;padding:6px 13px;border-radius:6px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--red);color:#fff}
+
+.giftgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.gift{background:linear-gradient(150deg,var(--surface2),var(--surface));
+  border:1px solid var(--line2);border-radius:11px;padding:18px;position:relative;overflow:hidden}
+.gift::after{content:"";position:absolute;right:-20px;top:-20px;width:80px;height:80px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,31,61,.25),transparent 70%)}
+.gift .gv{font-family:'Rajdhani';font-size:28px;color:var(--cyan)}
+.gift .gl{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.gift .gc{font-family:'Rajdhani';font-size:15px;letter-spacing:2px;margin-top:8px;
+  color:var(--text);background:var(--bg);border:1px dashed var(--line2);
+  border-radius:6px;padding:6px;text-align:center}
+
+.note{background:rgba(34,211,238,.07);border:1px solid rgba(34,211,238,.22);
+  border-radius:9px;padding:12px 15px;font-size:12px;font-weight:600;color:var(--cyan);
+  display:flex;gap:9px;margin-top:16px}
+
+@media(max-width:920px){
+  .hero-grid,.infos-grid,.bo-cols{grid-template-columns:1fr}
+  .acts,.formules,.pricestrip,.reviews,.kpis,.giftgrid{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:42px}.nav{display:none}.bo-side{display:none}
+  .plan{grid-template-columns:54px repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="modebar">
+  <span class="lbl">MAQUETTE — DÉMO</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ===================================================== SITE -->
+<div class="screen active" id="screen-site">
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo">
+        <span class="lm">🔫</span>
+        <div class="lt">Laser Game Blois<small>VINEUIL · 41</small></div>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('activites')">Activités</a>
+        <a onclick="scrollToSec('formules')">Formules</a>
+        <a onclick="scrollToSec('tarifs')">Tarifs</a>
+        <a onclick="scrollToSec('avis')">Avis</a>
+        <a onclick="scrollToSec('infos')">Infos & accès</a>
+      </nav>
+      <button class="btn btn-red btn-sm" onclick="openResa()">⚡ Réserver</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">⚡ 3 labyrinthes · jusqu'à 30 joueurs</span>
+        <h1>Entre dans<br>l'<span class="hl">arène laser</span></h1>
+        <p class="sub">Le laser game nouvelle génération à Blois. Réserve ta partie en ligne, 24h/24 — anniversaires, EVG/EVJF, sorties entre potes.</p>
+        <div class="hero-cta">
+          <button class="btn btn-red" onclick="openResa()">⚡ Réserver une partie</button>
+          <button class="btn btn-ghost" onclick="scrollToSec('formules')">Voir les formules</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><b>3</b><span>LABYRINTHES</span></div>
+          <div class="hs"><b>20 min</b><span>PAR PARTIE</span></div>
+          <div class="hs"><b>7j/7</b><span>OUVERT</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="scan"></div>
+        <div class="big">🎯</div>
+        <div class="float f1"><span class="e">🔫</span> Réservation 24/7</div>
+        <div class="float f2"><span class="e">🎵</span> Blind Test vocal</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="infoband">
+    <div class="wrap">
+      <div class="ib"><span class="e">📍</span> 123 rue Marcelin Berthelot, Vineuil</div>
+      <div class="ib"><span class="e">⚡</span> Réservation en ligne 24h/24</div>
+      <div class="ib"><span class="e">🍹</span> Bar & espace détente</div>
+      <div class="ib"><span class="e">🎂</span> Anniversaires & EVG/EVJF</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITES -->
+  <section id="activites">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">CE QUI T'ATTEND</div>
+        <h2>Deux expériences, une adrénaline</h2>
+        <p>Du laser game immersif au blind test vocal — viens seul, en groupe ou en famille.</p>
+      </div>
+      <div class="acts">
+        <div class="act" style="--acc:var(--red)"><div class="ai">🎯</div><h3>Laser Game</h3>
+          <p>3 labyrinthes modulables sur 2 niveaux, brouillard, jeux de lumière. De 6 à 30 joueurs par partie.</p>
+          <div class="ap">dès 10 € / partie</div></div>
+        <div class="act" style="--acc:var(--cyan)"><div class="ai">🎵</div><h3>Blind Test vocal</h3>
+          <p>Le 1er blind test à reconnaissance vocale du réseau. 6 000 titres, buzz à la voix, fous rires garantis.</p>
+          <div class="ap">10 € / heure</div></div>
+        <div class="act" style="--acc:var(--magenta)"><div class="ai">🍹</div><h3>Le Bar</h3>
+          <p>Cocktails, softs et petite restauration pour souffler entre deux parties ou prolonger la soirée.</p>
+          <div class="ap">sur place</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMULES -->
+  <section id="formules">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">CHOISIS TON PACK</div>
+        <h2>Des formules pour chaque occasion</h2>
+        <p>Réservation et acompte en ligne — ta partie est garantie.</p>
+      </div>
+      <div class="formules" id="formulesGrid"></div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section id="tarifs" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">TARIFS CLAIRS</div>
+        <h2>Et aussi</h2>
+        <p>Bons plans, offres groupes et tickets entreprises.</p>
+      </div>
+      <div class="pricestrip">
+        <div class="ps"><div class="pe">🎫</div><b>FullGame</b><div class="pp">21 €</div><small>3 parties laser</small></div>
+        <div class="ps"><div class="pe">🎓</div><b>Offre étudiante</b><div class="pp">8 €</div><small>la partie · sur présentation</small></div>
+        <div class="ps"><div class="pe">🏢</div><b>Ticket CSE Solo</b><div class="pp">8 €</div><small>Duo 14 € · prépayé</small></div>
+        <div class="ps"><div class="pe">🔒</div><b>Privatisation</b><div class="pp">800 €</div><small>3h · centre rien que pour vous</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">ILS ONT JOUÉ</div>
+        <h2>Avis des joueurs</h2>
+        <p>Ce que disent ceux qui sont passés dans l'arène.</p>
+      </div>
+      <div class="reviews">
+        <div class="review"><div class="rstar">★★★★★</div><p>« Soirée EVG au top, les labyrinthes sont immenses. On a réservé en 2 minutes depuis le canapé. »</p><div class="rwho">— Antoine D.</div></div>
+        <div class="review"><div class="rstar">★★★★★</div><p>« Anniversaire de mon fils : pack clé en main, salle privée, l'équipe gère tout. À refaire. »</p><div class="rwho">— Nadia K.</div></div>
+        <div class="review"><div class="rstar">★★★★★</div><p>« Le blind test vocal est une tuerie, on a ri pendant une heure. Concept original. »</p><div class="rwho">— Thomas P.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="sec-head"><div class="kicker">AVANT DE VENIR</div><h2>Infos & accès</h2></div>
+      <div class="infos-grid">
+        <div class="info-card hours">
+          <h3>🕑 Horaires</h3>
+          <div class="hr"><span>Lundi – Mardi</span><b>Sur réservation</b></div>
+          <div class="hr"><span>Mercredi</span><b>14h – 20h</b></div>
+          <div class="hr"><span>Jeudi – Vendredi</span><b>16h – 23h</b></div>
+          <div class="hr"><span>Samedi</span><b>10h – 00h</b></div>
+          <div class="hr"><span>Dimanche</span><b>10h – 20h</b></div>
+        </div>
+        <div class="info-card">
+          <h3>📍 Accès & contact</h3>
+          <div class="iline"><span class="e">🏠</span> 123 rue Marcelin Berthelot, 41350 Vineuil</div>
+          <div class="iline"><span class="e">🚗</span> Parking gratuit · à 5 min de Blois</div>
+          <div class="iline"><span class="e">📞</span> 02 54 33 06 30</div>
+          <div class="iline"><span class="e">📸</span> Instagram @lasergameblois</div>
+          <div style="margin-top:14px"><button class="btn btn-red" onclick="openResa()">⚡ Réserver maintenant</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fgrid">
+        <div>
+          <div class="logo"><span class="lm">🔫</span><div class="lt">Laser Game Blois<small>VINEUIL · 41</small></div></div>
+          <p style="margin-top:12px;font-size:13px;font-weight:500;max-width:250px">Le laser game nouvelle génération à Blois — Vineuil.</p>
+        </div>
+        <div class="fcol"><b>Activités</b><a onclick="scrollToSec('activites')">Laser Game</a><a onclick="scrollToSec('activites')">Blind Test</a><a onclick="scrollToSec('tarifs')">Tarifs</a></div>
+        <div class="fcol"><b>Réserver</b><a onclick="openResa()">Une partie</a><a onclick="openResa()">Un anniversaire</a><a onclick="openResa()">EVG / EVJF</a></div>
+        <div class="fcol"><b>Suivez-nous</b><a>Instagram</a><a>Facebook</a><a>Avis Google</a></div>
+      </div>
+      <div class="fbot">Maquette de refonte réalisée pour la prospection — données illustratives. © Laser Game Blois</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================================================== BACK OFFICE -->
+<div class="screen" id="screen-bo">
+  <div class="bo">
+    <aside class="bo-side">
+      <div class="bo-brand">
+        <span class="lm">🔫</span>
+        <div><b>Laser Game</b><small>BACK OFFICE</small></div>
+      </div>
+      <nav class="bo-nav" id="boNav"></nav>
+      <div class="bo-foot">
+        <div class="av">LG</div>
+        <div><b>Gérant</b><small>Laser Game Blois</small></div>
+      </div>
+    </aside>
+    <div class="bo-main">
+      <div class="bo-top">
+        <div><h2 id="boTitle">Tableau de bord</h2>
+          <div class="bo-sub" id="boSub">Vue d'ensemble du centre</div></div>
+      </div>
+      <div class="bo-content">
+        <div class="bo-view active" id="bv-dash"></div>
+        <div class="bo-view" id="bv-resa"></div>
+        <div class="bo-view" id="bv-planning"></div>
+        <div class="bo-view" id="bv-cartes"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESA MODAL -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-head">
+      <span style="font-size:24px">⚡</span>
+      <h3>Réserver en ligne</h3>
+      <button class="rx" onclick="closeResa()">✕</button>
+    </div>
+    <div class="steps" id="steps"></div>
+    <div class="resa-body" id="resaBody"></div>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const FORMULES=[
+  {id:'partie',emo:'🎯',nom:'Partie Découverte',age:'Dès 1 joueur',prix:10,star:false,
+   inc:['1 partie de laser game (20 min)','Briefing + équipement fourni','Accès aux 3 labyrinthes']},
+  {id:'full',emo:'🔥',nom:'FullGame',age:'Le plus joué',prix:21,star:true,
+   inc:['3 parties de laser game enchaînées','Classement & scores détaillés','Accès bar entre les parties']},
+  {id:'rouge',emo:'🎂',nom:'Anniv · Pack Rouge',age:'Dès 6 enfants',prix:22,star:false,
+   inc:['2 parties de laser game','Salle anniversaire 30 min','Boissons offertes','Invitations à imprimer']},
+  {id:'vert',emo:'🎉',nom:'Anniv · Pack Vert',age:'Dès 6 enfants',prix:26,star:false,
+   inc:['3 parties de laser game','Salle décorée privée 1h','Goûter complet + boissons','Cadeau + photo souvenir']},
+];
+const ADDONS=[
+  {id:'boissons',nom:'Pack boissons groupe',desc:'Softs & cocktails sans alcool à volonté',prix:24},
+  {id:'gateau',nom:'Gâteau d\'anniversaire',desc:'Au chocolat ou fruits, 8-15 parts',prix:28},
+  {id:'photo',nom:'Pack photos souvenir',desc:'Photos du groupe en tenue laser',prix:15},
+  {id:'privatise',nom:'Labyrinthe privatisé',desc:'Un labyrinthe rien que pour votre groupe',prix:60},
+];
+
+const RESAS=[
+  {ref:'LG-3071',nom:'Antoine Dubois',tel:'06 21 43 65 87',formule:'full',date:'Ven. 23 mai',heure:'21h00',nb:8,laby:'Néo',statut:'conf',total:168,acompte:50},
+  {ref:'LG-3072',nom:'Anniv. Lucas (8 ans)',tel:'06 55 12 33 90',formule:'vert',date:'Sam. 24 mai',heure:'14h00',nb:10,laby:'Alpha',statut:'conf',total:260,acompte:50},
+  {ref:'LG-3073',nom:'EVG Maxime',tel:'06 78 90 12 34',formule:'full',date:'Sam. 24 mai',heure:'20h00',nb:12,laby:'Néo',statut:'att',total:252,acompte:0},
+  {ref:'LG-3074',nom:'Anniv. Jade (9 ans)',tel:'06 33 44 55 66',formule:'rouge',date:'Dim. 25 mai',heure:'15h30',nb:9,laby:'Beta',statut:'new',total:198,acompte:0},
+  {ref:'LG-3075',nom:'CSE Technivac',tel:'06 11 99 88 77',formule:'partie',date:'Mer. 28 mai',heure:'18h00',nb:16,laby:'Alpha',statut:'conf',total:160,acompte:50},
+  {ref:'LG-3070',nom:'Sortie famille Petit',tel:'06 44 22 88 11',formule:'partie',date:'Dim. 18 mai',heure:'11h00',nb:5,laby:'Beta',statut:'done',total:50,acompte:50},
+];
+const STAT={conf:{l:'Confirmé',c:'b-conf'},att:{l:'Acompte attendu',c:'b-att'},new:{l:'Demande',c:'b-new'},done:{l:'Terminé',c:'b-done'}};
+const fNom=id=>FORMULES.find(f=>f.id===id).nom;
+const eur=n=>n.toLocaleString('fr-FR')+' €';
+
+/* ================= MODE ================= */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+/* ================= SITE: formules ================= */
+function renderFormules(){
+  document.getElementById('formulesGrid').innerHTML=FORMULES.map(f=>`
+    <div class="formule ${f.star?'star':''}">
+      ${f.star?'<div class="ribbon">🔥 Le plus joué</div>':''}
+      <div class="fz">${f.emo}</div>
+      <h3>${f.nom}</h3>
+      <div class="age">${f.age}</div>
+      <div class="price">${f.prix}<small> €/joueur</small></div>
+      <ul>${f.inc.map(i=>`<li><span class="ck">▸</span> ${i}</li>`).join('')}</ul>
+      <button class="btn ${f.star?'btn-red':'btn-ghost'}" onclick="openResa('${f.id}')">Réserver</button>
+    </div>`).join('');
+}
+
+/* ================= RESERVATION TUNNEL ================= */
+let R={step:0,formule:null,date:null,heure:null,nb:6,addons:[]};
+const DAYS=[
+  {d:'23',j:'Ven',off:false},{d:'24',j:'Sam',off:false},{d:'25',j:'Dim',off:false},
+  {d:'26',j:'Lun',off:true},{d:'27',j:'Mar',off:true},{d:'28',j:'Mer',off:false},
+  {d:'29',j:'Jeu',off:false},{d:'30',j:'Ven',off:false},{d:'31',j:'Sam',off:false},
+  {d:'01',j:'Dim',off:false},{d:'02',j:'Lun',off:true},{d:'03',j:'Mar',off:true},
+  {d:'04',j:'Mer',off:false},{d:'05',j:'Jeu',off:false},
+];
+const SLOTS=[{h:'14h00',full:false},{h:'16h00',full:false},{h:'18h00',full:true},
+  {h:'20h00',full:false},{h:'21h30',full:false},{h:'23h00',full:false},{h:'10h30',full:false},{h:'12h00',full:true}];
+
+function openResa(fid){
+  R={step:0,formule:fid||null,date:null,heure:null,nb:6,addons:[]};
+  if(fid)R.step=1;
+  document.getElementById('ov').classList.add('open');
+  renderResa();
+}
+function closeResa(){document.getElementById('ov').classList.remove('open');}
+function rGo(s){R.step=s;renderResa();}
+function resaTotal(){
+  if(!R.formule)return{base:0,add:0,tot:0};
+  const f=FORMULES.find(x=>x.id===R.formule);
+  const base=f.prix*R.nb;
+  const add=R.addons.reduce((s,id)=>s+ADDONS.find(a=>a.id===id).prix,0);
+  return{base,add,tot:base+add};
+}
+function renderResa(){
+  document.getElementById('steps').innerHTML=[0,1,2,3,4].map(i=>`<div class="stp ${i<=R.step?'on':''}"></div>`).join('');
+  const body=document.getElementById('resaBody');
+  const T=resaTotal();
+
+  if(R.step===0){
+    body.innerHTML=`<div class="rstep active">
+      <h4>1 · Choisis ta formule</h4>
+      <div class="rhint">Partie simple, FullGame ou pack anniversaire.</div>
+      ${FORMULES.map(f=>`<div class="opt ${R.formule===f.id?'sel':''}" onclick="R.formule='${f.id}';renderResa()">
+        <div class="oe">${f.emo}</div>
+        <div class="on"><b>${f.nom}</b><span>${f.age}</span></div>
+        <div class="op">${f.prix} €</div>
+      </div>`).join('')}
+      <div class="resa-foot"><span></span>
+        <button class="btn btn-cyan" ${R.formule?'':'disabled style="opacity:.4"'} onclick="rGo(1)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===1){
+    body.innerHTML=`<div class="rstep active">
+      <h4>2 · Date & créneau</h4>
+      <div class="rhint">Disponibilités en temps réel sur les 3 labyrinthes.</div>
+      <div class="daypick">${DAYS.map(d=>`
+        <div class="day ${d.off?'off':''} ${R.date===d.d?'sel':''}"
+          ${d.off?'':`onclick="R.date='${d.d}';R.heure=null;renderResa()"`}>
+          <small>${d.j}</small>${d.d}</div>`).join('')}</div>
+      ${R.date?`<div style="margin-top:18px"><b style="font-size:13px;text-transform:uppercase;color:var(--muted)">Créneau</b>
+        <div class="slots">${SLOTS.map(s=>`
+          <div class="slot ${s.full?'full':''} ${R.heure===s.h?'sel':''}"
+            ${s.full?'':`onclick="R.heure='${s.h}';renderResa()"`}>${s.h}</div>`).join('')}</div></div>`:''}
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(0)">← Retour</button>
+        <button class="btn btn-cyan" ${R.date&&R.heure?'':'disabled style="opacity:.4"'} onclick="rGo(2)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===2){
+    body.innerHTML=`<div class="rstep active">
+      <h4>3 · Joueurs & options</h4>
+      <div class="rhint">De 1 à 30 joueurs par partie.</div>
+      <div style="background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:15px;display:flex;align-items:center;justify-content:space-between">
+        <b style="font-size:14px">Nombre de joueurs</b>
+        <div class="qty">
+          <button onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>
+          <span class="qv">${R.nb}</span>
+          <button onclick="R.nb=Math.min(30,R.nb+1);renderResa()">+</button>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:4px 15px">
+        ${ADDONS.map(a=>`<label class="addon">
+          <input type="checkbox" ${R.addons.includes(a.id)?'checked':''} onchange="toggleAddon('${a.id}')">
+          <div class="anm"><b>${a.nom}</b><span>${a.desc}</span></div>
+          <div class="ap">+${a.prix} €</div>
+        </label>`).join('')}
+      </div>
+      <div class="summary">
+        <div class="sline"><span>${fNom(R.formule)} × ${R.nb}</span><span>${eur(T.base)}</span></div>
+        ${T.add?`<div class="sline"><span>Options</span><span>${eur(T.add)}</span></div>`:''}
+        <div class="sline tot"><span>Total</span><span>${eur(T.tot)}</span></div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(1)">← Retour</button>
+        <button class="btn btn-cyan" onclick="rGo(3)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===3){
+    body.innerHTML=`<div class="rstep active">
+      <h4>4 · Tes coordonnées</h4>
+      <div class="rhint">Pour confirmer et t'envoyer ton e-billet.</div>
+      <div class="fieldrow">
+        <div class="field"><label>Prénom</label><input placeholder="Antoine"></div>
+        <div class="field"><label>Nom</label><input placeholder="Dubois"></div>
+      </div>
+      <div class="fieldrow">
+        <div class="field"><label>Téléphone</label><input placeholder="06 12 34 56 78"></div>
+        <div class="field"><label>Email</label><input placeholder="antoine@email.fr"></div>
+      </div>
+      <div class="field"><label>Remarque (optionnel)</label><input placeholder="Occasion, demande spéciale..."></div>
+      <div class="summary">
+        <div class="sline"><span>Formule</span><span>${fNom(R.formule)}</span></div>
+        <div class="sline"><span>Date</span><span>${R.date} mai · ${R.heure}</span></div>
+        <div class="sline"><span>${R.nb} joueurs${R.addons.length?' + '+R.addons.length+' option(s)':''}</span><span>${eur(T.tot)}</span></div>
+        <div class="sline tot"><span>Total</span><span>${eur(T.tot)}</span></div>
+        <div class="acompte">⚡ Acompte de 50 € en ligne pour garantir le créneau — le solde se règle sur place.</div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(2)">← Retour</button>
+        <button class="btn btn-cyan" onclick="rGo(4)">Payer l'acompte →</button>
+      </div></div>`;
+  }
+  else{
+    const ref='LG-'+(3076+Math.floor(Math.random()*40));
+    body.innerHTML=`<div class="rstep active confirm-ok">
+      <div class="ce">🎯</div>
+      <h4>Réservation confirmée</h4>
+      <p>Ton e-billet QR code vient d'être envoyé par email.<br>Rendez-vous le ${R.date} mai à ${R.heure} !</p>
+      <div class="ref">RÉF. ${ref}</div>
+      <div style="margin-top:22px"><button class="btn btn-cyan" onclick="closeResa()">C'est parti !</button></div>
+      <p style="margin-top:14px;font-size:11.5px;color:var(--muted2)">La réservation s'affiche aussitôt dans le planning du back office.</p>
+    </div>`;
+  }
+}
+function toggleAddon(id){
+  const i=R.addons.indexOf(id);
+  if(i>=0)R.addons.splice(i,1);else R.addons.push(id);
+  renderResa();
+}
+
+/* ================= BACK OFFICE ================= */
+const BONAV=[
+  {id:'dash',e:'📊',l:'Tableau de bord',t:'Tableau de bord',s:'Vue d\'ensemble du centre'},
+  {id:'resa',e:'⚡',l:'Réservations',t:'Réservations',s:'Toutes les réservations du centre',ct:RESAS.length},
+  {id:'planning',e:'🗺️',l:'Planning labyrinthes',t:'Planning des labyrinthes',s:'Occupation des 3 labyrinthes en temps réel'},
+  {id:'cartes',e:'🎁',l:'E-cartes & promos',t:'E-cartes cadeau & codes promo',s:'Cartes cadeaux, codes promo et parrainage'},
+];
+let boCur='dash';
+function buildBoNav(){
+  document.getElementById('boNav').innerHTML=BONAV.map(n=>`
+    <div class="bn ${n.id===boCur?'active':''}" onclick="boGo('${n.id}')">
+      <span class="e">${n.e}</span><span>${n.l}</span>
+      ${n.ct?`<span class="ct">${n.ct}</span>`:''}</div>`).join('');
+}
+function boGo(id){
+  boCur=id;
+  const n=BONAV.find(x=>x.id===id);
+  document.getElementById('boTitle').textContent=n.t;
+  document.getElementById('boSub').textContent=n.s;
+  document.querySelectorAll('.bo-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('bv-'+id).classList.add('active');
+  document.querySelectorAll('.bo-nav .bn').forEach((b,i)=>b.classList.toggle('active',BONAV[i].id===id));
+}
+
+function renderDash(){
+  const ca=RESAS.filter(r=>r.statut!=='new').reduce((s,r)=>s+r.total,0);
+  const aVenir=RESAS.filter(r=>r.statut==='conf'||r.statut==='att').length;
+  const nouvelles=RESAS.filter(r=>r.statut==='new').length;
+  document.getElementById('bv-dash').innerHTML=`
+    <div class="kpis">
+      <div class="kpi" style="--kc:var(--red)"><span class="ki">⚡</span><div class="kl">Réservations à venir</div>
+        <div class="kv">${aVenir}</div><div class="kf up">+5 vs sem. dernière</div></div>
+      <div class="kpi" style="--kc:var(--cyan)"><span class="ki">💶</span><div class="kl">CA réservé (semaine)</div>
+        <div class="kv">${eur(ca)}</div><div class="kf up">dont 60 % en ligne</div></div>
+      <div class="kpi" style="--kc:var(--magenta)"><span class="ki">🔔</span><div class="kl">Demandes à traiter</div>
+        <div class="kv">${nouvelles}</div><div class="kf" style="color:#ffb020">action requise</div></div>
+      <div class="kpi" style="--kc:var(--lime)"><span class="ki">🌙</span><div class="kl">Résa hors horaires</div>
+        <div class="kv">38 %</div><div class="kf up">faites entre 20h et 2h</div></div>
+    </div>
+    <div class="bo-cols">
+      <div class="panel">
+        <div class="panel-h"><h3>⚡ Prochaines réservations</h3><span class="pill">${RESAS.filter(r=>r.statut!=='done').length} à venir</span></div>
+        <div class="panel-b"><table class="tbl">
+          <tr><th>Client</th><th>Date</th><th>Formule</th><th>Labyrinthe</th><th>Statut</th><th>Total</th></tr>
+          ${RESAS.filter(r=>r.statut!=='done').map(r=>`<tr>
+            <td><div class="who"><div class="wav">🎯</div>
+              <div><b>${r.nom}</b><small>${r.nb} joueurs</small></div></div></td>
+            <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+            <td>${fNom(r.formule)}</td>
+            <td><b style="color:var(--cyan)">${r.laby}</b></td>
+            <td><span class="badge ${STAT[r.statut].c}">${STAT[r.statut].l}</span></td>
+            <td><b>${eur(r.total)}</b></td></tr>`).join('')}
+        </table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>🔔 À traiter</h3></div>
+        <div class="panel-b">
+          <div style="display:flex;flex-direction:column;gap:9px;padding:6px 0">
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.2);border-radius:9px">
+              <span style="font-size:17px">🔔</span><div><b style="font-size:12.5px">Valider la demande "Anniv. Jade"</b>
+              <div style="font-size:11.5px;color:var(--cyan);font-weight:600">Reçue il y a 1h via le site</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(255,170,0,.08);border:1px solid rgba(255,170,0,.2);border-radius:9px">
+              <span style="font-size:17px">💳</span><div><b style="font-size:12.5px">Relancer l'acompte EVG Maxime</b>
+              <div style="font-size:11.5px;color:#ffb020;font-weight:600">12 joueurs · Sam. 24 mai 20h</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(154,230,0,.08);border:1px solid rgba(154,230,0,.2);border-radius:9px">
+              <span style="font-size:17px">🎂</span><div><b style="font-size:12.5px">2 anniversaires ce week-end</b>
+              <div style="font-size:11.5px;color:var(--lime);font-weight:600">Lucas (sam.) et Jade (dim.)</div></div></div>
+          </div>
+          <div class="note" style="margin-top:8px">💡 <div>38 % des réservations sont faites hors des horaires d'ouverture — du CA qui n'existait pas avec le téléphone seul.</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderResaView(){
+  document.getElementById('bv-resa').innerHTML=`
+    <div class="toolbar">
+      <div class="search"><span class="si">🔍</span><input placeholder="Rechercher un client, une référence..."></div>
+      <div class="seg"><button class="on">Toutes</button><button>À venir</button><button>Demandes</button></div>
+      <button class="btn btn-red btn-sm" style="margin-left:auto">+ Réservation manuelle</button>
+    </div>
+    <div class="panel"><div class="panel-b"><table class="tbl">
+      <tr><th>Réf.</th><th>Client</th><th>Contact</th><th>Date & heure</th><th>Formule</th><th>Joueurs</th><th>Labyrinthe</th><th>Statut</th><th>Total</th><th>Acompte</th></tr>
+      ${RESAS.map(r=>`<tr>
+        <td><b style="color:var(--red)">${r.ref}</b></td>
+        <td><div class="who"><div class="wav">🎯</div><div><b>${r.nom}</b></div></div></td>
+        <td><small style="color:var(--muted)">${r.tel}</small></td>
+        <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+        <td>${fNom(r.formule)}</td>
+        <td><b>${r.nb}</b></td>
+        <td><b style="color:var(--cyan)">${r.laby}</b></td>
+        <td><span class="badge ${STAT[r.statut].c}">${STAT[r.statut].l}</span></td>
+        <td><b>${eur(r.total)}</b></td>
+        <td>${r.acompte?`<span style="color:var(--lime);font-weight:800">✓ ${r.acompte} €</span>`:`<span style="color:#ffb020;font-weight:800">en attente</span>`}</td>
+      </tr>`).join('')}
+    </table></div></div>`;
+}
+
+function renderPlanning(){
+  const labys=['Alpha','Beta','Néo'];
+  const heures=['14h','15h','16h','17h','18h','19h','20h','21h'];
+  const book={
+    '14h':[{l:'Anniv. Lucas',c:'mag'},null,null],
+    '16h':[null,{l:'Sortie scolaire',c:'cyan'},null],
+    '18h':[{l:'CSE Technivac',c:''},null,{l:'Partie ouverte',c:'cyan'}],
+    '20h':[null,null,{l:'EVG Maxime',c:''}],
+    '21h':[{l:'Partie ouverte',c:'cyan'},{l:'FullGame groupe',c:''},null],
+  };
+  let rows='';
+  heures.forEach(h=>{
+    rows+=`<div class="pt">${h}</div>`;
+    [0,1,2].forEach(i=>{
+      const b=book[h]&&book[h][i];
+      rows+=b?`<div class="pslot book ${b.c}">${b.l}</div>`:`<div class="pslot free">libre</div>`;
+    });
+  });
+  document.getElementById('bv-planning').innerHTML=`
+    <div class="toolbar">
+      <div class="seg"><button>Ven. 23</button><button class="on">Sam. 24 mai</button><button>Dim. 25</button></div>
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto">🔒 Bloquer un créneau (maintenance)</button>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h3>🗺️ Occupation des labyrinthes</h3><span class="pill">Samedi 24 mai</span></div>
+      <div class="panel-b" style="padding:16px 18px">
+        <div class="plan">
+          <div class="ph">Horaire</div>
+          ${labys.map(l=>`<div class="ph">Labyrinthe ${l}</div>`).join('')}
+          ${rows}
+        </div>
+        <div class="note" style="margin-top:16px">💡 <div>Chaque réservation en ligne réserve automatiquement un labyrinthe sur son créneau — plus de double-booking, plus d'oubli.</div></div>
+      </div>
+    </div>`;
+}
+
+function renderCartes(){
+  document.getElementById('bv-cartes').innerHTML=`
+    <div class="giftgrid">
+      <div class="gift"><div class="gl">E-cartes cadeau actives</div><div class="gv">14</div>
+        <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:4px">valeur totale 420 €</div></div>
+      <div class="gift"><div class="gl">Codes promo en cours</div><div class="gv">3</div>
+        <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:4px">87 utilisations ce mois</div></div>
+      <div class="gift"><div class="gl">Parrainages convertis</div><div class="gv">9</div>
+        <div style="font-size:11.5px;color:var(--lime);font-weight:600;margin-top:4px">+18 nouveaux joueurs</div></div>
+    </div>
+    <div class="bo-cols">
+      <div class="panel">
+        <div class="panel-h"><h3>🎁 E-cartes cadeau</h3><button class="btn btn-red btn-sm" style="margin-left:auto">+ Émettre une carte</button></div>
+        <div class="panel-b"><table class="tbl">
+          <tr><th>Code</th><th>Valeur</th><th>Acheteur</th><th>Statut</th></tr>
+          <tr><td><b style="color:var(--cyan);letter-spacing:1px">LG-GIFT-7K2P</b></td><td><b>50 €</b></td><td>Nadia Kessar</td><td><span class="badge b-conf">Active</span></td></tr>
+          <tr><td><b style="color:var(--cyan);letter-spacing:1px">LG-GIFT-3M9X</b></td><td><b>30 €</b></td><td>Paul Vidal</td><td><span class="badge b-conf">Active</span></td></tr>
+          <tr><td><b style="color:var(--cyan);letter-spacing:1px">LG-GIFT-1A5T</b></td><td><b>40 €</b></td><td>Léa Fontaine</td><td><span class="badge b-done">Utilisée</span></td></tr>
+          <tr><td><b style="color:var(--cyan);letter-spacing:1px">LG-GIFT-8R4W</b></td><td><b>60 €</b></td><td>Hugo Marchand</td><td><span class="badge b-conf">Active</span></td></tr>
+        </table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>🏷️ Codes promo</h3></div>
+        <div class="panel-b">
+          <div class="gift" style="margin-bottom:10px"><div class="gl">Offre étudiante</div>
+            <div class="gc">ETUDIANT8</div>
+            <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:6px">−2 € la partie · 52 utilisations</div></div>
+          <div class="gift" style="margin-bottom:10px"><div class="gl">Anniversaire — parrainage</div>
+            <div class="gc">PARRAIN10</div>
+            <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:6px">−10 % · 23 utilisations</div></div>
+          <div class="gift"><div class="gl">Happy hour mercredi</div>
+            <div class="gc">MERCREDI</div>
+            <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:6px">3e partie offerte · 12 utilisations</div></div>
+          <div class="note" style="margin-top:14px">💡 <div>Le parrainage a déjà ramené 18 nouveaux joueurs — un canal d'acquisition gratuit, impossible à suivre sans back office.</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ================= INIT ================= */
+renderFormules();
+buildBoNav();
+renderDash();renderResaView();renderPlanning();renderCartes();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeResa();});
+</script>
+</body>
+</html>

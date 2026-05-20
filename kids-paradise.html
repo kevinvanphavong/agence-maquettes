@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kid's Paradise — Maquette refonte site + back office</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root{
+  --violet:#7c3aed; --violet-d:#6d28d9; --violet-l:#a78bfa;
+  --pink:#ec4899; --yellow:#fbbf24; --green:#22c55e; --orange:#fb923c; --cyan:#06b6d4;
+  --ink:#2c2150; --muted:#8b84a3; --line:#ece7f8;
+  --bg:#faf8ff; --card:#ffffff; --soft:#f4f0fd;
+  --shadow:0 14px 40px rgba(124,58,237,.13);
+  --shadow-sm:0 6px 18px rgba(124,58,237,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.disp{font-family:'Fredoka',sans-serif;font-weight:600}
+img{max-width:100%}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--violet-l);border-radius:8px}
+::-webkit-scrollbar-track{background:var(--soft)}
+a{color:inherit;text-decoration:none}
+.btn{
+  font-family:'Fredoka';font-weight:600;font-size:15px;cursor:pointer;border:none;
+  padding:13px 26px;border-radius:40px;transition:transform .15s,box-shadow .15s,filter .15s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;
+  box-shadow:0 8px 22px rgba(124,58,237,.4)}
+.btn-yellow{background:var(--yellow);color:#5b3d00;box-shadow:0 8px 22px rgba(251,191,36,.45)}
+.btn-ghost{background:#fff;color:var(--violet);border:2px solid var(--line)}
+.btn-sm{padding:8px 16px;font-size:13px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* ===== MODE SWITCH ===== */
+.modebar{
+  position:fixed;top:0;left:0;right:0;height:46px;background:var(--ink);z-index:200;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.modebar .lbl{color:#cfc6e8;font-size:12px;font-weight:700;margin-right:8px}
+.mode-btn{
+  font-family:'Fredoka';font-size:13px;font-weight:600;padding:6px 16px;border-radius:30px;
+  border:none;cursor:pointer;background:transparent;color:#9b91bd;transition:all .15s;
+}
+.mode-btn.active{background:var(--violet);color:#fff}
+
+/* ===== PAGE ROOT ===== */
+.screen{display:none;padding-top:46px}
+.screen.active{display:block}
+
+/* ============ SITE PUBLIC ============ */
+.hdr{
+  position:sticky;top:46px;z-index:100;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+}
+.hdr-in{display:flex;align-items:center;gap:18px;height:74px}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Fredoka';font-weight:700;font-size:21px}
+.logo .lm{
+  width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  font-size:22px;background:linear-gradient(135deg,var(--violet),var(--pink));
+  box-shadow:0 6px 16px rgba(124,58,237,.4);transform:rotate(-6deg);
+}
+.logo .lt small{display:block;font-family:'Nunito';font-weight:700;font-size:10px;
+  color:var(--muted);letter-spacing:1.5px;margin-top:-3px}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{padding:9px 14px;border-radius:30px;font-weight:700;font-size:14px;color:var(--ink);
+  transition:background .15s}
+.nav a:hover{background:var(--soft)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:62px 0 80px;
+  background:radial-gradient(circle at 80% 10%,#f0e7ff 0,transparent 55%),
+  radial-gradient(circle at 10% 90%,#ffe9f5 0,transparent 50%)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.hero .tag{display:inline-flex;align-items:center;gap:7px;background:#fff;
+  padding:7px 15px;border-radius:30px;font-weight:800;font-size:13px;color:var(--violet);
+  box-shadow:var(--shadow-sm);margin-bottom:18px}
+.hero h1{font-size:54px;line-height:1.05;letter-spacing:-1px}
+.hero h1 .hl{background:linear-gradient(120deg,var(--violet),var(--pink));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p.sub{font-size:18px;color:#5f5680;margin:18px 0 26px;max-width:440px;font-weight:600}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:26px;margin-top:30px}
+.hero-stats .hs b{font-family:'Fredoka';font-size:26px;display:block;color:var(--violet)}
+.hero-stats .hs span{font-size:12.5px;color:var(--muted);font-weight:700}
+.hero-art{
+  aspect-ratio:1/1;border-radius:38px;position:relative;
+  background:linear-gradient(150deg,var(--violet),var(--pink) 60%,var(--orange));
+  box-shadow:0 30px 60px rgba(124,58,237,.35);display:flex;align-items:center;justify-content:center;
+}
+.hero-art .big{font-size:140px;filter:drop-shadow(0 10px 14px rgba(0,0,0,.25))}
+.float{position:absolute;background:#fff;border-radius:18px;padding:11px 15px;
+  box-shadow:var(--shadow);font-weight:800;font-size:13px;display:flex;align-items:center;gap:8px}
+.float .e{font-size:20px}
+.float.f1{top:24px;left:-26px}
+.float.f2{bottom:42px;right:-30px}
+.float.f3{bottom:-18px;left:60px;background:var(--yellow);color:#5b3d00}
+
+/* INFOBAND */
+.infoband{background:var(--ink);color:#fff;padding:18px 0}
+.infoband .wrap{display:flex;justify-content:space-around;gap:20px;flex-wrap:wrap}
+.infoband .ib{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+.infoband .ib .e{font-size:22px}
+
+/* SECTION */
+section{padding:74px 0}
+.sec-head{text-align:center;max-width:560px;margin:0 auto 44px}
+.sec-head .kicker{font-weight:800;color:var(--pink);letter-spacing:1.5px;font-size:13px;
+  text-transform:uppercase}
+.sec-head h2{font-size:38px;margin:8px 0 10px;letter-spacing:-.5px}
+.sec-head p{color:#5f5680;font-weight:600;font-size:16px}
+
+/* ACTIVITES */
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.act{background:var(--card);border-radius:24px;padding:26px 22px;text-align:center;
+  box-shadow:var(--shadow-sm);transition:transform .18s;border:1px solid var(--line)}
+.act:hover{transform:translateY(-6px)}
+.act .ai{width:74px;height:74px;border-radius:22px;margin:0 auto 14px;font-size:36px;
+  display:flex;align-items:center;justify-content:center}
+.act h3{font-size:19px;margin-bottom:6px}
+.act p{font-size:13.5px;color:var(--muted);font-weight:600}
+
+/* ANNIVERSAIRES */
+#anniv{background:linear-gradient(180deg,#fff,var(--soft))}
+.formules{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:start}
+.formule{background:var(--card);border-radius:26px;padding:30px 26px;position:relative;
+  border:2px solid var(--line);box-shadow:var(--shadow-sm);transition:transform .18s}
+.formule:hover{transform:translateY(-6px)}
+.formule.star{border-color:var(--violet);box-shadow:var(--shadow)}
+.formule .ribbon{position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;font-family:'Fredoka';
+  font-weight:600;font-size:12px;padding:5px 16px;border-radius:30px;white-space:nowrap}
+.formule .fz{font-size:42px}
+.formule h3{font-size:23px;margin:6px 0 2px}
+.formule .age{font-size:13px;color:var(--muted);font-weight:700}
+.formule .price{font-family:'Fredoka';font-size:38px;color:var(--violet);margin:14px 0 2px}
+.formule .price small{font-size:14px;color:var(--muted);font-weight:700}
+.formule ul{list-style:none;margin:16px 0 20px;display:flex;flex-direction:column;gap:9px}
+.formule li{font-size:13.5px;font-weight:600;display:flex;gap:8px;align-items:flex-start}
+.formule li .ck{color:var(--green);font-weight:900}
+.formule .btn{width:100%;justify-content:center}
+
+/* TARIFS */
+.tarif-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:22px}
+.tarif-card{background:var(--card);border-radius:24px;padding:28px;box-shadow:var(--shadow-sm);
+  border:1px solid var(--line)}
+.tarif-card h3{font-size:21px;margin-bottom:16px;display:flex;align-items:center;gap:9px}
+.trow{display:flex;justify-content:space-between;align-items:center;padding:13px 0;
+  border-bottom:1px dashed var(--line)}
+.trow:last-child{border:none}
+.trow .tn b{font-size:15px}
+.trow .tn span{display:block;font-size:12px;color:var(--muted);font-weight:700}
+.trow .tp{font-family:'Fredoka';font-size:24px;color:var(--violet)}
+.passbox{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;
+  border-radius:24px;padding:28px;display:flex;flex-direction:column;justify-content:center}
+.passbox .pe{font-size:44px}
+.passbox h3{font-size:22px;color:#fff;margin:6px 0}
+.passbox .pbig{font-family:'Fredoka';font-size:46px;margin:6px 0}
+.passbox p{font-size:13.5px;font-weight:600;opacity:.92}
+
+/* AVIS */
+#avis{background:var(--ink);color:#fff}
+#avis .sec-head h2{color:#fff}
+#avis .sec-head p{color:#bdb4dc}
+.gnote{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:34px}
+.gnote .gbig{font-family:'Fredoka';font-size:54px;color:var(--yellow)}
+.gnote .stars{font-size:20px;color:var(--yellow)}
+.gnote .gsub{font-size:13px;color:#bdb4dc;font-weight:700}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.review{background:#3a2f63;border-radius:20px;padding:22px}
+.review .rstar{color:var(--yellow);font-size:14px;margin-bottom:8px}
+.review p{font-size:14px;font-weight:600;line-height:1.55}
+.review .rwho{margin-top:14px;font-size:12.5px;color:#bdb4dc;font-weight:700}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.info-card{background:var(--card);border-radius:24px;padding:28px;box-shadow:var(--shadow-sm);
+  border:1px solid var(--line)}
+.info-card h3{font-size:20px;margin-bottom:14px;display:flex;gap:9px;align-items:center}
+.info-card .iline{display:flex;gap:10px;padding:8px 0;font-weight:700;font-size:14px}
+.info-card .iline .e{font-size:18px}
+.hours .hr{display:flex;justify-content:space-between;padding:7px 0;
+  border-bottom:1px dashed var(--line);font-weight:700;font-size:14px}
+.hours .hr:last-child{border:none}
+
+/* FOOTER */
+footer{background:var(--ink);color:#bdb4dc;padding:40px 0 26px}
+footer .fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;
+  padding-bottom:24px;border-bottom:1px solid #3a2f63}
+footer .logo{color:#fff}
+footer .fcol b{color:#fff;font-family:'Fredoka';display:block;margin-bottom:8px;font-size:15px}
+footer .fcol a{display:block;font-size:13px;padding:3px 0;font-weight:600}
+footer .fbot{text-align:center;padding-top:20px;font-size:12px;font-weight:600}
+
+/* ===== RESERVATION MODAL ===== */
+.ov{position:fixed;inset:0;background:rgba(44,33,80,.6);backdrop-filter:blur(4px);
+  z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
+.ov.open{display:flex}
+.resa{background:var(--bg);border-radius:28px;width:680px;max-width:100%;max-height:92vh;
+  overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.resa-head{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;
+  padding:22px 26px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:2}
+.resa-head h3{font-size:20px;color:#fff}
+.resa-head .rx{margin-left:auto;width:34px;height:34px;border-radius:50%;border:none;
+  background:rgba(255,255,255,.2);color:#fff;font-size:18px;cursor:pointer}
+.steps{display:flex;gap:6px;padding:18px 26px 6px}
+.stp{flex:1;height:6px;border-radius:6px;background:var(--line)}
+.stp.on{background:var(--violet)}
+.resa-body{padding:14px 26px 26px}
+.rstep{display:none}
+.rstep.active{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rstep h4{font-size:19px;margin-bottom:4px}
+.rstep .rhint{color:var(--muted);font-size:13px;font-weight:700;margin-bottom:16px}
+.opt{display:flex;gap:12px;align-items:center;background:#fff;border:2px solid var(--line);
+  border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer;transition:all .15s}
+.opt:hover{border-color:var(--violet-l)}
+.opt.sel{border-color:var(--violet);background:#f6f1ff}
+.opt .oe{font-size:28px;width:44px;text-align:center}
+.opt .on b{font-size:15px}
+.opt .on span{display:block;font-size:12.5px;color:var(--muted);font-weight:700}
+.opt .op{margin-left:auto;font-family:'Fredoka';font-size:18px;color:var(--violet);font-weight:600}
+.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:12px}
+.field label{font-weight:800;font-size:12.5px;display:block;margin-bottom:5px}
+.field input,.field select{width:100%;padding:11px 13px;border:2px solid var(--line);
+  border-radius:12px;font-family:'Nunito';font-weight:700;font-size:14px;background:#fff}
+.field input:focus,.field select:focus{outline:none;border-color:var(--violet)}
+.daypick{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{aspect-ratio:1;border:2px solid var(--line);border-radius:12px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-weight:800;font-size:14px;background:#fff;transition:all .12s}
+.day small{font-size:9px;color:var(--muted);font-weight:800}
+.day:hover:not(.off){border-color:var(--violet-l)}
+.day.sel{background:var(--violet);color:#fff;border-color:var(--violet)}
+.day.sel small{color:#fff}
+.day.off{opacity:.3;cursor:not-allowed}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.slot{padding:10px;border:2px solid var(--line);border-radius:12px;text-align:center;
+  font-weight:800;font-size:13px;cursor:pointer;background:#fff;transition:all .12s}
+.slot:hover{border-color:var(--violet-l)}
+.slot.sel{background:var(--violet);color:#fff;border-color:var(--violet)}
+.slot.full{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.qty{display:flex;align-items:center;gap:14px}
+.qty button{width:38px;height:38px;border-radius:50%;border:2px solid var(--violet);
+  background:#fff;color:var(--violet);font-size:20px;font-weight:900;cursor:pointer}
+.qty .qv{font-family:'Fredoka';font-size:26px;width:46px;text-align:center}
+.addon{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.addon:last-child{border:none}
+.addon input{width:20px;height:20px;accent-color:var(--violet)}
+.addon .anm b{font-size:14px}
+.addon .anm span{display:block;font-size:12px;color:var(--muted);font-weight:700}
+.addon .ap{margin-left:auto;font-family:'Fredoka';color:var(--violet);font-weight:600}
+.summary{background:#fff;border-radius:18px;padding:18px;border:2px solid var(--line);margin:14px 0}
+.sline{display:flex;justify-content:space-between;padding:6px 0;font-weight:700;font-size:14px}
+.sline.tot{border-top:2px solid var(--line);margin-top:6px;padding-top:12px;
+  font-family:'Fredoka';font-size:21px;color:var(--violet)}
+.sline.tot span:last-child{font-weight:600}
+.acompte{background:#f6f1ff;border-radius:12px;padding:11px 14px;font-size:12.5px;
+  font-weight:700;color:var(--violet-d);margin-top:8px}
+.resa-foot{display:flex;gap:10px;justify-content:space-between;margin-top:16px}
+.confirm-ok{text-align:center;padding:24px 10px}
+.confirm-ok .ce{font-size:70px}
+.confirm-ok h4{font-size:26px;margin:10px 0 6px}
+.confirm-ok p{color:#5f5680;font-weight:700;font-size:14.5px}
+.ref{display:inline-block;background:var(--ink);color:#fff;font-family:'Fredoka';
+  padding:8px 20px;border-radius:30px;margin-top:14px;font-size:16px}
+
+/* ============ BACK OFFICE ============ */
+.bo{display:flex;min-height:calc(100vh - 46px)}
+.bo-side{width:228px;background:var(--ink);flex-shrink:0;padding:22px 14px;
+  display:flex;flex-direction:column}
+.bo-brand{display:flex;align-items:center;gap:9px;padding:0 8px 18px;
+  border-bottom:1px solid #3a2f63;margin-bottom:14px}
+.bo-brand .lm{width:36px;height:36px;border-radius:11px;font-size:18px;
+  background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;
+  align-items:center;justify-content:center;transform:rotate(-6deg)}
+.bo-brand b{font-family:'Fredoka';color:#fff;font-size:15px}
+.bo-brand small{display:block;color:#9b91bd;font-size:10px;font-weight:700;letter-spacing:1px}
+.bo-nav .bn{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:12px;
+  color:#9b91bd;font-weight:700;font-size:14px;cursor:pointer;margin-bottom:3px;transition:all .14s}
+.bo-nav .bn:hover{background:#3a2f63;color:#fff}
+.bo-nav .bn.active{background:var(--violet);color:#fff}
+.bo-nav .bn .e{font-size:17px;width:22px;text-align:center}
+.bo-nav .bn .ct{margin-left:auto;background:rgba(255,255,255,.15);font-size:11px;
+  padding:1px 8px;border-radius:20px;font-weight:800}
+.bo-side .bo-foot{margin-top:auto;padding:12px 8px 0;border-top:1px solid #3a2f63;
+  display:flex;align-items:center;gap:9px}
+.bo-side .bo-foot .av{width:34px;height:34px;border-radius:50%;font-weight:800;
+  background:linear-gradient(135deg,var(--cyan),var(--green));display:flex;
+  align-items:center;justify-content:center;color:#fff;font-size:13px}
+.bo-side .bo-foot b{color:#fff;font-size:13px}
+.bo-side .bo-foot small{display:block;color:#9b91bd;font-size:11px;font-weight:700}
+.bo-main{flex:1;background:var(--bg);overflow-y:auto}
+.bo-top{height:66px;background:#fff;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;padding:0 30px;gap:14px;position:sticky;top:0;z-index:5}
+.bo-top h2{font-size:20px}
+.bo-top .bo-sub{font-size:12.5px;color:var(--muted);font-weight:700}
+.bo-content{padding:26px 30px 50px}
+.bo-view{display:none}
+.bo-view.active{display:block;animation:fade .3s}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.kpi{background:#fff;border-radius:18px;padding:18px;border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);position:relative;overflow:hidden}
+.kpi .ki{position:absolute;right:12px;top:10px;font-size:32px;opacity:.18}
+.kpi .kl{font-size:12px;color:var(--muted);font-weight:800}
+.kpi .kv{font-family:'Fredoka';font-size:30px;margin-top:6px}
+.kpi .kf{font-size:11.5px;font-weight:800;margin-top:3px}
+.kpi .kf.up{color:var(--green)}
+.bo-cols{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
+.panel{background:#fff;border-radius:18px;border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);overflow:hidden}
+.panel-h{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;gap:10px}
+.panel-h h3{font-size:16px}
+.panel-h .pill{margin-left:auto;font-size:11px;font-weight:800;padding:3px 10px;
+  border-radius:20px;background:var(--soft);color:var(--violet)}
+.panel-b{padding:8px 20px 16px}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:11px;color:var(--muted);font-weight:800;
+  text-transform:uppercase;letter-spacing:.5px;padding:10px 8px;border-bottom:2px solid var(--line)}
+.tbl td{padding:12px 8px;border-bottom:1px solid var(--line);font-weight:700;font-size:13.5px}
+.tbl tr:last-child td{border:none}
+.tbl tr:hover td{background:var(--soft)}
+.who{display:flex;align-items:center;gap:9px}
+.who .wav{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:15px;flex-shrink:0}
+.who b{font-size:13.5px}
+.who small{display:block;font-size:11px;color:var(--muted);font-weight:700}
+.badge{font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;display:inline-block}
+.b-conf{background:#dcfce7;color:#15803d}
+.b-att{background:#fef3c7;color:#a16207}
+.b-new{background:#dbeafe;color:#1d4ed8}
+.b-done{background:#ede9fe;color:#6d28d9}
+.fbar{height:8px;background:var(--soft);border-radius:6px;overflow:hidden;min-width:80px}
+.fbar i{display:block;height:100%;border-radius:6px}
+
+/* calendar BO */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
+.cal .cdow{text-align:center;font-size:11px;font-weight:800;color:var(--muted);padding-bottom:4px}
+.ccell{background:var(--soft);border-radius:12px;min-height:84px;padding:7px;
+  border:1px solid var(--line)}
+.ccell .cd{font-weight:800;font-size:12px;color:var(--muted)}
+.ccell.today{border-color:var(--violet);background:#f6f1ff}
+.cev{background:#fff;border-left:3px solid var(--violet);border-radius:6px;
+  padding:3px 6px;margin-top:4px;font-size:10.5px;font-weight:800;cursor:pointer;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cev.pink{border-left-color:var(--pink)}
+.cev.orange{border-left-color:var(--orange)}
+
+.toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center}
+.search{flex:1;max-width:300px;position:relative}
+.search input{width:100%;padding:10px 14px 10px 36px;border:2px solid var(--line);
+  border-radius:12px;font-family:'Nunito';font-weight:700;font-size:13.5px}
+.search .si{position:absolute;left:12px;top:9px;font-size:15px}
+.seg{display:flex;background:#fff;border:2px solid var(--line);border-radius:12px;padding:3px}
+.seg button{border:none;background:none;font-family:'Nunito';font-weight:800;font-size:12.5px;
+  padding:6px 13px;border-radius:9px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--violet);color:#fff}
+
+/* slots admin */
+.slotgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+.slotcard{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;
+  text-align:center}
+.slotcard b{font-family:'Fredoka';font-size:17px}
+.slotcard .scap{font-size:11.5px;color:var(--muted);font-weight:800;margin:6px 0}
+.slotcard .fbar{margin:0 auto}
+.slotcard.busy{border-color:var(--orange)}
+.slotcard.fullx{border-color:var(--pink);background:#fef1f7}
+
+.note{background:#f6f1ff;border:1px solid #e4d8fb;border-radius:14px;padding:13px 16px;
+  font-size:12.5px;font-weight:700;color:var(--violet-d);display:flex;gap:9px;margin-top:18px}
+
+@media(max-width:920px){
+  .hero-grid,.tarif-grid,.infos-grid,.bo-cols{grid-template-columns:1fr}
+  .acts,.formules,.reviews{grid-template-columns:1fr 1fr}
+  .kpis{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:38px}.nav{display:none}
+  .bo-side{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MODE SWITCH ===== -->
+<div class="modebar">
+  <span class="lbl">MAQUETTE — DÉMO</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ============================================================ SITE -->
+<div class="screen active" id="screen-site">
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo">
+        <span class="lm">🎈</span>
+        <span class="lt">Kid's Paradise<small>BLOIS</small></span>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('activites')">Activités</a>
+        <a onclick="scrollToSec('anniv')">Anniversaires</a>
+        <a onclick="scrollToSec('tarifs')">Tarifs</a>
+        <a onclick="scrollToSec('avis')">Avis</a>
+        <a onclick="scrollToSec('infos')">Infos & accès</a>
+      </nav>
+      <button class="btn btn-primary btn-sm" onclick="openResa()">🎉 Réserver un anniv</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">⭐ 4,1/5 sur Google · +100 familles ravies</span>
+        <h1>Le royaume du <span class="hl">jeu</span> pour les 0-12 ans</h1>
+        <p class="sub">Toboggans géants, trampolines, piscine à balles et espace bébé — au chaud l'hiver, au frais l'été. Et des anniversaires inoubliables.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="openResa()">🎉 Réserver un anniversaire</button>
+          <button class="btn btn-ghost" onclick="scrollToSec('tarifs')">Voir les tarifs</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><b>1 200 m²</b><span>D'AIRE DE JEU</span></div>
+          <div class="hs"><b>0-12</b><span>ANS</span></div>
+          <div class="hs"><b>7j/7</b><span>OUVERT</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="big">🎠</div>
+        <div class="float f1"><span class="e">🎪</span> Espace bébé sécurisé</div>
+        <div class="float f2"><span class="e">🎂</span> 3 formules anniv</div>
+        <div class="float f3"><span class="e">❄️</span> Climatisé tout l'été</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFOBAND -->
+  <div class="infoband">
+    <div class="wrap">
+      <div class="ib"><span class="e">📍</span> 1 Rue Franciade, La Chaussée-Saint-Victor</div>
+      <div class="ib"><span class="e">🕑</span> Ouvert aujourd'hui · 10h-19h</div>
+      <div class="ib"><span class="e">🅿️</span> Parking gratuit</div>
+      <div class="ib"><span class="e">☕</span> Espace parents & snack</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITES -->
+  <section id="activites">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">Tout pour s'amuser</div>
+        <h2>Une journée entière de jeu</h2>
+        <p>Des espaces pensés pour chaque âge, de bébé aux grands de 12 ans.</p>
+      </div>
+      <div class="acts">
+        <div class="act"><div class="ai" style="background:#ede9fe">🛝</div><h3>Structures géantes</h3><p>Toboggans, ponts de singe et parcours d'aventure.</p></div>
+        <div class="act"><div class="ai" style="background:#fce7f3">🤸</div><h3>Trampolines</h3><p>Une zone de rebonds pour se défouler en sécurité.</p></div>
+        <div class="act"><div class="ai" style="background:#dbeafe">🔵</div><h3>Piscine à balles</h3><p>Des milliers de balles et un canon à balles géant.</p></div>
+        <div class="act"><div class="ai" style="background:#dcfce7">🍼</div><h3>Espace bébé</h3><p>Un coin doux et protégé pour les 0-3 ans.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANNIVERSAIRES -->
+  <section id="anniv">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">La star de la maison</div>
+        <h2>Des anniversaires clés en main</h2>
+        <p>Vous profitez, on s'occupe de tout. Réservation en ligne en 2 minutes — dès 7 enfants.</p>
+      </div>
+      <div class="formules" id="formulesGrid"></div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section id="tarifs">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">Sans surprise</div>
+        <h2>Les tarifs d'entrée</h2>
+        <p>Une fois l'entrée payée, on joue toute la journée.</p>
+      </div>
+      <div class="tarif-grid">
+        <div class="tarif-card">
+          <h3>🎟️ Entrées à l'unité</h3>
+          <div class="trow"><div class="tn"><b>Bébé</b><span>0 à 2 ans</span></div><div class="tp">1 €</div></div>
+          <div class="trow"><div class="tn"><b>Petit</b><span>2 à 4 ans</span></div><div class="tp">6 €</div></div>
+          <div class="trow"><div class="tn"><b>Enfant</b><span>4 à 12 ans</span></div><div class="tp">9 €</div></div>
+          <div class="trow"><div class="tn"><b>Adulte accompagnant</b><span>Café offert</span></div><div class="tp">Gratuit</div></div>
+        </div>
+        <div class="passbox">
+          <div class="pe">🎫</div>
+          <h3>Le Pass Malin</h3>
+          <div class="pbig">75 €</div>
+          <p>10 entrées enfant à utiliser quand vous voulez. Soit 7,50 € l'entrée — et pas de date limite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">Ils y étaient</div>
+        <h2>Ce que disent les familles</h2>
+        <p>Une note construite sur plus de 100 avis Google vérifiés.</p>
+      </div>
+      <div class="gnote">
+        <div class="gbig">4,1</div>
+        <div>
+          <div class="stars">★★★★☆</div>
+          <div class="gsub">Note Google · 100+ avis</div>
+        </div>
+      </div>
+      <div class="reviews">
+        <div class="review"><div class="rstar">★★★★★</div><p>« Anniversaire de ma fille au top, les enfants ne voulaient plus partir. L'équipe est adorable. »</p><div class="rwho">— Camille R.</div></div>
+        <div class="review"><div class="rstar">★★★★★</div><p>« Idéal les jours de pluie. Climatisé, propre, et un vrai coin café pour les parents. »</p><div class="rwho">— Mehdi B.</div></div>
+        <div class="review"><div class="rstar">★★★★☆</div><p>« Mes enfants adorent les trampolines. La réservation en ligne pour l'anniv était super simple. »</p><div class="rwho">— Sophie L.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos" style="background:linear-gradient(180deg,var(--soft),#fff)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">Avant de venir</div>
+        <h2>Infos pratiques & accès</h2>
+      </div>
+      <div class="infos-grid">
+        <div class="info-card hours">
+          <h3>🕑 Horaires</h3>
+          <div class="hr"><span>Lundi</span><b>Fermé</b></div>
+          <div class="hr"><span>Mardi – Vendredi</span><b>15h – 19h</b></div>
+          <div class="hr"><span>Mercredi</span><b>10h – 19h</b></div>
+          <div class="hr"><span>Samedi – Dimanche</span><b>10h – 19h</b></div>
+          <div class="hr"><span>Vacances scolaires</span><b>10h – 19h tous les jours</b></div>
+        </div>
+        <div class="info-card">
+          <h3>📍 Accès & contact</h3>
+          <div class="iline"><span class="e">🏠</span> 1 Rue Franciade, 41260 La Chaussée-Saint-Victor</div>
+          <div class="iline"><span class="e">🚗</span> Parking gratuit devant le parc</div>
+          <div class="iline"><span class="e">📞</span> 02 54 00 00 00</div>
+          <div class="iline"><span class="e">✉️</span> bonjour@kidsparadise-blois.fr</div>
+          <div class="iline"><span class="e">❄️</span> Climatisé l'été · chauffé l'hiver</div>
+          <div style="margin-top:14px"><button class="btn btn-primary" onclick="openResa()">🎉 Réserver un anniversaire</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fgrid">
+        <div>
+          <div class="logo"><span class="lm">🎈</span><span class="lt" style="color:#fff">Kid's Paradise<small>BLOIS</small></span></div>
+          <p style="margin-top:12px;font-size:13px;font-weight:600;max-width:260px">Le parc de jeux indoor des 0-12 ans à La Chaussée-Saint-Victor.</p>
+        </div>
+        <div class="fcol"><b>Le parc</b><a onclick="scrollToSec('activites')">Activités</a><a onclick="scrollToSec('tarifs')">Tarifs</a><a onclick="scrollToSec('infos')">Horaires</a></div>
+        <div class="fcol"><b>Anniversaires</b><a onclick="scrollToSec('anniv')">Nos formules</a><a onclick="openResa()">Réserver en ligne</a></div>
+        <div class="fcol"><b>Suivez-nous</b><a>Facebook</a><a>Instagram</a><a>Avis Google</a></div>
+      </div>
+      <div class="fbot">Maquette de refonte réalisée pour la prospection — données illustratives. © Kid's Paradise Blois</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================ BACK OFFICE -->
+<div class="screen" id="screen-bo">
+  <div class="bo">
+    <aside class="bo-side">
+      <div class="bo-brand">
+        <span class="lm">🎈</span>
+        <div><b>Kid's Paradise</b><small>BACK OFFICE</small></div>
+      </div>
+      <nav class="bo-nav" id="boNav"></nav>
+      <div class="bo-foot">
+        <div class="av">KP</div>
+        <div><b>Gérante</b><small>Kid's Paradise Blois</small></div>
+      </div>
+    </aside>
+    <div class="bo-main">
+      <div class="bo-top">
+        <div>
+          <h2 id="boTitle">Tableau de bord</h2>
+          <div class="bo-sub" id="boSub">Vue d'ensemble de l'activité</div>
+        </div>
+      </div>
+      <div class="bo-content">
+        <div class="bo-view active" id="bv-dash"></div>
+        <div class="bo-view" id="bv-resa"></div>
+        <div class="bo-view" id="bv-clients"></div>
+        <div class="bo-view" id="bv-creneaux"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== RESERVATION MODAL ===== -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-head">
+      <span style="font-size:26px">🎂</span>
+      <h3>Réserver un anniversaire</h3>
+      <button class="rx" onclick="closeResa()">✕</button>
+    </div>
+    <div class="steps" id="steps"></div>
+    <div class="resa-body" id="resaBody"></div>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const FORMULES=[
+  {id:'decouverte',emo:'🎈',nom:'Découverte',age:'Idéal 2-5 ans',prix:13.5,star:false,
+   inc:['2h de jeu libre dans tout le parc','Goûter : gâteau, jus de fruits, bonbons','Table décorée réservée','Invitations à imprimer']},
+  {id:'fiesta',emo:'🎉',nom:'Fiesta',age:'Idéal 5-9 ans',prix:15.5,star:true,
+   inc:['2h30 de jeu libre','Goûter complet + boisson à volonté','1 animateur dédié au groupe','Table décorée + ballons','Cadeau souvenir pour le roi/la reine']},
+  {id:'royale',emo:'👑',nom:'Royale',age:'Idéal 8-12 ans',prix:17.5,star:false,
+   inc:['3h de jeu + espace privatisé 1h','Goûter premium au choix','Animateur dédié + grand jeu animé','Déco thème au choix + ballons','Cadeau pour chaque enfant','Photo souvenir du groupe']},
+];
+const ADDONS=[
+  {id:'gateau',nom:'Gâteau personnalisé',desc:'Pièce montée ou layer cake au choix',prix:35},
+  {id:'boissons',nom:'Pack boissons parents',desc:'Café, thé et softs pour les adultes',prix:18},
+  {id:'pinata',nom:'Piñata surprise',desc:'Garnie de bonbons et petits jouets',prix:22},
+  {id:'maquillage',nom:'Atelier maquillage',desc:'30 min avec une maquilleuse',prix:45},
+];
+
+/* back office demo data */
+const RESAS=[
+  {ref:'KP-2048',enfant:'Léa',age:6,parent:'Camille Rota',tel:'06 12 34 56 78',formule:'fiesta',date:'Sam. 24 mai',heure:'14h00',nb:10,statut:'conf',total:155,acompte:50},
+  {ref:'KP-2049',enfant:'Tom',age:9,parent:'Mehdi Bara',tel:'06 98 76 54 32',formule:'royale',date:'Sam. 24 mai',heure:'16h30',nb:12,statut:'conf',total:210,acompte:50},
+  {ref:'KP-2050',enfant:'Jade',age:4,parent:'Sophie Leduc',tel:'06 44 55 66 77',formule:'decouverte',date:'Dim. 25 mai',heure:'10h30',nb:8,statut:'att',total:108,acompte:0},
+  {ref:'KP-2051',enfant:'Noah',age:7,parent:'Julie Mercier',tel:'06 11 22 33 44',formule:'fiesta',date:'Mer. 28 mai',heure:'14h00',nb:9,statut:'new',total:139.5,acompte:0},
+  {ref:'KP-2052',enfant:'Inès',age:8,parent:'Karim Sahli',tel:'06 77 88 99 00',formule:'royale',date:'Sam. 31 mai',heure:'14h00',nb:14,statut:'conf',total:245,acompte:50},
+  {ref:'KP-2047',enfant:'Hugo',age:5,parent:'Laura Petit',tel:'06 33 22 11 00',formule:'decouverte',date:'Dim. 18 mai',heure:'15h00',nb:7,statut:'done',total:94.5,acompte:50},
+];
+const STAT={conf:{l:'Confirmé',c:'b-conf'},att:{l:'Acompte attendu',c:'b-att'},new:{l:'Nouvelle demande',c:'b-new'},done:{l:'Terminé',c:'b-done'}};
+const fNom=id=>FORMULES.find(f=>f.id===id).nom;
+const eur=n=>n.toLocaleString('fr-FR',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+' €';
+
+/* ================= MODE ================= */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+/* ================= SITE: formules ================= */
+function renderFormules(){
+  document.getElementById('formulesGrid').innerHTML=FORMULES.map(f=>`
+    <div class="formule ${f.star?'star':''}">
+      ${f.star?'<div class="ribbon">⭐ La plus choisie</div>':''}
+      <div class="fz">${f.emo}</div>
+      <h3>${f.nom}</h3>
+      <div class="age">${f.age}</div>
+      <div class="price">${f.prix.toLocaleString('fr-FR',{minimumFractionDigits:2})}<small> €/enfant</small></div>
+      <ul>${f.inc.map(i=>`<li><span class="ck">✓</span> ${i}</li>`).join('')}</ul>
+      <button class="btn ${f.star?'btn-primary':'btn-ghost'}" onclick="openResa('${f.id}')">Choisir ${f.nom}</button>
+    </div>`).join('');
+}
+
+/* ================= RESERVATION TUNNEL ================= */
+let R={step:0,formule:null,date:null,heure:null,nb:8,addons:[]};
+const DAYS=[
+  {d:'24',j:'Sam',off:false},{d:'25',j:'Dim',off:false},{d:'26',j:'Lun',off:true},
+  {d:'27',j:'Mar',off:false},{d:'28',j:'Mer',off:false},{d:'29',j:'Jeu',off:false},
+  {d:'30',j:'Ven',off:false},{d:'31',j:'Sam',off:false},{d:'01',j:'Dim',off:false},
+  {d:'02',j:'Lun',off:true},{d:'03',j:'Mar',off:false},{d:'04',j:'Mer',off:false},
+  {d:'05',j:'Jeu',off:false},{d:'06',j:'Ven',off:false},
+];
+const SLOTS=[{h:'10h00',full:false},{h:'12h30',full:true},{h:'14h00',full:false},{h:'16h30',full:false}];
+
+function openResa(fid){
+  R={step:0,formule:fid||null,date:null,heure:null,nb:8,addons:[]};
+  if(fid)R.step=1;
+  document.getElementById('ov').classList.add('open');
+  renderResa();
+}
+function closeResa(){document.getElementById('ov').classList.remove('open');}
+function rGo(s){R.step=s;renderResa();}
+
+function resaTotal(){
+  if(!R.formule)return{base:0,add:0,tot:0};
+  const f=FORMULES.find(x=>x.id===R.formule);
+  const base=f.prix*R.nb;
+  const add=R.addons.reduce((s,id)=>s+ADDONS.find(a=>a.id===id).prix,0);
+  return{base,add,tot:base+add};
+}
+function renderResa(){
+  const stepsEl=document.getElementById('steps');
+  stepsEl.innerHTML=[0,1,2,3,4].map(i=>`<div class="stp ${i<=R.step?'on':''}"></div>`).join('');
+  const body=document.getElementById('resaBody');
+  const T=resaTotal();
+
+  if(R.step===0){
+    body.innerHTML=`<div class="rstep active">
+      <h4>1. Choisissez votre formule</h4>
+      <div class="rhint">3 formules tout compris, dès 7 enfants.</div>
+      ${FORMULES.map(f=>`<div class="opt ${R.formule===f.id?'sel':''}" onclick="R.formule='${f.id}';renderResa()">
+        <div class="oe">${f.emo}</div>
+        <div class="on"><b>${f.nom}</b><span>${f.age}</span></div>
+        <div class="op">${f.prix.toLocaleString('fr-FR',{minimumFractionDigits:2})} €<span style="font-size:11px;color:var(--muted)"> /enf.</span></div>
+      </div>`).join('')}
+      <div class="resa-foot"><span></span>
+        <button class="btn btn-primary" ${R.formule?'':'disabled style="opacity:.4"'} onclick="rGo(1)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===1){
+    body.innerHTML=`<div class="rstep active">
+      <h4>2. Choisissez la date</h4>
+      <div class="rhint">Créneaux disponibles ce mois-ci.</div>
+      <div class="daypick">${DAYS.map(d=>`
+        <div class="day ${d.off?'off':''} ${R.date===d.d?'sel':''}"
+          ${d.off?'':`onclick="R.date='${d.d}';R.heure=null;renderResa()"`}>
+          <small>${d.j}</small>${d.d}</div>`).join('')}</div>
+      ${R.date?`<div style="margin-top:18px"><b style="font-size:14px">Horaire d'arrivée</b>
+        <div class="slots">${SLOTS.map(s=>`
+          <div class="slot ${s.full?'full':''} ${R.heure===s.h?'sel':''}"
+            ${s.full?'':`onclick="R.heure='${s.h}';renderResa()"`}>${s.h}</div>`).join('')}</div></div>`:''}
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(0)">← Retour</button>
+        <button class="btn btn-primary" ${R.date&&R.heure?'':'disabled style="opacity:.4"'} onclick="rGo(2)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===2){
+    body.innerHTML=`<div class="rstep active">
+      <h4>3. Nombre d'enfants & options</h4>
+      <div class="rhint">Minimum 7 enfants pour un anniversaire.</div>
+      <div style="background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px;display:flex;align-items:center;justify-content:space-between">
+        <b style="font-size:14px">Nombre d'enfants</b>
+        <div class="qty">
+          <button onclick="R.nb=Math.max(7,R.nb-1);renderResa()">−</button>
+          <span class="qv">${R.nb}</span>
+          <button onclick="R.nb=Math.min(25,R.nb+1);renderResa()">+</button>
+        </div>
+      </div>
+      <div style="margin-top:16px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:6px 16px">
+        ${ADDONS.map(a=>`<label class="addon">
+          <input type="checkbox" ${R.addons.includes(a.id)?'checked':''} onchange="toggleAddon('${a.id}')">
+          <div class="anm"><b>${a.nom}</b><span>${a.desc}</span></div>
+          <div class="ap">+${a.prix} €</div>
+        </label>`).join('')}
+      </div>
+      <div class="summary">
+        <div class="sline"><span>${fNom(R.formule)} × ${R.nb} enfants</span><span>${eur(T.base)}</span></div>
+        ${T.add?`<div class="sline"><span>Options</span><span>${eur(T.add)}</span></div>`:''}
+        <div class="sline tot"><span>Total estimé</span><span>${eur(T.tot)}</span></div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(1)">← Retour</button>
+        <button class="btn btn-primary" onclick="rGo(3)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===3){
+    body.innerHTML=`<div class="rstep active">
+      <h4>4. Vos coordonnées</h4>
+      <div class="rhint">Pour confirmer la réservation et vous envoyer les infos.</div>
+      <div class="fieldrow">
+        <div class="field"><label>Prénom du parent</label><input placeholder="Camille"></div>
+        <div class="field"><label>Nom</label><input placeholder="Rota"></div>
+      </div>
+      <div class="fieldrow">
+        <div class="field"><label>Téléphone</label><input placeholder="06 12 34 56 78"></div>
+        <div class="field"><label>Email</label><input placeholder="camille@email.fr"></div>
+      </div>
+      <div class="fieldrow">
+        <div class="field"><label>Prénom de l'enfant fêté</label><input placeholder="Léa"></div>
+        <div class="field"><label>Âge</label><input placeholder="6 ans"></div>
+      </div>
+      <div class="field"><label>Allergies / remarques</label><input placeholder="Une allergie aux fruits à coque..."></div>
+      <div class="summary">
+        <div class="sline"><span>Formule</span><span>${fNom(R.formule)}</span></div>
+        <div class="sline"><span>Date</span><span>${R.date} mai · ${R.heure}</span></div>
+        <div class="sline"><span>${R.nb} enfants${R.addons.length?' + '+R.addons.length+' option(s)':''}</span><span>${eur(T.tot)}</span></div>
+        <div class="sline tot"><span>Total</span><span>${eur(T.tot)}</span></div>
+        <div class="acompte">💳 Acompte de 50 € à régler en ligne pour valider — le solde se paie sur place le jour J.</div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(2)">← Retour</button>
+        <button class="btn btn-primary" onclick="rGo(4)">Payer l'acompte (50 €) →</button>
+      </div></div>`;
+  }
+  else{
+    const ref='KP-'+(2053+Math.floor(Math.random()*40));
+    body.innerHTML=`<div class="rstep active confirm-ok">
+      <div class="ce">🎉</div>
+      <h4>Réservation confirmée !</h4>
+      <p>Un email récapitulatif vient de partir.<br>Rendez-vous le ${R.date} mai à ${R.heure} !</p>
+      <div class="ref">Référence ${ref}</div>
+      <div style="margin-top:22px"><button class="btn btn-primary" onclick="closeResa()">Parfait, merci !</button></div>
+      <p style="margin-top:14px;font-size:12px;color:var(--muted)">Cette réservation apparaît instantanément dans le back office du parc.</p>
+    </div>`;
+  }
+}
+function toggleAddon(id){
+  const i=R.addons.indexOf(id);
+  if(i>=0)R.addons.splice(i,1);else R.addons.push(id);
+  renderResa();
+}
+
+/* ================= BACK OFFICE ================= */
+const BONAV=[
+  {id:'dash',e:'📊',l:'Tableau de bord',t:'Tableau de bord',s:'Vue d\'ensemble de l\'activité'},
+  {id:'resa',e:'🎂',l:'Réservations',t:'Réservations anniversaires',s:'Toutes les réservations à venir et passées',ct:RESAS.length},
+  {id:'clients',e:'👨‍👩‍👧',l:'Clients',t:'Fichier clients',s:'Les familles qui ont réservé chez vous'},
+  {id:'creneaux',e:'🗓️',l:'Créneaux',t:'Gestion des créneaux',s:'Disponibilités et capacité du parc'},
+];
+let boCur='dash';
+function buildBoNav(){
+  document.getElementById('boNav').innerHTML=BONAV.map(n=>`
+    <div class="bn ${n.id===boCur?'active':''}" onclick="boGo('${n.id}')">
+      <span class="e">${n.e}</span><span>${n.l}</span>
+      ${n.ct?`<span class="ct">${n.ct}</span>`:''}</div>`).join('');
+}
+function boGo(id){
+  boCur=id;
+  const n=BONAV.find(x=>x.id===id);
+  document.getElementById('boTitle').textContent=n.t;
+  document.getElementById('boSub').textContent=n.s;
+  document.querySelectorAll('.bo-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('bv-'+id).classList.add('active');
+  document.querySelectorAll('.bo-nav .bn').forEach((b,i)=>b.classList.toggle('active',BONAV[i].id===id));
+}
+
+function renderDash(){
+  const caMois=RESAS.filter(r=>r.statut!=='new').reduce((s,r)=>s+r.total,0);
+  const aVenir=RESAS.filter(r=>r.statut==='conf'||r.statut==='att').length;
+  const nouvelles=RESAS.filter(r=>r.statut==='new').length;
+  document.getElementById('bv-dash').innerHTML=`
+    <div class="kpis">
+      <div class="kpi"><span class="ki">🎂</span><div class="kl">RÉSERVATIONS À VENIR</div>
+        <div class="kv">${aVenir}</div><div class="kf up">+2 vs sem. dernière</div></div>
+      <div class="kpi"><span class="ki">💶</span><div class="kl">CA ANNIVERSAIRES (MOIS)</div>
+        <div class="kv">${eur(caMois)}</div><div class="kf up">+18 % vs avril</div></div>
+      <div class="kpi"><span class="ki">🔔</span><div class="kl">NOUVELLES DEMANDES</div>
+        <div class="kv">${nouvelles}</div><div class="kf" style="color:var(--orange)">à traiter</div></div>
+      <div class="kpi"><span class="ki">📈</span><div class="kl">TAUX DE REMPLISSAGE WEEK-END</div>
+        <div class="kv">82 %</div><div class="kf up">samedi quasi complet</div></div>
+    </div>
+    <div class="bo-cols">
+      <div class="panel">
+        <div class="panel-h"><h3>🎂 Prochaines réservations</h3><span class="pill">${RESAS.filter(r=>r.statut!=='done').length} à venir</span></div>
+        <div class="panel-b"><table class="tbl">
+          <tr><th>Enfant</th><th>Date</th><th>Formule</th><th>Statut</th><th>Total</th></tr>
+          ${RESAS.filter(r=>r.statut!=='done').map(r=>`<tr>
+            <td><div class="who"><div class="wav" style="background:#ede9fe">🎈</div>
+              <div><b>${r.enfant}, ${r.age} ans</b><small>${r.parent}</small></div></div></td>
+            <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+            <td>${fNom(r.formule)}<br><small style="color:var(--muted)">${r.nb} enfants</small></td>
+            <td><span class="badge ${STAT[r.statut].c}">${STAT[r.statut].l}</span></td>
+            <td><b>${eur(r.total)}</b></td></tr>`).join('')}
+        </table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>⚡ À faire aujourd'hui</h3></div>
+        <div class="panel-b">
+          <div style="display:flex;flex-direction:column;gap:10px;padding:6px 0">
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:#dbeafe;border-radius:12px">
+              <span style="font-size:18px">🔔</span><div><b style="font-size:13px">Valider la demande de Noah</b>
+              <div style="font-size:12px;color:#1d4ed8;font-weight:700">Reçue il y a 2h via le site</div></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:#fef3c7;border-radius:12px">
+              <span style="font-size:18px">💳</span><div><b style="font-size:13px">Relancer l'acompte de Jade</b>
+              <div style="font-size:12px;color:#a16207;font-weight:700">Réservation Dim. 25 mai</div></div></div>
+            <div style="display:flex;gap:10px;align-items:flex-start;padding:10px;background:#dcfce7;border-radius:12px">
+              <span style="font-size:18px">🎂</span><div><b style="font-size:13px">2 anniversaires ce samedi</b>
+              <div style="font-size:12px;color:#15803d;font-weight:700">Léa (14h) et Tom (16h30)</div></div></div>
+          </div>
+          <div class="note" style="margin-top:8px">💡 <div>Avant : ces infos étaient éclatées entre Qweekle, le téléphone et un cahier. Ici, tout est au même endroit.</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderResaView(){
+  document.getElementById('bv-resa').innerHTML=`
+    <div class="toolbar">
+      <div class="search"><span class="si">🔍</span><input placeholder="Rechercher un enfant, un parent, une référence..."></div>
+      <div class="seg"><button class="on">Toutes</button><button>À venir</button><button>Demandes</button></div>
+      <button class="btn btn-primary btn-sm" style="margin-left:auto">+ Nouvelle réservation</button>
+    </div>
+    <div class="panel"><div class="panel-b"><table class="tbl">
+      <tr><th>Réf.</th><th>Enfant fêté</th><th>Parent</th><th>Date & heure</th><th>Formule</th><th>Enfants</th><th>Statut</th><th>Total</th><th>Acompte</th></tr>
+      ${RESAS.map(r=>`<tr>
+        <td><b style="color:var(--violet)">${r.ref}</b></td>
+        <td><div class="who"><div class="wav" style="background:#fce7f3">🎈</div>
+          <div><b>${r.enfant}</b><small>${r.age} ans</small></div></div></td>
+        <td>${r.parent}<br><small style="color:var(--muted)">${r.tel}</small></td>
+        <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+        <td>${fNom(r.formule)}</td>
+        <td><b>${r.nb}</b></td>
+        <td><span class="badge ${STAT[r.statut].c}">${STAT[r.statut].l}</span></td>
+        <td><b>${eur(r.total)}</b></td>
+        <td>${r.acompte?`<span style="color:var(--green);font-weight:800">✓ ${r.acompte} €</span>`:`<span style="color:var(--orange);font-weight:800">en attente</span>`}</td>
+      </tr>`).join('')}
+    </table></div></div>`;
+}
+
+function renderClients(){
+  const map={};
+  RESAS.forEach(r=>{
+    if(!map[r.parent])map[r.parent]={parent:r.parent,tel:r.tel,nb:0,ca:0,last:r.date};
+    map[r.parent].nb++;map[r.parent].ca+=r.total;
+  });
+  const list=Object.values(map);
+  document.getElementById('bv-clients').innerHTML=`
+    <div class="toolbar">
+      <div class="search"><span class="si">🔍</span><input placeholder="Rechercher une famille..."></div>
+      <button class="btn btn-primary btn-sm" style="margin-left:auto">⬇ Exporter le fichier clients</button>
+    </div>
+    <div class="panel"><div class="panel-b"><table class="tbl">
+      <tr><th>Famille</th><th>Téléphone</th><th>Réservations</th><th>CA cumulé</th><th>Fidélité</th><th></th></tr>
+      ${list.map(c=>`<tr>
+        <td><div class="who"><div class="wav" style="background:#dcfce7">👨‍👩‍👧</div>
+          <div><b>Famille ${c.parent.split(' ')[1]}</b><small>${c.parent}</small></div></div></td>
+        <td>${c.tel}</td>
+        <td><b>${c.nb}</b> anniversaire${c.nb>1?'s':''}</td>
+        <td><b>${eur(c.ca)}</b></td>
+        <td>${c.nb>1?'<span class="badge b-done">⭐ Famille fidèle</span>':'<span class="badge b-new">Nouveau</span>'}</td>
+        <td><button class="btn btn-ghost btn-sm">✉️ Relancer</button></td>
+      </tr>`).join('')}
+    </table></div></div>
+    <div class="note">💡 <div>Chaque réservation en ligne enrichit automatiquement ce fichier — base parfaite pour une relance « anniversaire l'an prochain ».</div></div>`;
+}
+
+function renderCreneaux(){
+  const cells=[
+    {d:'',ev:[]},{d:'',ev:[]},
+    {d:'21',today:true,ev:[]},{d:'22',ev:[]},{d:'23',ev:[]},
+    {d:'24',ev:[{t:'Léa · 14h',c:''},{t:'Tom · 16h30',c:'pink'}]},
+    {d:'25',ev:[{t:'Jade · 10h30',c:'orange'}]},
+    {d:'26',ev:[]},{d:'27',ev:[]},
+    {d:'28',ev:[{t:'Noah · 14h',c:''}]},
+    {d:'29',ev:[]},{d:'30',ev:[]},
+    {d:'31',ev:[{t:'Inès · 14h',c:'pink'}]},{d:'',ev:[]},
+  ];
+  const dows=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const slots=[
+    {h:'10h00',cap:3,used:2},{h:'12h30',cap:3,used:3},
+    {h:'14h00',cap:3,used:2},{h:'16h30',cap:3,used:1},
+  ];
+  document.getElementById('bv-creneaux').innerHTML=`
+    <div class="bo-cols" style="grid-template-columns:1.6fr 1fr">
+      <div class="panel">
+        <div class="panel-h"><h3>🗓️ Calendrier des anniversaires</h3><span class="pill">Semaine du 21 mai</span></div>
+        <div class="panel-b">
+          <div class="cal">${dows.map(d=>`<div class="cdow">${d}</div>`).join('')}
+            ${cells.map(c=>`<div class="ccell ${c.today?'today':''}">
+              <div class="cd">${c.d}</div>
+              ${c.ev.map(e=>`<div class="cev ${e.c}">${e.t}</div>`).join('')}
+            </div>`).join('')}</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>⏰ Capacité par créneau</h3><span class="pill">Samedi 24 mai</span></div>
+        <div class="panel-b">
+          <div class="slotgrid">${slots.map(s=>{
+            const pct=Math.round(s.used/s.cap*100);
+            const cls=s.used>=s.cap?'fullx':s.used>0?'busy':'';
+            const col=s.used>=s.cap?'var(--pink)':s.used/s.cap>.5?'var(--orange)':'var(--green)';
+            return `<div class="slotcard ${cls}">
+              <b>${s.h}</b>
+              <div class="scap">${s.used}/${s.cap} salles</div>
+              <div class="fbar"><i style="width:${pct}%;background:${col}"></i></div>
+              <div style="font-size:11px;font-weight:800;margin-top:6px;color:${col}">
+                ${s.used>=s.cap?'COMPLET':s.cap-s.used+' dispo'}</div>
+            </div>`;}).join('')}</div>
+          <div class="note" style="margin-top:14px">💡 <div>Le créneau de 12h30 est complet : le site bloque automatiquement les nouvelles réservations sur ce slot.</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ================= INIT ================= */
+renderFormules();
+buildBoNav();
+renderDash();renderResaView();renderClients();renderCreneaux();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeResa();});
+</script>
+</body>
+</html>
