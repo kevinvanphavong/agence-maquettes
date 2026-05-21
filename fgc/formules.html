@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nos Formules · Family Games Center Blois</title>
+<meta name="description" content="Soirées hebdomadaires, Pass multi-activités, Réservations groupe SILVER/GOLD/PLATINIUM et anniversaires enfants New/Super/Pro Bowler — saison 2026/2027.">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Page-specific extensions on the FGC system */
+  .gamme-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: var(--pink-hot);
+    margin-bottom: 14px;
+  }
+  .gamme-eyebrow .num {
+    display: inline-grid;
+    place-items: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--pink-hot);
+    border-radius: 999px;
+    color: var(--yellow);
+    background: rgba(255, 45, 135, 0.12);
+    font-size: 0.85rem;
+  }
+  .gamme-head {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: end;
+    padding-bottom: 26px;
+    margin-bottom: 36px;
+    border-bottom: 1px dashed rgba(255, 217, 61, 0.2);
+  }
+  .gamme-head .desc {
+    font-size: 1rem;
+    color: rgba(255, 244, 224, 0.78);
+    line-height: 1.6;
+  }
+  .gamme-head .desc em {
+    color: var(--yellow);
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* Hebdo cards reusing FGC visual style */
+  .hebdo-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .hebdo-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.7) 0%, rgba(22, 10, 58, 0.92) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.18);
+    border-radius: 26px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s, border-color 0.2s;
+    min-height: 360px;
+    overflow: hidden;
+  }
+  .hebdo-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(255, 45, 135, 0.25) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .hebdo-card:hover { transform: translateY(-4px); border-color: rgba(255, 217, 61, 0.4); }
+  .hebdo-card.deal {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 1px var(--yellow-dark);
+  }
+  .hebdo-card.deal::after {
+    content: '★ Pack du moment';
+    position: absolute;
+    top: 18px; right: 18px;
+    font-family: 'Lilita One', sans-serif;
+    background: linear-gradient(180deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+    color: var(--purple-light);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    box-shadow: 0 3px 0 #b88200;
+  }
+  .hebdo-tag {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    color: var(--pink-hot);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hebdo-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: var(--pink-hot);
+  }
+  .hebdo-title {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    line-height: 1.1;
+    color: var(--cream);
+  }
+  .hebdo-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 244, 224, 0.78);
+    line-height: 1.55;
+  }
+  .hebdo-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+  }
+  .hebdo-bullets li {
+    font-size: 0.92rem;
+    color: rgba(255, 244, 224, 0.85);
+    padding-left: 18px;
+    position: relative;
+  }
+  .hebdo-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: var(--yellow);
+  }
+  .hebdo-foot {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .hebdo-price {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--yellow);
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+  .hebdo-price .cur { font-size: 1.4rem; color: var(--pink-hot); }
+  .hebdo-price .unit {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255, 244, 224, 0.6);
+    margin-left: 6px;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 400;
+  }
+  .hebdo-vs {
+    display: block;
+    margin-top: 4px;
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(255, 244, 224, 0.5);
+    text-decoration: line-through;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .hebdo-days {
+    text-align: right;
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    color: rgba(255, 244, 224, 0.65);
+    line-height: 1.4;
+  }
+  .hebdo-days strong { color: #84cc16; letter-spacing: 0.5px; }
+
+  /* Pass cards */
+  .pass-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .pass-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.7) 0%, rgba(22, 10, 58, 0.92) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.18);
+    border-radius: 22px;
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .pass-card:hover { transform: translateY(-4px); border-color: rgba(255, 217, 61, 0.4); }
+  .pass-card.hero {
+    border-color: var(--yellow);
+    background: linear-gradient(180deg, rgba(94, 45, 184, 0.85) 0%, rgba(22, 10, 58, 0.95) 100%);
+    box-shadow: 0 0 0 1px var(--yellow-dark);
+  }
+  .pass-card.hero::after {
+    content: '★ Best-seller';
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Lilita One', sans-serif;
+    background: linear-gradient(180deg, var(--pink-hot) 0%, var(--pink) 100%);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .pass-name {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    color: var(--cream);
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+  }
+  .pass-price {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--yellow);
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+  .pass-price .cur { font-size: 1.3rem; color: var(--pink-hot); }
+  .pass-price .unit {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255, 244, 224, 0.55);
+    margin-left: 6px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .pass-calc {
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .pass-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: rgba(255, 244, 224, 0.7);
+  }
+  .pass-row .dots {
+    flex: 1;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+  }
+  .pass-row .v {
+    color: rgba(255, 244, 224, 0.9);
+    white-space: nowrap;
+  }
+  .pass-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'Lilita One', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255, 244, 224, 0.55);
+  }
+  .pass-total strong {
+    color: var(--cream);
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+  .pass-save {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    background: rgba(132, 204, 22, 0.12);
+    border: 1px solid rgba(132, 204, 22, 0.3);
+    border-radius: 12px;
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .pass-save .label {
+    font-size: 0.72rem;
+    color: rgba(255, 244, 224, 0.7);
+  }
+  .pass-save .val {
+    font-size: 1.3rem;
+    color: #a3e635;
+  }
+
+  /* Group options tiers */
+  .group-options {
+    margin-top: 50px;
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.5) 0%, rgba(22, 10, 58, 0.7) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.2);
+    border-radius: 28px;
+    padding: 40px;
+  }
+  .group-options-head {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 50px;
+    align-items: end;
+    margin-bottom: 30px;
+    padding-bottom: 22px;
+    border-bottom: 1px dashed rgba(255, 217, 61, 0.18);
+  }
+  .group-options-head h3 {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    color: var(--cream);
+    font-size: 1.5rem;
+    line-height: 1.15;
+  }
+  .group-options-head h3 .accent { color: var(--yellow); }
+  .group-options-head .intro {
+    font-size: 0.92rem;
+    color: rgba(255, 244, 224, 0.75);
+    line-height: 1.55;
+  }
+  .group-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .tier-card {
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .tier-card.featured {
+    border-color: var(--yellow-dark);
+    background: rgba(255, 217, 61, 0.06);
+  }
+  .tier-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .tier-size {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: rgba(255, 244, 224, 0.6);
+  }
+  .tier-time {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+    color: rgba(255, 244, 224, 0.6);
+    letter-spacing: 0.5px;
+  }
+  .tier-card.featured .tier-time {
+    color: var(--yellow);
+    border-color: var(--yellow-dark);
+  }
+  .tier-count {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--cream);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .tier-card.featured .tier-count { color: var(--yellow); }
+  .tier-count .unit {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.78rem;
+    color: var(--pink-hot);
+    font-weight: 600;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tier-activities {
+    list-style: none;
+    padding: 14px 0 0;
+    margin: 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tier-activities li {
+    font-size: 0.88rem;
+    color: rgba(255, 244, 224, 0.85);
+    padding-left: 16px;
+    position: relative;
+  }
+  .tier-activities li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: var(--yellow);
+  }
+  .tier-activities li.new {
+    color: var(--pink-hot);
+    font-weight: 600;
+  }
+  .tier-activities li.new::before {
+    background: var(--pink-hot);
+    box-shadow: 0 0 8px rgba(255, 45, 135, 0.5);
+  }
+
+  /* Réservations groupe (SILVER/GOLD/PLATINIUM) */
+  .resa-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .resa-card {
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.7) 0%, rgba(22, 10, 58, 0.92) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.18);
+    border-radius: 26px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s;
+  }
+  .resa-card:hover { transform: translateY(-4px); }
+  .resa-rank {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .resa-rank.silver { color: #d4d4d8; }
+  .resa-rank.gold { color: var(--yellow); }
+  .resa-rank.platinium { color: var(--pink-hot); }
+  .resa-rank .tag {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.72rem;
+    color: rgba(255, 244, 224, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  .resa-price {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--cream);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+  }
+  .resa-price .cur { font-size: 1.4rem; color: var(--pink-hot); }
+  .resa-price .unit {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(255, 244, 224, 0.55);
+    margin-left: 6px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .resa-pitch {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    color: var(--cream);
+  }
+  .resa-bullets {
+    list-style: none;
+    padding: 14px 0;
+    margin: 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .resa-bullets li {
+    font-size: 0.9rem;
+    color: rgba(255, 244, 224, 0.85);
+    padding-left: 16px;
+    position: relative;
+  }
+  .resa-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: var(--yellow);
+  }
+  .resa-key {
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(255, 244, 224, 0.78);
+  }
+  .resa-key strong { color: var(--yellow); font-weight: 600; }
+
+  /* Anniversaires */
+  .anniv-intro {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+    padding: 32px;
+    background: linear-gradient(90deg, rgba(255, 217, 61, 0.12) 0%, rgba(255, 45, 135, 0.10) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.25);
+    border-radius: 22px;
+  }
+  .anniv-intro h3 {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    color: var(--cream);
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  .anniv-fromto {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .anniv-fromto .old {
+    color: rgba(255, 244, 224, 0.4);
+    text-decoration: line-through;
+  }
+  .anniv-fromto .arrow { color: var(--pink-hot); font-size: 1.1rem; }
+  .anniv-fromto .new { color: var(--yellow); }
+  .anniv-intro p {
+    font-size: 0.95rem;
+    color: rgba(255, 244, 224, 0.82);
+    line-height: 1.55;
+  }
+  .anniv-intro p em {
+    color: var(--yellow);
+    font-style: normal;
+    font-weight: 600;
+  }
+  .vip-block {
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 217, 61, 0.25);
+    border-radius: 18px;
+    padding: 22px;
+  }
+  .vip-label {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    color: var(--pink-hot);
+    margin-bottom: 14px;
+  }
+  .vip-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
+  }
+  .vip-list li {
+    font-size: 0.86rem;
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .vip-list li .vip-ic {
+    width: 24px; height: 24px;
+    background: var(--yellow);
+    color: var(--purple-light);
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .anniv-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .anniv-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.75) 0%, rgba(22, 10, 58, 0.95) 100%);
+    border: 2px solid rgba(255, 217, 61, 0.18);
+    border-radius: 26px;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .anniv-card:hover { transform: translateY(-6px); border-color: rgba(255, 217, 61, 0.4); }
+  .anniv-card.featured {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 1px var(--yellow-dark), 0 22px 50px -22px rgba(255, 217, 61, 0.35);
+  }
+  .anniv-card.featured::after {
+    content: '★ Best-seller';
+    position: absolute;
+    top: -12px; left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, var(--pink-hot) 0%, var(--pink) 100%);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-family: 'Lilita One', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .anniv-icon {
+    font-size: 2.4rem;
+    line-height: 1;
+  }
+  .anniv-name {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .anniv-card.featured .anniv-name { color: var(--yellow); }
+  .anniv-age {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 244, 224, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .anniv-price {
+    font-family: 'Lilita One', sans-serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--yellow);
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+  .anniv-price .cur { font-size: 1.3rem; color: var(--pink-hot); }
+  .anniv-price .unit {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255, 244, 224, 0.55);
+    margin-left: 6px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .anniv-feats {
+    list-style: none;
+    padding: 14px 0 0;
+    margin: 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    flex-grow: 1;
+  }
+  .anniv-feats li {
+    font-size: 0.88rem;
+    color: rgba(255, 244, 224, 0.85);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .anniv-feats li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px;
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: var(--yellow);
+  }
+  .anniv-feats li.vip {
+    color: var(--pink-hot);
+    font-weight: 600;
+  }
+  .anniv-feats li.vip::before {
+    background: var(--pink-hot);
+    box-shadow: 0 0 8px rgba(255, 45, 135, 0.5);
+  }
+  .anniv-cta {
+    margin-top: 8px;
+  }
+  .anniv-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 980px) {
+    .gamme-head { grid-template-columns: 1fr; gap: 18px; }
+    .hebdo-cards, .resa-cards, .anniv-cards { grid-template-columns: 1fr; }
+    .pass-cards { grid-template-columns: 1fr 1fr; }
+    .group-tiers { grid-template-columns: 1fr; }
+    .group-options-head { grid-template-columns: 1fr; gap: 16px; }
+    .anniv-intro { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .pass-cards { grid-template-columns: 1fr; }
+    .vip-list { grid-template-columns: 1fr; }
+    .group-options { padding: 24px; }
+    .anniv-intro { padding: 22px; }
+  }
+</style>
+</head>
+<body data-page="formules">
+<div class="bg-ambient"></div>
+<div data-fgc-header></div>
+
+<main>
+  <!-- HERO -->
+  <section class="hero" style="padding:60px 0 30px">
+    <div class="wrap" style="text-align:center;max-width:880px;margin:0 auto">
+      <div class="breadcrumb" style="text-align:center"><a href="index.html">Accueil</a><span class="sep">›</span><span>Nos formules</span></div>
+      <span class="section-eyebrow">Pour chaque occasion</span>
+      <h1 class="hero-title">Nos <span class="pop">formules.</span></h1>
+      <p class="hero-sub" style="margin:0 auto">Soirées hebdo à petit prix, packs multi-activités, réservations groupes et anniversaires d'enfants. Des formules toutes prêtes, à partir de <strong>17,90€/pers</strong>.</p>
+    </div>
+  </section>
+
+  <!-- 01 — SOIRÉES RÉCURRENTES -->
+  <section class="section" id="hebdomadaires" style="padding-top:30px">
+    <div class="wrap">
+      <div class="gamme-head">
+        <div>
+          <span class="gamme-eyebrow"><span class="num">01</span>Soirées de la semaine</span>
+          <h2 class="section-title">Trois rendez-vous <span class="accent">à petit prix.</span></h2>
+        </div>
+        <p class="desc">Des soirées récurrentes pour bien démarrer (ou finir) la semaine. <em>Sans réservation</em> sauf pour le Pack Afterwork — on vous accueille directement.</p>
+      </div>
+
+      <div class="hebdo-cards">
+        <article class="hebdo-card">
+          <div class="hebdo-tag">Lundi &amp; mardi soir</div>
+          <h3 class="hebdo-title">Bowling illimité</h3>
+          <p class="hebdo-desc">Enchaînez les parties autant que vous voulez, de 20h30 jusqu'à la fermeture. Chaussures incluses. Pas besoin de réserver — vous venez, vous payez à l'accueil, vous jouez.</p>
+          <div class="hebdo-foot">
+            <div class="hebdo-price">20<span class="cur">€</span><span class="unit">/pers.</span></div>
+            <div class="hebdo-days">Lundi · Mardi<br>20h30 → fermeture</div>
+          </div>
+        </article>
+
+        <article class="hebdo-card">
+          <div class="hebdo-tag">Jeudi soir</div>
+          <h3 class="hebdo-title">Jeudi à gogo</h3>
+          <p class="hebdo-desc">Bowling et billard à volonté toute la soirée, avec un soda offert. On accueille les 150 premiers entre 17h et 21h — venez tôt pour être sûr d'avoir une place !</p>
+          <div class="hebdo-foot">
+            <div class="hebdo-price">24,90<span class="cur">€</span><span class="unit">/pers.</span></div>
+            <div class="hebdo-days">Jeudi<br>150 premiers</div>
+          </div>
+        </article>
+
+        <article class="hebdo-card deal">
+          <div class="hebdo-tag">Lundi à jeudi · soir</div>
+          <h3 class="hebdo-title">Pack Afterwork</h3>
+          <ul class="hebdo-bullets">
+            <li>2 pizzas au choix</li>
+            <li>Girafe 2,5L de bière pression</li>
+            <li>1h de billard OU fléchettes</li>
+          </ul>
+          <div class="hebdo-foot">
+            <div>
+              <div class="hebdo-price">68<span class="cur">€</span><span class="unit">/groupe</span></div>
+              <span class="hebdo-vs">au lieu de 87€ à la carte</span>
+            </div>
+            <div class="hebdo-days"><strong>−22 %</strong><br>vs. à la carte</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 — PASS MULTI-ACTIVITÉS -->
+  <section class="section" id="pass" style="padding-top:30px">
+    <div class="wrap">
+      <div class="gamme-head">
+        <div>
+          <span class="gamme-eyebrow"><span class="num">02</span>Pass multi-activités</span>
+          <h2 class="section-title">Plusieurs activités, <span class="accent">une seule visite.</span></h2>
+        </div>
+        <p class="desc">Quatre packs qui combinent bowling, VR, arcade et boisson. Sans réservation, valables <em>du dimanche au jeudi</em>. Vous payez moins cher que si vous preniez tout séparément.</p>
+      </div>
+
+      <div class="pass-cards">
+        <!-- Pass Chill -->
+        <article class="pass-card">
+          <div class="pass-name">Pass Chill</div>
+          <div class="pass-price">17,90<span class="cur">€</span><span class="unit">/pers.</span></div>
+          <ul class="hebdo-bullets" style="padding-top:14px;border-top:1px dashed rgba(255,255,255,0.1)">
+            <li>1 partie de bowling + chaussures</li>
+            <li>1 session de réalité virtuelle</li>
+            <li>2 jetons arcade</li>
+            <li>1 soda offert</li>
+          </ul>
+          <div class="pass-total"><span>Si pris séparément</span><strong>22,70€</strong></div>
+          <div class="pass-save"><span class="label">Vous économisez</span><span class="val">−21 %</span></div>
+        </article>
+
+        <!-- Pass Confort -->
+        <article class="pass-card hero">
+          <div class="pass-name">Pass Confort</div>
+          <div class="pass-price">26,90<span class="cur">€</span><span class="unit">/pers.</span></div>
+          <ul class="hebdo-bullets" style="padding-top:14px;border-top:1px dashed rgba(255,255,255,0.1)">
+            <li>2 parties de bowling + chaussures</li>
+            <li>2 sessions de réalité virtuelle</li>
+            <li>4 jetons arcade</li>
+            <li>1 soda offert</li>
+          </ul>
+          <div class="pass-total"><span>Si pris séparément</span><strong>38,60€</strong></div>
+          <div class="pass-save"><span class="label">Vous économisez</span><span class="val">−30 %</span></div>
+        </article>
+
+        <!-- Pass VIP -->
+        <article class="pass-card">
+          <div class="pass-name">Pass VIP</div>
+          <div class="pass-price">34,90<span class="cur">€</span><span class="unit">/pers.</span></div>
+          <ul class="hebdo-bullets" style="padding-top:14px;border-top:1px dashed rgba(255,255,255,0.1)">
+            <li>2 parties de bowling + chaussures</li>
+            <li>3 sessions de réalité virtuelle</li>
+            <li>6 jetons arcade</li>
+            <li>1 soda offert</li>
+          </ul>
+          <div class="pass-total"><span>Si pris séparément</span><strong>46,60€</strong></div>
+          <div class="pass-save"><span class="label">Vous économisez</span><span class="val">−25 %</span></div>
+        </article>
+
+        <!-- Pass Multiverse -->
+        <article class="pass-card">
+          <div class="pass-name">Pass Multiverse</div>
+          <div class="pass-price">43,90<span class="cur">€</span><span class="unit">/pers.</span></div>
+          <ul class="hebdo-bullets" style="padding-top:14px;border-top:1px dashed rgba(255,255,255,0.1)">
+            <li>3 parties de bowling + chaussures</li>
+            <li>3 sessions de réalité virtuelle</li>
+            <li>6 jetons arcade</li>
+            <li>1 activité au choix (billard, fléchettes, karaoké, blindtest)</li>
+            <li>1 soda offert</li>
+          </ul>
+          <div class="pass-total"><span>Si pris séparément</span><strong>62,50€</strong></div>
+          <div class="pass-save"><span class="label">Vous économisez</span><span class="val">−30 %</span></div>
+        </article>
+      </div>
+
+      <!-- Group options bonus -->
+      <div class="group-options">
+        <div class="group-options-head">
+          <div>
+            <span class="gamme-eyebrow" style="margin-bottom:0"><span class="num" style="border-color:var(--yellow);color:var(--yellow);background:rgba(255,217,61,0.12)">+</span>Bonus inclus dans tous les Pass</span>
+            <h3 style="margin-top:14px">Plus vous êtes nombreux, <span class="accent">plus on vous offre</span> d'activités</h3>
+          </div>
+          <p class="intro">En plus de ce qui est déjà dans votre Pass, on vous offre 30 minutes sur des activités supplémentaires — billard, fléchettes, karaoké, blindtest. À partir de 2 personnes.</p>
+        </div>
+
+        <div class="group-tiers">
+          <article class="tier-card">
+            <div class="tier-head">
+              <span class="tier-size">2 — 4 personnes</span>
+              <span class="tier-time">30 min</span>
+            </div>
+            <div class="tier-count">1<span class="unit">option<br>offerte</span></div>
+            <ul class="tier-activities">
+              <li>Billard</li>
+              <li>Fléchettes</li>
+            </ul>
+          </article>
+
+          <article class="tier-card">
+            <div class="tier-head">
+              <span class="tier-size">5 — 8 personnes</span>
+              <span class="tier-time">30 min</span>
+            </div>
+            <div class="tier-count">2<span class="unit">options<br>offertes</span></div>
+            <ul class="tier-activities">
+              <li>Billard</li>
+              <li>Fléchettes</li>
+              <li class="new">Karaoké</li>
+            </ul>
+          </article>
+
+          <article class="tier-card featured">
+            <div class="tier-head">
+              <span class="tier-size">9 personnes et +</span>
+              <span class="tier-time">30 min</span>
+            </div>
+            <div class="tier-count">3<span class="unit">options<br>offertes</span></div>
+            <ul class="tier-activities">
+              <li>Billard</li>
+              <li>Fléchettes</li>
+              <li>Karaoké</li>
+              <li class="new">Blindtest</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — RÉSERVATIONS EN LIGNE -->
+  <section class="section" id="reservations-groupe" style="padding-top:30px">
+    <div class="wrap">
+      <div class="gamme-head">
+        <div>
+          <span class="gamme-eyebrow"><span class="num">03</span>Réserver à l'avance</span>
+          <h2 class="section-title">Packs avec <span class="accent">piste garantie.</span></h2>
+        </div>
+        <p class="desc">Réservez votre piste à l'avance pour ne pas avoir à attendre. Avec boisson incluse et une formule choisie selon votre groupe. SILVER et GOLD pour <em>les groupes à partir de 8 personnes</em>, PLATINIUM pour <em>les sorties à 2 ou en solo</em> sans minimum.</p>
+      </div>
+
+      <div class="resa-cards">
+        <!-- SILVER -->
+        <article class="resa-card">
+          <div class="resa-rank silver">SILVER<span class="tag">Groupe ≥ 8 pers.</span></div>
+          <div class="resa-price">18,90<span class="cur">€</span><span class="unit">/pers.</span></div>
+          <h3 class="resa-pitch">Le pack groupe<br>essentiel</h3>
+          <ul class="resa-bullets">
+            <li>1 partie de bowling + chaussures</li>
+            <li>1 cocktail ou soda au choix</li>
+            <li>À partir de 8 personnes · réserver 4h avant</li>
+          </ul>
+          <div class="resa-key">Votre piste est <strong>réservée et préparée</strong> avant votre arrivée — vous n'avez plus qu'à vous installer et jouer.</div>
+          <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Réserver SILVER</a>
+        </article>
+
+        <!-- GOLD -->
+        <article class="resa-card" style="border-color:var(--yellow);box-shadow:0 0 0 1px var(--yellow-dark)">
+          <div class="resa-rank gold">GOLD<span class="tag">Groupe ≥ 8 pers.</span></div>
+          <div class="resa-price">23,50<span class="cur">€</span><span class="unit">/pers.</span></div>
+          <h3 class="resa-pitch">2 parties de bowling<br>au lieu d'une</h3>
+          <ul class="resa-bullets">
+            <li>2 parties de bowling + chaussures</li>
+            <li>1 cocktail ou soda au choix</li>
+            <li>À partir de 8 personnes · réserver 4h avant</li>
+          </ul>
+          <div class="resa-key">Vous payez seulement <strong>+4,60€</strong> pour une partie en plus. Pour les soirées où on ne veut pas s'arrêter à une seule manche.</div>
+          <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Réserver GOLD</a>
+        </article>
+
+        <!-- PLATINIUM -->
+        <article class="resa-card">
+          <div class="resa-rank platinium">PLATINIUM<span class="tag">À 2 ou en solo</span></div>
+          <div class="resa-price">20,00<span class="cur">€</span><span class="unit">/pers.</span></div>
+          <h3 class="resa-pitch">Réserver même<br>à la dernière minute</h3>
+          <ul class="resa-bullets">
+            <li>1 partie de bowling + chaussures</li>
+            <li>1 cocktail ou soda au choix</li>
+            <li>Sans minimum · réserver 2h avant</li>
+          </ul>
+          <div class="resa-key">Vous voulez être sûr d'avoir une piste un samedi soir chargé ? Réservez 2h à l'avance — votre place est <strong>garantie</strong>, sans attendre.</div>
+          <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Réserver PLATINIUM</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 — ANNIVERSAIRES ENFANTS -->
+  <section class="section" id="anniversaires-enfants" style="padding-top:30px">
+    <div class="wrap">
+      <div class="gamme-head">
+        <div>
+          <span class="gamme-eyebrow"><span class="num">04</span>Anniversaires enfants</span>
+          <h2 class="section-title">L'anniversaire <span class="accent">clé en main.</span></h2>
+        </div>
+        <p class="desc">Trois formules selon l'âge de l'enfant. <em>Service VIP inclus dans toutes</em> : on s'occupe de l'accueil, de la table, du gâteau, des photos. Vous, vous profitez de la fête.</p>
+      </div>
+
+      <div class="anniv-intro">
+        <div>
+          <h3>On s'occupe de tout</h3>
+          <p style="margin-bottom:14px">Trois formules par tranche d'âge, avec un <em>service complet inclus</em> : votre coupe-file à l'arrivée, votre table décorée, votre piste préparée, un référent dédié pour le groupe, et même la remise des médailles et un polaroïd souvenir pour l'enfant.</p>
+          <p style="font-size:0.92rem;opacity:0.75">Acompte de 50€ pour valider la réservation. Le reste se règle sur place le jour J. Annulation gratuite jusqu'à 7 jours avant la fête.</p>
+        </div>
+        <div class="vip-block">
+          <div class="vip-label">★ Service VIP inclus dans les 3 formules</div>
+          <ul class="vip-list">
+            <li><span class="vip-ic">🚪</span>Coupe-file à l'accueil</li>
+            <li><span class="vip-ic">🎂</span>Table décorée dédiée</li>
+            <li><span class="vip-ic">🎳</span>Piste préparée à l'arrivée</li>
+            <li><span class="vip-ic">🧑‍🎨</span>Référent dédié au groupe</li>
+            <li><span class="vip-ic">🏅</span>Remise des médailles</li>
+            <li><span class="vip-ic">📸</span>Photo polaroïd souvenir</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="anniv-cards">
+        <!-- NEW BOWLER -->
+        <article class="anniv-card">
+          <div class="anniv-icon">🎳</div>
+          <div>
+            <div class="anniv-name">New Bowler</div>
+            <div class="anniv-age">Recommandé · 6 à 8 ans</div>
+          </div>
+          <div class="anniv-price">18,50<span class="cur">€</span><span class="unit">/enfant</span></div>
+          <ul class="anniv-feats">
+            <li>1 partie de bowling + chaussures</li>
+            <li>1 jeton arcade par enfant</li>
+            <li>Goûter d'anniversaire complet</li>
+            <li class="vip">Service VIP anniversaire inclus</li>
+          </ul>
+          <div class="anniv-cta">
+            <a href="reserver-anniversaire.html#formule=newbowler" class="btn btn-ghost">Réserver — acompte 50€</a>
+          </div>
+        </article>
+
+        <!-- SUPER BOWLER -->
+        <article class="anniv-card featured">
+          <div class="anniv-icon">🏆</div>
+          <div>
+            <div class="anniv-name">Super Bowler</div>
+            <div class="anniv-age">Recommandé · 8 à 10 ans</div>
+          </div>
+          <div class="anniv-price">22,50<span class="cur">€</span><span class="unit">/enfant</span></div>
+          <ul class="anniv-feats">
+            <li>2 parties de bowling + chaussures</li>
+            <li>2 jetons arcade par enfant</li>
+            <li>Goûter d'anniversaire complet</li>
+            <li class="vip">Service VIP anniversaire inclus</li>
+          </ul>
+          <div class="anniv-cta">
+            <a href="reserver-anniversaire.html#formule=superbowler" class="btn btn-primary">Réserver — acompte 50€</a>
+          </div>
+        </article>
+
+        <!-- PRO BOWLER -->
+        <article class="anniv-card">
+          <div class="anniv-icon">💎</div>
+          <div>
+            <div class="anniv-name">Pro Bowler</div>
+            <div class="anniv-age">Recommandé · 10 à 12 ans</div>
+          </div>
+          <div class="anniv-price">26,50<span class="cur">€</span><span class="unit">/enfant</span></div>
+          <ul class="anniv-feats">
+            <li>2 parties de bowling + chaussures</li>
+            <li>2 jetons arcade par enfant</li>
+            <li>1 session de réalité virtuelle</li>
+            <li>Goûter d'anniversaire complet</li>
+            <li class="vip">Service VIP anniversaire inclus</li>
+          </ul>
+          <div class="anniv-cta">
+            <a href="reserver-anniversaire.html#formule=probowler" class="btn btn-ghost">Réserver — acompte 50€</a>
+          </div>
+        </article>
+      </div>
+
+      <p style="text-align:center;margin-top:30px;font-size:0.9rem;opacity:0.7">Dès 6 enfants. Acompte de 50€ pour bloquer la date · Annulation gratuite jusqu'à 7 jours avant la fête.</p>
+    </div>
+  </section>
+
+  <!-- EVG / EVJF -->
+  <section class="section">
+    <div class="wrap">
+      <span class="section-eyebrow">🎉 Soirées spéciales sur mesure</span>
+      <h2 class="section-title">EVG · EVJF · <span class="accent">Sorties privatisées.</span></h2>
+      <p class="section-lead">Pour son enterrement de vie de jeune fille ou de garçon, ou tout simplement une grosse soirée entre potes : on assemble votre menu fun à la carte.</p>
+
+      <div class="activities" style="grid-template-columns:repeat(4,1fr)">
+        <div class="activity-card">
+          <div class="activity-icon">🥂</div>
+          <h3 class="activity-title">Welcome Drink</h3>
+          <p class="activity-desc">Cocktail de bienvenue offert à l'arrivée du groupe.</p>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon">🎤</div>
+          <h3 class="activity-title">Karaoké privé</h3>
+          <p class="activity-desc">Box privatisé jusqu'à 9 personnes pour pousser la chansonnette.</p>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon">🎳</div>
+          <h3 class="activity-title">Pistes réservées</h3>
+          <p class="activity-desc">Vos propres pistes bowling + chaussures pour toute la team.</p>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon">🍕</div>
+          <h3 class="activity-title">Catering inclus</h3>
+          <p class="activity-desc">Snacks salés, pizzas, planches apéro à partager.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:40px;text-align:center">
+        <a href="contact.html" class="btn btn-primary">Demander un devis personnalisé</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<div data-fgc-footer></div>
+<script src="partials.js"></script>
+</body>
+</html>

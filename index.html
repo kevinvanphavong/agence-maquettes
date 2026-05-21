@@ -48,17 +48,19 @@ a{color:inherit;text-decoration:none}
 .projects{padding:30px 0 70px}
 .sec-label{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--muted2);
   text-transform:uppercase;margin-bottom:18px}
-.proj{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.proj{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;
   overflow:hidden;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
 .card:hover{transform:translateY(-6px)}
 .card.kp:hover{border-color:#a78bfa}
 .card.lg:hover{border-color:#ff1f3d}
+.card.fgc:hover{border-color:#ffd93d}
 .card .visual{height:200px;position:relative;overflow:hidden;display:flex;
   align-items:center;justify-content:center}
 .card.kp .visual{background:radial-gradient(circle at 30% 30%,#a78bfa,#7c3aed 55%,#ec4899)}
 .card.lg .visual{background:radial-gradient(circle at 70% 30%,#2a0a12,#0a0a14 60%);
   border-bottom:1px solid var(--line)}
+.card.fgc .visual{background:radial-gradient(circle at 40% 28%,#5e2db8,#2a1458 58%,#ff2d87)}
 .card .visual .emo{font-size:84px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35))}
 .card.lg .visual .emo{filter:drop-shadow(0 0 26px rgba(255,31,61,.6))}
 .card .visual .scan{position:absolute;left:0;right:0;height:2px;
@@ -70,6 +72,7 @@ a{color:inherit;text-decoration:none}
   margin-bottom:8px}
 .card.kp .ptag{color:#c084fc}
 .card.lg .ptag{color:#ff5c6f}
+.card.fgc .ptag{color:#ffd93d}
 .card h3{font-size:23px;margin-bottom:8px}
 .card .body p{font-size:14px;color:var(--muted);font-weight:500;flex:1}
 .card .feats{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 20px}
@@ -80,6 +83,7 @@ a{color:inherit;text-decoration:none}
   font-size:14.5px;transition:filter .15s}
 .card.kp .go{background:linear-gradient(135deg,#7c3aed,#ec4899);color:#fff}
 .card.lg .go{background:#ff1f3d;color:#fff}
+.card.fgc .go{background:linear-gradient(135deg,#5e2db8,#ff2d87);color:#fff}
 .card .go:hover{filter:brightness(1.1)}
 .card .go .arr{font-size:18px}
 
@@ -119,9 +123,9 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
   <section class="hero">
     <span class="eyebrow">✦ Démonstrations interactives</span>
     <h1>Des maquettes <span class="g">qui se cliquent</span>, pas des PDF qui dorment.</h1>
-    <p>Pour chaque prospect, une refonte complète du site et un back office de gestion des réservations et des clients — navigables en direct, dans le navigateur.</p>
+    <p>Pour chaque projet, une refonte complète du site et son outil de gestion des réservations et des clients — navigables en direct, dans le navigateur.</p>
     <div class="meta">
-      <div class="m"><b>2</b><span>MAQUETTES</span></div>
+      <div class="m"><b>3</b><span>MAQUETTES</span></div>
       <div class="m"><b>Site + back office</b><span>PÉRIMÈTRE</span></div>
       <div class="m"><b>0</b><span>INSTALLATION</span></div>
     </div>
@@ -159,6 +163,20 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
         </div>
       </a>
 
+      <a class="card fgc" href="fgc/index.html">
+        <div class="visual"><span class="emo">🎳</span></div>
+        <div class="body">
+          <div class="ptag">Bowling · arcade · multi-loisirs</div>
+          <h3>Family Games Center</h3>
+          <p>Refonte complète du site multi-activités : 16 pages, univers super-héros modernisé, tunnel de réservation d'anniversaires et espace client intégrés.</p>
+          <div class="feats">
+            <span>16 pages</span><span>7 activités</span>
+            <span>Tunnel anniversaire</span><span>Espace client</span>
+          </div>
+          <div class="go">Voir la maquette <span class="arr">→</span></div>
+        </div>
+      </a>
+
     </div>
   </section>
 
@@ -173,8 +191,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
       </div>
       <div class="step">
         <div class="n">2</div>
-        <h3>Le back office</h3>
-        <p>En haut de page, le bouton « 🔒 Back office » bascule vers l'outil de gestion : tableau de bord, réservations, clients, créneaux.</p>
+        <h3>Back office &amp; pages</h3>
+        <p>Kids Paradise et Laser Game ont un bouton « 🔒 Back office » en haut de page. Family Games Center est un site complet de 16 pages à parcourir librement.</p>
       </div>
       <div class="step">
         <div class="n">3</div>

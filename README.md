@@ -4,9 +4,10 @@ Démonstrations interactives de refonte de site web + back office, à présenter
 
 ## Contenu du dossier
 
-- `index.html` — page portfolio qui présente les deux maquettes (la page d'accueil)
+- `index.html` — page portfolio qui présente les trois maquettes (la page d'accueil)
 - `kids-paradise.html` — maquette Kid's Paradise (site + back office)
 - `laser-game.html` — maquette Laser Game Evolution Blois (site + back office)
+- `fgc/` — maquette Family Games Center (site multi-pages, 16 pages, point d'entrée `fgc/index.html`)
 
 ---
 
@@ -50,9 +51,10 @@ git push -u origin main
 
 | Page | URL |
 |---|---|
-| Portfolio (les 2 maquettes) | `https://kevinvanphavong.github.io/agence-maquettes/` |
+| Portfolio (les 3 maquettes) | `https://kevinvanphavong.github.io/agence-maquettes/` |
 | Maquette Kid's Paradise | `https://kevinvanphavong.github.io/agence-maquettes/kids-paradise.html` |
 | Maquette Laser Game | `https://kevinvanphavong.github.io/agence-maquettes/laser-game.html` |
+| Maquette Family Games Center | `https://kevinvanphavong.github.io/agence-maquettes/fgc/` |
 
 Envoie le lien portfolio pour une vue d'ensemble, ou le lien direct de la maquette concernée à chaque prospect.
 

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connexion · Family Games Center</title>
+<meta name="description" content="Connectez-vous à votre compte Family Games Center pour gérer vos réservations, votre carte fidélité et vos anniversaires.">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .auth-page {
+    min-height: calc(100vh - 80px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  .auth-side {
+    position: relative;
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    border-right: 1px solid rgba(255, 217, 61, 0.18);
+  }
+  .auth-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(40% 60% at 50% 100%, rgba(255, 45, 135, 0.25), transparent 60%),
+      radial-gradient(60% 70% at 80% 20%, rgba(255, 217, 61, 0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .auth-side-inner {
+    position: relative;
+    max-width: 460px;
+  }
+  .auth-side .section-eyebrow { color: var(--pink-hot); }
+  .auth-side h1 {
+    font-size: clamp(2.4rem, 4vw, 3.6rem);
+    color: var(--cream);
+    margin: 14px 0 22px;
+    line-height: 1.05;
+  }
+  .auth-side h1 .accent { color: var(--yellow); }
+  .auth-side p {
+    color: rgba(255, 244, 224, 0.78);
+    line-height: 1.55;
+    margin-bottom: 30px;
+  }
+  .auth-perks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .auth-perks li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 0.95rem;
+    color: rgba(255, 244, 224, 0.92);
+    line-height: 1.4;
+  }
+  .auth-perks .perk-ic {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+    color: var(--purple-light);
+    display: grid;
+    place-items: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 3px 0 #b88200;
+  }
+  .auth-perks li:nth-child(2) .perk-ic {
+    background: linear-gradient(135deg, var(--pink-hot) 0%, var(--pink) 100%);
+    color: white;
+    box-shadow: 0 3px 0 #8e0d3d;
+  }
+  .auth-perks li:nth-child(3) .perk-ic {
+    background: linear-gradient(135deg, var(--cyan) 0%, #0bb 100%);
+    color: var(--purple-light);
+    box-shadow: 0 3px 0 #066;
+  }
+  .auth-perks strong {
+    display: block;
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    color: var(--cream);
+    margin-bottom: 2px;
+  }
+  .auth-perks span:last-child {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  .auth-main {
+    padding: 70px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .auth-card {
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.65) 0%, rgba(22, 10, 58, 0.92) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.2);
+    border-radius: 28px;
+    padding: 40px 36px;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.6);
+  }
+  .auth-card h2 {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 2rem;
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .auth-card h2 .accent { color: var(--yellow); }
+  .auth-card .sub {
+    color: rgba(255, 244, 224, 0.7);
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+  }
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .auth-field { display: flex; flex-direction: column; gap: 6px; }
+  .auth-field label {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    color: var(--yellow);
+    letter-spacing: 1px;
+  }
+  .auth-field-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .auth-field-row a {
+    font-size: 0.78rem;
+    color: var(--pink-hot);
+    text-decoration: underline;
+  }
+  .auth-input-wrap {
+    position: relative;
+  }
+  .auth-input-wrap input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    color: var(--cream);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.98rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .auth-input-wrap input::placeholder { color: rgba(255, 244, 224, 0.32); }
+  .auth-input-wrap input:focus { outline: 0; border-color: var(--yellow); background: rgba(0,0,0,0.4); }
+  .auth-input-wrap input.has-error { border-color: var(--pink-hot); }
+  .auth-input-wrap.with-icon input { padding-right: 48px; }
+  .auth-toggle-pw {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    color: rgba(255,244,224,0.5);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 6px;
+    line-height: 1;
+  }
+  .auth-toggle-pw:hover { color: var(--yellow); }
+  .auth-err {
+    font-size: 0.8rem;
+    color: var(--pink-hot);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .auth-err::before { content: '⚠'; }
+
+  .auth-remember {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    color: rgba(255,244,224,0.85);
+  }
+  .auth-remember input { display: none; }
+  .auth-remember-box {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.3);
+    border: 2px solid rgba(255,255,255,0.18);
+    display: grid; place-items: center;
+    color: var(--purple-light);
+    font-family: 'Lilita One', sans-serif;
+    font-size: 0.85rem;
+  }
+  .auth-remember input:checked + .auth-remember-box {
+    background: linear-gradient(180deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+    border-color: var(--yellow);
+  }
+
+  .auth-submit {
+    width: 100%;
+    justify-content: center;
+    padding: 16px;
+    font-size: 1rem;
+    margin-top: 8px;
+  }
+
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 24px 0;
+    color: rgba(255,244,224,0.4);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Lilita One', sans-serif;
+  }
+  .auth-divider::before, .auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .auth-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .auth-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    color: var(--cream);
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .auth-social-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,217,61,0.3); }
+  .auth-social-btn svg, .auth-social-btn .ic {
+    width: 18px; height: 18px;
+    flex-shrink: 0;
+  }
+
+  .auth-footer {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: rgba(255,244,224,0.7);
+  }
+  .auth-footer a {
+    color: var(--yellow);
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: underline;
+  }
+
+  .auth-demo {
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: rgba(255, 217, 61, 0.08);
+    border: 1px dashed rgba(255, 217, 61, 0.3);
+    border-radius: 12px;
+    font-size: 0.82rem;
+    color: rgba(255,244,224,0.78);
+    line-height: 1.5;
+  }
+  .auth-demo strong { color: var(--yellow); font-family: 'Lilita One', sans-serif; letter-spacing: 0.5px; }
+  .auth-demo button {
+    background: var(--yellow);
+    color: var(--purple-light);
+    border: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: 'Lilita One', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-left: 6px;
+  }
+
+  .auth-loading {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 4, 32, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .auth-loading.show { display: flex; }
+  .auth-loading-spinner {
+    width: 56px; height: 56px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top-color: var(--yellow);
+    border-radius: 50%;
+    animation: auth-spin 0.7s linear infinite;
+  }
+  @keyframes auth-spin { to { transform: rotate(360deg); } }
+  .auth-loading-text {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    color: var(--cream);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 980px) {
+    .auth-page { grid-template-columns: 1fr; }
+    .auth-side { display: none; }
+    .auth-main { padding: 40px 24px; }
+  }
+  @media (max-width: 640px) {
+    .auth-card { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body data-page="connexion">
+<div class="bg-ambient"></div>
+<div data-fgc-header></div>
+
+<main>
+  <div class="auth-page">
+    <!-- Left side : marketing -->
+    <div class="auth-side">
+      <div class="auth-side-inner">
+        <span class="section-eyebrow">Bon retour parmi nous</span>
+        <h1>Connectez-vous à votre <span class="accent">espace.</span></h1>
+        <p>Retrouvez vos réservations, votre carte fidélité et l'historique de vos visites au Family Games Center.</p>
+        <ul class="auth-perks">
+          <li>
+            <div class="perk-ic">🎂</div>
+            <div>
+              <strong>Réservez en quelques clics</strong>
+              <span>Anniversaires, packs et sorties groupe avec acompte sécurisé.</span>
+            </div>
+          </li>
+          <li>
+            <div class="perk-ic">🏆</div>
+            <div>
+              <strong>Cumulez vos parties</strong>
+              <span>Vos cartes 5 / 8 / 14 parties s'utilisent directement avec votre compte.</span>
+            </div>
+          </li>
+          <li>
+            <div class="perk-ic">🎁</div>
+            <div>
+              <strong>Bons plans réservés</strong>
+              <span>Cadeau d'anniversaire offert, ventes flash et offres exclusives.</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right side : form -->
+    <div class="auth-main">
+      <div class="auth-card">
+        <h2>Se <span class="accent">connecter.</span></h2>
+        <p class="sub">Heureux de vous revoir ! Entrez vos identifiants ci-dessous.</p>
+
+        <form class="auth-form" id="loginForm" novalidate>
+          <div class="auth-field">
+            <label for="email">Email</label>
+            <div class="auth-input-wrap">
+              <input type="email" id="email" name="email" placeholder="sophie.martin@exemple.fr" autocomplete="email" required>
+            </div>
+            <div class="auth-err" id="err-email" hidden></div>
+          </div>
+
+          <div class="auth-field">
+            <div class="auth-field-row">
+              <label for="password">Mot de passe</label>
+              <a href="#" id="forgotLink">Mot de passe oublié ?</a>
+            </div>
+            <div class="auth-input-wrap with-icon">
+              <input type="password" id="password" name="password" placeholder="Votre mot de passe" autocomplete="current-password" required>
+              <button type="button" class="auth-toggle-pw" id="togglePw" aria-label="Afficher/masquer">👁</button>
+            </div>
+            <div class="auth-err" id="err-password" hidden></div>
+          </div>
+
+          <label class="auth-remember">
+            <input type="checkbox" id="remember" checked>
+            <span class="auth-remember-box" id="rememberBox">✓</span>
+            <span>Rester connecté sur cet appareil</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary auth-submit">Se connecter</button>
+        </form>
+
+        <div class="auth-demo">
+          <strong>💡 Démo</strong> : utilisez <code>sophie@fgc.fr</code> / <code>demo</code> ou cliquez
+          <button type="button" id="fillDemo">Auto-remplir</button>
+        </div>
+
+        <div class="auth-divider">ou</div>
+
+        <div class="auth-social">
+          <a href="#" class="auth-social-btn">
+            <span class="ic" style="background:white;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:bold;color:#4285F4">G</span>
+            Continuer avec Google
+          </a>
+          <a href="#" class="auth-social-btn">
+            <svg viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12.07C22 6.49 17.52 2 11.93 2 6.34 2 1.87 6.49 1.87 12.07c0 5.02 3.66 9.18 8.45 9.93v-7.02H7.78v-2.9h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.77l-.44 2.9h-2.33v7.02c4.79-.75 8.45-4.91 8.45-9.93Z"/></svg>
+            Continuer avec Facebook
+          </a>
+        </div>
+
+        <div class="auth-footer">
+          Pas encore de compte ? <a href="inscription.html">Créer un compte</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="auth-loading" id="authLoading">
+  <div class="auth-loading-spinner"></div>
+  <div class="auth-loading-text">Connexion en cours…</div>
+</div>
+
+<div data-fgc-footer></div>
+<script src="partials.js"></script>
+<script>
+  const form = document.getElementById('loginForm');
+  const emailEl = document.getElementById('email');
+  const pwEl = document.getElementById('password');
+  const errEmail = document.getElementById('err-email');
+  const errPw = document.getElementById('err-password');
+  const loading = document.getElementById('authLoading');
+  const togglePw = document.getElementById('togglePw');
+  const rememberBox = document.getElementById('rememberBox');
+  const remember = document.getElementById('remember');
+  remember.addEventListener('change', () => {
+    rememberBox.textContent = remember.checked ? '✓' : '';
+  });
+  togglePw.addEventListener('click', () => {
+    pwEl.type = pwEl.type === 'password' ? 'text' : 'password';
+  });
+  document.getElementById('fillDemo').addEventListener('click', () => {
+    emailEl.value = 'sophie@fgc.fr';
+    pwEl.value = 'demo';
+  });
+  function showErr(el, errEl, msg) {
+    el.classList.add('has-error');
+    errEl.hidden = false;
+    errEl.textContent = msg;
+  }
+  function clearErr(el, errEl) {
+    el.classList.remove('has-error');
+    errEl.hidden = true;
+  }
+  [emailEl, pwEl].forEach(el => el.addEventListener('input', () => {
+    clearErr(emailEl, errEmail);
+    clearErr(pwEl, errPw);
+  }));
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let ok = true;
+    if (!/^\S+@\S+\.\S+$/.test(emailEl.value)) { showErr(emailEl, errEmail, 'Email invalide'); ok = false; }
+    if (!pwEl.value || pwEl.value.length < 3) { showErr(pwEl, errPw, 'Mot de passe requis'); ok = false; }
+    if (!ok) return;
+    loading.classList.add('show');
+    setTimeout(() => {
+      // Simulate session
+      try { localStorage.setItem('fgc_logged_in', 'true'); } catch (e) {}
+      window.location.href = 'mon-compte.html';
+    }, 1100);
+  });
+
+  document.getElementById('forgotLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!emailEl.value) {
+      alert('Entrez d\'abord votre email, on vous enverra un lien de réinitialisation.');
+      emailEl.focus();
+    } else {
+      alert('Email de réinitialisation envoyé à ' + emailEl.value + ' (démo).');
+    }
+  });
+</script>
+</body>
+</html>

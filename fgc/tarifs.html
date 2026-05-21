@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarifs · Family Games Center Blois</title>
+<meta name="description" content="Tarifs à la carte 2026 du Family Games Center à Blois : bowling, billard, fléchettes, karaoké, VR, blindtest, bar et snacking.">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .tarif-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .tarif-card {
+    position: relative;
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.7) 0%, rgba(22, 10, 58, 0.92) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.18);
+    border-radius: 24px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .tarif-card:hover { transform: translateY(-4px); border-color: rgba(255, 217, 61, 0.4); }
+  .tarif-card.bar {
+    background: linear-gradient(180deg, rgba(255, 217, 61, 0.10) 0%, rgba(22, 10, 58, 0.92) 100%);
+    border-color: rgba(255, 217, 61, 0.3);
+  }
+  .tarif-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+    color: var(--purple-light);
+    display: grid;
+    place-items: center;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 0 #b88200;
+  }
+  .tarif-card.bar .tarif-icon {
+    background: linear-gradient(135deg, var(--pink-hot) 0%, var(--pink) 100%);
+    color: white;
+    box-shadow: 0 5px 0 #8e0d3d;
+  }
+  .tarif-name {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    line-height: 1;
+    color: var(--cream);
+  }
+  .tarif-unit {
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.78rem;
+    color: rgba(255, 244, 224, 0.55);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+  .tarif-list {
+    list-style: none;
+    padding: 14px 0 0;
+    margin: 0;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .tarif-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: rgba(255, 244, 224, 0.88);
+  }
+  .tarif-list .label { flex-shrink: 0; }
+  .tarif-list .dots {
+    flex: 1;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+  .tarif-list .v {
+    font-family: 'Lilita One', sans-serif;
+    color: var(--yellow);
+    font-size: 1.05rem;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+  }
+  .tarif-list .v.range { color: var(--pink-hot); }
+  .tarif-note {
+    font-size: 0.82rem;
+    color: rgba(255, 244, 224, 0.6);
+    line-height: 1.5;
+    padding-top: 8px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  }
+
+  .disclaimer {
+    margin-top: 40px;
+    padding: 18px 22px;
+    background: rgba(255, 217, 61, 0.06);
+    border-left: 3px solid var(--yellow);
+    border-radius: 0 14px 14px 0;
+    font-size: 0.88rem;
+    color: rgba(255, 244, 224, 0.78);
+    line-height: 1.5;
+  }
+  .disclaimer strong { color: var(--yellow); }
+
+  @media (max-width: 980px) {
+    .tarif-cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .tarif-cards { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body data-page="tarifs">
+<div class="bg-ambient"></div>
+<div data-fgc-header></div>
+
+<main>
+  <section class="hero" style="padding:60px 0 30px">
+    <div class="wrap" style="text-align:center;max-width:820px;margin:0 auto">
+      <div class="breadcrumb" style="text-align:center"><a href="index.html">Accueil</a><span class="sep">›</span><span>Tarifs à la carte</span></div>
+      <span class="section-eyebrow">Tarifs 2026 / 2027</span>
+      <h1 class="hero-title">Tarifs <span class="pop">à la carte.</span></h1>
+      <p class="hero-sub" style="margin:0 auto">Référence des activités, du bar et du snacking — à l'unité, par heure ou par personne. Pour les formules à prix négocié, voir notre <a href="formules.html" style="color:var(--yellow);text-decoration:underline">page Formules</a>.</p>
+    </div>
+  </section>
+
+  <!-- ACTIVITÉS -->
+  <section class="section" id="activites" style="padding-top:30px">
+    <div class="wrap">
+      <span class="section-eyebrow">🎮 Les activités</span>
+      <h2 class="section-title">Activités <span class="accent">à l'unité.</span></h2>
+
+      <div class="tarif-cards" style="margin-top:30px">
+        <!-- BOWLING -->
+        <article class="tarif-card">
+          <div class="tarif-icon">🎳</div>
+          <div>
+            <div class="tarif-name">Bowling</div>
+            <div class="tarif-unit">à la partie · 20 pistes</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">Enfant (-10 ans)</span><span class="dots"></span><span class="v">5,00€</span></li>
+            <li><span class="label">Adulte</span><span class="dots"></span><span class="v">7,90€</span></li>
+            <li><span class="label">Location chaussures</span><span class="dots"></span><span class="v">1,90€</span></li>
+          </ul>
+          <div class="tarif-note">⏱️ Bowling à volonté lun &amp; mar dès 20h30 : 20€/pers. Voir aussi <a href="formules.html#hebdomadaires" style="color:var(--yellow)">Jeudi à gogo</a>.</div>
+        </article>
+
+        <!-- BILLARD -->
+        <article class="tarif-card">
+          <div class="tarif-icon">🎱</div>
+          <div>
+            <div class="tarif-name">Billard</div>
+            <div class="tarif-unit">par table · 20 tables</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">30 minutes</span><span class="dots"></span><span class="v">7,50€</span></li>
+            <li><span class="label">1 heure</span><span class="dots"></span><span class="v">15,00€</span></li>
+          </ul>
+          <div class="tarif-note">Queues &amp; billes fournies. Tables en libre-service avec casier automatique CB.</div>
+        </article>
+
+        <!-- FLÉCHETTES -->
+        <article class="tarif-card">
+          <div class="tarif-icon">🎯</div>
+          <div>
+            <div class="tarif-name">Fléchettes</div>
+            <div class="tarif-unit">par borne · 4 bornes</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">1 heure</span><span class="dots"></span><span class="v">18,00€</span></li>
+          </ul>
+          <div class="tarif-note">Bornes électroniques, jusqu'à 8 joueurs. Scoring auto multi-modes, inscription à l'accueil.</div>
+        </article>
+
+        <!-- ARCADE -->
+        <article class="tarif-card">
+          <div class="tarif-icon">🕹️</div>
+          <div>
+            <div class="tarif-name">Arcade</div>
+            <div class="tarif-unit">au jeton · 150 m²</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">Jeton</span><span class="dots"></span><span class="v">à partir de 2€</span></li>
+          </ul>
+          <div class="tarif-note">Flippers, simulateurs, air hockey, basket, bornes à lots. Prix au jeton selon le jeu.</div>
+        </article>
+
+        <!-- VR -->
+        <article class="tarif-card">
+          <div class="tarif-icon">🥽</div>
+          <div>
+            <div class="tarif-name">Réalité Virtuelle</div>
+            <div class="tarif-unit">par session · par personne</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">Session</span><span class="dots"></span><span class="v">à partir de 4€</span></li>
+          </ul>
+          <div class="tarif-note">Salle VR dédiée de 50 m², agent référent sur place. Catalogue de jeux mis à jour régulièrement.</div>
+        </article>
+
+        <!-- KARAOKÉ -->
+        <article class="tarif-card">
+          <div class="tarif-icon">🎤</div>
+          <div>
+            <div class="tarif-name">Karaoké Box</div>
+            <div class="tarif-unit">par box · à l'heure</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">Box 1 (≤ 9 pers.)</span><span class="dots"></span><span class="v range">36 — 59€</span></li>
+            <li><span class="label">Box 2 (≤ 6 pers.)</span><span class="dots"></span><span class="v range">29 — 49€</span></li>
+          </ul>
+          <div class="tarif-note">Tarif selon le créneau (jour &amp; heure). Réservation conseillée le week-end.</div>
+        </article>
+
+        <!-- BLINDTEST -->
+        <article class="tarif-card">
+          <div class="tarif-icon">🎧</div>
+          <div>
+            <div class="tarif-name">Blindtest</div>
+            <div class="tarif-unit">par box · jusqu'à 8 joueurs</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">Session</span><span class="dots"></span><span class="v range">46 — 69€</span></li>
+          </ul>
+          <div class="tarif-note">Tarif selon le créneau. Plus de 5 000 titres disponibles dans la base.</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAR & SNACK -->
+  <section class="section" id="bar-snack" style="padding-top:30px">
+    <div class="wrap">
+      <span class="section-eyebrow">🍹 Bar &amp; Snacking</span>
+      <h2 class="section-title">À <span class="accent">l'unité.</span></h2>
+
+      <div class="tarif-cards" style="margin-top:30px">
+        <article class="tarif-card bar">
+          <div class="tarif-icon">🍹</div>
+          <div>
+            <div class="tarif-name">Bar</div>
+            <div class="tarif-unit">à l'unité</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">Soda / soft</span><span class="dots"></span><span class="v">4,90€</span></li>
+            <li><span class="label">Bière pression / bouteille</span><span class="dots"></span><span class="v range">dès 4,50€</span></li>
+            <li><span class="label">Girafe 2,5L pression</span><span class="dots"></span><span class="v">39,00€</span></li>
+            <li><span class="label">Cocktail</span><span class="dots"></span><span class="v range">7,50 — 12,90€</span></li>
+            <li><span class="label">Café</span><span class="dots"></span><span class="v">2,30€</span></li>
+            <li><span class="label">Thé</span><span class="dots"></span><span class="v">3,90€</span></li>
+            <li><span class="label">Eau bouteille</span><span class="dots"></span><span class="v">2,90€</span></li>
+          </ul>
+        </article>
+
+        <article class="tarif-card bar">
+          <div class="tarif-icon">🍿</div>
+          <div>
+            <div class="tarif-name">Snacking</div>
+            <div class="tarif-unit">à l'unité</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">Pizza</span><span class="dots"></span><span class="v">14,90€</span></li>
+            <li><span class="label">Frites</span><span class="dots"></span><span class="v">6,90€</span></li>
+            <li><span class="label">Saucisson</span><span class="dots"></span><span class="v">5,90€</span></li>
+            <li><span class="label">Pop-corn</span><span class="dots"></span><span class="v">3,50€</span></li>
+            <li><span class="label">Bonbons</span><span class="dots"></span><span class="v">3,50€</span></li>
+          </ul>
+        </article>
+
+        <article class="tarif-card bar" style="background:linear-gradient(180deg, rgba(255, 45, 135, 0.15) 0%, rgba(22, 10, 58, 0.92) 100%);border-color:var(--pink-hot)">
+          <div class="tarif-icon" style="background:linear-gradient(135deg, var(--pink-hot) 0%, var(--pink) 100%)">🍕</div>
+          <div>
+            <div class="tarif-name">Pack Afterwork</div>
+            <div class="tarif-unit">lun → jeu soir</div>
+          </div>
+          <ul class="tarif-list">
+            <li><span class="label">2 pizzas</span><span class="dots"></span><span class="v">incluses</span></li>
+            <li><span class="label">Girafe 2,5L pression</span><span class="dots"></span><span class="v">incluse</span></li>
+            <li><span class="label">1h billard ou fléchettes</span><span class="dots"></span><span class="v">incluse</span></li>
+            <li style="margin-top:8px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.1)"><span class="label" style="font-family:'Lilita One',sans-serif;text-transform:uppercase">Pack groupe</span><span class="dots"></span><span class="v" style="font-size:1.4rem">68€</span></li>
+          </ul>
+          <div class="tarif-note" style="color:#84cc16;font-weight:600">Économie −22 % vs. à la carte (87€).</div>
+        </article>
+      </div>
+
+      <div class="disclaimer">
+        Tarifs susceptibles d'évoluer selon les saisons et les fournisseurs. <strong>Soumis à TVA et au service.</strong> Pour les groupes de plus de 9 personnes, voir nos <a href="formules.html#pass" style="color:var(--yellow);text-decoration:underline">Pass multi-activités</a> et <a href="formules.html#reservations-groupe" style="color:var(--yellow);text-decoration:underline">Réservations groupe</a> à prix négocié.
+      </div>
+    </div>
+  </section>
+
+</main>
+<div data-fgc-footer></div>
+<script src="partials.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entreprises · Family Games Center Blois</title>
+<meta name="description" content="Team building, arbre de Noël, séminaires, soirées d'entreprise. Privatisation totale ou partielle, formules personnalisées.">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="entreprises">
+<div class="bg-ambient"></div>
+<div data-fgc-header></div>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap page-hero-grid">
+      <div>
+        <div class="breadcrumb"><a href="index.html">Accueil</a><span class="sep">›</span><span>Entreprises</span></div>
+        <span class="section-eyebrow">Pour les pros</span>
+        <h1 class="hero-title" style="font-size:clamp(2.6rem,5vw,4.4rem)">Vos événements <span class="pop">d'entreprise.</span></h1>
+        <p class="hero-sub">
+          Team building, séminaire, arbre de Noël, after-work d'équipe, soirée client… On adapte le centre à votre événement. Privatisation totale ou partielle, formules sur mesure, devis sous 48h.
+        </p>
+        <div class="hero-cta">
+          <a href="#devis" class="btn btn-primary">Demander un devis</a>
+          <a href="tel:0254748521" class="btn btn-ghost">02 54 74 85 21</a>
+        </div>
+      </div>
+      <div class="page-hero-visual">
+        <img src="assets/affiche-afterwork.png" alt="Entreprises">
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <span class="section-eyebrow">Nos formats entreprises</span>
+      <h2 class="section-title">4 formats <span class="accent">éprouvés.</span></h2>
+
+      <div class="activities" style="grid-template-columns:repeat(2,1fr);gap:24px">
+        <div class="activity-card">
+          <div class="activity-icon">🤝</div>
+          <h3 class="activity-title">Team Building</h3>
+          <p class="activity-desc">Tournoi bowling inter-équipes, blind test compétitif, escape game VR coopératif. Animations pensées pour souder les équipes. À partir de 10 personnes.</p>
+          <span class="activity-link">Demander un devis</span>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon">🎄</div>
+          <h3 class="activity-title">Arbre de Noël</h3>
+          <p class="activity-desc">Goûter pour les enfants, espace arcade en accès libre, photo Père Noël, distribution de cadeaux. Animation et catering inclus.</p>
+          <span class="activity-link">Demander un devis</span>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon">💼</div>
+          <h3 class="activity-title">Séminaire</h3>
+          <p class="activity-desc">Salle de réunion adjacente possible, pause-déjeuner sur place et activités décompression en fin de journée pour ressouder l'équipe.</p>
+          <span class="activity-link">Demander un devis</span>
+        </div>
+        <div class="activity-card">
+          <div class="activity-icon">🥂</div>
+          <h3 class="activity-title">Soirée client</h3>
+          <p class="activity-desc">Privatisation d'un espace bar, cocktails dînatoires, animation karaoké ou blind test. L'occasion de marquer les esprits autrement.</p>
+          <span class="activity-link">Demander un devis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="devis" style="padding-top:0">
+    <div class="wrap">
+      <span class="section-eyebrow">Devis personnalisé</span>
+      <h2 class="section-title">Parlons de <span class="accent">votre projet.</span></h2>
+      <p class="section-lead">Remplissez le formulaire et notre équipe événementielle vous recontacte sous 48h avec une proposition adaptée.</p>
+
+      <div class="form-card">
+        <form onsubmit="event.preventDefault();alert('Merci ! Nous reviendrons vers vous sous 48h.');">
+          <div class="form-row">
+            <div class="field"><label>Entreprise</label><input type="text" required placeholder="Nom de votre entreprise"></div>
+            <div class="field"><label>Contact</label><input type="text" required placeholder="Votre nom"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Email</label><input type="email" required placeholder="vous@entreprise.fr"></div>
+            <div class="field"><label>Téléphone</label><input type="tel" placeholder="06 …"></div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label>Type d'événement</label>
+              <select>
+                <option>Team Building</option>
+                <option>Arbre de Noël</option>
+                <option>Séminaire</option>
+                <option>Soirée client</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="field"><label>Nombre de personnes</label><input type="number" min="1" placeholder="10"></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label>Date souhaitée</label><input type="date"></div>
+            <div class="field"><label>Budget approximatif</label><input type="text" placeholder="ex : 1 500 € — 3 000 €"></div>
+          </div>
+          <div class="field" style="margin-bottom:22px">
+            <label>Votre projet</label>
+            <textarea placeholder="Décrivez-nous votre événement, vos envies, vos contraintes…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Envoyer ma demande</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+<div data-fgc-footer></div>
+<script src="partials.js"></script>
+</body>
+</html>

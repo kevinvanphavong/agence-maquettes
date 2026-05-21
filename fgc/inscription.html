@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Créer un compte · Family Games Center</title>
+<meta name="description" content="Créez votre compte Family Games Center pour réserver vos sorties, anniversaires et profiter de la carte fidélité.">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .signup-wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .signup-head {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .signup-head .breadcrumb { justify-content: center; display: block; }
+  .signup-head h1 {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+    color: var(--cream);
+    margin: 10px 0 14px;
+  }
+  .signup-head h1 .accent { color: var(--yellow); }
+  .signup-head .sub {
+    color: rgba(255,244,224,0.78);
+    max-width: 620px;
+    margin: 0 auto;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .signup-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .signup-card {
+    background: linear-gradient(180deg, rgba(61, 27, 107, 0.65) 0%, rgba(22, 10, 58, 0.92) 100%);
+    border: 1px solid rgba(255, 217, 61, 0.18);
+    border-radius: 28px;
+    padding: 36px;
+    box-shadow: 0 28px 70px -24px rgba(0,0,0,0.5);
+  }
+
+  .signup-section {
+    margin-bottom: 28px;
+    padding-bottom: 26px;
+    border-bottom: 1px dashed rgba(255, 217, 61, 0.18);
+  }
+  .signup-section:last-of-type { border: 0; padding-bottom: 0; margin-bottom: 0; }
+  .signup-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .signup-section-num {
+    width: 32px; height: 32px;
+    display: grid; place-items: center;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+    color: var(--purple-light);
+    font-family: 'Lilita One', sans-serif;
+    box-shadow: 0 3px 0 #b88200;
+  }
+  .signup-section-title h3 {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: var(--cream);
+    letter-spacing: 0.5px;
+  }
+
+  .signup-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .signup-row:last-child { margin-bottom: 0; }
+  .signup-row.full { grid-template-columns: 1fr; }
+  .signup-field { display: flex; flex-direction: column; gap: 6px; }
+  .signup-field.span-2 { grid-column: span 2; }
+  .signup-field label {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    color: var(--yellow);
+    letter-spacing: 1px;
+  }
+  .signup-field input, .signup-field select {
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    color: var(--cream);
+    font-family: 'Fredoka', sans-serif;
+    font-size: 0.98rem;
+    transition: border-color 0.2s, background 0.2s;
+    width: 100%;
+  }
+  .signup-field input::placeholder { color: rgba(255, 244, 224, 0.32); }
+  .signup-field input:focus, .signup-field select:focus { outline: 0; border-color: var(--yellow); background: rgba(0,0,0,0.4); }
+  .signup-field input.has-error { border-color: var(--pink-hot); }
+  .signup-field .hint {
+    font-size: 0.78rem;
+    opacity: 0.55;
+  }
+  .signup-field .err {
+    font-size: 0.8rem;
+    color: var(--pink-hot);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .signup-field .err::before { content: '⚠'; }
+
+  .pw-strength {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  .pw-strength span {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .pw-strength.s1 span:nth-child(-n+1) { background: #ef4444; }
+  .pw-strength.s2 span:nth-child(-n+2) { background: #f97316; }
+  .pw-strength.s3 span:nth-child(-n+3) { background: var(--yellow); }
+  .pw-strength.s4 span { background: #84cc16; }
+  .pw-strength-label {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    margin-top: 4px;
+  }
+  .pw-strength-label.s1 { color: #ef4444; }
+  .pw-strength-label.s2 { color: #f97316; }
+  .pw-strength-label.s3 { color: var(--yellow); }
+  .pw-strength-label.s4 { color: #84cc16; }
+
+  .signup-input-wrap { position: relative; }
+  .signup-toggle-pw {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    color: rgba(255,244,224,0.5);
+    cursor: pointer;
+    font-size: 1.05rem;
+    padding: 6px;
+  }
+  .signup-toggle-pw:hover { color: var(--yellow); }
+  .signup-input-wrap.with-icon input { padding-right: 44px; }
+
+  .signup-checkbox-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .signup-checkbox {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: rgba(255,244,224,0.9);
+  }
+  .signup-checkbox input { display: none; }
+  .signup-checkbox-box {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 7px;
+    background: rgba(0,0,0,0.3);
+    border: 2px solid rgba(255,255,255,0.18);
+    display: grid; place-items: center;
+    color: var(--purple-light);
+    font-family: 'Lilita One', sans-serif;
+    margin-top: 1px;
+  }
+  .signup-checkbox input:checked + .signup-checkbox-box {
+    background: linear-gradient(180deg, var(--yellow) 0%, var(--yellow-dark) 100%);
+    border-color: var(--yellow);
+  }
+  .signup-checkbox a { color: var(--yellow); text-decoration: underline; }
+
+  .signup-submit {
+    width: 100%;
+    justify-content: center;
+    padding: 18px;
+    font-size: 1.05rem;
+    margin-top: 24px;
+  }
+
+  .signup-footer {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 0.9rem;
+    color: rgba(255,244,224,0.7);
+  }
+  .signup-footer a { color: var(--yellow); font-family: 'Lilita One', sans-serif; text-transform: uppercase; }
+
+  /* Aside */
+  .signup-aside {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .signup-aside-card {
+    background: rgba(255, 217, 61, 0.06);
+    border: 1px solid rgba(255, 217, 61, 0.18);
+    border-radius: 20px;
+    padding: 22px 24px;
+  }
+  .signup-aside-card.pink {
+    background: rgba(255, 45, 135, 0.08);
+    border-color: rgba(255, 45, 135, 0.22);
+  }
+  .signup-aside-card h4 {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    color: var(--yellow);
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .signup-aside-card.pink h4 { color: var(--pink-hot); }
+  .signup-aside-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .signup-aside-card li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.88rem;
+    color: rgba(255,244,224,0.88);
+    line-height: 1.4;
+  }
+  .signup-aside-card li::before {
+    content: '✓';
+    color: var(--yellow);
+    flex-shrink: 0;
+    font-family: 'Lilita One', sans-serif;
+    margin-top: 1px;
+  }
+  .signup-aside-card.pink li::before { color: var(--pink-hot); content: '★'; }
+
+  .auth-loading {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 4, 32, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .auth-loading.show { display: flex; }
+  .auth-loading-spinner {
+    width: 56px; height: 56px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-top-color: var(--yellow);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .auth-loading-text {
+    font-family: 'Lilita One', sans-serif;
+    text-transform: uppercase;
+    color: var(--cream);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 980px) {
+    .signup-grid { grid-template-columns: 1fr; }
+    .signup-aside { position: static; }
+  }
+  @media (max-width: 640px) {
+    .signup-row { grid-template-columns: 1fr; }
+    .signup-card { padding: 26px 22px; }
+  }
+</style>
+</head>
+<body data-page="inscription">
+<div class="bg-ambient"></div>
+<div data-fgc-header></div>
+
+<main>
+  <div class="signup-wrap">
+    <div class="signup-head">
+      <div class="breadcrumb">
+        <a href="index.html">Accueil</a><span class="sep">›</span><a href="connexion.html">Connexion</a><span class="sep">›</span><span>Inscription</span>
+      </div>
+      <h1>Créer mon <span class="accent">compte.</span></h1>
+      <p class="sub">Quelques infos et c'est parti. Vous pourrez ensuite réserver vos sorties, profiter de la carte fidélité et organiser des anniversaires en quelques clics.</p>
+    </div>
+
+    <div class="signup-grid">
+      <form class="signup-card" id="signupForm" novalidate>
+        <!-- Section 1 : Identité -->
+        <div class="signup-section">
+          <div class="signup-section-title">
+            <div class="signup-section-num">1</div>
+            <h3>Vos informations</h3>
+          </div>
+          <div class="signup-row">
+            <div class="signup-field">
+              <label for="firstName">Prénom</label>
+              <input type="text" id="firstName" placeholder="Sophie" autocomplete="given-name" required>
+            </div>
+            <div class="signup-field">
+              <label for="lastName">Nom</label>
+              <input type="text" id="lastName" placeholder="Martin" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="signup-row">
+            <div class="signup-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="sophie.martin@exemple.fr" autocomplete="email" required>
+            </div>
+            <div class="signup-field">
+              <label for="phone">Téléphone mobile</label>
+              <input type="tel" id="phone" placeholder="06 12 34 56 78" autocomplete="tel" required>
+            </div>
+          </div>
+          <div class="signup-row">
+            <div class="signup-field">
+              <label for="birthdate">Date de naissance</label>
+              <input type="date" id="birthdate" autocomplete="bday">
+              <span class="hint">Un cadeau d'anniversaire vous attend chaque année 🎁</span>
+            </div>
+            <div class="signup-field">
+              <label for="city">Ville</label>
+              <input type="text" id="city" placeholder="Blois" autocomplete="address-level2">
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2 : Mot de passe -->
+        <div class="signup-section">
+          <div class="signup-section-title">
+            <div class="signup-section-num">2</div>
+            <h3>Sécurité</h3>
+          </div>
+          <div class="signup-row">
+            <div class="signup-field">
+              <label for="password">Mot de passe</label>
+              <div class="signup-input-wrap with-icon">
+                <input type="password" id="password" placeholder="8 caractères minimum" autocomplete="new-password" required>
+                <button type="button" class="signup-toggle-pw" id="togglePw" aria-label="Afficher">👁</button>
+              </div>
+              <div class="pw-strength" id="pwStrength"><span></span><span></span><span></span><span></span></div>
+              <span class="pw-strength-label" id="pwLabel">Choisissez un mot de passe robuste</span>
+            </div>
+            <div class="signup-field">
+              <label for="passwordConfirm">Confirmer le mot de passe</label>
+              <div class="signup-input-wrap">
+                <input type="password" id="passwordConfirm" placeholder="Tapez à nouveau" autocomplete="new-password" required>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 : Préférences -->
+        <div class="signup-section">
+          <div class="signup-section-title">
+            <div class="signup-section-num">3</div>
+            <h3>Préférences & accord</h3>
+          </div>
+          <div class="signup-checkbox-row">
+            <label class="signup-checkbox">
+              <input type="checkbox" id="newsletter">
+              <span class="signup-checkbox-box" id="cb-newsletter"></span>
+              <span><strong>Recevoir nos bons plans</strong> par email — soirées spéciales, ventes flash, et offres anniversaire (1 à 2 emails par mois max).</span>
+            </label>
+            <label class="signup-checkbox">
+              <input type="checkbox" id="sms">
+              <span class="signup-checkbox-box" id="cb-sms"></span>
+              <span><strong>Rappels SMS</strong> pour mes réservations (J-2 et le jour J).</span>
+            </label>
+            <label class="signup-checkbox">
+              <input type="checkbox" id="cgu" required>
+              <span class="signup-checkbox-box" id="cb-cgu"></span>
+              <span>J'accepte les <a href="#" onclick="event.preventDefault()">conditions générales</a> et la <a href="#" onclick="event.preventDefault()">politique de confidentialité</a>.</span>
+            </label>
+          </div>
+          <div class="signup-field" style="margin-top:8px">
+            <span class="err" id="err-cgu" hidden>Vous devez accepter les conditions générales</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary signup-submit">🎳 Créer mon compte gratuitement</button>
+        <p class="signup-footer">Déjà un compte ? <a href="connexion.html">Se connecter</a></p>
+      </form>
+
+      <!-- Aside -->
+      <aside class="signup-aside">
+        <div class="signup-aside-card">
+          <h4>🎁 Vos avantages</h4>
+          <ul>
+            <li>Réservation rapide en quelques clics</li>
+            <li>Historique de toutes vos visites</li>
+            <li>Suivi de votre carte fidélité bowling</li>
+            <li>Cadeau le jour de votre anniversaire</li>
+            <li>Profils enfants pour les fêtes</li>
+          </ul>
+        </div>
+        <div class="signup-aside-card pink">
+          <h4>★ 100 % gratuit</h4>
+          <ul>
+            <li>Pas d'abonnement, jamais</li>
+            <li>Pas de carte bancaire requise à l'inscription</li>
+            <li>Désinscription en un clic</li>
+            <li>Vos données restent en France</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<div class="auth-loading" id="authLoading">
+  <div class="auth-loading-spinner"></div>
+  <div class="auth-loading-text">Création de votre compte…</div>
+</div>
+
+<div data-fgc-footer></div>
+<script src="partials.js"></script>
+<script>
+  const form = document.getElementById('signupForm');
+  const pw = document.getElementById('password');
+  const pw2 = document.getElementById('passwordConfirm');
+  const pwStrength = document.getElementById('pwStrength');
+  const pwLabel = document.getElementById('pwLabel');
+  const cgu = document.getElementById('cgu');
+  const errCgu = document.getElementById('err-cgu');
+  const loading = document.getElementById('authLoading');
+  document.getElementById('togglePw').addEventListener('click', () => {
+    pw.type = pw.type === 'password' ? 'text' : 'password';
+  });
+
+  // Checkbox visuals
+  ['newsletter', 'sms', 'cgu'].forEach(id => {
+    const box = document.getElementById('cb-' + id);
+    const input = document.getElementById(id);
+    input.addEventListener('change', () => {
+      box.textContent = input.checked ? '✓' : '';
+      if (id === 'cgu' && input.checked) { errCgu.hidden = true; }
+    });
+  });
+
+  function scorePassword(value) {
+    let s = 0;
+    if (value.length >= 8) s++;
+    if (/[a-z]/.test(value) && /[A-Z]/.test(value)) s++;
+    if (/\d/.test(value)) s++;
+    if (/[^\w\s]/.test(value)) s++;
+    return s;
+  }
+  pw.addEventListener('input', () => {
+    const s = scorePassword(pw.value);
+    pwStrength.className = 'pw-strength s' + s;
+    pwLabel.className = 'pw-strength-label s' + s;
+    pwLabel.textContent = ['Choisissez un mot de passe robuste','Faible','Correct','Bon','Excellent'][s] || '';
+  });
+
+  function showErr(input, msg) {
+    input.classList.add('has-error');
+    let err = input.parentElement.nextElementSibling;
+    if (err && !err.classList?.contains('err')) {
+      // input is inside wrap, look up
+      err = input.closest('.signup-field').querySelector('.err');
+    }
+    if (!err) {
+      err = document.createElement('span');
+      err.className = 'err';
+      input.closest('.signup-field').appendChild(err);
+    }
+    err.textContent = msg;
+    err.hidden = false;
+  }
+  function clearErr(input) {
+    input.classList.remove('has-error');
+    const err = input.closest('.signup-field').querySelector('.err');
+    if (err) err.hidden = true;
+  }
+  form.querySelectorAll('input').forEach(i => i.addEventListener('input', () => clearErr(i)));
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let ok = true;
+    const fn = document.getElementById('firstName');
+    const ln = document.getElementById('lastName');
+    const em = document.getElementById('email');
+    const ph = document.getElementById('phone');
+    if (!fn.value.trim()) { showErr(fn, 'Prénom requis'); ok = false; }
+    if (!ln.value.trim()) { showErr(ln, 'Nom requis'); ok = false; }
+    if (!/^\S+@\S+\.\S+$/.test(em.value)) { showErr(em, 'Email invalide'); ok = false; }
+    if (ph.value.replace(/\D/g, '').length < 10) { showErr(ph, 'Numéro à 10 chiffres'); ok = false; }
+    if (pw.value.length < 8) { showErr(pw, '8 caractères minimum'); ok = false; }
+    if (pw.value !== pw2.value) { showErr(pw2, 'Les mots de passe ne correspondent pas'); ok = false; }
+    if (!cgu.checked) { errCgu.hidden = false; ok = false; }
+    if (!ok) return;
+    loading.classList.add('show');
+    setTimeout(() => {
+      try {
+        localStorage.setItem('fgc_logged_in', 'true');
+        localStorage.setItem('fgc_first_name', fn.value);
+      } catch (e) {}
+      window.location.href = 'mon-compte.html?welcome=1';
+    }, 1400);
+  });
+</script>
+</body>
+</html>
