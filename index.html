@@ -107,9 +107,54 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
   .hero h1{font-size:34px}
   .hero .meta{flex-wrap:wrap;gap:18px}
 }
+
+/* ACCESS GATE — garde-fou à code */
+body.gate-locked .wrap{display:none}
+#gate{display:none}
+body.gate-locked #gate{display:flex}
+#gate{position:fixed;inset:0;z-index:9999;background:var(--bg);
+  align-items:center;justify-content:center;padding:24px}
+#gate::before{content:"";position:absolute;top:-140px;right:-100px;width:460px;height:460px;
+  border-radius:50%;background:radial-gradient(circle,rgba(139,124,255,.20),transparent 65%)}
+.gate-box{position:relative;width:100%;max-width:380px;background:var(--surface);
+  border:1px solid var(--line);border-radius:20px;padding:38px 32px;text-align:center}
+.gate-mk{width:48px;height:48px;border-radius:13px;margin:0 auto 18px;display:flex;
+  align-items:center;justify-content:center;font-size:22px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:0 6px 20px rgba(139,124,255,.4)}
+.gate-box h2{font-size:22px;margin-bottom:7px}
+.gate-box p{font-size:13.5px;color:var(--muted);font-weight:500;margin-bottom:22px}
+#gate-form{display:flex;flex-direction:column;gap:10px}
+#gate-input{width:100%;padding:13px 15px;border-radius:11px;border:1px solid var(--line);
+  background:var(--surface2);color:var(--text);font-family:'Inter',sans-serif;
+  font-size:15px;outline:none;transition:border-color .15s}
+#gate-input:focus{border-color:var(--accent)}
+#gate-form button{padding:13px 15px;border-radius:11px;border:0;cursor:pointer;
+  font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15px;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));transition:filter .15s}
+#gate-form button:hover{filter:brightness(1.1)}
+#gate-error{display:none;margin-top:14px;font-size:13px;font-weight:600;color:#ff5c6f}
 </style>
 </head>
-<body>
+<body class="gate-locked">
+
+<script>
+  /* Déverrouillage immédiat si ce navigateur a déjà saisi le code (évite le flash) */
+  if(localStorage.getItem("studio_gate_ok")==="1"){document.body.classList.remove("gate-locked");}
+</script>
+
+<div id="gate" aria-hidden="true">
+  <div class="gate-box">
+    <div class="gate-mk">◢</div>
+    <h2>Accès restreint</h2>
+    <p>Espace réservé à l'administrateur. Saisissez le code d'accès.</p>
+    <form id="gate-form" autocomplete="off">
+      <input type="password" id="gate-input" placeholder="Code d'accès" autocomplete="off" autofocus>
+      <button type="submit">Entrer</button>
+    </form>
+    <div id="gate-error">Code incorrect.</div>
+  </div>
+</div>
 
 <div class="wrap">
   <header class="top">
@@ -206,6 +251,32 @@ footer{border-top:1px solid var(--line);padding:30px 0;text-align:center;
     Maquettes de démonstration · données illustratives · réalisées pour la prospection commerciale.
   </footer>
 </div>
+
+<script>
+(function(){
+  /* ══════════════════════════════════════════════════════════════
+     CODE D'ACCÈS — pour le changer : modifie la valeur ci-dessous,
+     enregistre le fichier, puis commit + push sur GitHub.
+     ══════════════════════════════════════════════════════════════ */
+  var ACCESS_CODE = "studio2026";
+  /* ══════════════════════════════════════════════════════════════ */
+  var form  = document.getElementById("gate-form");
+  var input = document.getElementById("gate-input");
+  var error = document.getElementById("gate-error");
+  if(!form) return;
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if(input.value.trim() === ACCESS_CODE){
+      localStorage.setItem("studio_gate_ok","1");
+      document.body.classList.remove("gate-locked");
+    } else {
+      error.style.display = "block";
+      input.value = "";
+      input.focus();
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
