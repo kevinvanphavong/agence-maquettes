@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cap Karting — Maquette refonte site + back office · Vong Studio</title>
+<meta name="description" content="Maquette de démonstration : refonte du site et back-office de réservation pour Cap Karting, circuit de karting à Mer (41).">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Saira:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --bg:#0b0c10; --surface:#14151c; --surface2:#1c1e27; --surface3:#252834;
+  --line:#2b2d3a; --line2:#3b3e4f;
+  --text:#f0f1f6; --muted:#8a8d9e; --muted2:#5b5e70;
+  --orange:#ff5e1a; --orange-d:#e64d0c; --orange-soft:rgba(255,94,26,.14);
+  --green:#2ad17f; --red:#ff4242; --white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Saira',sans-serif;background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;line-height:1.55}
+h1,h2,h3,h4,.disp{font-family:'Saira Condensed',sans-serif;font-weight:800;
+  text-transform:uppercase;line-height:.98;letter-spacing:.5px}
+.mono{font-family:'Space Mono',monospace}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line2)}
+::-webkit-scrollbar-track{background:var(--surface)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 26px}
+.chequer{height:14px;background:repeating-conic-gradient(#fff 0 25%,#0b0c10 0 50%) 0 0/20px 20px}
+
+.btn{font-family:'Saira Condensed',sans-serif;font-weight:800;font-size:15px;cursor:pointer;
+  border:none;padding:14px 26px;text-transform:uppercase;letter-spacing:1px;
+  transition:transform .12s,box-shadow .12s,filter .12s;display:inline-flex;align-items:center;gap:8px;
+  clip-path:polygon(0 0,100% 0,100% 100%,10px 100%,0 calc(100% - 10px))}
+.btn:hover{transform:translateY(-2px)}
+.btn-orange{background:var(--orange);color:#fff}
+.btn-orange:hover{box-shadow:0 10px 26px rgba(255,94,26,.4)}
+.btn-white{background:var(--white);color:var(--bg)}
+.btn-ghost{background:transparent;color:var(--text);border:2px solid var(--line2);clip-path:none}
+.btn-ghost:hover{border-color:var(--orange);color:var(--orange)}
+.btn-sm{padding:9px 17px;font-size:13px}
+.btn-lg{padding:17px 34px;font-size:17px}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn[disabled]:hover{transform:none}
+
+/* ===== MODE SWITCH ===== */
+.modebar{position:fixed;top:0;left:0;right:0;height:48px;background:#000;z-index:300;
+  display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px solid var(--line)}
+.modebar .lbl{color:var(--muted2);font-size:11px;font-weight:700;letter-spacing:1.5px;
+  margin-right:10px;text-transform:uppercase}
+.mode-btn{font-family:'Saira Condensed',sans-serif;font-size:13.5px;font-weight:800;
+  text-transform:uppercase;letter-spacing:1px;padding:6px 18px;border:none;cursor:pointer;
+  background:transparent;color:var(--muted);transition:all .14s}
+.mode-btn.active{background:var(--orange);color:#fff}
+
+.screen{display:none;padding-top:48px}
+.screen.active{display:block}
+
+/* ============ SITE PUBLIC ============ */
+.hdr{position:sticky;top:48px;z-index:100;background:rgba(11,12,16,.94);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:20px;height:76px}
+.logo{display:flex;align-items:center;gap:11px;cursor:pointer}
+.logo .lm{width:46px;height:46px;background:var(--orange);display:flex;align-items:center;
+  justify-content:center;font-size:23px;clip-path:polygon(0 0,100% 0,100% 100%,12px 100%,0 calc(100% - 12px))}
+.logo .lt{font-family:'Saira Condensed';font-weight:800;font-size:22px;line-height:.9;letter-spacing:1px}
+.logo .lt small{display:block;font-family:'Space Mono';font-weight:400;font-size:9px;
+  color:var(--orange);letter-spacing:1px;margin-top:3px;text-transform:none}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{padding:9px 13px;font-weight:600;font-size:13.5px;cursor:pointer;color:var(--muted);
+  transition:color .14s}
+.nav a:hover{color:var(--orange)}
+.burger{display:none;font-size:24px;background:none;border:none;cursor:pointer;color:#fff}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:92px 0 0}
+.hero::before{content:"";position:absolute;top:0;right:0;width:46%;height:100%;
+  background:repeating-linear-gradient(135deg,var(--orange-soft) 0 3px,transparent 3px 26px)}
+.hero-in{position:relative;max-width:880px}
+.hero .flag{display:inline-flex;align-items:center;gap:10px;font-family:'Space Mono';
+  font-size:12px;color:var(--orange);letter-spacing:1px;margin-bottom:22px}
+.hero .flag::before{content:"";width:30px;height:14px;
+  background:repeating-conic-gradient(#fff 0 25%,#0b0c10 0 50%) 0 0/7px 7px;border:1px solid var(--line2)}
+.hero h1{font-size:96px;letter-spacing:1px}
+.hero h1 .o{color:var(--orange)}
+.hero h1 .stroke{-webkit-text-stroke:2px var(--line2);color:transparent}
+.hero p.sub{font-size:18px;color:var(--muted);margin:22px 0 30px;max-width:520px;font-weight:500}
+.hero-cta{display:flex;gap:13px;flex-wrap:wrap}
+.telemetry{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);margin-top:74px}
+.tm{padding:24px 22px;border-right:1px solid var(--line)}
+.tm:last-child{border-right:none}
+.tm .tmk{font-family:'Space Mono';font-size:10.5px;color:var(--muted2);letter-spacing:1px}
+.tm .tmv{font-family:'Saira Condensed';font-weight:800;font-size:34px;margin-top:4px}
+.tm .tmv .o{color:var(--orange)}
+
+section{padding:90px 0}
+.sec-head{margin-bottom:46px}
+.sec-head .num{font-family:'Space Mono';font-size:12px;color:var(--orange);letter-spacing:1px}
+.sec-head h2{font-size:54px;margin-top:8px}
+.sec-head p{color:var(--muted);font-size:15.5px;font-weight:500;margin-top:10px;max-width:560px}
+
+/* KARTS */
+.karts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line)}
+.kart{background:var(--surface);padding:30px 26px;transition:background .15s}
+.kart:hover{background:var(--surface2)}
+.kart .kn{font-family:'Space Mono';font-size:11px;color:var(--muted2)}
+.kart .ke{font-size:42px;margin:8px 0 12px}
+.kart h3{font-size:25px;color:var(--text)}
+.kart h3 .o{color:var(--orange)}
+.kart p{font-size:13px;color:var(--muted);font-weight:500;margin-top:6px}
+.kart .kspec{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.kart .kspec span{font-family:'Space Mono';font-size:10.5px;color:var(--muted);
+  border:1px solid var(--line2);padding:3px 9px}
+
+/* SESSIONS */
+#sessions{background:var(--surface)}
+.ses-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ses{background:var(--bg);border:1px solid var(--line);position:relative;
+  transition:transform .15s,border-color .15s}
+.ses:hover{transform:translateY(-6px);border-color:var(--orange)}
+.ses.hot{border-color:var(--orange)}
+.ses .stripe{height:6px;background:repeating-linear-gradient(135deg,var(--orange) 0 14px,var(--orange-d) 14px 28px)}
+.ses .sbody{padding:30px 28px}
+.ses .stag{font-family:'Space Mono';font-size:11px;color:var(--orange);letter-spacing:1px}
+.ses h3{font-size:30px;margin:8px 0 4px}
+.ses .sd{font-size:13px;color:var(--muted);font-weight:500;margin-bottom:18px}
+.ses .sp{font-family:'Saira Condensed';font-weight:800;font-size:50px;line-height:1}
+.ses .sp small{font-size:16px;color:var(--muted)}
+.ses ul{list-style:none;margin:18px 0 22px}
+.ses ul li{font-size:13px;font-weight:500;padding:7px 0;border-bottom:1px solid var(--line);
+  display:flex;gap:9px}
+.ses ul li:last-child{border:none}
+.ses ul li .c{color:var(--orange);font-weight:700}
+
+/* GROUPES */
+#groupes{background:var(--surface);border-top:1px solid var(--line)}
+.grp-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+.grp-list{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.grp-list .gi{display:flex;gap:14px;align-items:flex-start;border-left:3px solid var(--orange);
+  padding-left:16px}
+.grp-list .gi .ge{font-size:24px}
+.grp-list .gi b{font-family:'Saira Condensed';font-weight:700;font-size:17px;text-transform:uppercase}
+.grp-list .gi span{font-size:13px;color:var(--muted);display:block;font-weight:500}
+.grp-card{background:var(--bg);border:1px solid var(--line);padding:38px;position:relative;overflow:hidden}
+.grp-card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;
+  background:repeating-linear-gradient(135deg,var(--orange) 0 14px,var(--orange-d) 14px 28px)}
+.grp-card .gbig{font-family:'Saira Condensed';font-weight:800;font-size:84px;color:var(--orange);line-height:.9}
+.grp-card h3{font-size:30px;margin:6px 0 10px}
+.grp-card p{font-size:14px;color:var(--muted);font-weight:500;margin-bottom:22px}
+
+/* AVIS */
+.avis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{border:1px solid var(--line);background:var(--surface);padding:26px}
+.review .rs{color:var(--orange);font-size:14px;letter-spacing:2px;margin-bottom:12px}
+.review p{font-size:14px;font-weight:500;margin-bottom:16px}
+.review .rw{display:flex;align-items:center;gap:10px}
+.review .rav{width:38px;height:38px;background:var(--surface3);display:flex;align-items:center;
+  justify-content:center;font-family:'Saira Condensed';font-weight:800;font-size:15px;color:var(--orange)}
+.review .rw b{font-size:13.5px;display:block;font-weight:700}
+.review .rw span{font-size:11.5px;color:var(--muted)}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ibox{border:1px solid var(--line);background:var(--surface);padding:32px}
+.ibox h3{font-size:24px;margin-bottom:18px}
+.hr-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);
+  font-size:13.5px;font-weight:500}
+.hr-row:last-child{border:none}
+.hr-row b{font-weight:600}
+.hr-row .op{color:var(--green);font-weight:700;font-family:'Space Mono';font-size:12.5px}
+.hr-row .cl{color:var(--muted2);font-weight:700;font-family:'Space Mono';font-size:12.5px}
+.il{display:flex;gap:12px;margin-bottom:14px;font-size:14px;font-weight:500}
+.il .ie{font-size:19px;color:var(--orange)}
+.map-ph{margin-top:16px;height:160px;border:1px solid var(--line);background:var(--surface2);
+  display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;
+  color:var(--muted);font-size:12.5px;font-weight:600}
+
+/* CTA */
+.cta{position:relative;overflow:hidden;border-top:1px solid var(--line);text-align:center;padding:96px 0}
+.cta::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(135deg,var(--orange-soft) 0 3px,transparent 3px 30px)}
+.cta-in{position:relative}
+.cta h2{font-size:64px}
+.cta h2 .o{color:var(--orange)}
+.cta p{color:var(--muted);font-size:16px;font-weight:500;margin:14px 0 28px}
+
+/* FOOTER */
+.ft{background:#08090c;border-top:1px solid var(--line);padding:54px 0 24px}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px;margin-bottom:36px}
+.ft-about{font-size:13.5px;color:var(--muted);margin-top:14px;max-width:280px;font-weight:500}
+.ft-col h4{font-family:'Saira Condensed';font-size:14px;margin-bottom:14px;letter-spacing:1px;color:var(--orange)}
+.ft-col a,.ft-col p{display:block;font-size:13.5px;margin-bottom:9px;color:var(--muted);cursor:pointer;font-weight:500}
+.ft-col a:hover{color:var(--text)}
+.ft-bot{border-top:1px solid var(--line);padding-top:20px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted2);font-weight:500;font-family:'Space Mono'}
+
+/* ===== RESA OVERLAY ===== */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:400;display:none;
+  align-items:center;justify-content:center;padding:20px}
+.ov.show{display:flex}
+.resa{background:var(--surface);border:1px solid var(--line2);width:100%;max-width:560px;
+  max-height:90vh;overflow-y:auto}
+.resa-hd{padding:20px 26px;border-bottom:1px solid var(--line);display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:2}
+.resa-hd h3{font-size:21px}
+.resa-hd .rx{width:36px;height:36px;border:1px solid var(--line2);background:transparent;
+  cursor:pointer;font-size:15px;color:var(--muted)}
+.steps-bar{display:flex;gap:5px;padding:16px 26px 0}
+.steps-bar .sd{flex:1;height:4px;background:var(--surface3)}
+.steps-bar .sd.on{background:var(--orange)}
+.resa-bd{padding:22px 26px 26px}
+.resa-bd .qst{font-family:'Saira Condensed';font-weight:800;font-size:22px;text-transform:uppercase}
+.resa-bd .qsub{font-size:12.5px;color:var(--muted);margin-bottom:18px;font-weight:500}
+.opt{border:1px solid var(--line2);padding:15px 17px;cursor:pointer;display:flex;align-items:center;
+  gap:13px;margin-bottom:9px;background:var(--bg);transition:border-color .14s,background .14s}
+.opt:hover{border-color:var(--line2)}
+.opt.sel{border-color:var(--orange);background:var(--orange-soft)}
+.opt .oe{width:46px;height:46px;background:var(--surface3);display:flex;align-items:center;
+  justify-content:center;font-size:23px;flex-shrink:0}
+.opt .ob{flex:1}
+.opt .ob b{font-family:'Saira Condensed';font-weight:700;font-size:17px;text-transform:uppercase;display:block}
+.opt .ob span{font-size:12px;color:var(--muted)}
+.opt .op{font-family:'Saira Condensed';font-weight:800;font-size:20px;color:var(--orange)}
+.date-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px}
+.dcell{border:1px solid var(--line2);padding:9px 3px;text-align:center;cursor:pointer;background:var(--bg)}
+.dcell.sel{border-color:var(--orange);background:var(--orange-soft)}
+.dcell.off{opacity:.3;cursor:not-allowed}
+.dcell .dd{font-family:'Space Mono';font-size:9.5px;color:var(--muted2);text-transform:uppercase}
+.dcell .dn{font-family:'Saira Condensed';font-weight:800;font-size:20px}
+.dcell .dm{font-size:9.5px;color:var(--muted);font-family:'Space Mono'}
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.slot{border:1px solid var(--line2);padding:11px 4px;text-align:center;cursor:pointer;background:var(--bg)}
+.slot.sel{border-color:var(--orange);background:var(--orange-soft)}
+.slot.full{opacity:.32;cursor:not-allowed}
+.slot .sh{font-family:'Saira Condensed';font-weight:800;font-size:17px}
+.slot .sl{font-family:'Space Mono';font-size:9.5px;margin-top:2px}
+.slot .sl.ok{color:var(--green)}
+.slot .sl.low{color:var(--orange)}
+.slot .sl.no{color:var(--muted2)}
+.counter{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line2);
+  background:var(--bg);padding:13px 16px;margin-bottom:12px}
+.counter .cl b{font-family:'Saira Condensed';font-weight:700;font-size:16px;text-transform:uppercase;display:block}
+.counter .cl span{font-size:11.5px;color:var(--muted)}
+.counter .cc{display:flex;align-items:center;gap:13px}
+.counter .cc button{width:34px;height:34px;border:1px solid var(--line2);background:var(--surface3);
+  font-size:18px;cursor:pointer;color:var(--orange);font-weight:700}
+.counter .cc b{font-family:'Saira Condensed';font-size:21px;min-width:26px;text-align:center}
+.fld{margin-bottom:13px}
+.fld label{font-family:'Space Mono';font-size:10.5px;color:var(--muted);display:block;
+  margin-bottom:6px;letter-spacing:1px}
+.fld input{width:100%;padding:12px 14px;border:1px solid var(--line2);background:var(--bg);
+  color:var(--text);font-family:'Saira';font-size:14px;outline:none}
+.fld input:focus{border-color:var(--orange)}
+.recap{border:1px solid var(--line);background:var(--bg);padding:17px;margin-bottom:15px}
+.recap .rr{display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;font-weight:500}
+.recap .rr.tot{border-top:1px solid var(--line2);margin-top:6px;padding-top:11px;
+  font-family:'Saira Condensed';font-weight:800;font-size:19px;text-transform:uppercase}
+.recap .rr.tot .o{color:var(--orange)}
+.resa-ft{display:flex;gap:9px;margin-top:16px}
+.resa-ft .btn{flex:1;justify-content:center}
+.done{text-align:center;padding:12px 0}
+.done .dok{width:80px;height:80px;background:var(--orange);font-size:38px;display:flex;
+  align-items:center;justify-content:center;margin:0 auto 18px;
+  clip-path:polygon(0 0,100% 0,100% 100%,16px 100%,0 calc(100% - 16px))}
+.done h3{font-size:26px;margin-bottom:8px}
+.done p{font-size:13.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.demo-note{border:1px solid var(--line2);background:var(--bg);padding:10px 12px;
+  font-size:11.5px;color:var(--muted);margin-top:16px;font-weight:500}
+
+/* ============ BACK OFFICE ============ */
+.bo{background:var(--bg);min-height:100vh}
+.bo-top{background:#08090c;border-bottom:1px solid var(--line);position:sticky;top:48px;z-index:90}
+.bo-top-in{display:flex;align-items:center;gap:16px;height:58px}
+.bo-brand{display:flex;align-items:center;gap:10px}
+.bo-brand .bm{width:34px;height:34px;background:var(--orange);display:flex;align-items:center;
+  justify-content:center;font-size:17px;clip-path:polygon(0 0,100% 0,100% 100%,9px 100%,0 calc(100% - 9px))}
+.bo-brand b{font-family:'Saira Condensed';font-weight:800;font-size:16px;letter-spacing:.5px}
+.bo-brand span{font-family:'Space Mono';font-size:9px;color:var(--muted2);display:block}
+.bo-live{margin-left:auto;display:flex;align-items:center;gap:8px;font-family:'Space Mono';
+  font-size:11px;color:var(--muted)}
+.bo-live .dot{width:8px;height:8px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green)}
+.bo-tabs{background:var(--surface);border-bottom:1px solid var(--line);padding:0 26px;
+  display:flex;gap:2px;position:sticky;top:106px;z-index:80;overflow-x:auto}
+.bo-tabs button{font-family:'Saira Condensed';font-weight:700;font-size:14px;text-transform:uppercase;
+  letter-spacing:.5px;background:none;border:none;border-bottom:3px solid transparent;
+  padding:15px 16px;cursor:pointer;color:var(--muted);white-space:nowrap}
+.bo-tabs button.active{color:var(--orange);border-bottom-color:var(--orange)}
+.bo-body{padding:30px 26px 60px;max-width:1200px;margin:0 auto}
+.bv{display:none}
+.bv.active{display:block}
+.bv-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+.bv-head h2{font-size:32px}
+.bv-head p{font-size:13px;color:var(--muted);font-weight:500}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.kpi{background:var(--surface);border:1px solid var(--line);padding:20px}
+.kpi .kk{font-family:'Space Mono';font-size:10px;color:var(--muted2);letter-spacing:1px}
+.kpi .kv{font-family:'Saira Condensed';font-weight:800;font-size:38px;margin-top:4px}
+.kpi .kv .o{color:var(--orange)}
+.kpi .kt{font-family:'Space Mono';font-size:10.5px;margin-top:4px}
+.kpi .kt.up{color:var(--green)}
+.kpi .kt.dn{color:var(--orange)}
+
+.bo-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:18px}
+.panel{background:var(--surface);border:1px solid var(--line)}
+.panel-hd{padding:15px 20px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between}
+.panel-hd h3{font-size:17px}
+.panel-hd .pmore{font-size:12px;color:var(--orange);font-weight:700;cursor:pointer;
+  font-family:'Saira Condensed';text-transform:uppercase}
+
+.rtable{width:100%;border-collapse:collapse}
+.rtable th{text-align:left;font-family:'Space Mono';font-size:10px;letter-spacing:.5px;
+  color:var(--muted2);font-weight:400;padding:11px 20px;border-bottom:1px solid var(--line)}
+.rtable td{padding:13px 20px;border-bottom:1px solid var(--line);font-size:13px;font-weight:500}
+.rtable tr:last-child td{border-bottom:none}
+.rtable tr:hover td{background:var(--surface2)}
+.cust{display:flex;align-items:center;gap:10px}
+.cust .ca{width:32px;height:32px;background:var(--surface3);display:flex;align-items:center;
+  justify-content:center;font-family:'Saira Condensed';font-weight:800;font-size:12.5px;
+  color:var(--orange);flex-shrink:0}
+.cust b{font-weight:700;font-size:13px}
+.cust span{font-size:11px;color:var(--muted);display:block}
+.pill{display:inline-flex;font-family:'Saira Condensed';font-weight:700;font-size:11.5px;
+  text-transform:uppercase;letter-spacing:.5px;padding:3px 10px;border:1px solid}
+.pill.green{color:var(--green);border-color:var(--green)}
+.pill.orange{color:var(--orange);border-color:var(--orange)}
+.pill.gray{color:var(--muted);border-color:var(--line2)}
+.pill.red{color:var(--red);border-color:var(--red)}
+
+/* LEADERBOARD */
+.lb{padding:6px 0}
+.lb-row{display:flex;align-items:center;gap:12px;padding:11px 20px;border-bottom:1px solid var(--line)}
+.lb-row:last-child{border:none}
+.lb-row .pos{font-family:'Saira Condensed';font-weight:800;font-size:20px;width:30px;color:var(--muted2)}
+.lb-row.p1 .pos{color:var(--orange)}
+.lb-row .pn{flex:1;font-weight:600;font-size:13.5px}
+.lb-row .lt{font-family:'Space Mono';font-size:13px;font-weight:700}
+.lb-row.p1 .lt{color:var(--orange)}
+
+/* PLANNING PISTE */
+.track{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.tslot{background:var(--surface);border:1px solid var(--line);padding:16px}
+.tslot .th{font-family:'Saira Condensed';font-weight:800;font-size:22px}
+.tslot .tk{font-family:'Space Mono';font-size:11px;color:var(--muted);margin:4px 0 10px}
+.tslot .tbar{height:7px;background:var(--surface3);overflow:hidden;margin-bottom:8px}
+.tslot .tbar i{display:block;height:100%}
+.tslot .tst{font-family:'Saira Condensed';font-weight:700;font-size:12px;text-transform:uppercase}
+
+.notice{background:var(--orange-soft);border:1px solid var(--orange);padding:13px 17px;
+  font-size:12.5px;color:var(--text);margin-bottom:22px;display:flex;gap:9px;align-items:center;font-weight:500}
+.toolbar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.seg{display:flex;border:1px solid var(--line2)}
+.seg button{font-family:'Saira Condensed';font-weight:700;font-size:12.5px;text-transform:uppercase;
+  background:var(--surface);border:none;border-right:1px solid var(--line2);padding:8px 14px;
+  cursor:pointer;color:var(--muted)}
+.seg button:last-child{border-right:none}
+.seg button.active{background:var(--orange);color:#fff}
+.search{flex:1;min-width:160px;padding:9px 13px;border:1px solid var(--line2);background:var(--surface);
+  color:var(--text);font-size:13px;font-family:'Saira';outline:none;font-weight:500}
+
+@media(max-width:960px){
+  .hero h1{font-size:60px}
+  .telemetry{grid-template-columns:repeat(2,1fr)}
+  .tm:nth-child(2){border-right:none}
+  .karts,.ses-grid,.avis-grid{grid-template-columns:1fr}
+  .grp-grid,.infos-grid,.bo-grid{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  .burger{display:block;margin-left:auto}
+}
+@media(max-width:560px){
+  .hero h1{font-size:46px}
+  .sec-head h2,.cta h2{font-size:36px}
+  .date-grid{grid-template-columns:repeat(3,1fr)}
+  .modebar .lbl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MODE SWITCH ===== -->
+<div class="modebar">
+  <span class="lbl">Maquette Vong Studio</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= SITE PUBLIC ======================== -->
+<!-- ============================================================ -->
+<div class="screen active" id="screen-site">
+
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo" onclick="scrollToSec('top')">
+        <span class="lm">🏁</span>
+        <span class="lt">CAP KARTING<small>circuit · mer (41)</small></span>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('karts')">Les karts</a>
+        <a onclick="scrollToSec('sessions')">Sessions</a>
+        <a onclick="scrollToSec('groupes')">Groupes &amp; entreprises</a>
+        <a onclick="scrollToSec('avis')">Avis</a>
+        <a onclick="scrollToSec('infos')">Accès</a>
+      </nav>
+      <button class="btn btn-orange btn-sm" onclick="openResa()">Réserver</button>
+      <button class="burger" onclick="scrollToSec('sessions')">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="wrap hero-in">
+      <span class="flag">CIRCUIT INDOOR/OUTDOOR · PISTE ÉCLAIRÉE</span>
+      <h1>1500 mètres<br>de <span class="o">pure</span> <span class="stroke">adrénaline</span>.</h1>
+      <p class="sub">L'un des plus grands circuits de karting d'Europe, à 15 minutes de Blois. Réservez votre piste en ligne — fini le « rappelez-nous aux heures de bureau ».</p>
+      <div class="hero-cta">
+        <button class="btn btn-orange btn-lg" onclick="openResa()">🏁 Réserver une session</button>
+        <button class="btn btn-ghost btn-lg" onclick="scrollToSec('groupes')">Groupes &amp; entreprises</button>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="telemetry">
+        <div class="tm"><div class="tmk">LONGUEUR PISTE</div><div class="tmv">1500 <span class="o">M</span></div></div>
+        <div class="tm"><div class="tmk">FLOTTE DE KARTS</div><div class="tmv">6 <span class="o">MODÈLES</span></div></div>
+        <div class="tm"><div class="tmk">OUVERTURE</div><div class="tmv">7J / <span class="o">7</span></div></div>
+        <div class="tm"><div class="tmk">SESSIONS NOCTURNES</div><div class="tmv">JUSQU'À <span class="o">23H</span></div></div>
+      </div>
+    </div>
+  </section>
+  <div class="chequer"></div>
+
+  <!-- KARTS -->
+  <section id="karts">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">// 01 — LA FLOTTE</span>
+        <h2>Un kart pour chaque pilote</h2>
+        <p>Du baptême en famille à la compétition rotax : six modèles pour tous les âges et tous les niveaux.</p>
+      </div>
+      <div class="karts">
+        <div class="kart">
+          <div class="kn">MOD. 01</div><div class="ke">🏎️</div>
+          <h3>Kart <span class="o">Fun</span></h3>
+          <p>Le kart loisir polyvalent, idéal pour une première fois ou une sortie entre amis.</p>
+          <div class="kspec"><span>DÈS 1,40 M</span><span>270 CC</span></div>
+        </div>
+        <div class="kart">
+          <div class="kn">MOD. 02</div><div class="ke">🏁</div>
+          <h3>Kart <span class="o">Sport</span></h3>
+          <p>Plus de couple, plus de vitesse — pour les pilotes qui veulent attaquer les chronos.</p>
+          <div class="kspec"><span>PILOTE CONFIRMÉ</span><span>390 CC</span></div>
+        </div>
+        <div class="kart">
+          <div class="kn">MOD. 03</div><div class="ke">⚡</div>
+          <h3>Rotax <span class="o">Pro</span></h3>
+          <p>Le kart de compétition du club : châssis rotax, sensations de circuit pur.</p>
+          <div class="kspec"><span>COMPÉTITION</span><span>ROTAX MAX</span></div>
+        </div>
+        <div class="kart">
+          <div class="kn">MOD. 04</div><div class="ke">🧒</div>
+          <h3>Kart <span class="o">Kid</span></h3>
+          <p>Une piste et des karts dédiés aux enfants, encadrés, pour des premiers tours en sécurité.</p>
+          <div class="kspec"><span>7 À 13 ANS</span><span>120 CC</span></div>
+        </div>
+        <div class="kart">
+          <div class="kn">MOD. 05</div><div class="ke">👥</div>
+          <h3>Kart <span class="o">Biplace</span></h3>
+          <p>Deux à bord : un parent et son enfant, ou un passager qui découvre la piste.</p>
+          <div class="kspec"><span>2 PERSONNES</span><span>ENFANT DÈS 4 ANS</span></div>
+        </div>
+        <div class="kart">
+          <div class="kn">MOD. 06</div><div class="ke">♿</div>
+          <h3>Handi<span class="o">kart</span></h3>
+          <p>Un kart adapté aux pilotes à mobilité réduite — la piste est ouverte à tous.</p>
+          <div class="kspec"><span>PMR</span><span>COMMANDES ADAPTÉES</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SESSIONS -->
+  <section id="sessions">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">// 02 — RÉSERVER UNE SESSION</span>
+        <h2>Choisissez votre format de course</h2>
+        <p>Réservation et paiement en ligne, 24h/24. Votre piste est garantie à l'heure choisie.</p>
+      </div>
+      <div class="ses-grid">
+        <div class="ses">
+          <div class="stripe"></div>
+          <div class="sbody">
+            <div class="stag">FORMAT 01</div>
+            <h3>Session Sprint</h3>
+            <div class="sd">La dose d'adrénaline rapide.</div>
+            <div class="sp">22€<small> /pilote</small></div>
+            <ul>
+              <li><span class="c">▸</span> 1 manche de 10 minutes</li>
+              <li><span class="c">▸</span> Casque &amp; combinaison fournis</li>
+              <li><span class="c">▸</span> Chrono individuel remis</li>
+            </ul>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+          </div>
+        </div>
+        <div class="ses hot">
+          <div class="stripe"></div>
+          <div class="sbody">
+            <div class="stag">FORMAT 02 · LE PLUS COURU</div>
+            <h3>Grand Prix</h3>
+            <div class="sd">Essais, manche qualificative, finale.</div>
+            <div class="sp">39€<small> /pilote</small></div>
+            <ul>
+              <li><span class="c">▸</span> Essais + qualif + finale</li>
+              <li><span class="c">▸</span> Grille de départ &amp; podium</li>
+              <li><span class="c">▸</span> Classement chronométré complet</li>
+            </ul>
+            <button class="btn btn-orange" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+          </div>
+        </div>
+        <div class="ses">
+          <div class="stripe"></div>
+          <div class="sbody">
+            <div class="stag">FORMAT 03</div>
+            <h3>Session Kid</h3>
+            <div class="sd">La piste dédiée aux enfants.</div>
+            <div class="sp">18€<small> /enfant</small></div>
+            <ul>
+              <li><span class="c">▸</span> Piste &amp; karts kid · 7-13 ans</li>
+              <li><span class="c">▸</span> 1 manche de 10 minutes encadrée</li>
+              <li><span class="c">▸</span> Équipement à la taille</li>
+            </ul>
+            <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROUPES -->
+  <section id="groupes">
+    <div class="wrap">
+      <div class="grp-grid">
+        <div>
+          <div class="sec-head" style="margin-bottom:24px">
+            <span class="num">// 03 — GROUPES &amp; ENTREPRISES</span>
+            <h2>EVG, CE, séminaires</h2>
+          </div>
+          <p style="font-size:15.5px;color:var(--muted);font-weight:500;max-width:440px">Anniversaires, enterrements de vie de garçon, sorties de comité d'entreprise, team building : Cap Karting accueille vos groupes jusqu'à 500 personnes. Un formulaire en ligne, une réponse rapide — fini les e-mails perdus.</p>
+          <div class="grp-list">
+            <div class="gi"><span class="ge">🎂</span><div><b>Anniversaire Pilote</b><span>Manches, podium et salle privative pour le héros du jour.</span></div></div>
+            <div class="gi"><span class="ge">🍾</span><div><b>EVG / EVJF</b><span>Grand Prix complet, défis et photo de podium pour la team.</span></div></div>
+            <div class="gi"><span class="ge">🏢</span><div><b>Séminaires &amp; CE</b><span>Endurance par équipes, jusqu'à 500 personnes, restauration sur place.</span></div></div>
+          </div>
+        </div>
+        <div class="grp-card">
+          <div class="gbig">500</div>
+          <h3>personnes accueillies</h3>
+          <p>Décrivez votre événement, recevez une proposition chiffrée rapidement. Plus aucune demande ne se perd dans une boîte mail.</p>
+          <button class="btn btn-orange btn-lg" onclick="scrollToSec('infos')">Demander un devis groupe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis" style="background:var(--surface);border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">// 04 — LE PADDOCK</span>
+        <h2>4,6/5 — 380 avis pilotes</h2>
+      </div>
+      <div class="avis-grid">
+        <div class="review">
+          <div class="rs">★★★★★</div>
+          <p>« Piste énorme, vraies sensations. Le Grand Prix avec podium, génial pour un anniversaire entre potes. »</p>
+          <div class="rw"><div class="rav">RT</div><div><b>Romain T.</b><span>il y a 2 semaines</span></div></div>
+        </div>
+        <div class="review">
+          <div class="rs">★★★★★</div>
+          <p>« Sortie CE de 40 personnes : organisation au top. Pouvoir réserver et payer en ligne changerait tout, vivement. »</p>
+          <div class="rw"><div class="rav">SL</div><div><b>Sonia L.</b><span>il y a 1 mois</span></div></div>
+        </div>
+        <div class="review">
+          <div class="rs">★★★★☆</div>
+          <p>« Mes enfants ont adoré la piste kid. Accueil pro, casques nickel. Sessions nocturnes vraiment sympas. »</p>
+          <div class="rw"><div class="rav">KB</div><div><b>Karim B.</b><span>il y a 1 mois</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="num">// 05 — ACCÈS &amp; HORAIRES</span>
+        <h2>Venir piloter</h2>
+      </div>
+      <div class="infos-grid">
+        <div class="ibox">
+          <h3>Horaires d'ouverture</h3>
+          <div class="hr-row"><b>Lundi</b><span class="cl">FERMÉ</span></div>
+          <div class="hr-row"><b>Mardi · Mercredi · Jeudi</b><span class="op">14:00 — 22:00</span></div>
+          <div class="hr-row"><b>Vendredi</b><span class="op">14:00 — 23:00</span></div>
+          <div class="hr-row"><b>Samedi</b><span class="op">10:00 — 23:00</span></div>
+          <div class="hr-row"><b>Dimanche</b><span class="op">10:00 — 20:00</span></div>
+        </div>
+        <div class="ibox">
+          <h3>Nous trouver</h3>
+          <div class="il"><span class="ie">📍</span><div>Route de Talcy<br>41500 Mer</div></div>
+          <div class="il"><span class="ie">📞</span><div>02 54 81 39 02 · info@capkarting.com</div></div>
+          <div class="il"><span class="ie">🏁</span><div>À 15 min de Blois · sortie A10 · parking gratuit</div></div>
+          <div class="map-ph"><span style="font-size:24px">🗺️</span> Carte Google Maps interactive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="wrap cta-in">
+      <h2>Prêt à <span class="o">attaquer</span> le chrono ?</h2>
+      <p>Réservez votre session en ligne — votre piste vous attend.</p>
+      <button class="btn btn-orange btn-lg" onclick="openResa()">🏁 Réserver maintenant</button>
+    </div>
+  </div>
+  <div class="chequer"></div>
+
+  <!-- FOOTER -->
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft-grid">
+        <div>
+          <div class="logo">
+            <span class="lm">🏁</span>
+            <span class="lt">CAP KARTING<small>circuit · mer (41)</small></span>
+          </div>
+          <p class="ft-about">L'un des plus grands circuits de karting d'Europe — 1500 m de piste éclairée, à 15 minutes de Blois.</p>
+        </div>
+        <div class="ft-col">
+          <h4>Le circuit</h4>
+          <a onclick="scrollToSec('karts')">Les karts</a>
+          <a onclick="scrollToSec('sessions')">Sessions</a>
+          <a onclick="scrollToSec('avis')">Avis pilotes</a>
+        </div>
+        <div class="ft-col">
+          <h4>Réserver</h4>
+          <a onclick="openResa('visite')">Une session</a>
+          <a onclick="openResa('anniv')">Un événement</a>
+          <a onclick="scrollToSec('groupes')">Groupes &amp; CE</a>
+        </div>
+        <div class="ft-col">
+          <h4>Contact</h4>
+          <p>Route de Talcy, 41500 Mer</p>
+          <p>02 54 81 39 02</p>
+          <p>info@capkarting.com</p>
+        </div>
+      </div>
+      <div class="ft-bot">
+        <span>© 2026 CAP KARTING — SARL D-KART</span>
+        <span>Maquette de démonstration · Vong Studio · données illustratives</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= BACK OFFICE ========================= -->
+<!-- ============================================================ -->
+<div class="screen bo" id="screen-bo">
+
+  <div class="bo-top">
+    <div class="wrap bo-top-in">
+      <div class="bo-brand">
+        <span class="bm">🏁</span>
+        <div><b>CAP KARTING</b><span>RACE CONTROL</span></div>
+      </div>
+      <div class="bo-live"><span class="dot"></span> PISTE OUVERTE · SAM. 6 JUIN · 14:02</div>
+    </div>
+  </div>
+
+  <div class="bo-tabs">
+    <button class="active" onclick="setBV('dash',this)">Tableau de bord</button>
+    <button onclick="setBV('resa',this)">Réservations</button>
+    <button onclick="setBV('piste',this)">Planning piste</button>
+    <button onclick="setBV('groupes',this)">Groupes &amp; CE</button>
+    <button onclick="setBV('pilotes',this)">Pilotes</button>
+  </div>
+
+  <div class="bo-body">
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="bv active" id="bv-dash">
+      <div class="bv-head">
+        <div><h2>Race Control</h2><p>L'activité du circuit — samedi 6 juin 2026.</p></div>
+        <button class="btn btn-orange btn-sm" onclick="setBV('piste',document.querySelectorAll('.bo-tabs button')[2])">Voir le planning piste</button>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="kk">RÉSERVATIONS · JOUR</div><div class="kv">41</div><div class="kt up">▲ 16 % VS SAM. DERNIER</div></div>
+        <div class="kpi"><div class="kk">PILOTES ATTENDUS</div><div class="kv">138</div><div class="kt up">▲ 9 % VS SAM. DERNIER</div></div>
+        <div class="kpi"><div class="kk">ENCAISSÉ EN LIGNE · MOIS</div><div class="kv">7 <span class="o">920€</span></div><div class="kt up">▲ NOUVEAU CANAL</div></div>
+        <div class="kpi"><div class="kk">DEMANDES GROUPES</div><div class="kv">6</div><div class="kt dn">▼ 6 À TRAITER</div></div>
+      </div>
+      <div class="notice">🏁 Le planning de piste est désormais intégré au back office — fini l'aller-retour avec Apex Timing.</div>
+      <div class="bo-grid">
+        <div class="panel">
+          <div class="panel-hd">
+            <h3>Prochaines sessions</h3>
+            <span class="pmore" onclick="setBV('resa',document.querySelectorAll('.bo-tabs button')[1])">Tout voir →</span>
+          </div>
+          <table class="rtable">
+            <thead><tr><th>CLIENT</th><th>SESSION</th><th>FORMAT</th><th>PILOTES</th><th>STATUT</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cust"><span class="ca">RT</span><div><b>Romain Texier</b><span>Web · payé</span></div></div></td><td>16:00</td><td>Grand Prix</td><td>8</td><td><span class="pill green">Confirmé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca">EVG</span><div><b>EVG — A. Mercier</b><span>Web · acompte</span></div></div></td><td>18:00</td><td>Pack EVG</td><td>12</td><td><span class="pill orange">Acompte</span></td></tr>
+              <tr><td><div class="cust"><span class="ca">SL</span><div><b>Sonia Lefort</b><span>Web · payé</span></div></div></td><td>18:00</td><td>Session Sprint</td><td>4</td><td><span class="pill green">Confirmé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca">KB</span><div><b>Karim Benali</b><span>Web · payé</span></div></div></td><td>20:00</td><td>Session Kid</td><td>3</td><td><span class="pill green">Confirmé</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><h3>Classement du jour</h3><span class="pmore">Piste sport</span></div>
+          <div class="lb">
+            <div class="lb-row p1"><span class="pos">P1</span><span class="pn">M. Caron</span><span class="lt">00:41.208</span></div>
+            <div class="lb-row"><span class="pos">P2</span><span class="pn">L. Fabre</span><span class="lt">00:41.677</span></div>
+            <div class="lb-row"><span class="pos">P3</span><span class="pn">R. Texier</span><span class="lt">00:42.013</span></div>
+            <div class="lb-row"><span class="pos">P4</span><span class="pn">N. Aubert</span><span class="lt">00:42.580</span></div>
+            <div class="lb-row"><span class="pos">P5</span><span class="pn">J. Morel</span><span class="lt">00:43.114</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RESERVATIONS ===== -->
+    <div class="bv" id="bv-resa">
+      <div class="bv-head">
+        <div><h2>Réservations</h2><p>Toutes les sessions réservées en ligne.</p></div>
+        <button class="btn btn-orange btn-sm">+ Ajouter une session</button>
+      </div>
+      <div class="toolbar">
+        <div class="seg"><button class="active">Aujourd'hui</button><button>Semaine</button><button>Toutes</button></div>
+        <input class="search" placeholder="Rechercher un pilote, un e-mail…">
+      </div>
+      <div class="panel">
+        <table class="rtable">
+          <thead><tr><th>CLIENT</th><th>DATE</th><th>HEURE</th><th>FORMAT</th><th>PILOTES</th><th>MONTANT</th><th>STATUT</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca">RT</span><div><b>Romain Texier</b><span>06 41 ** ** 72</span></div></div></td><td>06/06</td><td>16:00</td><td>Grand Prix</td><td>8</td><td><b>312 €</b></td><td><span class="pill green">Payé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">AM</span><div><b>EVG — A. Mercier</b><span>07 52 ** ** 18</span></div></div></td><td>06/06</td><td>18:00</td><td>Pack EVG / EVJF</td><td>12</td><td><b>340 €</b></td><td><span class="pill orange">Acompte 30 %</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">SL</span><div><b>Sonia Lefort</b><span>06 08 ** ** 33</span></div></div></td><td>06/06</td><td>18:00</td><td>Session Sprint</td><td>4</td><td><b>88 €</b></td><td><span class="pill green">Payé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">KB</span><div><b>Karim Benali</b><span>06 77 ** ** 04</span></div></div></td><td>06/06</td><td>20:00</td><td>Session Kid</td><td>3</td><td><b>54 €</b></td><td><span class="pill green">Payé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">MC</span><div><b>Mathieu Caron</b><span>06 90 ** ** 51</span></div></div></td><td>07/06</td><td>14:00</td><td>Grand Prix</td><td>6</td><td><b>234 €</b></td><td><span class="pill green">Payé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">CE</span><div><b>CE Loiret Auto</b><span>ce@loiret-auto.fr</span></div></div></td><td>07/06</td><td>19:00</td><td>Endurance équipes</td><td>24</td><td><b>1 320 €</b></td><td><span class="pill orange">Acompte 30 %</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">JM</span><div><b>Julie Morel</b><span>06 33 ** ** 67</span></div></div></td><td>08/06</td><td>15:00</td><td>Session Sprint</td><td>2</td><td><b>44 €</b></td><td><span class="pill gray">En attente</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">NF</span><div><b>Nicolas Faure</b><span>06 18 ** ** 25</span></div></div></td><td>05/06</td><td>21:30</td><td>Grand Prix</td><td>10</td><td><b>390 €</b></td><td><span class="pill red">Annulée</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== PLANNING PISTE ===== -->
+    <div class="bv" id="bv-piste">
+      <div class="bv-head">
+        <div><h2>Planning piste</h2><p>Occupation des créneaux — samedi 6 juin 2026. 16 karts disponibles par session.</p></div>
+        <div class="seg"><button class="active">Sam. 6</button><button>Dim. 7</button><button>Lun. 8</button></div>
+      </div>
+      <div class="notice">⚙️ Calendrier de piste unifié : ouvrez ou fermez un créneau, ajustez le nombre de karts, bloquez la piste pour un groupe.</div>
+      <div class="track">
+        <div class="tslot">
+          <div class="th">14:00</div><div class="tk">7 / 16 KARTS</div>
+          <div class="tbar"><i style="width:44%;background:var(--green)"></i></div>
+          <div class="tst" style="color:var(--green)">Ouvert</div>
+        </div>
+        <div class="tslot">
+          <div class="th">16:00</div><div class="tk">13 / 16 KARTS</div>
+          <div class="tbar"><i style="width:81%;background:var(--orange)"></i></div>
+          <div class="tst" style="color:var(--orange)">Bientôt complet</div>
+        </div>
+        <div class="tslot">
+          <div class="th">18:00</div><div class="tk">16 / 16 KARTS</div>
+          <div class="tbar"><i style="width:100%;background:var(--red)"></i></div>
+          <div class="tst" style="color:var(--red)">Complet · EVG</div>
+        </div>
+        <div class="tslot">
+          <div class="th">20:00</div><div class="tk">10 / 16 KARTS</div>
+          <div class="tbar"><i style="width:62%;background:var(--green)"></i></div>
+          <div class="tst" style="color:var(--green)">Ouvert</div>
+        </div>
+        <div class="tslot">
+          <div class="th">21:30</div><div class="tk">5 / 16 KARTS</div>
+          <div class="tbar"><i style="width:31%;background:var(--green)"></i></div>
+          <div class="tst" style="color:var(--green)">Nocturne · ouvert</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== GROUPES & CE ===== -->
+    <div class="bv" id="bv-groupes">
+      <div class="bv-head">
+        <div><h2>Groupes &amp; CE</h2><p>Les demandes de groupes captées par le formulaire en ligne — fini les e-mails perdus.</p></div>
+        <button class="btn btn-orange btn-sm">⤓ Exporter</button>
+      </div>
+      <div class="panel">
+        <div class="panel-hd"><h3>Demandes à traiter</h3><span class="pmore">6 ouvertes</span></div>
+        <table class="rtable">
+          <thead><tr><th>DEMANDEUR</th><th>TYPE</th><th>DATE SOUHAITÉE</th><th>PERS.</th><th>REÇUE</th><th>STATUT</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca">CE</span><div><b>CE Loiret Auto</b><span>ce@loiret-auto.fr</span></div></div></td><td>Endurance équipes</td><td>27/06</td><td>24</td><td>il y a 2h</td><td><span class="pill orange">Devis envoyé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">AM</span><div><b>Antoine Mercier</b><span>EVG · 06 52 ** ** 18</span></div></div></td><td>EVG / EVJF</td><td>14/06</td><td>12</td><td>il y a 6h</td><td><span class="pill green">Confirmé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">SD</span><div><b>Sodexo Tours</b><span>séminaire · 80 pers.</span></div></div></td><td>Séminaire</td><td>03/07</td><td>80</td><td>hier</td><td><span class="pill orange">À chiffrer</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">LP</span><div><b>Lycée Pro Blois</b><span>sortie scolaire</span></div></div></td><td>Groupe scolaire</td><td>20/06</td><td>34</td><td>hier</td><td><span class="pill gray">Nouvelle</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">EM</span><div><b>Émilie Roy</b><span>anniversaire 12 ans</span></div></div></td><td>Anniversaire</td><td>21/06</td><td>9</td><td>il y a 2 j</td><td><span class="pill gray">Nouvelle</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== PILOTES ===== -->
+    <div class="bv" id="bv-pilotes">
+      <div class="bv-head">
+        <div><h2>Pilotes</h2><p>Le fichier clients — meilleur chrono et historique de sessions.</p></div>
+        <button class="btn btn-orange btn-sm">⤓ Exporter (CSV)</button>
+      </div>
+      <div class="toolbar">
+        <div class="seg"><button class="active">Tous</button><button>Club</button><button>Groupes</button></div>
+        <input class="search" placeholder="Rechercher un pilote…">
+      </div>
+      <div class="panel">
+        <table class="rtable">
+          <thead><tr><th>PILOTE</th><th>E-MAIL</th><th>SESSIONS</th><th>MEILLEUR CHRONO</th><th>DERNIÈRE VENUE</th><th>SEGMENT</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca">MC</span><b>Mathieu Caron</b></div></td><td>m.caron@email.fr</td><td>23</td><td><span class="mono" style="color:var(--orange);font-weight:700">00:41.208</span></td><td>06/06/2026</td><td><span class="pill orange">Club</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">LF</span><b>Lucas Fabre</b></div></td><td>lucas.fabre@email.fr</td><td>17</td><td><span class="mono" style="font-weight:700">00:41.677</span></td><td>06/06/2026</td><td><span class="pill orange">Club</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">RT</span><b>Romain Texier</b></div></td><td>r.texier@email.fr</td><td>6</td><td><span class="mono" style="font-weight:700">00:42.013</span></td><td>06/06/2026</td><td><span class="pill green">Habitué</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">SL</span><b>Sonia Lefort</b></div></td><td>s.lefort@email.fr</td><td>2</td><td><span class="mono" style="font-weight:700">00:45.902</span></td><td>06/06/2026</td><td><span class="pill gray">Nouvelle</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">KB</span><b>Karim Benali</b></div></td><td>k.benali@email.fr</td><td>9</td><td><span class="mono" style="font-weight:700">00:43.450</span></td><td>06/06/2026</td><td><span class="pill green">Habitué</span></td></tr>
+            <tr><td><div class="cust"><span class="ca">JM</span><b>Julie Morel</b></div></td><td>j.morel@email.fr</td><td>4</td><td><span class="mono" style="font-weight:700">00:43.114</span></td><td>02/06/2026</td><td><span class="pill green">Habituée</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== RESA OVERLAY ===== -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-hd">
+      <h3 id="resa-title">Réserver une session</h3>
+      <button class="rx" onclick="closeResa()">✕</button>
+    </div>
+    <div class="steps-bar" id="steps-bar"></div>
+    <div class="resa-bd" id="resa-bd"></div>
+  </div>
+</div>
+
+<script>
+/* ============ MODE SWITCH ============ */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function setBV(v,btn){
+  document.querySelectorAll('.bv').forEach(function(e){e.classList.remove('active')});
+  document.getElementById('bv-'+v).classList.add('active');
+  document.querySelectorAll('.bo-tabs button').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){
+  if(document.getElementById('screen-site').classList.contains('active')===false)setMode('site');
+  var el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+
+/* ============ RESERVATION TUNNEL ============ */
+var FORMULES={
+  visite:[
+    {id:'v1',e:'🏁',n:'Session Sprint',d:'1 manche de 10 min',p:22},
+    {id:'v2',e:'🏆',n:'Grand Prix',d:'Essais + qualif + finale',p:39},
+    {id:'v3',e:'🧒',n:'Session Kid',d:'Piste kid · 7-13 ans',p:18}
+  ],
+  anniv:[
+    {id:'a1',e:'🎂',n:'Anniversaire Pilote',d:'Jusqu\'à 10 pilotes · manches + salle',p:230,forfait:true},
+    {id:'a2',e:'🍾',n:'Pack EVG / EVJF',d:'Grand Prix complet + podium + salle',p:340,forfait:true},
+    {id:'a3',e:'🏎️',n:'Sortie groupe / club',d:'Endurance par équipes · dès 12 pilotes',p:480,forfait:true}
+  ]
+};
+var SLOTS=[
+  {h:'14:00',left:9},{h:'16:00',left:3},{h:'18:00',left:0},
+  {h:'20:00',left:6},{h:'21:30',left:11}
+];
+var R={};
+function resetR(type){
+  R={type:type,formule:null,date:null,slot:null,nb:type==='anniv'?8:2,
+     name:'',email:'',phone:'',stage:'formule'};
+}
+function openResa(type){
+  resetR(type||'visite');
+  document.getElementById('ov').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderResa();
+}
+function closeResa(){
+  document.getElementById('ov').classList.remove('show');
+  document.body.style.overflow='';
+}
+var STAGES=['formule','date','who','contact','done'];
+function go(stage){R.stage=stage;renderResa();}
+
+function days(){
+  var out=[],names=['DIM','LUN','MAR','MER','JEU','VEN','SAM'];
+  var mon=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  var d=new Date();
+  for(var i=1;i<=12;i++){
+    var x=new Date(d.getTime()+i*86400000);
+    out.push({key:i,dn:x.getDate(),dd:names[x.getDay()],dm:mon[x.getMonth()],off:x.getDay()===1});
+  }
+  return out;
+}
+function money(n){return n.toLocaleString('fr-FR')+' €';}
+function curF(){return FORMULES[R.type].filter(function(x){return x.id===R.formule})[0];}
+
+function renderResa(){
+  document.getElementById('resa-title').textContent=
+    R.type==='anniv'?'Réserver un événement':'Réserver une session';
+  var idx=STAGES.indexOf(R.stage),bar='';
+  for(var i=0;i<4;i++)bar+='<div class="sd'+(i<=idx?' on':'')+'"></div>';
+  document.getElementById('steps-bar').innerHTML=R.stage==='done'?'':bar;
+  var bd=document.getElementById('resa-bd'),h='';
+
+  if(R.stage==='formule'){
+    h+='<div class="qst">'+(R.type==='anniv'?'Quel événement ?':'Quel format de course ?')+'</div>';
+    h+='<div class="qsub">'+(R.type==='anniv'?'Prix au forfait — salle et encadrement inclus.':'Prix par pilote — équipement fourni.')+'</div>';
+    FORMULES[R.type].forEach(function(f){
+      h+='<div class="opt'+(R.formule===f.id?' sel':'')+'" onclick="R.formule=\''+f.id+'\';renderResa()">'
+        +'<div class="oe">'+f.e+'</div><div class="ob"><b>'+f.n+'</b><span>'+f.d+'</span></div>'
+        +'<div class="op">'+f.p+'€</div></div>';
+    });
+    h+='<div class="resa-ft"><button class="btn btn-orange" '+(R.formule?'':'disabled')+' onclick="go(\'date\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='date'){
+    h+='<div class="qst">Choisissez la date</div><div class="qsub">Circuit fermé le lundi.</div>';
+    h+='<div class="date-grid">';
+    days().forEach(function(d){
+      h+='<div class="dcell'+(d.off?' off':'')+(R.date===d.key?' sel':'')+'" '
+        +(d.off?'':'onclick="R.date='+d.key+';R.slot=null;renderResa()"')+'>'
+        +'<div class="dd">'+d.dd+'</div><div class="dn">'+d.dn+'</div><div class="dm">'+d.dm+'</div></div>';
+    });
+    h+='</div>';
+    if(R.date){
+      h+='<div class="qst" style="font-size:17px;margin-bottom:9px">Créneau de piste</div><div class="slot-grid">';
+      SLOTS.forEach(function(s){
+        var full=s.left<=0,cls=full?'no':(s.left<=5?'low':'ok');
+        var lbl=full?'COMPLET':s.left+' KARTS';
+        h+='<div class="slot'+(full?' full':'')+(R.slot===s.h?' sel':'')+'" '
+          +(full?'':'onclick="R.slot=\''+s.h+'\';renderResa()"')+'>'
+          +'<div class="sh">'+s.h+'</div><div class="sl '+cls+'">'+lbl+'</div></div>';
+      });
+      h+='</div>';
+    }
+    h+='<div class="resa-ft"><button class="btn btn-ghost" onclick="go(\'formule\')">← Retour</button>'
+      +'<button class="btn btn-orange" '+(R.date&&R.slot?'':'disabled')+' onclick="go(\'who\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='who'){
+    h+='<div class="qst">Combien de pilotes ?</div><div class="qsub">'
+      +(R.type==='anniv'?'Dans la limite de la formule choisie.':'Chaque pilote a son kart et son chrono.')+'</div>';
+    h+='<div class="counter"><div class="cl"><b>Nombre de pilotes</b><span>Équipement fourni pour chacun</span></div>'
+      +'<div class="cc"><button onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>'
+      +'<b>'+R.nb+'</b><button onclick="R.nb=Math.min(40,R.nb+1);renderResa()">+</button></div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-ghost" onclick="go(\'date\')">← Retour</button>'
+      +'<button class="btn btn-orange" onclick="go(\'contact\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='contact'){
+    var f=curF(),forf=!!f.forfait;
+    var total=forf?f.p:f.p*R.nb,acompte=Math.round(total*0.3);
+    h+='<div class="qst">Vos coordonnées</div><div class="qsub">Pour la confirmation et le briefing pilote.</div>';
+    h+='<div class="fld"><label>NOM ET PRÉNOM</label><input value="'+R.name+'" placeholder="Romain Texier" oninput="R.name=this.value"></div>';
+    h+='<div class="fld"><label>E-MAIL</label><input value="'+R.email+'" placeholder="vous@email.fr" oninput="R.email=this.value"></div>';
+    h+='<div class="fld"><label>TÉLÉPHONE</label><input value="'+R.phone+'" placeholder="06 ** ** ** **" oninput="R.phone=this.value"></div>';
+    h+='<div class="recap">'
+      +'<div class="rr"><span>'+f.n+'</span><span>'+(forf?'Forfait':f.p+'€ × '+R.nb+' pilotes')+'</span></div>'
+      +'<div class="rr"><span>Total</span><span>'+money(total)+'</span></div>'
+      +'<div class="rr tot"><span>Acompte (30 %)</span><span class="o">'+money(acompte)+'</span></div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-ghost" onclick="go(\'who\')">← Retour</button>'
+      +'<button class="btn btn-orange" onclick="submitResa()">Payer l\'acompte</button></div>';
+  }
+
+  else if(R.stage==='done'){
+    var f2=curF(),dd=days().filter(function(x){return x.key===R.date})[0];
+    h+='<div class="done"><div class="dok">✓</div>'
+      +'<h3>Session réservée !</h3>'
+      +'<p>'+f2.n+' · '+(dd?dd.dd+' '+dd.dn+' '+dd.dm:'')+' à '+R.slot+'</p>'
+      +'<p>'+R.nb+' pilotes — confirmation et briefing envoyés vers '+(R.email||'votre adresse')+'.</p>'
+      +'<div class="demo-note">🔎 Maquette de démonstration — aucun paiement réel n\'a été effectué. Dans le vrai site, la session apparaît aussitôt dans Race Control (Réservations + Planning piste).</div>'
+      +'<div class="resa-ft"><button class="btn btn-orange" style="flex:1;justify-content:center" onclick="closeResa()">Fermer</button></div></div>';
+  }
+
+  bd.innerHTML=h;
+}
+function submitResa(){
+  if(!R.name||!R.email){alert('Merci d\'indiquer votre nom et votre e-mail.');return;}
+  go('done');
+}
+</script>
+
+</body>
+</html>
