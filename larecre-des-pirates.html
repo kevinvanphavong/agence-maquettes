@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Récré des Pirates — Maquette refonte site + back office · Vong Studio</title>
+<meta name="description" content="Maquette de démonstration : refonte du site et back-office de réservation pour La Récré des Pirates, parc de jeux indoor 0-12 ans à Romorantin-Lanthenay.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+:root{
+  --bg:#fbf2dd; --surface:#ffffff; --surface2:#fdf6e8; --surface3:#f3e7c9;
+  --ink:#163443; --muted:#5f7682; --muted2:#9aa8af;
+  --line:#ece0c6; --line2:#ddcfac;
+  --teal:#0e8a8f; --teal-d:#0a6c70; --teal-soft:#d6eeef;
+  --gold:#f2a619; --gold-d:#d68f08; --gold-soft:#fdeccb;
+  --coral:#e2492d; --coral-d:#c33a20; --coral-soft:#fbe0d8;
+  --mint:#27a567;
+  --shadow:0 14px 40px rgba(22,52,67,.13);
+  --shadow-sm:0 6px 18px rgba(22,52,67,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;line-height:1.6}
+h1,h2,h3,h4,.disp{font-family:'Fredoka',sans-serif;font-weight:600;line-height:1.12}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+.btn{font-family:'Fredoka',sans-serif;font-weight:600;font-size:15px;cursor:pointer;
+  border:none;padding:13px 26px;border-radius:40px;transition:transform .15s,box-shadow .15s,filter .15s;
+  display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translateY(-2px)}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 8px 20px rgba(14,138,143,.32)}
+.btn-teal:hover{box-shadow:0 12px 26px rgba(14,138,143,.42)}
+.btn-coral{background:var(--coral);color:#fff;box-shadow:0 8px 20px rgba(226,73,45,.32)}
+.btn-coral:hover{box-shadow:0 12px 26px rgba(226,73,45,.42)}
+.btn-gold{background:var(--gold);color:#3a2a05;box-shadow:0 8px 20px rgba(242,166,25,.36)}
+.btn-ghost{background:var(--surface);color:var(--ink);border:2px solid var(--line2)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn-sm{padding:9px 18px;font-size:13.5px}
+.btn-lg{padding:16px 32px;font-size:17px}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn[disabled]:hover{transform:none}
+
+/* ===== MODE SWITCH ===== */
+.modebar{position:fixed;top:0;left:0;right:0;height:48px;background:var(--ink);z-index:300;
+  display:flex;align-items:center;justify-content:center;gap:6px}
+.modebar .lbl{color:#7d99a3;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  margin-right:10px;text-transform:uppercase}
+.mode-btn{font-family:'Fredoka',sans-serif;font-size:13.5px;font-weight:600;
+  padding:7px 18px;border-radius:30px;border:none;cursor:pointer;
+  background:transparent;color:#a9bfc6;transition:all .15s}
+.mode-btn.active{background:var(--teal);color:#fff}
+
+.screen{display:none;padding-top:48px}
+.screen.active{display:block}
+
+/* ============ SITE PUBLIC ============ */
+.hdr{position:sticky;top:48px;z-index:100;background:rgba(251,242,221,.94);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:18px;height:74px}
+.logo{display:flex;align-items:center;gap:11px;cursor:pointer}
+.logo .lm{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;
+  justify-content:center;font-size:24px;background:linear-gradient(135deg,var(--teal),var(--teal-d));
+  box-shadow:0 8px 16px rgba(14,138,143,.34)}
+.logo .lt{font-family:'Fredoka';font-weight:700;font-size:20px;line-height:1}
+.logo .lt small{display:block;font-family:'Nunito';font-weight:700;font-size:9.5px;
+  color:var(--coral);letter-spacing:1.5px;margin-top:3px}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{padding:9px 14px;border-radius:9px;font-weight:700;font-size:14px;cursor:pointer;
+  transition:color .15s,background .15s;color:var(--muted)}
+.nav a:hover{color:var(--teal);background:var(--surface2)}
+.hdr .phone{font-family:'Fredoka';font-weight:600;font-size:14px;color:var(--ink)}
+.burger{display:none;font-size:24px;background:none;border:none;cursor:pointer;color:var(--ink)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:60px 0 80px;
+  background:radial-gradient(ellipse at 82% 12%,rgba(14,138,143,.12) 0,transparent 55%),
+  radial-gradient(ellipse at 6% 92%,rgba(242,166,25,.16) 0,transparent 52%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;background:var(--gold-soft);
+  color:var(--gold-d);padding:8px 16px;border-radius:30px;font-weight:800;
+  font-size:12.5px;margin-bottom:22px}
+.hero h1{font-size:60px;font-weight:700;letter-spacing:-1px}
+.hero h1 .hl{color:var(--teal)}
+.hero h1 .hl2{color:var(--coral)}
+.hero p.sub{font-size:17.5px;color:var(--muted);margin:20px 0 30px;max-width:450px;font-weight:600}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:32px;margin-top:38px}
+.hero-stats .hs b{font-family:'Fredoka';font-weight:700;font-size:29px;display:block;color:var(--ink)}
+.hero-stats .hs span{font-size:12px;color:var(--muted);font-weight:700}
+.hero-art{aspect-ratio:1/1;border-radius:32px;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--teal),var(--teal-d) 60%,#0a4f55);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 28px 56px rgba(14,138,143,.36)}
+.hero-art::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.13) 1.5px,transparent 1.6px);
+  background-size:28px 28px}
+.hero-art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;
+  background:rgba(255,255,255,.06);border-top:2px dashed rgba(255,255,255,.22)}
+.hero-art .big{font-size:158px;position:relative;animation:sway 3.4s ease-in-out infinite;
+  filter:drop-shadow(0 18px 22px rgba(0,0,0,.3))}
+@keyframes sway{0%,100%{transform:rotate(-7deg) translateY(-6px)}50%{transform:rotate(7deg) translateY(8px)}}
+.float{position:absolute;background:#fff;border-radius:14px;padding:11px 15px;font-weight:800;
+  font-size:12.5px;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-sm)}
+.float .e{font-size:19px}
+.float.f1{top:28px;left:-18px;animation:drift 4s ease-in-out infinite}
+.float.f2{bottom:46px;right:-20px;animation:drift 4s ease-in-out infinite .8s}
+.float.f3{bottom:130px;left:-24px;animation:drift 4s ease-in-out infinite 1.6s}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* INFOBAND */
+.infoband{background:var(--ink);padding:18px 0}
+.infoband .wrap{display:flex;justify-content:space-around;gap:18px;flex-wrap:wrap}
+.infoband .ib{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;color:#fff}
+.infoband .ib .e{font-size:20px}
+
+section{padding:82px 0}
+.sec-head{max-width:600px;margin:0 auto 50px;text-align:center}
+.sec-head .kicker{font-family:'Fredoka';font-weight:600;color:var(--coral);
+  letter-spacing:1.5px;font-size:12.5px;text-transform:uppercase}
+.sec-head h2{font-size:42px;font-weight:700;margin:12px 0 12px}
+.sec-head p{color:var(--muted);font-size:16px;font-weight:600}
+
+/* ACTIVITES */
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.act{background:var(--surface);border:1px solid var(--line);border-radius:24px;
+  padding:28px 24px;transition:transform .18s,box-shadow .18s}
+.act:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.act .aico{width:64px;height:64px;border-radius:20px;display:flex;align-items:center;
+  justify-content:center;font-size:33px;margin-bottom:16px}
+.act h3{font-size:21px;margin-bottom:8px}
+.act p{font-size:13.5px;color:var(--muted);font-weight:600}
+.act .atag{display:inline-block;margin-top:14px;font-family:'Fredoka';font-weight:600;
+  font-size:12px;padding:4px 12px;border-radius:20px;background:var(--surface3);color:var(--ink)}
+
+/* TARIFS */
+#tarifs{background:var(--surface)}
+.tar-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:940px;margin:0 auto}
+.tcard{border:2px solid var(--line);border-radius:24px;padding:34px 28px;text-align:center;
+  position:relative;transition:transform .18s,border-color .18s;background:var(--surface)}
+.tcard:hover{transform:translateY(-6px)}
+.tcard.pop{border-color:var(--teal);box-shadow:0 18px 40px rgba(14,138,143,.16)}
+.tcard .pin{position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--teal);color:#fff;font-family:'Fredoka';font-weight:600;font-size:11.5px;
+  padding:6px 16px;border-radius:20px}
+.tcard .tdur{font-family:'Fredoka';font-weight:600;font-size:16px;color:var(--muted)}
+.tcard .tprice{font-family:'Fredoka';font-weight:700;font-size:48px;margin:6px 0 2px}
+.tcard .tprice span{font-size:18px;color:var(--muted)}
+.tcard .tsub{font-size:13px;color:var(--muted);margin-bottom:20px;font-weight:600}
+.tcard ul{list-style:none;text-align:left;margin-bottom:24px}
+.tcard ul li{font-size:13.5px;padding:7px 0;border-bottom:1px solid var(--line);
+  display:flex;gap:9px;color:var(--ink);font-weight:600}
+.tcard ul li:last-child{border:none}
+.tcard ul li .ck{color:var(--mint);font-weight:800}
+.tar-note{text-align:center;margin-top:28px;font-size:13.5px;color:var(--muted);font-weight:600}
+
+/* ANNIVERSAIRES */
+.anniv-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:30px;align-items:center}
+.anniv-art{border-radius:26px;background:linear-gradient(155deg,var(--coral),#f0734d);
+  padding:46px 40px;color:#fff;position:relative;overflow:hidden;box-shadow:0 24px 46px rgba(226,73,45,.3)}
+.anniv-art::before{content:"🏴‍☠️";position:absolute;font-size:140px;right:-18px;bottom:-32px;opacity:.2}
+.anniv-art h3{font-size:32px;font-weight:700;margin-bottom:12px}
+.anniv-art p{font-size:15px;font-weight:600;opacity:.96;margin-bottom:22px}
+.anniv-formules{display:flex;flex-direction:column;gap:14px}
+.fcard{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;
+  display:flex;align-items:center;gap:18px;transition:transform .15s,box-shadow .15s;cursor:pointer}
+.fcard:hover{transform:translateX(6px);box-shadow:var(--shadow-sm)}
+.fcard .fe{width:54px;height:54px;border-radius:15px;display:flex;align-items:center;
+  justify-content:center;font-size:27px;flex-shrink:0}
+.fcard .fb{flex:1}
+.fcard .fb h4{font-size:17px;margin-bottom:3px}
+.fcard .fb p{font-size:12.5px;color:var(--muted);font-weight:600}
+.fcard .fp{font-family:'Fredoka';font-weight:700;font-size:22px;color:var(--teal);text-align:right}
+.fcard .fp small{display:block;font-size:11px;color:var(--muted);font-weight:700}
+
+/* AVIS */
+#avis{background:var(--surface)}
+.avis-top{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+.avis-score{font-family:'Fredoka';font-weight:700;font-size:54px;color:var(--ink);line-height:1}
+.avis-stars{font-size:20px;letter-spacing:2px}
+.avis-meta{font-size:13.5px;color:var(--muted);font-weight:700}
+.avis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:var(--surface2);border:1px solid var(--line);border-radius:18px;padding:24px}
+.review .rstars{color:var(--gold);font-size:14px;letter-spacing:1px;margin-bottom:10px}
+.review p{font-size:14px;font-weight:600;margin-bottom:16px}
+.review .rwho{display:flex;align-items:center;gap:10px}
+.review .rav{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-family:'Fredoka';font-weight:600;color:#fff;font-size:15px}
+.review .rwho b{font-size:13.5px;display:block}
+.review .rwho span{font-size:11.5px;color:var(--muted)}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.infos-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px;
+  box-shadow:var(--shadow-sm)}
+.infos-card h3{font-size:22px;margin-bottom:18px}
+.hours-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);
+  font-size:14px;font-weight:600}
+.hours-row:last-child{border:none}
+.hours-row .open{color:var(--mint);font-weight:800}
+.hours-row .closed{color:var(--muted2);font-weight:700}
+.infos-line{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:14px;font-weight:600}
+.infos-line .ie{font-size:19px}
+.map-ph{margin-top:18px;height:170px;border-radius:14px;
+  background:linear-gradient(135deg,#e6dabc,#f3e7c9);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;
+  font-weight:700;flex-direction:column;gap:6px}
+
+/* CTA BAND */
+.ctaband{background:linear-gradient(135deg,var(--teal),var(--teal-d));color:#fff;text-align:center;
+  border-radius:30px;padding:56px 30px;margin:0 auto;position:relative;overflow:hidden}
+.ctaband::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.12) 1.4px,transparent 1.5px);background-size:26px 26px}
+.ctaband h2{font-size:36px;font-weight:700;position:relative;margin-bottom:12px}
+.ctaband p{font-size:16px;opacity:.93;position:relative;margin-bottom:26px;font-weight:600}
+
+/* FOOTER */
+.ft{background:var(--ink);color:#b6c6cc;padding:54px 0 26px;margin-top:82px}
+.ft-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:36px}
+.ft .logo .lt{color:#fff}
+.ft-col h4{font-family:'Fredoka';color:#fff;font-size:14px;margin-bottom:14px}
+.ft-col a,.ft-col p{display:block;font-size:13.5px;margin-bottom:9px;color:#8da3ab;cursor:pointer;font-weight:600}
+.ft-col a:hover{color:#fff}
+.ft-about{font-size:13.5px;color:#8da3ab;margin-top:14px;max-width:280px;font-weight:600}
+.ft-bottom{border-top:1px solid #2a4653;padding-top:20px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;font-size:12.5px;color:#6f878f;font-weight:600}
+
+/* ===== RESA OVERLAY ===== */
+.ov{position:fixed;inset:0;background:rgba(22,52,67,.55);backdrop-filter:blur(4px);
+  z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
+.ov.show{display:flex}
+.resa{background:var(--surface);border-radius:26px;width:100%;max-width:560px;
+  max-height:90vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.resa-hd{padding:22px 26px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--surface);z-index:2}
+.resa-hd h3{font-size:19px}
+.resa-hd .rx{width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);
+  background:var(--surface);cursor:pointer;font-size:16px;color:var(--muted)}
+.resa-hd .rx:hover{background:var(--surface2)}
+.steps-bar{display:flex;gap:6px;padding:16px 26px 0}
+.steps-bar .sd{flex:1;height:5px;border-radius:4px;background:var(--line)}
+.steps-bar .sd.on{background:var(--teal)}
+.resa-bd{padding:22px 26px 26px}
+.resa-bd .qst{font-family:'Fredoka';font-weight:600;font-size:18px;margin-bottom:4px}
+.resa-bd .qsub{font-size:13px;color:var(--muted);margin-bottom:18px;font-weight:600}
+.opt{border:2px solid var(--line);border-radius:16px;padding:16px 18px;cursor:pointer;
+  display:flex;align-items:center;gap:14px;margin-bottom:11px;transition:border-color .14s,background .14s}
+.opt:hover{border-color:var(--line2)}
+.opt.sel{border-color:var(--teal);background:var(--teal-soft)}
+.opt .oe{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;
+  justify-content:center;font-size:24px;flex-shrink:0;background:var(--surface2)}
+.opt .ob{flex:1}
+.opt .ob b{font-family:'Fredoka';font-size:15.5px;display:block;font-weight:600}
+.opt .ob span{font-size:12.5px;color:var(--muted);font-weight:600}
+.opt .op{font-family:'Fredoka';font-weight:700;font-size:17px;color:var(--teal)}
+.date-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.dcell{border:2px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center;
+  cursor:pointer;transition:all .14s}
+.dcell:hover{border-color:var(--line2)}
+.dcell.sel{border-color:var(--teal);background:var(--teal-soft)}
+.dcell.off{opacity:.32;cursor:not-allowed}
+.dcell .dd{font-size:10.5px;color:var(--muted);font-weight:800;text-transform:uppercase}
+.dcell .dn{font-family:'Fredoka';font-weight:700;font-size:19px}
+.dcell .dm{font-size:10px;color:var(--muted);font-weight:600}
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.slot{border:2px solid var(--line);border-radius:12px;padding:11px 6px;text-align:center;
+  cursor:pointer;transition:all .14s}
+.slot:hover{border-color:var(--line2)}
+.slot.sel{border-color:var(--teal);background:var(--teal-soft)}
+.slot.full{opacity:.35;cursor:not-allowed}
+.slot .sh{font-family:'Fredoka';font-weight:700;font-size:16px}
+.slot .sl{font-size:10.5px;font-weight:700;margin-top:2px}
+.slot .sl.ok{color:var(--mint)}
+.slot .sl.low{color:var(--coral)}
+.slot .sl.no{color:var(--muted2)}
+.counter{display:flex;align-items:center;justify-content:space-between;
+  border:2px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.counter .cl b{font-family:'Fredoka';font-size:15px;display:block;font-weight:600}
+.counter .cl span{font-size:12px;color:var(--muted);font-weight:600}
+.counter .cc{display:flex;align-items:center;gap:14px}
+.counter .cc button{width:34px;height:34px;border-radius:50%;border:2px solid var(--line2);
+  background:var(--surface);font-size:18px;cursor:pointer;color:var(--teal);font-weight:700}
+.counter .cc button:hover{background:var(--teal-soft)}
+.counter .cc b{font-family:'Fredoka';font-size:19px;min-width:24px;text-align:center}
+.fld{margin-bottom:14px}
+.fld label{font-size:12.5px;font-weight:800;color:var(--ink);display:block;margin-bottom:6px}
+.fld input{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:12px;
+  font-family:'Nunito';font-size:14px;outline:none;transition:border-color .14s;font-weight:600}
+.fld input:focus{border-color:var(--teal)}
+.recap{background:var(--surface2);border-radius:16px;padding:18px;margin-bottom:16px}
+.recap .rr{display:flex;justify-content:space-between;padding:7px 0;font-size:13.5px;font-weight:600}
+.recap .rr.tot{border-top:1px solid var(--line2);margin-top:6px;padding-top:12px;
+  font-family:'Fredoka';font-weight:700;font-size:17px}
+.recap .rr.tot .teal{color:var(--teal)}
+.resa-ft{display:flex;gap:10px;margin-top:18px}
+.resa-ft .btn{flex:1;justify-content:center}
+.done{text-align:center;padding:14px 0}
+.done .dok{width:78px;height:78px;border-radius:50%;background:var(--mint);color:#fff;
+  font-size:40px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.done h3{font-size:24px;margin-bottom:8px}
+.done p{font-size:14px;color:var(--muted);margin-bottom:6px;font-weight:600}
+.demo-note{background:var(--gold-soft);border:1px solid #f0d79a;border-radius:10px;padding:9px 12px;
+  font-size:11.5px;color:#8a6608;margin-top:16px;font-weight:700}
+
+/* ============ BACK OFFICE ============ */
+.bo{background:var(--surface2);min-height:100vh}
+.bo-top{background:var(--ink);color:#fff;position:sticky;top:48px;z-index:90}
+.bo-top-in{display:flex;align-items:center;gap:18px;height:64px}
+.bo-brand{display:flex;align-items:center;gap:10px}
+.bo-brand .bm{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--teal),var(--teal-d));
+  display:flex;align-items:center;justify-content:center;font-size:18px}
+.bo-brand b{font-family:'Fredoka';font-weight:600;font-size:17px}
+.bo-brand span{font-size:10.5px;color:#8da3ab;display:block;margin-top:1px;letter-spacing:1px}
+.bo-user{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700}
+.bo-user .ua{width:34px;height:34px;border-radius:50%;background:var(--coral);
+  display:flex;align-items:center;justify-content:center;font-family:'Fredoka';font-weight:600;font-size:13px}
+.bo-nav{display:flex;gap:4px;background:var(--surface);border-bottom:1px solid var(--line);
+  padding:0 24px;position:sticky;top:112px;z-index:80;overflow-x:auto}
+.bo-nav button{font-family:'Fredoka';font-weight:500;font-size:14px;background:none;border:none;
+  padding:15px 16px;cursor:pointer;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap}
+.bo-nav button.active{color:var(--teal);border-bottom-color:var(--teal)}
+.bo-body{padding:30px 24px 60px;max-width:1180px;margin:0 auto}
+.bv{display:none}
+.bv.active{display:block}
+.bv-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
+.bv-head h2{font-size:25px;font-weight:700}
+.bv-head p{font-size:13.5px;color:var(--muted);font-weight:600}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:26px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;
+  box-shadow:var(--shadow-sm)}
+.kpi .ki{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:21px;margin-bottom:12px}
+.kpi .kv{font-family:'Fredoka';font-weight:700;font-size:30px}
+.kpi .kl{font-size:12.5px;color:var(--muted);font-weight:700}
+.kpi .kt{font-size:11.5px;font-weight:800;margin-top:6px}
+.kpi .kt.up{color:var(--mint)}
+.kpi .kt.dn{color:var(--coral)}
+
+.bo-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:20px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  box-shadow:var(--shadow-sm);overflow:hidden}
+.panel-hd{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between}
+.panel-hd h3{font-size:16px}
+.panel-hd .pmore{font-size:12.5px;color:var(--teal);font-weight:800;cursor:pointer}
+.panel-bd{padding:8px 0}
+
+.rtable{width:100%;border-collapse:collapse}
+.rtable th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted2);font-weight:800;padding:11px 22px;border-bottom:1px solid var(--line)}
+.rtable td{padding:13px 22px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:600}
+.rtable tr:last-child td{border-bottom:none}
+.rtable tr:hover td{background:var(--surface2)}
+.cust{display:flex;align-items:center;gap:10px}
+.cust .ca{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-family:'Fredoka';font-weight:600;font-size:13px;color:#fff;flex-shrink:0}
+.cust b{font-weight:700;font-size:13.5px}
+.cust span{font-size:11.5px;color:var(--muted);display:block;font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:800;
+  padding:4px 11px;border-radius:20px;font-family:'Nunito'}
+.pill.green{background:#d6f1e3;color:#1c7a4f}
+.pill.teal{background:var(--teal-soft);color:var(--teal-d)}
+.pill.amber{background:var(--gold-soft);color:#9a6f06}
+.pill.gray{background:var(--surface3);color:var(--muted)}
+.pill.coral{background:var(--coral-soft);color:var(--coral-d)}
+
+.occ{padding:18px 22px}
+.occ-row{margin-bottom:15px}
+.occ-row:last-child{margin-bottom:0}
+.occ-row .ot{display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:6px;font-weight:700}
+.occ-row .ot span{color:var(--muted)}
+.occ-bar{height:9px;border-radius:6px;background:var(--surface3);overflow:hidden}
+.occ-bar i{display:block;height:100%;border-radius:6px}
+
+.toolbar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.toolbar .seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.toolbar .seg button{font-family:'Fredoka';font-weight:500;font-size:12.5px;background:none;border:none;
+  padding:8px 14px;cursor:pointer;color:var(--muted)}
+.toolbar .seg button.active{background:var(--teal);color:#fff}
+.toolbar .search{flex:1;min-width:160px;padding:9px 14px;border:1px solid var(--line);
+  border-radius:10px;font-size:13px;font-family:'Nunito';outline:none;background:var(--surface);font-weight:600}
+
+.planning{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.pslot{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;
+  box-shadow:var(--shadow-sm)}
+.pslot .ph{font-family:'Fredoka';font-weight:700;font-size:18px;margin-bottom:3px}
+.pslot .pj{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:10px}
+.pslot .pbar{height:8px;border-radius:5px;background:var(--surface3);overflow:hidden;margin-bottom:8px}
+.pslot .pbar i{display:block;height:100%}
+.pslot .pst{font-size:11.5px;font-weight:800}
+
+.notice{background:var(--teal-soft);border:1px solid #b5e0e1;border-radius:14px;
+  padding:14px 18px;font-size:13px;color:var(--teal-d);margin-bottom:22px;display:flex;
+  gap:10px;align-items:center;font-weight:700}
+
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero h1{font-size:44px}
+  .hero-art{max-width:380px;margin:0 auto}
+  .acts{grid-template-columns:repeat(2,1fr)}
+  .anniv-grid,.infos-grid,.bo-grid{grid-template-columns:1fr}
+  .tar-wrap,.avis-grid{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  .burger{display:block;margin-left:auto}
+}
+@media(max-width:560px){
+  .acts{grid-template-columns:1fr}
+  .sec-head h2,.ctaband h2{font-size:30px}
+  .hero h1{font-size:37px}
+  .date-grid{grid-template-columns:repeat(3,1fr)}
+  .hero-stats{gap:18px}
+  .modebar .lbl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MODE SWITCH ===== -->
+<div class="modebar">
+  <span class="lbl">Maquette Vong Studio</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= SITE PUBLIC ======================== -->
+<!-- ============================================================ -->
+<div class="screen active" id="screen-site">
+
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo" onclick="scrollToSec('top')">
+        <span class="lm">🏴‍☠️</span>
+        <span class="lt">La Récré des Pirates<small>PARC INDOOR 0-12 ANS · ROMORANTIN</small></span>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('activites')">Les univers</a>
+        <a onclick="scrollToSec('tarifs')">Tarifs</a>
+        <a onclick="scrollToSec('anniv')">Anniversaires</a>
+        <a onclick="scrollToSec('avis')">Avis</a>
+        <a onclick="scrollToSec('infos')">Infos &amp; accès</a>
+      </nav>
+      <span class="phone">02 54 83 63 55</span>
+      <button class="btn btn-teal btn-sm" onclick="openResa()">Réserver</button>
+      <button class="burger" onclick="scrollToSec('activites')">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">🗺️ À Romorantin-Lanthenay (41)</span>
+        <h1>Larguez les amarres,<br>petits <span class="hl">moussaillons</span> <span class="hl2">!</span></h1>
+        <p class="sub">700 m² de jeux à l'abordage pour les 0-12 ans : structures géantes, trampolines et chasses au trésor. Réservez votre venue ou un anniversaire en ligne.</p>
+        <div class="hero-cta">
+          <button class="btn btn-coral btn-lg" onclick="openResa()">⚓ Réserver une visite</button>
+          <button class="btn btn-ghost btn-lg" onclick="scrollToSec('anniv')">Un anniversaire</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><b>700 m²</b><span>de jeux couverts</span></div>
+          <div class="hs"><b>0-12 ans</b><span>tout l'équipage</span></div>
+          <div class="hs"><b>4 univers</b><span>à explorer</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <span class="big">🏴‍☠️</span>
+        <div class="float f1"><span class="e">🦜</span> Chasse au trésor</div>
+        <div class="float f2"><span class="e">🛝</span> Structures géantes</div>
+        <div class="float f3"><span class="e">✅</span> Réservé en 3 min</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOBAND -->
+  <div class="infoband">
+    <div class="wrap">
+      <div class="ib"><span class="e">🧦</span> Chaussettes obligatoires — en vente sur place</div>
+      <div class="ib"><span class="e">☕</span> Espace parents &amp; coin café</div>
+      <div class="ib"><span class="e">🅿️</span> Parking gratuit · zone Carrefour</div>
+      <div class="ib"><span class="e">🎉</span> Anniversaires 7j/7 sur réservation</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITES -->
+  <section id="activites">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Les univers du parc</span>
+        <h2>4 territoires à explorer</h2>
+        <p>Une seule entrée, accès libre à tous les univers pendant toute la journée.</p>
+      </div>
+      <div class="acts">
+        <div class="act">
+          <div class="aico" style="background:var(--teal-soft)">🛝</div>
+          <h3>Le Grand Galion</h3>
+          <p>La structure géante multi-niveaux : toboggans, filets, ponts de singe et piscine à balles.</p>
+          <span class="atag">Dès 3 ans</span>
+        </div>
+        <div class="act">
+          <div class="aico" style="background:var(--coral-soft)">🧸</div>
+          <h3>L'Île aux Tout-Petits</h3>
+          <p>Un espace doux et sécurisé, parcours d'éveil et jeux sensoriels pour les plus petits moussaillons.</p>
+          <span class="atag">0 à 3 ans</span>
+        </div>
+        <div class="act">
+          <div class="aico" style="background:var(--gold-soft)">🤸</div>
+          <h3>Le Pont des Sauteurs</h3>
+          <p>La zone trampolines pour rebondir, sauter et dépenser toute l'énergie de l'abordage.</p>
+          <span class="atag">Dès 4 ans</span>
+        </div>
+        <div class="act">
+          <div class="aico" style="background:#e6e0f3">🧱</div>
+          <h3>La Cabane des Bâtisseurs</h3>
+          <p>Briques géantes et Lego grandeur nature pour construire son propre navire de pirate.</p>
+          <span class="atag">Tous âges</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section id="tarifs">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Billetterie en ligne</span>
+        <h2>Des tarifs clairs, une place réservée</h2>
+        <p>Réservez votre créneau d'arrivée — l'entrée est garantie, même les mercredis et jours de pluie.</p>
+      </div>
+      <div class="tar-wrap">
+        <div class="tcard">
+          <div class="tdur">Entrée Moussaillon</div>
+          <div class="tprice">6€</div>
+          <div class="tsub">1-2 ans · journée</div>
+          <ul>
+            <li><span class="ck">✓</span> Accès Île aux Tout-Petits</li>
+            <li><span class="ck">✓</span> Journée complète</li>
+            <li><span class="ck">✓</span> 1 adulte accompagnateur offert</li>
+          </ul>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+        </div>
+        <div class="tcard pop">
+          <div class="pin">LE PLUS DEMANDÉ</div>
+          <div class="tdur">Entrée Petit Pirate</div>
+          <div class="tprice">11€</div>
+          <div class="tsub">3-12 ans · journée</div>
+          <ul>
+            <li><span class="ck">✓</span> Accès aux 4 univers</li>
+            <li><span class="ck">✓</span> Journée complète, entrées-sorties libres</li>
+            <li><span class="ck">✓</span> 1 adulte accompagnateur offert</li>
+          </ul>
+          <button class="btn btn-teal" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+        </div>
+        <div class="tcard">
+          <div class="tdur">Pass Équipage</div>
+          <div class="tprice">45€</div>
+          <div class="tsub">5 entrées Petit Pirate</div>
+          <ul>
+            <li><span class="ck">✓</span> 5 journées au lieu de 55€</li>
+            <li><span class="ck">✓</span> Valable 12 mois</li>
+            <li><span class="ck">✓</span> Pour les familles fidèles</li>
+          </ul>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+        </div>
+      </div>
+      <p class="tar-note">Accompagnateur adulte gratuit · café offert aux parents · tarifs illustratifs pour la maquette.</p>
+    </div>
+  </section>
+
+  <!-- ANNIVERSAIRES -->
+  <section id="anniv">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Anniversaires</span>
+        <h2>Le plus bel anniversaire de pirate</h2>
+        <p>Salle privative, goûter et animation : vous réservez en ligne, on prépare le trésor.</p>
+      </div>
+      <div class="anniv-grid">
+        <div class="anniv-art">
+          <h3>Réservez l'anniversaire en 3 minutes</h3>
+          <p>Fini les allers-retours téléphoniques. Choisissez la date, la formule et le nombre d'enfants — la confirmation arrive par e-mail aussitôt, l'acompte est réglé en ligne.</p>
+          <button class="btn" style="background:#fff;color:var(--coral-d)" onclick="openResa('anniv')">🎉 Réserver un anniversaire</button>
+        </div>
+        <div class="anniv-formules">
+          <div class="fcard" onclick="openResa('anniv')">
+            <div class="fe" style="background:var(--teal-soft)">🎈</div>
+            <div class="fb"><h4>Formule Moussaillon</h4><p>1h30 de jeux + salle + boisson</p></div>
+            <div class="fp">13€<small>/enfant</small></div>
+          </div>
+          <div class="fcard" onclick="openResa('anniv')">
+            <div class="fe" style="background:var(--gold-soft)">🏴‍☠️</div>
+            <div class="fb"><h4>Formule Flibustier</h4><p>2h de jeux + salle privative + goûter</p></div>
+            <div class="fp">19€<small>/enfant</small></div>
+          </div>
+          <div class="fcard" onclick="openResa('anniv')">
+            <div class="fe" style="background:var(--coral-soft)">👑</div>
+            <div class="fb"><h4>Formule Capitaine</h4><p>2h + goûter + animation pirate + cadeau</p></div>
+            <div class="fp">25€<small>/enfant</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Ils ont jeté l'ancre chez nous</span>
+        <h2>Les familles adorent</h2>
+      </div>
+      <div class="avis-top">
+        <div class="avis-score">4,8</div>
+        <div>
+          <div class="avis-stars">⭐⭐⭐⭐⭐</div>
+          <div class="avis-meta">Note moyenne sur Google &amp; Facebook</div>
+        </div>
+      </div>
+      <div class="avis-grid">
+        <div class="review">
+          <div class="rstars">★★★★★</div>
+          <p>« Anniversaire de ma fille au top, salle privative parfaite et l'équipe adorable. Réservation en ligne enfin possible, un vrai plus ! »</p>
+          <div class="rwho">
+            <div class="rav" style="background:var(--teal)">EM</div>
+            <div><b>Élodie M.</b><span>il y a 3 semaines</span></div>
+          </div>
+        </div>
+        <div class="review">
+          <div class="rstars">★★★★★</div>
+          <p>« Les enfants ne voulaient plus partir. Espace tout-petits rassurant et coin café pour les parents. On y retourne ! »</p>
+          <div class="rwho">
+            <div class="rav" style="background:var(--coral)">JD</div>
+            <div><b>Julien D.</b><span>il y a 1 mois</span></div>
+          </div>
+        </div>
+        <div class="review">
+          <div class="rstars">★★★★☆</div>
+          <p>« Super parc pour les jours de pluie. Beaucoup de monde le mercredi — réserver son créneau à l'avance, c'est malin. »</p>
+          <div class="rwho">
+            <div class="rav" style="background:var(--gold-d)">SP</div>
+            <div><b>Sandra P.</b><span>il y a 1 mois</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">Infos &amp; accès</span>
+        <h2>Venir à l'abordage</h2>
+      </div>
+      <div class="infos-grid">
+        <div class="infos-card">
+          <h3>🕒 Horaires d'ouverture</h3>
+          <div class="hours-row"><b>Lundi · Mardi</b><span class="closed">Fermé</span></div>
+          <div class="hours-row"><b>Mercredi</b><span class="open">10h – 19h</span></div>
+          <div class="hours-row"><b>Jeudi · Vendredi</b><span class="open">16h – 19h</span></div>
+          <div class="hours-row"><b>Samedi · Dimanche</b><span class="open">10h – 19h</span></div>
+          <div class="hours-row"><b>Vacances scolaires</b><span class="open">10h – 19h, 7j/7</span></div>
+        </div>
+        <div class="infos-card">
+          <h3>📍 Nous trouver</h3>
+          <div class="infos-line"><span class="ie">🏠</span><div>Zone commerciale Carrefour<br>rue Honoré de Balzac, 41200 Romorantin-Lanthenay</div></div>
+          <div class="infos-line"><span class="ie">📞</span><div>02 54 83 63 55</div></div>
+          <div class="infos-line"><span class="ie">🛍️</span><div>Boutique snacks &amp; goûters intégrée au site</div></div>
+          <div class="map-ph"><span style="font-size:26px">🗺️</span> Carte Google Maps interactive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="ctaband">
+        <h2>Prêts à hisser les voiles ?</h2>
+        <p>Réservez votre venue en quelques clics — et gardez le téléphone pour les copains.</p>
+        <button class="btn btn-lg" style="background:#fff;color:var(--teal)" onclick="openResa()">⚓ Réserver maintenant</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft-grid">
+        <div>
+          <div class="logo">
+            <span class="lm">🏴‍☠️</span>
+            <span class="lt">La Récré des Pirates<small>PARC INDOOR 0-12 ANS</small></span>
+          </div>
+          <p class="ft-about">Le parc de jeux indoor des 0-12 ans à Romorantin-Lanthenay. 700 m² d'aventure couverte, par tous les temps.</p>
+        </div>
+        <div class="ft-col">
+          <h4>Le parc</h4>
+          <a onclick="scrollToSec('activites')">Les univers</a>
+          <a onclick="scrollToSec('tarifs')">Tarifs</a>
+          <a onclick="scrollToSec('anniv')">Anniversaires</a>
+          <a onclick="scrollToSec('avis')">Avis</a>
+        </div>
+        <div class="ft-col">
+          <h4>Réserver</h4>
+          <a onclick="openResa('visite')">Une visite</a>
+          <a onclick="openResa('anniv')">Un anniversaire</a>
+          <a onclick="scrollToSec('infos')">Groupes &amp; écoles</a>
+        </div>
+        <div class="ft-col">
+          <h4>Contact</h4>
+          <p>Zone Carrefour, rue Honoré de Balzac<br>41200 Romorantin-Lanthenay</p>
+          <p>02 54 83 63 55</p>
+          <p>Facebook · Instagram</p>
+        </div>
+      </div>
+      <div class="ft-bottom">
+        <span>© 2026 La Récré des Pirates. Tous droits réservés.</span>
+        <span>Maquette de démonstration · Vong Studio · données illustratives</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= BACK OFFICE ========================= -->
+<!-- ============================================================ -->
+<div class="screen bo" id="screen-bo">
+
+  <div class="bo-top">
+    <div class="wrap bo-top-in">
+      <div class="bo-brand">
+        <span class="bm">🏴‍☠️</span>
+        <div><b>La Récré des Pirates</b><span>ESPACE GÉRANT</span></div>
+      </div>
+      <div class="bo-user">
+        <span style="text-align:right">Le Capitaine<br><span style="color:var(--muted2);font-size:11px">Gérant du parc</span></span>
+        <span class="ua">🏴‍☠️</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bo-nav">
+    <button class="active" onclick="setBV('dash',this)">📊 Tableau de bord</button>
+    <button onclick="setBV('resa',this)">📅 Réservations</button>
+    <button onclick="setBV('planning',this)">🎟️ Planning créneaux</button>
+    <button onclick="setBV('clients',this)">👥 Clients</button>
+    <button onclick="setBV('anniv',this)">🎉 Anniversaires</button>
+  </div>
+
+  <div class="bo-body">
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="bv active" id="bv-dash">
+      <div class="bv-head">
+        <div><h2>Ohé Capitaine 👋</h2><p>Voici l'activité du parc — samedi 6 juin 2026.</p></div>
+        <button class="btn btn-teal btn-sm" onclick="setBV('planning',document.querySelectorAll('.bo-nav button')[2])">Voir le planning du jour</button>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi">
+          <div class="ki" style="background:var(--teal-soft)">📅</div>
+          <div class="kv">46</div>
+          <div class="kl">Réservations aujourd'hui</div>
+          <div class="kt up">▲ 15 % vs samedi dernier</div>
+        </div>
+        <div class="kpi">
+          <div class="ki" style="background:var(--coral-soft)">🧒</div>
+          <div class="kv">163</div>
+          <div class="kl">Enfants attendus</div>
+          <div class="kt up">▲ 11 % vs samedi dernier</div>
+        </div>
+        <div class="kpi">
+          <div class="ki" style="background:var(--gold-soft)">💳</div>
+          <div class="kv">2 740 €</div>
+          <div class="kl">Encaissé en ligne ce mois</div>
+          <div class="kt up">▲ nouveau canal</div>
+        </div>
+        <div class="kpi">
+          <div class="ki" style="background:#e6e0f3">📈</div>
+          <div class="kv">54 %</div>
+          <div class="kl">Taux de remplissage du jour</div>
+          <div class="kt dn">▼ créneau 13h30 à remplir</div>
+        </div>
+      </div>
+
+      <div class="notice">🛍️ La boutique snacks &amp; goûters est désormais intégrée au site — fini le sous-domaine séparé. Une seule charte, une seule navigation.</div>
+
+      <div class="bo-grid">
+        <div class="panel">
+          <div class="panel-hd">
+            <h3>Prochaines arrivées</h3>
+            <span class="pmore" onclick="setBV('resa',document.querySelectorAll('.bo-nav button')[1])">Tout voir →</span>
+          </div>
+          <div class="panel-bd">
+            <table class="rtable">
+              <thead><tr><th>Famille</th><th>Créneau</th><th>Enfants</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="cust"><span class="ca" style="background:var(--teal)">EM</span><div><b>Famille Moreau</b><span>Entrée Petit Pirate</span></div></div></td>
+                  <td>10:00</td><td>3</td><td><span class="pill green">✓ Payé</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cust"><span class="ca" style="background:var(--coral)">LB</span><div><b>Anniversaire Lou B.</b><span>Formule Flibustier</span></div></div></td>
+                  <td>11:30</td><td>10</td><td><span class="pill teal">Acompte versé</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cust"><span class="ca" style="background:var(--gold-d)">FD</span><div><b>Famille Dubreuil</b><span>Entrée Moussaillon</span></div></div></td>
+                  <td>11:30</td><td>2</td><td><span class="pill green">✓ Payé</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cust"><span class="ca" style="background:#7d6cb0">AP</span><div><b>Assistante maternelle</b><span>Groupe · 5 enfants</span></div></div></td>
+                  <td>15:00</td><td>5</td><td><span class="pill amber">À confirmer</span></td>
+                </tr>
+                <tr>
+                  <td><div class="cust"><span class="ca" style="background:var(--teal-d)">CM</span><div><b>Anniversaire Camille M.</b><span>Formule Capitaine</span></div></div></td>
+                  <td>16:30</td><td>12</td><td><span class="pill teal">Acompte versé</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><h3>Remplissage par créneau</h3></div>
+          <div class="occ">
+            <div class="occ-row"><div class="ot"><b>10:00</b><span>38/60</span></div><div class="occ-bar"><i style="width:63%;background:var(--mint)"></i></div></div>
+            <div class="occ-row"><div class="ot"><b>11:30</b><span>51/60</span></div><div class="occ-bar"><i style="width:85%;background:var(--coral)"></i></div></div>
+            <div class="occ-row"><div class="ot"><b>13:30</b><span>17/60</span></div><div class="occ-bar"><i style="width:28%;background:var(--coral)"></i></div></div>
+            <div class="occ-row"><div class="ot"><b>15:00</b><span>44/60</span></div><div class="occ-bar"><i style="width:73%;background:var(--mint)"></i></div></div>
+            <div class="occ-row"><div class="ot"><b>16:30</b><span>33/60</span></div><div class="occ-bar"><i style="width:55%;background:var(--gold)"></i></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RESERVATIONS ===== -->
+    <div class="bv" id="bv-resa">
+      <div class="bv-head">
+        <div><h2>Réservations</h2><p>Toutes les réservations en ligne, classées par date.</p></div>
+        <button class="btn btn-teal btn-sm">+ Ajouter une réservation</button>
+      </div>
+      <div class="toolbar">
+        <div class="seg">
+          <button class="active">Aujourd'hui</button>
+          <button>Cette semaine</button>
+          <button>Toutes</button>
+        </div>
+        <input class="search" placeholder="🔍 Rechercher une famille, un e-mail…">
+      </div>
+      <div class="panel">
+        <div class="panel-bd">
+          <table class="rtable">
+            <thead><tr><th>Famille</th><th>Date</th><th>Créneau</th><th>Prestation</th><th>Enfants</th><th>Montant</th><th>Statut</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--teal)">EM</span><div><b>Famille Moreau</b><span>06 31 ** ** 41</span></div></div></td><td>06/06</td><td>10:00</td><td>Entrée Petit Pirate</td><td>3</td><td><b>33 €</b></td><td><span class="pill green">✓ Payé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--coral)">LB</span><div><b>Lou Bertrand</b><span>07 62 ** ** 09</span></div></div></td><td>06/06</td><td>11:30</td><td>Anniversaire · Flibustier</td><td>10</td><td><b>190 €</b></td><td><span class="pill teal">Acompte 30 %</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--gold-d)">FD</span><div><b>Famille Dubreuil</b><span>06 14 ** ** 77</span></div></div></td><td>06/06</td><td>11:30</td><td>Entrée Moussaillon</td><td>2</td><td><b>12 €</b></td><td><span class="pill green">✓ Payé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:#7d6cb0">AP</span><div><b>Assist. mat. Les Lutins</b><span>contact@lutins41.fr</span></div></div></td><td>06/06</td><td>15:00</td><td>Groupe</td><td>5</td><td><b>55 €</b></td><td><span class="pill amber">À confirmer</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--teal-d)">CM</span><div><b>Camille Mahé</b><span>06 88 ** ** 23</span></div></div></td><td>06/06</td><td>16:30</td><td>Anniversaire · Capitaine</td><td>12</td><td><b>300 €</b></td><td><span class="pill teal">Acompte 30 %</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--coral-d)">RG</span><div><b>Famille Garnier</b><span>06 09 ** ** 51</span></div></div></td><td>07/06</td><td>10:00</td><td>Pass Équipage</td><td>2</td><td><b>45 €</b></td><td><span class="pill green">✓ Payé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--teal)">NL</span><div><b>Noé Lefèvre</b><span>06 73 ** ** 18</span></div></div></td><td>07/06</td><td>13:30</td><td>Anniversaire · Moussaillon</td><td>8</td><td><b>104 €</b></td><td><span class="pill gray">En attente paiement</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--gold-d)">SP</span><div><b>Famille Pichon</b><span>06 40 ** ** 62</span></div></div></td><td>08/06</td><td>15:00</td><td>Entrée Petit Pirate</td><td>4</td><td><b>44 €</b></td><td><span class="pill coral">Annulée</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PLANNING ===== -->
+    <div class="bv" id="bv-planning">
+      <div class="bv-head">
+        <div><h2>Planning des créneaux</h2><p>Jauge en temps réel — samedi 6 juin 2026. Capacité 60 enfants / créneau.</p></div>
+        <div class="seg">
+          <button class="active">Samedi 6</button>
+          <button>Dimanche 7</button>
+          <button>Mercredi 10</button>
+        </div>
+      </div>
+      <div class="notice">⚙️ Fermez un créneau, ajustez la capacité ou bloquez une salle pour un anniversaire directement depuis cet écran.</div>
+      <div class="planning">
+        <div class="pslot">
+          <div class="ph">10:00</div><div class="pj">38 / 60 enfants</div>
+          <div class="pbar"><i style="width:63%;background:var(--mint)"></i></div>
+          <div class="pst" style="color:var(--mint)">Ouvert · 22 places</div>
+        </div>
+        <div class="pslot">
+          <div class="ph">11:30</div><div class="pj">51 / 60 enfants</div>
+          <div class="pbar"><i style="width:85%;background:var(--coral)"></i></div>
+          <div class="pst" style="color:var(--coral)">Presque complet · 9 places</div>
+        </div>
+        <div class="pslot">
+          <div class="ph">13:30</div><div class="pj">17 / 60 enfants</div>
+          <div class="pbar"><i style="width:28%;background:var(--coral)"></i></div>
+          <div class="pst" style="color:var(--coral)">À remplir · 43 places</div>
+        </div>
+        <div class="pslot">
+          <div class="ph">15:00</div><div class="pj">44 / 60 enfants</div>
+          <div class="pbar"><i style="width:73%;background:var(--mint)"></i></div>
+          <div class="pst" style="color:var(--mint)">Ouvert · 16 places</div>
+        </div>
+        <div class="pslot">
+          <div class="ph">16:30</div><div class="pj">33 / 60 enfants</div>
+          <div class="pbar"><i style="width:55%;background:var(--gold)"></i></div>
+          <div class="pst" style="color:#9a6f06">Ouvert · 27 places</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CLIENTS ===== -->
+    <div class="bv" id="bv-clients">
+      <div class="bv-head">
+        <div><h2>Fichier clients</h2><p>La base famille constituée automatiquement à chaque réservation en ligne.</p></div>
+        <button class="btn btn-teal btn-sm">⤓ Exporter (CSV)</button>
+      </div>
+      <div class="toolbar">
+        <div class="seg">
+          <button class="active">Toutes</button>
+          <button>Habituées</button>
+          <button>Anniversaires</button>
+        </div>
+        <input class="search" placeholder="🔍 Rechercher une famille…">
+      </div>
+      <div class="panel">
+        <div class="panel-bd">
+          <table class="rtable">
+            <thead><tr><th>Famille</th><th>E-mail</th><th>Visites</th><th>Dernière visite</th><th>Total dépensé</th><th>Segment</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--teal)">EM</span><b>Famille Moreau</b></div></td><td>moreau.famille@email.fr</td><td>8</td><td>06/06/2026</td><td><b>264 €</b></td><td><span class="pill green">Habituée</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--coral)">LB</span><b>Lou Bertrand</b></div></td><td>l.bertrand@email.fr</td><td>2</td><td>06/06/2026</td><td><b>241 €</b></td><td><span class="pill teal">Anniversaires</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--gold-d)">FD</span><b>Famille Dubreuil</b></div></td><td>dubreuil@email.fr</td><td>3</td><td>06/06/2026</td><td><b>78 €</b></td><td><span class="pill gray">Nouvelle</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--teal-d)">CM</span><b>Camille Mahé</b></div></td><td>camille.mahe@email.fr</td><td>5</td><td>06/06/2026</td><td><b>412 €</b></td><td><span class="pill teal">Anniversaires</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--coral-d)">RG</span><b>Famille Garnier</b></div></td><td>garnier.r@email.fr</td><td>11</td><td>07/06/2026</td><td><b>337 €</b></td><td><span class="pill green">Habituée</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--teal)">NL</span><b>Noé Lefèvre</b></div></td><td>noe.lefevre@email.fr</td><td>1</td><td>07/06/2026</td><td><b>104 €</b></td><td><span class="pill gray">Nouvelle</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--gold-d)">SP</span><b>Famille Pichon</b></div></td><td>pichon.famille@email.fr</td><td>4</td><td>21/05/2026</td><td><b>176 €</b></td><td><span class="pill green">Habituée</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ANNIVERSAIRES ===== -->
+    <div class="bv" id="bv-anniv">
+      <div class="bv-head">
+        <div><h2>Anniversaires</h2><p>Les anniversaires à préparer — formule, salle privative et goûter.</p></div>
+        <button class="btn btn-teal btn-sm">+ Bloquer une salle</button>
+      </div>
+      <div class="bo-grid">
+        <div class="panel">
+          <div class="panel-hd"><h3>À venir cette semaine</h3></div>
+          <div class="panel-bd">
+            <table class="rtable">
+              <thead><tr><th>Héros du jour</th><th>Date</th><th>Formule</th><th>Enfants</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--gold-d)">🏴‍☠️</span><div><b>Lou, 7 ans</b><span>Réservé par L. Bertrand</span></div></div></td><td>06/06 · 11:30</td><td>Flibustier</td><td>10</td><td><span class="pill teal">Acompte versé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--coral)">👑</span><div><b>Camille, 9 ans</b><span>Réservé par C. Mahé</span></div></div></td><td>06/06 · 16:30</td><td>Capitaine</td><td>12</td><td><span class="pill teal">Acompte versé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--teal)">🎈</span><div><b>Noé, 6 ans</b><span>Réservé par N. Lefèvre</span></div></div></td><td>07/06 · 13:30</td><td>Moussaillon</td><td>8</td><td><span class="pill gray">Acompte à régler</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><h3>Ce mois-ci</h3></div>
+          <div class="occ">
+            <div class="kpi" style="border:none;box-shadow:none;padding:8px 0">
+              <div class="kv" style="color:var(--coral)">17</div>
+              <div class="kl">anniversaires réservés en juin</div>
+            </div>
+            <div style="border-top:1px solid var(--line);margin:10px 0"></div>
+            <div class="occ-row"><div class="ot"><b>Formule Flibustier</b><span>8</span></div><div class="occ-bar"><i style="width:47%;background:var(--gold)"></i></div></div>
+            <div class="occ-row"><div class="ot"><b>Formule Capitaine</b><span>6</span></div><div class="occ-bar"><i style="width:35%;background:var(--coral)"></i></div></div>
+            <div class="occ-row"><div class="ot"><b>Formule Moussaillon</b><span>3</span></div><div class="occ-bar"><i style="width:18%;background:var(--teal)"></i></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== RESA OVERLAY ===== -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-hd">
+      <h3 id="resa-title">Réserver une visite</h3>
+      <button class="rx" onclick="closeResa()">✕</button>
+    </div>
+    <div class="steps-bar" id="steps-bar"></div>
+    <div class="resa-bd" id="resa-bd"></div>
+  </div>
+</div>
+
+<script>
+/* ============ MODE SWITCH ============ */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function setBV(v,btn){
+  document.querySelectorAll('.bv').forEach(function(e){e.classList.remove('active')});
+  document.getElementById('bv-'+v).classList.add('active');
+  document.querySelectorAll('.bo-nav button').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){
+  if(document.getElementById('screen-site').classList.contains('active')===false)setMode('site');
+  var el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+
+/* ============ RESERVATION TUNNEL ============ */
+var FORMULES={
+  visite:[
+    {id:'v1',e:'🧸',n:'Entrée Moussaillon',d:'1-2 ans · journée',p:6},
+    {id:'v2',e:'🏴‍☠️',n:'Entrée Petit Pirate',d:'3-12 ans · journée',p:11},
+    {id:'v3',e:'🎟️',n:'Pass Équipage',d:'5 entrées Petit Pirate',p:45}
+  ],
+  anniv:[
+    {id:'a1',e:'🎈',n:'Formule Moussaillon',d:'1h30 jeux + salle + boisson',p:13},
+    {id:'a2',e:'🏴‍☠️',n:'Formule Flibustier',d:'2h jeux + salle privative + goûter',p:19},
+    {id:'a3',e:'👑',n:'Formule Capitaine',d:'2h + goûter + animation + cadeau',p:25}
+  ]
+};
+var SLOTS=[
+  {h:'10:00',left:22},{h:'11:30',left:9},{h:'13:30',left:43},
+  {h:'15:00',left:16},{h:'16:30',left:27}
+];
+var R={};
+function resetR(type){
+  R={type:type,formule:null,date:null,slot:null,nb:type==='anniv'?8:2,
+     name:'',email:'',phone:'',stage:'formule'};
+}
+function openResa(type){
+  resetR(type||'visite');
+  document.getElementById('ov').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderResa();
+}
+function closeResa(){
+  document.getElementById('ov').classList.remove('show');
+  document.body.style.overflow='';
+}
+var STAGES=['formule','date','who','contact','done'];
+function go(stage){R.stage=stage;renderResa();}
+
+function days(){
+  var out=[],names=['DIM','LUN','MAR','MER','JEU','VEN','SAM'];
+  var mon=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  var d=new Date();
+  for(var i=1;i<=12;i++){
+    var x=new Date(d.getTime()+i*86400000);
+    out.push({key:i,dn:x.getDate(),dd:names[x.getDay()],dm:mon[x.getMonth()],off:(x.getDay()===1||x.getDay()===2)});
+  }
+  return out;
+}
+function money(n){return n.toLocaleString('fr-FR')+' €';}
+
+function renderResa(){
+  var title=document.getElementById('resa-title');
+  title.textContent=R.type==='anniv'?'Réserver un anniversaire':'Réserver une visite';
+  var idx=STAGES.indexOf(R.stage);
+  var bar='';
+  for(var i=0;i<4;i++)bar+='<div class="sd'+(i<=idx?' on':'')+'"></div>';
+  document.getElementById('steps-bar').innerHTML=R.stage==='done'?'':bar;
+  var bd=document.getElementById('resa-bd'),h='';
+
+  if(R.stage==='formule'){
+    var list=FORMULES[R.type];
+    h+='<div class="qst">'+(R.type==='anniv'?'Quelle formule anniversaire ?':'Quelle entrée ?')+'</div>';
+    h+='<div class="qsub">'+(R.type==='anniv'?'Prix par enfant — salle privative incluse.':'Prix par enfant — accompagnateur adulte offert.')+'</div>';
+    list.forEach(function(f){
+      h+='<div class="opt'+(R.formule===f.id?' sel':'')+'" onclick="R.formule=\''+f.id+'\';renderResa()">'
+        +'<div class="oe">'+f.e+'</div><div class="ob"><b>'+f.n+'</b><span>'+f.d+'</span></div>'
+        +'<div class="op">'+f.p+'€</div></div>';
+    });
+    h+='<div class="resa-ft"><button class="btn btn-teal" '+(R.formule?'':'disabled')+' onclick="go(\'date\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='date'){
+    h+='<div class="qst">Choisissez votre date</div><div class="qsub">Le parc est fermé les lundis et mardis.</div>';
+    h+='<div class="date-grid">';
+    days().forEach(function(d){
+      h+='<div class="dcell'+(d.off?' off':'')+(R.date===d.key?' sel':'')+'" '
+        +(d.off?'':'onclick="R.date='+d.key+';R.slot=null;renderResa()"')+'>'
+        +'<div class="dd">'+d.dd+'</div><div class="dn">'+d.dn+'</div><div class="dm">'+d.dm+'</div></div>';
+    });
+    h+='</div>';
+    if(R.date){
+      h+='<div class="qst" style="font-size:15px;margin-bottom:10px">Créneau d\'arrivée</div><div class="slot-grid">';
+      SLOTS.forEach(function(s){
+        var full=s.left<=0,cls=full?'no':(s.left<=10?'low':'ok');
+        var lbl=full?'Complet':s.left+' places';
+        h+='<div class="slot'+(full?' full':'')+(R.slot===s.h?' sel':'')+'" '
+          +(full?'':'onclick="R.slot=\''+s.h+'\';renderResa()"')+'>'
+          +'<div class="sh">'+s.h+'</div><div class="sl '+cls+'">'+lbl+'</div></div>';
+      });
+      h+='</div>';
+    }
+    h+='<div class="resa-ft"><button class="btn btn-ghost" onclick="go(\'formule\')">← Retour</button>'
+      +'<button class="btn btn-teal" '+(R.date&&R.slot?'':'disabled')+' onclick="go(\'who\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='who'){
+    var lbl=R.type==='anniv'?'Nombre d\'enfants':'Nombre d\'enfants';
+    h+='<div class="qst">Combien d\'enfants ?</div><div class="qsub">L\'accompagnateur adulte est offert. Ajustable jusqu\'à 48h avant.</div>';
+    h+='<div class="counter"><div class="cl"><b>'+lbl+'</b><span>Chaussettes en vente à l\'accueil</span></div>'
+      +'<div class="cc"><button onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>'
+      +'<b>'+R.nb+'</b><button onclick="R.nb=Math.min(40,R.nb+1);renderResa()">+</button></div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-ghost" onclick="go(\'date\')">← Retour</button>'
+      +'<button class="btn btn-teal" onclick="go(\'contact\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='contact'){
+    var f=FORMULES[R.type].filter(function(x){return x.id===R.formule})[0];
+    var total=f.p*R.nb,acompte=Math.round(total*0.3);
+    h+='<div class="qst">Vos coordonnées</div><div class="qsub">Pour recevoir la confirmation et le rappel.</div>';
+    h+='<div class="fld"><label>Nom et prénom</label><input id="f-name" value="'+R.name+'" placeholder="Ex. Famille Moreau" oninput="R.name=this.value"></div>';
+    h+='<div class="fld"><label>E-mail</label><input id="f-email" value="'+R.email+'" placeholder="vous@email.fr" oninput="R.email=this.value"></div>';
+    h+='<div class="fld"><label>Téléphone</label><input id="f-phone" value="'+R.phone+'" placeholder="06 ** ** ** **" oninput="R.phone=this.value"></div>';
+    h+='<div class="recap">'
+      +'<div class="rr"><span>'+f.n+'</span><span>'+f.p+'€ × '+R.nb+'</span></div>'
+      +'<div class="rr"><span>Total</span><span>'+money(total)+'</span></div>'
+      +'<div class="rr tot"><span>Acompte à régler (30 %)</span><span class="teal">'+money(acompte)+'</span></div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-ghost" onclick="go(\'who\')">← Retour</button>'
+      +'<button class="btn btn-coral" onclick="submitResa()">💳 Payer l\'acompte</button></div>';
+  }
+
+  else if(R.stage==='done'){
+    var f2=FORMULES[R.type].filter(function(x){return x.id===R.formule})[0];
+    var dd=days().filter(function(x){return x.key===R.date})[0];
+    h+='<div class="done"><div class="dok">✓</div>'
+      +'<h3>Réservation confirmée !</h3>'
+      +'<p>'+f2.n+' · '+(dd?dd.dd+' '+dd.dn+' '+dd.dm:'')+' à '+R.slot+'</p>'
+      +'<p>'+R.nb+' enfants — un e-mail de confirmation part vers '+(R.email||'votre adresse')+'.</p>'
+      +'<div class="demo-note">🔎 Maquette de démonstration — aucun paiement réel n\'a été effectué. Dans le vrai site, cette réservation apparaît instantanément dans le back office (onglet Réservations).</div>'
+      +'<div class="resa-ft"><button class="btn btn-teal" style="flex:1;justify-content:center" onclick="closeResa()">Fermer</button></div></div>';
+  }
+
+  bd.innerHTML=h;
+}
+function submitResa(){
+  if(!R.name||!R.email){alert('Merci de renseigner votre nom et votre e-mail.');return;}
+  go('done');
+}
+</script>
+
+</body>
+</html>
