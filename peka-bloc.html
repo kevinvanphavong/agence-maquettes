@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peka Bloc — Maquette refonte site + back office · Vong Studio</title>
+<meta name="description" content="Maquette de démonstration : refonte du site et outil de captation de leads événementiels pour Peka Bloc, salle d'escalade de bloc à Blois.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#ebe7dc; --bg2:#e2ddce; --surface:#ffffff; --surface2:#f5f2e8;
+  --ink:#221f18; --ink2:#3a362b; --muted:#736d5d; --muted2:#a39c89;
+  --line:#d8d2c0; --line2:#c7c0aa;
+  --wood:#bd874a; --wood-d:#9a6a35;
+  --g-jaune:#f2bf16; --g-vert:#3fa455; --g-bleu:#2f7fd6;
+  --g-rouge:#df4329; --g-violet:#8a4dc2; --g-noir:#1f1d18;
+  --chalk:#fbf9f3;
+  --shadow:0 16px 38px rgba(34,31,24,.13);
+  --shadow-sm:0 6px 16px rgba(34,31,24,.09);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Hanken Grotesk',sans-serif;background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;line-height:1.6}
+h1,h2,h3,h4,.disp{font-family:'Familjen Grotesk',sans-serif;font-weight:700;line-height:1.05;letter-spacing:-.5px}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+
+.btn{font-family:'Familjen Grotesk',sans-serif;font-weight:700;font-size:15px;cursor:pointer;
+  border:none;padding:13px 24px;border-radius:40px;transition:transform .14s,box-shadow .14s,filter .14s;
+  display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translateY(-2px)}
+.btn-ink{background:var(--ink);color:var(--chalk)}
+.btn-ink:hover{box-shadow:0 10px 22px rgba(34,31,24,.3)}
+.btn-wood{background:var(--wood);color:#fff}
+.btn-wood:hover{box-shadow:0 10px 22px rgba(189,135,74,.4)}
+.btn-line{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--chalk)}
+.btn-chalk{background:var(--chalk);color:var(--ink)}
+.btn-sm{padding:9px 17px;font-size:13.5px}
+.btn-lg{padding:16px 30px;font-size:16.5px}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn[disabled]:hover{transform:none}
+
+/* ===== MODE SWITCH ===== */
+.modebar{position:fixed;top:0;left:0;right:0;height:48px;background:var(--ink);z-index:300;
+  display:flex;align-items:center;justify-content:center;gap:6px}
+.modebar .lbl{color:#827b69;font-size:11px;font-weight:600;letter-spacing:1.5px;
+  margin-right:10px;text-transform:uppercase}
+.mode-btn{font-family:'Familjen Grotesk',sans-serif;font-size:13.5px;font-weight:700;
+  padding:7px 18px;border-radius:30px;border:none;cursor:pointer;
+  background:transparent;color:#a9a18c;transition:all .14s}
+.mode-btn.active{background:var(--wood);color:#fff}
+
+.screen{display:none;padding-top:48px}
+.screen.active{display:block}
+
+/* hold shape */
+.hold{border-radius:62% 38% 56% 44% / 55% 50% 50% 45%}
+
+/* ============ SITE PUBLIC ============ */
+.hdr{position:sticky;top:48px;z-index:100;background:rgba(235,231,220,.95);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:18px;height:74px}
+.logo{display:flex;align-items:center;gap:11px;cursor:pointer}
+.logo .lm{width:44px;height:44px;background:var(--ink);color:var(--g-jaune);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  border-radius:60% 40% 55% 45% / 52% 48% 52% 48%}
+.logo .lt{font-family:'Familjen Grotesk';font-weight:700;font-size:20px;line-height:1}
+.logo .lt small{display:block;font-family:'Hanken Grotesk';font-weight:600;font-size:9.5px;
+  letter-spacing:1.5px;margin-top:3px;color:var(--muted)}
+.nav{display:flex;gap:3px;margin-left:auto}
+.nav a{padding:9px 13px;border-radius:8px;font-weight:600;font-size:13.5px;cursor:pointer;
+  color:var(--muted);transition:color .14s,background .14s}
+.nav a:hover{color:var(--ink);background:var(--surface2)}
+.burger{display:none;font-size:24px;background:none;border:none;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:74px 0 78px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:12.5px;
+  letter-spacing:1px;text-transform:uppercase;color:var(--wood-d);margin-bottom:20px}
+.hero .eyebrow::before{content:"";width:26px;height:2px;background:var(--wood)}
+.hero h1{font-size:66px;font-weight:700;letter-spacing:-2px}
+.hero h1 em{font-style:normal;color:var(--wood)}
+.hero p.sub{font-size:17.5px;color:var(--ink2);margin:22px 0 30px;max-width:430px;font-weight:500}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-wall{position:relative;height:420px;background:var(--ink);border-radius:30px;overflow:hidden;
+  box-shadow:var(--shadow)}
+.hero-wall::before{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1.5px,transparent 1.6px);background-size:30px 30px}
+.hh{position:absolute;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px rgba(0,0,0,.3)}
+.hh.a{width:90px;height:90px;background:var(--g-jaune);top:46px;left:42px;transform:rotate(-12deg)}
+.hh.b{width:64px;height:64px;background:var(--g-rouge);top:150px;right:64px;transform:rotate(20deg)}
+.hh.c{width:104px;height:104px;background:var(--g-bleu);bottom:60px;left:90px;transform:rotate(8deg);font-size:42px}
+.hh.d{width:54px;height:54px;background:var(--g-vert);top:60px;right:130px;transform:rotate(-8deg)}
+.hh.e{width:74px;height:74px;background:var(--g-violet);bottom:96px;right:54px;transform:rotate(-16deg);font-size:30px}
+.hh .figure{font-size:46px;filter:grayscale(1) brightness(2);position:absolute;
+  left:50%;top:42%;transform:translate(-50%,-50%)}
+
+/* GRADE SCALE */
+.scale{background:var(--ink);color:var(--chalk)}
+.scale .wrap{padding:34px 26px;display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.scale .stitle{font-family:'Familjen Grotesk';font-weight:700;font-size:15px;flex-shrink:0}
+.scale .stitle span{display:block;font-family:'Hanken Grotesk';font-weight:500;font-size:12px;
+  color:#a9a18c;margin-top:3px}
+.grades{display:flex;gap:8px;flex:1;flex-wrap:wrap}
+.grade{display:flex;align-items:center;gap:8px;background:#2d291f;padding:8px 13px;border-radius:30px}
+.grade .dot{width:18px;height:18px;border-radius:54% 46% 58% 42% / 50% 55% 45% 50%}
+.grade b{font-family:'Familjen Grotesk';font-size:13px}
+.grade span{font-size:11px;color:#a9a18c}
+
+/* SECTIONS */
+section{padding:84px 0}
+.sec-head{margin-bottom:44px;display:flex;align-items:flex-start;gap:18px}
+.marker{flex-shrink:0;width:58px;height:58px;display:flex;align-items:center;justify-content:center;
+  font-family:'Familjen Grotesk';font-weight:700;font-size:15px;color:#fff;
+  border-radius:58% 42% 55% 45% / 52% 50% 50% 48%}
+.sec-head .sh-txt .k{font-weight:700;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.sec-head .sh-txt h2{font-size:42px;margin:5px 0 8px;letter-spacing:-1px}
+.sec-head .sh-txt p{color:var(--muted);font-size:15.5px;font-weight:500;max-width:560px}
+
+/* ESPACES */
+.espaces{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.espace{background:var(--surface);border-radius:22px;overflow:hidden;display:flex;
+  box-shadow:var(--shadow-sm);transition:transform .16s}
+.espace:hover{transform:translateY(-6px)}
+.espace .ev{width:130px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:50px}
+.espace.e1 .ev{background:var(--g-jaune)}
+.espace.e2 .ev{background:var(--g-bleu)}
+.espace.e3 .ev{background:var(--g-rouge)}
+.espace.e4 .ev{background:var(--g-vert)}
+.espace .eb{padding:24px 24px 24px 22px}
+.espace .eb h3{font-size:22px;margin-bottom:6px}
+.espace .eb p{font-size:13.5px;color:var(--muted);font-weight:500}
+.espace .eb .etag{display:inline-block;margin-top:12px;font-weight:700;font-size:11.5px;
+  background:var(--surface2);border:1px solid var(--line);padding:4px 11px;border-radius:20px}
+
+/* COURS */
+#cours{background:var(--bg2)}
+.cours-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cours{background:var(--surface);border-radius:20px;padding:26px;border-top:5px solid var(--wood)}
+.cours:nth-child(1){border-top-color:var(--g-jaune)}
+.cours:nth-child(2){border-top-color:var(--g-bleu)}
+.cours:nth-child(3){border-top-color:var(--g-violet)}
+.cours h3{font-size:20px;margin-bottom:6px}
+.cours .cm{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.cours p{font-size:13.5px;color:var(--ink2);font-weight:500}
+
+/* ABONNEMENTS */
+.abo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.abo{background:var(--surface);border-radius:22px;padding:30px 26px;text-align:center;
+  border:2px solid var(--line);transition:transform .15s}
+.abo:hover{transform:translateY(-5px)}
+.abo.feat{background:var(--ink);color:var(--chalk);border-color:var(--ink)}
+.abo .an{font-weight:700;font-size:16px;font-family:'Familjen Grotesk'}
+.abo .ap{font-family:'Familjen Grotesk';font-weight:700;font-size:46px;margin:6px 0 0;letter-spacing:-1.5px}
+.abo .ap small{font-size:15px;color:var(--muted)}
+.abo.feat .ap small{color:#a9a18c}
+.abo .as{font-size:12.5px;color:var(--muted);margin-bottom:18px;font-weight:500}
+.abo.feat .as{color:#a9a18c}
+.abo-note{text-align:center;margin-top:24px;font-size:13px;color:var(--muted);font-weight:500}
+
+/* EVENEMENTIEL */
+.evt{background:var(--ink);color:var(--chalk);border-radius:30px;overflow:hidden;
+  display:grid;grid-template-columns:1.05fr .95fr}
+.evt-txt{padding:54px 46px}
+.evt-txt .k{font-weight:700;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:var(--g-jaune)}
+.evt-txt h2{font-size:40px;margin:12px 0 14px;color:#fff}
+.evt-txt p{font-size:15px;color:#cfc9b8;font-weight:500;margin-bottom:24px;max-width:420px}
+.evt-types{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:26px}
+.evt-types .et{background:#2d291f;border-radius:13px;padding:13px 15px;cursor:pointer;
+  transition:background .14s;display:flex;align-items:center;gap:11px}
+.evt-types .et:hover{background:#393425}
+.evt-types .et .ete{font-size:22px}
+.evt-types .et b{font-family:'Familjen Grotesk';font-size:14px}
+.evt-types .et span{font-size:11px;color:#a9a18c;display:block}
+.evt-side{background:var(--wood);display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:46px 36px}
+.evt-side .big{font-size:80px;margin-bottom:10px}
+.evt-side h3{font-size:26px;color:#fff;margin-bottom:8px}
+.evt-side p{font-size:13.5px;color:#fff6ea;font-weight:500;margin-bottom:20px}
+
+/* AVIS */
+.avis-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.review{background:var(--surface);border-radius:18px;padding:24px;box-shadow:var(--shadow-sm)}
+.review .rs{font-size:14px;letter-spacing:1px;margin-bottom:10px}
+.review p{font-size:14px;font-weight:500;margin-bottom:14px}
+.review .rw{display:flex;align-items:center;gap:10px}
+.review .rav{width:36px;height:36px;display:flex;align-items:center;justify-content:center;
+  font-family:'Familjen Grotesk';font-weight:700;color:#fff;font-size:14px;
+  border-radius:56% 44% 52% 48% / 50% 54% 46% 50%}
+.review .rw b{font-size:13px;display:block}
+.review .rw span{font-size:11px;color:var(--muted)}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ibox{background:var(--surface);border-radius:22px;padding:30px;box-shadow:var(--shadow-sm)}
+.ibox h3{font-size:21px;margin-bottom:16px}
+.hr-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line);
+  font-size:13.5px;font-weight:500}
+.hr-row:last-child{border:none}
+.hr-row .op{color:var(--g-vert);font-weight:700}
+.il{display:flex;gap:12px;margin-bottom:14px;font-size:14px;font-weight:500}
+.il .ie{font-size:18px}
+.map-ph{margin-top:14px;height:150px;border-radius:14px;background:var(--surface2);
+  border:1px solid var(--line);display:flex;flex-direction:column;gap:6px;
+  align-items:center;justify-content:center;color:var(--muted);font-size:12.5px;font-weight:600}
+
+/* CTA */
+.cta{text-align:center;padding:84px 0}
+.cta h2{font-size:46px;letter-spacing:-1.5px;margin-bottom:12px}
+.cta p{font-size:16px;color:var(--muted);font-weight:500;margin-bottom:26px}
+
+/* FOOTER */
+.ft{background:var(--ink);color:#b3ad9b;padding:52px 0 24px}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px;margin-bottom:34px}
+.ft .logo .lt{color:#fff}
+.ft-about{font-size:13.5px;margin-top:14px;max-width:280px;font-weight:500}
+.ft-col h4{font-family:'Familjen Grotesk';color:#fff;font-size:14px;margin-bottom:13px}
+.ft-col a,.ft-col p{display:block;font-size:13.5px;margin-bottom:9px;color:#b3ad9b;cursor:pointer;font-weight:500}
+.ft-col a:hover{color:#fff}
+.ft-bot{border-top:1px solid #3a362b;padding-top:18px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:9px;font-size:12px;color:#827b69;font-weight:500}
+
+/* ===== DEVIS OVERLAY ===== */
+.ov{position:fixed;inset:0;background:rgba(34,31,24,.6);backdrop-filter:blur(4px);
+  z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
+.ov.show{display:flex}
+.resa{background:var(--bg);border-radius:24px;width:100%;max-width:560px;max-height:90vh;
+  overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.resa-hd{padding:21px 26px;border-bottom:1px solid var(--line);display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;background:var(--bg);z-index:2}
+.resa-hd h3{font-size:19px}
+.resa-hd .rx{width:36px;height:36px;border-radius:50%;border:1px solid var(--line2);
+  background:var(--surface);cursor:pointer;font-size:15px;color:var(--muted)}
+.steps-bar{display:flex;gap:6px;padding:16px 26px 0}
+.steps-bar .sd{flex:1;height:6px;border-radius:6px;background:var(--line)}
+.steps-bar .sd.on{background:var(--wood)}
+.resa-bd{padding:21px 26px 26px}
+.resa-bd .qst{font-family:'Familjen Grotesk';font-weight:700;font-size:19px;margin-bottom:4px}
+.resa-bd .qsub{font-size:12.5px;color:var(--muted);margin-bottom:18px;font-weight:500}
+.opt{border:2px solid var(--line);border-radius:15px;padding:15px 17px;cursor:pointer;
+  display:flex;align-items:center;gap:13px;margin-bottom:10px;background:var(--surface);
+  transition:border-color .14s}
+.opt:hover{border-color:var(--line2)}
+.opt.sel{border-color:var(--wood);background:#fbf3e7}
+.opt .oe{width:46px;height:46px;background:var(--surface2);display:flex;align-items:center;
+  justify-content:center;font-size:23px;flex-shrink:0;border-radius:56% 44% 52% 48% / 50% 54% 46% 50%}
+.opt .ob{flex:1}
+.opt .ob b{font-family:'Familjen Grotesk';font-size:15.5px;display:block}
+.opt .ob span{font-size:12px;color:var(--muted)}
+.date-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dcell{border:2px solid var(--line);border-radius:12px;padding:10px 4px;text-align:center;
+  cursor:pointer;background:var(--surface);transition:border-color .14s}
+.dcell:hover{border-color:var(--line2)}
+.dcell.sel{border-color:var(--wood);background:#fbf3e7}
+.dcell .dd{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase}
+.dcell .dn{font-family:'Familjen Grotesk';font-weight:700;font-size:19px}
+.dcell .dm{font-size:9.5px;color:var(--muted);font-weight:600}
+.counter{display:flex;align-items:center;justify-content:space-between;border:2px solid var(--line);
+  border-radius:14px;padding:12px 16px;margin-bottom:12px;background:var(--surface)}
+.counter .cl b{font-family:'Familjen Grotesk';font-size:15px;display:block}
+.counter .cl span{font-size:11.5px;color:var(--muted)}
+.counter .cc{display:flex;align-items:center;gap:13px}
+.counter .cc button{width:34px;height:34px;border-radius:50%;border:2px solid var(--line2);
+  background:var(--surface);font-size:18px;cursor:pointer;color:var(--wood-d);font-weight:700}
+.counter .cc b{font-family:'Familjen Grotesk';font-size:19px;min-width:26px;text-align:center}
+.fld{margin-bottom:13px}
+.fld label{font-size:12px;font-weight:700;display:block;margin-bottom:6px}
+.fld input,.fld textarea{width:100%;padding:11px 14px;border:2px solid var(--line);border-radius:11px;
+  font-family:'Hanken Grotesk';font-size:14px;outline:none;background:var(--surface);resize:none}
+.fld input:focus,.fld textarea:focus{border-color:var(--wood)}
+.recap{background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.recap .rr{display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;font-weight:500}
+.recap .rr b{font-weight:700}
+.recap-note{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:8px;
+  border-top:1px solid var(--line);padding-top:9px}
+.resa-ft{display:flex;gap:10px;margin-top:16px}
+.resa-ft .btn{flex:1;justify-content:center}
+.done{text-align:center;padding:12px 0}
+.done .dok{width:80px;height:80px;background:var(--g-vert);color:#fff;font-size:38px;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+  border-radius:58% 42% 55% 45% / 52% 50% 50% 48%}
+.done h3{font-size:23px;margin-bottom:8px}
+.done p{font-size:13.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.demo-note{background:#fbf3e7;border:1px solid #e8d4b4;border-radius:10px;padding:9px 12px;
+  font-size:11.5px;color:#8a6a30;margin-top:16px;font-weight:600}
+
+/* ============ BACK OFFICE ============ */
+.bo{background:var(--bg);min-height:100vh}
+.bo-top{background:var(--ink);color:#fff;position:sticky;top:48px;z-index:90}
+.bo-top-in{display:flex;align-items:center;gap:16px;height:62px}
+.bo-brand{display:flex;align-items:center;gap:10px}
+.bo-brand .bm{width:36px;height:36px;background:var(--wood);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-size:18px;
+  border-radius:60% 40% 55% 45% / 52% 48% 52% 48%}
+.bo-brand b{font-family:'Familjen Grotesk';font-weight:700;font-size:16px}
+.bo-brand span{font-size:9.5px;color:#a9a18c;display:block;letter-spacing:1px}
+.bo-user{margin-left:auto;display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600}
+.bo-user .ua{width:34px;height:34px;background:var(--g-bleu);color:#fff;display:flex;
+  align-items:center;justify-content:center;font-family:'Familjen Grotesk';font-weight:700;font-size:13px;
+  border-radius:56% 44% 52% 48% / 50% 54% 46% 50%}
+.bo-tabs{background:var(--surface);border-bottom:1px solid var(--line);padding:0 26px;
+  display:flex;gap:4px;position:sticky;top:110px;z-index:80;overflow-x:auto}
+.bo-tabs button{font-family:'Familjen Grotesk';font-weight:600;font-size:14px;background:none;
+  border:none;border-bottom:3px solid transparent;padding:15px 15px;cursor:pointer;
+  color:var(--muted);white-space:nowrap}
+.bo-tabs button.active{color:var(--wood-d);border-bottom-color:var(--wood)}
+.bo-body{padding:30px 26px 60px;max-width:1140px;margin:0 auto}
+.bv{display:none}
+.bv.active{display:block}
+.bv-head{margin-bottom:22px}
+.bv-head h2{font-size:28px;letter-spacing:-1px}
+.bv-head p{font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi{background:var(--surface);border-radius:18px;padding:20px;box-shadow:var(--shadow-sm)}
+.kpi .kd{width:30px;height:30px;margin-bottom:12px;
+  border-radius:58% 42% 55% 45% / 52% 50% 50% 48%}
+.kpi .kv{font-family:'Familjen Grotesk';font-weight:700;font-size:30px;letter-spacing:-1px}
+.kpi .kl{font-size:12px;color:var(--muted);font-weight:600}
+
+.notice{background:#fbf3e7;border:1px solid #e8d4b4;border-radius:14px;padding:14px 18px;
+  font-size:13px;color:#8a6a30;margin-bottom:24px;font-weight:600;display:flex;gap:9px;align-items:center}
+
+/* KANBAN */
+.kanban{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.kcol{background:var(--bg2);border-radius:18px;padding:14px}
+.kcol-hd{display:flex;align-items:center;justify-content:space-between;padding:4px 8px 12px}
+.kcol-hd b{font-family:'Familjen Grotesk';font-size:14px}
+.kcol-hd .cnt{font-family:'Familjen Grotesk';font-weight:700;font-size:12px;
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:2px 9px}
+.kcard{background:var(--surface);border-radius:14px;padding:15px;margin-bottom:10px;
+  box-shadow:var(--shadow-sm);border-left:4px solid var(--wood)}
+.kcard:last-child{margin-bottom:0}
+.kcard.j{border-left-color:var(--g-jaune)}
+.kcard.b{border-left-color:var(--g-bleu)}
+.kcard.r{border-left-color:var(--g-rouge)}
+.kcard.v{border-left-color:var(--g-violet)}
+.kcard .ktype{font-family:'Familjen Grotesk';font-weight:700;font-size:14px;margin-bottom:3px}
+.kcard .kmeta{font-size:11.5px;color:var(--muted);font-weight:500}
+.kcard .krow{display:flex;align-items:center;justify-content:space-between;margin-top:11px;
+  padding-top:11px;border-top:1px solid var(--line)}
+.kcard .kwho{display:flex;align-items:center;gap:8px}
+.kcard .kav{width:26px;height:26px;background:var(--surface2);display:flex;align-items:center;
+  justify-content:center;font-family:'Familjen Grotesk';font-weight:700;font-size:10.5px;
+  border-radius:56% 44% 52% 48% / 50% 54% 46% 50%}
+.kcard .kwho span{font-size:11.5px;font-weight:600}
+.kcard .kval{font-family:'Familjen Grotesk';font-weight:700;font-size:13px;color:var(--wood-d)}
+
+.panel{background:var(--surface);border-radius:18px;box-shadow:var(--shadow-sm);overflow:hidden}
+.panel-hd{padding:17px 22px;border-bottom:1px solid var(--line)}
+.panel-hd h3{font-size:16px}
+.rtable{width:100%;border-collapse:collapse}
+.rtable th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;
+  color:var(--muted2);font-weight:700;padding:11px 22px;border-bottom:1px solid var(--line)}
+.rtable td{padding:13px 22px;border-bottom:1px solid var(--line);font-size:13px;font-weight:500}
+.rtable tr:last-child td{border-bottom:none}
+.rtable tr:hover td{background:var(--surface2)}
+.cust{display:flex;align-items:center;gap:10px}
+.cust .ca{width:33px;height:33px;color:#fff;display:flex;align-items:center;justify-content:center;
+  font-family:'Familjen Grotesk';font-weight:700;font-size:12.5px;flex-shrink:0;
+  border-radius:56% 44% 52% 48% / 50% 54% 46% 50%}
+.cust b{font-weight:700;font-size:13px}
+.cust span{font-size:11px;color:var(--muted);display:block}
+.pill{display:inline-flex;font-size:11px;font-weight:700;padding:4px 11px;border-radius:20px;
+  font-family:'Familjen Grotesk'}
+.pill.green{background:#dcf0e0;color:#2b7d40}
+.pill.amber{background:#fbf0d4;color:#9a7414}
+.pill.gray{background:var(--surface2);color:var(--muted)}
+
+.toolbar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{font-family:'Familjen Grotesk';font-weight:600;font-size:12.5px;background:none;border:none;
+  padding:8px 14px;cursor:pointer;color:var(--muted)}
+.seg button.active{background:var(--wood);color:#fff}
+.search{flex:1;min-width:160px;padding:9px 14px;border:1px solid var(--line);border-radius:10px;
+  font-size:13px;font-family:'Hanken Grotesk';outline:none;background:var(--surface);font-weight:500}
+
+@media(max-width:940px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero h1{font-size:46px}
+  .hero-wall{max-width:400px;margin:0 auto;width:100%}
+  .espaces,.cours-row,.abo-grid,.avis-grid,.infos-grid{grid-template-columns:1fr}
+  .evt{grid-template-columns:1fr}
+  .evt-txt{padding:40px 28px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .kanban{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  .burger{display:block;margin-left:auto}
+}
+@media(max-width:560px){
+  .hero h1{font-size:38px}
+  .sec-head h2,.cta h2{font-size:31px}
+  .espace{flex-direction:column}
+  .espace .ev{width:100%;height:90px}
+  .evt-types{grid-template-columns:1fr}
+  .date-grid{grid-template-columns:repeat(3,1fr)}
+  .modebar .lbl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MODE SWITCH ===== -->
+<div class="modebar">
+  <span class="lbl">Maquette Vong Studio</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= SITE PUBLIC ======================== -->
+<!-- ============================================================ -->
+<div class="screen active" id="screen-site">
+
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo" onclick="scrollToSec('top')">
+        <span class="lm">🧗</span>
+        <span class="lt">Peka Bloc<small>ESCALADE DE BLOC · BLOIS</small></span>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('espaces')">La salle</a>
+        <a onclick="scrollToSec('cours')">Cours</a>
+        <a onclick="scrollToSec('abos')">Abonnements</a>
+        <a onclick="scrollToSec('evt')">Événementiel</a>
+        <a onclick="scrollToSec('infos')">Infos</a>
+      </nav>
+      <button class="btn btn-ink btn-sm" onclick="openResa()">Anniversaire / groupe</button>
+      <button class="burger" onclick="scrollToSec('espaces')">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">Salle de bloc · Blois</span>
+        <h1>Lis le mur.<br>Trouve la voie.<br><em>Grimpe.</em></h1>
+        <p class="sub">1500 m² de blocs, une zone parkour et un bar-restaurant — pour les pitchounes comme pour les grimpeurs confirmés. À Blois, zone de l'Industrie.</p>
+        <div class="hero-cta">
+          <button class="btn btn-ink btn-lg" onclick="goDeciplus()">🧗 Réserver une séance</button>
+          <button class="btn btn-line btn-lg" onclick="openResa()">Organiser un événement</button>
+        </div>
+      </div>
+      <div class="hero-wall">
+        <div class="hh a hold"></div>
+        <div class="hh b hold"></div>
+        <div class="hh c hold">🧗</div>
+        <div class="hh d hold"></div>
+        <div class="hh e hold">🤸</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRADE SCALE -->
+  <div class="scale">
+    <div class="wrap">
+      <div class="stitle">Lecture des couleurs<span>Chaque bloc a son niveau</span></div>
+      <div class="grades">
+        <div class="grade"><span class="dot" style="background:var(--g-jaune)"></span><b>Jaune</b><span>Initiation</span></div>
+        <div class="grade"><span class="dot" style="background:var(--g-vert)"></span><b>Vert</b><span>Facile</span></div>
+        <div class="grade"><span class="dot" style="background:var(--g-bleu)"></span><b>Bleu</b><span>Intermédiaire</span></div>
+        <div class="grade"><span class="dot" style="background:var(--g-rouge)"></span><b>Rouge</b><span>Difficile</span></div>
+        <div class="grade"><span class="dot" style="background:var(--g-violet)"></span><b>Violet</b><span>Très difficile</span></div>
+        <div class="grade"><span class="dot" style="background:#5b554a"></span><b>Noir</b><span>Expert</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPACES -->
+  <section id="espaces">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="marker hold" style="background:var(--g-jaune);color:var(--ink)">01</div>
+        <div class="sh-txt">
+          <div class="k">La salle</div>
+          <h2>1500 m² à explorer</h2>
+          <p>Quatre espaces sous le même toit — on grimpe, on saute, et on refait le monde au bar.</p>
+        </div>
+      </div>
+      <div class="espaces">
+        <div class="espace e1">
+          <div class="ev">🧗</div>
+          <div class="eb">
+            <h3>Le mur de bloc</h3>
+            <p>Des centaines de blocs ouverts régulièrement, du jaune initiation au noir expert. Tapis intégral, pas de baudrier.</p>
+            <span class="etag">Tous niveaux</span>
+          </div>
+        </div>
+        <div class="espace e2">
+          <div class="ev">🤸</div>
+          <div class="eb">
+            <h3>La zone parkour</h3>
+            <p>Modules, sauts et réception en mousse pour travailler le déplacement et la prise de risque maîtrisée.</p>
+            <span class="etag">Dès 6 ans</span>
+          </div>
+        </div>
+        <div class="espace e3">
+          <div class="ev">🍔</div>
+          <div class="eb">
+            <h3>Le bar-restaurant</h3>
+            <p>Plats du jour, planches et boissons, face aux murs. L'endroit où l'on récupère entre deux essais.</p>
+            <span class="etag">Ouvert à tous</span>
+          </div>
+        </div>
+        <div class="espace e4">
+          <div class="ev">🧒</div>
+          <div class="eb">
+            <h3>L'espace Pitchoune</h3>
+            <p>Une zone d'escalade pensée et sécurisée pour les plus jeunes grimpeurs, encadrée par nos moniteurs.</p>
+            <span class="etag">3 à 6 ans</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURS -->
+  <section id="cours">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="marker hold" style="background:var(--g-bleu)">02</div>
+        <div class="sh-txt">
+          <div class="k">Progresser</div>
+          <h2>Les cours encadrés</h2>
+          <p>Que vous touchiez un mur pour la première fois ou que vous visiez le bloc noir, un moniteur vous fait progresser.</p>
+        </div>
+      </div>
+      <div class="cours-row">
+        <div class="cours">
+          <h3>Cours Découverte</h3>
+          <div class="cm">1h · samedi &amp; dimanche</div>
+          <p>La première séance pour apprendre à lire un bloc, chuter en sécurité et prendre confiance.</p>
+        </div>
+        <div class="cours">
+          <h3>Cours Enfant</h3>
+          <div class="cm">1h · mercredi &amp; samedi</div>
+          <p>Un créneau hebdomadaire encadré pour les 6-12 ans, par petits groupes de niveau.</p>
+        </div>
+        <div class="cours">
+          <h3>Coaching Perf'</h3>
+          <div class="cm">1h30 · sur inscription</div>
+          <p>Travail de la technique, du gainage et de la lecture pour passer un cap sur les blocs durs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABONNEMENTS -->
+  <section id="abos">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="marker hold" style="background:var(--g-rouge)">03</div>
+        <div class="sh-txt">
+          <div class="k">Tarifs</div>
+          <h2>Venir grimper</h2>
+          <p>À la séance ou en abonnement — l'achat se fait en quelques clics, badge et QR code générés automatiquement.</p>
+        </div>
+      </div>
+      <div class="abo-grid">
+        <div class="abo">
+          <div class="an">Séance</div>
+          <div class="ap">13€<small> /pers.</small></div>
+          <div class="as">L'entrée à l'unité, accès libre toute la journée</div>
+          <button class="btn btn-line" style="width:100%;justify-content:center" onclick="goDeciplus()">Réserver</button>
+        </div>
+        <div class="abo feat">
+          <div class="an">Carnet 10 séances</div>
+          <div class="ap">110€<small> /10</small></div>
+          <div class="as">Le bon plan des grimpeurs réguliers — 11€ la séance</div>
+          <button class="btn btn-chalk" style="width:100%;justify-content:center" onclick="goDeciplus()">Acheter le carnet</button>
+        </div>
+        <div class="abo">
+          <div class="an">Abonnement mensuel</div>
+          <div class="ap">42€<small> /mois</small></div>
+          <div class="as">Grimpe illimitée, sans engagement, badge d'accès</div>
+          <button class="btn btn-line" style="width:100%;justify-content:center" onclick="goDeciplus()">S'abonner</button>
+        </div>
+      </div>
+      <p class="abo-note">Séances et abonnements gérés via la plateforme Deciplus, intégrée au site · tarifs illustratifs pour la maquette.</p>
+    </div>
+  </section>
+
+  <!-- EVENEMENTIEL -->
+  <section id="evt">
+    <div class="wrap">
+      <div class="evt">
+        <div class="evt-txt">
+          <div class="k">Événementiel</div>
+          <h2>Anniversaires &amp; groupes</h2>
+          <p>Anniversaire d'enfant, sortie d'entreprise, EVG ou groupe d'amis : Peka Bloc privatise ses murs. Décrivez votre projet, recevez un devis — fini le « contactez-nous » sans réponse.</p>
+          <div class="evt-types">
+            <div class="et" onclick="openResa('anniv')"><span class="ete">🎂</span><div><b>Anniversaire</b><span>Enfant ou ado</span></div></div>
+            <div class="et" onclick="openResa('groupe')"><span class="ete">👥</span><div><b>Groupe d'amis</b><span>Dès 8 personnes</span></div></div>
+            <div class="et" onclick="openResa('seminaire')"><span class="ete">🏢</span><div><b>Séminaire</b><span>Entreprise / CE</span></div></div>
+            <div class="et" onclick="openResa('evg')"><span class="ete">🎉</span><div><b>EVG / EVJF</b><span>Team building fun</span></div></div>
+          </div>
+        </div>
+        <div class="evt-side">
+          <div class="big">🧗‍♀️</div>
+          <h3>Demandez votre devis</h3>
+          <p>Réponse sous 48h, sans engagement.</p>
+          <button class="btn btn-chalk btn-lg" onclick="openResa()">Faire une demande</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis" style="background:var(--bg2)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="marker hold" style="background:var(--g-violet)">04</div>
+        <div class="sh-txt">
+          <div class="k">La communauté</div>
+          <h2>4,8/5 — les grimpeurs en parlent</h2>
+        </div>
+      </div>
+      <div class="avis-grid">
+        <div class="review">
+          <div class="rs">⭐⭐⭐⭐⭐</div>
+          <p>« Salle au top, ouverture de blocs variée et régulière. Le bar après la session, c'est le petit plus qui fait tout. »</p>
+          <div class="rw"><div class="rav hold" style="background:var(--g-bleu)">TR</div><div><b>Thomas R.</b><span>il y a 2 semaines</span></div></div>
+        </div>
+        <div class="review">
+          <div class="rs">⭐⭐⭐⭐⭐</div>
+          <p>« Anniversaire de mon fils ici : encadrement parfait, les enfants ont adoré. Devis reçu super vite, pour une fois ! »</p>
+          <div class="rw"><div class="rav hold" style="background:var(--g-rouge)">CL</div><div><b>Claire L.</b><span>il y a 1 mois</span></div></div>
+        </div>
+        <div class="review">
+          <div class="rs">⭐⭐⭐⭐☆</div>
+          <p>« Espace parkour génial, zone pitchoune rassurante pour la petite. On vient en famille tous les week-ends. »</p>
+          <div class="rw"><div class="rav hold" style="background:var(--g-vert)">MD</div><div><b>Mathieu D.</b><span>il y a 1 mois</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="marker hold" style="background:#5b554a">05</div>
+        <div class="sh-txt">
+          <div class="k">Accès</div>
+          <h2>Venir grimper à Peka Bloc</h2>
+        </div>
+      </div>
+      <div class="infos-grid">
+        <div class="ibox">
+          <h3>🕒 Horaires</h3>
+          <div class="hr-row"><b>Lundi – Vendredi</b><span class="op">12h – 22h30</span></div>
+          <div class="hr-row"><b>Samedi</b><span class="op">10h – 22h30</span></div>
+          <div class="hr-row"><b>Dimanche</b><span class="op">10h – 19h</span></div>
+          <div class="hr-row"><b>Bar-restaurant</b><span class="op">Service 12h – 14h / 19h – 22h</span></div>
+        </div>
+        <div class="ibox">
+          <h3>📍 Nous trouver</h3>
+          <div class="il"><span class="ie">🏠</span><div>7 boulevard de l'Industrie<br>41000 Blois</div></div>
+          <div class="il"><span class="ie">🧗</span><div>Chaussons en location sur place · pas de matériel requis</div></div>
+          <div class="il"><span class="ie">🅿️</span><div>Parking gratuit · zone de loisirs</div></div>
+          <div class="map-ph"><span style="font-size:24px">🗺️</span> Carte Google Maps interactive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="wrap">
+      <h2>Un anniversaire ou un groupe à organiser ?</h2>
+      <p>Décrivez votre projet en 2 minutes — on revient vers vous avec un devis sous 48h.</p>
+      <button class="btn btn-wood btn-lg" onclick="openResa()">Demander un devis</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft-grid">
+        <div>
+          <div class="logo">
+            <span class="lm">🧗</span>
+            <span class="lt">Peka Bloc<small>ESCALADE DE BLOC · BLOIS</small></span>
+          </div>
+          <p class="ft-about">Salle d'escalade de bloc, parkour et bar-restaurant à Blois. 1500 m² pour tous les niveaux, des pitchounes aux experts.</p>
+        </div>
+        <div class="ft-col">
+          <h4>La salle</h4>
+          <a onclick="scrollToSec('espaces')">Les espaces</a>
+          <a onclick="scrollToSec('cours')">Les cours</a>
+          <a onclick="scrollToSec('abos')">Abonnements</a>
+        </div>
+        <div class="ft-col">
+          <h4>Organiser</h4>
+          <a onclick="openResa('anniv')">Un anniversaire</a>
+          <a onclick="openResa('groupe')">Un groupe</a>
+          <a onclick="openResa('seminaire')">Un séminaire</a>
+        </div>
+        <div class="ft-col">
+          <h4>Contact</h4>
+          <p>7 bd de l'Industrie<br>41000 Blois</p>
+          <p>Facebook · Instagram</p>
+        </div>
+      </div>
+      <div class="ft-bot">
+        <span>© 2026 Peka Bloc — PKB SAS. Tous droits réservés.</span>
+        <span>Maquette de démonstration · Vong Studio · données illustratives</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= BACK OFFICE ========================= -->
+<!-- ============================================================ -->
+<div class="screen bo" id="screen-bo">
+
+  <div class="bo-top">
+    <div class="wrap bo-top-in">
+      <div class="bo-brand">
+        <span class="bm">🧗</span>
+        <div><b>Peka Bloc</b><span>ESPACE ÉVÉNEMENTIEL</span></div>
+      </div>
+      <div class="bo-user">
+        <span style="text-align:right">Maxence De Schrooder<br><span style="color:#a9a18c;font-size:10.5px">Directeur général</span></span>
+        <span class="ua">MD</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bo-tabs">
+    <button class="active" onclick="setBV('dash',this)">📊 Tableau de bord</button>
+    <button onclick="setBV('leads',this)">🧗 Demandes événementielles</button>
+    <button onclick="setBV('contacts',this)">👥 Contacts</button>
+  </div>
+
+  <div class="bo-body">
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="bv active" id="bv-dash">
+      <div class="bv-head">
+        <h2>Tableau de bord — événementiel</h2>
+        <p>Le segment le plus margé, enfin suivi — semaine du 6 juin 2026.</p>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="kd hold" style="background:var(--g-jaune)"></div><div class="kv">9</div><div class="kl">Demandes ce mois</div></div>
+        <div class="kpi"><div class="kd hold" style="background:var(--g-bleu)"></div><div class="kv">4</div><div class="kl">Devis en attente de réponse</div></div>
+        <div class="kpi"><div class="kd hold" style="background:var(--g-vert)"></div><div class="kv">5</div><div class="kl">Événements confirmés à venir</div></div>
+        <div class="kpi"><div class="kd hold" style="background:var(--g-rouge)"></div><div class="kv">3 480 €</div><div class="kl">Valeur du pipe événementiel</div></div>
+      </div>
+      <div class="notice">📈 Avant la refonte, aucune de ces demandes n'était tracée — elles arrivaient sur un simple « contactez-nous ». Le formulaire en ligne les capte et les qualifie automatiquement.</div>
+      <div class="panel">
+        <div class="panel-hd"><h3>Dernières demandes reçues</h3></div>
+        <table class="rtable">
+          <thead><tr><th>Demandeur</th><th>Type</th><th>Date souhaitée</th><th>Pers.</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-jaune);color:var(--ink)">CL</span><div><b>Claire Lemaire</b><span>via le site · il y a 3h</span></div></div></td><td>Anniversaire enfant</td><td>21/06/2026</td><td>10</td><td><span class="pill gray">Nouveau</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-bleu)">ST</span><div><b>Sodexo Tours</b><span>via le site · hier</span></div></div></td><td>Séminaire entreprise</td><td>04/07/2026</td><td>30</td><td><span class="pill amber">Devis envoyé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-rouge)">PG</span><div><b>Paul Girard</b><span>via le site · hier</span></div></div></td><td>EVG</td><td>28/06/2026</td><td>12</td><td><span class="pill amber">Devis envoyé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-violet)">AM</span><div><b>Asso. Grimpe 41</b><span>via le site · il y a 2 j</span></div></div></td><td>Groupe d'amis</td><td>15/06/2026</td><td>16</td><td><span class="pill green">Confirmé</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== LEADS (KANBAN) ===== -->
+    <div class="bv" id="bv-leads">
+      <div class="bv-head">
+        <h2>Demandes événementielles</h2>
+        <p>Chaque demande du formulaire en ligne, suivie de la réception à la confirmation.</p>
+      </div>
+      <div class="kanban">
+        <div class="kcol">
+          <div class="kcol-hd"><b>🆕 Nouveau</b><span class="cnt">3</span></div>
+          <div class="kcard j">
+            <div class="ktype">🎂 Anniversaire enfant</div>
+            <div class="kmeta">21/06 · 10 enfants · 7 ans</div>
+            <div class="krow"><div class="kwho"><span class="kav">CL</span><span>Claire Lemaire</span></div></div>
+          </div>
+          <div class="kcard b">
+            <div class="ktype">👥 Groupe d'amis</div>
+            <div class="kmeta">19/06 · 9 personnes</div>
+            <div class="krow"><div class="kwho"><span class="kav">RB</span><span>Rémi Blanc</span></div></div>
+          </div>
+          <div class="kcard v">
+            <div class="ktype">🎉 EVG</div>
+            <div class="kmeta">12/07 · 14 personnes</div>
+            <div class="krow"><div class="kwho"><span class="kav">NF</span><span>Nicolas Faure</span></div></div>
+          </div>
+        </div>
+        <div class="kcol">
+          <div class="kcol-hd"><b>📨 Devis envoyé</b><span class="cnt">3</span></div>
+          <div class="kcard b">
+            <div class="ktype">🏢 Séminaire entreprise</div>
+            <div class="kmeta">04/07 · 30 personnes</div>
+            <div class="krow"><div class="kwho"><span class="kav">ST</span><span>Sodexo Tours</span></div><span class="kval">980 €</span></div>
+          </div>
+          <div class="kcard r">
+            <div class="ktype">🎉 EVG</div>
+            <div class="kmeta">28/06 · 12 personnes</div>
+            <div class="krow"><div class="kwho"><span class="kav">PG</span><span>Paul Girard</span></div><span class="kval">420 €</span></div>
+          </div>
+          <div class="kcard j">
+            <div class="ktype">🎂 Anniversaire ado</div>
+            <div class="kmeta">22/06 · 8 ados</div>
+            <div class="krow"><div class="kwho"><span class="kav">EV</span><span>Élise Vasseur</span></div><span class="kval">280 €</span></div>
+          </div>
+        </div>
+        <div class="kcol">
+          <div class="kcol-hd"><b>✅ Confirmé</b><span class="cnt">3</span></div>
+          <div class="kcard v">
+            <div class="ktype">👥 Groupe d'amis</div>
+            <div class="kmeta">15/06 · 16 personnes</div>
+            <div class="krow"><div class="kwho"><span class="kav">AG</span><span>Asso. Grimpe 41</span></div><span class="kval">560 €</span></div>
+          </div>
+          <div class="kcard j">
+            <div class="ktype">🎂 Anniversaire enfant</div>
+            <div class="kmeta">14/06 · 12 enfants</div>
+            <div class="krow"><div class="kwho"><span class="kav">SM</span><span>Sophie Marchand</span></div><span class="kval">340 €</span></div>
+          </div>
+          <div class="kcard b">
+            <div class="ktype">🏢 Séminaire CE</div>
+            <div class="kmeta">11/06 · 25 personnes</div>
+            <div class="krow"><div class="kwho"><span class="kav">CE</span><span>CE Blois Habitat</span></div><span class="kval">820 €</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CONTACTS ===== -->
+    <div class="bv" id="bv-contacts">
+      <div class="bv-head">
+        <h2>Contacts événementiel</h2>
+        <p>Le carnet de contacts constitué automatiquement à partir des demandes — exportable.</p>
+      </div>
+      <div class="toolbar">
+        <div class="seg">
+          <button class="active">Tous</button>
+          <button>Particuliers</button>
+          <button>Entreprises / CE</button>
+        </div>
+        <input class="search" placeholder="🔍 Rechercher un contact…">
+      </div>
+      <div class="panel">
+        <table class="rtable">
+          <thead><tr><th>Contact</th><th>E-mail</th><th>Demandes</th><th>Dernier événement</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-bleu)">CE</span><b>CE Blois Habitat</b></div></td><td>ce@blois-habitat.fr</td><td>2</td><td>11/06/2026</td><td><span class="pill gray">Entreprise</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-violet)">AG</span><b>Asso. Grimpe 41</b></div></td><td>contact@grimpe41.fr</td><td>3</td><td>15/06/2026</td><td><span class="pill gray">Association</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-jaune);color:var(--ink)">SM</span><b>Sophie Marchand</b></div></td><td>s.marchand@email.fr</td><td>1</td><td>14/06/2026</td><td><span class="pill gray">Particulier</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-bleu)">ST</span><b>Sodexo Tours</b></div></td><td>events@sodexo-tours.fr</td><td>1</td><td>—</td><td><span class="pill gray">Entreprise</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-rouge)">PG</span><b>Paul Girard</b></div></td><td>paul.girard@email.fr</td><td>1</td><td>—</td><td><span class="pill gray">Particulier</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--g-jaune);color:var(--ink)">CL</span><b>Claire Lemaire</b></div></td><td>claire.lemaire@email.fr</td><td>1</td><td>—</td><td><span class="pill gray">Particulier</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== DEVIS OVERLAY ===== -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-hd">
+      <h3 id="resa-title">Demande de devis</h3>
+      <button class="rx" onclick="closeResa()">✕</button>
+    </div>
+    <div class="steps-bar" id="steps-bar"></div>
+    <div class="resa-bd" id="resa-bd"></div>
+  </div>
+</div>
+
+<script>
+/* ============ MODE SWITCH ============ */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function setBV(v,btn){
+  document.querySelectorAll('.bv').forEach(function(e){e.classList.remove('active')});
+  document.getElementById('bv-'+v).classList.add('active');
+  document.querySelectorAll('.bo-tabs button').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){
+  if(document.getElementById('screen-site').classList.contains('active')===false)setMode('site');
+  var el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+function goDeciplus(){
+  alert('Maquette de démonstration — la réservation de séances et l\'achat d\'abonnements se feraient sur la plateforme Deciplus, intégrée au parcours du site.');
+}
+
+/* ============ TUNNEL DEVIS ÉVÉNEMENTIEL (Pack 2 — sans paiement) ============ */
+var EVENTS=[
+  {id:'anniv',e:'🎂',n:'Anniversaire',d:'Enfant ou ado · encadré'},
+  {id:'groupe',e:'👥',n:'Groupe d\'amis',d:'Dès 8 personnes'},
+  {id:'seminaire',e:'🏢',n:'Séminaire entreprise',d:'Team building / CE'},
+  {id:'evg',e:'🎉',n:'EVG / EVJF',d:'Enterrement de vie'}
+];
+var R={};
+function resetR(evt){
+  R={evt:evt||null,date:null,nb:10,name:'',email:'',phone:'',msg:'',stage:'type'};
+}
+function openResa(evt){
+  resetR(evt);
+  document.getElementById('ov').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderResa();
+}
+function closeResa(){
+  document.getElementById('ov').classList.remove('show');
+  document.body.style.overflow='';
+}
+var STAGES=['type','date','who','contact','done'];
+function go(stage){R.stage=stage;renderResa();}
+
+function days(){
+  var out=[],names=['DIM','LUN','MAR','MER','JEU','VEN','SAM'];
+  var mon=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  var d=new Date();
+  for(var i=3;i<=14;i++){
+    var x=new Date(d.getTime()+i*86400000);
+    out.push({key:i,dn:x.getDate(),dd:names[x.getDay()],dm:mon[x.getMonth()]});
+  }
+  return out;
+}
+function curE(){return EVENTS.filter(function(x){return x.id===R.evt})[0];}
+
+function renderResa(){
+  document.getElementById('resa-title').textContent='Demande de devis';
+  var idx=STAGES.indexOf(R.stage),bar='';
+  for(var i=0;i<4;i++)bar+='<div class="sd'+(i<=idx?' on':'')+'"></div>';
+  document.getElementById('steps-bar').innerHTML=R.stage==='done'?'':bar;
+  var bd=document.getElementById('resa-bd'),h='';
+
+  if(R.stage==='type'){
+    h+='<div class="qst">Quel type d\'événement ?</div>';
+    h+='<div class="qsub">On adapte le devis à votre projet — aucun paiement à ce stade.</div>';
+    EVENTS.forEach(function(f){
+      h+='<div class="opt'+(R.evt===f.id?' sel':'')+'" onclick="R.evt=\''+f.id+'\';renderResa()">'
+        +'<div class="oe">'+f.e+'</div><div class="ob"><b>'+f.n+'</b><span>'+f.d+'</span></div></div>';
+    });
+    h+='<div class="resa-ft"><button class="btn btn-wood" '+(R.evt?'':'disabled')+' onclick="go(\'date\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='date'){
+    h+='<div class="qst">Date souhaitée</div><div class="qsub">Une date approximative suffit — on confirmera ensemble.</div>';
+    h+='<div class="date-grid">';
+    days().forEach(function(d){
+      h+='<div class="dcell'+(R.date===d.key?' sel':'')+'" onclick="R.date='+d.key+';renderResa()">'
+        +'<div class="dd">'+d.dd+'</div><div class="dn">'+d.dn+'</div><div class="dm">'+d.dm+'</div></div>';
+    });
+    h+='</div>';
+    h+='<div class="resa-ft"><button class="btn btn-line" onclick="go(\'type\')">← Retour</button>'
+      +'<button class="btn btn-wood" '+(R.date?'':'disabled')+' onclick="go(\'who\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='who'){
+    h+='<div class="qst">Combien de participants ?</div><div class="qsub">Une estimation, ajustable plus tard.</div>';
+    h+='<div class="counter"><div class="cl"><b>Participants</b><span>Grimpeurs attendus</span></div>'
+      +'<div class="cc"><button onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>'
+      +'<b>'+R.nb+'</b><button onclick="R.nb=Math.min(60,R.nb+1);renderResa()">+</button></div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-line" onclick="go(\'date\')">← Retour</button>'
+      +'<button class="btn btn-wood" onclick="go(\'contact\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='contact'){
+    var f=curE(),dd=days().filter(function(x){return x.key===R.date})[0];
+    h+='<div class="qst">Vos coordonnées</div><div class="qsub">Pour vous envoyer le devis sous 48h.</div>';
+    h+='<div class="fld"><label>Nom et prénom</label><input value="'+R.name+'" placeholder="Ex. Claire Lemaire" oninput="R.name=this.value"></div>';
+    h+='<div class="fld"><label>E-mail</label><input value="'+R.email+'" placeholder="vous@email.fr" oninput="R.email=this.value"></div>';
+    h+='<div class="fld"><label>Téléphone</label><input value="'+R.phone+'" placeholder="06 ** ** ** **" oninput="R.phone=this.value"></div>';
+    h+='<div class="fld"><label>Précisions (facultatif)</label><textarea rows="2" placeholder="Âge des enfants, créneau souhaité, restauration…" oninput="R.msg=this.value">'+R.msg+'</textarea></div>';
+    h+='<div class="recap">'
+      +'<div class="rr"><span>Événement</span><b>'+(f?f.n:'')+'</b></div>'
+      +'<div class="rr"><span>Date souhaitée</span><b>'+(dd?dd.dd+' '+dd.dn+' '+dd.dm:'')+'</b></div>'
+      +'<div class="rr"><span>Participants</span><b>'+R.nb+'</b></div>'
+      +'<div class="recap-note">Demande sans engagement ni paiement. Peka Bloc vous envoie un devis personnalisé sous 48h.</div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-line" onclick="go(\'who\')">← Retour</button>'
+      +'<button class="btn btn-wood" onclick="submitResa()">Envoyer ma demande →</button></div>';
+  }
+
+  else if(R.stage==='done'){
+    var f2=curE(),dd2=days().filter(function(x){return x.key===R.date})[0];
+    h+='<div class="done"><div class="dok">✓</div>'
+      +'<h3>Demande envoyée !</h3>'
+      +'<p>'+(f2?f2.n:'')+' · '+(dd2?dd2.dd+' '+dd2.dn+' '+dd2.dm:'')+' · '+R.nb+' participants</p>'
+      +'<p>Peka Bloc vous envoie un devis sous 48h vers '+(R.email||'votre adresse')+'.</p>'
+      +'<div class="demo-note">🔎 Maquette de démonstration. Dans le vrai site, cette demande arrive aussitôt dans le back office (Demandes événementielles, colonne « Nouveau ») — le segment le plus margé, enfin tracé.</div>'
+      +'<div class="resa-ft"><button class="btn btn-wood" style="flex:1;justify-content:center" onclick="closeResa()">Fermer</button></div></div>';
+  }
+
+  bd.innerHTML=h;
+}
+function submitResa(){
+  if(!R.name||!R.email){alert('Merci d\'indiquer votre nom et votre e-mail.');return;}
+  go('done');
+}
+</script>
+
+</body>
+</html>
