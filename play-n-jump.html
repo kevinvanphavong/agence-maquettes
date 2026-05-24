@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play N'Jump — Maquette refonte site + back office · Vong Studio</title>
+<meta name="description" content="Maquette de démonstration : création du site et back-office de réservation pour Play N'Jump, parc indoor enfants à Blois.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#f4eedd; --paper2:#fbf6e8; --white:#ffffff;
+  --ink:#1a1712; --ink-soft:#3c372e;
+  --lime:#caf03a; --pink:#ff4d9e; --violet:#6d4dff; --orange:#ff8a1e; --sky:#39c6ff;
+  --muted:#6b6557;
+  --bd:3px solid var(--ink);
+  --hs:6px 6px 0 var(--ink);
+  --hs-sm:4px 4px 0 var(--ink);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--paper);color:var(--ink);
+  -webkit-font-smoothing:antialiased;line-height:1.55}
+h1,h2,h3,h4,.disp{font-family:'Syne',sans-serif;font-weight:800;line-height:1.02;letter-spacing:-1px}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:11px;height:11px}
+::-webkit-scrollbar-thumb{background:var(--ink);border-radius:0}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+.btn{font-family:'Syne',sans-serif;font-weight:800;font-size:15px;cursor:pointer;
+  border:var(--bd);padding:13px 24px;border-radius:0;background:var(--white);color:var(--ink);
+  box-shadow:var(--hs-sm);transition:transform .1s,box-shadow .1s;
+  display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn-lime{background:var(--lime)}
+.btn-pink{background:var(--pink);color:#fff}
+.btn-violet{background:var(--violet);color:#fff}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-sm{padding:9px 16px;font-size:13px}
+.btn-lg{padding:16px 30px;font-size:17px}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn[disabled]:hover{transform:none;box-shadow:var(--hs-sm)}
+
+/* ===== MODE SWITCH ===== */
+.modebar{position:fixed;top:0;left:0;right:0;height:48px;background:var(--ink);z-index:300;
+  display:flex;align-items:center;justify-content:center;gap:6px}
+.modebar .lbl{color:#7c7768;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  margin-right:10px;text-transform:uppercase}
+.mode-btn{font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  padding:6px 16px;border:2px solid #4a453b;cursor:pointer;
+  background:transparent;color:#9c9788;transition:all .14s}
+.mode-btn.active{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+
+.screen{display:none;padding-top:48px}
+.screen.active{display:block}
+
+/* MARQUEE */
+.marquee{background:var(--ink);color:var(--lime);overflow:hidden;border-top:var(--bd);
+  border-bottom:var(--bd);padding:11px 0}
+.marquee.pink{background:var(--pink);color:var(--ink)}
+.marquee.violet{background:var(--violet);color:#fff}
+.mq-track{display:flex;gap:0;white-space:nowrap;animation:mq 26s linear infinite;width:max-content}
+.mq-track span{font-family:'Syne';font-weight:800;font-size:16px;padding:0 22px;
+  display:inline-flex;align-items:center;gap:22px;text-transform:uppercase;letter-spacing:.5px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============ SITE PUBLIC ============ */
+.hdr{position:sticky;top:48px;z-index:100;background:var(--paper);border-bottom:var(--bd)}
+.hdr-in{display:flex;align-items:center;gap:16px;height:74px}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo .lm{width:46px;height:46px;border:var(--bd);background:var(--lime);
+  display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:var(--hs-sm)}
+.logo .lt{font-family:'Syne';font-weight:800;font-size:21px;line-height:.95}
+.logo .lt small{display:block;font-family:'Space Grotesk';font-weight:600;font-size:9px;
+  letter-spacing:1.5px;margin-top:3px;color:var(--muted)}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{padding:8px 13px;font-weight:600;font-size:13.5px;cursor:pointer;border:2px solid transparent;
+  transition:all .12s}
+.nav a:hover{border-color:var(--ink);background:var(--white)}
+.burger{display:none;font-size:24px;background:none;border:none;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:64px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:center;position:relative}
+.hero .sticker{display:inline-block;background:var(--violet);color:#fff;border:var(--bd);
+  font-family:'Syne';font-weight:800;font-size:13px;padding:8px 16px;box-shadow:var(--hs-sm);
+  transform:rotate(-3deg);margin-bottom:20px}
+.hero h1{font-size:80px;font-weight:800;letter-spacing:-3px}
+.hero h1 .box{background:var(--pink);color:#fff;padding:0 12px;display:inline-block;
+  transform:rotate(-2deg);border:var(--bd);box-shadow:var(--hs)}
+.hero h1 .out{-webkit-text-stroke:3px var(--ink);color:transparent}
+.hero p.sub{font-size:17.5px;color:var(--ink-soft);margin:24px 0 28px;max-width:430px;font-weight:500}
+.hero-cta{display:flex;gap:13px;flex-wrap:wrap}
+.hero-collage{position:relative;height:380px}
+.tile{position:absolute;border:var(--bd);box-shadow:var(--hs);display:flex;
+  flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.tile.t1{width:200px;height:200px;background:var(--lime);top:0;right:10px;transform:rotate(4deg)}
+.tile.t1 .em{font-size:96px}
+.tile.t2{width:170px;height:120px;background:var(--white);bottom:60px;left:0;transform:rotate(-5deg);padding:14px}
+.tile.t2 b{font-family:'Syne';font-size:38px;font-weight:800}
+.tile.t2 span{font-size:11px;font-weight:600;color:var(--muted)}
+.tile.t3{width:158px;height:110px;background:var(--sky);bottom:0;right:48px;transform:rotate(6deg);padding:12px}
+.tile.t3 .st{font-size:15px;letter-spacing:1px}
+.tile.t3 b{font-family:'Syne';font-size:15px;font-weight:800;margin-top:4px}
+
+/* SECTION */
+.sec{padding:74px 0}
+.sec-head{margin-bottom:40px}
+.sec-head .k{display:inline-block;font-family:'Syne';font-weight:800;font-size:12.5px;
+  background:var(--ink);color:var(--lime);padding:5px 12px;text-transform:uppercase;letter-spacing:1px}
+.sec-head h2{font-size:48px;font-weight:800;margin-top:14px;letter-spacing:-1.5px;max-width:720px}
+.sec-head p{font-size:15.5px;color:var(--muted);font-weight:500;margin-top:8px;max-width:560px}
+
+/* ZONES */
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.zone{border:var(--bd);box-shadow:var(--hs);background:var(--white);padding:26px;
+  transition:transform .12s,box-shadow .12s}
+.zone:nth-child(1){transform:rotate(-1.5deg)}
+.zone:nth-child(3){transform:rotate(1.5deg)}
+.zone:hover{transform:rotate(0) translate(-2px,-2px);box-shadow:9px 9px 0 var(--ink)}
+.zone .zh{width:70px;height:70px;border:var(--bd);display:flex;align-items:center;
+  justify-content:center;font-size:36px;margin-bottom:16px}
+.zone.c1 .zh{background:var(--lime)}
+.zone.c2 .zh{background:var(--pink)}
+.zone.c3 .zh{background:var(--sky)}
+.zone h3{font-size:24px;margin-bottom:8px}
+.zone p{font-size:13.5px;color:var(--muted);font-weight:500}
+.zone .za{display:inline-block;margin-top:14px;font-family:'Syne';font-weight:800;font-size:11.5px;
+  border:2px solid var(--ink);padding:4px 10px}
+
+/* FASTFOOD split */
+.ff{background:var(--violet);color:#fff;border-top:var(--bd);border-bottom:var(--bd)}
+.ff-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.ff-txt{padding:74px 50px 74px 0}
+.ff-txt .k{background:var(--lime);color:var(--ink)}
+.ff-txt h2{font-size:46px;margin:14px 0}
+.ff-txt p{font-size:15.5px;font-weight:500;opacity:.92;margin-bottom:22px;max-width:420px}
+.ff-menu{border-left:var(--bd);padding:54px 0 54px 50px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+.ff-item{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.4);
+  padding:14px 18px;display:flex;align-items:center;gap:14px}
+.ff-item .fe{font-size:28px}
+.ff-item b{font-family:'Syne';font-size:16px}
+.ff-item span{font-size:12.5px;opacity:.85;display:block}
+.ff-item .fpr{margin-left:auto;font-family:'Syne';font-weight:800;font-size:18px;color:var(--lime)}
+
+/* ANNIV */
+.anniv-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.acard{border:var(--bd);box-shadow:var(--hs);background:var(--white);display:flex;flex-direction:column;
+  transition:transform .12s,box-shadow .12s}
+.acard:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--ink)}
+.acard .atop{padding:22px;border-bottom:var(--bd)}
+.acard.f1 .atop{background:var(--lime)}
+.acard.f2 .atop{background:var(--pink);color:#fff}
+.acard.f3 .atop{background:var(--sky)}
+.acard .ae{font-size:40px}
+.acard .atop h4{font-size:23px;margin:8px 0 2px}
+.acard .atop .ap{font-family:'Syne';font-weight:800;font-size:34px}
+.acard .atop .ap small{font-size:13px;font-weight:600}
+.acard .abd{padding:22px;flex:1;display:flex;flex-direction:column}
+.acard .abd ul{list-style:none;margin-bottom:18px;flex:1}
+.acard .abd ul li{font-size:13.5px;font-weight:500;padding:6px 0;display:flex;gap:9px;
+  border-bottom:1px dashed var(--line2,#d8d2c0)}
+.acard .abd ul li:last-child{border:none}
+.acard .abd ul li .ck{font-weight:800}
+
+/* TARIFS strip */
+.tarif{background:var(--lime);border-top:var(--bd);border-bottom:var(--bd)}
+.tarif-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.tcell{padding:34px;border-right:var(--bd);text-align:center}
+.tcell:last-child{border-right:none}
+.tcell .tn{font-family:'Syne';font-weight:800;font-size:17px}
+.tcell .tp{font-family:'Syne';font-weight:800;font-size:60px;letter-spacing:-3px;margin:6px 0}
+.tcell .tp span{font-size:18px}
+.tcell .ts{font-size:13px;color:var(--ink-soft);font-weight:600;margin-bottom:16px}
+
+/* AVIS */
+.avis-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{border:var(--bd);background:var(--white);padding:22px;box-shadow:var(--hs-sm)}
+.review:nth-child(2){background:var(--pink);color:#fff}
+.review .rs{font-size:15px;letter-spacing:1px;margin-bottom:10px}
+.review p{font-size:14px;font-weight:500;margin-bottom:14px}
+.review .rw{display:flex;align-items:center;gap:10px}
+.review .rav{width:36px;height:36px;border:2px solid var(--ink);background:var(--lime);
+  display:flex;align-items:center;justify-content:center;font-family:'Syne';font-weight:800;font-size:14px}
+.review:nth-child(2) .rav{border-color:#fff}
+.review .rw b{font-size:13px;display:block}
+.review .rw span{font-size:11px;opacity:.7}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.ibox{border:var(--bd);background:var(--white);padding:30px;box-shadow:var(--hs-sm)}
+.ibox h3{font-size:22px;margin-bottom:16px}
+.hr-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:2px dotted #d8d2c0;
+  font-size:14px;font-weight:600}
+.hr-row:last-child{border:none}
+.hr-row .op{color:#1f9d54}
+.hr-row .cl{color:var(--muted)}
+.il{display:flex;gap:12px;margin-bottom:14px;font-size:14px;font-weight:500}
+.il .ie{font-size:19px}
+.map-ph{margin-top:14px;height:150px;border:var(--bd);background:var(--paper2);
+  display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;
+  color:var(--muted);font-size:12.5px;font-weight:700}
+
+/* CTA */
+.cta{background:var(--pink);border-top:var(--bd);border-bottom:var(--bd);text-align:center;padding:76px 0}
+.cta h2{font-size:54px;color:#fff;letter-spacing:-2px}
+.cta p{font-size:16px;color:#fff;font-weight:600;margin:12px 0 26px}
+
+/* FOOTER */
+.ft{background:var(--ink);color:#bdb8a8;padding:52px 0 24px}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:28px;margin-bottom:34px}
+.ft .logo .lt{color:#fff}
+.ft-about{font-size:13.5px;margin-top:14px;max-width:280px;font-weight:500}
+.ft-col h4{font-family:'Syne';color:var(--lime);font-size:14px;margin-bottom:13px}
+.ft-col a,.ft-col p{display:block;font-size:13.5px;margin-bottom:8px;color:#bdb8a8;cursor:pointer;font-weight:500}
+.ft-col a:hover{color:#fff}
+.ft-bot{border-top:1px solid #423d33;padding-top:18px;display:flex;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;font-size:12px;color:#7c7768;font-weight:500}
+
+/* ===== RESA OVERLAY ===== */
+.ov{position:fixed;inset:0;background:rgba(26,23,18,.62);z-index:400;display:none;
+  align-items:center;justify-content:center;padding:20px}
+.ov.show{display:flex}
+.resa{background:var(--paper2);border:var(--bd);box-shadow:10px 10px 0 var(--ink);
+  width:100%;max-width:560px;max-height:90vh;overflow-y:auto}
+.resa-hd{padding:20px 24px;border-bottom:var(--bd);display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;background:var(--paper2);z-index:2}
+.resa-hd h3{font-size:19px}
+.resa-hd .rx{width:36px;height:36px;border:var(--bd);background:var(--white);cursor:pointer;font-size:15px}
+.steps-bar{display:flex;gap:5px;padding:16px 24px 0}
+.steps-bar .sd{flex:1;height:8px;border:2px solid var(--ink);background:var(--white)}
+.steps-bar .sd.on{background:var(--lime)}
+.resa-bd{padding:20px 24px 24px}
+.resa-bd .qst{font-family:'Syne';font-weight:800;font-size:19px;margin-bottom:4px}
+.resa-bd .qsub{font-size:12.5px;color:var(--muted);margin-bottom:18px;font-weight:500}
+.opt{border:var(--bd);padding:14px 16px;cursor:pointer;display:flex;align-items:center;gap:13px;
+  margin-bottom:10px;background:var(--white);box-shadow:var(--hs-sm);transition:transform .1s,box-shadow .1s}
+.opt:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.opt.sel{background:var(--lime)}
+.opt .oe{width:46px;height:46px;border:2px solid var(--ink);display:flex;align-items:center;
+  justify-content:center;font-size:23px;flex-shrink:0;background:var(--paper2)}
+.opt .ob{flex:1}
+.opt .ob b{font-family:'Syne';font-size:15.5px;display:block}
+.opt .ob span{font-size:12px;color:var(--muted)}
+.opt .op{font-family:'Syne';font-weight:800;font-size:18px}
+.date-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:16px}
+.dcell{border:2px solid var(--ink);padding:9px 3px;text-align:center;cursor:pointer;background:var(--white)}
+.dcell.sel{background:var(--lime)}
+.dcell.off{opacity:.32;cursor:not-allowed}
+.dcell .dd{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase}
+.dcell .dn{font-family:'Syne';font-weight:800;font-size:19px}
+.dcell .dm{font-size:9.5px;color:var(--muted);font-weight:600}
+.slot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.slot{border:2px solid var(--ink);padding:10px 3px;text-align:center;cursor:pointer;background:var(--white)}
+.slot.sel{background:var(--lime)}
+.slot.full{opacity:.34;cursor:not-allowed}
+.slot .sh{font-family:'Syne';font-weight:800;font-size:15px}
+.slot .sl{font-size:9.5px;font-weight:700;margin-top:2px}
+.slot .sl.ok{color:#1f9d54}
+.slot .sl.low{color:var(--pink)}
+.slot .sl.no{color:var(--muted)}
+.counter{display:flex;align-items:center;justify-content:space-between;border:var(--bd);
+  background:var(--white);padding:12px 15px;margin-bottom:12px}
+.counter .cl b{font-family:'Syne';font-size:15px;display:block}
+.counter .cl span{font-size:11.5px;color:var(--muted)}
+.counter .cc{display:flex;align-items:center;gap:12px}
+.counter .cc button{width:34px;height:34px;border:2px solid var(--ink);background:var(--lime);
+  font-size:18px;cursor:pointer;font-weight:800}
+.counter .cc b{font-family:'Syne';font-size:19px;min-width:24px;text-align:center}
+.fld{margin-bottom:13px}
+.fld label{font-size:12px;font-weight:700;display:block;margin-bottom:5px}
+.fld input{width:100%;padding:11px 13px;border:2px solid var(--ink);font-family:'Space Grotesk';
+  font-size:14px;outline:none;background:var(--white)}
+.fld input:focus{background:#fffce8}
+.recap{border:var(--bd);background:var(--white);padding:16px;margin-bottom:14px}
+.recap .rr{display:flex;justify-content:space-between;padding:6px 0;font-size:13.5px;font-weight:500}
+.recap .rr.tot{border-top:2px solid var(--ink);margin-top:5px;padding-top:11px;
+  font-family:'Syne';font-weight:800;font-size:17px}
+.recap-note{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:8px}
+.resa-ft{display:flex;gap:9px;margin-top:16px}
+.resa-ft .btn{flex:1;justify-content:center}
+.done{text-align:center;padding:12px 0}
+.done .dok{width:78px;height:78px;border:var(--bd);background:var(--lime);box-shadow:var(--hs);
+  font-size:38px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.done h3{font-size:23px;margin-bottom:8px}
+.done p{font-size:13.5px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.demo-note{border:2px solid var(--ink);background:var(--lime);padding:9px 12px;
+  font-size:11.5px;margin-top:16px;font-weight:600}
+
+/* ============ BACK OFFICE ============ */
+.bo{background:var(--paper);min-height:100vh}
+.bo-top{background:var(--ink);color:#fff;border-bottom:var(--bd)}
+.bo-top-in{display:flex;align-items:center;gap:16px;height:62px}
+.bo-brand{display:flex;align-items:center;gap:10px}
+.bo-brand .bm{width:36px;height:36px;border:2px solid var(--lime);background:var(--lime);
+  display:flex;align-items:center;justify-content:center;font-size:18px}
+.bo-brand b{font-family:'Syne';font-weight:800;font-size:16px}
+.bo-brand span{font-size:9.5px;color:#8c8778;display:block;letter-spacing:1px}
+.bo-user{margin-left:auto;display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600}
+.bo-user .ua{width:34px;height:34px;border:2px solid var(--lime);background:var(--pink);
+  display:flex;align-items:center;justify-content:center;font-family:'Syne';font-weight:800;font-size:13px}
+.bo-tabs{background:var(--paper);border-bottom:var(--bd);padding:14px 24px 0;display:flex;gap:10px;
+  overflow-x:auto}
+.bo-tabs button{font-family:'Syne';font-weight:800;font-size:13.5px;background:var(--white);
+  border:var(--bd);border-bottom:none;padding:11px 18px;cursor:pointer;white-space:nowrap;
+  margin-bottom:-3px;color:var(--ink)}
+.bo-tabs button.active{background:var(--lime)}
+.bo-body{padding:30px 24px 60px;max-width:1100px;margin:0 auto}
+.bv{display:none}
+.bv.active{display:block}
+.bv-head{margin-bottom:22px}
+.bv-head h2{font-size:30px;font-weight:800;letter-spacing:-1px}
+.bv-head p{font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px}
+
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.kpi{border:var(--bd);background:var(--white);padding:20px;box-shadow:var(--hs-sm)}
+.kpi:nth-child(1){background:var(--lime)}
+.kpi:nth-child(2){background:var(--sky)}
+.kpi:nth-child(3){background:var(--pink);color:#fff}
+.kpi .kv{font-family:'Syne';font-weight:800;font-size:38px;letter-spacing:-1.5px}
+.kpi .kl{font-size:12.5px;font-weight:700}
+
+.panel{border:var(--bd);background:var(--white);box-shadow:var(--hs-sm);margin-bottom:20px}
+.panel-hd{padding:16px 20px;border-bottom:var(--bd);display:flex;align-items:center;
+  justify-content:space-between;background:var(--paper2)}
+.panel-hd h3{font-size:16px}
+.panel-hd .tag{font-family:'Syne';font-weight:800;font-size:11.5px;background:var(--pink);
+  color:#fff;padding:4px 10px;border:2px solid var(--ink)}
+
+.rtable{width:100%;border-collapse:collapse}
+.rtable th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;
+  color:var(--muted);font-weight:700;padding:11px 20px;border-bottom:2px solid var(--ink)}
+.rtable td{padding:13px 20px;border-bottom:1px solid #e6e0cf;font-size:13px;font-weight:500}
+.rtable tr:last-child td{border-bottom:none}
+.rtable tr:hover td{background:var(--paper2)}
+.cust{display:flex;align-items:center;gap:10px}
+.cust .ca{width:33px;height:33px;border:2px solid var(--ink);display:flex;align-items:center;
+  justify-content:center;font-family:'Syne';font-weight:800;font-size:12.5px;flex-shrink:0}
+.cust b{font-weight:700;font-size:13px}
+.cust span{font-size:11px;color:var(--muted);display:block}
+.pill{display:inline-flex;font-size:11px;font-weight:800;padding:4px 10px;
+  font-family:'Syne';border:2px solid var(--ink)}
+.pill.lime{background:var(--lime)}
+.pill.sky{background:var(--sky)}
+.pill.amber{background:var(--orange);color:#fff}
+.pill.gray{background:#e4ddc9}
+.pill.pink{background:var(--pink);color:#fff}
+
+.agenda{padding:16px 20px;display:flex;flex-direction:column;gap:10px}
+.ag-row{border:2px solid var(--ink);display:flex;align-items:center;gap:14px;padding:13px 16px}
+.ag-row .agt{font-family:'Syne';font-weight:800;font-size:16px;width:62px;flex-shrink:0}
+.ag-row .agb{flex:1}
+.ag-row .agb b{font-size:13.5px}
+.ag-row .agb span{font-size:11.5px;color:var(--muted);display:block}
+.ag-row.free{border-style:dashed;color:var(--muted);font-weight:600;font-size:12.5px;
+  justify-content:center;display:flex}
+
+.notice{border:var(--bd);background:var(--lime);padding:13px 16px;font-size:12.5px;
+  font-weight:600;margin-bottom:22px;display:flex;gap:9px;align-items:center}
+
+.toolbar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.seg{display:flex;border:2px solid var(--ink)}
+.seg button{font-family:'Syne';font-weight:800;font-size:12px;background:var(--white);
+  border:none;border-right:2px solid var(--ink);padding:8px 14px;cursor:pointer}
+.seg button:last-child{border-right:none}
+.seg button.active{background:var(--ink);color:#fff}
+.search{flex:1;min-width:160px;padding:9px 13px;border:2px solid var(--ink);font-size:13px;
+  font-family:'Space Grotesk';outline:none;background:var(--white);font-weight:500}
+
+@media(max-width:940px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero h1{font-size:54px}
+  .hero-collage{height:300px;max-width:380px;margin:0 auto}
+  .zones,.anniv-wrap,.avis-wrap,.tarif-row,.kpis{grid-template-columns:1fr}
+  .ff-grid,.infos-grid{grid-template-columns:1fr}
+  .ff-txt{padding:54px 24px}
+  .ff-menu{border-left:none;border-top:var(--bd);padding:40px 24px}
+  .tcell{border-right:none;border-bottom:var(--bd)}
+  .tcell:last-child{border-bottom:none}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  .burger{display:block;margin-left:auto}
+}
+@media(max-width:560px){
+  .hero h1{font-size:42px}
+  .sec-head h2,.cta h2,.ff-txt h2{font-size:32px}
+  .date-grid,.slot-grid{grid-template-columns:repeat(3,1fr)}
+  .modebar .lbl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MODE SWITCH ===== -->
+<div class="modebar">
+  <span class="lbl">Maquette Vong Studio</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= SITE PUBLIC ======================== -->
+<!-- ============================================================ -->
+<div class="screen active" id="screen-site">
+
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo" onclick="scrollToSec('top')">
+        <span class="lm">🦘</span>
+        <span class="lt">PLAY N'JUMP<small>PARC INDOOR · BLOIS</small></span>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('zones')">Les zones</a>
+        <a onclick="scrollToSec('resto')">Fast-food</a>
+        <a onclick="scrollToSec('anniv')">Anniversaires</a>
+        <a onclick="scrollToSec('tarifs')">Tarifs</a>
+        <a onclick="scrollToSec('infos')">Infos</a>
+      </nav>
+      <button class="btn btn-pink btn-sm" onclick="openResa()">Réserver</button>
+      <button class="burger" onclick="scrollToSec('zones')">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="sticker">✦ NOUVEAU À BLOIS — OUVERT 2024</span>
+        <h1>ON SAUTE,<br>ON <span class="box">JOUE</span>,<br><span class="out">ON DÉVORE.</span></h1>
+        <p class="sub">Le parc indoor des enfants à Blois : trampolines, structures de jeux et fast-food. Réserve ton créneau ou ton anniv' en ligne, en 2 minutes.</p>
+        <div class="hero-cta">
+          <button class="btn btn-lime btn-lg" onclick="openResa()">🦘 Réserver maintenant</button>
+          <button class="btn btn-lg" onclick="scrollToSec('anniv')">Voir les anniv'</button>
+        </div>
+      </div>
+      <div class="hero-collage">
+        <div class="tile t1"><span class="em">🎈</span></div>
+        <div class="tile t2"><b>722</b><span>déjà fans sur Insta</span></div>
+        <div class="tile t3"><div class="st">★★★★★</div><b>Les kids adorent</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="mq-track">
+      <span>TRAMPOLINES ✦ STRUCTURES GÉANTES ✦ FAST-FOOD ✦ ANNIVERSAIRES ✦ BABY CLUB ✦ </span>
+      <span>TRAMPOLINES ✦ STRUCTURES GÉANTES ✦ FAST-FOOD ✦ ANNIVERSAIRES ✦ BABY CLUB ✦ </span>
+    </div>
+  </div>
+
+  <!-- ZONES -->
+  <section class="sec" id="zones">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="k">Les zones de jeu</span>
+        <h2>3 terrains de jeu, une seule entrée.</h2>
+        <p>Accès libre à toutes les zones pendant toute la durée du créneau. Chaussettes antidérapantes obligatoires.</p>
+      </div>
+      <div class="zones">
+        <div class="zone c1">
+          <div class="zh">🦘</div>
+          <h3>Le Trampo</h3>
+          <p>Un mur de trampolines connectés pour sauter, rebondir et tester ses meilleures figures entre potes.</p>
+          <span class="za">DÈS 4 ANS</span>
+        </div>
+        <div class="zone c2">
+          <div class="zh">🛝</div>
+          <h3>La Jungle</h3>
+          <p>Structure géante à étages : toboggans, ponts de singe, filets et piscine à balles à perte de vue.</p>
+          <span class="za">DÈS 3 ANS</span>
+        </div>
+        <div class="zone c3">
+          <div class="zh">🧸</div>
+          <h3>Le Baby Club</h3>
+          <p>Un espace tout doux et sécurisé, rien que pour les tout-petits, à l'écart des grandes zones.</p>
+          <span class="za">0 À 3 ANS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAST-FOOD -->
+  <div class="ff" id="resto">
+    <div class="wrap">
+      <div class="ff-grid">
+        <div class="ff-txt">
+          <span class="k" style="display:inline-block;font-family:'Syne';font-weight:800;font-size:12.5px;padding:5px 12px;text-transform:uppercase;letter-spacing:1px">Le fast-food</span>
+          <h2>On ne sort pas du parc<br>pour manger.</h2>
+          <p>Burgers, frites, nuggets et boissons servis sur place toute la journée. Les enfants jouent, vous mangez tranquille — et les goûters d'anniversaire sont déjà dans les formules.</p>
+          <button class="btn btn-lime btn-lg" onclick="openResa()">Réserver une table + créneau</button>
+        </div>
+        <div class="ff-menu">
+          <div class="ff-item"><span class="fe">🍔</span><div><b>Menu Kid</b><span>Burger + frites + compote + boisson</span></div><span class="fpr">7€</span></div>
+          <div class="ff-item"><span class="fe">🍟</span><div><b>Menu Maxi Jump</b><span>Double burger + frites + dessert</span></div><span class="fpr">11€</span></div>
+          <div class="ff-item"><span class="fe">🍕</span><div><b>Part de pizza</b><span>Margherita ou jambon</span></div><span class="fpr">4€</span></div>
+          <div class="ff-item"><span class="fe">🥤</span><div><b>Coin parents</b><span>Café, boissons fraîches, en-cas</span></div><span class="fpr">2€</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ANNIVERSAIRES -->
+  <section class="sec" id="anniv">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="k">Anniversaires</span>
+        <h2>L'anniv' qui finit en légende.</h2>
+        <p>Salle privée, jeux à volonté et fast-food : tu choisis la formule, on s'occupe de tout. Réservation 100 % en ligne.</p>
+      </div>
+      <div class="anniv-wrap">
+        <div class="acard f1">
+          <div class="atop">
+            <div class="ae">🎈</div>
+            <h4>Formule Cool</h4>
+            <div class="ap">14€<small> /enfant</small></div>
+          </div>
+          <div class="abd">
+            <ul>
+              <li><span class="ck">✦</span> 2h de jeux en accès libre</li>
+              <li><span class="ck">✦</span> Salle privée 45 min</li>
+              <li><span class="ck">✦</span> Boissons à volonté</li>
+            </ul>
+            <button class="btn btn-ink" style="width:100%;justify-content:center" onclick="openResa('anniv')">Réserver</button>
+          </div>
+        </div>
+        <div class="acard f2">
+          <div class="atop">
+            <div class="ae">🍔</div>
+            <h4>Formule Méga</h4>
+            <div class="ap">19€<small> /enfant</small></div>
+          </div>
+          <div class="abd">
+            <ul>
+              <li><span class="ck">✦</span> 2h de jeux + salle privée 1h</li>
+              <li><span class="ck">✦</span> Menu Kid fast-food inclus</li>
+              <li><span class="ck">✦</span> Boissons + part de gâteau</li>
+            </ul>
+            <button class="btn btn-ink" style="width:100%;justify-content:center" onclick="openResa('anniv')">Réserver</button>
+          </div>
+        </div>
+        <div class="acard f3">
+          <div class="atop">
+            <div class="ae">🚀</div>
+            <h4>Formule Ultra</h4>
+            <div class="ap">24€<small> /enfant</small></div>
+          </div>
+          <div class="abd">
+            <ul>
+              <li><span class="ck">✦</span> 2h de jeux + salle privée 1h30</li>
+              <li><span class="ck">✦</span> Menu Maxi + gâteau personnalisé</li>
+              <li><span class="ck">✦</span> Cadeau surprise pour le héros</li>
+            </ul>
+            <button class="btn btn-ink" style="width:100%;justify-content:center" onclick="openResa('anniv')">Réserver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE 2 -->
+  <div class="marquee pink">
+    <div class="mq-track">
+      <span>RÉSERVE TON ANNIV' EN LIGNE ✦ PLUS BESOIN DE DM ✦ CONFIRMÉ EN 24H ✦ </span>
+      <span>RÉSERVE TON ANNIV' EN LIGNE ✦ PLUS BESOIN DE DM ✦ CONFIRMÉ EN 24H ✦ </span>
+    </div>
+  </div>
+
+  <!-- TARIFS -->
+  <div class="tarif" id="tarifs">
+    <div class="wrap" style="padding-top:54px">
+      <div class="sec-head" style="margin-bottom:24px">
+        <span class="k">Entrées · tarifs</span>
+        <h2>Simple, comme un saut.</h2>
+      </div>
+    </div>
+    <div class="tarif-row">
+      <div class="tcell">
+        <div class="tn">ENTRÉE BABY</div>
+        <div class="tp">6€</div>
+        <div class="ts">0-3 ans · journée</div>
+        <button class="btn" onclick="openResa('visite')">Réserver</button>
+      </div>
+      <div class="tcell">
+        <div class="tn">ENTRÉE JUMPER</div>
+        <div class="tp">10€</div>
+        <div class="ts">3-12 ans · journée</div>
+        <button class="btn btn-pink" onclick="openResa('visite')">Réserver</button>
+      </div>
+      <div class="tcell">
+        <div class="tn">CARNET 5 ENTRÉES</div>
+        <div class="tp">40€</div>
+        <div class="ts">5× Jumper · −20 %</div>
+        <button class="btn" onclick="openResa('visite')">Réserver</button>
+      </div>
+    </div>
+    <div class="wrap" style="padding-bottom:54px;padding-top:18px">
+      <p style="font-size:13px;font-weight:600;color:var(--ink-soft)">Accompagnateur adulte gratuit · chaussettes antidérapantes 2€ · tarifs illustratifs pour la maquette.</p>
+    </div>
+  </div>
+
+  <!-- AVIS -->
+  <section class="sec" id="avis">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="k">Ils ont sauté</span>
+        <h2>4,6 ★ — et ça grimpe.</h2>
+      </div>
+      <div class="avis-wrap">
+        <div class="review">
+          <div class="rs">★★★★★</div>
+          <p>« Parc tout neuf, super propre, les enfants se sont éclatés. Le fast-food sur place, énorme pratique. »</p>
+          <div class="rw"><div class="rav">YK</div><div><b>Yanis K.</b><span>il y a 2 semaines</span></div></div>
+        </div>
+        <div class="review">
+          <div class="rs">★★★★★</div>
+          <p>« Anniv' de ma fille ici : formule Méga au top, on n'a rien eu à gérer. Enfin un parc moderne à Blois ! »</p>
+          <div class="rw"><div class="rav">CB</div><div><b>Carole B.</b><span>il y a 3 semaines</span></div></div>
+        </div>
+        <div class="review">
+          <div class="rs">★★★★☆</div>
+          <p>« Très bon accueil, les ados ont adoré le Trampo. Hâte de pouvoir réserver en ligne, ça arrive paraît-il. »</p>
+          <div class="rw"><div class="rav">MD</div><div><b>Mehdi D.</b><span>il y a 1 mois</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section class="sec" id="infos" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="k">Infos &amp; accès</span>
+        <h2>On t'attend à Blois.</h2>
+      </div>
+      <div class="infos-grid">
+        <div class="ibox">
+          <h3>🕒 Horaires</h3>
+          <div class="hr-row"><b>Lundi</b><span class="cl">Fermé</span></div>
+          <div class="hr-row"><b>Mardi · Jeudi · Vendredi</b><span class="op">16h – 19h</span></div>
+          <div class="hr-row"><b>Mercredi</b><span class="op">10h – 19h</span></div>
+          <div class="hr-row"><b>Samedi · Dimanche</b><span class="op">10h – 19h</span></div>
+          <div class="hr-row"><b>Vacances scolaires</b><span class="op">10h – 19h, du mardi au dimanche</span></div>
+        </div>
+        <div class="ibox">
+          <h3>📍 Où nous trouver</h3>
+          <div class="il"><span class="ie">🏠</span><div>7 boulevard de l'Industrie<br>41000 Blois</div></div>
+          <div class="il"><span class="ie">📱</span><div>Instagram @playnjump.blois</div></div>
+          <div class="il"><span class="ie">🅿️</span><div>Parking gratuit · zone de loisirs</div></div>
+          <div class="map-ph"><span style="font-size:24px">🗺️</span> Carte Google Maps interactive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="wrap">
+      <h2>PRÊT À SAUTER ?</h2>
+      <p>Réserve ton créneau ou ton anniv' — ça prend 2 minutes, promis.</p>
+      <button class="btn btn-lime btn-lg" onclick="openResa()">🦘 Je réserve</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft-grid">
+        <div>
+          <div class="logo">
+            <span class="lm">🦘</span>
+            <span class="lt">PLAY N'JUMP<small>PARC INDOOR · BLOIS</small></span>
+          </div>
+          <p class="ft-about">Le parc indoor des enfants à Blois. Trampolines, structures de jeux et fast-food — ouvert depuis 2024.</p>
+        </div>
+        <div class="ft-col">
+          <h4>Le parc</h4>
+          <a onclick="scrollToSec('zones')">Les zones</a>
+          <a onclick="scrollToSec('resto')">Fast-food</a>
+          <a onclick="scrollToSec('tarifs')">Tarifs</a>
+          <a onclick="scrollToSec('avis')">Avis</a>
+        </div>
+        <div class="ft-col">
+          <h4>Réserver</h4>
+          <a onclick="openResa('visite')">Un créneau</a>
+          <a onclick="openResa('anniv')">Un anniversaire</a>
+        </div>
+        <div class="ft-col">
+          <h4>Contact</h4>
+          <p>7 bd de l'Industrie<br>41000 Blois</p>
+          <p>Instagram · TikTok · Facebook</p>
+        </div>
+      </div>
+      <div class="ft-bot">
+        <span>© 2026 Play N'Jump — SAS PLAY N'JUMP. Tous droits réservés.</span>
+        <span>Maquette de démonstration · Vong Studio · données illustratives</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= BACK OFFICE ========================= -->
+<!-- ============================================================ -->
+<div class="screen bo" id="screen-bo">
+
+  <div class="bo-top">
+    <div class="wrap bo-top-in">
+      <div class="bo-brand">
+        <span class="bm">🦘</span>
+        <div><b>PLAY N'JUMP</b><span>ESPACE GÉRANT</span></div>
+      </div>
+      <div class="bo-user">
+        <span style="text-align:right">Azzedine Fellouh<br><span style="color:#8c8778;font-size:10.5px">Gérant</span></span>
+        <span class="ua">AF</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bo-tabs">
+    <button class="active" onclick="setBV('dash',this)">📊 Tableau de bord</button>
+    <button onclick="setBV('resa',this)">📅 Réservations</button>
+    <button onclick="setBV('clients',this)">👥 Clients</button>
+  </div>
+
+  <div class="bo-body">
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="bv active" id="bv-dash">
+      <div class="bv-head">
+        <h2>Salut Azzedine 👋</h2>
+        <p>L'activité du parc — samedi 6 juin 2026.</p>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="kv">5</div><div class="kl">Demandes à confirmer</div></div>
+        <div class="kpi"><div class="kv">3</div><div class="kl">Anniversaires cette semaine</div></div>
+        <div class="kpi"><div class="kv">87</div><div class="kl">Enfants attendus aujourd'hui</div></div>
+      </div>
+      <div class="notice">🔔 5 demandes de réservation attendent ta confirmation. Sans réponse, le créneau reste ouvert aux autres familles.</div>
+      <div class="panel">
+        <div class="panel-hd">
+          <h3>Demandes de réservation à traiter</h3>
+          <span class="tag">5 EN ATTENTE</span>
+        </div>
+        <table class="rtable">
+          <thead><tr><th>Famille</th><th>Demandé pour</th><th>Prestation</th><th>Enfants</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--lime)">CB</span><div><b>Carole Boyer</b><span>via le site · il y a 2h</span></div></div></td><td>Sam 6 · 15:30</td><td>Anniv. Méga</td><td>11</td><td><span class="pill amber">À confirmer</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--sky)">YK</span><div><b>Yanis Kaddour</b><span>via le site · il y a 5h</span></div></div></td><td>Dim 7 · 13:00</td><td>Entrée Jumper ×3</td><td>3</td><td><span class="pill amber">À confirmer</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--pink)">ML</span><div><b>Marie Lemoine</b><span>via le site · hier</span></div></div></td><td>Mer 10 · 14:00</td><td>Anniv. Ultra</td><td>14</td><td><span class="pill amber">À confirmer</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--orange)">TG</span><div><b>Thomas Garcia</b><span>via le site · hier</span></div></div></td><td>Sam 13 · 10:30</td><td>Anniv. Cool</td><td>8</td><td><span class="pill amber">À confirmer</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--lime)">SR</span><div><b>Sophie Renaud</b><span>via le site · hier</span></div></div></td><td>Dim 14 · 15:30</td><td>Entrée Jumper ×4</td><td>4</td><td><span class="pill amber">À confirmer</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== RESERVATIONS ===== -->
+    <div class="bv" id="bv-resa">
+      <div class="bv-head">
+        <h2>Réservations</h2>
+        <p>L'agenda du parc — demandes en ligne et créneaux confirmés.</p>
+      </div>
+      <div class="toolbar">
+        <div class="seg">
+          <button class="active">Samedi 6</button>
+          <button>Dimanche 7</button>
+          <button>Toutes</button>
+        </div>
+        <input class="search" placeholder="🔍 Rechercher une famille…">
+      </div>
+      <div class="panel">
+        <div class="panel-hd"><h3>Agenda du samedi 6 juin</h3></div>
+        <div class="agenda">
+          <div class="ag-row">
+            <div class="agt">10:30</div>
+            <div class="agb"><b>Famille Diallo · Entrée Jumper ×5</b><span>5 enfants — réservation confirmée</span></div>
+            <span class="pill lime">Confirmé</span>
+          </div>
+          <div class="ag-row">
+            <div class="agt">13:00</div>
+            <div class="agb"><b>Anniversaire Léa, 7 ans · Formule Méga</b><span>10 enfants — salle privée réservée</span></div>
+            <span class="pill sky">Confirmé</span>
+          </div>
+          <div class="ag-row">
+            <div class="agt">15:30</div>
+            <div class="agb"><b>Anniversaire (demande Carole Boyer) · Formule Méga</b><span>11 enfants — en attente de ta confirmation</span></div>
+            <span class="pill amber">À confirmer</span>
+          </div>
+          <div class="ag-row free">Créneau 17:30 — aucune réservation</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-hd"><h3>Toutes les réservations</h3></div>
+        <table class="rtable">
+          <thead><tr><th>Famille</th><th>Date</th><th>Créneau</th><th>Prestation</th><th>Enfants</th><th>Statut</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--lime)">FD</span><b>Famille Diallo</b></div></td><td>06/06</td><td>10:30</td><td>Entrée Jumper ×5</td><td>5</td><td><span class="pill lime">Confirmé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--sky)">LP</span><b>Léa Pereira</b></div></td><td>06/06</td><td>13:00</td><td>Anniv. Méga</td><td>10</td><td><span class="pill sky">Confirmé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--orange)">CB</span><b>Carole Boyer</b></div></td><td>06/06</td><td>15:30</td><td>Anniv. Méga</td><td>11</td><td><span class="pill amber">À confirmer</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--pink)">YK</span><b>Yanis Kaddour</b></div></td><td>07/06</td><td>13:00</td><td>Entrée Jumper ×3</td><td>3</td><td><span class="pill amber">À confirmer</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--lime)">NB</span><b>Nadia Bouchard</b></div></td><td>07/06</td><td>15:30</td><td>Carnet 5 entrées</td><td>4</td><td><span class="pill lime">Confirmé</span></td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:#e4ddc9">JM</span><b>Julie Marchand</b></div></td><td>04/06</td><td>14:00</td><td>Anniv. Cool</td><td>9</td><td><span class="pill gray">Terminé</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== CLIENTS ===== -->
+    <div class="bv" id="bv-clients">
+      <div class="bv-head">
+        <h2>Clients</h2>
+        <p>Le fichier client constitué automatiquement à chaque réservation — exportable à tout moment.</p>
+      </div>
+      <div class="toolbar">
+        <div class="seg">
+          <button class="active">Tous</button>
+          <button>Anniversaires</button>
+        </div>
+        <input class="search" placeholder="🔍 Rechercher un client…">
+        <button class="btn btn-sm">⤓ Exporter (CSV)</button>
+      </div>
+      <div class="panel">
+        <table class="rtable">
+          <thead><tr><th>Client</th><th>E-mail</th><th>Téléphone</th><th>Réservations</th><th>Dernière venue</th></tr></thead>
+          <tbody>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--lime)">FD</span><b>Famille Diallo</b></div></td><td>diallo.famille@email.fr</td><td>06 41 ** ** 22</td><td>3</td><td>06/06/2026</td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--sky)">LP</span><b>Léa Pereira</b></div></td><td>l.pereira@email.fr</td><td>07 52 ** ** 81</td><td>1</td><td>06/06/2026</td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--orange)">CB</span><b>Carole Boyer</b></div></td><td>carole.boyer@email.fr</td><td>06 08 ** ** 17</td><td>2</td><td>06/06/2026</td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--pink)">YK</span><b>Yanis Kaddour</b></div></td><td>yanis.k@email.fr</td><td>06 77 ** ** 04</td><td>4</td><td>07/06/2026</td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:var(--lime)">NB</span><b>Nadia Bouchard</b></div></td><td>nadia.bouchard@email.fr</td><td>06 90 ** ** 51</td><td>2</td><td>07/06/2026</td></tr>
+            <tr><td><div class="cust"><span class="ca" style="background:#e4ddc9">JM</span><b>Julie Marchand</b></div></td><td>julie.marchand@email.fr</td><td>06 33 ** ** 67</td><td>5</td><td>04/06/2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== RESA OVERLAY ===== -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-hd">
+      <h3 id="resa-title">Réserver un créneau</h3>
+      <button class="rx" onclick="closeResa()">✕</button>
+    </div>
+    <div class="steps-bar" id="steps-bar"></div>
+    <div class="resa-bd" id="resa-bd"></div>
+  </div>
+</div>
+
+<script>
+/* ============ MODE SWITCH ============ */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function setBV(v,btn){
+  document.querySelectorAll('.bv').forEach(function(e){e.classList.remove('active')});
+  document.getElementById('bv-'+v).classList.add('active');
+  document.querySelectorAll('.bo-tabs button').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){
+  if(document.getElementById('screen-site').classList.contains('active')===false)setMode('site');
+  var el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+
+/* ============ RESERVATION TUNNEL (Pack 2 — demande sans paiement) ============ */
+var FORMULES={
+  visite:[
+    {id:'v1',e:'🧸',n:'Entrée Baby',d:'0-3 ans · journée',p:6},
+    {id:'v2',e:'🦘',n:'Entrée Jumper',d:'3-12 ans · journée',p:10},
+    {id:'v3',e:'🎟️',n:'Carnet 5 entrées',d:'5× Entrée Jumper',p:40}
+  ],
+  anniv:[
+    {id:'a1',e:'🎈',n:'Formule Cool',d:'2h jeux + salle 45 min',p:14},
+    {id:'a2',e:'🍔',n:'Formule Méga',d:'2h + salle 1h + menu Kid',p:19},
+    {id:'a3',e:'🚀',n:'Formule Ultra',d:'2h + menu Maxi + gâteau + cadeau',p:24}
+  ]
+};
+var SLOTS=[
+  {h:'10:30',left:18},{h:'13:00',left:6},{h:'15:30',left:31},{h:'17:30',left:12}
+];
+var R={};
+function resetR(type){
+  R={type:type,formule:null,date:null,slot:null,nb:type==='anniv'?8:2,
+     name:'',email:'',phone:'',stage:'formule'};
+}
+function openResa(type){
+  resetR(type||'visite');
+  document.getElementById('ov').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderResa();
+}
+function closeResa(){
+  document.getElementById('ov').classList.remove('show');
+  document.body.style.overflow='';
+}
+var STAGES=['formule','date','who','contact','done'];
+function go(stage){R.stage=stage;renderResa();}
+
+function days(){
+  var out=[],names=['DIM','LUN','MAR','MER','JEU','VEN','SAM'];
+  var mon=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  var d=new Date();
+  for(var i=1;i<=12;i++){
+    var x=new Date(d.getTime()+i*86400000);
+    out.push({key:i,dn:x.getDate(),dd:names[x.getDay()],dm:mon[x.getMonth()],off:x.getDay()===1});
+  }
+  return out;
+}
+function money(n){return n.toLocaleString('fr-FR')+' €';}
+function curF(){return FORMULES[R.type].filter(function(x){return x.id===R.formule})[0];}
+
+function renderResa(){
+  document.getElementById('resa-title').textContent=
+    R.type==='anniv'?'Réserver un anniversaire':'Réserver un créneau';
+  var idx=STAGES.indexOf(R.stage),bar='';
+  for(var i=0;i<4;i++)bar+='<div class="sd'+(i<=idx?' on':'')+'"></div>';
+  document.getElementById('steps-bar').innerHTML=R.stage==='done'?'':bar;
+  var bd=document.getElementById('resa-bd'),h='';
+
+  if(R.stage==='formule'){
+    h+='<div class="qst">'+(R.type==='anniv'?'Quelle formule anniv\' ?':'Quelle entrée ?')+'</div>';
+    h+='<div class="qsub">'+(R.type==='anniv'?'Prix par enfant — salle privée incluse.':'Prix par enfant — accompagnateur adulte offert.')+'</div>';
+    FORMULES[R.type].forEach(function(f){
+      h+='<div class="opt'+(R.formule===f.id?' sel':'')+'" onclick="R.formule=\''+f.id+'\';renderResa()">'
+        +'<div class="oe">'+f.e+'</div><div class="ob"><b>'+f.n+'</b><span>'+f.d+'</span></div>'
+        +'<div class="op">'+f.p+'€</div></div>';
+    });
+    h+='<div class="resa-ft"><button class="btn btn-pink" '+(R.formule?'':'disabled')+' onclick="go(\'date\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='date'){
+    h+='<div class="qst">Choisis ta date</div><div class="qsub">Le parc est fermé le lundi.</div>';
+    h+='<div class="date-grid">';
+    days().forEach(function(d){
+      h+='<div class="dcell'+(d.off?' off':'')+(R.date===d.key?' sel':'')+'" '
+        +(d.off?'':'onclick="R.date='+d.key+';R.slot=null;renderResa()"')+'>'
+        +'<div class="dd">'+d.dd+'</div><div class="dn">'+d.dn+'</div><div class="dm">'+d.dm+'</div></div>';
+    });
+    h+='</div>';
+    if(R.date){
+      h+='<div class="qst" style="font-size:15px;margin-bottom:9px">Créneau d\'arrivée</div><div class="slot-grid">';
+      SLOTS.forEach(function(s){
+        var full=s.left<=0,cls=full?'no':(s.left<=10?'low':'ok');
+        var lbl=full?'Complet':s.left+' pl.';
+        h+='<div class="slot'+(full?' full':'')+(R.slot===s.h?' sel':'')+'" '
+          +(full?'':'onclick="R.slot=\''+s.h+'\';renderResa()"')+'>'
+          +'<div class="sh">'+s.h+'</div><div class="sl '+cls+'">'+lbl+'</div></div>';
+      });
+      h+='</div>';
+    }
+    h+='<div class="resa-ft"><button class="btn" onclick="go(\'formule\')">← Retour</button>'
+      +'<button class="btn btn-pink" '+(R.date&&R.slot?'':'disabled')+' onclick="go(\'who\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='who'){
+    h+='<div class="qst">Vous êtes combien ?</div><div class="qsub">Le nombre d\'enfants attendus.</div>';
+    h+='<div class="counter"><div class="cl"><b>Nombre d\'enfants</b><span>Modifiable jusqu\'à 48h avant</span></div>'
+      +'<div class="cc"><button onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>'
+      +'<b>'+R.nb+'</b><button onclick="R.nb=Math.min(30,R.nb+1);renderResa()">+</button></div></div>';
+    h+='<div class="resa-ft"><button class="btn" onclick="go(\'date\')">← Retour</button>'
+      +'<button class="btn btn-pink" onclick="go(\'contact\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='contact'){
+    var f=curF(),total=f.p*R.nb;
+    h+='<div class="qst">Tes coordonnées</div><div class="qsub">Pour qu\'on te confirme le créneau.</div>';
+    h+='<div class="fld"><label>NOM ET PRÉNOM</label><input value="'+R.name+'" placeholder="Ex. Carole Boyer" oninput="R.name=this.value"></div>';
+    h+='<div class="fld"><label>E-MAIL</label><input value="'+R.email+'" placeholder="toi@email.fr" oninput="R.email=this.value"></div>';
+    h+='<div class="fld"><label>TÉLÉPHONE</label><input value="'+R.phone+'" placeholder="06 ** ** ** **" oninput="R.phone=this.value"></div>';
+    h+='<div class="recap">'
+      +'<div class="rr"><span>'+f.n+'</span><span>'+f.p+'€ × '+R.nb+'</span></div>'
+      +'<div class="rr tot"><span>Total estimé</span><span>'+money(total)+'</span></div>'
+      +'<div class="recap-note">Demande sans paiement en ligne. Le parc te confirme le créneau, puis t\'envoie le lien pour régler l\'acompte.</div></div>';
+    h+='<div class="resa-ft"><button class="btn" onclick="go(\'who\')">← Retour</button>'
+      +'<button class="btn btn-pink" onclick="submitResa()">Envoyer ma demande →</button></div>';
+  }
+
+  else if(R.stage==='done'){
+    var f2=curF(),dd=days().filter(function(x){return x.key===R.date})[0];
+    h+='<div class="done"><div class="dok">✓</div>'
+      +'<h3>Demande envoyée !</h3>'
+      +'<p>'+f2.n+' · '+(dd?dd.dd+' '+dd.dn+' '+dd.dm:'')+' à '+R.slot+'</p>'
+      +'<p>'+R.nb+' enfants — Play N\'Jump te confirme le créneau sous 24h par e-mail.</p>'
+      +'<div class="demo-note">🔎 Maquette de démonstration. Dans le vrai site, cette demande arrive aussitôt dans le back office (onglet Réservations, statut « À confirmer »).</div>'
+      +'<div class="resa-ft"><button class="btn btn-lime" style="flex:1;justify-content:center" onclick="closeResa()">Fermer</button></div></div>';
+  }
+
+  bd.innerHTML=h;
+}
+function submitResa(){
+  if(!R.name||!R.email){alert('Merci d\'indiquer ton nom et ton e-mail.');return;}
+  go('done');
+}
+</script>
+
+</body>
+</html>
