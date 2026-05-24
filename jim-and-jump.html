@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jim and Jump — Maquette refonte site + back office · Vong Studio</title>
+<meta name="description" content="Maquette de démonstration : refonte du site et back-office de réservation pour Jim and Jump, parc d'attractions indoor 1500 m² au Mans.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --ink:#1c1c38; --ink2:#2a2a4f; --ink3:#34335e;
+  --paper:#fff5e6; --cream:#fffaf1; --card:#ffffff;
+  --yellow:#ffce2c; --yellow-d:#e9b400;
+  --coral:#ff5a3c; --coral-d:#e8401f;
+  --green:#16b87f; --green-d:#0e9a68;
+  --blue:#3f7bef; --blue-d:#2a5fd0;
+  --muted:#6c6c86; --muted2:#9b9bb0;
+  --line:#ece4d2; --line2:#ddd3bc;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);
+  -webkit-font-smoothing:antialiased;line-height:1.6}
+h1,h2,h3,h4,.disp{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;line-height:1.04;letter-spacing:-1px}
+a{color:inherit;text-decoration:none}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 26px}
+
+.btn{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;cursor:pointer;
+  border:none;padding:14px 26px;border-radius:13px;transition:transform .14s,box-shadow .14s,filter .14s;
+  display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translateY(-2px)}
+.btn-yellow{background:var(--yellow);color:var(--ink)}
+.btn-yellow:hover{box-shadow:0 10px 24px rgba(255,206,44,.45)}
+.btn-coral{background:var(--coral);color:#fff}
+.btn-coral:hover{box-shadow:0 10px 24px rgba(255,90,60,.42)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{box-shadow:0 10px 24px rgba(28,28,56,.4)}
+.btn-light{background:#fff;color:var(--ink)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.34)}
+.btn-outline:hover{border-color:#fff}
+.btn-sm{padding:10px 18px;font-size:13.5px;border-radius:10px}
+.btn-lg{padding:17px 34px;font-size:17px}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.btn[disabled]:hover{transform:none}
+
+/* ===== MODE SWITCH ===== */
+.modebar{position:fixed;top:0;left:0;right:0;height:48px;background:#000;z-index:300;
+  display:flex;align-items:center;justify-content:center;gap:6px}
+.modebar .lbl{color:#7c7c92;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  margin-right:10px;text-transform:uppercase}
+.mode-btn{font-family:'Bricolage Grotesque',sans-serif;font-size:13.5px;font-weight:700;
+  padding:7px 18px;border-radius:9px;border:none;cursor:pointer;
+  background:transparent;color:#9a9ab0;transition:all .15s}
+.mode-btn.active{background:var(--yellow);color:#000}
+
+.screen{display:none;padding-top:48px}
+.screen.active{display:block}
+
+/* ============ SITE PUBLIC ============ */
+.hdr{position:sticky;top:48px;z-index:100;background:var(--ink)}
+.hdr-in{display:flex;align-items:center;gap:20px;height:78px}
+.logo{display:flex;align-items:center;gap:11px;cursor:pointer}
+.logo .lm{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;
+  justify-content:center;font-size:24px;background:var(--yellow);transform:rotate(-6deg)}
+.logo .lt{font-family:'Bricolage Grotesque';font-weight:800;font-size:21px;color:#fff;line-height:1}
+.logo .lt small{display:block;font-family:'DM Sans';font-weight:600;font-size:9.5px;
+  color:var(--yellow);letter-spacing:1.5px;margin-top:3px}
+.nav{display:flex;gap:3px;margin-left:auto;background:var(--ink2);padding:5px;border-radius:13px}
+.nav a{padding:9px 15px;border-radius:9px;font-weight:600;font-size:13.5px;cursor:pointer;
+  color:#b8b8cf;transition:color .15s,background .15s}
+.nav a:hover{color:#fff;background:var(--ink3)}
+.burger{display:none;font-size:24px;background:none;border:none;cursor:pointer;color:#fff}
+
+/* HERO */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden;
+  padding:78px 0 150px;text-align:center}
+.hero::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(63,123,239,.32),transparent 68%);top:-180px;left:-120px}
+.hero::after{content:"";position:absolute;width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,60,.28),transparent 68%);bottom:-160px;right:-130px}
+.hero .in{position:relative;max-width:840px;margin:0 auto}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;background:var(--ink2);
+  border:1px solid var(--ink3);padding:8px 17px;border-radius:30px;font-weight:600;
+  font-size:12.5px;margin-bottom:24px;color:var(--yellow)}
+.hero h1{font-size:74px;font-weight:800;letter-spacing:-2.5px}
+.hero h1 .u{color:var(--yellow)}
+.hero h1 .c{color:var(--coral)}
+.hero p.sub{font-size:18px;color:#bdbdd4;margin:24px auto 32px;max-width:560px;font-weight:500}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* BENTO */
+.bento-sec{background:var(--paper);padding-bottom:96px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:-96px;
+  position:relative;z-index:3}
+.bt{border-radius:22px;padding:26px;position:relative;overflow:hidden;
+  transition:transform .18s;cursor:pointer;text-decoration:none}
+.bt:hover{transform:translateY(-7px)}
+.bt .be{font-size:46px;display:block;margin-bottom:auto}
+.bt .bk{font-family:'DM Sans';font-weight:700;font-size:11px;letter-spacing:1px;
+  text-transform:uppercase;opacity:.7}
+.bt h3{font-size:25px;margin:4px 0 6px;letter-spacing:-.5px}
+.bt p{font-size:13.5px;font-weight:500;opacity:.85}
+.bt .bgo{margin-top:14px;font-family:'Bricolage Grotesque';font-weight:700;font-size:13.5px;
+  display:inline-flex;align-items:center;gap:6px}
+.bt.zone{grid-column:span 2;min-height:248px;display:flex;flex-direction:column}
+.bt.z1{background:var(--green);color:#fff}
+.bt.z2{background:var(--blue);color:#fff}
+.bt.z3{background:var(--coral);color:#fff}
+.bt.wide{grid-column:span 3;min-height:158px;display:flex;flex-direction:column}
+.bt.resto{background:var(--ink);color:#fff}
+.bt.stat{background:var(--yellow);color:var(--ink)}
+.bt.stat .row{display:flex;gap:26px;margin-top:auto}
+.bt.stat .row b{font-family:'Bricolage Grotesque';font-weight:800;font-size:30px;display:block}
+.bt.stat .row span{font-size:11.5px;font-weight:600}
+
+/* SECTION BLOCKS */
+.block{padding:88px 0}
+.block.b-green{background:var(--green);color:#fff}
+.block.b-yellow{background:var(--yellow);color:var(--ink)}
+.block.b-coral{background:var(--coral);color:#fff}
+.block.b-ink{background:var(--ink);color:#fff}
+.block.b-paper{background:var(--paper)}
+.block.b-cream{background:var(--cream)}
+.sec-kicker{font-family:'Bricolage Grotesque';font-weight:700;font-size:12.5px;
+  letter-spacing:2px;text-transform:uppercase;opacity:.7}
+.sec-h2{font-size:46px;font-weight:800;letter-spacing:-1.5px;margin:10px 0}
+
+/* RESTAURATION */
+.resto-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:center}
+.resto-list{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+.resto-list .ri{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.12);
+  border-radius:14px;padding:14px 18px}
+.resto-list .ri .rie{font-size:26px}
+.resto-list .ri b{font-family:'Bricolage Grotesque';font-size:16px}
+.resto-list .ri span{font-size:13px;opacity:.85;display:block}
+.resto-card{background:#fff;color:var(--ink);border-radius:24px;padding:32px;
+  box-shadow:0 24px 50px rgba(14,154,104,.3)}
+.resto-card .big{font-size:64px;margin-bottom:10px}
+.resto-card h3{font-size:26px;margin-bottom:8px}
+.resto-card p{font-size:14px;color:var(--muted);font-weight:500;margin-bottom:18px}
+
+/* TARIFS */
+.tar-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px}
+.tcard{background:var(--ink);color:#fff;border-radius:22px;padding:32px 28px;position:relative}
+.tcard.hot{background:#fff;color:var(--ink);box-shadow:0 22px 46px rgba(28,28,56,.22)}
+.tcard .pin{position:absolute;top:-13px;left:28px;background:var(--coral);color:#fff;
+  font-family:'Bricolage Grotesque';font-weight:700;font-size:11px;padding:6px 14px;border-radius:8px}
+.tcard .tn{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px}
+.tcard .tprice{font-family:'Bricolage Grotesque';font-weight:800;font-size:52px;margin:8px 0 0;letter-spacing:-2px}
+.tcard .tprice span{font-size:17px;opacity:.6}
+.tcard .tsub{font-size:13px;opacity:.7;margin-bottom:18px;font-weight:500}
+.tcard ul{list-style:none;margin-bottom:22px}
+.tcard ul li{font-size:13.5px;padding:7px 0;font-weight:500;display:flex;gap:9px;
+  border-bottom:1px solid rgba(255,255,255,.12)}
+.tcard.hot ul li{border-bottom-color:var(--line)}
+.tcard ul li:last-child{border:none}
+.tcard ul li .ck{color:var(--yellow)}
+.tcard.hot ul li .ck{color:var(--green)}
+.tar-foot{text-align:center;margin-top:22px;font-size:13.5px;opacity:.8;font-weight:500}
+
+/* ANNIVERSAIRES */
+.anniv-head{display:flex;justify-content:space-between;align-items:flex-end;
+  flex-wrap:wrap;gap:20px;margin-bottom:36px}
+.anniv-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.acard{background:#fff;color:var(--ink);border-radius:20px;padding:24px;
+  display:flex;flex-direction:column;transition:transform .16s}
+.acard:hover{transform:translateY(-7px)}
+.acard .ae{width:54px;height:54px;border-radius:14px;background:var(--paper);
+  display:flex;align-items:center;justify-content:center;font-size:27px;margin-bottom:14px}
+.acard h4{font-size:19px;margin-bottom:5px}
+.acard .ad{font-size:12.5px;color:var(--muted);font-weight:500;flex:1;margin-bottom:14px}
+.acard .ap{font-family:'Bricolage Grotesque';font-weight:800;font-size:30px}
+.acard .ap small{font-size:13px;color:var(--muted);font-weight:600}
+.acard .abtn{margin-top:14px;text-align:center;background:var(--ink);color:#fff;
+  font-family:'Bricolage Grotesque';font-weight:700;font-size:13.5px;padding:11px;
+  border-radius:11px;cursor:pointer;transition:background .15s}
+.acard .abtn:hover{background:var(--coral)}
+
+/* PRIVATISATION */
+.prive-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center}
+.prive-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+.prive-stats .ps{background:var(--ink2);border:1px solid var(--ink3);border-radius:16px;padding:20px}
+.prive-stats .ps b{font-family:'Bricolage Grotesque';font-weight:800;font-size:32px;color:var(--yellow);display:block}
+.prive-stats .ps span{font-size:12.5px;color:#bdbdd4;font-weight:500}
+.prive-card{background:var(--coral);border-radius:26px;padding:40px;position:relative;overflow:hidden}
+.prive-card::before{content:"🎉";position:absolute;font-size:150px;right:-22px;bottom:-34px;opacity:.22}
+.prive-card h3{font-size:30px;margin-bottom:12px}
+.prive-card p{font-size:14.5px;font-weight:500;opacity:.95;margin-bottom:22px}
+
+/* AVIS */
+.avis-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:center}
+.avis-big b{font-family:'Bricolage Grotesque';font-weight:800;font-size:96px;line-height:.9;display:block}
+.avis-big .st{font-size:24px;letter-spacing:2px;margin:6px 0}
+.avis-big span{font-size:14px;font-weight:600;opacity:.8}
+.avis-cards{display:flex;flex-direction:column;gap:14px}
+.review{background:rgba(28,28,56,.07);border-radius:16px;padding:20px 22px}
+.review p{font-size:14px;font-weight:500;margin-bottom:12px}
+.review .rwho{display:flex;align-items:center;gap:10px}
+.review .rav{width:36px;height:36px;border-radius:50%;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';
+  font-weight:700;font-size:14px}
+.review .rwho b{font-size:13.5px;display:block}
+.review .rwho span{font-size:11.5px;opacity:.7}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.infos-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:32px}
+.infos-card h3{font-size:21px;margin-bottom:18px}
+.hrow{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);
+  font-size:14px;font-weight:500}
+.hrow:last-child{border:none}
+.hrow .op{color:var(--green-d);font-weight:700}
+.hrow .cl{color:var(--muted2);font-weight:600}
+.iline{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:14px;font-weight:500}
+.iline .ie{font-size:19px}
+.map-ph{margin-top:16px;height:160px;border-radius:14px;background:var(--paper);
+  border:1px solid var(--line);display:flex;flex-direction:column;gap:6px;
+  align-items:center;justify-content:center;color:var(--muted);font-size:13px;font-weight:600}
+
+/* CTA */
+.cta-final{text-align:center}
+.cta-final h2{font-size:50px;font-weight:800;letter-spacing:-2px;margin-bottom:14px}
+.cta-final p{font-size:16.5px;font-weight:500;opacity:.92;margin-bottom:28px}
+
+/* FOOTER */
+.ft{background:var(--ink);color:#9c9cb6;padding:56px 0 26px}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:30px;margin-bottom:38px}
+.ft-about{font-size:13.5px;margin-top:14px;max-width:290px;font-weight:500}
+.ft-col h4{font-family:'Bricolage Grotesque';color:#fff;font-size:14px;margin-bottom:14px}
+.ft-col a,.ft-col p{display:block;font-size:13.5px;margin-bottom:9px;color:#9c9cb6;cursor:pointer;font-weight:500}
+.ft-col a:hover{color:#fff}
+.ft-bot{border-top:1px solid var(--ink3);padding-top:20px;display:flex;
+  justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:#6c6c86;font-weight:500}
+
+/* ===== RESA OVERLAY ===== */
+.ov{position:fixed;inset:0;background:rgba(28,28,56,.6);backdrop-filter:blur(4px);
+  z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
+.ov.show{display:flex}
+.resa{background:var(--cream);border-radius:24px;width:100%;max-width:560px;
+  max-height:90vh;overflow-y:auto;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.resa-hd{padding:22px 26px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--cream);z-index:2}
+.resa-hd h3{font-size:19px}
+.resa-hd .rx{width:36px;height:36px;border-radius:10px;border:1px solid var(--line2);
+  background:#fff;cursor:pointer;font-size:16px;color:var(--muted)}
+.steps-bar{display:flex;gap:6px;padding:16px 26px 0}
+.steps-bar .sd{flex:1;height:5px;border-radius:4px;background:var(--line)}
+.steps-bar .sd.on{background:var(--coral)}
+.resa-bd{padding:22px 26px 26px}
+.resa-bd .qst{font-family:'Bricolage Grotesque';font-weight:700;font-size:18px;margin-bottom:4px}
+.resa-bd .qsub{font-size:13px;color:var(--muted);margin-bottom:18px;font-weight:500}
+.opt{border:2px solid var(--line);border-radius:14px;padding:15px 17px;cursor:pointer;
+  display:flex;align-items:center;gap:14px;margin-bottom:10px;transition:border-color .14s,background .14s;background:#fff}
+.opt:hover{border-color:var(--line2)}
+.opt.sel{border-color:var(--coral);background:#fff4f1}
+.opt .oe{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:23px;flex-shrink:0;background:var(--paper)}
+.opt .ob{flex:1}
+.opt .ob b{font-family:'Bricolage Grotesque';font-size:15.5px;display:block}
+.opt .ob span{font-size:12.5px;color:var(--muted)}
+.opt .op{font-family:'Bricolage Grotesque';font-weight:800;font-size:17px;color:var(--coral)}
+.date-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px}
+.dcell{border:2px solid var(--line);border-radius:11px;padding:10px 4px;text-align:center;
+  cursor:pointer;transition:all .14s;background:#fff}
+.dcell:hover{border-color:var(--line2)}
+.dcell.sel{border-color:var(--coral);background:#fff4f1}
+.dcell.off{opacity:.32;cursor:not-allowed}
+.dcell .dd{font-size:10.5px;color:var(--muted);font-weight:700;text-transform:uppercase}
+.dcell .dn{font-family:'Bricolage Grotesque';font-weight:800;font-size:19px}
+.dcell .dm{font-size:10px;color:var(--muted);font-weight:500}
+.slot-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.slot{border:2px solid var(--line);border-radius:11px;padding:11px 6px;text-align:center;
+  cursor:pointer;transition:all .14s;background:#fff}
+.slot:hover{border-color:var(--line2)}
+.slot.sel{border-color:var(--coral);background:#fff4f1}
+.slot.full{opacity:.35;cursor:not-allowed}
+.slot .sh{font-family:'Bricolage Grotesque';font-weight:800;font-size:16px}
+.slot .sl{font-size:10.5px;font-weight:700;margin-top:2px}
+.slot .sl.ok{color:var(--green-d)}
+.slot .sl.low{color:var(--coral)}
+.slot .sl.no{color:var(--muted2)}
+.counter{display:flex;align-items:center;justify-content:space-between;background:#fff;
+  border:2px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.counter .cl b{font-family:'Bricolage Grotesque';font-size:15px;display:block}
+.counter .cl span{font-size:12px;color:var(--muted)}
+.counter .cc{display:flex;align-items:center;gap:14px}
+.counter .cc button{width:34px;height:34px;border-radius:9px;border:2px solid var(--line2);
+  background:#fff;font-size:18px;cursor:pointer;color:var(--coral);font-weight:700}
+.counter .cc b{font-family:'Bricolage Grotesque';font-size:19px;min-width:24px;text-align:center}
+.fld{margin-bottom:14px}
+.fld label{font-size:12.5px;font-weight:700;display:block;margin-bottom:6px}
+.fld input{width:100%;padding:12px 14px;border:2px solid var(--line);border-radius:11px;
+  font-family:'DM Sans';font-size:14px;outline:none;transition:border-color .14s;background:#fff}
+.fld input:focus{border-color:var(--coral)}
+.recap{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.recap .rr{display:flex;justify-content:space-between;padding:7px 0;font-size:13.5px;font-weight:500}
+.recap .rr.tot{border-top:1px solid var(--line);margin-top:6px;padding-top:12px;
+  font-family:'Bricolage Grotesque';font-weight:800;font-size:17px}
+.recap .rr.tot .hl{color:var(--coral)}
+.resa-ft{display:flex;gap:10px;margin-top:18px}
+.resa-ft .btn{flex:1;justify-content:center}
+.done{text-align:center;padding:14px 0}
+.done .dok{width:78px;height:78px;border-radius:50%;background:var(--green);color:#fff;
+  font-size:40px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.done h3{font-size:24px;margin-bottom:8px}
+.done p{font-size:14px;color:var(--muted);margin-bottom:6px;font-weight:500}
+.demo-note{background:#fff7df;border:1px solid #f0d894;border-radius:10px;padding:9px 12px;
+  font-size:11.5px;color:#8a6608;margin-top:16px;font-weight:600}
+
+/* ============ BACK OFFICE ============ */
+.bo-shell{display:flex;min-height:calc(100vh - 48px);background:var(--cream)}
+.bo-side{width:240px;background:var(--ink);color:#fff;position:sticky;top:48px;
+  height:calc(100vh - 48px);display:flex;flex-direction:column;flex-shrink:0;padding:22px 16px}
+.bo-side .bo-brand{display:flex;align-items:center;gap:10px;padding:0 8px 20px;
+  border-bottom:1px solid var(--ink3);margin-bottom:18px}
+.bo-side .bo-brand .bm{width:38px;height:38px;border-radius:11px;background:var(--yellow);
+  display:flex;align-items:center;justify-content:center;font-size:19px;transform:rotate(-6deg)}
+.bo-side .bo-brand b{font-family:'Bricolage Grotesque';font-weight:800;font-size:16px}
+.bo-side .bo-brand span{font-size:10px;color:var(--muted2);display:block;letter-spacing:1px;margin-top:1px}
+.bo-snav{display:flex;flex-direction:column;gap:3px;flex:1}
+.bo-snav button{display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  font-family:'Bricolage Grotesque';font-weight:600;font-size:14px;background:none;border:none;
+  color:#a6a6c2;padding:12px 13px;border-radius:11px;cursor:pointer;transition:all .14s}
+.bo-snav button .ni{font-size:17px}
+.bo-snav button.active{background:var(--blue);color:#fff}
+.bo-snav button:hover:not(.active){background:var(--ink2);color:#fff}
+.bo-uchip{display:flex;align-items:center;gap:10px;padding:12px 10px;background:var(--ink2);
+  border-radius:13px;margin-top:14px}
+.bo-uchip .ua{width:36px;height:36px;border-radius:10px;background:var(--coral);
+  display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque';
+  font-weight:700;font-size:14px}
+.bo-uchip b{font-size:13px}
+.bo-uchip span{font-size:11px;color:var(--muted2);display:block}
+.bo-main{flex:1;padding:32px 34px 60px;min-width:0}
+.bv{display:none}
+.bv.active{display:block}
+.bv-head{margin-bottom:24px}
+.bv-head h2{font-size:28px;font-weight:800;letter-spacing:-1px}
+.bv-head p{font-size:13.5px;color:var(--muted);font-weight:500;margin-top:2px}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+.kpi .ki{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-size:20px;margin-bottom:12px}
+.kpi .kv{font-family:'Bricolage Grotesque';font-weight:800;font-size:29px;letter-spacing:-1px}
+.kpi .kl{font-size:12px;color:var(--muted);font-weight:600}
+.kpi .kt{font-size:11px;font-weight:700;margin-top:6px}
+.kpi .kt.up{color:var(--green-d)}
+.kpi .kt.dn{color:var(--coral)}
+
+.bo-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.panel-hd{padding:17px 21px;border-bottom:1px solid var(--line);display:flex;
+  align-items:center;justify-content:space-between}
+.panel-hd h3{font-size:15.5px}
+.panel-hd .pmore{font-size:12.5px;color:var(--blue);font-weight:700;cursor:pointer}
+
+.rtable{width:100%;border-collapse:collapse}
+.rtable th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;
+  color:var(--muted2);font-weight:700;padding:11px 21px;border-bottom:1px solid var(--line)}
+.rtable td{padding:13px 21px;border-bottom:1px solid var(--line);font-size:13px;font-weight:500}
+.rtable tr:last-child td{border-bottom:none}
+.rtable tr:hover td{background:var(--cream)}
+.cust{display:flex;align-items:center;gap:10px}
+.cust .ca{width:33px;height:33px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-family:'Bricolage Grotesque';font-weight:700;font-size:12.5px;color:#fff;flex-shrink:0}
+.cust b{font-weight:700;font-size:13px}
+.cust span{font-size:11px;color:var(--muted);display:block}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;
+  padding:4px 10px;border-radius:7px;font-family:'Bricolage Grotesque'}
+.pill.green{background:#d6f3e7;color:#0c7d54}
+.pill.blue{background:#dde9fd;color:var(--blue-d)}
+.pill.amber{background:#fdeecb;color:#9a6f06}
+.pill.gray{background:#ececf2;color:var(--muted)}
+.pill.coral{background:#fde2dc;color:var(--coral-d)}
+
+.occ{padding:18px 21px}
+.occ-row{margin-bottom:14px}
+.occ-row:last-child{margin-bottom:0}
+.occ-row .ot{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;font-weight:600}
+.occ-row .ot span{color:var(--muted)}
+.occ-bar{height:9px;border-radius:6px;background:#eceef3;overflow:hidden}
+.occ-bar i{display:block;height:100%;border-radius:6px}
+
+.toolbar{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+.seg{display:flex;background:#fff;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{font-family:'Bricolage Grotesque';font-weight:600;font-size:12.5px;background:none;
+  border:none;padding:8px 14px;cursor:pointer;color:var(--muted)}
+.seg button.active{background:var(--ink);color:#fff}
+.search{flex:1;min-width:160px;padding:9px 14px;border:1px solid var(--line);border-radius:9px;
+  font-size:13px;font-family:'DM Sans';outline:none;background:#fff;font-weight:500}
+
+/* AGENDA DES SALLES */
+.salles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.salle{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.salle-hd{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.salle-hd.s1{background:var(--blue)}
+.salle-hd.s2{background:var(--green)}
+.salle-hd.s3{background:var(--coral)}
+.salle-hd b{font-family:'Bricolage Grotesque';font-size:16px}
+.salle-hd span{font-size:11px;font-weight:600;opacity:.9}
+.salle-bd{padding:14px}
+.booking{border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:9px}
+.booking:last-child{margin-bottom:0}
+.booking .bt-row{display:flex;justify-content:space-between;align-items:center}
+.booking b{font-family:'Bricolage Grotesque';font-size:13.5px}
+.booking .bh{font-size:11.5px;color:var(--muted);font-weight:600}
+.booking .bcap{font-size:11px;color:var(--muted);font-weight:600;margin-top:4px}
+.slot-free{border:1px dashed var(--line2);border-radius:11px;padding:13px;text-align:center;
+  font-size:12px;color:var(--muted2);font-weight:600}
+
+.notice{background:#fdeecb;border:1px solid #f0d894;border-radius:13px;padding:13px 17px;
+  font-size:12.5px;color:#8a6608;margin-bottom:22px;display:flex;gap:9px;align-items:center;font-weight:600}
+
+@media(max-width:980px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .bt.zone,.bt.wide{grid-column:span 1}
+  .hero h1{font-size:50px}
+  .resto-grid,.prive-grid,.avis-grid,.infos-grid,.bo-grid{grid-template-columns:1fr}
+  .tar-strip,.anniv-row,.salles{grid-template-columns:1fr}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  .burger{display:block;margin-left:auto}
+  .bo-shell{flex-direction:column}
+  .bo-side{width:100%;height:auto;position:static;flex-direction:column}
+  .bo-snav{flex-direction:row;overflow-x:auto;gap:6px}
+  .bo-snav button{white-space:nowrap}
+  .bo-uchip{display:none}
+}
+@media(max-width:560px){
+  .bento{grid-template-columns:1fr}
+  .hero h1{font-size:39px}
+  .sec-h2,.cta-final h2{font-size:32px}
+  .anniv-row{grid-template-columns:1fr}
+  .date-grid{grid-template-columns:repeat(3,1fr)}
+  .modebar .lbl{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== MODE SWITCH ===== -->
+<div class="modebar">
+  <span class="lbl">Maquette Vong Studio</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= SITE PUBLIC ======================== -->
+<!-- ============================================================ -->
+<div class="screen active" id="screen-site">
+
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo" onclick="scrollToSec('top')">
+        <span class="lm">🎪</span>
+        <span class="lt">Jim and Jump<small>PARC INDOOR · LE MANS</small></span>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('parc')">Le parc</a>
+        <a onclick="scrollToSec('tarifs')">Tarifs</a>
+        <a onclick="scrollToSec('anniv')">Anniversaires</a>
+        <a onclick="scrollToSec('prives')">Privatisation</a>
+        <a onclick="scrollToSec('avis')">Avis</a>
+        <a onclick="scrollToSec('infos')">Infos</a>
+      </nav>
+      <button class="btn btn-yellow btn-sm" onclick="openResa()">Réserver</button>
+      <button class="burger" onclick="scrollToSec('parc')">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="wrap in">
+      <span class="tag">🏆 Le plus grand parc indoor du Mans · 1500 m²</span>
+      <h1>1500 m² de jeu,<br>du <span class="u">premier pas</span><br>au <span class="c">grand saut</span>.</h1>
+      <p class="sub">Trois univers pensés par tranche d'âge, une restauration sur place et des anniversaires clé en main. Et maintenant : la réservation en ligne, 24h/24.</p>
+      <div class="hero-cta">
+        <button class="btn btn-yellow btn-lg" onclick="openResa()">🎟️ Réserver une entrée</button>
+        <button class="btn btn-outline btn-lg" onclick="scrollToSec('anniv')">Organiser un anniversaire</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO -->
+  <div class="bento-sec" id="parc">
+    <div class="wrap">
+      <div class="bento">
+        <a class="bt zone z1" onclick="openResa('visite')">
+          <span class="be">🐤</span>
+          <span class="bk">9 mois – 3 ans</span>
+          <h3>Les P'tits Loups</h3>
+          <p>Un univers tout doux : tapis d'éveil, mini-toboggans et aire sensorielle sécurisée pour les tout-petits.</p>
+          <span class="bgo">Réserver une entrée →</span>
+        </a>
+        <a class="bt zone z2" onclick="openResa('visite')">
+          <span class="be">🚀</span>
+          <span class="bk">3 – 7 ans</span>
+          <h3>Les Explorateurs</h3>
+          <p>Structure à étages, ponts de singe, piscine à balles et toboggans pour les aventuriers en herbe.</p>
+          <span class="bgo">Réserver une entrée →</span>
+        </a>
+        <a class="bt zone z3" onclick="openResa('visite')">
+          <span class="be">🧗</span>
+          <span class="bk">7 – 12 ans</span>
+          <h3>Les Cascadeurs</h3>
+          <p>Parcours sportif, mur d'escalade et tyrolienne : du défi pour les grands qui veulent se dépenser.</p>
+          <span class="bgo">Réserver une entrée →</span>
+        </a>
+        <div class="bt wide resto" onclick="scrollToSec('resto')">
+          <span class="bk">Sur place</span>
+          <h3>🍔 Restauration &amp; coin café</h3>
+          <p>Plats chauds, snacks et boissons pour les enfants — et un vrai café pour les parents pendant qu'ils jouent.</p>
+          <span class="bgo" style="color:var(--yellow)">Voir la carte →</span>
+        </div>
+        <div class="bt wide stat">
+          <span class="bk">Ils nous ont adoptés</span>
+          <h3 style="margin-bottom:0">Le parc préféré des familles sarthoises</h3>
+          <div class="row">
+            <div><b>515</b><span>avis Google</span></div>
+            <div><b>4,7★</b><span>note moyenne</span></div>
+            <div><b>750</b><span>pers. en privatisation</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESTAURATION -->
+  <div class="block b-green" id="resto">
+    <div class="wrap">
+      <div class="resto-grid">
+        <div>
+          <span class="sec-kicker">Restauration sur place</span>
+          <h2 class="sec-h2">On joue, on grignote,<br>on recommence.</h2>
+          <p style="font-size:15.5px;font-weight:500;opacity:.95;max-width:440px">Pas besoin de sortir du parc pour déjeuner ou goûter. Notre espace restauration sert toute la journée — et les parents peuvent commander en ligne avant même d'arriver.</p>
+          <div class="resto-list">
+            <div class="ri"><span class="rie">🍕</span><div><b>Plats chauds &amp; menus enfants</b><span>Servis le midi, sans quitter le parc</span></div></div>
+            <div class="ri"><span class="rie">🧁</span><div><b>Goûters d'anniversaire</b><span>Gâteaux, bonbons et boissons inclus dans les formules</span></div></div>
+            <div class="ri"><span class="rie">☕</span><div><b>Coin café parents</b><span>Wifi, boissons chaudes, vue sur les structures</span></div></div>
+          </div>
+        </div>
+        <div class="resto-card">
+          <div class="big">🍽️</div>
+          <h3>Commande en ligne</h3>
+          <p>Réservez votre table et pré-commandez le menu en même temps que vos entrées — tout est prêt à votre arrivée.</p>
+          <button class="btn btn-coral" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver une entrée</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TARIFS -->
+  <div class="block b-yellow" id="tarifs">
+    <div class="wrap">
+      <div style="text-align:center;margin-bottom:14px">
+        <span class="sec-kicker">Billetterie en ligne</span>
+        <h2 class="sec-h2">Réservez votre entrée</h2>
+      </div>
+      <div class="tar-strip">
+        <div class="tcard">
+          <div class="tn">Entrée P'tit Loup</div>
+          <div class="tprice">7€</div>
+          <div class="tsub">9 mois – 3 ans · journée</div>
+          <ul>
+            <li><span class="ck">✓</span> Accès univers Les P'tits Loups</li>
+            <li><span class="ck">✓</span> Journée complète</li>
+            <li><span class="ck">✓</span> Accompagnateur offert</li>
+          </ul>
+          <button class="btn btn-light" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+        </div>
+        <div class="tcard hot">
+          <div class="pin">LE PLUS RÉSERVÉ</div>
+          <div class="tn">Entrée Aventurier</div>
+          <div class="tprice">12€</div>
+          <div class="tsub">3 – 12 ans · journée</div>
+          <ul>
+            <li><span class="ck">✓</span> Accès aux 3 univers de jeu</li>
+            <li><span class="ck">✓</span> Journée complète, entrées-sorties libres</li>
+            <li><span class="ck">✓</span> Accompagnateur offert</li>
+          </ul>
+          <button class="btn btn-coral" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+        </div>
+        <div class="tcard">
+          <div class="tn">Pass Tribu</div>
+          <div class="tprice">42€</div>
+          <div class="tsub">4 entrées Aventurier</div>
+          <ul>
+            <li><span class="ck">✓</span> 4 journées au lieu de 48€</li>
+            <li><span class="ck">✓</span> Valable 12 mois</li>
+            <li><span class="ck">✓</span> Pour les familles fidèles</li>
+          </ul>
+          <button class="btn btn-light" style="width:100%;justify-content:center" onclick="openResa('visite')">Réserver</button>
+        </div>
+      </div>
+      <p class="tar-foot">Chaussettes antidérapantes obligatoires (en vente 2€) · accompagnateur adulte gratuit · tarifs illustratifs.</p>
+    </div>
+  </div>
+
+  <!-- ANNIVERSAIRES -->
+  <div class="block b-coral" id="anniv">
+    <div class="wrap">
+      <div class="anniv-head">
+        <div>
+          <span class="sec-kicker">Anniversaires clé en main</span>
+          <h2 class="sec-h2">4 formules, zéro prise de tête</h2>
+        </div>
+        <p style="font-size:15px;font-weight:500;max-width:340px;opacity:.95">Salle privative, jeux et goûter : vous choisissez la formule, on prépare tout. Réservation et acompte en ligne.</p>
+      </div>
+      <div class="anniv-row">
+        <div class="acard">
+          <div class="ae">🎈</div>
+          <h4>Formule P'tits Loups</h4>
+          <div class="ad">Jusqu'à 8 enfants · 1h30 de jeux + salle privative + boissons.</div>
+          <div class="ap">85€<small> /forfait</small></div>
+          <div class="abtn" onclick="openResa('anniv')">Réserver</div>
+        </div>
+        <div class="acard">
+          <div class="ae">🎂</div>
+          <h4>Formule Classic</h4>
+          <div class="ad">Jusqu'à 10 enfants · 2h de jeux + salle + goûter complet.</div>
+          <div class="ap">110€<small> /forfait</small></div>
+          <div class="abtn" onclick="openResa('anniv')">Réserver</div>
+        </div>
+        <div class="acard">
+          <div class="ae">👑</div>
+          <h4>Goûter Royal</h4>
+          <div class="ad">Jusqu'à 12 enfants · 2h + goûter complet + gâteau personnalisé.</div>
+          <div class="ap">130€<small> /forfait</small></div>
+          <div class="abtn" onclick="openResa('anniv')">Réserver</div>
+        </div>
+        <div class="acard">
+          <div class="ae">🏆</div>
+          <h4>Tout Compris</h4>
+          <div class="ad">Jusqu'à 15 enfants · 2h + repas + gâteau + cadeau du héros.</div>
+          <div class="ap">150€<small> /forfait</small></div>
+          <div class="abtn" onclick="openResa('anniv')">Réserver</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIVATISATION -->
+  <div class="block b-ink" id="prives">
+    <div class="wrap">
+      <div class="prive-grid">
+        <div>
+          <span class="sec-kicker" style="color:var(--yellow)">Comités d'entreprise &amp; associations</span>
+          <h2 class="sec-h2">Privatisez le parc entier</h2>
+          <p style="font-size:15.5px;font-weight:500;color:#bdbdd4;max-width:440px">Arbre de Noël du CE, sortie d'association, événement scolaire : Jim and Jump se privatise pour vos groupes — jusqu'à 750 personnes. Devis en ligne, facturation simplifiée.</p>
+          <div class="prive-stats">
+            <div class="ps"><b>750</b><span>personnes en capacité maximale</span></div>
+            <div class="ps"><b>3</b><span>salles modulables, 18 pers. chacune</span></div>
+          </div>
+        </div>
+        <div class="prive-card">
+          <h3>Un événement de groupe ?</h3>
+          <p>Décrivez votre projet, recevez un devis personnalisé sous 48h. CE, écoles, associations : tarifs dégressifs selon le nombre de participants.</p>
+          <button class="btn btn-light btn-lg" onclick="scrollToSec('infos')">Demander un devis</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AVIS -->
+  <div class="block b-cream" id="avis">
+    <div class="wrap">
+      <div class="avis-grid">
+        <div class="avis-big">
+          <span class="sec-kicker">Les familles en parlent</span>
+          <b>4,7</b>
+          <div class="st">⭐⭐⭐⭐⭐</div>
+          <span>515 avis Google · Le Mans</span>
+        </div>
+        <div class="avis-cards">
+          <div class="review">
+            <p>« Anniversaire de mon fils dans la salle privative : organisation parfaite, on n'a touché à rien. Et pouvoir payer l'acompte en ligne, enfin ! »</p>
+            <div class="rwho"><div class="rav">VL</div><div><b>Virginie L.</b><span>il y a 2 semaines</span></div></div>
+          </div>
+          <div class="review">
+            <p>« 1500 m², il y en a pour tous les âges — la petite de 18 mois et le grand de 10 ans ont tous les deux adoré. Resto sur place très pratique. »</p>
+            <div class="rwho"><div class="rav">KM</div><div><b>Karim M.</b><span>il y a 1 mois</span></div></div>
+          </div>
+          <div class="review">
+            <p>« On y est venus avec le CE, 60 personnes. Accueil au top. Le parc gagnerait juste à proposer la résa en ligne — c'est en route paraît-il ! »</p>
+            <div class="rwho"><div class="rav">SD</div><div><b>Sandrine D.</b><span>il y a 1 mois</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFOS -->
+  <div class="block b-paper" id="infos">
+    <div class="wrap">
+      <div style="text-align:center;margin-bottom:40px">
+        <span class="sec-kicker">Infos &amp; accès</span>
+        <h2 class="sec-h2">Venir à Jim and Jump</h2>
+      </div>
+      <div class="infos-grid">
+        <div class="infos-card">
+          <h3>🕒 Horaires d'ouverture</h3>
+          <div class="hrow"><b>Lundi</b><span class="cl">Fermé</span></div>
+          <div class="hrow"><b>Mardi · Jeudi · Vendredi</b><span class="op">15h – 19h</span></div>
+          <div class="hrow"><b>Mercredi</b><span class="op">10h – 19h</span></div>
+          <div class="hrow"><b>Samedi · Dimanche</b><span class="op">10h – 19h</span></div>
+          <div class="hrow"><b>Vacances scolaires</b><span class="op">10h – 19h, du mardi au dimanche</span></div>
+        </div>
+        <div class="infos-card">
+          <h3>📍 Nous trouver</h3>
+          <div class="iline"><span class="ie">🏠</span><div>3 rue Louis Harel de la Noé<br>72000 Le Mans</div></div>
+          <div class="iline"><span class="ie">📞</span><div>02 43 72 68 21</div></div>
+          <div class="iline"><span class="ie">🅿️</span><div>Parking gratuit · accès facile depuis le périphérique</div></div>
+          <div class="map-ph"><span style="font-size:26px">🗺️</span> Carte Google Maps interactive</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA FINAL -->
+  <div class="block b-coral">
+    <div class="wrap cta-final">
+      <h2>On vous garde une place ?</h2>
+      <p>Réservez votre entrée ou un anniversaire en ligne — fini d'attendre l'ouverture du standard.</p>
+      <button class="btn btn-light btn-lg" onclick="openResa()">🎟️ Réserver maintenant</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="ft">
+    <div class="wrap">
+      <div class="ft-grid">
+        <div>
+          <div class="logo">
+            <span class="lm">🎪</span>
+            <span class="lt">Jim and Jump<small>PARC INDOOR · LE MANS</small></span>
+          </div>
+          <p class="ft-about">Le parc d'attractions indoor des 9 mois – 12 ans au Mans. 1500 m² de jeu couvert, restauration et anniversaires clé en main.</p>
+        </div>
+        <div class="ft-col">
+          <h4>Le parc</h4>
+          <a onclick="scrollToSec('parc')">Les 3 univers</a>
+          <a onclick="scrollToSec('resto')">Restauration</a>
+          <a onclick="scrollToSec('tarifs')">Tarifs</a>
+          <a onclick="scrollToSec('avis')">Avis</a>
+        </div>
+        <div class="ft-col">
+          <h4>Réserver</h4>
+          <a onclick="openResa('visite')">Une entrée</a>
+          <a onclick="openResa('anniv')">Un anniversaire</a>
+          <a onclick="scrollToSec('prives')">Privatisation CE</a>
+        </div>
+        <div class="ft-col">
+          <h4>Contact</h4>
+          <p>3 rue Louis Harel de la Noé<br>72000 Le Mans</p>
+          <p>02 43 72 68 21</p>
+          <p>Facebook · Instagram</p>
+        </div>
+      </div>
+      <div class="ft-bot">
+        <span>© 2026 Jim and Jump — SARL JIM AND JUMP. Tous droits réservés.</span>
+        <span>Maquette de démonstration · Vong Studio · données illustratives</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- ======================= BACK OFFICE ========================= -->
+<!-- ============================================================ -->
+<div class="screen" id="screen-bo">
+  <div class="bo-shell">
+
+    <aside class="bo-side">
+      <div class="bo-brand">
+        <span class="bm">🎪</span>
+        <div><b>Jim and Jump</b><span>ESPACE GÉRANT</span></div>
+      </div>
+      <nav class="bo-snav">
+        <button class="active" onclick="setBV('dash',this)"><span class="ni">📊</span> Tableau de bord</button>
+        <button onclick="setBV('resa',this)"><span class="ni">📅</span> Réservations</button>
+        <button onclick="setBV('salles',this)"><span class="ni">🚪</span> Agenda des salles</button>
+        <button onclick="setBV('clients',this)"><span class="ni">👥</span> Clients &amp; CE</button>
+        <button onclick="setBV('anniv',this)"><span class="ni">🎉</span> Anniversaires</button>
+      </nav>
+      <div class="bo-uchip">
+        <span class="ua">VH</span>
+        <div><b>Virginie Hérisson</b><span>Associée-gérante</span></div>
+      </div>
+    </aside>
+
+    <main class="bo-main">
+
+      <!-- ===== DASHBOARD ===== -->
+      <div class="bv active" id="bv-dash">
+        <div class="bv-head">
+          <h2>Bonjour Virginie 👋</h2>
+          <p>L'activité du parc — samedi 6 juin 2026.</p>
+        </div>
+        <div class="kpis">
+          <div class="kpi">
+            <div class="ki" style="background:#dde9fd">📅</div>
+            <div class="kv">52</div>
+            <div class="kl">Réservations aujourd'hui</div>
+            <div class="kt up">▲ 18 % vs samedi dernier</div>
+          </div>
+          <div class="kpi">
+            <div class="ki" style="background:#d6f3e7">🧒</div>
+            <div class="kv">287</div>
+            <div class="kl">Entrées attendues</div>
+            <div class="kt up">▲ 14 % vs samedi dernier</div>
+          </div>
+          <div class="kpi">
+            <div class="ki" style="background:#fdeecb">💳</div>
+            <div class="kv">5 310 €</div>
+            <div class="kl">Encaissé en ligne ce mois</div>
+            <div class="kt up">▲ nouveau canal</div>
+          </div>
+          <div class="kpi">
+            <div class="ki" style="background:#fde2dc">🚪</div>
+            <div class="kv">5 / 6</div>
+            <div class="kl">Créneaux de salle réservés</div>
+            <div class="kt dn">▼ surbooking évité 2 fois</div>
+          </div>
+        </div>
+        <div class="notice">⚠️ La salle Comète affichait 2 demandes sur le même créneau de 15h — le moteur de réservation a bloqué le doublon automatiquement.</div>
+        <div class="bo-grid">
+          <div class="panel">
+            <div class="panel-hd">
+              <h3>Prochaines arrivées</h3>
+              <span class="pmore" onclick="setBV('resa',document.querySelectorAll('.bo-snav button')[1])">Tout voir →</span>
+            </div>
+            <table class="rtable">
+              <thead><tr><th>Client</th><th>Créneau</th><th>Entrées</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--blue)">FB</span><div><b>Famille Brunet</b><span>Entrée Aventurier ×4</span></div></div></td><td>10:00</td><td>4</td><td><span class="pill green">✓ Payé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--coral)">AL</span><div><b>Anniv. Adam L.</b><span>Formule Tout Compris</span></div></div></td><td>11:30</td><td>15</td><td><span class="pill blue">Acompte versé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--green)">CE</span><div><b>CE Sarthe Habitat</b><span>Privatisation partielle</span></div></div></td><td>13:30</td><td>60</td><td><span class="pill amber">À confirmer</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--ink2)">MR</span><div><b>Famille Renaud</b><span>Entrée P'tit Loup ×2</span></div></div></td><td>15:00</td><td>2</td><td><span class="pill green">✓ Payé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--blue-d)">AG</span><div><b>Anniv. Agathe G.</b><span>Formule Classic</span></div></div></td><td>16:30</td><td>10</td><td><span class="pill blue">Acompte versé</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel">
+            <div class="panel-hd"><h3>Remplissage du jour</h3></div>
+            <div class="occ">
+              <div class="occ-row"><div class="ot"><b>10:00</b><span>49/80</span></div><div class="occ-bar"><i style="width:61%;background:var(--green)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>11:30</b><span>68/80</span></div><div class="occ-bar"><i style="width:85%;background:var(--coral)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>13:30</b><span>26/80</span></div><div class="occ-bar"><i style="width:33%;background:var(--coral)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>15:00</b><span>73/80</span></div><div class="occ-bar"><i style="width:91%;background:var(--coral)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>16:30</b><span>57/80</span></div><div class="occ-bar"><i style="width:71%;background:var(--green)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>18:00</b><span>40/80</span></div><div class="occ-bar"><i style="width:50%;background:var(--yellow-d)"></i></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RESERVATIONS ===== -->
+      <div class="bv" id="bv-resa">
+        <div class="bv-head">
+          <h2>Réservations</h2>
+          <p>Toutes les réservations en ligne — entrées, anniversaires et groupes.</p>
+        </div>
+        <div class="toolbar">
+          <div class="seg">
+            <button class="active">Aujourd'hui</button>
+            <button>Cette semaine</button>
+            <button>Toutes</button>
+          </div>
+          <input class="search" placeholder="🔍 Rechercher un client, un e-mail…">
+        </div>
+        <div class="panel">
+          <table class="rtable">
+            <thead><tr><th>Client</th><th>Date</th><th>Créneau</th><th>Prestation</th><th>Pers.</th><th>Montant</th><th>Statut</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--blue)">FB</span><div><b>Famille Brunet</b><span>06 41 ** ** 72</span></div></div></td><td>06/06</td><td>10:00</td><td>Entrée Aventurier ×4</td><td>4</td><td><b>48 €</b></td><td><span class="pill green">✓ Payé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--coral)">AL</span><div><b>Adam Lemoine</b><span>07 52 ** ** 18</span></div></div></td><td>06/06</td><td>11:30</td><td>Anniversaire · Tout Compris</td><td>15</td><td><b>150 €</b></td><td><span class="pill blue">Acompte 30 %</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--green)">CE</span><div><b>CE Sarthe Habitat</b><span>ce@sarthe-habitat.fr</span></div></div></td><td>06/06</td><td>13:30</td><td>Privatisation partielle</td><td>60</td><td><b>540 €</b></td><td><span class="pill amber">Devis à valider</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--ink2)">MR</span><div><b>Famille Renaud</b><span>06 08 ** ** 33</span></div></div></td><td>06/06</td><td>15:00</td><td>Entrée P'tit Loup ×2</td><td>2</td><td><b>14 €</b></td><td><span class="pill green">✓ Payé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--blue-d)">AG</span><div><b>Agathe Gautier</b><span>06 77 ** ** 04</span></div></div></td><td>06/06</td><td>16:30</td><td>Anniversaire · Classic</td><td>10</td><td><b>110 €</b></td><td><span class="pill blue">Acompte 30 %</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--coral-d)">PT</span><div><b>Pauline Tessier</b><span>06 90 ** ** 51</span></div></div></td><td>07/06</td><td>10:00</td><td>Pass Tribu</td><td>4</td><td><b>42 €</b></td><td><span class="pill green">✓ Payé</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--blue)">NL</span><div><b>Anniv. Noah L.</b><span>06 33 ** ** 67</span></div></div></td><td>07/06</td><td>14:00</td><td>Anniversaire · Goûter Royal</td><td>12</td><td><b>130 €</b></td><td><span class="pill gray">Acompte à régler</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--green)">AS</span><div><b>Asso. Les Bout'choux</b><span>contact@boutchoux72.fr</span></div></div></td><td>09/06</td><td>13:30</td><td>Privatisation groupe</td><td>45</td><td><b>405 €</b></td><td><span class="pill coral">Annulée</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== AGENDA DES SALLES ===== -->
+      <div class="bv" id="bv-salles">
+        <div class="bv-head">
+          <h2>Agenda des salles</h2>
+          <p>Les 3 salles d'anniversaire — 18 personnes max chacune. Samedi 6 juin 2026.</p>
+        </div>
+        <div class="notice">🛡️ Le moteur de réservation interdit deux anniversaires sur le même créneau de salle — fini le risque de surbooking constaté au téléphone.</div>
+        <div class="salles">
+          <div class="salle">
+            <div class="salle-hd s1"><b>Salle Étoile</b><span>18 pers. max</span></div>
+            <div class="salle-bd">
+              <div class="booking">
+                <div class="bt-row"><b>Adam, 9 ans</b><span class="bh">11:30 – 13:30</span></div>
+                <div class="bcap">Formule Tout Compris · 15 enfants</div>
+              </div>
+              <div class="booking">
+                <div class="bt-row"><b>Agathe, 8 ans</b><span class="bh">16:30 – 18:30</span></div>
+                <div class="bcap">Formule Classic · 10 enfants</div>
+              </div>
+              <div class="slot-free">Créneau 14:00 libre</div>
+            </div>
+          </div>
+          <div class="salle">
+            <div class="salle-hd s2"><b>Salle Comète</b><span>18 pers. max</span></div>
+            <div class="salle-bd">
+              <div class="booking">
+                <div class="bt-row"><b>Léa, 6 ans</b><span class="bh">10:30 – 12:30</span></div>
+                <div class="bcap">Formule P'tits Loups · 8 enfants</div>
+              </div>
+              <div class="booking">
+                <div class="bt-row"><b>Tom, 10 ans</b><span class="bh">15:00 – 17:00</span></div>
+                <div class="bcap">Formule Goûter Royal · 12 enfants</div>
+              </div>
+              <div class="slot-free">Créneau 17:30 libre</div>
+            </div>
+          </div>
+          <div class="salle">
+            <div class="salle-hd s3"><b>Salle Galaxie</b><span>18 pers. max</span></div>
+            <div class="salle-bd">
+              <div class="booking">
+                <div class="bt-row"><b>Privatisation CE</b><span class="bh">13:30 – 16:00</span></div>
+                <div class="bcap">CE Sarthe Habitat · salle réservée au groupe</div>
+              </div>
+              <div class="slot-free">Créneau 10:00 libre</div>
+              <div class="slot-free">Créneau 16:30 libre</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CLIENTS ===== -->
+      <div class="bv" id="bv-clients">
+        <div class="bv-head">
+          <h2>Clients &amp; comités d'entreprise</h2>
+          <p>La base constituée automatiquement — familles, CE et associations exploitables pour le remarketing.</p>
+        </div>
+        <div class="toolbar">
+          <div class="seg">
+            <button class="active">Tous</button>
+            <button>Familles</button>
+            <button>CE &amp; assos</button>
+          </div>
+          <input class="search" placeholder="🔍 Rechercher un client…">
+        </div>
+        <div class="panel">
+          <table class="rtable">
+            <thead><tr><th>Client</th><th>E-mail</th><th>Visites</th><th>Dernière visite</th><th>Total dépensé</th><th>Segment</th></tr></thead>
+            <tbody>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--blue)">FB</span><b>Famille Brunet</b></div></td><td>brunet.famille@email.fr</td><td>9</td><td>06/06/2026</td><td><b>396 €</b></td><td><span class="pill green">Habituée</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--green)">CE</span><b>CE Sarthe Habitat</b></div></td><td>ce@sarthe-habitat.fr</td><td>2</td><td>06/06/2026</td><td><b>1 080 €</b></td><td><span class="pill blue">Comité d'entreprise</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--coral)">AG</span><b>Agathe Gautier</b></div></td><td>a.gautier@email.fr</td><td>4</td><td>06/06/2026</td><td><b>318 €</b></td><td><span class="pill blue">Anniversaires</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--ink2)">MR</span><b>Famille Renaud</b></div></td><td>renaud72@email.fr</td><td>1</td><td>06/06/2026</td><td><b>14 €</b></td><td><span class="pill gray">Nouvelle</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--blue-d)">PT</span><b>Pauline Tessier</b></div></td><td>pauline.tessier@email.fr</td><td>12</td><td>07/06/2026</td><td><b>504 €</b></td><td><span class="pill green">Habituée</span></td></tr>
+              <tr><td><div class="cust"><span class="ca" style="background:var(--green-d)">AB</span><b>Asso. Les Bout'choux</b></div></td><td>contact@boutchoux72.fr</td><td>3</td><td>14/05/2026</td><td><b>1 215 €</b></td><td><span class="pill blue">Association</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== ANNIVERSAIRES ===== -->
+      <div class="bv" id="bv-anniv">
+        <div class="bv-head">
+          <h2>Anniversaires</h2>
+          <p>Les anniversaires à préparer — formule, salle et goûter.</p>
+        </div>
+        <div class="bo-grid">
+          <div class="panel">
+            <div class="panel-hd"><h3>À venir cette semaine</h3></div>
+            <table class="rtable">
+              <thead><tr><th>Héros du jour</th><th>Date</th><th>Salle</th><th>Formule</th><th>Statut</th></tr></thead>
+              <tbody>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--coral)">🏆</span><div><b>Adam, 9 ans</b><span>15 enfants</span></div></div></td><td>06/06 · 11:30</td><td>Étoile</td><td>Tout Compris</td><td><span class="pill blue">Acompte versé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--blue)">🎂</span><div><b>Agathe, 8 ans</b><span>10 enfants</span></div></div></td><td>06/06 · 16:30</td><td>Étoile</td><td>Classic</td><td><span class="pill blue">Acompte versé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--green)">👑</span><div><b>Tom, 10 ans</b><span>12 enfants</span></div></div></td><td>06/06 · 15:00</td><td>Comète</td><td>Goûter Royal</td><td><span class="pill green">✓ Confirmé</span></td></tr>
+                <tr><td><div class="cust"><span class="ca" style="background:var(--ink2)">🎈</span><div><b>Léa, 6 ans</b><span>8 enfants</span></div></div></td><td>06/06 · 10:30</td><td>Comète</td><td>P'tits Loups</td><td><span class="pill gray">Acompte à régler</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel">
+            <div class="panel-hd"><h3>Ce mois-ci</h3></div>
+            <div class="occ">
+              <div style="padding:4px 0 12px">
+                <div style="font-family:'Bricolage Grotesque';font-weight:800;font-size:32px;color:var(--coral)">23</div>
+                <div style="font-size:12px;color:var(--muted);font-weight:600">anniversaires réservés en juin</div>
+              </div>
+              <div style="border-top:1px solid var(--line);margin-bottom:12px"></div>
+              <div class="occ-row"><div class="ot"><b>Tout Compris</b><span>9</span></div><div class="occ-bar"><i style="width:39%;background:var(--coral)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>Goûter Royal</b><span>6</span></div><div class="occ-bar"><i style="width:26%;background:var(--blue)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>Classic</b><span>5</span></div><div class="occ-bar"><i style="width:22%;background:var(--green)"></i></div></div>
+              <div class="occ-row"><div class="ot"><b>P'tits Loups</b><span>3</span></div><div class="occ-bar"><i style="width:13%;background:var(--yellow-d)"></i></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ===== RESA OVERLAY ===== -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-hd">
+      <h3 id="resa-title">Réserver une entrée</h3>
+      <button class="rx" onclick="closeResa()">✕</button>
+    </div>
+    <div class="steps-bar" id="steps-bar"></div>
+    <div class="resa-bd" id="resa-bd"></div>
+  </div>
+</div>
+
+<script>
+/* ============ MODE SWITCH ============ */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function setBV(v,btn){
+  document.querySelectorAll('.bv').forEach(function(e){e.classList.remove('active')});
+  document.getElementById('bv-'+v).classList.add('active');
+  document.querySelectorAll('.bo-snav button').forEach(function(b){b.classList.remove('active')});
+  if(btn)btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){
+  if(document.getElementById('screen-site').classList.contains('active')===false)setMode('site');
+  var el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+
+/* ============ RESERVATION TUNNEL ============ */
+var FORMULES={
+  visite:[
+    {id:'v1',e:'🐤',n:'Entrée P\'tit Loup',d:'9 mois – 3 ans · journée',p:7},
+    {id:'v2',e:'🚀',n:'Entrée Aventurier',d:'3 – 12 ans · journée',p:12},
+    {id:'v3',e:'👨‍👩‍👧‍👦',n:'Pass Tribu',d:'4 entrées Aventurier',p:42}
+  ],
+  anniv:[
+    {id:'a1',e:'🎈',n:'Formule P\'tits Loups',d:'Jusqu\'à 8 enfants · 1h30 + salle',p:85,forfait:true},
+    {id:'a2',e:'🎂',n:'Formule Classic',d:'Jusqu\'à 10 enfants · 2h + goûter',p:110,forfait:true},
+    {id:'a3',e:'👑',n:'Formule Goûter Royal',d:'Jusqu\'à 12 enfants · 2h + gâteau',p:130,forfait:true},
+    {id:'a4',e:'🏆',n:'Formule Tout Compris',d:'Jusqu\'à 15 enfants · repas + cadeau',p:150,forfait:true}
+  ]
+};
+var SLOTS=[
+  {h:'10:00',left:31},{h:'11:30',left:12},{h:'13:30',left:54},
+  {h:'15:00',left:7},{h:'16:30',left:23},{h:'18:00',left:40}
+];
+var R={};
+function resetR(type){
+  R={type:type,formule:null,date:null,slot:null,nb:type==='anniv'?10:2,
+     name:'',email:'',phone:'',stage:'formule'};
+}
+function openResa(type){
+  resetR(type||'visite');
+  document.getElementById('ov').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderResa();
+}
+function closeResa(){
+  document.getElementById('ov').classList.remove('show');
+  document.body.style.overflow='';
+}
+var STAGES=['formule','date','who','contact','done'];
+function go(stage){R.stage=stage;renderResa();}
+
+function days(){
+  var out=[],names=['DIM','LUN','MAR','MER','JEU','VEN','SAM'];
+  var mon=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
+  var d=new Date();
+  for(var i=1;i<=12;i++){
+    var x=new Date(d.getTime()+i*86400000);
+    out.push({key:i,dn:x.getDate(),dd:names[x.getDay()],dm:mon[x.getMonth()],off:x.getDay()===1});
+  }
+  return out;
+}
+function money(n){return n.toLocaleString('fr-FR')+' €';}
+function curF(){return FORMULES[R.type].filter(function(x){return x.id===R.formule})[0];}
+
+function renderResa(){
+  document.getElementById('resa-title').textContent=
+    R.type==='anniv'?'Réserver un anniversaire':'Réserver une entrée';
+  var idx=STAGES.indexOf(R.stage),bar='';
+  for(var i=0;i<4;i++)bar+='<div class="sd'+(i<=idx?' on':'')+'"></div>';
+  document.getElementById('steps-bar').innerHTML=R.stage==='done'?'':bar;
+  var bd=document.getElementById('resa-bd'),h='';
+
+  if(R.stage==='formule'){
+    h+='<div class="qst">'+(R.type==='anniv'?'Quelle formule anniversaire ?':'Quelle entrée ?')+'</div>';
+    h+='<div class="qsub">'+(R.type==='anniv'?'Prix au forfait — salle privative incluse.':'Prix par personne — accompagnateur adulte offert.')+'</div>';
+    FORMULES[R.type].forEach(function(f){
+      h+='<div class="opt'+(R.formule===f.id?' sel':'')+'" onclick="R.formule=\''+f.id+'\';renderResa()">'
+        +'<div class="oe">'+f.e+'</div><div class="ob"><b>'+f.n+'</b><span>'+f.d+'</span></div>'
+        +'<div class="op">'+f.p+'€</div></div>';
+    });
+    h+='<div class="resa-ft"><button class="btn btn-coral" '+(R.formule?'':'disabled')+' onclick="go(\'date\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='date'){
+    h+='<div class="qst">Choisissez votre date</div><div class="qsub">Le parc est fermé le lundi.</div>';
+    h+='<div class="date-grid">';
+    days().forEach(function(d){
+      h+='<div class="dcell'+(d.off?' off':'')+(R.date===d.key?' sel':'')+'" '
+        +(d.off?'':'onclick="R.date='+d.key+';R.slot=null;renderResa()"')+'>'
+        +'<div class="dd">'+d.dd+'</div><div class="dn">'+d.dn+'</div><div class="dm">'+d.dm+'</div></div>';
+    });
+    h+='</div>';
+    if(R.date){
+      h+='<div class="qst" style="font-size:15px;margin-bottom:10px">Créneau d\'arrivée</div><div class="slot-grid">';
+      SLOTS.forEach(function(s){
+        var full=s.left<=0,cls=full?'no':(s.left<=12?'low':'ok');
+        var lbl=full?'Complet':s.left+' places';
+        h+='<div class="slot'+(full?' full':'')+(R.slot===s.h?' sel':'')+'" '
+          +(full?'':'onclick="R.slot=\''+s.h+'\';renderResa()"')+'>'
+          +'<div class="sh">'+s.h+'</div><div class="sl '+cls+'">'+lbl+'</div></div>';
+      });
+      h+='</div>';
+    }
+    h+='<div class="resa-ft"><button class="btn btn-light" style="border:2px solid var(--line2)" onclick="go(\'formule\')">← Retour</button>'
+      +'<button class="btn btn-coral" '+(R.date&&R.slot?'':'disabled')+' onclick="go(\'who\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='who'){
+    h+='<div class="qst">Combien d\'enfants ?</div>';
+    h+='<div class="qsub">'+(R.type==='anniv'?'Dans la limite de la formule choisie.':'L\'accompagnateur adulte est offert.')+'</div>';
+    h+='<div class="counter"><div class="cl"><b>Nombre d\'enfants</b><span>Ajustable jusqu\'à 48h avant</span></div>'
+      +'<div class="cc"><button onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>'
+      +'<b>'+R.nb+'</b><button onclick="R.nb=Math.min(50,R.nb+1);renderResa()">+</button></div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-light" style="border:2px solid var(--line2)" onclick="go(\'date\')">← Retour</button>'
+      +'<button class="btn btn-coral" onclick="go(\'contact\')">Continuer →</button></div>';
+  }
+
+  else if(R.stage==='contact'){
+    var f=curF(),forf=!!f.forfait;
+    var total=forf?f.p:f.p*R.nb,acompte=Math.round(total*0.3);
+    h+='<div class="qst">Vos coordonnées</div><div class="qsub">Pour recevoir la confirmation et le rappel.</div>';
+    h+='<div class="fld"><label>Nom et prénom</label><input value="'+R.name+'" placeholder="Ex. Famille Brunet" oninput="R.name=this.value"></div>';
+    h+='<div class="fld"><label>E-mail</label><input value="'+R.email+'" placeholder="vous@email.fr" oninput="R.email=this.value"></div>';
+    h+='<div class="fld"><label>Téléphone</label><input value="'+R.phone+'" placeholder="06 ** ** ** **" oninput="R.phone=this.value"></div>';
+    h+='<div class="recap">'
+      +'<div class="rr"><span>'+f.n+'</span><span>'+(forf?'Forfait':f.p+'€ × '+R.nb)+'</span></div>'
+      +'<div class="rr"><span>Total</span><span>'+money(total)+'</span></div>'
+      +'<div class="rr tot"><span>Acompte à régler (30 %)</span><span class="hl">'+money(acompte)+'</span></div></div>';
+    h+='<div class="resa-ft"><button class="btn btn-light" style="border:2px solid var(--line2)" onclick="go(\'who\')">← Retour</button>'
+      +'<button class="btn btn-coral" onclick="submitResa()">💳 Payer l\'acompte</button></div>';
+  }
+
+  else if(R.stage==='done'){
+    var f2=curF(),dd=days().filter(function(x){return x.key===R.date})[0];
+    h+='<div class="done"><div class="dok">✓</div>'
+      +'<h3>Réservation confirmée !</h3>'
+      +'<p>'+f2.n+' · '+(dd?dd.dd+' '+dd.dn+' '+dd.dm:'')+' à '+R.slot+'</p>'
+      +'<p>'+R.nb+' enfants — un e-mail de confirmation part vers '+(R.email||'votre adresse')+'.</p>'
+      +'<div class="demo-note">🔎 Maquette de démonstration — aucun paiement réel n\'a été effectué. Dans le vrai site, la réservation apparaît aussitôt dans le back office (Réservations + Agenda des salles).</div>'
+      +'<div class="resa-ft"><button class="btn btn-coral" style="flex:1;justify-content:center" onclick="closeResa()">Fermer</button></div></div>';
+  }
+
+  bd.innerHTML=h;
+}
+function submitResa(){
+  if(!R.name||!R.email){alert('Merci de renseigner votre nom et votre e-mail.');return;}
+  go('done');
+}
+</script>
+
+</body>
+</html>
