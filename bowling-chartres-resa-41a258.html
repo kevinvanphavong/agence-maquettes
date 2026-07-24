@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bowling de Chartres — Réservation en ligne + Back office (maquette démo)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#070b16; --surface:#0e1424; --surface2:#151d31; --surface3:#1e2740;
+  --line:#232d47; --line2:#334063;
+  --text:#eef1fa; --muted:#93a0bd; --muted2:#5d6785;
+  --blue:#3f74ff; --blue-d:#2350d8; --blue-l:#6d95ff;
+  --accent:#ff9d33; --accent-d:#e57e12;
+  --violet:#9b6bff; --green:#33d17a; --amber:#ffb020;
+  --glow-blue:0 0 24px rgba(63,116,255,.5);
+  --glow-accent:0 0 22px rgba(255,157,51,.45);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.disp{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.3px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px}
+::-webkit-scrollbar-track{background:var(--surface)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.btn{font-family:'Space Grotesk';font-weight:700;font-size:15px;letter-spacing:.2px;
+  cursor:pointer;border:none;padding:13px 26px;border-radius:11px;
+  transition:transform .15s,box-shadow .15s,filter .15s;display:inline-flex;
+  align-items:center;gap:8px}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--blue-l);outline-offset:2px}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:var(--glow-blue)}
+.btn-blue:hover{box-shadow:0 0 34px rgba(63,116,255,.7)}
+.btn-accent{background:var(--accent);color:#231204;box-shadow:var(--glow-accent)}
+.btn-accent:hover{box-shadow:0 0 34px rgba(255,157,51,.7)}
+.btn-ghost{background:transparent;color:var(--text);border:2px solid var(--line2)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue-l)}
+.btn-sm{padding:9px 16px;font-size:13.5px;border-radius:9px}
+a:focus-visible,.mode-btn:focus-visible,.nav a:focus-visible,.opt:focus-visible,
+.day:focus-visible,.slot:focus-visible,input:focus-visible,.bn:focus-visible{
+  outline:3px solid var(--blue-l);outline-offset:2px}
+
+/* MODE SWITCH */
+.modebar{position:fixed;top:0;left:0;right:0;height:48px;background:#04070f;z-index:200;
+  display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px solid var(--line)}
+.modebar .lbl{color:var(--muted2);font-size:11px;font-weight:800;letter-spacing:2px;margin-right:8px}
+.mode-btn{font-family:'Space Grotesk';font-size:14px;font-weight:700;letter-spacing:.3px;
+  padding:7px 18px;border-radius:8px;border:none;cursor:pointer;
+  background:transparent;color:var(--muted);transition:all .15s}
+.mode-btn.active{background:var(--blue);color:#fff;box-shadow:var(--glow-blue)}
+
+.screen{display:none;padding-top:48px}
+.screen.active{display:block}
+
+/* ============ RÉSERVATION EN LIGNE ============ */
+.hdr{position:sticky;top:48px;z-index:100;background:rgba(7,11,22,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:18px;height:72px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .lm{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;background:linear-gradient(135deg,var(--blue),var(--blue-d));
+  box-shadow:var(--glow-blue)}
+.logo .lt{font-family:'Space Grotesk';font-weight:700;font-size:19px;line-height:1}
+.logo .lt small{display:block;font-family:'Inter';font-weight:700;font-size:9.5px;
+  color:var(--accent);letter-spacing:2.5px;margin-top:3px}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{padding:9px 14px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;
+  transition:color .15s}
+.nav a:hover{color:var(--blue-l)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:70px 0 60px;
+  background:radial-gradient(ellipse at 78% 15%,rgba(63,116,255,.18) 0,transparent 55%),
+  radial-gradient(ellipse at 12% 95%,rgba(255,157,51,.12) 0,transparent 50%)}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+  background-size:46px 46px;mask-image:radial-gradient(ellipse at 50% 35%,#000,transparent 75%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);
+  background:var(--surface);padding:7px 15px;border-radius:30px;font-weight:700;
+  font-size:12.5px;color:var(--accent);margin-bottom:20px}
+.hero .tag .live{width:8px;height:8px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-size:52px;line-height:1.02;letter-spacing:-1px}
+.hero h1 .hl{color:var(--blue-l)}
+.hero p.sub{font-size:17px;color:var(--muted);margin:20px 0 26px;max-width:460px;
+  font-weight:500;line-height:1.6}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:30px;margin-top:32px}
+.hero-stats .hs b{font-family:'Space Grotesk';font-size:28px;display:block;color:var(--accent)}
+.hero-stats .hs span{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1px}
+
+/* Live availability card */
+.live-card{background:linear-gradient(160deg,var(--surface2),var(--surface));
+  border:1px solid var(--line2);border-radius:18px;padding:22px;position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.4),inset 0 0 60px rgba(63,116,255,.05)}
+.live-card .lh{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.live-card .lh b{font-family:'Space Grotesk';font-size:16px}
+.live-card .lh .live{width:8px;height:8px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite}
+.live-card .lsub{font-size:12px;color:var(--muted);font-weight:500;margin-bottom:14px}
+.live-row{display:flex;align-items:center;justify-content:space-between;
+  background:var(--bg);border:1px solid var(--line);border-radius:11px;
+  padding:11px 14px;margin-bottom:9px}
+.live-row .lr-a{display:flex;align-items:center;gap:10px;font-weight:700;font-size:13.5px}
+.live-row .lr-a .e{font-size:20px}
+.live-row .lr-a small{display:block;font-size:11px;color:var(--muted);font-weight:500}
+.live-slots{display:flex;gap:5px}
+.mini-slot{font-family:'Space Grotesk';font-weight:700;font-size:12px;padding:5px 9px;
+  border-radius:7px;background:rgba(51,209,122,.14);color:var(--green);border:1px solid rgba(51,209,122,.3)}
+.mini-slot.full{background:rgba(140,140,170,.12);color:var(--muted2);
+  border-color:var(--line);text-decoration:line-through}
+.live-card .btn{width:100%;justify-content:center;margin-top:6px}
+
+/* INFOBAND */
+.infoband{background:var(--blue);padding:14px 0}
+.infoband .wrap{display:flex;justify-content:space-around;gap:18px;flex-wrap:wrap}
+.infoband .ib{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13.5px;color:#fff}
+.infoband .ib .e{font-size:18px}
+
+section{padding:66px 0}
+.sec-head{max-width:640px;margin:0 auto 42px;text-align:center}
+.sec-head .kicker{font-weight:800;color:var(--accent);letter-spacing:3px;font-size:12px}
+.sec-head h2{font-size:38px;margin:10px 0 10px;letter-spacing:-.5px}
+.sec-head p{color:var(--muted);font-size:15.5px;font-weight:500}
+
+/* ACTIVITES */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.act{background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:28px 24px;position:relative;overflow:hidden;transition:transform .18s,border-color .18s}
+.act:hover{transform:translateY(-6px);border-color:var(--acc,var(--blue))}
+.act::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--acc,var(--blue))}
+.act .ai{font-size:42px;margin-bottom:14px}
+.act h3{font-size:23px;margin-bottom:8px}
+.act p{font-size:13.5px;color:var(--muted);font-weight:500;line-height:1.6}
+.act .ap{margin-top:14px;font-family:'Space Grotesk';font-weight:700;font-size:18px;color:var(--accent)}
+.act .btn{width:100%;justify-content:center;margin-top:16px}
+
+/* STEPS EXPLAINER */
+#comment{background:linear-gradient(180deg,var(--bg),var(--surface))}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.fl{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 18px;position:relative}
+.fl .fn{font-family:'Space Grotesk';font-size:13px;font-weight:700;color:#231204;
+  background:var(--accent);width:28px;height:28px;border-radius:8px;display:flex;
+  align-items:center;justify-content:center;margin-bottom:12px}
+.fl .fe{font-size:26px;margin-bottom:6px}
+.fl b{font-family:'Space Grotesk';font-size:15px;display:block;margin-bottom:5px}
+.fl p{font-size:12.5px;color:var(--muted);font-weight:500;line-height:1.55}
+.pain{max-width:760px;margin:34px auto 0;background:var(--surface);border:1px solid var(--line2);
+  border-radius:14px;padding:20px 24px;display:flex;gap:16px;align-items:center}
+.pain .pe{font-size:32px}
+.pain b{font-family:'Space Grotesk';font-size:15px}
+.pain p{font-size:13px;color:var(--muted);font-weight:500;margin-top:3px;line-height:1.55}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.info-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.info-card h3{font-size:20px;margin-bottom:16px;color:var(--blue-l)}
+.info-card .iline{display:flex;gap:11px;padding:8px 0;font-weight:600;font-size:14px}
+.info-card .iline .e{font-size:17px}
+.hours .hr{display:flex;justify-content:space-between;padding:9px 0;
+  border-bottom:1px solid var(--line);font-weight:600;font-size:14px}
+.hours .hr:last-child{border:none}
+.hours .hr b{color:var(--blue-l)}
+.ph-note{margin-top:14px;font-size:12px;color:var(--muted2);font-weight:600;
+  background:var(--surface2);border:1px dashed var(--line2);border-radius:10px;padding:12px}
+
+footer{background:#04070f;border-top:1px solid var(--line);padding:40px 0 26px;color:var(--muted)}
+footer .fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px;
+  padding-bottom:24px;border-bottom:1px solid var(--line)}
+footer .fcol b{color:var(--text);font-family:'Space Grotesk';font-size:15px;display:block;margin-bottom:9px}
+footer .fcol a{display:block;font-size:13px;padding:3px 0;font-weight:500;cursor:pointer}
+footer .fcol a:hover{color:var(--blue-l)}
+footer .fbot{text-align:center;padding-top:20px;font-size:11.5px;font-weight:500}
+
+/* RESA MODAL */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(5px);
+  z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
+.ov.open{display:flex}
+.resa{background:var(--surface);border:1px solid var(--line2);border-radius:18px;
+  width:700px;max-width:100%;max-height:92vh;overflow-y:auto;
+  box-shadow:0 0 60px rgba(63,116,255,.28)}
+.resa-head{background:linear-gradient(135deg,var(--blue),var(--blue-d));padding:20px 26px;
+  display:flex;align-items:center;gap:13px;position:sticky;top:0;z-index:2}
+.resa-head h3{font-size:20px;color:#fff}
+.resa-head .rx{margin-left:auto;width:36px;height:36px;border-radius:9px;border:none;
+  background:rgba(0,0,0,.25);color:#fff;font-size:17px;cursor:pointer}
+.resa-head .rx:hover{background:rgba(0,0,0,.4)}
+.steps{display:flex;gap:6px;padding:18px 26px 4px}
+.stp{flex:1;height:5px;border-radius:5px;background:var(--line)}
+.stp.on{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.resa-body{padding:14px 26px 26px}
+.rstep{display:none}
+.rstep.active{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rstep h4{font-size:19px;margin-bottom:3px}
+.rstep .rhint{color:var(--muted);font-size:13px;font-weight:500;margin-bottom:16px}
+.rstep .rhint .live{display:inline-block;width:8px;height:8px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite;margin-right:5px}
+.opt{display:flex;gap:12px;align-items:center;background:var(--surface2);
+  border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:9px;
+  cursor:pointer;transition:all .14s}
+.opt:hover{border-color:var(--line2)}
+.opt.sel{border-color:var(--blue);background:rgba(63,116,255,.08)}
+.opt .oe{font-size:26px;width:44px;text-align:center}
+.opt .on b{font-size:14.5px;font-family:'Space Grotesk';font-weight:700}
+.opt .on span{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-top:2px}
+.opt .op{margin-left:auto;font-family:'Space Grotesk';font-size:17px;color:var(--accent);font-weight:700;text-align:right;white-space:nowrap}
+.opt .op small{display:block;font-size:10.5px;color:var(--muted);font-weight:600}
+.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:12px}
+.field label{font-weight:700;font-size:12px;display:block;margin-bottom:5px;
+  letter-spacing:.3px;color:var(--muted)}
+.field input{width:100%;padding:12px 13px;border:1px solid var(--line2);border-radius:9px;
+  font-family:'Inter';font-weight:600;font-size:14px;background:var(--bg);color:var(--text)}
+.field input:focus{outline:none;border-color:var(--blue)}
+.daypick{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{aspect-ratio:1;border:1px solid var(--line2);border-radius:9px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;background:var(--surface2);transition:all .12s}
+.day small{font-size:9px;color:var(--muted);font-weight:800}
+.day:hover:not(.off){border-color:var(--blue)}
+.day.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+.day.sel small{color:#dbe6ff}
+.day.off{opacity:.25;cursor:not-allowed}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.slot{padding:10px 6px;border:1px solid var(--line2);border-radius:9px;text-align:center;
+  font-weight:700;font-size:13px;cursor:pointer;background:var(--surface2);transition:all .12s;position:relative}
+.slot:hover:not(.full){border-color:var(--blue)}
+.slot small{display:block;font-size:9.5px;color:var(--green);font-weight:700;margin-top:2px}
+.slot.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+.slot.sel small{color:#dbe6ff}
+.slot.full{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.qty{display:flex;align-items:center;gap:14px}
+.qty button{width:40px;height:40px;border-radius:9px;border:1px solid var(--blue);
+  background:transparent;color:var(--blue-l);font-size:20px;font-weight:900;cursor:pointer}
+.qty button:hover{background:rgba(63,116,255,.12)}
+.qty .qv{font-family:'Space Grotesk';font-size:26px;width:46px;text-align:center}
+.addon{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+.addon:last-child{border:none}
+.addon input{width:19px;height:19px;accent-color:var(--blue)}
+.addon .anm b{font-size:13.5px}
+.addon .anm span{display:block;font-size:11.5px;color:var(--muted);font-weight:500}
+.addon .ap{margin-left:auto;font-family:'Space Grotesk';color:var(--accent);font-weight:700;font-size:15px}
+.summary{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+.sline{display:flex;justify-content:space-between;padding:5px 0;font-weight:600;font-size:13.5px}
+.sline.tot{border-top:1px solid var(--line2);margin-top:6px;padding-top:11px;
+  font-family:'Space Grotesk';font-size:22px;color:var(--accent)}
+.paybox{background:rgba(51,209,122,.08);border:1px solid rgba(51,209,122,.28);
+  border-radius:10px;padding:11px 14px;font-size:12px;font-weight:600;color:var(--green);
+  margin-top:8px;display:flex;gap:8px;align-items:center}
+.resa-foot{display:flex;gap:10px;justify-content:space-between;margin-top:16px}
+/* payment step */
+.paycard{background:var(--surface2);border:1px solid var(--line2);border-radius:14px;padding:18px;margin-bottom:14px}
+.paycard .pch{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.paycard .pch b{font-family:'Space Grotesk';font-size:15px}
+.paycard .cards{margin-left:auto;display:flex;gap:6px;font-size:20px}
+.pay-secure{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);
+  font-weight:600;margin-top:10px}
+.pay-amount{background:linear-gradient(135deg,rgba(63,116,255,.14),rgba(255,157,51,.1));
+  border:1px solid var(--line2);border-radius:12px;padding:16px 18px;display:flex;
+  align-items:center;justify-content:space-between;margin-bottom:14px}
+.pay-amount .pl{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.3px}
+.pay-amount .pv{font-family:'Space Grotesk';font-size:30px;color:var(--accent)}
+.confirm-ok{text-align:center;padding:20px 10px}
+.confirm-ok .ce{font-size:62px;filter:drop-shadow(0 0 20px rgba(51,209,122,.55))}
+.confirm-ok h4{font-size:26px;margin:12px 0 6px;color:var(--green)}
+.confirm-ok p{color:var(--muted);font-weight:500;font-size:14px}
+.ref{display:inline-block;background:var(--blue);color:#fff;font-family:'Space Grotesk';
+  font-size:16px;padding:9px 22px;border-radius:9px;margin-top:14px;box-shadow:var(--glow-blue)}
+.paid-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(51,209,122,.14);
+  color:var(--green);border:1px solid rgba(51,209,122,.35);font-family:'Space Grotesk';
+  font-weight:700;font-size:13px;padding:6px 14px;border-radius:20px;margin-top:12px}
+
+/* ============ BACK OFFICE ============ */
+.bo{display:flex;min-height:calc(100vh - 48px)}
+.bo-side{width:236px;background:#04070f;flex-shrink:0;padding:20px 13px;
+  display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.bo-brand{display:flex;align-items:center;gap:9px;padding:0 8px 16px;
+  border-bottom:1px solid var(--line);margin-bottom:14px}
+.bo-brand .lm{width:38px;height:38px;border-radius:10px;font-size:18px;
+  background:linear-gradient(135deg,var(--blue),var(--blue-d));display:flex;
+  align-items:center;justify-content:center;box-shadow:var(--glow-blue)}
+.bo-brand b{font-family:'Space Grotesk';font-size:15px}
+.bo-brand small{display:block;color:var(--accent);font-size:9px;font-weight:800;letter-spacing:1.5px}
+.bo-nav .bn{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:10px;
+  color:var(--muted);font-weight:600;font-size:13.5px;cursor:pointer;margin-bottom:3px;
+  transition:all .14s}
+.bo-nav .bn:hover{background:var(--surface2);color:var(--text)}
+.bo-nav .bn.active{background:var(--blue);color:#fff}
+.bo-nav .bn .e{font-size:16px;width:22px;text-align:center}
+.bo-nav .bn .ct{margin-left:auto;background:rgba(255,255,255,.14);font-size:10.5px;
+  padding:1px 8px;border-radius:20px;font-weight:800}
+.bo-side .bo-foot{margin-top:auto;padding:12px 8px 0;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:9px}
+.bo-side .bo-foot .av{width:36px;height:36px;border-radius:9px;font-weight:800;
+  background:linear-gradient(135deg,var(--accent),var(--violet));display:flex;
+  align-items:center;justify-content:center;color:#160a02;font-size:13px}
+.bo-side .bo-foot b{color:var(--text);font-size:13px}
+.bo-side .bo-foot small{display:block;color:var(--muted);font-size:11px;font-weight:600}
+.bo-main{flex:1;background:var(--bg);overflow-y:auto}
+.bo-top{min-height:64px;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;padding:10px 30px;position:sticky;top:0;z-index:5;gap:16px}
+.bo-top h2{font-size:20px}
+.bo-top .bo-sub{font-size:12px;color:var(--muted);font-weight:500}
+.bo-top .live-pill{margin-left:auto;display:inline-flex;align-items:center;gap:7px;
+  background:var(--surface2);border:1px solid var(--line2);border-radius:20px;
+  padding:6px 13px;font-size:11.5px;font-weight:700;color:var(--green)}
+.bo-top .live-pill .live{width:8px;height:8px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite}
+.bo-content{padding:24px 30px 50px}
+.bo-view{display:none}
+.bo-view.active{display:block;animation:fade .3s}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+  padding:17px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:var(--kc,var(--blue))}
+.kpi .ki{position:absolute;right:11px;top:11px;font-size:26px;opacity:.2}
+.kpi .kl{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+.kpi .kv{font-family:'Space Grotesk';font-size:29px;margin-top:5px}
+.kpi .kf{font-size:11.5px;font-weight:700;margin-top:2px}
+.kpi .kf.up{color:var(--green)}
+.bo-cols{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.panel-h{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.panel-h h3{font-size:16px}
+.panel-h .pill{margin-left:auto;font-size:10.5px;font-weight:800;padding:3px 10px;
+  border-radius:20px;background:var(--surface3);color:var(--blue-l);text-transform:uppercase;letter-spacing:.3px}
+.panel-b{padding:6px 18px 14px;overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;min-width:520px}
+.tbl th{text-align:left;font-size:10.5px;color:var(--muted);font-weight:800;
+  text-transform:uppercase;letter-spacing:.3px;padding:10px 8px;border-bottom:1px solid var(--line2)}
+.tbl td{padding:11px 8px;border-bottom:1px solid var(--line);font-weight:600;font-size:13px}
+.tbl tr:last-child td{border:none}
+.tbl tr:hover td{background:var(--surface2)}
+.who{display:flex;align-items:center;gap:9px}
+.who .wav{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:14px;flex-shrink:0;background:var(--surface3)}
+.who b{font-size:13px}
+.who small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.badge{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:6px;
+  display:inline-block;text-transform:uppercase;letter-spacing:.2px}
+.b-conf{background:rgba(51,209,122,.15);color:var(--green)}
+.b-att{background:rgba(255,176,32,.15);color:var(--amber)}
+.b-new{background:rgba(63,116,255,.18);color:var(--blue-l)}
+.b-done{background:rgba(140,140,170,.15);color:var(--muted)}
+.b-online{background:rgba(51,209,122,.15);color:var(--green)}
+.b-onsite{background:rgba(255,176,32,.15);color:var(--amber)}
+
+/* planning pistes + quiz */
+.plan{display:grid;grid-template-columns:60px repeat(4,1fr);gap:8px;min-width:560px}
+.plan .ph{font-family:'Space Grotesk';font-weight:700;font-size:12.5px;text-align:center;
+  padding:9px 0;color:var(--blue-l);border-bottom:1px solid var(--line2)}
+.plan .pt{font-weight:700;font-size:12px;color:var(--muted);
+  display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
+.pslot{background:var(--surface2);border:1px solid var(--line);border-radius:9px;
+  min-height:48px;padding:6px;font-size:10.5px;font-weight:700}
+.pslot.book{background:rgba(63,116,255,.13);border-color:rgba(63,116,255,.42);color:#9fbcff}
+.pslot.book.acc{background:rgba(255,157,51,.13);border-color:rgba(255,157,51,.42);color:#ffc281}
+.pslot.book.vio{background:rgba(155,107,255,.13);border-color:rgba(155,107,255,.42);color:#c9b0ff}
+.pslot.free{color:var(--muted2);display:flex;align-items:center;justify-content:center}
+.pslot small{display:block;font-weight:600;opacity:.85;margin-top:2px}
+
+.toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap}
+.search{flex:1;max-width:300px;position:relative}
+.search input{width:100%;padding:10px 14px 10px 36px;border:1px solid var(--line2);
+  border-radius:9px;font-family:'Inter';font-weight:600;font-size:13px;
+  background:var(--surface);color:var(--text)}
+.search .si{position:absolute;left:12px;top:9px;font-size:14px}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line2);border-radius:9px;padding:3px}
+.seg button{border:none;background:none;font-family:'Space Grotesk';font-weight:700;font-size:12.5px;
+  padding:6px 13px;border-radius:6px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--blue);color:#fff}
+
+.giftgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.gift{background:linear-gradient(150deg,var(--surface2),var(--surface));
+  border:1px solid var(--line2);border-radius:14px;padding:18px;position:relative;overflow:hidden}
+.gift::after{content:"";position:absolute;right:-20px;top:-20px;width:80px;height:80px;
+  border-radius:50%;background:radial-gradient(circle,rgba(63,116,255,.22),transparent 70%)}
+.gift .gv{font-family:'Space Grotesk';font-size:27px;color:var(--accent)}
+.gift .gl{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+
+.note{background:rgba(63,116,255,.08);border:1px solid rgba(63,116,255,.24);
+  border-radius:11px;padding:12px 15px;font-size:12px;font-weight:600;color:var(--blue-l);
+  display:flex;gap:9px;margin-top:16px;line-height:1.5}
+
+@media(max-width:920px){
+  .hero-grid,.infos-grid,.bo-cols{grid-template-columns:1fr}
+  .acts,.flow,.kpis,.giftgrid{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:38px}.nav{display:none}.bo-side{display:none}
+  .fieldrow{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .acts,.flow,.kpis,.giftgrid{grid-template-columns:1fr}
+  .hero{padding:40px 0 40px}
+  .slots{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="modebar">
+  <span class="lbl">MAQUETTE — DÉMO</span>
+  <button class="mode-btn active" id="m-resa" onclick="setMode('resa')">🎳 Réservation en ligne</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ===================================================== RÉSERVATION EN LIGNE -->
+<div class="screen active" id="screen-resa">
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo">
+        <span class="lm">🎳</span>
+        <div class="lt">Bowling de Chartres<small>NOGENT-LE-PHAYE · 28</small></div>
+      </div>
+      <nav class="nav">
+        <a onclick="scrollToSec('activites')">Activités</a>
+        <a onclick="scrollToSec('comment')">Comment ça marche</a>
+        <a onclick="scrollToSec('infos')">Infos &amp; accès</a>
+      </nav>
+      <button class="btn btn-accent btn-sm" onclick="openResa()">⚡ Réserver</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag"><span class="live"></span> Disponibilités en temps réel</span>
+        <h1>Réservez votre <span class="hl">piste</span><br>en ligne, en 2 minutes</h1>
+        <p class="sub">Bowling et Quiz Room, 7j/7 — choisissez votre créneau, réglez en ligne par carte, et c'est confirmé. Fini le téléphone et le paiement à l'accueil.</p>
+        <div class="hero-cta">
+          <button class="btn btn-accent" onclick="openResa()">⚡ Réserver maintenant</button>
+          <button class="btn btn-ghost" onclick="scrollToSec('activites')">Voir les activités</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><b>12</b><span>PISTES</span></div>
+          <div class="hs"><b>Quiz</b><span>ROOM 20 PL.</span></div>
+          <div class="hs"><b>7j/7</b><span>RÉSA EN LIGNE</span></div>
+        </div>
+      </div>
+      <div class="live-card">
+        <div class="lh"><span class="live"></span><b>Disponibilités du jour</b></div>
+        <div class="lsub">Samedi soir · mis à jour à l'instant</div>
+        <div class="live-row">
+          <div class="lr-a"><span class="e">🎳</span><div>Bowling — pistes<small>par piste, jusqu'à 6 joueurs</small></div></div>
+          <div class="live-slots">
+            <span class="mini-slot">18h</span><span class="mini-slot">19h</span>
+            <span class="mini-slot full">20h</span><span class="mini-slot">21h</span>
+          </div>
+        </div>
+        <div class="live-row">
+          <div class="lr-a"><span class="e">🧠</span><div>Quiz Room<small>session 1h par groupe</small></div></div>
+          <div class="live-slots">
+            <span class="mini-slot full">18h</span><span class="mini-slot">19h30</span>
+            <span class="mini-slot">21h</span>
+          </div>
+        </div>
+        <button class="btn btn-blue" onclick="openResa()">Choisir mon créneau →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="infoband">
+    <div class="wrap">
+      <div class="ib"><span class="e">⚡</span> Réservation en ligne 24h/24</div>
+      <div class="ib"><span class="e">💳</span> Paiement CB immédiat &amp; sécurisé</div>
+      <div class="ib"><span class="e">🎳</span> Bowling &amp; Quiz Room</div>
+      <div class="ib"><span class="e">🎂</span> Anniversaires clé en main</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITES -->
+  <section id="activites">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">CE QUI SE RÉSERVE</div>
+        <h2>Deux activités, une seule réservation</h2>
+        <p>Bowling à la piste ou session Quiz Room — sélectionnez, payez, c'est réservé.</p>
+      </div>
+      <div class="acts">
+        <div class="act" style="--acc:var(--blue)"><div class="ai">🎳</div><h3>Bowling</h3>
+          <p>12 pistes rénovées, écrans de scores automatiques. Réservez à la piste (jusqu'à 6 joueurs) ou au joueur, à l'heure.</p>
+          <div class="ap">dès 6,50 € / partie</div>
+          <button class="btn btn-blue" onclick="openResa('bowl-joueur')">Réserver une piste</button></div>
+        <div class="act" style="--acc:var(--violet)"><div class="ai">🧠</div><h3>Quiz Room</h3>
+          <p>Salle immersive jusqu'à 20 joueurs, buzzers et grand écran. Session d'1h par groupe — désormais réservable et payable en ligne.</p>
+          <div class="ap">15 € / joueur</div>
+          <button class="btn btn-ghost" onclick="openResa('quiz')">Réserver une session</button></div>
+        <div class="act" style="--acc:var(--accent)"><div class="ai">🎂</div><h3>Anniversaires</h3>
+          <p>Formule enfant clé en main : bowling, boissons et gâteau. Réservez la date et réglez l'acompte en ligne.</p>
+          <div class="ap">18 € / enfant</div>
+          <button class="btn btn-ghost" onclick="openResa('anniv')">Organiser un anniv'</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENT CA MARCHE -->
+  <section id="comment">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">RÉSERVATION EN LIGNE</div>
+        <h2>De la piste au paiement, en 5 étapes</h2>
+        <p>Un parcours unique et temps réel — plus d'allers-retours par email ni de règlement à l'accueil.</p>
+      </div>
+      <div class="flow">
+        <div class="fl"><div class="fn">1</div><div class="fe">🎳</div><b>Activité</b><p>Bowling, Quiz Room ou anniversaire.</p></div>
+        <div class="fl"><div class="fn">2</div><div class="fe">📅</div><b>Date &amp; créneau</b><p>Disponibilités en temps réel des pistes et de la salle.</p></div>
+        <div class="fl"><div class="fn">3</div><div class="fe">👥</div><b>Participants</b><p>Nombre de joueurs, chaussures, options.</p></div>
+        <div class="fl"><div class="fn">4</div><div class="fe">💳</div><b>Paiement CB</b><p>Réglé en ligne immédiatement, e-billet envoyé.</p></div>
+      </div>
+      <div class="pain">
+        <span class="pe">💡</span>
+        <div>
+          <b>Ce que la réservation en ligne change pour vous</b>
+          <p>Aujourd'hui : validation manuelle en 2 emails, bowling réservable seulement par téléphone, Quiz Room payé sur place à l'accueil. Demain : créneau réservé et payé en ligne en temps réel, tout centralisé dans le back office — zéro double-saisie, zéro oubli.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="sec-head"><div class="kicker">AVANT DE VENIR</div><h2>Infos &amp; accès</h2></div>
+      <div class="infos-grid">
+        <div class="info-card hours">
+          <h3>🕑 Horaires</h3>
+          <div class="hr"><span>Lundi</span><b>Fermé</b></div>
+          <div class="hr"><span>Mardi – Jeudi</span><b>16h – 23h</b></div>
+          <div class="hr"><span>Vendredi</span><b>16h – 01h</b></div>
+          <div class="hr"><span>Samedi</span><b>10h – 01h</b></div>
+          <div class="hr"><span>Dimanche</span><b>10h – 22h</b></div>
+        </div>
+        <div class="info-card">
+          <h3>📍 Accès &amp; contact</h3>
+          <div class="iline"><span class="e">🏠</span> 8 rue des Quilles, 28630 Nogent-le-Phaye</div>
+          <div class="iline"><span class="e">🚗</span> Parking gratuit · à 10 min de Chartres</div>
+          <div class="iline"><span class="e">📞</span> 02 37 00 00 00 <span style="color:var(--muted2)">(numéro illustratif)</span></div>
+          <div class="iline"><span class="e">📸</span> Instagram @bowlingdechartres</div>
+          <div class="ph-note">🖼️ Visuels de l'établissement à fournir par le client (image à intégrer).</div>
+          <div style="margin-top:14px"><button class="btn btn-accent" onclick="openResa()">⚡ Réserver maintenant</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fgrid">
+        <div>
+          <div class="logo"><span class="lm">🎳</span><div class="lt">Bowling de Chartres<small>NOGENT-LE-PHAYE · 28</small></div></div>
+          <p style="margin-top:12px;font-size:13px;font-weight:500;max-width:270px">Bowling &amp; Quiz Room — réservation et paiement en ligne, en temps réel.</p>
+        </div>
+        <div class="fcol"><b>Activités</b><a onclick="scrollToSec('activites')">Bowling</a><a onclick="scrollToSec('activites')">Quiz Room</a><a onclick="openResa('anniv')">Anniversaires</a></div>
+        <div class="fcol"><b>Réserver</b><a onclick="openResa('bowl-joueur')">Une piste</a><a onclick="openResa('quiz')">Une session Quiz</a><a onclick="openResa('anniv')">Un anniversaire</a></div>
+        <div class="fcol"><b>Suivez-nous</b><a>Instagram</a><a>Facebook</a><a>Avis Google</a></div>
+      </div>
+      <div class="fbot">Maquette de démonstration réalisée pour la prospection — données illustratives. © Bowling de Chartres</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================================================== BACK OFFICE -->
+<div class="screen" id="screen-bo">
+  <div class="bo">
+    <aside class="bo-side">
+      <div class="bo-brand">
+        <span class="lm">🎳</span>
+        <div><b>Bowling</b><small>BACK OFFICE</small></div>
+      </div>
+      <nav class="bo-nav" id="boNav"></nav>
+      <div class="bo-foot">
+        <div class="av">FT</div>
+        <div><b>Famille Tessier</b><small>Gérants</small></div>
+      </div>
+    </aside>
+    <div class="bo-main">
+      <div class="bo-top">
+        <div><h2 id="boTitle">Tableau de bord</h2>
+          <div class="bo-sub" id="boSub">Vue d'ensemble des réservations</div></div>
+        <span class="live-pill"><span class="live"></span> Temps réel</span>
+      </div>
+      <div class="bo-content">
+        <div class="bo-view active" id="bv-dash"></div>
+        <div class="bo-view" id="bv-resa"></div>
+        <div class="bo-view" id="bv-planning"></div>
+        <div class="bo-view" id="bv-paiements"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESA MODAL -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa" role="dialog" aria-label="Réservation en ligne">
+    <div class="resa-head">
+      <span style="font-size:24px">⚡</span>
+      <h3>Réserver en ligne</h3>
+      <button class="rx" onclick="closeResa()" aria-label="Fermer">✕</button>
+    </div>
+    <div class="steps" id="steps"></div>
+    <div class="resa-body" id="resaBody"></div>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const OFFRES=[
+  {id:'bowl-joueur',type:'bowling',emo:'🎳',nom:'Bowling — à la partie',sub:'Par joueur · env. 12 min',prix:6.5,unite:'/ joueur',res:'Piste'},
+  {id:'bowl-piste',type:'bowling',emo:'🎳',nom:'Bowling — piste à l\'heure',sub:'La piste, jusqu\'à 6 joueurs · 1h',prix:28,unite:'/ piste / h',res:'Piste'},
+  {id:'quiz',type:'quiz',emo:'🧠',nom:'Quiz Room — session',sub:'Salle par groupe · 1h',prix:15,unite:'/ joueur',res:'Quiz Room'},
+  {id:'anniv',type:'anniv',emo:'🎂',nom:'Anniversaire enfant',sub:'Bowling + goûter · dès 6 enfants',prix:18,unite:'/ enfant',res:'Piste'},
+];
+const ADDONS=[
+  {id:'chauss',nom:'Location chaussures',desc:'La paire, toutes tailles',prix:3},
+  {id:'boisson',nom:'Formule boisson',desc:'Un soft par participant',prix:4},
+  {id:'gateau',nom:'Gâteau d\'anniversaire',desc:'Chocolat ou fruits, 8-15 parts',prix:26},
+  {id:'anim',nom:'Animateur dédié',desc:'Un animateur pour votre groupe',prix:45},
+];
+
+const RESAS=[
+  {ref:'BC-2041',nom:'Sortie famille Renaud',tel:'06 21 43 65 87',offre:'bowl-piste',date:'Ven. 18 juil.',heure:'19h00',nb:5,res:'Piste 3',statut:'conf',pay:'online',total:56},
+  {ref:'BC-2042',nom:'Anniv. Léa (9 ans)',tel:'06 55 12 33 90',offre:'anniv',date:'Sam. 19 juil.',heure:'14h00',nb:10,res:'Pistes 5-6',statut:'conf',pay:'online',total:206},
+  {ref:'BC-2043',nom:'Team Quiz — Assurances Berry',tel:'06 78 90 12 34',offre:'quiz',date:'Sam. 19 juil.',heure:'19h30',nb:12,res:'Quiz Room',statut:'conf',pay:'online',total:180},
+  {ref:'BC-2044',nom:'Groupe Morel',tel:'06 33 44 55 66',offre:'bowl-joueur',date:'Sam. 19 juil.',heure:'21h00',nb:8,res:'Piste 2',statut:'att',pay:'onsite',total:76},
+  {ref:'BC-2045',nom:'Anniv. Noah (8 ans)',tel:'06 11 99 88 77',offre:'anniv',date:'Dim. 20 juil.',heure:'15h30',nb:9,res:'Pistes 7-8',statut:'new',pay:'online',total:185},
+  {ref:'BC-2040',nom:'Comité ce Faurel',tel:'06 44 22 88 11',offre:'quiz',date:'Mer. 16 juil.',heure:'18h00',nb:14,res:'Quiz Room',statut:'done',pay:'online',total:210},
+];
+const STAT={conf:{l:'Confirmée',c:'b-conf'},att:{l:'À confirmer',c:'b-att'},new:{l:'Nouvelle',c:'b-new'},done:{l:'Terminée',c:'b-done'}};
+const PAY={online:{l:'Payé en ligne',c:'b-online'},onsite:{l:'À l\'accueil',c:'b-onsite'}};
+const oNom=id=>OFFRES.find(o=>o.id===id).nom;
+const oEmo=id=>OFFRES.find(o=>o.id===id).emo;
+const eur=n=>{const s=(Math.round(n*100)/100).toLocaleString('fr-FR',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2});return s+' €';};
+
+/* ================= MODE ================= */
+function setMode(m){
+  document.getElementById('screen-resa').classList.toggle('active',m==='resa');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-resa').classList.toggle('active',m==='resa');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+/* ================= RESERVATION TUNNEL ================= */
+let R={step:0,offre:null,date:null,heure:null,nb:6,addons:[]};
+const DAYS=[
+  {d:'18',j:'Ven',off:false},{d:'19',j:'Sam',off:false},{d:'20',j:'Dim',off:false},
+  {d:'21',j:'Lun',off:true},{d:'22',j:'Mar',off:false},{d:'23',j:'Mer',off:false},
+  {d:'24',j:'Jeu',off:false},{d:'25',j:'Ven',off:false},{d:'26',j:'Sam',off:false},
+  {d:'27',j:'Dim',off:false},{d:'28',j:'Lun',off:true},{d:'29',j:'Mar',off:false},
+  {d:'30',j:'Mer',off:false},{d:'31',j:'Jeu',off:false},
+];
+const SLOTS=[
+  {h:'14h00',left:6},{h:'16h00',left:4},{h:'18h00',left:0},{h:'19h00',left:2},
+  {h:'20h00',left:3},{h:'21h00',left:5},{h:'22h00',left:6},{h:'22h30',left:0}
+];
+
+function openResa(oid){
+  R={step:0,offre:oid||null,date:null,heure:null,nb:6,addons:[]};
+  if(oid)R.step=1;
+  document.getElementById('ov').classList.add('open');
+  renderResa();
+}
+function closeResa(){document.getElementById('ov').classList.remove('open');}
+function rGo(s){R.step=s;renderResa();}
+function resaTotal(){
+  if(!R.offre)return{base:0,add:0,tot:0};
+  const o=OFFRES.find(x=>x.id===R.offre);
+  const base=o.prix*R.nb;
+  const add=R.addons.reduce((s,id)=>s+ADDONS.find(a=>a.id===id).prix*(id==='chauss'||id==='boisson'?R.nb:1),0);
+  return{base,add,tot:base+add};
+}
+function renderResa(){
+  document.getElementById('steps').innerHTML=[0,1,2,3,4,5].map(i=>`<div class="stp ${i<=R.step?'on':''}"></div>`).join('');
+  const body=document.getElementById('resaBody');
+  const T=resaTotal();
+
+  if(R.step===0){
+    body.innerHTML=`<div class="rstep active">
+      <h4>1 · Choisissez votre activité</h4>
+      <div class="rhint">Bowling à la partie ou à l'heure, Quiz Room, ou anniversaire.</div>
+      ${OFFRES.map(o=>`<div class="opt ${R.offre===o.id?'sel':''}" tabindex="0" role="button"
+        onclick="R.offre='${o.id}';renderResa()" onkeydown="if(event.key==='Enter'){R.offre='${o.id}';renderResa()}">
+        <div class="oe">${o.emo}</div>
+        <div class="on"><b>${o.nom}</b><span>${o.sub}</span></div>
+        <div class="op">${eur(o.prix)}<small>${o.unite}</small></div>
+      </div>`).join('')}
+      <div class="resa-foot"><span></span>
+        <button class="btn btn-accent" ${R.offre?'':'disabled style="opacity:.4"'} onclick="rGo(1)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===1){
+    const resLbl=R.offre?OFFRES.find(o=>o.id===R.offre).res:'ressource';
+    body.innerHTML=`<div class="rstep active">
+      <h4>2 · Date &amp; créneau</h4>
+      <div class="rhint"><span class="live"></span>Disponibilités en temps réel — ${resLbl.toLowerCase()}.</div>
+      <div class="daypick">${DAYS.map(d=>`
+        <div class="day ${d.off?'off':''} ${R.date===d.d?'sel':''}" ${d.off?'':`tabindex="0" role="button"`}
+          ${d.off?'':`onclick="R.date='${d.d}';R.heure=null;renderResa()" onkeydown="if(event.key==='Enter'){R.date='${d.d}';R.heure=null;renderResa()}"`}>
+          <small>${d.j}</small>${d.d}</div>`).join('')}</div>
+      ${R.date?`<div style="margin-top:18px"><b style="font-size:12px;letter-spacing:.3px;color:var(--muted);text-transform:uppercase">Créneaux disponibles</b>
+        <div class="slots">${SLOTS.map(s=>`
+          <div class="slot ${s.left===0?'full':''} ${R.heure===s.h?'sel':''}" ${s.left===0?'':`tabindex="0" role="button"`}
+            ${s.left===0?'':`onclick="R.heure='${s.h}';renderResa()" onkeydown="if(event.key==='Enter'){R.heure='${s.h}';renderResa()}"`}>
+            ${s.h}${s.left>0?`<small>${s.left} dispo</small>`:'<small style="color:var(--muted2)">complet</small>'}</div>`).join('')}</div></div>`:''}
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(0)">← Retour</button>
+        <button class="btn btn-accent" ${R.date&&R.heure?'':'disabled style="opacity:.4"'} onclick="rGo(2)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===2){
+    const o=OFFRES.find(x=>x.id===R.offre);
+    body.innerHTML=`<div class="rstep active">
+      <h4>3 · Participants &amp; options</h4>
+      <div class="rhint">Ajustez le nombre de participants et vos options.</div>
+      <div style="background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:15px;display:flex;align-items:center;justify-content:space-between">
+        <b style="font-size:14px">Nombre de participants</b>
+        <div class="qty">
+          <button aria-label="Retirer" onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>
+          <span class="qv">${R.nb}</span>
+          <button aria-label="Ajouter" onclick="R.nb=Math.min(24,R.nb+1);renderResa()">+</button>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:var(--surface2);border:1px solid var(--line);border-radius:11px;padding:4px 15px">
+        ${ADDONS.map(a=>`<label class="addon">
+          <input type="checkbox" ${R.addons.includes(a.id)?'checked':''} onchange="toggleAddon('${a.id}')">
+          <div class="anm"><b>${a.nom}</b><span>${a.desc}</span></div>
+          <div class="ap">+${eur(a.prix)}${(a.id==='chauss'||a.id==='boisson')?' / pers.':''}</div>
+        </label>`).join('')}
+      </div>
+      <div class="summary">
+        <div class="sline"><span>${o.nom} × ${R.nb}</span><span>${eur(T.base)}</span></div>
+        ${T.add?`<div class="sline"><span>Options</span><span>${eur(T.add)}</span></div>`:''}
+        <div class="sline tot"><span>Total</span><span>${eur(T.tot)}</span></div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(1)">← Retour</button>
+        <button class="btn btn-accent" onclick="rGo(3)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===3){
+    body.innerHTML=`<div class="rstep active">
+      <h4>4 · Vos coordonnées</h4>
+      <div class="rhint">Pour recevoir votre e-billet et votre reçu de paiement.</div>
+      <div class="fieldrow">
+        <div class="field"><label>Prénom</label><input placeholder="Camille"></div>
+        <div class="field"><label>Nom</label><input placeholder="Renaud"></div>
+      </div>
+      <div class="fieldrow">
+        <div class="field"><label>Téléphone</label><input placeholder="06 12 34 56 78"></div>
+        <div class="field"><label>Email</label><input placeholder="camille@email.fr"></div>
+      </div>
+      <div class="field"><label>Remarque (optionnel)</label><input placeholder="Occasion, besoin de rampe enfant..."></div>
+      <div class="summary">
+        <div class="sline"><span>Activité</span><span>${oNom(R.offre)}</span></div>
+        <div class="sline"><span>Date</span><span>${R.date} juil. · ${R.heure}</span></div>
+        <div class="sline"><span>${R.nb} participants${R.addons.length?' + '+R.addons.length+' option(s)':''}</span><span>${eur(T.tot)}</span></div>
+        <div class="sline tot"><span>Total à régler</span><span>${eur(T.tot)}</span></div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(2)">← Retour</button>
+        <button class="btn btn-accent" onclick="rGo(4)">Aller au paiement →</button>
+      </div></div>`;
+  }
+  else if(R.step===4){
+    body.innerHTML=`<div class="rstep active">
+      <h4>5 · Paiement en ligne</h4>
+      <div class="rhint">Réglez par carte pour valider immédiatement votre réservation.</div>
+      <div class="pay-amount">
+        <div><div class="pl">MONTANT À RÉGLER</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:600;margin-top:3px">${oNom(R.offre)} · ${R.nb} pers.</div></div>
+        <div class="pv">${eur(T.tot)}</div>
+      </div>
+      <div class="paycard">
+        <div class="pch"><span style="font-size:20px">💳</span><b>Carte bancaire</b>
+          <span class="cards">💳 🟠🔴 🔵</span></div>
+        <div class="field"><label>Numéro de carte</label><input inputmode="numeric" placeholder="•••• •••• •••• ••••"></div>
+        <div class="fieldrow">
+          <div class="field"><label>Expiration</label><input placeholder="MM / AA"></div>
+          <div class="field"><label>Cryptogramme</label><input placeholder="•••"></div>
+        </div>
+        <div class="field" style="margin-bottom:0"><label>Nom sur la carte</label><input placeholder="CAMILLE RENAUD"></div>
+        <div class="pay-secure">🔒 Paiement sécurisé — chiffrement SSL · 3D Secure (démonstration)</div>
+      </div>
+      <div class="paybox">✅ Aucun règlement à l'accueil : votre créneau est bloqué dès le paiement validé.</div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(3)">← Retour</button>
+        <button class="btn btn-accent" onclick="rGo(5)">Payer ${eur(T.tot)} →</button>
+      </div></div>`;
+  }
+  else{
+    const ref='BC-'+(2046+Math.floor(Math.random()*40));
+    body.innerHTML=`<div class="rstep active confirm-ok">
+      <div class="ce">✅</div>
+      <h4>Réservation confirmée</h4>
+      <p>Votre e-billet et votre reçu viennent d'être envoyés par email.<br>Rendez-vous le ${R.date} juillet à ${R.heure} !</p>
+      <div><span class="paid-chip">💳 Payé en ligne · ${eur(T.tot)}</span></div>
+      <div><span class="ref">RÉF. ${ref}</span></div>
+      <div style="margin-top:22px"><button class="btn btn-blue" onclick="closeResa()">Terminé</button></div>
+      <p style="margin-top:14px;font-size:11.5px;color:var(--muted2)">La réservation apparaît aussitôt dans le back office, déjà marquée « payée en ligne ».</p>
+    </div>`;
+  }
+}
+function toggleAddon(id){
+  const i=R.addons.indexOf(id);
+  if(i>=0)R.addons.splice(i,1);else R.addons.push(id);
+  renderResa();
+}
+
+/* ================= BACK OFFICE ================= */
+const BONAV=[
+  {id:'dash',e:'📊',l:'Tableau de bord',t:'Tableau de bord',s:'Vue d\'ensemble des réservations'},
+  {id:'resa',e:'⚡',l:'Réservations',t:'Réservations',s:'Bowling & Quiz Room en temps réel',ct:RESAS.length},
+  {id:'planning',e:'📅',l:'Planning',t:'Planning des pistes & Quiz Room',s:'Occupation en temps réel'},
+  {id:'paiements',e:'💳',l:'Paiements',t:'Paiements en ligne',s:'Encaissements & statuts de règlement'},
+];
+let boCur='dash';
+function buildBoNav(){
+  document.getElementById('boNav').innerHTML=BONAV.map(n=>`
+    <div class="bn ${n.id===boCur?'active':''}" tabindex="0" role="button" onclick="boGo('${n.id}')"
+      onkeydown="if(event.key==='Enter')boGo('${n.id}')">
+      <span class="e">${n.e}</span><span>${n.l}</span>
+      ${n.ct?`<span class="ct">${n.ct}</span>`:''}</div>`).join('');
+}
+function boGo(id){
+  boCur=id;
+  const n=BONAV.find(x=>x.id===id);
+  document.getElementById('boTitle').textContent=n.t;
+  document.getElementById('boSub').textContent=n.s;
+  document.querySelectorAll('.bo-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('bv-'+id).classList.add('active');
+  document.querySelectorAll('.bo-nav .bn').forEach((b,i)=>b.classList.toggle('active',BONAV[i].id===id));
+}
+
+function renderDash(){
+  const ca=RESAS.filter(r=>r.statut!=='new').reduce((s,r)=>s+r.total,0);
+  const online=RESAS.filter(r=>r.pay==='online'&&r.statut!=='new').reduce((s,r)=>s+r.total,0);
+  const aVenir=RESAS.filter(r=>r.statut==='conf'||r.statut==='att').length;
+  const nouvelles=RESAS.filter(r=>r.statut==='new').length;
+  const pctOnline=Math.round(online/ca*100);
+  document.getElementById('bv-dash').innerHTML=`
+    <div class="kpis">
+      <div class="kpi" style="--kc:var(--blue)"><span class="ki">⚡</span><div class="kl">Réservations à venir</div>
+        <div class="kv">${aVenir}</div><div class="kf up">+7 vs semaine dernière</div></div>
+      <div class="kpi" style="--kc:var(--accent)"><span class="ki">💶</span><div class="kl">CA réservé (semaine)</div>
+        <div class="kv">${eur(ca)}</div><div class="kf up">dont ${pctOnline}% payé en ligne</div></div>
+      <div class="kpi" style="--kc:var(--violet)"><span class="ki">🔔</span><div class="kl">Demandes à traiter</div>
+        <div class="kv">${nouvelles}</div><div class="kf" style="color:var(--amber)">action requise</div></div>
+      <div class="kpi" style="--kc:var(--green)"><span class="ki">🎳</span><div class="kl">Remplissage pistes (sam.)</div>
+        <div class="kv">82 %</div><div class="kf up">soirée quasi complète</div></div>
+    </div>
+    <div class="bo-cols">
+      <div class="panel">
+        <div class="panel-h"><h3>⚡ Prochaines réservations</h3><span class="pill">${RESAS.filter(r=>r.statut!=='done').length} à venir</span></div>
+        <div class="panel-b"><table class="tbl">
+          <tr><th>Client</th><th>Date</th><th>Activité</th><th>Emplacement</th><th>Paiement</th><th>Total</th></tr>
+          ${RESAS.filter(r=>r.statut!=='done').map(r=>`<tr>
+            <td><div class="who"><div class="wav">${oEmo(r.offre)}</div>
+              <div><b>${r.nom}</b><small>${r.nb} pers.</small></div></div></td>
+            <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+            <td>${oNom(r.offre)}</td>
+            <td><b style="color:var(--blue-l)">${r.res}</b></td>
+            <td><span class="badge ${PAY[r.pay].c}">${PAY[r.pay].l}</span></td>
+            <td><b>${eur(r.total)}</b></td></tr>`).join('')}
+        </table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>🔔 À traiter</h3></div>
+        <div class="panel-b">
+          <div style="display:flex;flex-direction:column;gap:9px;padding:6px 0">
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(63,116,255,.08);border:1px solid rgba(63,116,255,.2);border-radius:10px">
+              <span style="font-size:17px">🔔</span><div><b style="font-size:12.5px">Confirmer « Anniv. Noah »</b>
+              <div style="font-size:11.5px;color:var(--blue-l);font-weight:600">Payée en ligne · reçue il y a 40 min</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(255,176,32,.08);border:1px solid rgba(255,176,32,.2);border-radius:10px">
+              <span style="font-size:17px">💳</span><div><b style="font-size:12.5px">Groupe Morel — règlement à l'accueil</b>
+              <div style="font-size:11.5px;color:var(--amber);font-weight:600">8 pers. · Sam. 19 juil. 21h · à encaisser sur place</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(51,209,122,.08);border:1px solid rgba(51,209,122,.2);border-radius:10px">
+              <span style="font-size:17px">🎂</span><div><b style="font-size:12.5px">2 anniversaires ce week-end</b>
+              <div style="font-size:11.5px;color:var(--green);font-weight:600">Léa (sam.) et Noah (dim.)</div></div></div>
+          </div>
+          <div class="note" style="margin-top:8px">💡 <div>Fini les 2 emails de validation manuelle : chaque réservation payée en ligne arrive déjà confirmée ici.</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderResaView(){
+  document.getElementById('bv-resa').innerHTML=`
+    <div class="toolbar">
+      <div class="search"><span class="si">🔍</span><input placeholder="Rechercher un client, une référence..."></div>
+      <div class="seg"><button class="on">Toutes</button><button>Bowling</button><button>Quiz Room</button></div>
+      <button class="btn btn-blue btn-sm" style="margin-left:auto">+ Réservation manuelle</button>
+    </div>
+    <div class="panel"><div class="panel-b"><table class="tbl">
+      <tr><th>Réf.</th><th>Client</th><th>Contact</th><th>Date &amp; heure</th><th>Activité</th><th>Pers.</th><th>Emplacement</th><th>Statut</th><th>Paiement</th><th>Total</th></tr>
+      ${RESAS.map(r=>`<tr>
+        <td><b style="color:var(--accent)">${r.ref}</b></td>
+        <td><div class="who"><div class="wav">${oEmo(r.offre)}</div><div><b>${r.nom}</b></div></div></td>
+        <td><small style="color:var(--muted)">${r.tel}</small></td>
+        <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+        <td>${oNom(r.offre)}</td>
+        <td><b>${r.nb}</b></td>
+        <td><b style="color:var(--blue-l)">${r.res}</b></td>
+        <td><span class="badge ${STAT[r.statut].c}">${STAT[r.statut].l}</span></td>
+        <td><span class="badge ${PAY[r.pay].c}">${PAY[r.pay].l}</span></td>
+        <td><b>${eur(r.total)}</b></td>
+      </tr>`).join('')}
+    </table></div></div>
+    <div class="note">💡 <div>La colonne « Paiement » distingue d'un coup d'œil le réglé en ligne du restant à encaisser à l'accueil — plus besoin de croiser avec les emails.</div></div>`;
+}
+
+function renderPlanning(){
+  const cols=['Piste 1','Piste 2','Piste 3','Quiz Room'];
+  const heures=['14h','15h','16h','17h','18h','19h','20h','21h'];
+  const book={
+    '14h':[{l:'Anniv. Léa',s:'10 pers.',c:'acc'},null,null,null],
+    '16h':[{l:'Groupe scolaire',s:'6 pers.',c:''},null,null,{l:'Quiz — CE Faurel',s:'14 pers.',c:'vio'}],
+    '18h':[null,{l:'Famille Renaud',s:'5 pers.',c:''},null,null],
+    '19h':[{l:'Anniv. Noah',s:'9 pers.',c:'acc'},null,{l:'Partie ouverte',s:'4 pers.',c:''},{l:'Team Assurances',s:'12 pers.',c:'vio'}],
+    '21h':[null,{l:'Groupe Morel',s:'8 pers.',c:''},null,null],
+  };
+  let rows='';
+  heures.forEach(h=>{
+    rows+=`<div class="pt">${h}</div>`;
+    [0,1,2,3].forEach(i=>{
+      const b=book[h]&&book[h][i];
+      rows+=b?`<div class="pslot book ${b.c}">${b.l}<small>${b.s}</small></div>`:`<div class="pslot free">libre</div>`;
+    });
+  });
+  document.getElementById('bv-planning').innerHTML=`
+    <div class="toolbar">
+      <div class="seg"><button>Ven. 18</button><button class="on">Sam. 19 juil.</button><button>Dim. 20</button></div>
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto">🔧 Bloquer un créneau (maintenance)</button>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h3>📅 Occupation — pistes &amp; Quiz Room</h3><span class="pill">Samedi 19 juil.</span></div>
+      <div class="panel-b" style="padding:16px 18px">
+        <div class="plan">
+          <div class="ph">Heure</div>
+          ${cols.map(c=>`<div class="ph">${c}</div>`).join('')}
+          ${rows}
+        </div>
+        <div class="note" style="margin-top:16px">💡 <div>Chaque réservation en ligne bloque automatiquement une piste ou la Quiz Room sur son créneau — plus de double-réservation, plus de piste oubliée. (Aperçu 4 emplacements sur les 12 pistes + Quiz Room.)</div></div>
+      </div>
+    </div>`;
+}
+
+function renderPaiements(){
+  const online=RESAS.filter(r=>r.pay==='online'&&r.statut!=='new').reduce((s,r)=>s+r.total,0);
+  const onsite=RESAS.filter(r=>r.pay==='onsite').reduce((s,r)=>s+r.total,0);
+  document.getElementById('bv-paiements').innerHTML=`
+    <div class="giftgrid">
+      <div class="gift"><div class="gl">Encaissé en ligne (semaine)</div><div class="gv">${eur(online)}</div>
+        <div style="font-size:11.5px;color:var(--green);font-weight:600;margin-top:4px">réglé avant la venue</div></div>
+      <div class="gift"><div class="gl">À encaisser à l'accueil</div><div class="gv">${eur(onsite)}</div>
+        <div style="font-size:11.5px;color:var(--amber);font-weight:600;margin-top:4px">1 réservation restante</div></div>
+      <div class="gift"><div class="gl">Panier moyen</div><div class="gv">${eur(Math.round((online+onsite)/5))}</div>
+        <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:4px">par réservation</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h3>💳 Transactions récentes</h3><span class="pill">Temps réel</span></div>
+      <div class="panel-b"><table class="tbl">
+        <tr><th>Réf.</th><th>Client</th><th>Activité</th><th>Moyen</th><th>Statut</th><th>Montant</th></tr>
+        ${RESAS.map(r=>`<tr>
+          <td><b style="color:var(--accent)">${r.ref}</b></td>
+          <td><div class="who"><div class="wav">${oEmo(r.offre)}</div><div><b>${r.nom}</b></div></div></td>
+          <td>${oNom(r.offre)}</td>
+          <td>${r.pay==='online'?'Carte bancaire (en ligne)':'Sur place'}</td>
+          <td><span class="badge ${PAY[r.pay].c}">${PAY[r.pay].l}</span></td>
+          <td><b>${eur(r.total)}</b></td>
+        </tr>`).join('')}
+      </table></div>
+    </div>
+    <div class="note">💡 <div>La Quiz Room, autrefois payée uniquement sur place à l'accueil, est désormais encaissée en ligne comme le bowling — trésorerie sécurisée avant même l'arrivée du groupe.</div></div>`;
+}
+
+/* ================= INIT ================= */
+buildBoNav();
+renderDash();renderResaView();renderPlanning();renderPaiements();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeResa();});
+</script>
+</body>
+</html>
