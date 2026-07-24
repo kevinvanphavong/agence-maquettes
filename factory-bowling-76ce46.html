@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Factory Bowling — Maquette refonte site + back office</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+  --bg:#0a0d11; --surface:#111820; --surface2:#18212b; --surface3:#212c38;
+  --line:#25313d; --line2:#33465a;
+  --text:#eef4f8; --muted:#8ba0b0; --muted2:#586b7a;
+  --orange:#fb7a1e; --orange-d:#e8620a;
+  --teal:#2dd4bf; --amber:#f5a623; --lime:#9ae600;
+  --glow-orange:0 0 24px rgba(251,122,30,.45);
+  --glow-teal:0 0 22px rgba(45,212,191,.4);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.disp{font-family:'Oswald',sans-serif;font-weight:700;
+  text-transform:uppercase;letter-spacing:.5px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:8px}
+::-webkit-scrollbar-track{background:var(--surface)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.btn{font-family:'Oswald';font-weight:700;font-size:16px;text-transform:uppercase;
+  letter-spacing:1px;cursor:pointer;border:none;padding:13px 28px;border-radius:8px;
+  transition:transform .15s,box-shadow .15s,filter .15s;display:inline-flex;
+  align-items:center;gap:8px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.btn:hover{transform:translateY(-2px)}
+.btn-orange{background:var(--orange);color:#150a02;box-shadow:var(--glow-orange)}
+.btn-orange:hover{box-shadow:0 0 34px rgba(251,122,30,.7)}
+.btn-teal{background:var(--teal);color:#04141a;box-shadow:var(--glow-teal)}
+.btn-ghost{background:transparent;color:var(--text);border:2px solid var(--line2)}
+.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+.btn-sm{padding:8px 16px;font-size:13px}
+
+/* focus visible */
+a:focus-visible,button:focus-visible,input:focus-visible,label:focus-visible,
+.opt:focus-visible,.day:focus-visible,.slot:focus-visible,.nav a:focus-visible,
+.bn:focus-visible,.mode-btn:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+/* MODE SWITCH */
+.modebar{position:fixed;top:0;left:0;right:0;height:46px;background:#000;z-index:200;
+  display:flex;align-items:center;justify-content:center;gap:6px;border-bottom:1px solid var(--line)}
+.modebar .lbl{color:var(--muted2);font-size:11px;font-weight:800;letter-spacing:2px;margin-right:8px}
+.mode-btn{font-family:'Oswald';font-size:14px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1px;padding:6px 18px;border-radius:6px;border:none;cursor:pointer;
+  background:transparent;color:var(--muted);transition:all .15s}
+.mode-btn.active{background:var(--orange);color:#150a02;box-shadow:var(--glow-orange)}
+
+.screen{display:none;padding-top:46px}
+.screen.active{display:block}
+
+/* ============ SITE ============ */
+.hdr{position:sticky;top:46px;z-index:100;background:rgba(10,13,17,.92);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hdr-in{display:flex;align-items:center;gap:18px;height:72px}
+.logo{display:flex;align-items:center;gap:11px}
+.logo .lm{width:42px;height:42px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-size:21px;background:linear-gradient(135deg,var(--orange),var(--orange-d));
+  box-shadow:var(--glow-orange)}
+.logo .lt{font-family:'Oswald';font-weight:700;font-size:20px;line-height:1;text-transform:uppercase}
+.logo .lt small{display:block;font-family:'Inter';font-weight:700;font-size:9.5px;
+  color:var(--teal);letter-spacing:2.5px;margin-top:2px}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{padding:9px 14px;border-radius:6px;font-weight:700;font-size:13.5px;
+  font-family:'Oswald';text-transform:uppercase;letter-spacing:.5px;cursor:pointer;
+  transition:color .15s}
+.nav a:hover{color:var(--teal)}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:74px 0 86px;
+  background:radial-gradient(ellipse at 75% 20%,rgba(251,122,30,.15) 0,transparent 55%),
+  radial-gradient(ellipse at 15% 90%,rgba(45,212,191,.13) 0,transparent 50%)}
+.hero::before{content:"";position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:46px 46px;mask-image:radial-gradient(ellipse at 50% 40%,#000,transparent 75%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:42px;align-items:center}
+.hero .tag{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);
+  background:var(--surface);padding:7px 15px;border-radius:30px;font-weight:700;
+  font-size:12.5px;color:var(--teal);margin-bottom:20px}
+.hero h1{font-size:62px;line-height:.98;letter-spacing:1px}
+.hero h1 .hl{color:var(--orange);text-shadow:var(--glow-orange)}
+.hero p.sub{font-size:17px;color:var(--muted);margin:20px 0 28px;max-width:440px;
+  font-weight:500;line-height:1.6}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:30px;margin-top:34px}
+.hero-stats .hs b{font-family:'Oswald';font-size:30px;display:block;color:var(--teal)}
+.hero-stats .hs span{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:1px}
+.hero-art{aspect-ratio:1/1;border-radius:14px;position:relative;overflow:hidden;
+  background:linear-gradient(155deg,#1c1207,#0a0d11 55%);border:1px solid var(--line2);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 60px rgba(251,122,30,.22),inset 0 0 80px rgba(45,212,191,.07)}
+.hero-art .big{font-size:150px;filter:drop-shadow(0 0 30px rgba(251,122,30,.7))}
+.scan{position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--teal),transparent);
+  animation:scan 3.5s linear infinite;box-shadow:0 0 14px var(--teal)}
+@keyframes scan{0%{top:0}100%{top:100%}}
+.float{position:absolute;background:var(--surface);border:1px solid var(--line2);
+  border-radius:9px;padding:10px 14px;font-weight:700;font-size:12.5px;display:flex;
+  align-items:center;gap:8px}
+.float .e{font-size:18px}
+.float.f1{top:22px;left:-22px;border-color:rgba(251,122,30,.4)}
+.float.f2{bottom:34px;right:-26px;border-color:rgba(45,212,191,.4)}
+
+/* INFOBAND */
+.infoband{background:var(--orange);padding:14px 0}
+.infoband .wrap{display:flex;justify-content:space-around;gap:18px;flex-wrap:wrap}
+.infoband .ib{display:flex;align-items:center;gap:9px;font-weight:700;font-size:13.5px;color:#150a02}
+.infoband .ib .e{font-size:18px}
+
+section{padding:78px 0}
+.sec-head{max-width:620px;margin:0 auto 46px;text-align:center}
+.sec-head .kicker{font-weight:800;color:var(--teal);letter-spacing:3px;font-size:12px}
+.sec-head h2{font-size:44px;margin:10px 0 10px}
+.sec-head p{color:var(--muted);font-size:15.5px;font-weight:500}
+
+/* image placeholder */
+.imgph{border:2px dashed var(--line2);border-radius:12px;background:var(--surface);
+  min-height:180px;display:flex;align-items:center;justify-content:center;gap:10px;
+  color:var(--muted);font-weight:700;font-size:14px;text-align:center;padding:20px}
+.imgph .e{font-size:26px}
+
+/* ACTIVITES */
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.act{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:30px 26px;position:relative;overflow:hidden;transition:transform .18s,border-color .18s}
+.act:hover{transform:translateY(-6px);border-color:var(--orange)}
+.act::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--acc,var(--orange))}
+.act .ai{font-size:46px;margin-bottom:14px}
+.act h3{font-size:24px;margin-bottom:8px}
+.act p{font-size:13.5px;color:var(--muted);font-weight:500;line-height:1.6}
+.act .ap{margin-top:14px;font-family:'Oswald';font-weight:700;font-size:18px;color:var(--teal)}
+
+/* FORMULES */
+#formules{background:linear-gradient(180deg,var(--bg),var(--surface))}
+.formules{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;align-items:start}
+.formule{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:26px 22px;position:relative;transition:transform .18s,border-color .18s}
+.formule:hover{transform:translateY(-6px)}
+.formule.star{border-color:var(--orange);box-shadow:0 0 30px rgba(251,122,30,.22)}
+.formule .ribbon{position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  background:var(--orange);color:#150a02;font-family:'Oswald';font-weight:700;font-size:11px;
+  text-transform:uppercase;letter-spacing:1px;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.formule .fz{font-size:38px;margin-bottom:6px}
+.formule h3{font-size:21px}
+.formule .age{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.5px}
+.formule .price{font-family:'Oswald';font-size:36px;color:var(--teal);margin:12px 0 2px}
+.formule .price small{font-size:13px;color:var(--muted)}
+.formule ul{list-style:none;margin:14px 0 18px;display:flex;flex-direction:column;gap:8px}
+.formule li{font-size:12.5px;font-weight:500;color:var(--muted);display:flex;gap:7px}
+.formule li .ck{color:var(--lime);font-weight:900}
+.formule .btn{width:100%;justify-content:center;font-size:13px;padding:11px}
+
+/* PRICE STRIP */
+.pricestrip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ps{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;text-align:center}
+.ps .pe{font-size:30px}
+.ps b{display:block;font-family:'Oswald';font-size:17px;margin:6px 0 2px}
+.ps .pp{font-family:'Oswald';font-size:30px;color:var(--orange)}
+.ps small{font-size:11.5px;color:var(--muted);font-weight:600}
+
+/* AVIS */
+#avis{background:var(--surface)}
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.review{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:24px}
+.review .rstar{color:var(--lime);font-size:14px;letter-spacing:2px;margin-bottom:10px}
+.review p{font-size:14px;font-weight:500;color:var(--text);line-height:1.6}
+.review .rwho{margin-top:14px;font-size:12px;color:var(--muted);font-weight:700}
+
+/* INFOS */
+.infos-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.info-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px}
+.info-card h3{font-size:21px;margin-bottom:16px;color:var(--teal)}
+.info-card .iline{display:flex;gap:11px;padding:8px 0;font-weight:600;font-size:14px}
+.info-card .iline .e{font-size:17px}
+.hours .hr{display:flex;justify-content:space-between;padding:9px 0;
+  border-bottom:1px solid var(--line);font-weight:600;font-size:14px}
+.hours .hr:last-child{border:none}
+.hours .hr b{color:var(--teal)}
+
+footer{background:#000;border-top:1px solid var(--line);padding:42px 0 26px;color:var(--muted)}
+footer .fgrid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px;
+  padding-bottom:24px;border-bottom:1px solid var(--line)}
+footer .fcol b{color:var(--text);font-family:'Oswald';font-size:16px;display:block;
+  margin-bottom:9px;text-transform:uppercase}
+footer .fcol a{display:block;font-size:13px;padding:3px 0;font-weight:500;cursor:pointer}
+footer .fcol a:hover{color:var(--teal)}
+footer .fbot{text-align:center;padding-top:20px;font-size:11.5px;font-weight:500}
+
+/* RESA MODAL */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(5px);
+  z-index:300;display:none;align-items:center;justify-content:center;padding:24px}
+.ov.open{display:flex}
+.resa{background:var(--surface);border:1px solid var(--line2);border-radius:14px;
+  width:680px;max-width:100%;max-height:92vh;overflow-y:auto;
+  box-shadow:0 0 60px rgba(251,122,30,.3)}
+.resa-head{background:linear-gradient(135deg,var(--orange),var(--orange-d));padding:20px 26px;
+  display:flex;align-items:center;gap:13px;position:sticky;top:0;z-index:2}
+.resa-head h3{font-size:21px;color:#150a02}
+.resa-head .rx{margin-left:auto;width:34px;height:34px;border-radius:7px;border:none;
+  background:rgba(0,0,0,.25);color:#fff;font-size:17px;cursor:pointer}
+.steps{display:flex;gap:6px;padding:18px 26px 4px}
+.stp{flex:1;height:5px;border-radius:5px;background:var(--line)}
+.stp.on{background:var(--teal);box-shadow:0 0 8px var(--teal)}
+.resa-body{padding:14px 26px 26px}
+.rstep{display:none}
+.rstep.active{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.rstep h4{font-size:20px;margin-bottom:3px}
+.rstep .rhint{color:var(--muted);font-size:13px;font-weight:500;margin-bottom:16px}
+.opt{display:flex;gap:12px;align-items:center;background:var(--surface2);
+  border:1px solid var(--line);border-radius:9px;padding:14px;margin-bottom:9px;
+  cursor:pointer;transition:all .14s}
+.opt:hover{border-color:var(--line2)}
+.opt.sel{border-color:var(--teal);background:rgba(45,212,191,.07)}
+.opt .oe{font-size:26px;width:42px;text-align:center}
+.opt .on b{font-size:14.5px;font-family:'Oswald';font-weight:700;text-transform:uppercase}
+.opt .on span{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.opt .op{margin-left:auto;font-family:'Oswald';font-size:19px;color:var(--teal);font-weight:700}
+.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:12px}
+.field label{font-weight:700;font-size:12px;display:block;margin-bottom:5px;
+  text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.field input{width:100%;padding:11px 13px;border:1px solid var(--line2);border-radius:8px;
+  font-family:'Inter';font-weight:600;font-size:14px;background:var(--bg);color:var(--text)}
+.field input:focus{outline:none;border-color:var(--teal)}
+.daypick{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.day{aspect-ratio:1;border:1px solid var(--line2);border-radius:8px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;background:var(--surface2);transition:all .12s}
+.day small{font-size:9px;color:var(--muted);font-weight:800}
+.day:hover:not(.off){border-color:var(--teal)}
+.day.sel{background:var(--teal);color:#04141a;border-color:var(--teal)}
+.day.sel small{color:#04141a}
+.day.off{opacity:.25;cursor:not-allowed}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.slot{padding:10px 6px;border:1px solid var(--line2);border-radius:8px;text-align:center;
+  font-weight:700;font-size:13px;cursor:pointer;background:var(--surface2);transition:all .12s}
+.slot:hover{border-color:var(--teal)}
+.slot.sel{background:var(--teal);color:#04141a;border-color:var(--teal)}
+.slot.full{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+.qty{display:flex;align-items:center;gap:14px}
+.qty button{width:38px;height:38px;border-radius:7px;border:1px solid var(--teal);
+  background:transparent;color:var(--teal);font-size:20px;font-weight:900;cursor:pointer}
+.qty .qv{font-family:'Oswald';font-size:28px;width:46px;text-align:center}
+.addon{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.addon:last-child{border:none}
+.addon input{width:19px;height:19px;accent-color:var(--teal)}
+.addon .anm b{font-size:13.5px}
+.addon .anm span{display:block;font-size:11.5px;color:var(--muted);font-weight:500}
+.addon .ap{margin-left:auto;font-family:'Oswald';color:var(--teal);font-weight:700;font-size:16px}
+.summary{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:16px;margin:14px 0}
+.sline{display:flex;justify-content:space-between;padding:5px 0;font-weight:600;font-size:13.5px}
+.sline.tot{border-top:1px solid var(--line2);margin-top:6px;padding-top:11px;
+  font-family:'Oswald';font-size:22px;color:var(--teal)}
+.acompte{background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.25);
+  border-radius:8px;padding:10px 13px;font-size:12px;font-weight:600;color:var(--teal);margin-top:8px}
+.resa-foot{display:flex;gap:10px;justify-content:space-between;margin-top:16px}
+.confirm-ok{text-align:center;padding:22px 10px}
+.confirm-ok .ce{font-size:66px;filter:drop-shadow(0 0 20px rgba(45,212,191,.6))}
+.confirm-ok h4{font-size:27px;margin:12px 0 6px;color:var(--teal)}
+.confirm-ok p{color:var(--muted);font-weight:500;font-size:14px}
+.ref{display:inline-block;background:var(--orange);color:#150a02;font-family:'Oswald';
+  font-size:17px;padding:8px 22px;border-radius:7px;margin-top:14px;box-shadow:var(--glow-orange)}
+
+/* ============ BACK OFFICE ============ */
+.bo{display:flex;min-height:calc(100vh - 46px)}
+.bo-side{width:230px;background:#000;flex-shrink:0;padding:20px 13px;
+  display:flex;flex-direction:column;border-right:1px solid var(--line)}
+.bo-brand{display:flex;align-items:center;gap:9px;padding:0 8px 16px;
+  border-bottom:1px solid var(--line);margin-bottom:14px}
+.bo-brand .lm{width:36px;height:36px;border-radius:8px;font-size:17px;
+  background:linear-gradient(135deg,var(--orange),var(--orange-d));display:flex;
+  align-items:center;justify-content:center;box-shadow:var(--glow-orange)}
+.bo-brand b{font-family:'Oswald';font-size:15px;text-transform:uppercase}
+.bo-brand small{display:block;color:var(--teal);font-size:9px;font-weight:800;letter-spacing:1.5px}
+.bo-nav .bn{display:flex;align-items:center;gap:11px;padding:11px 12px;border-radius:8px;
+  color:var(--muted);font-weight:600;font-size:13.5px;cursor:pointer;margin-bottom:3px;
+  transition:all .14s}
+.bo-nav .bn:hover{background:var(--surface2);color:var(--text)}
+.bo-nav .bn.active{background:var(--orange);color:#150a02}
+.bo-nav .bn .e{font-size:16px;width:22px;text-align:center}
+.bo-nav .bn .ct{margin-left:auto;background:rgba(0,0,0,.18);font-size:10.5px;
+  padding:1px 8px;border-radius:20px;font-weight:800}
+.bo-side .bo-foot{margin-top:auto;padding:12px 8px 0;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:9px}
+.bo-side .bo-foot .av{width:34px;height:34px;border-radius:7px;font-weight:800;
+  background:linear-gradient(135deg,var(--teal),var(--amber));display:flex;
+  align-items:center;justify-content:center;color:#04141a;font-size:13px}
+.bo-side .bo-foot b{color:var(--text);font-size:13px}
+.bo-side .bo-foot small{display:block;color:var(--muted);font-size:11px;font-weight:600}
+.bo-main{flex:1;background:var(--bg);overflow-y:auto}
+.bo-top{height:64px;background:var(--surface);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;padding:0 30px;position:sticky;top:0;z-index:5}
+.bo-top h2{font-size:21px}
+.bo-top .bo-sub{font-size:12px;color:var(--muted);font-weight:500}
+.bo-content{padding:24px 30px 50px}
+.bo-view{display:none}
+.bo-view.active{display:block;animation:fade .3s}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:11px;
+  padding:17px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+  background:var(--kc,var(--orange))}
+.kpi .ki{position:absolute;right:11px;top:11px;font-size:28px;opacity:.2}
+.kpi .kl{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.kpi .kv{font-family:'Oswald';font-size:31px;margin-top:5px}
+.kpi .kf{font-size:11.5px;font-weight:700;margin-top:2px}
+.kpi .kf.up{color:var(--lime)}
+.bo-cols{display:grid;grid-template-columns:1.5fr 1fr;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.panel-h{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+.panel-h h3{font-size:16px}
+.panel-h .pill{margin-left:auto;font-size:10.5px;font-weight:800;padding:3px 10px;
+  border-radius:20px;background:var(--surface3);color:var(--teal);text-transform:uppercase;letter-spacing:.5px}
+.panel-b{padding:6px 18px 14px}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{text-align:left;font-size:10.5px;color:var(--muted);font-weight:800;
+  text-transform:uppercase;letter-spacing:.5px;padding:10px 8px;border-bottom:1px solid var(--line2)}
+.tbl td{padding:11px 8px;border-bottom:1px solid var(--line);font-weight:600;font-size:13px}
+.tbl tr:last-child td{border:none}
+.tbl tr:hover td{background:var(--surface2)}
+.who{display:flex;align-items:center;gap:9px}
+.who .wav{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;
+  justify-content:center;font-size:14px;flex-shrink:0;background:var(--surface3)}
+.who b{font-size:13px}
+.who small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.badge{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:5px;
+  display:inline-block;text-transform:uppercase;letter-spacing:.3px}
+.b-conf{background:rgba(154,230,0,.15);color:var(--lime)}
+.b-att{background:rgba(245,166,35,.15);color:var(--amber)}
+.b-new{background:rgba(45,212,191,.15);color:var(--teal)}
+.b-done{background:rgba(140,160,176,.15);color:var(--muted)}
+.fbar{height:7px;background:var(--surface3);border-radius:5px;overflow:hidden;min-width:74px}
+.fbar i{display:block;height:100%;border-radius:5px}
+
+/* planning box karaoke */
+.plan{display:grid;grid-template-columns:70px repeat(3,1fr);gap:8px}
+.plan .ph{font-family:'Oswald';font-weight:700;font-size:13px;text-align:center;
+  padding:9px 0;text-transform:uppercase;color:var(--teal);
+  border-bottom:1px solid var(--line2)}
+.plan .pt{font-weight:700;font-size:12px;color:var(--muted);
+  display:flex;align-items:center;justify-content:flex-end;padding-right:8px}
+.pslot{background:var(--surface2);border:1px solid var(--line);border-radius:7px;
+  min-height:48px;padding:5px;font-size:10.5px;font-weight:700}
+.pslot.book{background:rgba(251,122,30,.13);border-color:rgba(251,122,30,.4);color:#f9b27a}
+.pslot.book.cyan{background:rgba(45,212,191,.11);border-color:rgba(45,212,191,.4);color:#7fe6dc}
+.pslot.book.mag{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.4);color:#f5cd88}
+.pslot.free{color:var(--muted2);display:flex;align-items:center;justify-content:center}
+
+.toolbar{display:flex;gap:10px;margin-bottom:16px;align-items:center;flex-wrap:wrap}
+.search{flex:1;max-width:300px;position:relative}
+.search input{width:100%;padding:10px 14px 10px 36px;border:1px solid var(--line2);
+  border-radius:8px;font-family:'Inter';font-weight:600;font-size:13px;
+  background:var(--surface);color:var(--text)}
+.search .si{position:absolute;left:12px;top:9px;font-size:14px}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line2);border-radius:8px;padding:3px}
+.seg button{border:none;background:none;font-family:'Oswald';font-weight:700;font-size:12.5px;
+  text-transform:uppercase;padding:6px 13px;border-radius:6px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--orange);color:#150a02}
+
+.giftgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.gift{background:linear-gradient(150deg,var(--surface2),var(--surface));
+  border:1px solid var(--line2);border-radius:11px;padding:18px;position:relative;overflow:hidden}
+.gift::after{content:"";position:absolute;right:-20px;top:-20px;width:80px;height:80px;
+  border-radius:50%;background:radial-gradient(circle,rgba(251,122,30,.22),transparent 70%)}
+.gift .gv{font-family:'Oswald';font-size:28px;color:var(--teal)}
+.gift .gl{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.gift .gc{font-family:'Oswald';font-size:15px;letter-spacing:2px;margin-top:8px;
+  color:var(--text);background:var(--bg);border:1px dashed var(--line2);
+  border-radius:6px;padding:6px;text-align:center}
+
+.note{background:rgba(45,212,191,.07);border:1px solid rgba(45,212,191,.22);
+  border-radius:9px;padding:12px 15px;font-size:12px;font-weight:600;color:var(--teal);
+  display:flex;gap:9px;margin-top:16px}
+
+@media(max-width:920px){
+  .hero-grid,.infos-grid,.bo-cols{grid-template-columns:1fr}
+  .acts,.formules,.pricestrip,.reviews,.kpis,.giftgrid{grid-template-columns:1fr 1fr}
+  .hero h1{font-size:42px}.nav{display:none}.bo-side{display:none}
+  .plan{grid-template-columns:54px repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="modebar">
+  <span class="lbl">MAQUETTE — DÉMO</span>
+  <button class="mode-btn active" id="m-site" onclick="setMode('site')">🌐 Site public</button>
+  <button class="mode-btn" id="m-bo" onclick="setMode('bo')">🔒 Back office</button>
+</div>
+
+<!-- ===================================================== SITE -->
+<div class="screen active" id="screen-site">
+  <header class="hdr">
+    <div class="wrap hdr-in">
+      <div class="logo">
+        <span class="lm">🎳</span>
+        <div class="lt">The Factory Bowling<small>ORLÉANS SUD · 45</small></div>
+      </div>
+      <nav class="nav">
+        <a tabindex="0" onclick="scrollToSec('activites')">Activités</a>
+        <a tabindex="0" onclick="scrollToSec('formules')">Formules</a>
+        <a tabindex="0" onclick="scrollToSec('tarifs')">Tarifs</a>
+        <a tabindex="0" onclick="scrollToSec('avis')">Avis</a>
+        <a tabindex="0" onclick="scrollToSec('infos')">Infos & accès</a>
+      </nav>
+      <button class="btn btn-orange btn-sm" onclick="openResa()">🎳 Réserver</button>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tag">🎳 20 pistes · 3 box karaoké · anniversaires</span>
+        <h1>Réserve ta piste<br>en <span class="hl">2 minutes</span></h1>
+        <p class="sub">Le bowling nouvelle génération à Saint-Denis-en-Val, aux portes d'Orléans. Réserve tes pistes et tes box karaoké en ligne, 24h/24 — anniversaires, groupes et sorties CE.</p>
+        <div class="hero-cta">
+          <button class="btn btn-orange" onclick="openResa()">🎳 Réserver en ligne</button>
+          <button class="btn btn-ghost" onclick="scrollToSec('formules')">Voir les formules</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><b>20</b><span>PISTES</span></div>
+          <div class="hs"><b>3</b><span>BOX KARAOKÉ</span></div>
+          <div class="hs"><b>7j/7</b><span>OUVERT</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="scan"></div>
+        <div class="big">🎳</div>
+        <div class="float f1"><span class="e">⚡</span> Réservation 24/7</div>
+        <div class="float f2"><span class="e">🎤</span> 3 box karaoké</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="infoband">
+    <div class="wrap">
+      <div class="ib"><span class="e">📍</span> 12 rue de l'Industrie, Saint-Denis-en-Val</div>
+      <div class="ib"><span class="e">⚡</span> Réservation en ligne 24h/24</div>
+      <div class="ib"><span class="e">🍔</span> Bar & restauration sur place</div>
+      <div class="ib"><span class="e">🎂</span> Anniversaires & sorties CE</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITES -->
+  <section id="activites">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">CE QUI VOUS ATTEND</div>
+        <h2>Trois expériences sous un même toit</h2>
+        <p>Du bowling grand format aux box karaoké privatives, en passant par les anniversaires clé en main.</p>
+      </div>
+      <div class="acts">
+        <div class="act" style="--acc:var(--orange)"><div class="ai">🎳</div><h3>Bowling · 20 pistes</h3>
+          <p>20 pistes équipées d'écrans de scores automatiques, rampes enfants et éclairage d'ambiance. Idéal en famille, entre amis ou en groupe.</p>
+          <div class="ap">dès 6 € / partie</div></div>
+        <div class="act" style="--acc:var(--teal)"><div class="ai">🎤</div><h3>3 box karaoké</h3>
+          <p>Trois box privatives insonorisées, catalogue de 20 000+ titres, micros HD et écran géant. Réservation à l'heure.</p>
+          <div class="ap">dès 12 € / pers.</div></div>
+        <div class="act" style="--acc:var(--amber)"><div class="ai">🎂</div><h3>Anniversaires & groupes</h3>
+          <p>Packs anniversaire clé en main, offres groupes et CE : pistes réservées, restauration et box karaoké en option.</p>
+          <div class="ap">packs sur mesure</div></div>
+      </div>
+      <div class="imgph" style="margin-top:22px"><span class="e">📷</span> image à fournir par le client — vue des 20 pistes en ambiance soirée</div>
+    </div>
+  </section>
+
+  <!-- FORMULES -->
+  <section id="formules">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">CHOISISSEZ VOTRE FORMULE</div>
+        <h2>Une formule pour chaque occasion</h2>
+        <p>Réservation et acompte en ligne — votre piste ou votre box est garantie.</p>
+      </div>
+      <div class="formules" id="formulesGrid"></div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section id="tarifs" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">TARIFS CLAIRS</div>
+        <h2>Et aussi</h2>
+        <p>Bons plans, offres groupes et tickets entreprises.</p>
+      </div>
+      <div class="pricestrip">
+        <div class="ps"><div class="pe">🕐</div><b>Happy Hour</b><div class="pp">4 €</div><small>la partie · lun–jeu avant 18h</small></div>
+        <div class="ps"><div class="pe">🎓</div><b>Tarif étudiant</b><div class="pp">5 €</div><small>la partie · sur présentation</small></div>
+        <div class="ps"><div class="pe">🏢</div><b>Ticket CE</b><div class="pp">5 €</div><small>prépayé · dès 10 salariés</small></div>
+        <div class="ps"><div class="pe">🔒</div><b>Privatisation</b><div class="pp">1 200 €</div><small>soirée · le centre pour vous</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVIS -->
+  <section id="avis">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">ILS ONT JOUÉ</div>
+        <h2>Avis des joueurs</h2>
+        <p>Ce que disent ceux qui sont déjà venus lancer une boule.</p>
+      </div>
+      <div class="reviews">
+        <div class="review"><div class="rstar">★★★★★</div><p>« Anniversaire de mon fils au top : piste réservée en ligne en 2 minutes, l'équipe gère tout, box karaoké génial pour finir. »</p><div class="rwho">— Nadia K.</div></div>
+        <div class="review"><div class="rstar">★★★★★</div><p>« Enfin un vrai site pour réserver ! Avant il fallait appeler. Là j'ai booké mes 2 pistes depuis le canapé, un dimanche soir. »</p><div class="rwho">— Antoine D.</div></div>
+        <div class="review"><div class="rstar">★★★★★</div><p>« Soirée CE réussie : bowling puis karaoké privatif. Restauration correcte et ambiance parfaite. On reviendra. »</p><div class="rwho">— Thomas P.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFOS -->
+  <section id="infos" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="sec-head"><div class="kicker">AVANT DE VENIR</div><h2>Infos & accès</h2></div>
+      <div class="infos-grid">
+        <div class="info-card hours">
+          <h3>🕑 Horaires</h3>
+          <div class="hr"><span>Lundi – Mardi</span><b>14h – 23h</b></div>
+          <div class="hr"><span>Mercredi</span><b>11h – 23h</b></div>
+          <div class="hr"><span>Jeudi – Vendredi</span><b>14h – 01h</b></div>
+          <div class="hr"><span>Samedi</span><b>10h – 02h</b></div>
+          <div class="hr"><span>Dimanche</span><b>10h – 22h</b></div>
+        </div>
+        <div class="info-card">
+          <h3>📍 Accès & contact</h3>
+          <div class="iline"><span class="e">🏠</span> 12 rue de l'Industrie, 45560 Saint-Denis-en-Val</div>
+          <div class="iline"><span class="e">🚗</span> Parking gratuit · à 10 min du centre d'Orléans</div>
+          <div class="iline"><span class="e">📞</span> 02 38 55 12 40</div>
+          <div class="iline"><span class="e">📸</span> Instagram @thefactorybowling</div>
+          <div style="margin-top:14px"><button class="btn btn-orange" onclick="openResa()">🎳 Réserver maintenant</button></div>
+        </div>
+      </div>
+      <div class="imgph" style="margin-top:20px"><span class="e">📷</span> image à fournir par le client — plan d'accès ou façade du centre</div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="fgrid">
+        <div>
+          <div class="logo"><span class="lm">🎳</span><div class="lt">The Factory Bowling<small>ORLÉANS SUD · 45</small></div></div>
+          <p style="margin-top:12px;font-size:13px;font-weight:500;max-width:260px">Bowling 20 pistes, box karaoké et anniversaires à Saint-Denis-en-Val.</p>
+        </div>
+        <div class="fcol"><b>Activités</b><a onclick="scrollToSec('activites')">Bowling</a><a onclick="scrollToSec('activites')">Box karaoké</a><a onclick="scrollToSec('tarifs')">Tarifs</a></div>
+        <div class="fcol"><b>Réserver</b><a onclick="openResa()">Une piste</a><a onclick="openResa()">Un box karaoké</a><a onclick="openResa()">Un anniversaire</a></div>
+        <div class="fcol"><b>Suivez-nous</b><a>Instagram</a><a>Facebook</a><a>Avis Google</a></div>
+      </div>
+      <div class="fbot">Maquette de refonte réalisée pour la prospection — données illustratives. © The Factory Bowling</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ===================================================== BACK OFFICE -->
+<div class="screen" id="screen-bo">
+  <div class="bo">
+    <aside class="bo-side">
+      <div class="bo-brand">
+        <span class="lm">🎳</span>
+        <div><b>The Factory</b><small>BACK OFFICE</small></div>
+      </div>
+      <nav class="bo-nav" id="boNav"></nav>
+      <div class="bo-foot">
+        <div class="av">CG</div>
+        <div><b>Cécilia Goron</b><small>Présidente</small></div>
+      </div>
+    </aside>
+    <div class="bo-main">
+      <div class="bo-top">
+        <div><h2 id="boTitle">Tableau de bord</h2>
+          <div class="bo-sub" id="boSub">Vue d'ensemble du centre</div></div>
+      </div>
+      <div class="bo-content">
+        <div class="bo-view active" id="bv-dash"></div>
+        <div class="bo-view" id="bv-resa"></div>
+        <div class="bo-view" id="bv-planning"></div>
+        <div class="bo-view" id="bv-leads"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESA MODAL -->
+<div class="ov" id="ov" onclick="if(event.target===this)closeResa()">
+  <div class="resa">
+    <div class="resa-head">
+      <span style="font-size:24px">🎳</span>
+      <h3>Réserver en ligne</h3>
+      <button class="rx" onclick="closeResa()" aria-label="Fermer">✕</button>
+    </div>
+    <div class="steps" id="steps"></div>
+    <div class="resa-body" id="resaBody"></div>
+  </div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const FORMULES=[
+  {id:'partie',emo:'🎳',nom:'Partie de bowling',age:'Dès 1 joueur',prix:6,star:false,
+   inc:['1 partie (~15 min / joueur)','Prêt de chaussures inclus','Piste attribuée automatiquement']},
+  {id:'illimite',emo:'🔥',nom:'Bowling illimité 1h',age:'Le plus réservé',prix:14,star:true,
+   inc:['Parties illimitées pendant 1 heure','Chaussures incluses','Idéal familles & groupes']},
+  {id:'anniv',emo:'🎂',nom:'Pack anniversaire',age:'Dès 6 enfants',prix:18,star:false,
+   inc:['2 parties de bowling','Table réservée 45 min','Boisson + part de gâteau','Invitations à imprimer']},
+  {id:'karaoke',emo:'🎤',nom:'Box Karaoké (1h)',age:'Box privatif · 2 à 10 pers.',prix:12,star:false,
+   inc:['1 box privatif pendant 1 heure','Catalogue 20 000+ titres','Micros HD & écran géant']},
+];
+const ADDONS=[
+  {id:'boissons',nom:'Pack boissons groupe',desc:'Softs & cocktails sans alcool à volonté',prix:24},
+  {id:'gateau',nom:'Gâteau d\'anniversaire',desc:'Au chocolat ou fruits, 8-15 parts',prix:28},
+  {id:'resto',nom:'Formule restauration',desc:'Burgers, pizzas & frites pour le groupe',prix:15},
+  {id:'boxkar',nom:'Box karaoké 1h en plus',desc:'Un box privatif pour prolonger la soirée',prix:60},
+];
+
+const RESAS=[
+  {ref:'FB-3071',nom:'Antoine Dubois',tel:'06 21 43 65 87',formule:'illimite',date:'Ven. 25 juil',heure:'21h00',nb:8,piste:'Pistes 5-6',statut:'conf',total:112,acompte:30},
+  {ref:'FB-3072',nom:'Anniv. Lucas (8 ans)',tel:'06 55 12 33 90',formule:'anniv',date:'Sam. 26 juil',heure:'14h00',nb:10,piste:'Pistes 11-12',statut:'conf',total:180,acompte:30},
+  {ref:'FB-3073',nom:'Karaoké EVJF Léa',tel:'06 78 90 12 34',formule:'karaoke',date:'Sam. 26 juil',heure:'20h00',nb:9,piste:'Box Studio',statut:'att',total:108,acompte:0},
+  {ref:'FB-3074',nom:'Anniv. Jade (9 ans)',tel:'06 33 44 55 66',formule:'anniv',date:'Dim. 27 juil',heure:'15h30',nb:9,piste:'Pistes 3-4',statut:'new',total:162,acompte:0},
+  {ref:'FB-3075',nom:'CE Deltatec',tel:'06 11 99 88 77',formule:'illimite',date:'Mer. 30 juil',heure:'18h00',nb:16,piste:'Pistes 14-17',statut:'conf',total:224,acompte:30},
+  {ref:'FB-3070',nom:'Sortie famille Petit',tel:'06 44 22 88 11',formule:'partie',date:'Dim. 20 juil',heure:'11h00',nb:5,piste:'Piste 2',statut:'done',total:30,acompte:30},
+];
+const STAT={conf:{l:'Confirmé',c:'b-conf'},att:{l:'Acompte attendu',c:'b-att'},new:{l:'Demande',c:'b-new'},done:{l:'Terminé',c:'b-done'}};
+const fNom=id=>FORMULES.find(f=>f.id===id).nom;
+const eur=n=>n.toLocaleString('fr-FR')+' €';
+
+/* ================= MODE ================= */
+function setMode(m){
+  document.getElementById('screen-site').classList.toggle('active',m==='site');
+  document.getElementById('screen-bo').classList.toggle('active',m==='bo');
+  document.getElementById('m-site').classList.toggle('active',m==='site');
+  document.getElementById('m-bo').classList.toggle('active',m==='bo');
+  window.scrollTo(0,0);
+}
+function scrollToSec(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+/* ================= SITE: formules ================= */
+function renderFormules(){
+  document.getElementById('formulesGrid').innerHTML=FORMULES.map(f=>`
+    <div class="formule ${f.star?'star':''}">
+      ${f.star?'<div class="ribbon">🔥 Le plus réservé</div>':''}
+      <div class="fz">${f.emo}</div>
+      <h3>${f.nom}</h3>
+      <div class="age">${f.age}</div>
+      <div class="price">${f.prix}<small> €/pers.</small></div>
+      <ul>${f.inc.map(i=>`<li><span class="ck">▸</span> ${i}</li>`).join('')}</ul>
+      <button class="btn ${f.star?'btn-orange':'btn-ghost'}" onclick="openResa('${f.id}')">Réserver</button>
+    </div>`).join('');
+}
+
+/* ================= RESERVATION TUNNEL ================= */
+let R={step:0,formule:null,date:null,heure:null,nb:6,addons:[]};
+const DAYS=[
+  {d:'25',j:'Ven',off:false},{d:'26',j:'Sam',off:false},{d:'27',j:'Dim',off:false},
+  {d:'28',j:'Lun',off:false},{d:'29',j:'Mar',off:false},{d:'30',j:'Mer',off:false},
+  {d:'31',j:'Jeu',off:false},{d:'01',j:'Ven',off:false},{d:'02',j:'Sam',off:false},
+  {d:'03',j:'Dim',off:false},{d:'04',j:'Lun',off:false},{d:'05',j:'Mar',off:false},
+  {d:'06',j:'Mer',off:false},{d:'07',j:'Jeu',off:false},
+];
+const SLOTS=[{h:'11h00',full:false},{h:'14h00',full:false},{h:'16h00',full:true},
+  {h:'18h00',full:false},{h:'20h00',full:false},{h:'21h30',full:false},{h:'23h00',full:false},{h:'00h30',full:true}];
+
+function openResa(fid){
+  R={step:0,formule:fid||null,date:null,heure:null,nb:6,addons:[]};
+  if(fid)R.step=1;
+  document.getElementById('ov').classList.add('open');
+  renderResa();
+}
+function closeResa(){document.getElementById('ov').classList.remove('open');}
+function rGo(s){R.step=s;renderResa();}
+function resaTotal(){
+  if(!R.formule)return{base:0,add:0,tot:0};
+  const f=FORMULES.find(x=>x.id===R.formule);
+  const base=f.prix*R.nb;
+  const add=R.addons.reduce((s,id)=>s+ADDONS.find(a=>a.id===id).prix,0);
+  return{base,add,tot:base+add};
+}
+function renderResa(){
+  document.getElementById('steps').innerHTML=[0,1,2,3,4].map(i=>`<div class="stp ${i<=R.step?'on':''}"></div>`).join('');
+  const body=document.getElementById('resaBody');
+  const T=resaTotal();
+
+  if(R.step===0){
+    body.innerHTML=`<div class="rstep active">
+      <h4>1 · Choisissez votre formule</h4>
+      <div class="rhint">Bowling, bowling illimité, anniversaire ou box karaoké.</div>
+      ${FORMULES.map(f=>`<div class="opt ${R.formule===f.id?'sel':''}" tabindex="0" onclick="R.formule='${f.id}';renderResa()">
+        <div class="oe">${f.emo}</div>
+        <div class="on"><b>${f.nom}</b><span>${f.age}</span></div>
+        <div class="op">${f.prix} €</div>
+      </div>`).join('')}
+      <div class="resa-foot"><span></span>
+        <button class="btn btn-teal" ${R.formule?'':'disabled style="opacity:.4"'} onclick="rGo(1)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===1){
+    body.innerHTML=`<div class="rstep active">
+      <h4>2 · Date & créneau</h4>
+      <div class="rhint">Disponibilités en temps réel sur les 20 pistes et 3 box karaoké.</div>
+      <div class="daypick">${DAYS.map(d=>`
+        <div class="day ${d.off?'off':''} ${R.date===d.d?'sel':''}" tabindex="${d.off?-1:0}"
+          ${d.off?'':`onclick="R.date='${d.d}';R.heure=null;renderResa()"`}>
+          <small>${d.j}</small>${d.d}</div>`).join('')}</div>
+      ${R.date?`<div style="margin-top:18px"><b style="font-size:13px;text-transform:uppercase;color:var(--muted)">Créneau</b>
+        <div class="slots">${SLOTS.map(s=>`
+          <div class="slot ${s.full?'full':''} ${R.heure===s.h?'sel':''}" tabindex="${s.full?-1:0}"
+            ${s.full?'':`onclick="R.heure='${s.h}';renderResa()"`}>${s.h}</div>`).join('')}</div></div>`:''}
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(0)">← Retour</button>
+        <button class="btn btn-teal" ${R.date&&R.heure?'':'disabled style="opacity:.4"'} onclick="rGo(2)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===2){
+    body.innerHTML=`<div class="rstep active">
+      <h4>3 · Participants & options</h4>
+      <div class="rhint">Jusqu'à 6 joueurs par piste, 10 par box karaoké.</div>
+      <div style="background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:15px;display:flex;align-items:center;justify-content:space-between">
+        <b style="font-size:14px">Nombre de participants</b>
+        <div class="qty">
+          <button aria-label="Retirer un participant" onclick="R.nb=Math.max(1,R.nb-1);renderResa()">−</button>
+          <span class="qv">${R.nb}</span>
+          <button aria-label="Ajouter un participant" onclick="R.nb=Math.min(30,R.nb+1);renderResa()">+</button>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:var(--surface2);border:1px solid var(--line);border-radius:9px;padding:4px 15px">
+        ${ADDONS.map(a=>`<label class="addon">
+          <input type="checkbox" ${R.addons.includes(a.id)?'checked':''} onchange="toggleAddon('${a.id}')">
+          <div class="anm"><b>${a.nom}</b><span>${a.desc}</span></div>
+          <div class="ap">+${a.prix} €</div>
+        </label>`).join('')}
+      </div>
+      <div class="summary">
+        <div class="sline"><span>${fNom(R.formule)} × ${R.nb}</span><span>${eur(T.base)}</span></div>
+        ${T.add?`<div class="sline"><span>Options</span><span>${eur(T.add)}</span></div>`:''}
+        <div class="sline tot"><span>Total</span><span>${eur(T.tot)}</span></div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(1)">← Retour</button>
+        <button class="btn btn-teal" onclick="rGo(3)">Continuer →</button>
+      </div></div>`;
+  }
+  else if(R.step===3){
+    body.innerHTML=`<div class="rstep active">
+      <h4>4 · Vos coordonnées</h4>
+      <div class="rhint">Pour confirmer et vous envoyer votre e-billet.</div>
+      <div class="fieldrow">
+        <div class="field"><label>Prénom</label><input placeholder="Antoine"></div>
+        <div class="field"><label>Nom</label><input placeholder="Dubois"></div>
+      </div>
+      <div class="fieldrow">
+        <div class="field"><label>Téléphone</label><input placeholder="06 12 34 56 78"></div>
+        <div class="field"><label>Email</label><input placeholder="antoine@email.fr"></div>
+      </div>
+      <div class="field"><label>Remarque (optionnel)</label><input placeholder="Occasion, demande spéciale..."></div>
+      <div class="summary">
+        <div class="sline"><span>Formule</span><span>${fNom(R.formule)}</span></div>
+        <div class="sline"><span>Date</span><span>${R.date} juil. · ${R.heure}</span></div>
+        <div class="sline"><span>${R.nb} participants${R.addons.length?' + '+R.addons.length+' option(s)':''}</span><span>${eur(T.tot)}</span></div>
+        <div class="sline tot"><span>Total</span><span>${eur(T.tot)}</span></div>
+        <div class="acompte">⚡ Acompte de 30 € en ligne pour garantir le créneau — le solde se règle sur place.</div>
+      </div>
+      <div class="resa-foot">
+        <button class="btn btn-ghost" onclick="rGo(2)">← Retour</button>
+        <button class="btn btn-teal" onclick="rGo(4)">Payer l'acompte →</button>
+      </div></div>`;
+  }
+  else{
+    const ref='FB-'+(3076+Math.floor(Math.random()*40));
+    body.innerHTML=`<div class="rstep active confirm-ok">
+      <div class="ce">🎳</div>
+      <h4>Réservation confirmée</h4>
+      <p>Votre e-billet QR code vient d'être envoyé par email.<br>Rendez-vous le ${R.date} juil. à ${R.heure} !</p>
+      <div class="ref">RÉF. ${ref}</div>
+      <div style="margin-top:22px"><button class="btn btn-teal" onclick="closeResa()">C'est parti !</button></div>
+      <p style="margin-top:14px;font-size:11.5px;color:var(--muted2)">La réservation s'affiche aussitôt dans le planning du back office.</p>
+    </div>`;
+  }
+}
+function toggleAddon(id){
+  const i=R.addons.indexOf(id);
+  if(i>=0)R.addons.splice(i,1);else R.addons.push(id);
+  renderResa();
+}
+
+/* ================= BACK OFFICE ================= */
+const BONAV=[
+  {id:'dash',e:'📊',l:'Tableau de bord',t:'Tableau de bord',s:'Vue d\'ensemble du centre'},
+  {id:'resa',e:'🎳',l:'Réservations',t:'Réservations',s:'Toutes les réservations pistes & box',ct:RESAS.length},
+  {id:'planning',e:'🎤',l:'Planning box karaoké',t:'Planning des box karaoké',s:'Occupation des 3 box en temps réel'},
+  {id:'leads',e:'🏢',l:'Demandes groupes & CE',t:'Demandes groupes & CE',s:'Leads groupes, CE et privatisations'},
+];
+let boCur='dash';
+function buildBoNav(){
+  document.getElementById('boNav').innerHTML=BONAV.map(n=>`
+    <div class="bn ${n.id===boCur?'active':''}" tabindex="0" onclick="boGo('${n.id}')">
+      <span class="e">${n.e}</span><span>${n.l}</span>
+      ${n.ct?`<span class="ct">${n.ct}</span>`:''}</div>`).join('');
+}
+function boGo(id){
+  boCur=id;
+  const n=BONAV.find(x=>x.id===id);
+  document.getElementById('boTitle').textContent=n.t;
+  document.getElementById('boSub').textContent=n.s;
+  document.querySelectorAll('.bo-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('bv-'+id).classList.add('active');
+  document.querySelectorAll('.bo-nav .bn').forEach((b,i)=>b.classList.toggle('active',BONAV[i].id===id));
+}
+
+function renderDash(){
+  const ca=RESAS.filter(r=>r.statut!=='new').reduce((s,r)=>s+r.total,0);
+  const aVenir=RESAS.filter(r=>r.statut==='conf'||r.statut==='att').length;
+  const nouvelles=RESAS.filter(r=>r.statut==='new').length;
+  document.getElementById('bv-dash').innerHTML=`
+    <div class="kpis">
+      <div class="kpi" style="--kc:var(--orange)"><span class="ki">🎳</span><div class="kl">Réservations à venir</div>
+        <div class="kv">${aVenir}</div><div class="kf up">+6 vs sem. dernière</div></div>
+      <div class="kpi" style="--kc:var(--teal)"><span class="ki">💶</span><div class="kl">CA réservé (semaine)</div>
+        <div class="kv">${eur(ca)}</div><div class="kf up">dont 64 % en ligne</div></div>
+      <div class="kpi" style="--kc:var(--amber)"><span class="ki">🔔</span><div class="kl">Demandes à traiter</div>
+        <div class="kv">${nouvelles}</div><div class="kf" style="color:var(--amber)">action requise</div></div>
+      <div class="kpi" style="--kc:var(--lime)"><span class="ki">🌙</span><div class="kl">Résa hors horaires</div>
+        <div class="kv">41 %</div><div class="kf up">faites entre 20h et 2h</div></div>
+    </div>
+    <div class="bo-cols">
+      <div class="panel">
+        <div class="panel-h"><h3>🎳 Prochaines réservations</h3><span class="pill">${RESAS.filter(r=>r.statut!=='done').length} à venir</span></div>
+        <div class="panel-b"><table class="tbl">
+          <tr><th>Client</th><th>Date</th><th>Formule</th><th>Piste / Box</th><th>Statut</th><th>Total</th></tr>
+          ${RESAS.filter(r=>r.statut!=='done').map(r=>`<tr>
+            <td><div class="who"><div class="wav">🎳</div>
+              <div><b>${r.nom}</b><small>${r.nb} pers.</small></div></div></td>
+            <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+            <td>${fNom(r.formule)}</td>
+            <td><b style="color:var(--teal)">${r.piste}</b></td>
+            <td><span class="badge ${STAT[r.statut].c}">${STAT[r.statut].l}</span></td>
+            <td><b>${eur(r.total)}</b></td></tr>`).join('')}
+        </table></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>🔔 À traiter</h3></div>
+        <div class="panel-b">
+          <div style="display:flex;flex-direction:column;gap:9px;padding:6px 0">
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(45,212,191,.08);border:1px solid rgba(45,212,191,.2);border-radius:9px">
+              <span style="font-size:17px">🔔</span><div><b style="font-size:12.5px">Valider la demande "Anniv. Jade"</b>
+              <div style="font-size:11.5px;color:var(--teal);font-weight:600">Reçue il y a 1h via le site</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);border-radius:9px">
+              <span style="font-size:17px">💳</span><div><b style="font-size:12.5px">Relancer l'acompte Karaoké EVJF Léa</b>
+              <div style="font-size:11.5px;color:var(--amber);font-weight:600">9 pers. · Sam. 26 juil 20h</div></div></div>
+            <div style="display:flex;gap:10px;padding:10px;background:rgba(154,230,0,.08);border:1px solid rgba(154,230,0,.2);border-radius:9px">
+              <span style="font-size:17px">🎂</span><div><b style="font-size:12.5px">2 anniversaires ce week-end</b>
+              <div style="font-size:11.5px;color:var(--lime);font-weight:600">Lucas (sam.) et Jade (dim.)</div></div></div>
+          </div>
+          <div class="note" style="margin-top:8px">💡 <div>41 % des réservations sont faites hors des horaires d'ouverture — du CA impossible à capter quand le bouton « Réservation » renvoyait vers la page contact.</div></div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderResaView(){
+  document.getElementById('bv-resa').innerHTML=`
+    <div class="toolbar">
+      <div class="search"><span class="si">🔍</span><input placeholder="Rechercher un client, une référence..."></div>
+      <div class="seg"><button class="on">Toutes</button><button>À venir</button><button>Demandes</button></div>
+      <button class="btn btn-orange btn-sm" style="margin-left:auto">+ Réservation manuelle</button>
+    </div>
+    <div class="panel"><div class="panel-b"><table class="tbl">
+      <tr><th>Réf.</th><th>Client</th><th>Contact</th><th>Date & heure</th><th>Formule</th><th>Pers.</th><th>Piste / Box</th><th>Statut</th><th>Total</th><th>Acompte</th></tr>
+      ${RESAS.map(r=>`<tr>
+        <td><b style="color:var(--orange)">${r.ref}</b></td>
+        <td><div class="who"><div class="wav">🎳</div><div><b>${r.nom}</b></div></div></td>
+        <td><small style="color:var(--muted)">${r.tel}</small></td>
+        <td>${r.date}<br><small style="color:var(--muted)">${r.heure}</small></td>
+        <td>${fNom(r.formule)}</td>
+        <td><b>${r.nb}</b></td>
+        <td><b style="color:var(--teal)">${r.piste}</b></td>
+        <td><span class="badge ${STAT[r.statut].c}">${STAT[r.statut].l}</span></td>
+        <td><b>${eur(r.total)}</b></td>
+        <td>${r.acompte?`<span style="color:var(--lime);font-weight:800">✓ ${r.acompte} €</span>`:`<span style="color:var(--amber);font-weight:800">en attente</span>`}</td>
+      </tr>`).join('')}
+    </table></div></div>`;
+}
+
+function renderPlanning(){
+  const boxes=['Box Disco','Box Studio','Box Vinyle'];
+  const heures=['14h','15h','16h','17h','18h','19h','20h','21h'];
+  const book={
+    '14h':[{l:'Anniv. Chloé',c:'mag'},null,null],
+    '16h':[null,{l:'Team building',c:'cyan'},null],
+    '18h':[{l:'CE Deltatec',c:''},null,{l:'Session ouverte',c:'cyan'}],
+    '20h':[null,{l:'Karaoké EVJF Léa',c:''},null],
+    '21h':[{l:'Session ouverte',c:'cyan'},null,{l:'Anniversaire Enzo',c:''}],
+  };
+  let rows='';
+  heures.forEach(h=>{
+    rows+=`<div class="pt">${h}</div>`;
+    [0,1,2].forEach(i=>{
+      const b=book[h]&&book[h][i];
+      rows+=b?`<div class="pslot book ${b.c}">${b.l}</div>`:`<div class="pslot free">libre</div>`;
+    });
+  });
+  document.getElementById('bv-planning').innerHTML=`
+    <div class="toolbar">
+      <div class="seg"><button>Ven. 25</button><button class="on">Sam. 26 juil</button><button>Dim. 27</button></div>
+      <button class="btn btn-ghost btn-sm" style="margin-left:auto">🔒 Bloquer un box (maintenance)</button>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h3>🎤 Occupation des box karaoké</h3><span class="pill">Samedi 26 juil</span></div>
+      <div class="panel-b" style="padding:16px 18px">
+        <div class="plan">
+          <div class="ph">Horaire</div>
+          ${boxes.map(l=>`<div class="ph">${l}</div>`).join('')}
+          ${rows}
+        </div>
+        <div class="note" style="margin-top:16px">💡 <div>Chaque réservation de box en ligne bloque automatiquement le créneau — plus de double-booking, plus de box oublié au téléphone.</div></div>
+      </div>
+    </div>`;
+}
+
+function renderLeads(){
+  document.getElementById('bv-leads').innerHTML=`
+    <div class="giftgrid">
+      <div class="gift"><div class="gl">Demandes groupes / CE (mois)</div><div class="gv">17</div>
+        <div style="font-size:11.5px;color:var(--muted);font-weight:600;margin-top:4px">valeur estimée 6 400 €</div></div>
+      <div class="gift"><div class="gl">Devis en attente</div><div class="gv">4</div>
+        <div style="font-size:11.5px;color:var(--amber);font-weight:600;margin-top:4px">à relancer sous 48h</div></div>
+      <div class="gift"><div class="gl">Taux de conversion</div><div class="gv">58 %</div>
+        <div style="font-size:11.5px;color:var(--lime);font-weight:600;margin-top:4px">+11 pts vs trimestre dernier</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h3>🏢 Demandes groupes & CE</h3><button class="btn btn-orange btn-sm" style="margin-left:auto">+ Nouvelle demande</button></div>
+      <div class="panel-b"><table class="tbl">
+        <tr><th>Organisation</th><th>Contact</th><th>Type</th><th>Effectif</th><th>Date souhaitée</th><th>Statut</th></tr>
+        <tr>
+          <td><div class="who"><div class="wav">🏢</div><div><b>CE Deltatec</b><small>reçu via le site</small></div></div></td>
+          <td><small style="color:var(--muted)">c.morel@deltatec.fr</small></td>
+          <td>Soirée bowling + box</td><td><b>16</b></td><td>Mer. 30 juil</td>
+          <td><span class="badge b-conf">Confirmé</span></td></tr>
+        <tr>
+          <td><div class="who"><div class="wav">🏢</div><div><b>Amicale mairie</b><small>reçu via le site</small></div></div></td>
+          <td><small style="color:var(--muted)">amicale@saintdenis-en-val.fr</small></td>
+          <td>Privatisation partielle</td><td><b>40</b></td><td>Sam. 6 sept</td>
+          <td><span class="badge b-att">Devis envoyé</span></td></tr>
+        <tr>
+          <td><div class="who"><div class="wav">🏢</div><div><b>Start-up NovaLab</b><small>reçu via le site</small></div></div></td>
+          <td><small style="color:var(--muted)">team@novalab.io</small></td>
+          <td>Team building karaoké</td><td><b>22</b></td><td>Ven. 12 sept</td>
+          <td><span class="badge b-new">Nouvelle</span></td></tr>
+        <tr>
+          <td><div class="who"><div class="wav">🏢</div><div><b>Club sportif ASO</b><small>reçu via le site</small></div></div></td>
+          <td><small style="color:var(--muted)">bureau@aso-orleans.fr</small></td>
+          <td>Tournoi bowling</td><td><b>28</b></td><td>Dim. 21 sept</td>
+          <td><span class="badge b-new">Nouvelle</span></td></tr>
+      </table>
+        <div class="note" style="margin-top:14px">💡 <div>Avant la refonte, ces demandes arrivaient noyées dans la boîte contact. Centralisées ici, elles se relancent en 1 clic — un canal groupes/CE enfin pilotable.</div></div>
+      </div>
+    </div>`;
+}
+
+/* ================= INIT ================= */
+renderFormules();
+buildBoNav();
+renderDash();renderResaView();renderPlanning();renderLeads();
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeResa();});
+</script>
+</body>
+</html>
