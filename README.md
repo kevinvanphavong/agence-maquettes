@@ -32,6 +32,11 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | Play N'Jump | `https://kevinvanphavong.github.io/agence-maquettes/play-n-jump-9d96bc.html` |
 | Cap Karting | `https://kevinvanphavong.github.io/agence-maquettes/cap-karting-f8682f.html` |
 | Peka Bloc | `https://kevinvanphavong.github.io/agence-maquettes/peka-bloc-d7473a.html` |
+| Enjoy Vierzon (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/enjoy-vierzon-e5d670/` |
+| The Factory (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/the-factory-60f7e7/` |
+| Cap Karting (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-karting-v3-161c85/` |
+| La Récré des Pirates (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/recre-des-pirates-v3-f167ce/` |
+| Kid's Paradise (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/kids-paradise-v3-fd827f/` |
 
 À chaque prospect, on envoie **uniquement le lien direct de sa maquette** — jamais le lien portfolio (qui liste toutes les maquettes).
 

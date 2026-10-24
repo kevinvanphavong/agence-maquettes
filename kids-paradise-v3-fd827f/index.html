@@ -1,0 +1,1352 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#FFF7E8">
+<title>Kid's Paradise · parc de jeux enfants à Blois (aperçu)</title>
+<meta name="description" content="Aperçu non commandé de la page d'accueil de Kid's Paradise, parc de jeux couvert pour les 0 à 12 ans à La Chaussée-Saint-Victor, avec réservation des anniversaires et des entrées.">
+<link rel="preload" href="polices/lilita-one-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/outfit-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/labyrinthe.webp" as="image">
+<style>
+/*
+  Direction artistique (aperçu v3, 24/10/2026)
+  Ambiance : un mercredi après-midi pluvieux dans la grande salle : moquette framboise, toboggan arc-en-ciel, poteaux rouges, jaunes et bleus, la fresque jungle et les suricates du logo.
+  Idée forte : la page se visite comme le labyrinthe. Les formules sont des toboggans dont la longueur dit la durée, les prix d'entrée se lisent sur une toise, les photos sont sous un filet qu'on soulève, et la piscine à balles déborde du haut de page.
+  Palette (relevée sur le site, le logo et les photos du parc) : brun du logo #461C12, jaune du site #F4E148, ciel du site #7ABDE5, framboise de la moquette #C92A66, orange du toboggan #F26A1B, rouge des poteaux #D7262F, bleu du toboggan à pistes #1F5FB8, vert palmier #1B870B, fond crème #FFF7E8.
+  Typographie : Lilita One (les lettres grasses et bombées du logo) pour les titres, Outfit pour le texte. Hébergées dans polices/, licence OFL.
+  Motif : la balle de la piscine à balles (et les pois de la chaussette du site), les rayures du toboggan arc-en-ciel, le filet des structures, la frise de suricates.
+*/
+@font-face{font-family:"Lilita One";src:url(polices/lilita-one-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Outfit";src:url(polices/outfit-variable.woff2) format("woff2");font-weight:100 900;font-display:swap}
+
+:root{
+  --creme:#FFF7E8; --creme-2:#FCEBCB; --blanc:#fff;
+  --brun:#461C12; --encre:#33140C; --gris:#6B4F45;
+  --jaune:#F4E148; --jaune-pale:#FBF3B4;
+  --ciel:#7ABDE5; --ciel-pale:#E3F1FA;
+  --framboise:#C92A66; --framboise-fonce:#A11F50;
+  --orange:#F26A1B; --rouge:#D7262F; --bleu:#1F5FB8; --vert:#1B870B;
+  --titre:"Lilita One","Arial Black",sans-serif;
+  --texte:"Outfit",system-ui,sans-serif;
+  --t-xs:.875rem; --t-s:.9375rem; --t-m:1.0625rem; --t-l:1.25rem; --t-xl:1.625rem; --t-2xl:clamp(2.2rem,9vw,3.6rem);
+  --e1:4px; --e2:8px; --e3:12px; --e4:16px; --e5:24px; --e6:32px; --e7:48px; --e8:64px; --e9:96px;
+  --r-s:10px; --r-m:18px; --r-l:28px;
+  --ressort:cubic-bezier(.3,1.5,.5,1); --doux:cubic-bezier(.2,.7,.2,1);
+  --large:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--creme);color:var(--encre);font:400 var(--t-m)/1.55 var(--texte);overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+button{-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--bleu);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100% - 32px,var(--large));margin-inline:auto}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{font-family:var(--titre);font-weight:400;line-height:1;margin:0;color:var(--brun);letter-spacing:.005em}
+h2{font-size:var(--t-2xl)}
+h3{font-size:var(--t-l)}
+p{margin:0}
+.ico{width:20px;height:20px;flex:none}
+.js .rv{opacity:0;transform:translateY(28px);transition:opacity .6s var(--doux),transform .7s var(--doux)}
+.js .rv.vu{opacity:1;transform:none}
+
+/* ---------- boutons : un bloc de mousse qu'on enfonce ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--e2);min-height:52px;padding:10px 22px;border-radius:14px;border:2.5px solid var(--brun);font:400 1.125rem/1.1 var(--titre);letter-spacing:.01em;text-decoration:none;cursor:pointer;background:var(--blanc);color:var(--brun);box-shadow:0 5px 0 var(--brun);transition:transform .12s ease,box-shadow .12s ease,background-color .2s}
+.btn:hover{transform:translateY(3px);box-shadow:0 2px 0 var(--brun)}
+.btn:active{transform:translateY(5px);box-shadow:0 0 0 var(--brun)}
+.btn--framboise{background:var(--framboise);color:#fff}
+.btn--framboise:hover{background:var(--framboise-fonce)}
+.btn--jaune{background:var(--jaune);color:var(--brun)}
+.btn--orange{background:var(--orange);color:var(--encre)}
+.btn--plein{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+.lien{font-weight:700;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;color:var(--brun)}
+.lien:hover{text-decoration-style:wavy;text-decoration-color:var(--framboise)}
+
+/* ---------- aperçu Vong Studio ---------- */
+.apercu{background:var(--encre);color:#F7E9DA;font-size:var(--t-xs);line-height:1.4}
+.apercu__in{display:flex;flex-wrap:wrap;align-items:center;gap:0 var(--e4);padding:2px 0}
+.apercu__in>span{flex:1 1 220px;min-width:0;padding:6px 0}
+.apercu b{color:var(--jaune);font-weight:700}
+.apercu .long{display:none}
+.apercu summary{cursor:pointer;font-weight:700;color:var(--jaune);list-style:none;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+.apercu summary::-webkit-details-marker{display:none}
+.apercu summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-3px);transition:transform .2s}
+.apercu details[open] summary::after{transform:rotate(225deg)}
+.gerant{flex-basis:100%;padding:var(--e3) 0 var(--e4);border-top:1px solid rgba(247,233,218,.2)}
+.gerant ol{margin:0;padding-left:1.2em;display:grid;gap:var(--e3);max-width:74ch}
+.gerant li b{color:#fff}
+.gerant p{margin-top:var(--e3);max-width:74ch;color:#E2CFBF}
+
+/* ---------- en-tête ---------- */
+.entete{position:sticky;top:0;z-index:30;background:rgba(255,247,232,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:2px solid transparent;transition:border-color .3s}
+.entete.colle{border-bottom-color:var(--brun)}
+.entete__in{display:flex;align-items:center;gap:var(--e3);min-height:68px}
+.logo{display:block;flex:none;width:64px;margin:6px 0 -22px;transition:transform .4s var(--ressort)}
+.logo:hover{transform:rotate(-8deg) scale(1.05)}
+.logo img{width:100%;filter:drop-shadow(0 4px 6px rgba(70,28,18,.25))}
+.nav{display:none}
+.nav a{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 6px;font-weight:600;text-decoration:none}
+.nav a::after{content:"";position:absolute;left:6px;right:6px;bottom:6px;height:4px;border-radius:2px;background:repeating-linear-gradient(90deg,var(--rouge) 0 25%,var(--orange) 25% 50%,var(--jaune) 50% 75%,var(--bleu) 75% 100%);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--doux)}
+.nav a:hover::after{transform:none}
+.entete__droite{margin-left:auto;display:flex;align-items:center;gap:var(--e2)}
+.entete__droite .btn{min-height:44px;padding:6px 14px;font-size:1rem;box-shadow:0 4px 0 var(--brun)}
+.bouton-menu{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;border:2.5px solid var(--brun);border-radius:12px;background:var(--blanc);cursor:pointer}
+.menu-tel{display:none;position:absolute;left:16px;right:16px;top:70px;background:var(--blanc);border:2.5px solid var(--brun);border-radius:var(--r-m);box-shadow:0 6px 0 var(--brun);padding:var(--e2);z-index:40}
+.menu-tel.ouvert{display:grid}
+.menu-tel a{display:flex;align-items:center;min-height:48px;padding:0 12px;font-weight:600;text-decoration:none;border-radius:10px}
+.menu-tel a:hover{background:var(--jaune-pale)}
+
+/* ---------- haut de page : la piscine à balles déborde ---------- */
+.haut{position:relative;padding:var(--e5) 0 var(--e6)}
+.haut__in{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--e5);align-items:center}
+.haut__texte{display:flex;flex-direction:column;align-items:flex-start;gap:var(--e3);min-width:0}
+.panneau-jour{display:inline-flex;align-items:center;gap:var(--e2);min-height:36px;padding:4px 14px 4px 8px;border:2px solid var(--brun);border-radius:999px;background:var(--blanc);font-size:var(--t-xs);font-weight:600;line-height:1.3}
+.panneau-jour i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--vert);box-shadow:inset -3px -3px 0 rgba(0,0,0,.18)}
+.panneau-jour i.ferme{background:var(--rouge)}
+h1{font-size:clamp(2.4rem,min(12.6vw,8.6vh),5.6rem);line-height:.94}
+h1 .l{display:block}
+h1 .l2{color:var(--framboise)}
+h1 .age{display:inline-block;padding:0 .14em .04em;background:var(--jaune);border-radius:.18em;transform:rotate(-2deg);box-shadow:0 .06em 0 var(--brun)}
+.js h1 .l{opacity:0;transform:translateY(.4em);animation:monte .7s var(--ressort) forwards}
+.js h1 .l2{animation-delay:.1s}.js h1 .l3{animation-delay:.2s}
+@keyframes monte{to{opacity:1;transform:none}}
+.chapo{font-size:var(--t-m);max-width:34em;color:var(--gris)}
+.chapo b{color:var(--encre);font-weight:600}
+.haut__actions{display:flex;flex-wrap:wrap;gap:var(--e3);margin-top:var(--e2);width:100%}
+.haut__actions .btn{flex:1 1 200px}
+.reponses{list-style:none;margin:var(--e2) 0 0;padding:0;display:grid;gap:6px;font-size:var(--t-xs);font-weight:500;color:var(--gris)}
+.reponses li{display:flex;align-items:center;gap:var(--e2)}
+.reponses li::before{content:"";flex:none;width:12px;height:12px;border-radius:50%;background:var(--c,var(--rouge));box-shadow:inset -2px -2px 0 rgba(0,0,0,.18)}
+.reponses li:nth-child(2){--c:var(--bleu)}.reponses li:nth-child(3){--c:var(--vert)}
+
+.scene{position:relative;padding-top:34px;min-width:0}
+.scene__photo{position:relative;border:3px solid var(--brun);border-radius:var(--r-l) var(--r-l) var(--r-l) 110px;overflow:hidden;aspect-ratio:16/10;background:var(--ciel)}
+.scene__photo img{width:100%;height:100%;object-fit:cover;object-position:46% 60%;transition:transform 1.2s var(--doux)}
+.scene:hover .scene__photo img{transform:scale(1.04)}
+.scene__frise{position:absolute;top:0;left:22px;right:22px;height:36px;background:url(img/bande-suricates.png) repeat-x 0 100%/auto 36px}
+.balles{position:absolute;left:0;right:0;bottom:-18px;height:90px;pointer-events:none}
+.balle{position:absolute;bottom:0;width:var(--d,40px);height:var(--d,40px);border-radius:50%;background:var(--c);box-shadow:inset -6px -6px 0 rgba(0,0,0,.16),inset 5px 5px 0 rgba(255,255,255,.28);border:2px solid var(--brun)}
+.js .balle{animation:tombe .9s var(--ressort) both;animation-delay:var(--t,0s)}
+@keyframes tombe{from{transform:translateY(-260px)}to{transform:translateY(0)}}
+@media (hover:hover){.scene:hover .balle{animation:roule .6s ease-in-out both;animation-delay:calc(var(--t) / 3)}}
+@keyframes roule{50%{transform:translateY(-14px) rotate(20deg)}}
+.scene__legende{position:absolute;right:12px;top:48px;background:var(--brun);color:#fff;font-size:var(--t-xs);font-weight:600;padding:4px 10px;border-radius:999px}
+
+/* ---------- bandeau qui défile ---------- */
+.defile-cadre{overflow:hidden;padding:var(--e5) 0}
+.defile{background:var(--framboise);color:#fff;transform:rotate(-1.6deg);margin:0 -24px;border-block:3px solid var(--brun);overflow:hidden}
+.defile-piste{display:flex;width:max-content;animation:defile 36s linear infinite}
+.defile:hover .defile-piste{animation-play-state:paused}
+.defile p{display:flex;align-items:center;gap:var(--e4);padding:12px var(--e4) 12px 0;font:400 1.5rem/1 var(--titre);white-space:nowrap}
+.defile p span{display:inline-flex;align-items:center;gap:var(--e4)}
+.defile p span::after{content:"";width:16px;height:16px;border-radius:50%;background:var(--jaune);border:2px solid var(--brun)}
+.defile p span:nth-child(3n+2)::after{background:var(--ciel)}
+.defile p span:nth-child(3n)::after{background:var(--orange)}
+@keyframes defile{to{transform:translateX(-50%)}}
+
+/* ---------- carton d'invitation, sur la moquette à pois ---------- */
+.invit-zone{position:relative;background-color:var(--framboise);background-image:radial-gradient(circle,rgba(255,255,255,.13) 0 7px,transparent 8px),radial-gradient(circle,rgba(70,28,18,.14) 0 6px,transparent 7px);background-size:56px 56px,56px 56px;background-position:0 0,28px 28px;padding:var(--e7) 0}
+.invit-zone__in{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--e6);align-items:start}
+.invit-zone__in>*{min-width:0}
+.carton{position:relative;background:var(--blanc);border:3px solid var(--brun);border-radius:var(--r-m);padding:var(--e5);box-shadow:0 8px 0 var(--brun);transform:rotate(-1deg);transition:transform .5s var(--ressort)}
+.carton:hover{transform:rotate(0)}
+.carton__tete{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--e3)}
+.carton__tete h2{font-size:clamp(1.5rem,7vw,2.2rem);min-width:0}
+.carton__tampon{flex:none;width:72px;height:72px;border-radius:50%;background:var(--jaune);border:2.5px solid var(--brun);color:var(--brun);display:grid;place-items:center;text-align:center;font:400 .85rem/1 var(--titre);transform:rotate(10deg)}
+.carton__phrase{margin-top:var(--e4);font-size:var(--t-l);line-height:2.1;font-weight:600;color:var(--brun)}
+.trou{display:inline-block;vertical-align:baseline;border:0;border-bottom:3px dotted var(--framboise);background:transparent;padding:0 4px;font-weight:700;color:var(--encre);border-radius:0;min-height:44px}
+.trou:focus-visible{outline:none;border-bottom-style:solid;background:var(--jaune-pale)}
+input.trou{width:8.5ch}
+select.trou{appearance:none;-webkit-appearance:none;padding-right:20px;background:linear-gradient(45deg,transparent 50%,var(--brun) 50%) right 6px center/7px 7px no-repeat,linear-gradient(-45deg,transparent 50%,var(--brun) 50%) right 0 center/7px 7px no-repeat;cursor:pointer}
+.carton__quand{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px var(--e3);margin:var(--e3) 0 0;font-size:var(--t-s)}
+.carton__quand dt{font-weight:700;color:var(--brun)}
+.carton__quand dd{margin:0;color:var(--gris)}
+.carton__actions{margin-top:var(--e5);display:grid;gap:var(--e3)}
+.carton__petit{font-size:var(--t-xs);color:var(--gris);line-height:1.5}
+.carton__petit b{color:var(--brun)}
+
+.billet{position:relative;display:grid;grid-template-columns:minmax(0,1fr);background:var(--jaune);color:var(--encre);border:3px solid var(--brun);border-radius:var(--r-m);box-shadow:0 8px 0 var(--brun);transform:rotate(1.2deg);transition:transform .5s var(--ressort)}
+.billet:hover{transform:rotate(0)}
+.billet__corps{padding:var(--e5);display:grid;gap:var(--e3)}
+.billet h2{font-size:clamp(1.5rem,7vw,2rem)}
+.billet ul{list-style:none;margin:0;padding:0;display:grid}
+.billet li{display:flex;justify-content:space-between;align-items:baseline;gap:var(--e3);padding:8px 0;border-bottom:2px dashed rgba(70,28,18,.3);font-weight:500}
+.billet li b{font:400 1.5rem/1 var(--titre);color:var(--brun);white-space:nowrap}
+.validite{font-size:var(--t-xs);font-weight:500;color:var(--brun)}
+.billet__souche{position:relative;border-top:3px dashed var(--brun);padding:var(--e4) var(--e5) var(--e5);display:grid;gap:var(--e3)}
+.billet__souche::before,.billet__souche::after{content:"";position:absolute;top:-14px;width:24px;height:24px;border-radius:50%;background:var(--framboise);border:3px solid var(--brun)}
+.billet__souche::before{left:-15px;clip-path:inset(0 0 0 50%)}
+.billet__souche::after{right:-15px;clip-path:inset(0 50% 0 0)}
+.chaussettes{display:flex;gap:var(--e3);align-items:center;font-size:var(--t-s);font-weight:600}
+.chaussettes img{width:34px;height:auto;flex:none;transform:rotate(-12deg);transition:transform .4s var(--ressort)}
+.billet:hover .chaussettes img{transform:rotate(14deg) translateY(-3px)}
+
+/* ---------- sections ---------- */
+.sec{position:relative;padding:var(--e8) 0}
+.sec--ciel{background:var(--ciel-pale)}
+.sec--jaune{background:var(--jaune)}
+.sec--bleu{background:var(--bleu);color:#fff}
+.sec--bleu h2,.sec--bleu h3{color:#fff}
+.tete{display:grid;gap:var(--e3);margin-bottom:var(--e6);max-width:60ch}
+.tete p{color:var(--gris);font-size:var(--t-m)}
+.sec--bleu .tete p{color:#DCE8F7}
+.sec--jaune .tete p{color:var(--brun)}
+.exemple{white-space:nowrap;display:inline-block;font:700 .75rem/1.5 var(--texte);color:var(--rouge);border:1.5px solid currentColor;border-radius:5px;padding:0 5px;margin-left:4px;vertical-align:middle;background:var(--blanc)}
+
+/* anniversaires : le ballon et les toboggans */
+.anniv-tete{display:grid;gap:var(--e5);align-items:center;margin-bottom:var(--e6)}
+.anniv-tete .tete{margin:0}
+.ballon{position:relative;justify-self:center;width:min(230px,62vw);margin-bottom:60px;transition:transform .8s var(--ressort)}
+.ballon:hover{transform:translateY(-12px) rotate(-4deg)}
+.ballon img{width:100%;aspect-ratio:1;object-fit:cover;object-position:50% 60%;border-radius:50%;border:4px solid var(--brun);box-shadow:inset 0 0 0 4px #fff}
+.ballon::after{content:"";position:absolute;left:50%;bottom:-12px;width:18px;height:14px;margin-left:-9px;background:var(--framboise);border:3px solid var(--brun);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.ballon svg{position:absolute;left:50%;top:100%;width:40px;height:64px;margin-left:-20px;margin-top:2px}
+.ballon figcaption{position:absolute;left:-14px;top:12px;background:var(--framboise);color:#fff;font:400 1rem/1 var(--titre);padding:8px 12px;border-radius:999px;border:2.5px solid var(--brun);transform:rotate(-10deg)}
+
+.formules{display:grid;gap:var(--e4);list-style:none;margin:0;padding:0}
+.formule{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--e2) var(--e4);padding:var(--e4) var(--e4) var(--e5);background:var(--blanc);border:3px solid var(--brun);border-radius:var(--r-m)}
+.formule__nom{font-size:1.5rem;min-width:0}
+.formule__nom small{display:block;margin-top:4px;font:500 var(--t-xs)/1.35 var(--texte);color:var(--gris)}
+.formule__prix{text-align:right;font:400 2.1rem/1 var(--titre);color:var(--brun);white-space:nowrap}
+.formule__prix small{display:block;font:500 .75rem/1.3 var(--texte);color:var(--gris)}
+.toboggan{grid-column:1/-1;position:relative;height:30px;margin:var(--e2) 0 var(--e1)}
+.toboggan__piste{position:absolute;inset:0 auto 0 0;width:var(--long);border:2.5px solid var(--brun);border-radius:999px;background:repeating-linear-gradient(-55deg,var(--c1) 0 14px,var(--c2) 14px 28px);background-size:40px 100%;transition:background-position .9s linear}
+.formule:hover .toboggan__piste{background-position:120px 0}
+.toboggan__piste b{position:absolute;right:-2px;top:50%;transform:translate(100%,-50%);padding-left:8px;font:400 1.05rem/1 var(--titre);color:var(--brun);white-space:nowrap}
+.formule__infos{grid-column:1/-1;display:grid;gap:var(--e2);margin:0;font-size:var(--t-s)}
+.formule__infos dt{font-weight:700;color:var(--brun);font-size:var(--t-xs)}
+.formule__infos dd{margin:0}
+.puces{display:flex;flex-wrap:wrap;gap:6px}
+.puce{display:inline-block;background:var(--creme-2);color:var(--brun);font-weight:600;font-size:var(--t-xs);padding:3px 9px;border-radius:999px;white-space:nowrap;border:1.5px solid rgba(70,28,18,.25)}
+.formule .btn{grid-column:1/-1;justify-self:start;margin-top:var(--e2)}
+.note-snack{margin-top:var(--e4);font-size:var(--t-s);color:var(--gris);max-width:72ch}
+.inclus{display:grid;gap:var(--e6);margin-top:var(--e7)}
+.inclus h3{font-size:var(--t-xl);margin-bottom:var(--e3)}
+.coches{list-style:none;margin:0;padding:0;display:grid;gap:var(--e2)}
+.coches li{display:flex;gap:var(--e3);align-items:flex-start}
+.coches li::before{content:"";flex:none;width:18px;height:18px;margin-top:4px;border-radius:50%;background:var(--c,var(--orange));border:2px solid var(--brun);box-shadow:inset -3px -3px 0 rgba(0,0,0,.15)}
+.coches li:nth-child(4n+2){--c:var(--bleu)}.coches li:nth-child(4n+3){--c:var(--jaune)}.coches li:nth-child(4n){--c:var(--vert)}
+.encadre{margin-top:var(--e6);border:3px solid var(--brun);border-radius:var(--r-m);padding:var(--e4) var(--e5);display:flex;gap:var(--e4);align-items:flex-start;background:var(--jaune-pale);box-shadow:0 6px 0 var(--brun)}
+.encadre svg{width:30px;height:30px;flex:none;color:var(--brun)}
+.encadre p+p{margin-top:var(--e2)}
+
+/* le parc : les photos sous le filet */
+.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e3);list-style:none;margin:0;padding:0}
+.photo{position:relative;overflow:hidden;border:3px solid var(--brun);border-radius:var(--r-m);background:var(--brun);aspect-ratio:4/3;margin:0}
+.photo--large{grid-column:1/-1;aspect-ratio:16/7}
+.photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--doux)}
+.photo figcaption{position:absolute;left:8px;bottom:8px;background:var(--blanc);color:var(--brun);font:400 .95rem/1.1 var(--titre);padding:6px 10px;border-radius:999px;border:2px solid var(--brun);z-index:2}
+@media (hover:hover){
+  .photo::before{content:"";position:absolute;inset:0;z-index:1;background:repeating-linear-gradient(45deg,transparent 0 16px,rgba(242,106,27,.6) 16px 17.5px),repeating-linear-gradient(-45deg,transparent 0 16px,rgba(242,106,27,.6) 16px 17.5px);transition:transform .6s var(--doux)}
+  .photo:hover::before{transform:translateY(-102%)}
+  .photo:hover img{transform:scale(1.05)}
+}
+.a-fournir{display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:var(--e3);aspect-ratio:4/3;border:3px dashed var(--brun);border-radius:var(--r-m);background:repeating-linear-gradient(-55deg,var(--c1) 0 18px,var(--c2) 18px 36px);transition:background-position 1s linear}
+.a-fournir:hover{background-position:80px 0}
+.a-fournir b{align-self:flex-start;background:var(--blanc);border:2px solid var(--brun);border-radius:10px;padding:4px 10px;font:400 1.1rem/1.1 var(--titre);color:var(--brun)}
+.a-fournir span{align-self:flex-start;background:var(--brun);color:#fff;font-size:.75rem;font-weight:600;padding:2px 8px;border-radius:999px}
+.activites{list-style:none;margin:var(--e6) 0 0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);border-top:3px solid var(--brun)}
+.activites li{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:var(--e3);padding:var(--e3) 0;border-bottom:2px dotted rgba(70,28,18,.3)}
+.activites b{font:400 1.2rem/1.15 var(--titre);color:var(--brun);min-width:0}
+.activites span{color:var(--gris);font-size:var(--t-xs);text-align:right}
+
+/* horaires et la toise des prix */
+.ht{display:grid;gap:var(--e7)}
+.ht>*{min-width:0}
+.horaires{width:100%;border-collapse:separate;border-spacing:0;font-size:var(--t-s);background:var(--blanc);border:3px solid var(--brun);border-radius:var(--r-m);overflow:hidden}
+.horaires th,.horaires td{padding:10px 10px;text-align:left;border-bottom:1.5px solid rgba(70,28,18,.15)}
+.horaires tbody tr:last-child th,.horaires tbody tr:last-child td{border-bottom:0}
+.horaires thead th{background:var(--brun);color:var(--jaune);font-weight:700;font-size:var(--t-xs)}
+.horaires tbody th{font-family:var(--titre);font-weight:400;font-size:1.05rem;color:var(--brun)}
+.horaires td.ferme{color:var(--gris)}
+.horaires .periode{background:var(--jaune-pale);font-weight:600}
+.horaires tr.auj th,.horaires tr.auj td{background:var(--framboise);color:#fff}
+.horaires tr.auj th::after{content:" · aujourd'hui";font:600 var(--t-xs) var(--texte)}
+.note-periode{margin-top:var(--e4);background:var(--blanc);border:3px solid var(--brun);padding:var(--e3) var(--e4);border-radius:var(--r-s);font-size:var(--t-s)}
+.note-periode b{color:var(--brun)}
+.toise-zone{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--e3);align-items:end}
+.suricate-debout{width:30px;height:100px;image-rendering:auto;align-self:end;margin-bottom:4px}
+.toise{position:relative;list-style:none;margin:0;padding:0 0 0 30px;display:flex;flex-direction:column}
+.toise::before{content:"";position:absolute;left:0;top:0;bottom:0;width:22px;border:3px solid var(--brun);border-radius:8px;background:var(--blanc) repeating-linear-gradient(180deg,var(--brun) 0 2px,transparent 2px 12px) 0 0/50% 100% no-repeat}
+.toise li{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:var(--e3);min-height:var(--h);padding:var(--e3) var(--e4);background:var(--c);color:var(--encre);border:3px solid var(--brun);border-top-width:0;transition:transform .35s var(--ressort)}
+.toise li:first-child{border-top-width:3px;border-radius:var(--r-s) var(--r-s) 0 0}
+.toise li:last-child{border-radius:0 0 var(--r-s) var(--r-s)}
+.toise li::before{content:"";position:absolute;left:-32px;top:50%;width:28px;height:3px;background:var(--brun)}
+.toise li:hover{transform:translateX(6px)}
+.toise span{font-weight:600;line-height:1.3;min-width:0}
+.toise small{display:block;font-weight:500;font-size:var(--t-xs);color:var(--brun)}
+.toise .px{font:400 2rem/1 var(--titre);color:var(--brun);white-space:nowrap}
+.bons{margin-top:var(--e5);display:grid;gap:var(--e3)}
+.bon{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;background:var(--blanc);border:3px solid var(--brun);border-radius:var(--r-s);overflow:hidden}
+.bon>span{padding:var(--e3) var(--e4);font-size:var(--t-s);font-weight:500}
+.bon s{color:var(--gris);font-size:var(--t-xs)}
+.bon b{align-self:stretch;display:grid;place-items:center;padding:0 var(--e4);border-left:3px dashed var(--brun);background:var(--framboise);color:#fff;font:400 1.6rem/1 var(--titre);white-space:nowrap}
+
+/* carte fidélité */
+.carte-sec{display:grid;gap:var(--e7);align-items:center}
+.carte-sec>*{min-width:0}
+.tel{width:min(290px,100%);margin-inline:auto;background:var(--encre);border-radius:40px;padding:12px;border:3px solid #fff;transform:rotate(3deg);transition:transform .6s var(--ressort)}
+.tel:hover{transform:rotate(0)}
+.tel__ecran{background:var(--creme);border-radius:30px;overflow:hidden;padding:var(--e4);color:var(--encre);display:grid;gap:var(--e3)}
+.tel__haut{display:flex;align-items:center;gap:var(--e3)}
+.tel__haut img{width:46px;height:46px}
+.tel__haut b{font-weight:700;line-height:1.2}
+.tel__pts{background:var(--jaune);border-radius:16px;padding:var(--e4);text-align:center;border:2.5px solid var(--brun)}
+.tel__pts b{display:block;font:400 2.6rem/1 var(--titre);color:var(--brun)}
+.tel__bon{background:var(--framboise);color:#fff;border-radius:16px;padding:var(--e3);display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:var(--e3);align-items:center;font-size:var(--t-xs)}
+.tel__bon b{display:block;font-size:var(--t-s)}
+.tel__bon svg{width:64px;height:64px;background:#fff;border-radius:6px;padding:4px}
+.carte-points{list-style:none;margin:var(--e5) 0 0;padding:0;display:grid;gap:var(--e4)}
+.carte-points li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:var(--e3);align-items:start}
+.carte-points i{width:40px;height:40px;border-radius:50%;background:var(--c,var(--jaune));border:2.5px solid #fff;box-shadow:inset -5px -5px 0 rgba(0,0,0,.15)}
+.carte-points li:nth-child(2) i{--c:var(--orange)}.carte-points li:nth-child(3) i{--c:var(--ciel)}
+.carte-points b{color:#fff}
+.carte-points p{color:#E6EEF9}
+
+/* venir */
+.venir{display:grid;gap:var(--e6)}
+.venir>*{min-width:0}
+.venir dl{margin:0;display:grid;gap:var(--e4)}
+.venir dt{font:400 1.1rem/1.2 var(--titre);color:var(--brun)}
+.venir dd{margin:0}
+.plan{position:relative;border-radius:var(--r-m);overflow:hidden;border:3px solid var(--brun);min-height:260px;display:grid;place-items:center;text-align:center;padding:var(--e5)}
+.plan svg{position:absolute;inset:0;width:100%;height:100%}
+.plan p{position:relative;background:var(--blanc);border:2.5px solid var(--brun);border-radius:var(--r-s);padding:var(--e3) var(--e4);font-weight:600;box-shadow:0 4px 0 var(--brun)}
+.venir .lien,.plan .lien,.pied a{display:inline-flex;align-items:center;min-height:44px}
+
+/* pied */
+.pied{background:var(--brun);color:#EAD7C6;padding:0 0 var(--e6);font-size:var(--t-s)}
+.pied__frise{height:44px;background:var(--creme) url(img/bande-suricates.png) repeat-x 0 100%/auto 44px}
+.pied__in{display:grid;gap:var(--e5);padding-top:var(--e6)}
+.pied__in>*{min-width:0}
+.pied img{width:84px}
+.pied a{color:var(--jaune)}
+.pied__bas{margin-top:var(--e5);padding-top:var(--e4);border-top:1px solid rgba(234,215,198,.25);font-size:var(--t-xs);display:grid;gap:var(--e2)}
+.mention-droits{color:#fff;font-weight:700;font-size:var(--t-s)}
+
+/* ======================= tunnel de réservation ======================= */
+dialog.resa{padding:0;border:0;width:100%;max-width:100%;height:100%;max-height:100%;margin:0;background:var(--creme);color:var(--encre)}
+dialog.resa::backdrop{background:rgba(51,20,12,.6)}
+.resa__grille{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto 1fr auto;height:100%}
+.resa__tete{display:flex;align-items:center;gap:var(--e3);padding:var(--e3) var(--e4);background:var(--framboise);color:#fff}
+.resa__tete img{width:44px;height:44px;flex:none}
+.resa__titre{flex:1;min-width:0}
+.resa__titre b{display:block;font:400 var(--t-l)/1.1 var(--titre);color:#fff;overflow-wrap:anywhere}
+.resa__titre span{font-size:var(--t-xs);font-weight:500;color:#FFE3EE}
+.fermer{width:44px;height:44px;border-radius:50%;border:2.5px solid var(--brun);background:var(--blanc);color:var(--brun);cursor:pointer;display:grid;place-items:center;flex:none}
+.progres{display:flex;align-items:center;gap:6px;padding:10px var(--e4);background:var(--framboise);border-bottom:3px solid var(--brun)}
+.progres i{flex:1;height:14px;max-width:44px;border-radius:999px;background:rgba(255,255,255,.28);transition:background-color .3s,transform .3s var(--ressort)}
+.progres i.fait{background:var(--jaune)}
+.progres i.ici{background:#fff;transform:scale(1.15)}
+.resa__corps{overflow:auto;display:grid;grid-template-columns:minmax(0,1fr);align-content:start}
+.resa__etape{padding:var(--e5) var(--e4) var(--e6);animation:fondu .3s ease both;min-width:0}
+@keyframes fondu{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.resa__etape h3{font-size:var(--t-xl);margin-bottom:var(--e2);outline:none}
+.resa__aide{color:var(--gris);font-size:var(--t-s);margin-bottom:var(--e5);max-width:60ch}
+.resa__cote{display:none}
+.resa__pied{display:flex;flex-wrap:wrap;align-items:center;gap:var(--e2) var(--e3);padding:var(--e3) var(--e4);border-top:3px solid var(--brun);background:var(--blanc)}
+.resa__total{flex:1;min-width:0;font-size:var(--t-xs);line-height:1.3;color:var(--gris)}
+.resa__total b{display:block;font:400 var(--t-l)/1.1 var(--titre);color:var(--brun)}
+.resa__pied .btn{min-height:48px;padding:8px 18px;margin-left:auto;white-space:nowrap;box-shadow:0 4px 0 var(--brun)}
+.retour{background:transparent;border:0;font-weight:700;text-decoration:underline;text-underline-offset:4px;min-height:44px;min-width:44px;padding:0 6px;cursor:pointer;color:var(--brun)}
+.erreur{flex-basis:100%;order:5;background:#FCE8E6;color:#A3141C;border-left:5px solid var(--rouge);padding:var(--e2) var(--e3);font-weight:600;font-size:var(--t-s);border-radius:0 var(--r-s) var(--r-s) 0}
+.erreur:empty{display:none}
+
+.choix{display:grid;gap:var(--e3)}
+.opt{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:var(--e3);align-items:center;text-align:left;width:100%;padding:var(--e4);border:2.5px solid rgba(70,28,18,.3);border-radius:var(--r-m);background:var(--blanc);cursor:pointer;transition:border-color .15s,background-color .15s,transform .2s var(--ressort)}
+.opt:hover{border-color:var(--brun)}
+.opt:active{transform:scale(.985)}
+.opt[aria-pressed="true"],.opt[aria-checked="true"]{border-color:var(--brun);background:var(--jaune-pale);box-shadow:0 4px 0 var(--brun)}
+.opt__rond{width:24px;height:24px;border-radius:50%;border:2.5px solid var(--brun);display:grid;place-items:center;background:var(--blanc)}
+.opt[aria-pressed="true"] .opt__rond,.opt[aria-checked="true"] .opt__rond{background:var(--framboise);box-shadow:inset -3px -3px 0 rgba(0,0,0,.18)}
+.opt b{display:block;font-weight:700}
+.opt small{display:block;color:var(--gris);font-size:var(--t-xs);line-height:1.4;margin-top:2px}
+.opt__px{font:400 var(--t-l)/1 var(--titre);color:var(--brun);text-align:right;white-space:nowrap}
+.opt__px small{font:600 .75rem var(--texte)}
+
+.cal{max-width:470px}
+.cal__mois{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--e3)}
+.cal__mois b{font:400 var(--t-l)/1 var(--titre);color:var(--brun);text-transform:capitalize}
+.cal__nav{width:44px;height:44px;border-radius:50%;border:2.5px solid var(--brun);background:var(--blanc);cursor:pointer;display:grid;place-items:center}
+.cal__nav[disabled]{opacity:.3;cursor:not-allowed}
+.cal__grille{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal__js{text-align:center;font-size:.75rem;font-weight:700;color:var(--gris);padding-bottom:4px}
+.jourbtn{position:relative;aspect-ratio:1;min-height:44px;min-width:0;border-radius:50%;border:2px solid rgba(70,28,18,.25);background:var(--blanc);font-weight:700;cursor:pointer;display:grid;place-items:center;padding:0;transition:transform .2s var(--ressort),background-color .2s}
+.jourbtn.dispo:hover{transform:scale(1.08);border-color:var(--brun)}
+.jourbtn.dispo::after{content:"";position:absolute;bottom:4px;width:6px;height:6px;border-radius:50%;background:var(--vert)}
+.jourbtn.non{background:repeating-linear-gradient(-45deg,#F3E9DD 0 4px,#fff 4px 8px);color:#8F7A70;border-color:transparent;cursor:not-allowed}
+.jourbtn.ferie{color:#8F7A70;border-style:dashed;cursor:not-allowed}
+.jourbtn.passe{color:#B6A69C;border-color:transparent;background:transparent;cursor:default}
+.jourbtn.vac{border-color:var(--ciel);border-width:3px}
+.jourbtn[aria-pressed="true"]{background:var(--framboise);color:#fff;border-color:var(--brun);box-shadow:inset -4px -4px 0 rgba(0,0,0,.18)}
+.jourbtn[aria-pressed="true"]::after{background:#fff}
+.vide{aspect-ratio:1}
+.legende{display:flex;flex-wrap:wrap;gap:var(--e2) var(--e4);margin-top:var(--e3);font-size:var(--t-xs);color:var(--gris)}
+.legende span{display:inline-flex;align-items:center;gap:6px}
+.legende i{width:14px;height:14px;border-radius:50%;border:2px solid rgba(70,28,18,.25);display:inline-block;position:relative}
+.legende .l-dispo::after{content:"";position:absolute;left:3px;top:3px;width:4px;height:4px;border-radius:50%;background:var(--vert)}
+.legende .l-non{background:repeating-linear-gradient(-45deg,#EBDDCF 0 3px,#fff 3px 6px);border-color:transparent}
+.legende .l-vac{border-color:var(--ciel);border-width:3px}
+.legende .l-ferie{border-style:dashed}
+
+.creneaux{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:var(--e2)}
+.creneau{min-height:58px;border:2.5px solid rgba(70,28,18,.3);border-radius:14px;background:var(--blanc);font-weight:700;cursor:pointer;display:grid;place-items:center;padding:6px;line-height:1.2;transition:transform .2s var(--ressort)}
+.creneau small{font-weight:500;font-size:var(--t-xs);color:var(--gris)}
+.creneau:hover{border-color:var(--brun)}
+.creneau:active{transform:scale(.96)}
+.creneau[aria-pressed="true"]{background:var(--framboise);color:#fff;border-color:var(--brun);box-shadow:0 4px 0 var(--brun)}
+.creneau[aria-pressed="true"] small{color:#FFE3EE}
+.creneau.complet{background:#F3E9DD;color:#8F7A70;cursor:not-allowed;text-decoration:line-through;border-style:dashed}
+.creneau.complet small{text-decoration:none;display:block}
+
+.compteur{display:flex;align-items:center;justify-content:space-between;gap:var(--e3);padding:var(--e3) 0;border-bottom:2px dotted rgba(70,28,18,.25)}
+.compteur>div:first-child{min-width:0;hyphens:auto}
+.compteur b{display:block;font-weight:700}
+.compteur small{display:block;color:var(--gris);font-size:var(--t-xs)}
+.compteur__btns{flex:none;display:flex;align-items:center;gap:var(--e2)}
+.compteur__btns button{width:44px;height:44px;border-radius:50%;border:2.5px solid var(--brun);background:var(--jaune);font-size:1.4rem;font-weight:700;cursor:pointer;line-height:1;box-shadow:inset -4px -4px 0 rgba(0,0,0,.12);transition:transform .15s var(--ressort)}
+.compteur__btns button:active{transform:scale(.88)}
+.compteur__btns button[disabled]{opacity:.3;cursor:not-allowed;background:var(--blanc)}
+.compteur__val{min-width:2ch;text-align:center;font:400 var(--t-xl)/1 var(--titre);color:var(--brun)}
+.champs{display:grid;gap:var(--e4);max-width:520px}
+.champ label{display:block;font-weight:700;font-size:var(--t-s);margin-bottom:6px}
+.champ input,.champ select{width:100%;min-height:48px;padding:10px 12px;border:2.5px solid rgba(70,28,18,.35);border-radius:12px;background:var(--blanc)}
+.champ input:focus-visible,.champ select:focus-visible{outline:none;border-color:var(--brun);box-shadow:0 0 0 4px var(--jaune)}
+.champ input[aria-invalid="true"]{border-color:var(--rouge)}
+.champ .msg{color:#A3141C;font-size:var(--t-xs);font-weight:600;margin-top:4px}
+.champ .msg:empty{display:none}
+.duo{display:grid;gap:var(--e4)}
+.duo>*{min-width:0}
+.case{display:flex;gap:var(--e3);align-items:flex-start;padding:var(--e3) 0;border-bottom:2px dotted rgba(70,28,18,.25);cursor:pointer}
+.case input{width:24px;height:24px;accent-color:var(--framboise);margin-top:1px;flex:none}
+.case>span:not(.px){min-width:0}
+.case b{display:block;font-weight:700}
+.case small{color:var(--gris);font-size:var(--t-xs)}
+.case .px{margin-left:auto;font-weight:700;white-space:nowrap;color:var(--brun)}
+.sous-titre{font:400 1.15rem/1.2 var(--titre);color:var(--brun);margin:var(--e5) 0 var(--e2)}
+
+.recap{border:3px solid var(--brun);border-radius:var(--r-m);overflow:hidden;background:var(--blanc)}
+.recap__l{display:flex;justify-content:space-between;gap:var(--e3);padding:10px var(--e4);border-bottom:1.5px solid rgba(70,28,18,.12);font-size:var(--t-s)}
+.recap__l span:first-child{min-width:0}
+.recap__l span:last-child{font-weight:700;white-space:nowrap}
+.recap__l.tot{background:var(--jaune-pale);font-weight:700}
+.recap__l.tot span:last-child{font:400 var(--t-l)/1 var(--titre);color:var(--brun)}
+.recap__l.acompte{background:var(--framboise);color:#fff}
+.recap__l.acompte span:last-child{font:400 var(--t-l)/1 var(--titre)}
+.recap__l.reste{font-size:var(--t-xs)}
+.carte-bancaire{margin-top:var(--e5);border:2.5px dashed var(--bleu);border-radius:var(--r-m);padding:var(--e4);background:var(--ciel-pale);font-size:var(--t-s)}
+.carte-bancaire b{color:var(--bleu)}
+.conditions{margin-top:var(--e4);font-size:var(--t-xs);color:var(--gris);display:grid;gap:6px}
+
+.confirm{text-align:center;display:grid;gap:var(--e4);justify-items:center}
+.confirm__suricate{width:96px;height:96px;border-radius:50%;border:3px solid var(--brun);animation:coucou .8s var(--ressort) both}
+@keyframes coucou{from{transform:translateY(30px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+.confirm__num{display:inline-block;background:var(--jaune);color:var(--brun);font:400 var(--t-xl)/1 var(--titre);padding:12px 20px;border-radius:14px;border:3px solid var(--brun);letter-spacing:.04em}
+.confirm__actions{display:flex;flex-wrap:wrap;gap:var(--e4) var(--e3);justify-content:center}
+
+.mini-carton{background:var(--blanc);border:3px solid var(--brun);border-radius:var(--r-m);padding:var(--e4);position:relative;transform:rotate(-1deg);box-shadow:0 6px 0 var(--brun)}
+.mini-carton::before{content:"";position:absolute;right:12px;top:-14px;width:26px;height:26px;border-radius:50%;background:var(--framboise);border:2.5px solid var(--brun)}
+.mini-carton .mc-titre{font:400 var(--t-l)/1.1 var(--titre);color:var(--brun);overflow-wrap:anywhere}
+.mini-carton .mc-ligne{margin-top:var(--e2);font-size:var(--t-s);font-weight:600;color:var(--brun)}
+.mini-carton .mc-vide{color:#7A665C;font-weight:400}
+.mini-recap{margin-top:var(--e5);font-size:var(--t-s)}
+.mini-recap div{display:flex;justify-content:space-between;gap:var(--e2);padding:6px 0;border-bottom:2px dotted rgba(70,28,18,.25)}
+.mini-recap .tot{font-weight:700;border-bottom:0}
+.mini-recap .tot span:last-child{font:400 var(--t-l)/1 var(--titre);color:var(--brun)}
+.sim{margin-top:var(--e4);font-size:var(--t-xs);color:var(--gris)}
+
+#impression{display:none}
+
+/* ======================= points de rupture ======================= */
+@media (max-width:380px){
+  .resa__pied{padding-inline:var(--e3)}
+  .resa__total b{font-size:var(--t-m)}
+  .resa__pied .btn{padding:8px 12px;font-size:1rem}
+  .resa__etape{padding-inline:var(--e3)}
+  .cal{margin-inline:-8px}
+  .cal__grille{gap:0}
+  .compteur__btns{gap:2px}
+  .entete__droite .btn{padding:6px 10px}
+  .logo{width:56px}
+}
+@media (min-width:601px){
+  .apercu .long{display:inline}
+  .invit-zone__in{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+  .billet{margin-top:var(--e6)}
+  .duo{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .inclus{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .venir{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+  .pied__in{grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);align-items:start}
+  .photos{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .photo--large{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+  .activites{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:var(--e7)}
+  .anniv-tete{grid-template-columns:minmax(0,1fr) auto}
+  .defile p{font-size:1.9rem}
+  dialog.resa{width:min(1060px,calc(100% - 48px));height:min(780px,calc(100% - 48px));margin:auto;border-radius:var(--r-l);border:3px solid var(--brun)}
+}
+@media (min-width:861px){
+  .entete__in{min-height:80px}
+  .logo{width:96px;margin:8px 0 -40px}
+  .nav{display:flex;gap:var(--e3);align-items:center;margin-left:var(--e5)}
+  .entete__droite .bouton-menu,.menu-tel{display:none!important}
+  .entete__droite .btn{min-height:48px;padding:8px 20px;font-size:1.1rem}
+  .haut{padding:var(--e6) 0 var(--e7)}
+  .haut__in{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:var(--e7)}
+  .scene__photo{aspect-ratio:4/3.4}
+  .scene__frise{height:44px;background-size:auto 44px}
+  .scene{padding-top:42px}
+  .balle{width:calc(var(--d,40px) * 1.25);height:calc(var(--d,40px) * 1.25)}
+  .formules{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ht{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+  .carte-sec{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+  .photos{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .a-fournir{grid-column:span 2;aspect-ratio:auto;min-height:170px}
+  .resa__grille{grid-template-columns:minmax(0,1fr) 330px;grid-template-rows:auto auto 1fr auto}
+  .resa__tete,.progres{grid-column:1/-1}
+  .resa__corps{grid-column:1;grid-row:3}
+  .resa__cote{display:block;grid-column:2;grid-row:3/5;background:var(--jaune-pale);border-left:3px solid var(--brun);padding:var(--e6) var(--e5);overflow:auto}
+  .resa__pied{grid-column:1;grid-row:4}
+  .resa__pied .resa__total{display:none}
+  .resa__etape{padding:var(--e6) var(--e6) var(--e7)}
+  .sec{padding:var(--e9) 0}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .rv{opacity:1;transform:none}
+  .js h1 .l{opacity:1;transform:none}
+}
+@media print{
+  body>*:not(#impression){display:none!important}
+  #impression{display:block}
+  #impression .mini-carton{transform:none;box-shadow:none;max-width:14cm;margin:1cm auto;page-break-inside:avoid}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- Aperçu : maquette non commandée -->
+<aside class="apercu" aria-label="À propos de cet aperçu">
+  <div class="wrap apercu__in">
+    <span><b>Aperçu non commandé</b>, par Vong Studio<span class="long"> pour Kid's Paradise</span>. Logo et photos appartiennent au parc&nbsp;; retrait sur simple demande. Réservation et paiement simulés<span class="long">&nbsp;: rien n'est réservé ni payé</span>.</span>
+    <details>
+      <summary>Ce qui change pour vous</summary>
+    </details>
+    <div class="gerant" id="gerant" hidden>
+      <ol>
+        <li><b>La réservation reste chez vous.</b> Aujourd'hui, le site présente 2&nbsp;formules d'anniversaire et la boutique en ligne en vend 4 (Classic 2&nbsp;h&nbsp;30 et 3&nbsp;h n'existent que là), dans d'autres couleurs que les vôtres. Ici, les 4&nbsp;formules et les entrées se réservent sur votre site, à vos couleurs.</li>
+        <li><b>L'acompte est écrit avant de payer.</b> Les arrhes ne sont aujourd'hui mentionnées que dans les conditions de vente, sans montant. Ici, le récapitulatif affiche l'acompte, le reste à régler sur place et la règle d'annulation. Le taux de 30&nbsp;% est un exemple, à fixer avec vous.</li>
+        <li><b>Vos règles s'appliquent toutes seules, et les familles reviennent.</b> 7 à 12&nbsp;enfants, 2&nbsp;accompagnateurs gratuits, chaussettes, mercredi hors vacances, samedi et dimanche&nbsp;: le parcours les applique. L'entrée offerte à l'enfant fêté arrive sur une carte de fidélité dans le téléphone (Vong Club), au lieu d'un coupon qu'on oublie.</li>
+      </ol>
+      <p>Les horaires, prix, formules et activités viennent de kidsparadise-blois.fr et de votre boutique de réservation, relevés les 23 et 24&nbsp;octobre 2026. Les mentions «&nbsp;exemple&nbsp;» et «&nbsp;à confirmer&nbsp;» sont à caler avec vous. Le logo, la frise de suricates, la chaussette et les photos sont ceux de votre site actuel.</p>
+    </div>
+  </div>
+</aside>
+
+<header class="entete" id="entete">
+  <div class="wrap entete__in">
+    <a class="logo" href="#haut" aria-label="Kid's Paradise, accueil"><img src="img/logo-kids-paradise.png" width="208" height="208" alt="Kid's Paradise, parc de jeux enfants, Blois"></a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="#anniversaires">Anniversaires</a>
+      <a href="#parc">Le parc</a>
+      <a href="#horaires">Horaires et tarifs</a>
+      <a href="#carte">La carte</a>
+      <a href="#venir">Venir</a>
+    </nav>
+    <div class="entete__droite">
+      <button class="btn btn--framboise" type="button" data-resa="">Réserver</button>
+      <button class="bouton-menu" type="button" aria-expanded="false" aria-controls="menu-tel" id="bouton-menu">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg><span class="sr">Menu</span>
+      </button>
+    </div>
+    <nav class="menu-tel" id="menu-tel" aria-label="Menu principal (téléphone)">
+      <a href="#anniversaires">Anniversaires</a>
+      <a href="#parc">Le parc</a>
+      <a href="#horaires">Horaires et tarifs</a>
+      <a href="#carte">La carte fidélité</a>
+      <a href="#venir">Venir</a>
+    </nav>
+  </div>
+</header>
+
+<main id="haut">
+  <!-- Haut de page : le titre, puis la photo du labyrinthe, gardée par les suricates, et la piscine à balles qui déborde -->
+  <section class="haut" aria-labelledby="titre">
+    <div class="wrap haut__in">
+      <div class="haut__texte">
+        <p class="panneau-jour" aria-live="polite"><i id="jour-point" aria-hidden="true"></i><span id="jour-texte">Horaires du jour</span></p>
+        <h1 id="titre"><span class="l l1">Le paradis</span> <span class="l l2">des enfants</span> <span class="l l3">de <span class="age">0&nbsp;à&nbsp;12&nbsp;ans</span></span></h1>
+        <p class="chapo">Parc de jeux couvert à La Chaussée-Saint-Victor, <b>chauffé l'hiver, climatisé l'été</b>. Pour un après-midi de pluie ou un anniversaire, ouvert toute l'année.</p>
+        <div class="haut__actions">
+          <button class="btn btn--framboise" type="button" data-resa="anniv">Réserver un anniversaire</button>
+          <button class="btn" type="button" data-resa="entrees">Acheter des entrées</button>
+        </div>
+        <ul class="reponses">
+          <li>Les 4 formules anniversaires, réservées ici, dès 13,50&nbsp;€ par enfant</li>
+          <li>L'acompte s'affiche avant de payer <span class="exemple">30&nbsp;%, exemple</span></li>
+          <li>Les horaires du jour, vacances de la zone&nbsp;B comprises</li>
+        </ul>
+      </div>
+      <div class="scene">
+        <div class="scene__frise" aria-hidden="true"></div>
+        <div class="scene__photo">
+          <img src="img/labyrinthe.webp" width="1800" height="663" alt="Le labyrinthe géant de Kid's Paradise&nbsp;: tour à filets, toboggan à pistes bleu et toboggan arc-en-ciel" fetchpriority="high">
+        </div>
+        <p class="scene__legende">Le labyrinthe sur 3&nbsp;niveaux</p>
+        <div class="balles" aria-hidden="true">
+          <span class="balle" style="left:2%;--c:var(--rouge);--d:44px;--t:.2s"></span>
+          <span class="balle" style="left:12%;--c:var(--jaune);--d:36px;--t:.35s"></span>
+          <span class="balle" style="left:20%;--c:var(--bleu);--d:40px;--t:.5s"></span>
+          <span class="balle" style="left:7%;bottom:34px;--c:var(--vert);--d:32px;--t:.65s"></span>
+          <span class="balle" style="left:29%;--c:var(--orange);--d:30px;--t:.8s"></span>
+          <span class="balle" style="right:4%;--c:var(--framboise);--d:38px;--t:.45s"></span>
+          <span class="balle" style="right:13%;--c:var(--ciel);--d:28px;--t:.7s"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="defile-cadre" aria-hidden="true"><div class="defile"><div class="defile-piste">
+    <p><span>Labyrinthe géant sur 3 niveaux</span><span>Toboggans géants</span><span>La terrible tour à élastiques</span><span>Monkey dong</span><span>Piste de luge</span><span>Motos électriques</span><span>Légos géants</span><span>Accrobranche</span><span>Espace des moins de 3 ans</span></p>
+    <p><span>Labyrinthe géant sur 3 niveaux</span><span>Toboggans géants</span><span>La terrible tour à élastiques</span><span>Monkey dong</span><span>Piste de luge</span><span>Motos électriques</span><span>Légos géants</span><span>Accrobranche</span><span>Espace des moins de 3 ans</span></p>
+  </div></div></div>
+
+  <!-- Le carton d'invitation : l'anniversaire commence ici -->
+  <section class="invit-zone" aria-labelledby="carton-titre">
+    <div class="wrap invit-zone__in">
+      <form class="carton rv" id="carton" novalidate>
+        <div class="carton__tete">
+          <h2 id="carton-titre">Le carton d'invitation</h2>
+          <span class="carton__tampon" aria-hidden="true">Dès<br>13,50&nbsp;€</span>
+        </div>
+        <p class="carton__phrase">
+          <label class="sr" for="c-prenom">Prénom de l'enfant qui fête son anniversaire</label>
+          Tu es invité à l'anniversaire de <input class="trou" id="c-prenom" name="prenom" type="text" maxlength="18" autocomplete="off" placeholder="Prénom">
+          qui fête ses
+          <label class="sr" for="c-age">Âge</label>
+          <select class="trou" id="c-age" name="age">
+            <option value="">…</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option selected>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+          </select>
+          ans chez Kid's Paradise.
+        </p>
+        <dl class="carton__quand">
+          <dt>Le</dt><dd id="c-date">date à choisir · mercredi hors vacances, samedi ou dimanche</dd>
+          <dt>De</dt><dd id="c-heure">heure à choisir · 2&nbsp;h, 2&nbsp;h&nbsp;30 ou 3&nbsp;h de fête</dd>
+        </dl>
+        <div class="carton__actions">
+          <button class="btn btn--framboise" type="submit">Choisir la formule et la date</button>
+          <p class="carton__petit"><b>7 à 12&nbsp;enfants</b>, 2&nbsp;accompagnateurs gratuits. Acompte en ligne, le reste le jour de la fête. Les cartons sont à imprimer à la fin.</p>
+        </div>
+      </form>
+
+      <div class="billet rv" role="group" aria-labelledby="billet-titre">
+        <div class="billet__corps">
+          <h2 id="billet-titre">Juste venir jouer&nbsp;?</h2>
+          <ul>
+            <li>Enfant à partir de 3&nbsp;ans <b>9&nbsp;€</b></li>
+            <li>Enfant de moins de 3&nbsp;ans <b>6&nbsp;€</b></li>
+            <li>Accompagnateur <b>1&nbsp;€</b></li>
+          </ul>
+          <p class="validite">Billets valables 2&nbsp;ans, d'après les conditions générales de vente de la boutique du parc.</p>
+        </div>
+        <div class="billet__souche">
+          <p class="chaussettes"><img src="img/chaussette.webp" width="64" height="84" alt="">Chaussettes obligatoires, en vente sur place 2&nbsp;€ la paire.</p>
+          <button class="btn btn--plein" type="button" data-resa="entrees">Acheter mes entrées</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formules anniversaires : des toboggans dont la longueur dit la durée -->
+  <section class="sec" id="anniversaires" aria-labelledby="t-anniv">
+    <div class="wrap">
+      <div class="anniv-tete">
+        <div class="tete">
+          <h2 id="t-anniv" class="rv">Les formules anniversaires</h2>
+          <p>Toutes les formules comptent 7&nbsp;enfants minimum, 12 au maximum, l'enfant fêté compris. Plus le toboggan est long, plus la fête dure. Le parcours ne propose que les jours et les heures où la fête est possible.</p>
+        </div>
+        <figure class="ballon rv">
+          <img src="img/gateau-anniversaire.webp" width="400" height="400" loading="lazy" alt="Un enfant souffle les bougies de son gâteau au chocolat à Kid's Paradise">
+          <figcaption>Joyeux anniversaire</figcaption>
+          <svg viewBox="0 0 40 64" aria-hidden="true"><path d="M20 2c-8 10 8 16 0 26s8 16 0 34" fill="none" stroke="#461C12" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </figure>
+      </div>
+      <ul class="formules" id="formules"></ul>
+      <p class="note-snack">Créneaux indiqués sous réserve de disponibilité, comme sur le site du parc. Formule Snack&nbsp;: le site du parc indique deux arrivées, 10&nbsp;h et 10&nbsp;h&nbsp;30&nbsp;; le créneau de 10&nbsp;h&nbsp;30 n'existe pas dans la boutique. Le parcours propose 10&nbsp;h, comme la boutique&nbsp;; l'arrivée à 10&nbsp;h&nbsp;30 <span class="exemple">à confirmer</span></p>
+
+      <div class="inclus">
+        <div class="rv">
+          <h3>Compris dans chaque formule</h3>
+          <ul class="coches">
+            <li><span>Les cartons d'invitation, à imprimer <span class="exemple">à confirmer</span></span></li>
+            <li>L'accès illimité aux structures de jeux (hors jeux à monnayeurs)</li>
+            <li><span>Une table réservée pendant toute la fête <span class="exemple">à confirmer</span></span></li>
+            <li>Le goûter au choix&nbsp;: moelleux au chocolat, 4&nbsp;mini-crêpes sucre et Nutella, ou 2&nbsp;donuts par enfant</li>
+            <li>Les bonbons (halal possible) et les boissons à volonté (sirop à l'eau)</li>
+            <li>Une entrée offerte à l'enfant fêté, pour une prochaine visite, valable 2&nbsp;ans</li>
+          </ul>
+        </div>
+        <div class="rv">
+          <h3>Les règles de la fête</h3>
+          <ul class="coches">
+            <li>7&nbsp;enfants minimum, 12&nbsp;maximum, l'enfant fêté compris</li>
+            <li>2&nbsp;accompagnateurs gratuits, puis 1&nbsp;€ par personne</li>
+            <li>Chaussettes obligatoires pour tout le monde</li>
+            <li>Le groupe reste sous la responsabilité des parents</li>
+            <li><span>Pas de nourriture, de bonbons ni de boissons de l'extérieur, pour l'hygiène <span class="exemple">à confirmer</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="encadre rv">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 10h20" stroke="currentColor" stroke-width="2"/><path d="M6 15h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <div>
+          <p><b>Un acompte de 30&nbsp;% en ligne</b><span class="exemple">exemple</span> réserve la date. Le reste se règle le jour de la fête.</p>
+          <p>Le montant exact de l'acompte s'affiche avant de payer. En cas d'annulation, l'acompte n'est pas remboursé&nbsp;: il est rendu en entrées (conditions de vente de la boutique du parc).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Le parc : les photos sous le filet -->
+  <section class="sec sec--ciel" id="parc" aria-labelledby="t-parc">
+    <div class="wrap">
+      <div class="tete">
+        <h2 id="t-parc" class="rv">Le parc</h2>
+        <p>Un labyrinthe géant sur 3&nbsp;niveaux pour les grands, un espace psychomotricité pour les moins de 3&nbsp;ans, et des tables tout autour pour les parents, devant la fresque de la jungle.</p>
+      </div>
+      <ul class="photos">
+        <li class="photo photo--large rv"><figure style="margin:0;height:100%"><img src="img/labyrinthe-panorama.webp" width="1800" height="474" loading="lazy" alt="Vue d'ensemble du labyrinthe géant, de sa tour et de ses toboggans"><figcaption>Labyrinthe et toboggans géants</figcaption></figure></li>
+        <li class="photo rv"><figure style="margin:0;height:100%"><img src="img/espace-baby.webp" width="1200" height="568" loading="lazy" alt="L'espace Baby, aux couleurs vives, réservé aux moins de 3 ans"><figcaption>Espace des moins de 3&nbsp;ans</figcaption></figure></li>
+        <li class="photo rv"><figure style="margin:0;height:100%"><img src="img/coin-parents-fresque.webp" width="1200" height="900" loading="lazy" alt="Les tables des parents devant la grande fresque de la jungle"><figcaption>Le coin des parents</figcaption></figure></li>
+        <li class="photo rv"><figure style="margin:0;height:100%"><img src="img/structures-moquette.webp" width="530" height="400" loading="lazy" alt="Les structures de jeux et les tables, sur la moquette framboise"><figcaption>Les structures</figcaption></figure></li>
+        <li class="photo rv"><figure style="margin:0;height:100%"><img src="img/air-hockey.webp" width="530" height="400" loading="lazy" alt="Une partie d'air hockey au parc"><figcaption>Air hockey</figcaption></figure></li>
+        <li class="a-fournir rv" style="--c1:#FBE3B8;--c2:#FFF3DC"><span>Photo à fournir</span><b>La piste de luge</b></li>
+        <li class="a-fournir rv" style="--c1:#D5E8F6;--c2:#EEF6FC"><span>Photo à fournir</span><b>Les motos électriques</b></li>
+      </ul>
+      <ul class="activites">
+        <li><b>Espace psychomotricité</b><span>moins de 3&nbsp;ans</span></li>
+        <li><b>Labyrinthe géant sur 3&nbsp;niveaux</b><span>tyrolienne, ponts de singe, sables mouvants</span></li>
+        <li><b>Toboggans géants</b><span>les grands</span></li>
+        <li><b>La terrible tour à élastiques</b><span>les grands</span></li>
+        <li><b>Espace multisport</b><span>au bout du labyrinthe</span></li>
+        <li><b>Légos géants</b><span>les bâtisseurs</span></li>
+        <li><b>Le monkey dong</b><span>et son avalanche de balles</span></li>
+        <li><b>Accrobranche</b><span>les aventuriers</span></li>
+        <li><b>Piste de luge</b><span>tous les âges</span></li>
+        <li><b>Piste de motos électriques</b><span>les petits pilotes</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Horaires et la toise des prix -->
+  <section class="sec sec--jaune" id="horaires" aria-labelledby="t-ht">
+    <div class="wrap">
+      <div class="tete">
+        <h2 id="t-ht" class="rv">Horaires et tarifs</h2>
+        <p>Ouvert toute l'année. Les vacances suivent la zone&nbsp;B. Les prix d'entrée se lisent sur la toise, du plus grand visiteur au plus petit.</p>
+      </div>
+      <div class="ht">
+        <div class="rv">
+          <table class="horaires" id="tab-horaires">
+            <caption class="sr">Horaires d'ouverture, en semaine scolaire et pendant les vacances</caption>
+            <thead><tr><th scope="col">Jour</th><th scope="col" id="col-sco">Semaine scolaire</th><th scope="col" id="col-vac">Vacances zone&nbsp;B</th></tr></thead>
+            <tbody>
+              <tr data-j="1"><th scope="row">Lundi</th><td class="ferme" data-p="sco">Fermé</td><td data-p="vac">10&nbsp;h – 19&nbsp;h</td></tr>
+              <tr data-j="2"><th scope="row">Mardi</th><td class="ferme" data-p="sco">Fermé</td><td data-p="vac">10&nbsp;h – 19&nbsp;h</td></tr>
+              <tr data-j="3"><th scope="row">Mercredi</th><td data-p="sco">10&nbsp;h – 19&nbsp;h</td><td data-p="vac">10&nbsp;h – 19&nbsp;h</td></tr>
+              <tr data-j="4"><th scope="row">Jeudi</th><td class="ferme" data-p="sco">Fermé</td><td data-p="vac">10&nbsp;h – 19&nbsp;h</td></tr>
+              <tr data-j="5"><th scope="row">Vendredi</th><td class="ferme" data-p="sco">Fermé</td><td data-p="vac">10&nbsp;h – 19&nbsp;h</td></tr>
+              <tr data-j="6"><th scope="row">Samedi</th><td data-p="sco">10&nbsp;h – 19&nbsp;h</td><td data-p="vac">10&nbsp;h – 19&nbsp;h</td></tr>
+              <tr data-j="0"><th scope="row">Dimanche</th><td data-p="sco">10&nbsp;h – 18&nbsp;h</td><td data-p="vac">10&nbsp;h – 18&nbsp;h</td></tr>
+            </tbody>
+          </table>
+          <p class="note-periode" id="note-periode"></p>
+        </div>
+        <div class="rv">
+          <div class="toise-zone">
+            <img class="suricate-debout" src="img/suricate-debout.png" width="30" height="100" alt="">
+            <ol class="toise" aria-label="Prix des entrées, du plus grand au plus petit visiteur">
+              <li style="--c:var(--ciel);--h:84px"><span>Accompagnateur</span><span class="px">1&nbsp;€</span></li>
+              <li style="--c:var(--orange);--h:76px"><span>Enfant à partir de 3&nbsp;ans<small>billet valable 2&nbsp;ans (conditions de vente)</small></span><span class="px">9&nbsp;€</span></li>
+              <li style="--c:#F7A6C4;--h:68px"><span>Enfant de moins de 3&nbsp;ans<small>gratuit s'il ne marche pas</small></span><span class="px">6&nbsp;€</span></li>
+              <li style="--c:var(--blanc);--h:56px"><span>La paire de chaussettes</span><span class="px">2&nbsp;€</span></li>
+            </ol>
+          </div>
+          <div class="bons">
+            <p class="bon"><span>Pass Kid's de 10&nbsp;entrées, valable 2&nbsp;ans <s>90&nbsp;€</s></span><b>75&nbsp;€</b></p>
+            <p class="bon"><span>Le mercredi de 10&nbsp;h à 12&nbsp;h, de 0 à 3&nbsp;ans, hors vacances <s>6&nbsp;€</s></span><b>4&nbsp;€</b></p>
+          </div>
+          <p style="margin-top:var(--e5)"><button class="btn btn--framboise" type="button" data-resa="entrees">Acheter mes entrées</button></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carte fidélité -->
+  <section class="sec sec--bleu" id="carte" aria-labelledby="t-carte">
+    <div class="wrap carte-sec">
+      <div class="rv">
+        <div class="tete" style="margin-bottom:0">
+          <h2 id="t-carte">La carte Kid's Paradise, dans le téléphone</h2>
+          <p>Pas d'application à télécharger&nbsp;: la carte s'ouvre dans le navigateur du téléphone, aux couleurs du parc.</p>
+        </div>
+        <ul class="carte-points">
+          <li><i aria-hidden="true"></i><p><b>Chaque visite rapporte des points</b>, échangés contre des cadeaux du parc. Le barème se règle avec vous <span class="exemple">exemple</span></p></li>
+          <li><i aria-hidden="true"></i><p><b>L'entrée offerte à l'enfant fêté arrive sur la carte</b>, sous forme de bon à usage unique, valable 2&nbsp;ans comme les billets. Plus de coupon perdu au fond d'un sac.</p></li>
+          <li><i aria-hidden="true"></i><p><b>La roue et les défis</b> donnent une raison de revenir entre deux anniversaires.</p></li>
+        </ul>
+      </div>
+      <div class="tel" aria-label="Exemple d'écran de la carte de fidélité" role="img">
+        <div class="tel__ecran">
+          <div class="tel__haut"><img src="img/logo-kids-paradise.png" width="46" height="46" alt=""><b>Ma carte<br><span style="font-weight:400;font-size:.8rem">Famille exemple</span></b></div>
+          <div class="tel__pts"><b>320</b>points · exemple</div>
+          <div class="tel__bon"><div><b>1 entrée offerte</b>Bon à usage unique · valable 2&nbsp;ans</div>
+            <svg viewBox="0 0 21 21" aria-hidden="true" id="qr"></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Venir -->
+  <section class="sec" id="venir" aria-labelledby="t-venir">
+    <div class="wrap venir">
+      <div class="rv">
+        <div class="tete"><h2 id="t-venir">Venir au parc</h2></div>
+        <dl>
+          <div><dt>Adresse</dt><dd>1 rue Franciade, 41260 La Chaussée-Saint-Victor</dd></div>
+          <div><dt>En voiture</dt><dd>Autoroute A10, sortie 17</dd></div>
+          <div><dt>En bus</dt><dd>Arrêt Copernic (lignes C et G), arrêt Polyclinique (ligne A)</dd></div>
+          <div><dt>Téléphone</dt><dd><a class="lien" href="tel:+33254700826">02&nbsp;54&nbsp;70&nbsp;08&nbsp;26</a></dd></div>
+          <div><dt>E-mail</dt><dd><a class="lien" href="mailto:contact@kidsparadise-blois.fr">contact@kidsparadise-blois.fr</a></dd></div>
+        </dl>
+      </div>
+      <div class="plan rv">
+        <svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="400" height="260" fill="#E3F1FA"/><path d="M-10 190 C80 160 140 200 220 150 S340 90 420 110" stroke="#fff" stroke-width="18" fill="none"/><path d="M120 -10 L170 270" stroke="#fff" stroke-width="12"/><path d="M-10 60 L410 40" stroke="#fff" stroke-width="8"/><path d="M300 -10 L280 270" stroke="#fff" stroke-width="8"/><circle cx="200" cy="120" r="16" fill="#C92A66" stroke="#461C12" stroke-width="3"/><circle cx="60" cy="230" r="9" fill="#F4E148" stroke="#461C12" stroke-width="2"/><circle cx="350" cy="30" r="7" fill="#1F5FB8" stroke="#461C12" stroke-width="2"/></svg>
+        <p>Plan interactif à intégrer<br><a class="lien" href="https://www.google.com/maps/search/?api=1&amp;query=1+rue+Franciade+41260+La+Chauss%C3%A9e-Saint-Victor" rel="noopener" target="_blank">Ouvrir l'itinéraire</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="pied__frise" aria-hidden="true"></div>
+  <div class="wrap pied__in">
+    <img src="img/logo-kids-paradise.png" width="208" height="208" alt="Kid's Paradise" loading="lazy">
+    <div>
+      <p><b style="color:#fff">Kid's Paradise</b><br>Parc de jeux couvert pour les enfants de 0 à 12&nbsp;ans<br>1 rue Franciade, 41260 La Chaussée-Saint-Victor</p>
+    </div>
+    <div>
+      <p><a href="#anniversaires">Anniversaires</a> · <a href="#horaires">Horaires et tarifs</a> · <a href="#venir">Venir</a><br><a href="https://www.facebook.com/Kids-Paradise-Blois-311545625572636" rel="noopener" target="_blank">Kid's Paradise sur Facebook</a></p>
+    </div>
+  </div>
+  <div class="wrap pied__bas"><p class="mention-droits">Aperçu non commandé. Logo et photos appartiennent au parc&nbsp;; retrait sur simple demande.</p><p>Maquette réalisée par Vong Studio à partir du site public de Kid's Paradise et de sa boutique en ligne. Réservation et paiement simulés.</p></div>
+</footer>
+
+<!-- Tunnel de réservation -->
+<dialog class="resa" id="resa" aria-labelledby="resa-etape">
+  <div class="resa__grille">
+    <div class="resa__tete">
+      <img src="img/logo-kids-paradise.png" width="44" height="44" alt="">
+      <div class="resa__titre"><b id="resa-etape">Réserver</b><span id="resa-compte"></span></div>
+      <button class="fermer" type="button" id="resa-fermer" aria-label="Fermer la réservation"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+    </div>
+    <div class="progres" id="resa-progres" aria-hidden="true"></div>
+    <div class="resa__corps" id="resa-corps" tabindex="0" role="region" aria-label="Étape de la réservation"></div>
+    <aside class="resa__cote" id="resa-cote" aria-label="Votre réservation"></aside>
+    <div class="resa__pied">
+      <button class="retour" type="button" id="resa-retour">Retour</button>
+      <div class="resa__total" id="resa-total"></div>
+      <button class="btn btn--framboise" type="button" id="resa-suite">Continuer</button>
+      <p class="erreur" id="resa-err" tabindex="-1" role="alert"></p>
+    </div>
+  </div>
+</dialog>
+
+<div id="impression" aria-hidden="true"></div>
+
+<!--
+  Sources (site du parc, kidsparadise-blois.fr, et sa boutique inziairkidsparadise.qweekle.com) :
+  - Horaires (semaine scolaire et vacances zone B), prix des entrées, chaussettes 2 €, Pass Kid's 75 € au lieu de 90 €,
+    mercredi 10 h - 12 h de 0 à 3 ans hors vacances 4 € au lieu de 6 €, formules Classic et Snack, options, minimum 7 enfants,
+    « les groupes sont sous la responsabilité des parents », « créneaux horaires indiqués sous réserve de disponibilité » :
+    /horaires-et-tarifs.html et /anniversaires.html, relus le 24/10/2026.
+  - « Chauffé l'hiver, climatisé l'été », « ouvert toute l'année », 0 à 12 ans : accueil, relu le 24/10/2026.
+  - Samedi 31 octobre : 10 h - 18 h puis soirée Halloween de 19 h 30 à 22 h 30, places limitées ; la direction peut annuler
+    si le nombre de participants n'est pas atteint : alerte de l'accueil et /soiree-halloween-2026.html, lus le 24/10/2026.
+  - Activités : /presentation.html, relu le 24/10/2026. Accès, téléphone, e-mail : /contact.html, relu le 24/10/2026.
+  - Formules Classic 2 h 30 et 3 h, maximum 12 enfants, accompagnateurs, validité 2 ans, acompte rendu en entrées :
+    boutique et conditions de vente, relevées le 23/10/2026 par la version précédente (contrôle qualité passé).
+  - Images : logo, frise de suricates, suricate, chaussette et photos téléchargés depuis kidsparadise-blois.fr le 24/10/2026.
+  - Vacances de la zone B : arrêté du 22/10/2025 (service-public.gouv.fr).
+-->
+<script>
+(function(){
+'use strict';
+var NB=' ';
+var $=function(s,c){return (c||document).querySelector(s)};
+var $$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
+
+/* ---------- données du parc (relevées le 23/10/2026) ---------- */
+var FORMULES=[
+  {id:'c2', nom:'Classic 2'+NB+'h', duree:120, prix:13.5, repas:'Goûter', heures:['10:00','10:30','14:00','14:30','15:00'], jours:'Mercredi hors vacances, samedi, dimanche', weekend:false},
+  {id:'c25',nom:'Classic 2'+NB+'h'+NB+'30', duree:150, prix:15, repas:'Goûter', heures:['14:00','14:30','15:00'], jours:'Mercredi hors vacances, samedi, dimanche', weekend:false},
+  {id:'c3', nom:'Classic 3'+NB+'h', duree:180, prix:16.5, repas:'Goûter', heures:['14:00','14:30','15:00'], jours:'Mercredi hors vacances, samedi, dimanche', weekend:false},
+  {id:'s3', nom:'Snack 3'+NB+'h', duree:180, prix:17.5, repas:'Nuggets-frites et goûter', heures:['10:00'], jours:'Samedi et dimanche', weekend:true}
+];
+var GOUTERS=[
+  {id:'moelleux',nom:'Moelleux au chocolat',d:'un gâteau pour 10 à 12 personnes'},
+  {id:'crepes',nom:'Mini-crêpes',d:'4 par enfant, sucre et Nutella'},
+  {id:'donuts',nom:'Donuts',d:'un sucré et un au chocolat par enfant'}
+];
+var OPTIONS=[
+  {id:'jeton',nom:"Jeton d'activité",d:'un par enfant',prix:1},
+  {id:'boite',nom:'Boîte cadeau',d:'une par enfant',prix:2.5},
+  {id:'halal',nom:'Bonbons halal',d:'à la place des bonbons classiques',prix:0}
+];
+var BILLETS=[
+  {id:'plus3',nom:'Enfant à partir de 3'+NB+'ans',prix:9,enfant:true},
+  {id:'moins3',nom:'Enfant de moins de 3'+NB+'ans',prix:6,enfant:true},
+  {id:'bebe',nom:'Enfant qui ne marche pas encore',prix:0,enfant:true},
+  {id:'acc',nom:'Accompagnateur',prix:1,adulte:true},
+  {id:'chau',nom:'Paire de chaussettes',prix:2},
+  {id:'pass',nom:"Pass Kid's 10 entrées",prix:75,d:'au lieu de 90'+NB+'€, valable 2'+NB+'ans'}
+];
+var ACOMPTE=0.30; /* exemple, à fixer avec le parc */
+/* zone B, arrêté du 22/10/2025 (service-public.gouv.fr) : dernier jour = la veille de la reprise */
+var VACANCES=[
+  ['2026-10-17','2026-11-01','vacances de la Toussaint'],
+  ['2026-12-19','2027-01-03','vacances de Noël'],
+  ['2027-02-20','2027-03-07','vacances d’hiver'],
+  ['2027-04-17','2027-05-02','vacances de printemps'],
+  ['2027-07-03','2027-08-31','vacances d’été']
+];
+var FERIES={'2026-11-01':'Toussaint','2026-11-11':'11 novembre','2026-12-25':'Noël','2027-01-01':'jour de l’an','2027-03-29':'lundi de Pâques','2027-05-01':'1er mai','2027-05-06':'Ascension','2027-05-08':'8 mai','2027-05-17':'lundi de Pentecôte','2027-07-14':'14 juillet','2027-08-15':'15 août'};
+/* soirée du 31/10 : alerte de l'accueil et page /soiree-halloween-2026.html, lues le 24/10/2026 */
+var SPECIAL={'2026-10-31':{ferm:'18:00',soiree:{nom:'soirée Halloween',deb:'19:30',fin:'22:30'}}};
+var FIN_RESA='2027-08-31'; /* fin de l'année scolaire 2026-2027 */
+
+/* ---------- outils de date ---------- */
+function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function parse(s){var p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2])}
+function maintenantParis(){
+  var f=new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  var o={};f.formatToParts(new Date()).forEach(function(p){o[p.type]=p.value});
+  return {date:o.year+'-'+o.month+'-'+o.day,min:(+o.hour)*60+(+o.minute)};
+}
+var AUJ=maintenantParis();
+function enVacances(s){for(var i=0;i<VACANCES.length;i++){if(s>=VACANCES[i][0]&&s<=VACANCES[i][1])return VACANCES[i]}return null}
+function info(s){
+  var d=parse(s),j=d.getDay(),vac=enVacances(s),r={vac:vac,ferie:FERIES[s]||null,ouvert:false,ouv:'10:00',ferm:null,anniv:false,snack:false,note:''};
+  if(r.ferie){r.note='férié, horaires à confirmer';return r}
+  if(vac){r.ouvert=true;r.ferm=(j===0)?'18:00':'19:00'}
+  else if(j===3||j===6){r.ouvert=true;r.ferm='19:00'}
+  else if(j===0){r.ouvert=true;r.ferm='18:00'}
+  if(SPECIAL[s]){r.ferm=SPECIAL[s].ferm;r.soiree=SPECIAL[s].soiree;r.note='fermeture à '+h(r.ferm)+', puis '+r.soiree.nom+' de '+h(r.soiree.deb)+' à '+h(r.soiree.fin)+', places limitées'}
+  if(r.ouvert){
+    r.snack=(j===6||j===0);
+    r.anniv=r.snack||(!vac&&j===3);
+  }
+  return r;
+}
+var MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+var JOURS=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+function dateLongue(s){var d=parse(s);return JOURS[d.getDay()]+' '+(d.getDate()===1?'1er':d.getDate())+' '+MOIS[d.getMonth()]}
+function h(t){var p=t.split(':');return (+p[0])+NB+'h'+(p[1]!=='00'?NB+p[1]:'')}
+function plus(t,m){var p=t.split(':'),x=(+p[0])*60+(+p[1])+m;return String(Math.floor(x/60)).padStart(2,'0')+':'+String(x%60).padStart(2,'0')}
+function min(t){var p=t.split(':');return (+p[0])*60+(+p[1])}
+function eur(n){var s=(Math.round(n*100)/100).toFixed(2).replace('.',',');if(s.slice(-3)===',00')s=s.slice(0,-3);return s.replace(/\B(?=(\d{3})+(?!\d))/g,NB)+NB+'€'}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+
+/* ---------- bandeau du jour ---------- */
+(function(){
+  var t=info(AUJ.date),txt=null,ouvert=false,sv=t.soiree;
+  function soir(x){return x.nom+' de '+h(x.deb)+' à '+h(x.fin)+', places limitées'}
+  if(t.ouvert){
+    if(AUJ.min<min(t.ouv)) txt='Aujourd’hui : ouvre à '+h(t.ouv)+', ferme à '+h(t.ferm)+'.'+(sv?' Ce soir : '+soir(sv)+'.':'');
+    else if(AUJ.min<min(t.ferm)){txt='Ouvert maintenant, jusqu’à '+h(t.ferm)+'.'+(sv?' Ce soir : '+soir(sv)+'.':'');ouvert=true}
+    else if(sv&&AUJ.min<min(sv.deb)) txt='Fermé depuis '+h(t.ferm)+'. Ce soir : '+soir(sv)+'.';
+    else if(sv&&AUJ.min<min(sv.fin)){txt=sv.nom.replace(/^./,function(c){return c.toUpperCase()})+' en cours, jusqu’à '+h(sv.fin)+'.';ouvert=true}
+  }
+  if(!txt&&t.ferie) txt='Aujourd’hui, '+t.ferie+', jour férié : horaires à confirmer avec le parc.';
+  if(!txt){
+    var d=parse(AUJ.date),k=0,s,n;
+    do{d.setDate(d.getDate()+1);s=iso(d);k++}while(!info(s).ouvert&&!info(s).ferie&&k<14);
+    n=info(s);
+    txt=n.ferie?'Le parc est fermé. Prochain jour : '+(k===1?'demain, ':'')+dateLongue(s)+', férié, horaires à confirmer.':'Le parc est fermé. Il rouvre '+(k===1?'demain, ':'')+dateLongue(s)+' à '+h(n.ouv)+'.'+(n.note?' Ce jour-là : '+n.note+'.':'');
+  }
+  $('#jour-texte').textContent=txt.replace(/ :/g,NB+':');
+  $('#jour-point').classList.toggle('ferme',!ouvert);
+})();
+
+/* ---------- horaires : période en cours ---------- */
+(function(){
+  var t=info(AUJ.date),j=parse(AUJ.date).getDay(),p=t.vac?'vac':'sco';
+  var row=$('#tab-horaires tr[data-j="'+j+'"]');if(row)row.classList.add('auj');
+  $$('#tab-horaires td[data-p="'+p+'"]').forEach(function(td){td.classList.add('periode')});
+  var n=$('#note-periode'),html='',v=t.vac,prochaine=null,i,k;
+  for(i=0;i<VACANCES.length;i++){if(VACANCES[i][0]>AUJ.date){prochaine=VACANCES[i];break}}
+  function court(s){var d=parse(s);return JOURS[d.getDay()]+' '+(d.getDate()===1?'1<sup>er</sup>':d.getDate())+' '+MOIS[d.getMonth()]+(d.getFullYear()!==parse(AUJ.date).getFullYear()?' '+d.getFullYear():'')}
+  if(v){
+    html='<b>'+v[2].replace(/^./,function(c){return c.toUpperCase()})+(v[1]===FIN_RESA?', jusqu’à la rentrée de septembre':', jusqu’au '+court(v[1]))+'.</b> Du lundi au samedi de 10'+NB+'h à 19'+NB+'h, le dimanche de 10'+NB+'h à 18'+NB+'h.';
+  } else if(prochaine){
+    html='<b>Prochaines vacances&nbsp;: '+prochaine[2]+(prochaine[1]===FIN_RESA?', à partir du '+court(prochaine[0]):', du '+court(prochaine[0])+' au '+court(prochaine[1]))+'.</b> Ouvert tous les jours pendant les vacances.';
+  }
+  if(SPECIAL['2026-10-31']&&AUJ.date<='2026-10-31') html+=' Le samedi 31 octobre, fermeture à 18'+NB+'h puis soirée Halloween de 19'+NB+'h'+NB+'30 à 22'+NB+'h'+NB+'30, places limitées, sur réservation.';
+  if(!v&&!prochaine) html='<b>Calendrier de la rentrée 2027 à venir.</b>';
+  var fs=Object.keys(FERIES).filter(function(s){return s>=AUJ.date}).sort().slice(0,3);
+  if(fs.length) html+=' Jours fériés ('+fs.map(function(s){return court(s)}).join(', ')+'…)&nbsp;: horaires <span class="exemple">à confirmer</span>';
+  n.innerHTML=html;
+})();
+
+/* ---------- formules (section) ---------- */
+var COUL={c2:['var(--jaune)','#FBF3B4'],c25:['var(--orange)','#FBC59F'],c3:['var(--rouge)','#F2A4A8'],s3:['var(--bleu)','#A9C4EA']};
+$('#formules').innerHTML=FORMULES.map(function(f){
+  var c=COUL[f.id],d=f.duree/60,dl=(d%1?Math.floor(d)+NB+'h'+NB+'30':d+NB+'h');
+  return '<li class="formule rv" aria-labelledby="f-'+f.id+'">'+
+    '<h3 class="formule__nom" id="f-'+f.id+'">'+f.nom+'<small>'+f.jours+' · '+f.repas.toLowerCase()+'</small></h3>'+
+    '<p class="formule__prix">'+eur(f.prix)+'<small>par enfant</small></p>'+
+    '<div class="toboggan" aria-hidden="true"><span class="toboggan__piste" style="--long:calc('+Math.round(f.duree/180*100)+'% - 3.4em);--c1:'+c[0]+';--c2:'+c[1]+'"><b>'+dl+'</b></span></div>'+
+    '<dl class="formule__infos">'+
+      '<div><dt>Arrivée</dt><dd class="puces">'+f.heures.map(function(t){return '<span class="puce">'+h(t)+' – '+h(plus(t,f.duree))+'</span>'}).join('')+'</dd></div>'+
+    '</dl>'+
+    '<button class="btn" type="button" data-resa="anniv" data-formule="'+f.id+'">Réserver '+f.nom+'</button>'+
+  '</li>';
+}).join('');
+
+/* ---------- QR d'exemple (dessin, non lisible) ---------- */
+(function(){
+  var s='',seed=7;function r(){seed=(seed*9301+49297)%233280;return seed/233280}
+  function finder(x,y){s+='<rect x="'+x+'" y="'+y+'" width="7" height="7" fill="#2A120A"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" fill="#2A120A"/>'}
+  for(var y=0;y<21;y++)for(var x=0;x<21;x++){if((x<8&&y<8)||(x>12&&y<8)||(x<8&&y>12))continue;if(r()>.52)s+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="#2A120A"/>'}
+  finder(0,0);finder(14,0);finder(0,14);$('#qr').innerHTML=s;
+})();
+
+/* ---------- menu téléphone et encart gérant ---------- */
+var bm=$('#bouton-menu'),mt=$('#menu-tel');
+bm.addEventListener('click',function(){var o=mt.classList.toggle('ouvert');bm.setAttribute('aria-expanded',o)});
+$$('#menu-tel a').forEach(function(a){a.addEventListener('click',function(){mt.classList.remove('ouvert');bm.setAttribute('aria-expanded','false')})});
+var det=$('.apercu details'),ger=$('#gerant');
+det.addEventListener('toggle',function(){ger.hidden=!det.open});
+var ent=$('#entete');function colle(){ent.classList.toggle('colle',window.scrollY>8)}window.addEventListener('scroll',colle,{passive:true});colle();
+/* apparitions au défilement : opacité et translation (jamais de clip-path, invisible pour l'observateur) */
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vu');io.unobserve(e.target)}})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  $$('.rv').forEach(function(el){io.observe(el)});
+}else{$$('.rv').forEach(function(el){el.classList.add('vu')})}
+
+/* ======================= tunnel ======================= */
+var dlg=$('#resa'),corps=$('#resa-corps'),cote=$('#resa-cote');
+var S;
+function neuf(){
+  S={act:null,formule:null,date:null,heure:null,mois:null,enfants:7,acc:2,prenom:'',age:'',gouter:null,options:{},billets:{plus3:0,moins3:0,bebe:0,acc:0,chau:0,pass:0},nom:'',tel:'',mail:'',etape:0,num:null};
+}
+neuf();
+function etapes(){
+  if(S.act==='entrees')return ['act','date','billets','coord','paiement','ok'];
+  return ['act','formule','date','creneau','invites','options','coord','paiement','ok'];
+}
+var TITRES={act:'Que réservez-vous ?',billets:'Les entrées',formule:'La formule',date:'La date',creneau:"L'heure d'arrivée",invites:'Les invités',options:'Le goûter et les options',coord:'Vos coordonnées',paiement:S&&S.act==='entrees'?'Le paiement':'Récapitulatif et acompte',ok:'C’est réservé'};
+function formule(){return FORMULES.filter(function(f){return f.id===S.formule})[0]||null}
+
+function calcul(){
+  var l=[],tot=0;
+  if(S.act==='anniv'){
+    var f=formule();
+    if(f){var n=Math.max(S.enfants,7);l.push([f.nom+' × '+n+' enfants',f.prix*n]);tot+=f.prix*n;
+      var ex=Math.max(0,S.acc-2);if(ex){l.push([ex+' accompagnateur'+(ex>1?'s':'')+' en plus',ex]);tot+=ex}
+      OPTIONS.forEach(function(o){if(S.options[o.id]&&o.prix){var v=o.prix*n;l.push([o.nom+' × '+n,v]);tot+=v}});
+    }
+    var ac=Math.round(tot*ACOMPTE*100)/100;
+    return {lignes:l,total:tot,acompte:ac,reste:Math.round((tot-ac)*100)/100};
+  }
+  if(S.act==='entrees'){
+    BILLETS.forEach(function(b){var q=S.billets[b.id];if(q){l.push([q+' × '+b.nom,q*b.prix]);tot+=q*b.prix}});
+    return {lignes:l,total:tot,acompte:tot,reste:0};
+  }
+  return {lignes:[],total:0,acompte:0,reste:0};
+}
+
+function ouvrir(act,fid){
+  neuf();
+  var p=$('#c-prenom').value.trim(),a=$('#c-age').value;
+  S.prenom=p;S.age=a;
+  if(act==='anniv'){S.act='anniv';S.etape=1;if(fid){S.formule=fid;S.etape=2}}
+  else if(act==='entrees'){S.act='entrees';S.etape=1}
+  var d=parse(AUJ.date);S.mois=d.getFullYear()*12+d.getMonth();
+  if(typeof dlg.showModal==='function')dlg.showModal();else dlg.setAttribute('open','');
+  rendre(true);
+}
+$$('[data-resa]').forEach(function(b){b.addEventListener('click',function(){ouvrir(b.getAttribute('data-resa'),b.getAttribute('data-formule'))})});
+$('#carton').addEventListener('submit',function(e){e.preventDefault();ouvrir('anniv')});
+$('#resa-fermer').addEventListener('click',function(){dlg.close()});
+dlg.addEventListener('close',function(){majCarton()});
+
+function majCarton(){
+  var dd=$('#c-date'),dh=$('#c-heure');
+  if(S.act==='anniv'&&S.num&&S.date&&S.heure){dd.textContent=dateLongue(S.date);dh.textContent=h(S.heure)+' à '+h(plus(S.heure,formule().duree));}
+}
+
+function erreur(m){var e=$('#resa-err');if(e){e.textContent=m;if(m)e.focus()}}
+function valide(){
+  var k=etapes()[S.etape];
+  if(k==='act'&&!S.act)return 'Choisissez un anniversaire ou des entrées.';
+  if(k==='formule'&&!S.formule)return 'Choisissez une formule pour continuer.';
+  if(k==='date'&&AUJ.date>=FIN_RESA)return 'Calendrier de la rentrée 2027 à venir : réservation en ligne pas encore ouverte.';
+  if(k==='date'&&!S.date)return 'Choisissez une date dans le calendrier.';
+  if(k==='creneau'&&!S.heure)return 'Choisissez une heure d’arrivée.';
+  if(k==='invites'){
+    if(!S.prenom)return 'Indiquez le prénom de l’enfant fêté : il apparaîtra sur les cartons.';
+    if(!S.age)return 'Indiquez l’âge que l’enfant va fêter.';
+  }
+  if(k==='options'&&!S.gouter)return 'Choisissez le goûter.';
+  if(k==='billets'){
+    var b=S.billets,enf=b.plus3+b.moins3+b.bebe,tout=enf+b.acc+b.pass;
+    if(!tout)return 'Ajoutez au moins une entrée.';
+    if(enf&&!b.acc)return 'Les enfants viennent avec un adulte : ajoutez au moins une entrée accompagnateur (1'+NB+'€).';
+  }
+  if(k==='coord'){
+    var ok=true;
+    [['nom',S.nom.length>1,'Indiquez votre nom.'],['tel',/^(\+33|0)[1-9](\s?\d{2}){4}$/.test(S.tel.trim()),'Indiquez un numéro à 10 chiffres, par exemple 06 12 34 56 78.'],['mail',/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(S.mail.trim()),'Indiquez une adresse e-mail valide.']].forEach(function(c){
+      var i=$('#f-'+c[0]),m=$('#m-'+c[0]);if(!i)return;i.setAttribute('aria-invalid',c[1]?'false':'true');m.textContent=c[1]?'':c[2];if(!c[1])ok=false;
+    });
+    if(!ok)return 'Certains champs sont à compléter.';
+  }
+  return '';
+}
+function suite(){
+  var m=valide();if(m){erreur(m);return}
+  var k=etapes()[S.etape];
+  if(k==='paiement'){S.num='KP-'+String(Math.floor(1000+Math.random()*9000))}
+  S.etape=Math.min(S.etape+1,etapes().length-1);rendre(true);
+}
+$('#resa-suite').addEventListener('click',function(){
+  if(etapes()[S.etape]==='ok'){dlg.close();return}
+  suite();
+});
+$('#resa-retour').addEventListener('click',function(){if(S.etape>0){S.etape--;rendre(true)}});
+
+function opt(id,attrs,rond,b,small,px,sel){
+  return '<button type="button" class="opt" '+attrs+' aria-pressed="'+(sel?'true':'false')+'"><span class="opt__rond" aria-hidden="true"></span><span><b>'+b+'</b>'+(small?'<small>'+small+'</small>':'')+'</span><span class="opt__px">'+(px||'')+'</span></button>';
+}
+
+function vueAct(){
+  return '<h3>Que réservez-vous&nbsp;?</h3><p class="resa__aide">Deux parcours, les mêmes prix que sur place.</p><div class="choix">'+
+    opt('','data-act="anniv"',1,'Un anniversaire','7 à 12 enfants, 2 h à 3 h de fête, goûter compris. Acompte en ligne.','dès '+eur(13.5),S.act==='anniv')+
+    opt('','data-act="entrees"',1,'Des entrées pour venir jouer','Billets valables 2'+NB+'ans, sans créneau.','dès '+eur(1),S.act==='entrees')+
+  '</div>';
+}
+function vueFormule(){
+  return '<h3>La formule</h3><p class="resa__aide">Prix par enfant, 7 enfants minimum. Chaque formule comprend l’accès aux jeux, une table, le goûter, les bonbons et les boissons.</p><div class="choix">'+
+    FORMULES.map(function(f){return opt('','data-formule="'+f.id+'"',1,f.nom,f.repas+' · '+f.jours.toLowerCase(),eur(f.prix)+'<small><br>par enfant</small>',S.formule===f.id)}).join('')+'</div>';
+}
+function jourPossible(s){
+  var t=info(s);
+  if(s<=AUJ.date||s>FIN_RESA)return {ok:false,cls:'passe',raison:s<=AUJ.date?'date passée ou du jour':'calendrier de l’aperçu ouvert jusqu’au 31 août 2027'};
+  if(t.ferie)return {ok:false,cls:'ferie',raison:'jour férié, horaires à confirmer avec le parc'};
+  if(!t.ouvert)return {ok:false,cls:'non',raison:'le parc est fermé ce jour-là'};
+  if(S.act==='entrees')return {ok:true,cls:t.vac?'vac':'',raison:'ouvert de '+h(t.ouv)+' à '+h(t.ferm)};
+  var f=formule();
+  if(f&&f.weekend&&!t.snack)return {ok:false,cls:'non',raison:'la formule Snack a lieu le samedi et le dimanche'};
+  if(!t.anniv)return {ok:false,cls:'non',raison:t.vac?'pendant les vacances, les anniversaires ont lieu le samedi et le dimanche':'les anniversaires ont lieu le mercredi, le samedi et le dimanche'};
+  return {ok:true,cls:t.vac?'vac':'',raison:'anniversaires possibles'};
+}
+function vueDate(){
+  var m=S.mois,an=Math.floor(m/12),mo=m%12,prem=new Date(an,mo,1),nbj=new Date(an,mo+1,0).getDate();
+  var auj=parse(AUJ.date),minM=auj.getFullYear()*12+auj.getMonth(),fin=parse(FIN_RESA),maxM=fin.getFullYear()*12+fin.getMonth();
+  var dec=(prem.getDay()+6)%7,cells='';
+  ['L','M','M','J','V','S','D'].forEach(function(j,i){cells+='<span class="cal__js" aria-hidden="true">'+j+'</span>'});
+  for(var i=0;i<dec;i++)cells+='<span class="vide"></span>';
+  for(var d=1;d<=nbj;d++){
+    var s=iso(new Date(an,mo,d)),p=jourPossible(s),sel=S.date===s;
+    cells+='<button type="button" class="jourbtn '+(p.ok?'dispo ':'')+p.cls+'" data-jour="'+s+'" aria-pressed="'+sel+'" '+(p.ok?'':'aria-disabled="true"')+' aria-label="'+dateLongue(s).replace(' 1er ',' 1 ')+' : '+p.raison+'">'+d+'</button>';
+  }
+  var aide=S.act==='entrees'?'Le jour où vous pensez venir (billets valables 2'+NB+'ans). Le parc est ouvert le mercredi, le samedi et le dimanche, et tous les jours pendant les vacances.':(formule()&&formule().weekend?'La formule Snack a lieu le samedi et le dimanche.':'Les anniversaires ont lieu le mercredi (hors vacances), le samedi et le dimanche.');
+  if(AUJ.date>=FIN_RESA) return '<h3>La date</h3><p class="resa__aide">Calendrier de la rentrée 2027 à venir.</p>';
+  return '<h3>'+(S.act==='entrees'?'Date de visite prévue':'La date')+'</h3><p class="resa__aide">'+aide+'</p><div class="cal">'+
+    '<div class="cal__mois"><button type="button" class="cal__nav" data-mois="-1" aria-label="Mois précédent" '+(m<=minM?'disabled':'')+'><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'+
+    '<b aria-live="polite">'+MOIS[mo]+' '+an+'</b><button type="button" class="cal__nav" data-mois="1" aria-label="Mois suivant" '+(m>=maxM?'disabled':'')+'><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>'+
+    '<div class="cal__grille">'+cells+'</div>'+
+    '<div class="legende"><span><i class="l-dispo"></i>possible</span><span><i class="l-vac"></i>vacances scolaires</span><span><i class="l-non"></i>'+(S.act==='entrees'?'fermé':'fermé ou sans anniversaire')+'</span><span><i class="l-ferie"></i>férié, à confirmer</span></div>'+
+    '<p class="sr" id="cal-msg" aria-live="polite"></p>'+
+  '</div>';
+}
+function complet(s,t){
+  if(s==='2026-10-24'&&t==='14:00')return true;
+  var x=0,k=s+t;for(var i=0;i<k.length;i++)x=(x*31+k.charCodeAt(i))%9973;return x%5===0;
+}
+function vueCreneau(){
+  var f=formule(),t=info(S.date);
+  var list=f.heures.filter(function(x){return min(plus(x,f.duree))<=min(t.ferm)});
+  var html=list.map(function(x){var c=complet(S.date,x),sel=S.heure===x;
+    return '<button type="button" class="creneau'+(c?' complet':'')+'" data-heure="'+x+'" aria-pressed="'+sel+'" '+(c?'aria-disabled="true"':'')+' aria-label="'+h(x)+' à '+h(plus(x,f.duree))+(c?', complet':'')+'">'+h(x)+' – '+h(plus(x,f.duree))+'<small>'+(c?'complet':'table libre')+'</small></button>';
+  }).join('');
+  return '<h3>L’heure d’arrivée</h3><p class="resa__aide">'+f.nom+', '+dateLongue(S.date)+'. Le parc ferme à '+h(t.ferm)+' ce jour-là : toutes les fêtes finissent avant.</p><div class="creneaux">'+html+'</div>'+
+    '<p class="sim">Disponibilités simulées pour l’aperçu.</p>';
+}
+function compteur(id,b,small,val,mn,mx){
+  return '<div class="compteur"><div><b id="lb-'+id+'">'+b+'</b><small>'+small+'</small></div><div class="compteur__btns" role="group" aria-labelledby="lb-'+id+'">'+
+    '<button type="button" data-cpt="'+id+'" data-d="-1" aria-label="Retirer" '+(val<=mn?'disabled':'')+'>−</button><span class="compteur__val" aria-live="polite">'+val+'</span>'+
+    '<button type="button" data-cpt="'+id+'" data-d="1" aria-label="Ajouter" '+(val>=mx?'disabled':'')+'>+</button></div></div>';
+}
+function vueInvites(){
+  var ages='<option value="">…</option>';for(var a=1;a<=12;a++)ages+='<option'+(String(a)===String(S.age)?' selected':'')+'>'+a+'</option>';
+  return '<h3>Les invités</h3><p class="resa__aide">De 7 à 12 enfants, l’enfant fêté compris.</p>'+
+    compteur('enfants','Enfants','7 minimum, 12 maximum',S.enfants,7,12)+
+    compteur('acc','Accompagnateurs','2 gratuits, puis 1'+NB+'€ par personne',S.acc,0,10)+
+    (S.enfants>=12?'<p class="sim">12 enfants, c’est le maximum par anniversaire.</p>':'')+
+    '<div class="duo" style="margin-top:var(--e5)"><div class="champ"><label for="f-prenom">Prénom de l’enfant fêté</label><input id="f-prenom" maxlength="18" value="'+esc(S.prenom)+'" autocomplete="off"></div>'+
+    '<div class="champ"><label for="f-age">Âge qu’il ou elle va fêter</label><select id="f-age">'+ages+'</select></div></div>'+
+    '<p class="sim">Chaussettes obligatoires pour les enfants et les accompagnateurs.</p>';
+}
+function vueOptions(){
+  var n=Math.max(S.enfants,7);
+  return '<h3>Le goûter et les options</h3><p class="resa__aide">Le goûter est compris. Les options sont comptées par enfant.</p>'+
+    '<p class="sous-titre" id="g-titre">Le goûter</p><div class="choix" role="radiogroup" aria-labelledby="g-titre">'+
+    GOUTERS.map(function(g){return '<button type="button" class="opt" role="radio" data-gouter="'+g.id+'" aria-checked="'+(S.gouter===g.id)+'"><span class="opt__rond" aria-hidden="true"></span><span><b>'+g.nom+'</b><small>'+g.d+'</small></span><span class="opt__px"><small>compris</small></span></button>'}).join('')+'</div>'+
+    '<p class="sous-titre">Les options</p>'+
+    OPTIONS.map(function(o){return '<label class="case"><input type="checkbox" data-option="'+o.id+'" '+(S.options[o.id]?'checked':'')+'><span><b>'+o.nom+'</b><small>'+o.d+'</small></span><span class="px">'+(o.prix?'+'+eur(o.prix*n):'sans supplément')+'</span></label>'}).join('');
+}
+function vueBillets(){
+  var t=info(S.date);
+  return '<h3>Les entrées</h3><p class="resa__aide">'+dateLongue(S.date)+', de '+h(t.ouv)+' à '+h(t.ferm)+'. Ce jour sert à préparer votre visite&nbsp;: les billets restent valables 2'+NB+'ans (conditions de vente). Chaussettes obligatoires.</p>'+
+    BILLETS.map(function(b){return compteur('b-'+b.id,b.nom,(b.prix?eur(b.prix):'gratuit')+(b.d?' · '+b.d:'')+(b.id==='chau'?' · si vous n’en avez pas':''),S.billets[b.id],0,20)}).join('');
+}
+function champ(id,lab,type,val,auto,ph){
+  return '<div class="champ"><label for="f-'+id+'">'+lab+'</label><input id="f-'+id+'" type="'+type+'" value="'+esc(val)+'" autocomplete="'+auto+'" placeholder="'+ph+'" aria-describedby="m-'+id+'"><p class="msg" id="m-'+id+'" aria-live="polite"></p></div>';
+}
+function vueCoord(){
+  return '<h3>Vos coordonnées</h3><p class="resa__aide">Pour vous envoyer la confirmation'+(S.act==='anniv'?' et les cartons d’invitation':'')+'. Dans cet aperçu, rien n’est envoyé.</p><div class="champs">'+
+    champ('nom','Nom et prénom','text',S.nom,'name','Camille Martin')+
+    champ('tel','Téléphone','tel',S.tel,'tel','06 12 34 56 78')+
+    champ('mail','E-mail','email',S.mail,'email','camille@exemple.fr')+'</div>';
+}
+function lignesRecap(c,acompteVisible){
+  var r=c.lignes.map(function(l){return '<div class="recap__l"><span>'+l[0]+'</span><span>'+eur(l[1])+'</span></div>'}).join('');
+  r+='<div class="recap__l tot"><span>Total</span><span>'+eur(c.total)+'</span></div>';
+  if(acompteVisible){r+='<div class="recap__l acompte"><span>Acompte à payer maintenant (30'+NB+'%, exemple)</span><span>'+eur(c.acompte)+'</span></div><div class="recap__l reste"><span>Reste à régler le jour de la fête</span><span>'+eur(c.reste)+'</span></div>'}
+  return r;
+}
+function vuePaiement(){
+  var c=calcul();
+  if(S.act==='anniv'){
+    var f=formule(),g=GOUTERS.filter(function(x){return x.id===S.gouter})[0];
+    return '<h3>Récapitulatif et acompte</h3><p class="resa__aide">Anniversaire de '+esc(S.prenom)+' ('+S.age+' ans), '+dateLongue(S.date)+', de '+h(S.heure)+' à '+h(plus(S.heure,f.duree))+'. '+S.enfants+' enfants, '+S.acc+' accompagnateur'+(S.acc>1?'s':'')+'. Goûter : '+g.nom.toLowerCase()+'.</p>'+
+      '<div class="recap">'+lignesRecap(c,true)+'</div>'+
+      '<div class="carte-bancaire"><b>Paiement simulé.</b> Sur le vrai site, le paiement de l’acompte se fait ici par carte bancaire, sans quitter la page. Aucun numéro de carte n’est demandé dans cet aperçu.</div>'+
+      '<div class="conditions"><p>Le reste se règle sur place, le jour de la fête.</p><p>En cas d’annulation, l’acompte n’est pas remboursé : il est rendu en entrées (conditions de vente actuelles du parc).</p></div>';
+  }
+  return '<h3>Le paiement</h3><p class="resa__aide">Date de visite prévue : '+dateLongue(S.date)+' (billets valables 2'+NB+'ans). Les entrées se paient en entier à la réservation.</p>'+
+    '<div class="recap">'+lignesRecap(c,false)+'</div>'+
+    '<div class="carte-bancaire"><b>Paiement simulé.</b> Sur le vrai site, le paiement se fait ici par carte bancaire. Aucun numéro de carte n’est demandé dans cet aperçu.</div>'+
+    '<div class="conditions"><p>Les billets ne sont ni échangeables ni remboursables (conditions de vente actuelles du parc).</p></div>';
+}
+function invitHTML(){
+  var f=formule(),p=S.prenom?esc(S.prenom):'<span class="mc-vide">Prénom</span>',a=S.age?S.age:'<span class="mc-vide">…</span>';
+  return '<div class="mini-carton"><p class="mc-titre">Tu es invité à l’anniversaire de '+p+'</p>'+
+    '<p class="mc-ligne">qui fête ses '+a+' ans chez Kid’s Paradise</p>'+
+    '<p class="mc-ligne">Le '+(S.date?dateLongue(S.date):'<span class="mc-vide">date à choisir</span>')+'</p>'+
+    '<p class="mc-ligne">De '+(S.heure&&f?h(S.heure)+' à '+h(plus(S.heure,f.duree)):'<span class="mc-vide">heure à choisir</span>')+'</p>'+
+    '<p class="mc-ligne" style="font-weight:500">1 rue Franciade, La Chaussée-Saint-Victor · chaussettes obligatoires</p></div>';
+}
+function vueOk(){
+  var f=formule();
+  if(S.act==='anniv'){
+    var c=calcul();
+    return '<div class="confirm"><img class="confirm__suricate" src="img/suricate.webp" width="180" height="180" alt=""><h3>L’anniversaire de '+esc(S.prenom)+' est réservé</h3>'+
+      '<p class="confirm__num">'+S.num+'</p>'+
+      '<p class="resa__aide" style="margin:0">'+dateLongue(S.date)+', de '+h(S.heure)+' à '+h(plus(S.heure,f.duree))+' · '+f.nom+'. Acompte de '+eur(c.acompte)+' réglé (simulation), reste '+eur(c.reste)+' sur place. Une confirmation partirait à '+esc(S.mail)+'.</p>'+
+      '<div style="width:min(100%,380px);margin:var(--e3) auto">'+invitHTML()+'</div>'+
+      '<div class="confirm__actions"><button class="btn btn--framboise" type="button" id="ics">Ajouter à mon agenda</button><button class="btn" type="button" id="imprimer">Imprimer les cartons</button></div>'+
+      '<p class="sim">Réservation simulée : rien n’est réservé ni payé.</p></div>';
+  }
+  return '<div class="confirm"><img class="confirm__suricate" src="img/suricate.webp" width="180" height="180" alt=""><h3>Vos entrées sont réservées</h3><p class="confirm__num">'+S.num+'</p>'+
+    '<p class="resa__aide" style="margin:0">Date de visite prévue : '+dateLongue(S.date)+', de '+h(info(S.date).ouv)+' à '+h(info(S.date).ferm)+' (billets valables 2'+NB+'ans). Présentez ce numéro à l’accueil. Total réglé : '+eur(calcul().total)+' (simulation).</p>'+
+    '<div class="confirm__actions"><button class="btn btn--framboise" type="button" id="ics">Ajouter à mon agenda</button></div><p class="sim">Réservation simulée : rien n’est réservé ni payé.</p></div>';
+}
+
+function vueCote(){
+  var c=calcul(),html='';
+  if(S.act==='entrees'){
+    html='<p class="sous-titre" style="margin-top:0">Vos entrées</p><p style="font-weight:700;color:var(--brun)">'+(S.date?'Visite prévue '+dateLongue(S.date)+' · billets valables 2'+NB+'ans':'Date de visite à choisir')+'</p>';
+  } else html=invitHTML();
+  html+='<div class="mini-recap">'+c.lignes.map(function(l){return '<div><span>'+l[0]+'</span><span>'+eur(l[1])+'</span></div>'}).join('')+
+    '<div class="tot"><span>Total</span><span>'+eur(c.total)+'</span></div>'+
+    (S.act==='anniv'&&c.total?'<div><span>Acompte (30'+NB+'%, exemple)</span><span>'+eur(c.acompte)+'</span></div>':'')+'</div>'+
+    '<p class="sim">Aperçu : réservation et paiement simulés.</p>';
+  cote.innerHTML=html;
+  var t=$('#resa-total');
+  t.innerHTML=c.total?(S.act==='anniv'?'Total '+eur(c.total)+' · taux d’exemple<b>Acompte '+eur(c.acompte)+'</b>':'Total<b>'+eur(c.total)+'</b>'):'';
+}
+
+function rendre(focus){
+  var e=etapes(),k=e[S.etape];
+  TITRES.paiement=S.act==='entrees'?'Le paiement':'Récapitulatif et acompte';
+  $('#resa-etape').textContent=S.act==='anniv'?(S.prenom?'L’anniversaire de '+S.prenom:'Un anniversaire'):S.act==='entrees'?'Des entrées':'Réserver';
+  $('#resa-compte').textContent=k==='ok'?'Réservation simulée':'Étape '+(S.etape+1)+' sur '+(e.length-1)+' · '+TITRES[k].replace(' ?',NB+'?');
+  $('#resa-progres').innerHTML=e.slice(0,-1).map(function(x,i){return '<i class="'+(i<S.etape?'fait':i===S.etape?'ici':'')+'"></i>'}).join('');
+  var v={act:vueAct,formule:vueFormule,date:vueDate,creneau:vueCreneau,invites:vueInvites,options:vueOptions,billets:vueBillets,coord:vueCoord,paiement:vuePaiement,ok:vueOk}[k]();
+  corps.innerHTML='<div class="resa__etape">'+v+'</div>';$('#resa-err').textContent='';
+  corps.scrollTop=0;
+  var r=$('#resa-retour'),su=$('#resa-suite');
+  r.style.visibility=(S.etape===0||k==='ok')?'hidden':'visible';
+  su.textContent=k==='ok'?'Fermer':k==='paiement'?(S.act==='anniv'?'Payer '+eur(calcul().acompte)+' (exemple)':'Payer '+eur(calcul().total)):'Continuer';
+  $('#resa-total').style.display=(k==='paiement'||k==='ok')?'none':'';
+  $('#resa-total').style.visibility=(k==='paiement'||k==='ok')?'hidden':'visible';
+  vueCote();
+  brancher(k);
+  if(focus){var t=$('h3',corps);if(t){t.setAttribute('tabindex','-1');t.focus({preventScroll:true})}}
+}
+
+function brancher(k){
+  $$('[data-act]',corps).forEach(function(b){b.addEventListener('click',function(){var a=b.getAttribute('data-act');if(S.act!==a){S.act=a;S.date=null;S.heure=null}rendre(false);suite()})});
+  $$('.opt[data-formule]',corps).forEach(function(b){b.addEventListener('click',function(){var id=b.getAttribute('data-formule');if(S.formule!==id){S.formule=id;S.heure=null;if(S.date&&!jourPossible(S.date).ok)S.date=null}rendre(false);suite()})});
+  $$('[data-mois]',corps).forEach(function(b){b.addEventListener('click',function(){S.mois+=+b.getAttribute('data-mois');rendre(false);var n=$('[data-mois="'+b.getAttribute('data-mois')+'"]',corps);if(n&&!n.disabled)n.focus();else{var x=$('.jourbtn',corps);if(x)x.focus()}})});
+  $$('.jourbtn',corps).forEach(function(b){b.addEventListener('click',function(){
+    var s=b.getAttribute('data-jour'),p=jourPossible(s);
+    if(!p.ok){erreur(dateLongue(s).replace(/^./,function(c){return c.toUpperCase()})+' : '+p.raison+'.');return}
+    if(S.date!==s){S.date=s;S.heure=null}rendre(false);var x=$('[data-jour="'+s+'"]',corps);if(x)x.focus();
+  })});
+  $$('.creneau',corps).forEach(function(b){b.addEventListener('click',function(){
+    if(b.classList.contains('complet')){erreur('Ce créneau est complet. Choisissez une autre heure ou un autre jour.');return}
+    S.heure=b.getAttribute('data-heure');rendre(false);var x=$('[data-heure="'+S.heure+'"]',corps);if(x)x.focus();
+  })});
+  $$('[data-cpt]',corps).forEach(function(b){b.addEventListener('click',function(){
+    var id=b.getAttribute('data-cpt'),d=+b.getAttribute('data-d');
+    if(id==='enfants')S.enfants=Math.min(12,Math.max(7,S.enfants+d));
+    else if(id==='acc')S.acc=Math.min(10,Math.max(0,S.acc+d));
+    else{var bid=id.slice(2);S.billets[bid]=Math.min(20,Math.max(0,S.billets[bid]+d))}
+    rendre(false);var x=$('[data-cpt="'+id+'"][data-d="'+d+'"]',corps);if(x&&!x.disabled)x.focus();else{x=$('[data-cpt="'+id+'"][data-d="'+(-d)+'"]',corps);if(x)x.focus()}
+  })});
+  var fp=$('#f-prenom',corps);if(fp)fp.addEventListener('input',function(){S.prenom=fp.value.trim();$('#c-prenom').value=fp.value;vueCote()});
+  var fa=$('#f-age',corps);if(fa)fa.addEventListener('change',function(){S.age=fa.value;$('#c-age').value=fa.value;vueCote()});
+  $$('[data-gouter]',corps).forEach(function(b){b.addEventListener('click',function(){S.gouter=b.getAttribute('data-gouter');rendre(false);var x=$('[data-gouter="'+S.gouter+'"]',corps);if(x)x.focus()})});
+  $$('[data-option]',corps).forEach(function(c){c.addEventListener('change',function(){S.options[c.getAttribute('data-option')]=c.checked;vueCote();$('#resa-total')})});
+  ['nom','tel','mail'].forEach(function(id){var i=$('#f-'+id,corps);if(i)i.addEventListener('input',function(){S[id]=i.value})});
+  var ics=$('#ics',corps);if(ics)ics.addEventListener('click',agenda);
+  var im=$('#imprimer',corps);if(im)im.addEventListener('click',function(){var z=$('#impression');z.innerHTML=invitHTML()+invitHTML();window.print()});
+}
+
+function agenda(){
+  var f=formule(),d=S.date.replace(/-/g,''),deb,fin,titre;
+  if(S.act==='anniv'){deb=S.heure.replace(':','')+'00';fin=plus(S.heure,f.duree).replace(':','')+'00';titre='Anniversaire chez Kid’s Paradise ('+S.num+')'}
+  else{var t=info(S.date);deb=t.ouv.replace(':','')+'00';fin=t.ferm.replace(':','')+'00';titre='Kid’s Paradise, visite prévue (billets valables 2 ans, '+S.num+')'}
+  var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Kids Paradise//Apercu//FR','BEGIN:VEVENT','UID:'+S.num+'@apercu','DTSTAMP:20261023T000000Z',
+    'DTSTART;TZID=Europe/Paris:'+d+'T'+deb,'DTEND;TZID=Europe/Paris:'+d+'T'+fin,'SUMMARY:'+titre,
+    'LOCATION:1 rue Franciade\\, 41260 La Chaussée-Saint-Victor','DESCRIPTION:Chaussettes obligatoires. Réservation simulée (aperçu).','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='kids-paradise-'+S.num+'.ics';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+}
+
+/* carton : aperçu en direct depuis le haut de page */
+$('#c-prenom').addEventListener('input',function(){S.prenom=this.value.trim()});
+})();
+</script>
