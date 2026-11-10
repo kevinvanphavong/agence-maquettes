@@ -40,6 +40,7 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | MaxxParc (v3, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/maxxparc-v3-cd32d3/` |
 | Le Silver (v3, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v3-86289e/` |
 | Cap Form Loisirs (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-eb21fc/` |
+| Cap Form Loisirs (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-v4-fc034e/` |
 | Espace Games (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-f12eef/` |
 | Le Monde des P'tits Loups (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-7d3af2/` |
 | Le Monde des P'tits Loups (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-v4-77a4cd/` |
