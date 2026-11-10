@@ -42,6 +42,7 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | Cap Form Loisirs (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-eb21fc/` |
 | Espace Games (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-f12eef/` |
 | Le Monde des P'tits Loups (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-7d3af2/` |
+| Le Monde des P'tits Loups (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-v4-77a4cd/` |
 
 À chaque prospect, on envoie **uniquement le lien direct de sa maquette** — jamais le lien portfolio (qui liste toutes les maquettes).
 

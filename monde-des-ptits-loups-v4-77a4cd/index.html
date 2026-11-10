@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Le Monde des petits loups · parc de jeux couvert à Laval</title>
+<meta name="description" content="Aperçu non commandé d'une page d'accueil pour le parc de jeux couvert Le Monde des petits loups, à Laval : horaires du jour, prix et anniversaire réservable en ligne.">
+<link rel="preload" href="polices/fredoka-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/fredoka-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vong-kit.css">
+<style>
+/* Maquette v4 · structure S2 « Split Studio » · matière Hallmark « Hum » (papier découpé),
+   recolorée aux couleurs du parc (curseur Évolution) : jaune et bleu nuit du logo, cyan du bandeau du site, vert du feuillage.
+   Police : Fredoka (OFL, licence dans polices/), à la place de Chillax (licence non OFL). */
+@font-face{font-family:"Fredoka";src:url(polices/fredoka-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Fredoka";src:url(polices/fredoka-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+:root{
+  --papier:#fbf8ec; --papier-2:#f4efda; --papier-3:#ebe4c8; --carte:#fffdf6;
+  --encre:#1b2347;     /* bleu nuit des mots « Petits Loups » du logo, assombri pour le texte */
+  --encre-2:#26357a;   /* bleu nuit du logo */
+  --doux:#4c5370;
+  --trait:#ddd6bb; --bord-carte:#d9cfa8;
+  --jaune:#ffe600;     /* jaune du logo et du site (#ffff00), un cran plus chaud sur papier */
+  --jaune-bord:#c2a100; --jaune-doux:#fff3a3;
+  --bleu:#00668a;      /* cyan du bandeau du site (#0099cc) assombri : liens */
+  --vert:#2f7a2a;      /* feuillage du logo : « ouvert » */
+  --colline-1:#eef2d9; --colline-2:#dfeac3; --feuille:#5f9e4f;
+  --rouge:#b3261e;
+  --ombre-papier:drop-shadow(0 0 .6px rgba(27,35,71,.32)) drop-shadow(1.5px 2.5px 1.5px rgba(27,35,71,.1)) drop-shadow(6px 14px 16px rgba(27,35,71,.13));
+  --ombre-carte:0 1px 2px rgba(27,35,71,.06),0 12px 28px -14px rgba(27,35,71,.24);
+  --r-carte:24px; --r-stock:16px; --r-champ:14px;
+  --ressort:cubic-bezier(.34,1.56,.64,1); --net:cubic-bezier(.22,1,.36,1);
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .12 0 0 0 0 .2 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+  --fibre:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='turbulence' baseFrequency='.004 .06' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .3 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23f)'/%3E%3C/svg%3E");
+  --dechire:polygon(0 0,100% 0,100% calc(100% - 1.4px),96.4% calc(100% - 3.5px),92.9% calc(100% - 1.7px),89.3% calc(100% - 5.5px),85.7% calc(100% - 4.1px),82.1% calc(100% - 1.3px),78.6% calc(100% - 1.3px),75% calc(100% - 5.4px),71.4% calc(100% - 1.9px),67.9% calc(100% - 5.4px),64.3% calc(100% - 4.8px),60.7% calc(100% - 4px),57.1% calc(100% - 6.1px),53.6% calc(100% - 4.6px),50% calc(100% - 4.4px),46.4% calc(100% - 3.4px),42.9% calc(100% - 2.5px),39.3% calc(100% - 1.8px),35.7% calc(100% - 3.5px),32.1% calc(100% - 3.3px),28.6% calc(100% - 5.6px),25% calc(100% - 2.6px),21.4% calc(100% - 3.4px),17.9% calc(100% - 6.7px),14.3% calc(100% - 4.7px),10.7% calc(100% - 5px),7.1% calc(100% - 5.1px),3.6% calc(100% - 6.5px),0 calc(100% - 2.2px));
+  --dechire-2:polygon(0 0,100% 0,100% calc(100% - 7.2px),95.5% calc(100% - 1.5px),90.9% calc(100% - 3px),86.4% calc(100% - 5.8px),81.8% calc(100% - 3.5px),77.3% calc(100% - 4.9px),72.7% calc(100% - 2.8px),68.2% calc(100% - 3px),63.6% calc(100% - 4.5px),59.1% calc(100% - 5.9px),54.5% calc(100% - 6.5px),50% calc(100% - 5px),45.5% calc(100% - 4px),40.9% calc(100% - 8.7px),36.4% calc(100% - 7.2px),31.8% calc(100% - 5.4px),27.3% calc(100% - 5.3px),22.7% calc(100% - 2.2px),18.2% calc(100% - 2.6px),13.6% calc(100% - 1.7px),9.1% calc(100% - 8.5px),4.5% calc(100% - 7.6px),0 calc(100% - 1.5px));
+  /* jetons du kit */
+  --vk-fond:var(--carte); --vk-texte:var(--encre); --vk-doux:var(--doux); --vk-trait:var(--trait);
+  --vk-accent:var(--encre-2); --vk-sur-accent:#fff; --vk-ok:var(--vert); --vk-ferme:#6b6f80; --vk-vac:var(--jaune-doux); --vk-fer:#d7ecf5; --vk-rayon:12px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:12px}
+html,body{overflow-x:clip}
+body{margin:0;font-family:Fredoka,ui-rounded,system-ui,sans-serif;font-weight:500;font-size:17px;line-height:1.5;color:var(--encre);background:var(--papier)}
+body::before{content:"";position:fixed;inset:0;background:var(--grain);pointer-events:none;z-index:-1}
+.grain{position:relative;isolation:isolate}
+.grain::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--grain);z-index:-1;pointer-events:none}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.05;margin:0;color:var(--encre)}
+p{margin:0;text-wrap:pretty}
+a{color:var(--bleu);text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--bleu);outline-offset:2px;border-radius:8px}
+.enveloppe{max-width:1200px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+mark{background:linear-gradient(transparent 40%,var(--jaune) 40%,var(--jaune) 92%,transparent 92%);color:inherit;padding:0 2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.mention{display:inline-block;font-size:14px;font-weight:600;line-height:1.5;padding:0 7px;border:1px solid currentColor;border-radius:6px;color:#6a5200;vertical-align:2px;white-space:nowrap}
+
+/* Bandeau d'aperçu : une ligne */
+.apercu{background:var(--encre);color:#fff}
+.apercu .enveloppe{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:32px}
+.apercu p{font-size:14px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.apercu a{color:var(--jaune);font-size:14px;display:inline-flex;align-items:center;min-height:44px;padding:0 4px;white-space:nowrap}
+@media (max-width:459px){.apercu a{display:none}}
+
+/* En-tête */
+.tete{background:var(--papier)}
+.tete .enveloppe{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:6px 12px;padding-top:8px;padding-bottom:4px}
+.marque{display:flex;align-items:center;gap:10px;color:var(--encre);text-decoration:none;min-height:48px;min-width:0}
+.marque img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 36%;flex:none;box-shadow:0 0 0 2px var(--carte),0 3px 8px -3px rgba(27,35,71,.4)}
+.marque span{font-weight:600;font-size:18px;line-height:1.05;letter-spacing:-.01em}
+.marque small{display:block;font-weight:500;font-size:16px;color:var(--doux);letter-spacing:0}
+.appel{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:48px;min-height:48px;border-radius:999px;color:var(--encre);text-decoration:none;background:var(--carte);box-shadow:inset 0 0 0 1px var(--trait)}
+.appel{grid-row:1;grid-column:2}
+.appel svg{width:22px;height:22px}
+.appel span{display:none}
+.menu{grid-column:1/-1;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 12px}
+.menu::-webkit-scrollbar{display:none}
+.menu a{flex:none;display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;color:var(--encre);text-decoration:none;font-weight:600}
+.menu a:hover{background:var(--papier-2)}
+@media (min-width:900px){
+  .tete .enveloppe{grid-template-columns:auto minmax(0,1fr) auto;min-height:76px;padding-top:6px;padding-bottom:6px}
+  .menu{grid-column:auto;justify-content:center;margin:0;padding:0;overflow:visible}
+  .appel{padding:0 18px 0 14px;grid-column:3}
+  .appel span{display:inline;font-weight:600}
+  .marque span{font-size:20px}
+}
+
+/* ===== Premier écran : diptyque ===== */
+.ouverture{position:relative;padding:0 0 56px;overflow:hidden}
+.ouverture .enveloppe{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.preuve{order:-1;margin:0 -16px;min-width:0}
+.feuille{filter:var(--ombre-papier)}
+.feuille img{width:100%;aspect-ratio:16/9;object-fit:cover;clip-path:var(--dechire);background:var(--papier-3)}
+.texte{min-width:0;display:grid;gap:12px;align-content:start}
+.texte h1{font-size:clamp(34px,9.4vw,64px);line-height:1.02;letter-spacing:-.03em}
+.texte .phrase{font-size:19px;line-height:1.4;color:var(--encre)}
+.aujourdhui{background:var(--carte);border-radius:var(--r-stock);padding:4px 14px;box-shadow:inset 0 0 0 1px var(--trait)}
+.aujourdhui .vk-bandeau{gap:0 10px}
+.aujourdhui .vk-bandeau strong{font-weight:600}
+.aujourdhui .vk-detail{color:var(--doux)}
+.aujourdhui .vk-mention{font-size:14px;color:#6a5200}
+.aujourdhui .vk-lien{color:var(--bleu);text-decoration:underline;font-weight:600}
+.tarif{font-size:18px}
+.tarif b{font-weight:600}
+.agir{display:grid;gap:6px;margin-top:2px}
+.sous-bouton{color:var(--doux);font-size:16px}
+
+/* Boutons « carton » de la matière Hum */
+.btn{--bord:5px;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 24px;border:0;border-radius:var(--r-stock);font-weight:600;font-size:18px;text-decoration:none;cursor:pointer;color:var(--encre);
+  position:relative;isolation:isolate;background:var(--carte);box-shadow:inset 0 0 0 1px var(--trait),0 var(--bord) 0 0 var(--bord-carte);transition:translate .15s var(--net),box-shadow .15s var(--net)}
+.btn::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--grain);z-index:-1;pointer-events:none}
+.btn-principal::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--fibre);z-index:-1;pointer-events:none}
+.btn-principal{background:var(--jaune);box-shadow:0 var(--bord) 0 0 var(--jaune-bord),2px calc(var(--bord) + 4px) 10px -3px rgba(27,35,71,.3);transition-timing-function:var(--ressort)}
+.btn:hover{--bord:7px;translate:0 -2px}
+.btn:active{--bord:1px;translate:0 4px}
+.btn svg{width:20px;height:20px;flex:none}
+.btn[disabled]{opacity:.55;cursor:not-allowed;translate:none}
+
+/* Collines (sol du premier écran) */
+.collines{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:0;pointer-events:none}
+.collines svg{width:100%;height:100%;display:block}
+
+@media (min-width:900px){
+  .ouverture{padding:28px 0 120px}
+  .ouverture .enveloppe{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center}
+  .preuve{order:0;margin:0}
+  .feuille img{aspect-ratio:16/10;border-radius:var(--r-carte) var(--r-carte) 0 0}
+  .texte{gap:16px}
+  .texte .phrase{font-size:21px}
+  .agir{justify-items:start}
+  .collines{height:190px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .texte{animation:monte .5s var(--net) both}
+  .preuve{animation:monte .5s var(--net) .08s both}
+  @keyframes monte{from{opacity:0;translate:0 10px}to{opacity:1;translate:0 0}}
+}
+
+/* ===== Rangées du diptyque ===== */
+.rangee{padding:64px 0}
+.rangee .enveloppe{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.rangee .cote{min-width:0;display:grid;gap:14px;align-content:start}
+.rangee h2{font-size:clamp(32px,7.6vw,52px);letter-spacing:-.03em}
+.rangee .ligne{font-size:19px;line-height:1.45;max-width:36ch}
+.rangee .preuve-r{min-width:0}
+@media (min-width:900px){
+  .rangee{padding:112px 0}
+  .rangee .enveloppe{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px;align-items:center}
+  .rangee.tete-de-ligne .enveloppe{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+}
+.bande{background:var(--papier-2);position:relative;isolation:isolate}
+.bande::before{content:"";position:absolute;inset:0;background:var(--grain);z-index:-1;pointer-events:none}
+.inclus{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.inclus li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start}
+.inclus svg{width:22px;height:22px;color:var(--vert);margin-top:2px}
+
+/* Calcul de la fête (preuve de la rangée Anniversaire) */
+.calcul{background:var(--carte);border-radius:var(--r-carte);padding:22px 18px;box-shadow:var(--ombre-carte),inset 0 0 0 1px var(--trait);display:grid;gap:16px}
+.calcul h3{font-size:26px}
+.compteur{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px}
+.compteur label{font-weight:600}
+.compteur small{display:block;font-size:16px;color:var(--doux);font-weight:500}
+.pas{display:flex;align-items:center;gap:6px}
+.pas button{width:48px;height:48px;border-radius:14px;border:0;background:var(--papier-2);box-shadow:inset 0 0 0 1px var(--trait),0 3px 0 0 var(--bord-carte);font-size:24px;font-weight:600;cursor:pointer;line-height:1}
+.pas button:active{translate:0 2px;box-shadow:inset 0 0 0 1px var(--trait),0 1px 0 0 var(--bord-carte)}
+.pas button[disabled]{opacity:.45;cursor:not-allowed}
+.pas output{min-width:36px;text-align:center;font-weight:600;font-size:22px}
+.resultat{font-size:21px;line-height:1.35}
+.resultat strong{font-weight:600}
+.resultat small{display:block;font-size:16px;color:var(--doux)}
+.a-fournir{display:grid;place-items:center;text-align:center;padding:16px;border:2px dashed var(--feuille);border-radius:var(--r-stock);color:#2d5a22;font-weight:600;background:rgba(223,234,195,.45);min-height:96px}
+@media (min-width:900px){.calcul{padding:32px 34px}}
+
+/* Mosaïque du parc */
+.mosaique{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mosaique figure{margin:0;min-width:0}
+.mosaique .feuille img{aspect-ratio:1/1;border-radius:18px 18px 0 0;clip-path:var(--dechire-2)}
+.mosaique figcaption{font-size:16px;color:var(--doux);margin-top:6px}
+.mosaique .grande{grid-column:1/-1}
+.mosaique .grande .feuille img{aspect-ratio:16/9}
+.mosaique .a-fournir{aspect-ratio:1/1;min-height:0}
+.liste-parc{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.liste-parc li{padding-left:16px;border-left:4px solid var(--colline-2)}
+.liste-parc b{font-weight:600}
+
+/* Prix : un seul tableau */
+.prix{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.prix caption{text-align:left;font-weight:600;font-size:18px;padding:0 0 8px}
+.prix th,.prix td{padding:12px 4px;border-bottom:1px solid var(--trait);text-align:left;vertical-align:middle;font-weight:500}
+.prix th[scope=row]{font-weight:500}
+.prix th small{display:block;color:var(--doux);font-size:16px}
+.prix td{text-align:right;font-weight:600;white-space:nowrap}
+.prix tr.groupe th{padding-top:22px;font-weight:600;border-bottom:2px solid var(--encre)}
+.prix tr.groupe th .mention{margin-left:6px}
+.vide{display:inline-block;width:64px;height:28px;border:1.5px dashed var(--doux);border-radius:8px;vertical-align:middle}
+.carte-prix{background:var(--carte);border-radius:var(--r-carte);padding:10px 18px 20px;box-shadow:var(--ombre-carte),inset 0 0 0 1px var(--trait)}
+.legende{font-size:16px;color:var(--doux);margin-top:12px}
+@media (min-width:900px){.carte-prix{padding:14px 30px 26px}}
+
+/* Horaires + accès (fin de page) */
+.semaine{width:100%;border-collapse:collapse}
+.semaine th,.semaine td{padding:11px 4px;border-bottom:1px solid var(--trait);text-align:left;font-weight:500}
+.semaine td{text-align:right;white-space:nowrap}
+.semaine tr.auj th,.semaine tr.auj td{font-weight:600;background:linear-gradient(transparent 12%,var(--jaune-doux) 12%,var(--jaune-doux) 88%,transparent 88%)}
+.semaine td.ferme{color:var(--doux)}
+.regles{display:grid;gap:10px}
+.regles dt{font-weight:600}
+.regles dd{margin:0}
+.adresse{font-size:21px;line-height:1.35;font-weight:600}
+.contacts{display:flex;flex-wrap:wrap;gap:4px 18px}
+.contacts a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+.cloture{display:grid;gap:10px;justify-items:start;margin-top:8px}
+
+/* Pied de page */
+footer{background:var(--encre);color:#e9ebf5;padding:40px 0 48px}
+footer .enveloppe{display:grid;gap:14px}
+footer b{font-weight:600}
+footer a{color:var(--jaune)}
+footer [data-petit]{font-size:14px;color:#d3d7e8}
+details.gerant{background:var(--carte);color:var(--encre);border-radius:var(--r-stock);margin-top:6px}
+details.gerant summary{cursor:pointer;min-height:52px;display:flex;align-items:center;padding:0 18px;font-weight:600}
+details.gerant .corps{padding:0 18px 18px;display:grid;gap:10px}
+details.gerant ol,details.gerant ul{margin:0;padding-left:22px;display:grid;gap:6px}
+details.gerant h3{font-size:18px;letter-spacing:0;margin-top:6px}
+
+/* ===== Parcours de réservation (fenêtre) ===== */
+.voile{position:fixed;inset:0;background:rgba(17,22,48,.5);z-index:50}
+.panneau{position:fixed;inset:0;z-index:51;background:var(--papier);display:flex;flex-direction:column;overflow:hidden}
+.voile[hidden],.panneau[hidden]{display:none}
+@media (min-width:700px){.panneau{inset:4vh auto 4vh 50%;translate:-50% 0;width:600px;border-radius:var(--r-carte);box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}}
+.p-tete{display:grid;grid-template-columns:minmax(0,1fr) 48px;align-items:center;gap:8px;padding:10px 12px 6px 18px}
+.p-tete h2{font-size:24px}
+.p-tete p{color:var(--doux);font-size:16px}
+.fermer{width:48px;height:48px;border-radius:50%;border:0;background:var(--papier-2);font-size:26px;line-height:1;cursor:pointer}
+.progres{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding:0 18px 10px}
+.progres i{height:6px;border-radius:9px;background:var(--papier-3)}
+.progres i.fait{background:var(--encre-2)}
+.simule{background:var(--jaune-doux);font-size:16px;font-weight:600;text-align:center;padding:6px 12px}
+.p-corps{flex:1;overflow:auto;padding:18px 18px 12px;min-height:0;display:grid;gap:16px;align-content:start}
+.p-corps h3{font-size:24px}
+.aide{color:var(--doux)}
+.p-pied{display:flex;flex-wrap:wrap;gap:10px;padding:12px 18px 16px;background:var(--carte);border-top:1px solid var(--trait)}
+.p-pied .btn{flex:1 1 0;min-width:0;padding:0 14px}
+.p-pied .btn-principal{flex:2 1 0}
+.p-pied .vk-erreur{flex:1 0 100%;margin:0}
+.choix{display:grid;gap:10px}
+.option{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;width:100%;min-height:56px;padding:14px 16px;border:0;border-radius:var(--r-stock);background:var(--carte);box-shadow:inset 0 0 0 1px var(--trait);cursor:pointer}
+.option[aria-pressed=true]{box-shadow:inset 0 0 0 3px var(--encre-2);background:#f3f5ff}
+.option b{font-weight:600}
+.option span{grid-column:1/-1;color:var(--doux)}
+.vk-formule{background:var(--carte)}
+.vk-formule.vk-choisi{background:#f3f5ff}
+.vk-f-prix .vk-mention{font-size:14px}
+.vk-cal-js{font-size:16px}
+.vk-cal-legende{font-size:16px}
+.vk-cal-tete strong{font-weight:600;text-transform:capitalize}
+.vk-jour{font-weight:500}
+.vk-jour.vk-choisi{font-weight:600}
+.vk-calendrier{max-width:none}
+.vk-creneau{min-height:56px;background:var(--carte)}
+.vk-creneau span{font-size:16px}
+.vk-creneau strong{font-weight:600}
+.message{color:var(--rouge);font-weight:600}
+.message:empty{display:none}
+.ligne-p{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;background:var(--carte);border-radius:var(--r-stock);padding:10px 12px;box-shadow:inset 0 0 0 1px var(--trait)}
+.ligne-p small{display:block;color:var(--doux);font-size:16px}
+.champ label{display:block;font-weight:600;margin-bottom:4px}
+.champ input,.champ select{width:100%;min-height:52px;border-radius:var(--r-champ);border:1px solid var(--doux);background:var(--carte);padding:0 14px;font-size:17px}
+.coche{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;min-height:52px;padding:6px 12px;background:var(--carte);border-radius:var(--r-stock);box-shadow:inset 0 0 0 1px var(--trait);cursor:pointer}
+.coche input{width:24px;height:24px;accent-color:var(--encre-2)}
+.coche b{font-weight:600;white-space:nowrap}
+.rappel{background:var(--carte);border-radius:var(--r-stock);padding:12px 14px;box-shadow:inset 0 0 0 1px var(--trait)}
+.vk-recap{background:var(--carte);border-radius:var(--r-stock);padding:14px 16px;box-shadow:inset 0 0 0 1px var(--trait)}
+.vk-recap .vk-acompte{color:var(--vert)}
+.vk-simule{font-size:14px}
+.vk-confirmation{background:var(--carte);border-radius:var(--r-carte);padding:22px 18px;text-align:center;box-shadow:var(--ombre-carte)}
+.vk-c-titre{font-weight:600}
+.vk-confirmation strong{background:var(--jaune);padding:0 6px;border-radius:6px}
+.vk-agenda{font-weight:600;min-height:52px}
+.duo{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media (min-width:480px){.duo{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="apercu" role="note">
+  <div class="enveloppe">
+    <p data-petit>Aperçu non commandé · paiement simulé</p>
+    <a href="#gerant" id="lien-gerant">Pour le gérant</a>
+  </div>
+</div>
+
+<header class="tete">
+  <div class="enveloppe">
+    <a class="marque" href="#haut" aria-label="Le Monde des petits loups, retour en haut">
+      <img src="images/logo-loup.webp" alt="" width="46" height="46">
+      <span>Le Monde des petits loups<small>Laval</small></span>
+    </a>
+    <nav class="menu" aria-label="Menu" data-ux="menu">
+      <a href="#horaires">Horaires</a>
+      <a href="#prix">Prix</a>
+      <a href="#anniversaire">Anniversaires</a>
+      <a href="#parc">Le parc</a>
+    </nav>
+    <a class="appel" href="tel:+33243569937" aria-label="Appeler le parc au 02 43 56 99 37">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span>02 43 56 99 37</span>
+    </a>
+  </div>
+</header>
+
+<main id="haut">
+<!-- Premier écran : photo du parc (preuve) + bloc clair (titre, aujourd'hui, prix, bouton) -->
+<section class="ouverture" aria-labelledby="titre">
+  <div class="enveloppe">
+    <div class="texte">
+      <h1 id="titre">Jouer, grimper, fêter avec Garou la mascotte</h1>
+      <p class="phrase">1 200 m² de jeux couverts, de 0 à 12 ans, à Laval.</p>
+      <div class="aujourdhui" data-ux="horaires"><div id="bandeau"></div></div>
+      <p class="tarif" data-ux="prix">Anniversaire : <b>92 € pour 7 enfants</b>, 10 € par copain en plus</p>
+      <div class="agir">
+        <button type="button" class="btn btn-principal" data-ux="reserver" data-ouvrir="2">Réserver l'anniversaire
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <p class="sous-bouton">Acompte en ligne, le reste sur place.</p>
+      </div>
+    </div>
+    <figure class="preuve" style="margin-top:0;margin-bottom:0">
+      <div class="feuille"><img src="images/toboggan-vu-d-en-haut.webp" alt="Deux enfants, de dos, en haut du grand toboggan du parc" width="711" height="400" fetchpriority="high" data-ux="photo"></div>
+    </figure>
+  </div>
+  <div class="collines" aria-hidden="true">
+    <svg viewBox="0 0 1440 190" preserveAspectRatio="none"><path d="M0 120 C180 60 330 70 520 110 S880 150 1050 96 1330 60 1440 84 V190 H0Z" fill="#eef2d9"/><path d="M0 160 C220 112 420 120 640 150 S1020 176 1220 140 1380 128 1440 136 V190 H0Z" fill="#dfeac3"/><path d="M0 182 C300 168 560 176 820 184 S1240 178 1440 172 V190 H0Z" fill="#5f9e4f" opacity=".55"/></svg>
+  </div>
+</section>
+
+<!-- Rangée 1 : l'anniversaire (rangée principale, la preuve prend la plus grande part) -->
+<section class="rangee bande tete-de-ligne" id="anniversaire" aria-labelledby="t-fete">
+  <div class="enveloppe">
+    <div class="cote">
+      <h2 id="t-fete">L'anniversaire avec Garou</h2>
+      <p class="ligne">Un boxe réservé, le gâteau, puis la mini-boum dans la salle disco.</p>
+      <ul class="inclus">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>6 copains, l'enfant fêté et 1 adulte</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Cartons d'invitation et cadeau surprise</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Gâteau, 2 pichets de sirop, jeux à volonté</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>7 jetons de karting</span></li>
+      </ul>
+    </div>
+    <div class="preuve-r">
+      <div class="calcul grain">
+        <h3>Formule les P'tits Loups</h3>
+        <div class="compteur">
+          <label for="nb-calcul">Copains invités<small>6 compris dans la formule</small></label>
+          <div class="pas">
+            <button type="button" data-pas="-1" aria-label="Un copain de moins">−</button>
+            <output id="nb-calcul" aria-live="polite">6</output>
+            <button type="button" data-pas="1" aria-label="Un copain de plus">+</button>
+          </div>
+        </div>
+        <p class="resultat" id="res-calcul" aria-live="polite"></p>
+        <button type="button" class="btn" data-ouvrir="2" id="go-calcul">Choisir la date
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        <div class="a-fournir">Photo à fournir : Garou et la salle disco</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rangée 2 : le parc -->
+<section class="rangee" id="parc" aria-labelledby="t-parc">
+  <div class="enveloppe">
+    <div class="cote">
+      <h2 id="t-parc">Grimper, glisser, rebondir</h2>
+      <p class="ligne">Un parc climatisé sur le thème de la forêt, pour les 0 à 12 ans.</p>
+      <ul class="liste-parc">
+        <li><b>Structure tubulaire</b>, toboggans et coin des tout-petits</li>
+        <li><b>Jeux gonflables</b>, trampoline et mini-kartings électriques</li>
+        <li><b>Espace détente</b> pour les parents : revues, jeux de société</li>
+        <li><b>Cafétéria</b> : déjeuner, crêpes et gaufres au goûter</li>
+      </ul>
+    </div>
+    <div class="preuve-r">
+      <div class="mosaique">
+        <figure class="grande"><div class="feuille"><img src="images/structure-filets.webp" alt="La grande structure tubulaire et ses filets verts" width="400" height="400" loading="lazy"></div><figcaption>La grande structure</figcaption></figure>
+        <figure><div class="feuille"><img src="images/jeux-gonflables.webp" alt="Le château gonflable girafe, devant la fresque de la forêt" width="400" height="400" loading="lazy"></div><figcaption>Les gonflables</figcaption></figure>
+        <figure><div class="feuille"><img src="images/piscine-a-balles.webp" alt="Le coin des petits, avec piscine à balles et toboggan" width="400" height="400" loading="lazy"></div><figcaption>Le coin des petits</figcaption></figure>
+        <figure><div class="feuille"><img src="images/toboggan-tube.webp" alt="Un toboggan tube vert dans la structure" width="400" height="400" loading="lazy"></div><figcaption>Les toboggans</figcaption></figure>
+        <figure><div class="a-fournir">Photo à fournir : les mini-kartings</div><figcaption>Les mini-kartings</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rangée 3 : les prix, en un seul tableau -->
+<section class="rangee bande" id="prix" aria-labelledby="t-prix">
+  <div class="enveloppe">
+    <div class="cote">
+      <h2 id="t-prix">Ce que coûte une sortie</h2>
+      <p class="ligne">Les accompagnateurs entrent gratuitement. Chaussettes obligatoires pour les enfants.</p>
+    </div>
+    <div class="preuve-r">
+      <div class="carte-prix grain">
+        <table class="prix">
+          <caption class="sr">Tous les prix du parc</caption>
+          <tbody>
+            <tr class="groupe"><th scope="colgroup" colspan="2">Entrée enfant <span class="vk-mention mention">à confirmer</span></th></tr>
+            <tr><th scope="row">0 à 1 an</th><td>Gratuit</td></tr>
+            <tr><th scope="row">1 à 3 ans</th><td><span class="vide" aria-hidden="true"></span><span class="sr">tarif à confirmer</span></td></tr>
+            <tr><th scope="row">4 à 12 ans</th><td><span class="vide" aria-hidden="true"></span><span class="sr">tarif à confirmer</span></td></tr>
+            <tr><th scope="row">Jeudi et vendredi<small>tarif réduit, hors vacances</small></th><td><span class="vide" aria-hidden="true"></span><span class="sr">tarif à confirmer</span></td></tr>
+            <tr><th scope="row">Dernière heure</th><td><span class="vide" aria-hidden="true"></span><span class="sr">tarif à confirmer</span></td></tr>
+            <tr><th scope="row">Carnet de 10 entrées</th><td><span class="vide" aria-hidden="true"></span><span class="sr">tarif à confirmer</span></td></tr>
+            <tr><th scope="row">Accompagnateurs</th><td>Gratuit</td></tr>
+            <tr class="groupe"><th scope="colgroup" colspan="2">Anniversaire</th></tr>
+            <tr><th scope="row">Formule les P'tits Loups<small>7 enfants et 1 adulte</small></th><td>92 €</td></tr>
+            <tr><th scope="row">Copain en plus</th><td>10 €</td></tr>
+          </tbody>
+        </table>
+        <p class="legende">Les tarifs d'entrée seront affichés ici dès que le parc les aura confirmés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rangée 4 : horaires de la semaine, adresse, Réserver (la page finit ici) -->
+<section class="rangee" id="horaires" aria-labelledby="t-hor">
+  <div class="enveloppe">
+    <div class="cote">
+      <h2 id="t-hor">Horaires et accès</h2>
+      <p class="ligne" id="periode"></p>
+      <dl class="regles">
+        <div><dt>Hors vacances scolaires</dt><dd>Mercredi, samedi, dimanche : 10 h à 19 h. Jeudi, vendredi : 16 h à 19 h.</dd></div>
+        <div><dt>Vacances scolaires (zone B)</dt><dd>Tous les jours de 10 h à 19 h, le lundi de 14 h à 19 h.</dd></div>
+        <div><dt>Jours fériés</dt><dd>10 h à 19 h, sauf le 24 décembre et le 1er janvier. 25 décembre : à confirmer.</dd></div>
+      </dl>
+      <p class="adresse">1 rue de Bruxelles, zone des Bozées, 53000 Laval</p>
+      <div class="contacts">
+        <a href="tel:+33243569937">02 43 56 99 37</a>
+        <a href="mailto:mondedespetitsloups@sfr.fr">mondedespetitsloups@sfr.fr</a>
+        <a href="https://www.openstreetmap.org/search?query=1%20rue%20de%20Bruxelles%2053000%20Laval" rel="noopener">Itinéraire</a>
+      </div>
+    </div>
+    <div class="preuve-r">
+      <div class="carte-prix grain">
+        <table class="semaine" aria-describedby="note-sem">
+          <caption class="sr">Les 7 prochains jours</caption>
+          <tbody id="sept-jours"></tbody>
+        </table>
+        <p class="legende" id="note-sem">Horaires repris du site du parc, à confirmer avec lui.</p>
+      </div>
+      <div class="cloture">
+        <button type="button" class="btn btn-principal" data-ux="reserver" data-ouvrir="2">Réserver l'anniversaire
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="enveloppe">
+    <p><b>Le Monde des petits loups</b>, parc de jeux couvert à Laval</p>
+    <p data-petit>Aperçu non commandé. Logo et photos appartiennent au parc ; retrait sur simple demande. Aucune réservation ni aucun paiement réel ne passe par cette page. Les valeurs marquées exemple sont à caler avec le parc.</p>
+    <details class="gerant" id="gerant">
+      <summary>Pour le gérant : ce qui change</summary>
+      <div class="corps">
+        <ol>
+          <li><b>Une seule grille de prix</b>, la même au premier écran, dans le tableau et dans la réservation. Les tarifs d'entrée sont à nous transmettre : ils restent « à confirmer » ici.</li>
+          <li><b>L'anniversaire se réserve en ligne</b>, du premier écran au paiement : jour, horaire, copains, options, puis un acompte qui bloque le créneau (30 % en exemple). Vous recevez la demande complète.</li>
+          <li><b>Des informations toujours à jour</b> : « ouvert » ou « fermé », les horaires de la semaine et les prochaines vacances se calculent seuls chaque jour, à partir de vos horaires, des vacances de la zone B et des jours fériés.</li>
+        </ol>
+        <h3>Ouverture à confirmer avec vous</h3>
+        <p>Le 9 novembre, la fiche Google du parc indiquait « Définitivement fermé ». Cette page n'affirme rien d'autre que les horaires de votre site, marqués « à confirmer ». Si le parc est ouvert, la fiche Google est à corriger avant toute mise en ligne.</p>
+        <h3>À nous transmettre</h3>
+        <ul>
+          <li>les tarifs d'entrée retenus</li>
+          <li>la durée d'une fête et le nombre d'enfants par boxe</li>
+          <li>des photos de Garou, de la salle disco et des mini-kartings</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</footer>
+
+<!-- Parcours de réservation -->
+<div class="voile" id="voile" hidden></div>
+<div class="panneau" id="panneau" role="dialog" aria-modal="true" aria-labelledby="p-titre" hidden>
+  <div class="p-tete">
+    <div><h2 id="p-titre">Réserver</h2><p id="p-sous"></p></div>
+    <button type="button" class="fermer" id="fermer" aria-label="Fermer la réservation">×</button>
+  </div>
+  <div class="progres" id="progres" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <p class="simule">Aperçu : paiement simulé, ouverture du parc <span class="vk-mention mention">à confirmer</span></p>
+  <div class="p-corps" id="p-corps" tabindex="-1"></div>
+  <div class="p-pied" id="p-pied"></div>
+</div>
+
+<script src="vong-kit.js"></script>
+<script>
+(function () {
+"use strict";
+var K = VongKit;
+var $ = function (id) { return document.getElementById(id); };
+/* Date du jour (?t=2027-02-22T11:00 pour tester une autre date) */
+var q = new URLSearchParams(location.search);
+var maintenant = q.get("t") ? new Date(q.get("t")) : new Date();
+var aujourdhui = K.jourSeul(maintenant);
+
+/* ---- Horaires : site du parc, page Accueil (bloc HORAIRES), lue le 10/11/2026 ----
+   Hors vacances : mercredi et jours fériés 10 h-19 h (sauf 24 décembre et 1er janvier), jeudi-vendredi 16 h-19 h,
+   samedi-dimanche 10 h-19 h. Vacances : 7 j/7 10 h-19 h, lundi 14 h-19 h. Lundi et mardi hors vacances : fermé.
+   24 décembre et 1er janvier : fermés (le site dit « sauf le 24 décembre et 1er janvier ») ; 25 décembre : à confirmer. Zone B : académie de Nantes.
+   aConfirmer : ouverture à confirmer par le parc (fiche Google « Définitivement fermé » le 09/11/2026). */
+var H = new K.Horaires({
+  zone: "B",
+  hors: [[[10, 19]], null, null, [[10, 19]], [[16, 19]], [[16, 19]], [[10, 19]]],
+  vac:  [[[10, 19]], [[14, 19]], [[10, 19]], [[10, 19]], [[10, 19]], [[10, 19]], [[10, 19]]],
+  ferie: [[10, 19]],
+  fermetures: { "2027-01-01": "fermé le 1er janvier", "2026-12-24": "fermé le 24 décembre", "2026-12-25": "25 décembre : à confirmer" },
+  aConfirmer: true
+});
+
+/* ---- Anniversaire : site du parc, page Anniversaire (bloc TARIFS), lue le 10/11/2026 ---- */
+var FORMULE = { id: "ptits-loups", nom: "Formule les P'tits Loups", prix: 92, inclus: 6, sup: 10 };
+var DUREE = 2;          /* heures, exemple : durée non indiquée sur le site */
+var MAX = 20;           /* copains, exemple : capacité du boxe à confirmer */
+var TAUX = 0.30;        /* acompte, exemple */
+/* Options : prix de la page Cafétéria du site (repris de la v3, contrôlée) ; pour une fête : à confirmer */
+var OPTIONS = [
+  { id: "crepe", nom: "Une crêpe au sucre par enfant", prix: 1.60, parEnfant: true },
+  { id: "sirop", nom: "Un pichet de sirop en plus (1 l)", prix: 2.70, parEnfant: false },
+  { id: "diabolo", nom: "Un pichet de diabolo (1 l)", prix: 3.70, parEnfant: false }
+];
+
+function prixFete(n) { return FORMULE.prix + Math.max(0, n - FORMULE.inclus) * FORMULE.sup; }
+
+/* ---- Premier écran : bandeau du kit ---- */
+K.bandeau($("bandeau"), { horaires: H, maintenant: maintenant, lienHoraires: "#horaires" });
+
+/* ---- Les 7 prochains jours + période en cours ---- */
+(function () {
+  var h = [];
+  for (var i = 0; i < 7; i++) {
+    var d = K.plus(aujourdhui, i), j = H.jour(d), txt = H.texteJour(d);
+    var nom = i === 0 ? "Aujourd'hui" : i === 1 ? "Demain" : K.JOURS_L[d.getDay()].replace(/^./, function (c) { return c.toUpperCase(); }) + " " + d.getDate();
+    var conf = !j.ouvert && /à confirmer/.test(j.motif), motif = !j.ouvert && !conf && j.motif && j.motif !== "jour de fermeture" && !/^fermé/.test(j.motif) ? " (" + j.motif.replace(/^.*: /, "") + ")" : "";
+    h.push('<tr' + (i === 0 ? ' class="auj"' : "") + '><th scope="row">' + nom + '</th><td' + (j.ouvert ? "" : ' class="ferme"') + ">" + (j.ouvert ? txt.replace(/ – /g, " à ") : conf ? "À confirmer" : "Fermé" + motif) + "</td></tr>");
+  }
+  $("sept-jours").innerHTML = h.join("");
+  var p = H.vacance(aujourdhui), prochaine = null;
+  if (!p) for (var k = 0; k < K.VACANCES.B.length; k++) if (K.VACANCES.B[k][0] > K.cle(aujourdhui)) { prochaine = K.VACANCES.B[k]; break; }
+  $("periode").textContent = p ? "En ce moment, " + p + " : horaires des vacances." :
+    prochaine ? prochaine[2].replace(/^./, function (c) { return c.toUpperCase(); }) + " à partir du " + K.dateLongue(K.deCle(prochaine[0])) + " : horaires des vacances." : "";
+})();
+
+/* ---- Calcul de la fête sur la page ---- */
+var nbPage = FORMULE.inclus;
+function majCalcul() {
+  $("nb-calcul").textContent = nbPage;
+  var t = prixFete(nbPage);
+  $("res-calcul").innerHTML = "Pour " + nbPage + " copain" + (nbPage > 1 ? "s" : "") + " et l'enfant fêté : <mark><strong>" + K.euros(t) + "</strong></mark>" +
+    "<small>Acompte en ligne : " + K.euros(Math.round(t * TAUX * 100) / 100) + ' <span class="vk-mention mention">exemple 30 %</span></small>';
+  document.querySelector('[data-pas="-1"]').disabled = nbPage <= 1;
+  document.querySelector('[data-pas="1"]').disabled = nbPage >= MAX;
+}
+document.querySelectorAll("[data-pas]").forEach(function (b) {
+  b.addEventListener("click", function () { nbPage = Math.min(MAX, Math.max(1, nbPage + +b.dataset.pas)); majCalcul(); });
+});
+majCalcul();
+
+/* ---- Lien « Pour le gérant » : ouvre l'encart ---- */
+$("lien-gerant").addEventListener("click", function () { $("gerant").open = true; });
+
+/* =================== Parcours de réservation =================== */
+var E = { activite: "fete", date: null, creneau: null, copains: 6, prenom: "", age: "", options: {}, nom: "", tel: "", etape: 1 };
+var dernierDeclencheur = null;
+var corps = $("p-corps"), pied = $("p-pied");
+
+function ouvrir(etape, depuis) {
+  dernierDeclencheur = depuis || null;
+  if (depuis && depuis.id === "go-calcul") E.copains = nbPage;
+  $("voile").hidden = false; $("panneau").hidden = false;
+  document.body.style.overflow = "hidden";
+  aller(etape);
+}
+function fermer() {
+  $("voile").hidden = true; $("panneau").hidden = true;
+  document.body.style.overflow = "";
+  if (dernierDeclencheur) dernierDeclencheur.focus();
+}
+document.querySelectorAll("[data-ouvrir]").forEach(function (b) { b.addEventListener("click", function () { ouvrir(+b.dataset.ouvrir, b); }); });
+$("fermer").addEventListener("click", fermer);
+$("voile").addEventListener("click", fermer);
+document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("panneau").hidden) fermer(); });
+
+function piedBoutons(retour, suivant, libelle, action) {
+  pied.innerHTML = "";
+  if (retour) {
+    var r = document.createElement("button"); r.type = "button"; r.className = "btn"; r.textContent = "Retour";
+    r.onclick = function () { aller(retour); }; pied.appendChild(r);
+  }
+  var s = document.createElement("button"); s.type = "button"; s.className = "btn btn-principal"; s.id = "suivant"; s.textContent = libelle;
+  s.onclick = function () { action(s); }; pied.appendChild(s);
+  return s;
+}
+function progres(n) { document.querySelectorAll("#progres i").forEach(function (i, k) { i.className = k < n ? "fait" : ""; }); }
+function sousTitre() {
+  var t = "Anniversaire, " + FORMULE.nom;
+  if (E.date) t = K.dateLongue(E.date).replace(/^./, function (c) { return c.toUpperCase(); }) + (E.creneau ? " à " + K.heure(E.creneau.debut) : "");
+  $("p-sous").textContent = t;
+}
+
+function aller(n) {
+  E.etape = n; progres(Math.min(n, 4)); sousTitre();
+  corps.innerHTML = ""; corps.scrollTop = 0;
+  [null, etape1, etape2, etape3, etape4, etape5][n]();
+  corps.focus({ preventScroll: true });
+}
+
+/* Étape 1 : activité, puis formule */
+function etape1() {
+  $("p-titre").textContent = "Votre sortie";
+  corps.innerHTML = '<div class="choix" role="group" aria-label="Activité">' +
+    '<button type="button" class="option" data-act="fete" aria-pressed="' + (E.activite === "fete") + '"><b>Un anniversaire avec Garou</b><span>Boxe réservé, gâteau et mini-boum</span></button>' +
+    '<button type="button" class="option" data-act="jouer" aria-pressed="' + (E.activite === "jouer") + '"><b>Venir jouer en famille</b><span>Sans réservation, aux horaires d\'ouverture</span></button></div>' +
+    '<div id="suite1"></div>';
+  corps.querySelectorAll("[data-act]").forEach(function (b) { b.onclick = function () { E.activite = b.dataset.act; etape1(); }; });
+  var s = $("suite1");
+  if (E.activite === "fete") {
+    s.innerHTML = "<h3>La formule</h3>" + K.carteFormule({ id: FORMULE.id, nom: FORMULE.nom, prix: 92, unite: "7 enfants et 1 adulte", note: "Boxe réservé, cartons d'invitation, gâteau, 2 pichets de sirop, jeux à volonté, 7 jetons de karting et un cadeau surprise. Copain en plus : 10 €." }, true);
+    piedBoutons(null, 2, "Choisir la date", function () { aller(2); });
+  } else {
+    s.innerHTML = '<p class="rappel">Pas besoin de réserver : venez aux heures d\'ouverture (à confirmer avec le parc), l\'entrée se règle à l\'accueil. Pensez aux chaussettes pour les enfants.</p>';
+    piedBoutons(null, 0, "Voir les horaires", function () { fermer(); location.hash = "#horaires"; });
+  }
+}
+
+/* Étape 2 : date (calendrier du kit) puis créneau (créneaux du kit) */
+function etape2() {
+  $("p-titre").textContent = "Le jour et l'heure";
+  corps.innerHTML = '<div id="cal"></div><div id="bloc-cr" hidden><h3 id="t-cr">L\'heure d\'arrivée</h3><p class="aide">Durée (2 h) et disponibilités <span class="vk-mention mention">exemple</span></p><div id="cr"></div><p class="message" id="msg-cr" role="alert"></p></div>';
+  K.calendrier($("cal"), { horaires: H, debut: maintenant, choisi: E.date, mois: 6,
+    surChoix: function (d) { E.date = d; E.creneau = null; sousTitre(); rendreCreneaux(true); K.erreur($("suivant"), ""); } });
+  if (E.date) rendreCreneaux(false);
+  piedBoutons(1, 3, "Continuer", function (b) {
+    if (!E.date) { K.erreur(b, "Choisissez un jour dans le calendrier."); return; }
+    if (!E.creneau) { K.erreur(b, "Choisissez une heure d'arrivée."); return; }
+    K.erreur(b, ""); aller(3);
+  });
+}
+function rendreCreneaux(defiler) {
+  $("bloc-cr").hidden = false; $("msg-cr").textContent = "";
+  var liste = K.creneaux({ horaires: H, date: E.date, duree: DUREE, pas: 1, dernierDebut: 17, maintenant: maintenant,
+    places: function (d, t) { var n = K.hache(K.cle(d) + t) % 4; return n === 1 ? 2 : n; } });
+  K.rendreCreneaux($("cr"), liste, { unite: " boxes libres", choisi: E.creneau ? E.creneau.debut : undefined,
+    vide: "Plus d'horaire libre ce jour-là. Choisissez un autre jour.",
+    surChoix: function (c) { E.creneau = c; sousTitre(); $("msg-cr").textContent = ""; K.erreur($("suivant"), ""); },
+    surRefus: function (c) { $("msg-cr").textContent = c.passe ? K.heure(c.debut) + " est déjà passé : choisissez une autre heure." : K.heure(c.debut) + " est complet : choisissez une autre heure ou un autre jour."; $("msg-cr").scrollIntoView({ block: "nearest" }); } });
+  if (defiler) setTimeout(function () { $("bloc-cr").scrollIntoView({ block: "start" }); }, 30);
+}
+
+/* Étape 3 : les enfants et les options */
+function etape3() {
+  $("p-titre").textContent = "Les enfants";
+  var h = '<div class="ligne-p"><span><b>Copains invités</b><small>6 compris, 10 € par copain en plus</small></span>' +
+    '<div class="pas"><button type="button" id="moins" aria-label="Un copain de moins">−</button><output id="nb" aria-live="polite">' + E.copains + '</output><button type="button" id="plus" aria-label="Un copain de plus">+</button></div></div>' +
+    '<div class="duo"><div class="champ"><label for="prenom">Prénom de l\'enfant fêté</label><input id="prenom" autocomplete="off" maxlength="20" value="' + K.esc(E.prenom) + '"></div>' +
+    '<div class="champ"><label for="age">Âge fêté</label><select id="age"><option value="">Choisir</option>' +
+    [1,2,3,4,5,6,7,8,9,10,11,12].map(function (a) { return '<option' + (String(a) === E.age ? " selected" : "") + ">" + a + "</option>"; }).join("") + "</select></div></div>" +
+    '<h3>Des options ? <span class="vk-mention mention">prix à confirmer</span></h3><div class="choix">' +
+    OPTIONS.map(function (o) {
+      return '<label class="coche"><input type="checkbox" data-opt="' + o.id + '"' + (E.options[o.id] ? " checked" : "") + '><span>' + o.nom + '</span><b>' + K.euros(o.prix) + (o.parEnfant ? " / enfant" : "") + "</b></label>";
+    }).join("") + "</div>";
+  corps.innerHTML = h;
+  function maj() { $("nb").textContent = E.copains; $("moins").disabled = E.copains <= 1; $("plus").disabled = E.copains >= MAX; }
+  $("moins").onclick = function () { E.copains = Math.max(1, E.copains - 1); maj(); };
+  $("plus").onclick = function () { E.copains = Math.min(MAX, E.copains + 1); maj(); };
+  $("prenom").oninput = function () { E.prenom = this.value.trim(); };
+  $("age").onchange = function () { E.age = this.value; };
+  corps.querySelectorAll("[data-opt]").forEach(function (c) { c.onchange = function () { E.options[c.dataset.opt] = c.checked; }; });
+  maj();
+  piedBoutons(2, 4, "Voir le total", function () { aller(4); });
+}
+
+/* Étape 4 : récapitulatif + acompte (kit), coordonnées */
+function lignes() {
+  var enfants = E.copains + 1, l = [{ libelle: FORMULE.nom, quantite: 1, prixUnitaire: FORMULE.prix }];
+  if (E.copains > FORMULE.inclus) l.push({ libelle: "Copains en plus", quantite: E.copains - FORMULE.inclus, prixUnitaire: FORMULE.sup });
+  OPTIONS.forEach(function (o) { if (E.options[o.id]) l.push({ libelle: o.nom + " (prix à confirmer)", quantite: o.parEnfant ? enfants : 1, prixUnitaire: o.prix }); });
+  return l;
+}
+function etape4() {
+  $("p-titre").textContent = "Récapitulatif";
+  var fin = E.creneau.debut + DUREE;
+  corps.innerHTML = '<p class="rappel"><b>' + K.dateLongue(E.date).replace(/^./, function (c) { return c.toUpperCase(); }) + "</b>, de " + K.heure(E.creneau.debut) + " à " + K.heure(fin) +
+    "<br>Anniversaire" + (E.prenom ? " de " + K.esc(E.prenom) : "") + (E.age ? ", " + E.age + " ans" : "") + " : " + E.copains + " copain" + (E.copains > 1 ? "s" : "") + " et l'enfant fêté</p>" +
+    '<div id="recap"></div>' +
+    '<div class="duo"><div class="champ"><label for="nom">Votre nom</label><input id="nom" autocomplete="name" value="' + K.esc(E.nom) + '"></div>' +
+    '<div class="champ"><label for="tel">Votre téléphone</label><input id="tel" type="tel" inputmode="tel" autocomplete="tel" value="' + K.esc(E.tel) + '"></div></div>';
+  E.recap = K.recapitulatif($("recap"), { lignes: lignes(), tauxAcompte: TAUX, acompteExemple: true });
+  $("nom").oninput = function () { E.nom = this.value.trim(); };
+  $("tel").oninput = function () { E.tel = this.value.trim(); };
+  piedBoutons(3, 5, "Payer " + K.euros(E.recap.acompte), function (b) {
+    if (!E.nom) { K.erreur(b, "Indiquez votre nom pour la réservation."); $("nom").focus(); return; }
+    if (E.tel.replace(/\D/g, "").length < 10) { K.erreur(b, "Indiquez un numéro de téléphone à 10 chiffres."); $("tel").focus(); return; }
+    K.erreur(b, ""); aller(5);
+  });
+}
+
+/* Étape 5 : confirmation + agenda (kit) */
+function etape5() {
+  $("p-titre").textContent = "C'est réservé"; progres(4);
+  var num = K.numero("LOUP");
+  corps.innerHTML = '<div id="conf"></div>';
+  K.confirmation($("conf"), { numero: num, date: E.date, debut: E.creneau.debut, duree: DUREE,
+    titre: "Anniversaire au Monde des petits loups", lieu: "1 rue de Bruxelles, zone des Bozées, 53000 Laval",
+    resume: "Ouverture du parc à confirmer avant la fête. Acompte de " + K.euros(E.recap.acompte) + " (exemple), reste " + K.euros(E.recap.reste) + " à régler sur place. Chaussettes obligatoires pour les enfants." });
+  piedBoutons(null, 0, "Fermer", fermer);
+}
+})();
+</script>
+</body>
+</html>
