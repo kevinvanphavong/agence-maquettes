@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>MaxxParc Tours · Anniversaire laser (aperçu)</title>
+<meta name="description" content="Aperçu non commandé d'une page d'accueil pour MaxxParc Tours : réserver un anniversaire ou une partie en ligne, acompte compris.">
+<link rel="preload" as="image" href="images/accueil-laserkids-telephone.webp" media="(max-width: 759px)">
+<link rel="preload" as="image" href="images/accueil-laserkids-large.webp" media="(min-width: 760px)">
+<link rel="stylesheet" href="vong-kit.css">
+<style>
+/* Matière : style Hallmark « Arcade » (Bungee, Chivo, Silkscreen ; ombres décalées nettes, trame d'écran),
+   recoloré aux couleurs de maxxparc.com (curseur « Proche ») : fond nuit #181c27 du site,
+   rouge des cadres LaserMaxx en couleur qui mène, bleu clair du logo en couleur qui répond.
+   Polices hébergées dans polices/ (licences OFL à côté). */
+@font-face{font-family:"Bungee";src:url(polices/bungee-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Chivo";src:url(polices/chivo-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Chivo";src:url(polices/chivo-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Chivo";src:url(polices/chivo-latin-900-normal.woff2) format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:"Silkscreen";src:url(polices/silkscreen-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+
+:root{
+  --paper:#181c27; --paper-2:#1f2533; --paper-3:#2b3447; --shade:#0d1017;
+  --ink:#f4f7fb; --ink-2:#d6dde8; --muted:#b4bfd0; --rule:#3a4560;
+  --accent:#cf1f29; --accent-ink:#ffffff; --accent-2:#6fd0f5; --accent-2-ink:#0d1017;
+  --crt-r:#ff3b44; --crt-c:#6fd0f5;
+  --display:"Bungee",Impact,sans-serif; --body:"Chivo",ui-sans-serif,sans-serif; --figure:"Silkscreen",monospace;
+  --radius:4px; --bar:2px;
+  /* jetons du kit */
+  --vk-fond:var(--paper-2); --vk-texte:var(--ink); --vk-doux:var(--muted); --vk-trait:var(--rule);
+  --vk-accent:var(--accent-2); --vk-sur-accent:var(--accent-2-ink); --vk-ok:#5be37a; --vk-ferme:#7e8aa3;
+  --vk-vac:#ffe08a; --vk-fer:#ffc2cb; --vk-rayon:4px;
+}
+*{box-sizing:border-box}
+html{overflow-x:clip;-webkit-text-size-adjust:100%;scroll-padding-top:72px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;overflow-x:clip;background:var(--paper);color:var(--ink);font:400 1rem/1.6 var(--body)}
+img{display:block;max-width:100%}
+a{color:var(--ink);text-decoration-color:var(--accent-2);text-decoration-thickness:2px;text-underline-offset:4px}
+:focus-visible{outline:3px solid var(--accent-2);outline-offset:2px}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,.display{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:1.02;letter-spacing:0;text-shadow:-1.5px 0 0 var(--crt-r),1.5px 0 0 var(--crt-c)}
+h2,h3{font-family:var(--body);font-weight:900;letter-spacing:-.02em;line-height:1.05;margin:0}
+h2{font-size:clamp(1.9rem,6.4vw,3rem)}
+h3{font-size:1.25rem}
+p{margin:0}
+
+/* Boutons : surface de jeu Arcade (rouge plein, bord clair, ombre décalée bleue) */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border:var(--bar) solid var(--ink);border-radius:var(--radius);background:var(--accent);color:var(--accent-ink);font:700 1.125rem/1.1 var(--body);text-decoration:none;cursor:pointer;box-shadow:5px 5px 0 var(--accent-2);transition:translate .12s ease-out,box-shadow .12s ease-out}
+.btn:hover{translate:-1px -1px;box-shadow:6px 6px 0 var(--accent-2)}
+.btn:active{translate:3px 3px;box-shadow:2px 2px 0 var(--accent-2)}
+.btn.sec{background:transparent;color:var(--ink);box-shadow:none;border-color:var(--rule)}
+.btn.sec:hover{border-color:var(--accent-2);translate:none}
+.btn.large{width:100%}
+@media (prefers-reduced-motion:reduce){.btn,.btn:hover,.btn:active{transition:none;translate:none}}
+
+/* Bandeau d'aperçu, une ligne */
+.apercu{background:var(--shade);border-bottom:1px solid var(--rule)}
+.apercu .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:34px}
+.apercu p{font-size:14px;color:var(--ink-2);white-space:nowrap}
+.apercu a{font-size:14px;color:var(--ink-2);display:none;min-height:44px;align-items:center}
+@media (min-width:760px){.apercu a{display:inline-flex}}
+
+/* En-tête */
+.tete{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:var(--bar) solid var(--rule)}
+.tete .wrap{display:flex;align-items:center;gap:8px;min-height:60px}
+.logo{display:flex;align-items:center;min-height:44px;margin-right:auto}
+.logo img{height:34px;width:auto}
+.icone{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:var(--bar) solid var(--rule);border-radius:var(--radius);background:transparent;color:var(--ink);text-decoration:none;cursor:pointer;font:700 1rem/1 var(--body);gap:8px;padding:0 10px}
+.icone:hover{border-color:var(--accent-2)}
+.icone .num{display:none}
+.menu{display:none}
+.menu ul{list-style:none;margin:0;padding:0}
+.menu a{display:flex;align-items:center;min-height:48px;padding:0 12px;text-decoration:none;font:700 1.0625rem/1 var(--body);border-radius:var(--radius)}
+.menu a:hover,.menu a[aria-current]{background:var(--accent);color:var(--accent-ink)}
+.tete.ouvert .menu{display:block;position:absolute;left:0;right:0;top:100%;background:var(--paper-2);border-bottom:var(--bar) solid var(--rule);padding:8px 16px 14px}
+.menu .gerant-lien{display:flex;margin-top:6px;border-top:1px solid var(--rule);padding-top:6px;font-weight:400;color:var(--ink-2)}
+@media (min-width:980px){
+  .bouton-menu{display:none}
+  .menu,.tete.ouvert .menu{display:block;position:static;background:none;border:0;padding:0}
+  .menu ul{display:flex;gap:4px}
+  .menu .gerant-lien{display:none}
+  .icone .num{display:inline}
+}
+
+/* ---------- 1. Premier écran : la photo d'abord (structure S1 Photographic) ---------- */
+/* Premier écran (structure S1 Photographic) : la photo remplit l'écran, le titre est posé dessus
+   (voile sombre en bas pour la lisibilité), la plaque compacte est posée sur le bas de la photo. */
+.hero{position:relative;isolation:isolate;min-height:calc(100svh - 96px);display:flex;flex-direction:column;justify-content:flex-end;padding:12px}
+.hero picture{position:absolute;inset:0;z-index:-2}
+.hero .photo{width:100%;height:100%;object-fit:cover;object-position:50% 0%}
+/* voile de lisibilité attaché au bloc de texte : il suit sa hauteur à toutes les tailles d'écran */
+.hero-texte{position:relative}
+.hero-texte::before{content:"";position:absolute;z-index:-1;pointer-events:none;inset:-96px -12px -12px;background:linear-gradient(to top,rgba(13,16,23,.96) 0,rgba(13,16,23,.92) calc(100% - 84px),rgba(13,16,23,0) 100%)}
+.legende-photo{position:absolute;top:12px;right:12px;margin:0;padding:6px 10px;background:var(--shade);color:var(--ink);font:700 1rem/1.3 var(--body);border-radius:var(--radius)}
+.hero-texte{display:grid;gap:10px;width:100%;max-width:560px}
+.hero-texte h1{font-size:clamp(1.75rem,8vw,3.4rem);color:var(--ink)}
+.hero-texte .phrase{color:var(--ink);font-size:1.0625rem}
+.plaque{background:var(--paper-2);border:var(--bar) solid var(--rule);border-radius:var(--radius);padding:12px 14px 6px;display:grid;gap:8px}
+.plaque .vk-bandeau{gap:2px 10px}
+.plaque .vk-bandeau strong{font-weight:900}
+.plaque .vk-lien{color:var(--ink);text-decoration-color:var(--accent-2)}
+.fidele{display:inline-flex;align-items:center;min-height:44px;gap:10px;font-weight:700;text-decoration:none;color:var(--ink)}
+.fidele span{text-decoration:underline;text-decoration-color:var(--accent-2);text-decoration-thickness:2px;text-underline-offset:4px}
+.fidele svg{flex:none;color:var(--accent-2)}
+@media (max-width:359px){.hero-texte .phrase{font-size:1rem}.plaque{padding:10px 12px 4px;gap:6px}.plaque .vk-detail{display:none}}
+@media (min-width:760px){
+  .hero{min-height:min(calc(100vh - 96px),760px);padding:28px;align-items:flex-end}
+  .hero .photo{object-position:50% 40%}
+  .hero-texte::before{display:none}
+  .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(to left,rgba(13,16,23,.94) 0,rgba(13,16,23,.9) 42%,rgba(13,16,23,0) 58%)}
+  .legende-photo{top:24px;right:auto;left:24px}
+  .plaque{padding:16px 18px 8px}
+}
+
+/* Sections de matière */
+.bloc{padding:40px 0}
+@media (min-width:760px){.bloc{padding:64px 0}}
+.bloc.bande-2{background:var(--paper-2);border-top:var(--bar) solid var(--rule);border-bottom:var(--bar) solid var(--rule)}
+.tete-sec{display:grid;gap:8px;margin-bottom:20px;max-width:720px}
+.tete-sec p{color:var(--ink-2);font-size:1.0625rem}
+
+/* ---------- 2. Anniversaires ---------- */
+.compte{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:10px 14px;border:var(--bar) solid var(--accent-2);border-radius:var(--radius);background:var(--paper);margin-bottom:16px}
+.compte b{display:block;font-weight:900;font-size:1.125rem}
+.compte span{color:var(--muted)}
+.pm{display:flex;align-items:center;gap:6px}
+.pm button{width:48px;height:48px;border:var(--bar) solid var(--ink);border-radius:var(--radius);background:var(--paper-3);color:var(--ink);font:700 1.5rem/1 var(--body);cursor:pointer;box-shadow:3px 3px 0 var(--accent-2)}
+.pm button:active{translate:2px 2px;box-shadow:1px 1px 0 var(--accent-2)}
+.pm output{min-width:64px;text-align:center;font:700 2.5rem/1 var(--figure);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.formules{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.formules .vk-formule{background:var(--paper);border:var(--bar) solid var(--rule);padding:12px 14px;gap:2px;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:baseline}
+.formules .vk-formule:hover{border-color:var(--accent-2)}
+.formules .vk-f-nom{font-weight:900;font-size:1.1875rem;grid-column:1;min-width:0}
+.formules .vk-f-prix{grid-column:2;grid-row:1;white-space:nowrap}
+.formules .vk-f-details,.formules .vk-f-note{grid-column:1/-1}
+.formules .vk-f-details{color:var(--ink-2)}
+.formules .vk-f-note{color:var(--ink);font-weight:700}
+.formules .vk-f-note .tot{color:var(--accent-2)}
+.pack{margin-top:18px;color:var(--ink-2)}
+.pack strong{color:var(--ink)}
+@media (min-width:760px){.formules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (min-width:1100px){.formules{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ---------- 3. Réserver ---------- */
+.resa-grille{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.carte-resa{background:var(--paper-2);border:var(--bar) solid var(--rule);border-radius:var(--radius);padding:18px 16px;min-width:0}
+.progres{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.progres .etape{font-weight:700;color:var(--ink-2)}
+.progres .barre-p{flex:1;height:8px;background:var(--paper-3);border-radius:2px;overflow:hidden}
+.progres .barre-p i{display:block;height:100%;background:var(--accent-2)}
+.carte-resa h3{font-size:1.5rem;margin-bottom:6px}
+.carte-resa .aide{color:var(--ink-2);margin-bottom:14px}
+.choix{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.choix button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:baseline;text-align:left;min-height:64px;padding:12px 16px;border:var(--bar) solid var(--rule);border-radius:var(--radius);background:var(--paper);color:var(--ink);font:inherit;cursor:pointer}
+.choix button:hover{border-color:var(--accent-2)}
+.choix button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--ink)}
+.choix .t{font-weight:900;font-size:1.125rem;min-width:0}
+.choix .p{font-weight:700;white-space:nowrap}
+.choix .d{grid-column:1/-1;color:var(--ink-2);min-width:0}
+.choix button[aria-pressed="true"] .d{color:var(--accent-ink)}
+.carte-resa .formules{grid-template-columns:minmax(0,1fr)}
+.nav-etape{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:flex-start}
+.nav-etape .btn{flex:1 1 180px}
+.nav-etape .retour{flex:0 0 auto}
+.vk-erreur{color:#ffb3b8;flex-basis:100%}
+.vk-calendrier{max-width:none}
+.vk-cal-tete strong{font-weight:900;text-transform:capitalize}
+.vk-cal-nav{border-width:var(--bar)}
+.vk-cal-js{font-size:1rem}
+.vk-jour{font-weight:700}
+.vk-jour.vk-choisi{box-shadow:3px 3px 0 var(--ink)}
+.vk-cal-legende{font-size:1rem}
+.vk-cal-info{color:var(--ink);font-weight:700}
+.vk-creneau{border-width:var(--bar);background:var(--paper)}
+.vk-creneau strong{font-size:1.125rem}
+.vk-creneau span{font-size:1rem}
+.dispo{color:var(--muted);margin:10px 0 0}
+.ligne-compte{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
+.ligne-compte b{display:block;font-weight:900}
+.ligne-compte span{color:var(--ink-2)}
+.ligne-compte .pm output{font:900 1.5rem/1 var(--body);color:var(--accent-2);min-width:40px}
+.ligne-compte .pm button{width:44px;height:44px;font-size:1.25rem}
+.case{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:56px;padding:6px 0;border-bottom:1px solid var(--rule);cursor:pointer}
+.case input{width:24px;height:24px;margin:0 10px;accent-color:var(--accent-2)}
+.case b{font-weight:900;display:block}
+.case span{color:var(--ink-2)}
+.vk-recap{font-size:1.0625rem}
+.vk-recap .vk-acompte{color:var(--accent-2)}
+.vk-recap .vk-total{border-top-color:var(--rule)}
+.vk-simule,.vk-cal-legende .vk-mention{color:var(--ink-2)}
+.vk-confirmation{padding:16px;border:var(--bar) solid #5be37a;border-radius:var(--radius);background:var(--paper)}
+.vk-c-titre{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.75rem}
+.vk-agenda{border-width:var(--bar);margin:12px 0 4px;min-height:48px}
+.cote{display:grid;gap:12px;align-content:start;min-width:0}
+.cote .astuce{display:none}
+@media (min-width:980px){.cote .astuce{display:block}}
+.cote .well{background:var(--paper);border:var(--bar) solid var(--rule);border-radius:var(--radius);padding:16px}
+.cote h3{margin-bottom:8px}
+.cote ul{margin:0;padding-left:20px;color:var(--ink-2)}
+.cote li{margin-bottom:6px}
+.cote dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;margin:0}
+.cote dt{color:var(--muted)}
+.cote dd{margin:0;font-weight:700;min-width:0}
+@media (min-width:980px){.resa-grille{grid-template-columns:minmax(0,1fr) 340px;gap:28px}.carte-resa{padding:26px 28px}.choix{grid-template-columns:repeat(3,minmax(0,1fr))}.carte-resa .formules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ---------- Bandes photo (pleine largeur, le bord de l'image sert de séparateur) ---------- */
+.bande{position:relative;margin:0}
+.bande picture{display:block;position:relative}
+.bande img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.bande figcaption{position:absolute;left:12px;bottom:12px;padding:6px 10px;background:var(--shade);font-weight:700;border-radius:var(--radius)}
+@media (min-width:760px){.bande img{aspect-ratio:21/9}.bande figcaption{left:24px;bottom:24px}}
+
+/* ---------- 4. Activités : une carte de prix en rangées ---------- */
+.rangees{list-style:none;margin:0;padding:0;border-top:var(--bar) solid var(--ink)}
+.rangees li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;padding:14px 8px;border-bottom:1px solid var(--rule)}
+.rangees li:last-child{border-bottom:var(--bar) solid var(--ink)}
+.rangees h3{font-size:1.25rem}
+.rangees p{grid-column:1;color:var(--ink-2)}
+.rangees .px{grid-column:2;grid-row:1/span 2;font:700 2.5rem/1 var(--figure);color:var(--accent-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.rangees .px small{font:900 1.5rem/1 var(--body);color:inherit;margin-left:4px}
+.rangees li.curseur{background:var(--accent);border-color:var(--accent)}
+.rangees li.curseur p,.rangees li.curseur .px{color:var(--accent-ink)}
+.note-acts{margin-top:14px;color:var(--ink-2)}
+
+/* ---------- 5. Carte MaxxParc ---------- */
+.club{display:grid;grid-template-columns:minmax(0,1fr);gap:24px;align-items:center}
+.carte-pts{background:var(--paper);border:var(--bar) solid var(--accent-2);border-radius:var(--radius);padding:20px;box-shadow:6px 6px 0 var(--accent);max-width:360px}
+.carte-pts .haut{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.carte-pts .haut img{height:28px;width:auto}
+.carte-pts .score{font:700 4rem/1 var(--figure);color:var(--accent-2)}
+.carte-pts .score small{font:700 1.25rem/1 var(--body);color:var(--ink-2);margin-left:6px}
+.jauge{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px;margin:14px 0 10px}
+.jauge i{height:14px;background:var(--paper-3);border-radius:2px}
+.jauge i.on{background:var(--accent-2)}
+.club ul{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:12px}
+.club li{padding-left:16px;border-left:var(--bar) solid var(--accent-2);color:var(--ink-2)}
+.club li b{display:block;color:var(--ink);font-weight:900}
+@media (min-width:900px){.club{grid-template-columns:380px minmax(0,1fr);gap:56px}}
+
+/* ---------- 6. Horaires et accès ---------- */
+.horaires{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.tab-h{width:100%;border-collapse:collapse;table-layout:fixed}
+.tab-h caption{text-align:left;font-weight:900;font-size:1.125rem;margin-bottom:8px}
+.tab-h th,.tab-h td{padding:10px 6px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.tab-h thead th{font-weight:700;color:var(--ink-2)}
+.tab-h tbody th{font-weight:900}
+.tab-h tr.ici th,.tab-h tr.ici td{background:var(--accent);color:var(--accent-ink)}
+.tab-h td.hors-per{color:var(--muted)}
+.periodes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.periodes button{min-height:44px;padding:0 14px;border:var(--bar) solid var(--rule);border-radius:var(--radius);background:transparent;color:var(--ink);font:700 1rem/1 var(--body);cursor:pointer}
+.periodes button[aria-pressed="true"]{background:var(--accent-2);color:var(--accent-2-ink);border-color:var(--accent-2)}
+.notes-h{color:var(--ink-2);margin-top:12px;display:grid;gap:6px}
+.acces{display:grid;gap:12px;align-content:start}
+.acces .adr{font-weight:900;font-size:1.25rem}
+.acces p{color:var(--ink-2)}
+.acces .tel{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+.fin-resa{margin-top:8px}
+@media (min-width:900px){.horaires{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:48px}}
+
+/* Pied de page */
+.pied{background:var(--shade);border-top:var(--bar) solid var(--rule);padding:32px 0 104px;color:var(--ink-2)}
+.pied .wrap{display:grid;gap:14px;grid-template-columns:minmax(0,1fr)}
+.pied img{height:34px;width:auto;margin-bottom:8px}
+.pied a{display:inline-flex;align-items:center;min-height:44px}
+.pied .reseaux{display:flex;gap:16px}
+.pied [data-petit]{font-size:14px;color:var(--ink-2)}
+.gerant{border:var(--bar) dashed var(--rule);border-radius:var(--radius);padding:0 14px}
+.gerant summary{min-height:48px;display:flex;align-items:center;cursor:pointer;font-weight:900;color:var(--ink)}
+.gerant ol{margin:0 0 12px;padding-left:20px;display:grid;gap:10px}
+.gerant p{margin-bottom:12px}
+@media (min-width:900px){.pied .wrap{grid-template-columns:1fr 1fr 1.4fr}.pied{padding-bottom:40px}}
+
+/* Barre basse téléphone */
+.barre{position:fixed;left:0;right:0;bottom:0;z-index:25;display:flex;gap:8px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--paper);border-top:var(--bar) solid var(--rule);transition:transform .2s}
+.barre .btn{flex:1;box-shadow:none}
+.barre.cachee{transform:translateY(120%)}
+@media (min-width:900px){.barre{display:none}}
+@media (prefers-reduced-motion:reduce){.barre{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="apercu" role="note">
+  <div class="wrap">
+    <p data-petit>Aperçu non commandé · paiement simulé</p>
+    <a href="#gerant" data-ouvre-gerant>Pour le gérant</a>
+  </div>
+</div>
+
+<header class="tete" id="tete">
+  <div class="wrap">
+    <a class="logo" href="#haut"><img src="images/logo-maxxparc.png" alt="MaxxParc, accueil" width="302" height="79"></a>
+    <nav class="menu" id="menu" aria-label="Menu principal">
+      <ul data-ux="menu">
+        <li><a href="#anniversaires">Anniversaires</a></li>
+        <li><a href="#activites">Prix</a></li>
+        <li><a href="#horaires">Horaires</a></li>
+        <li><a href="#carte">Carte fidélité</a></li>
+        <li><a href="#reserver" data-go="debut">Réserver</a></li>
+      </ul>
+      <a class="gerant-lien" href="#gerant" data-ouvre-gerant>Pour le gérant</a>
+    </nav>
+    <a class="icone" href="tel:+33247443793" aria-label="Appeler le MaxxParc au 02 47 44 37 93"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span class="num">02 47 44 37 93</span></a>
+    <button class="icone bouton-menu" type="button" aria-expanded="false" aria-controls="menu" id="bouton-menu">Menu</button>
+  </div>
+</header>
+
+<main id="haut">
+<!-- 1. Premier écran : la photo du parc (Laserkids, photo de maxxparc.com/laserkids), plaque posée à sa base -->
+<section class="hero" aria-labelledby="titre">
+  <picture class="ecran">
+    <source media="(min-width: 760px)" srcset="images/accueil-laserkids-large.webp" width="1600" height="1199">
+    <img class="photo" data-ux="photo" src="images/accueil-laserkids-telephone.webp" width="720" height="1286" alt="Une petite fille et des adultes jouent au Laserkids, pistolets lumineux à la main, dans le décor fluo du MaxxParc" fetchpriority="high">
+  </picture>
+  <p class="legende-photo">Laserkids, Tours nord</p>
+  <div class="hero-texte">
+    <h1 id="titre">Anniversaire laser, réservé en&nbsp;ligne</h1>
+    <p class="phrase"><strong data-ux="prix">Dès 15 € par enfant</strong>, goûter compris, acompte payé en ligne.</p>
+    <div class="plaque">
+      <div id="bandeau" data-ux="horaires"></div>
+      <a class="btn large" href="#reserver" data-ux="reserver" data-go="debut">Réserver en ligne</a>
+      <a class="fidele" href="#carte"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg><span>Carte fidélité : des points à chaque partie</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Anniversaires : le prix total pour la bande, sans quitter la page -->
+<section class="bloc" id="anniversaires" aria-labelledby="t-anniv">
+  <div class="wrap">
+    <div class="tete-sec">
+      <h2 id="t-anniv">Six formules anniversaire</h2>
+      <p>De 4 à 15 ans. Prix par enfant, pack anniversaire compris.</p>
+    </div>
+    <div class="compte">
+      <div><b id="l-nb">Combien d'enfants ?</b><span>Fêté compris</span></div>
+      <div class="pm">
+        <button type="button" data-nb="-1" aria-label="Un enfant de moins">−</button>
+        <output id="nb" aria-labelledby="l-nb" aria-live="polite">8</output>
+        <button type="button" data-nb="1" aria-label="Un enfant de plus">+</button>
+      </div>
+    </div>
+    <div class="formules" id="formules"></div>
+    <p class="pack"><strong>Le pack anniversaire</strong> : muffins marbrés au Nutella d'une pâtissière locale, sirops à volonté, bonbons Haribo et photo souvenir.</p>
+  </div>
+</section>
+
+<!-- 3. Réserver : activité, formule, date, créneau, participants, récapitulatif avec acompte, confirmation -->
+<section class="bloc bande-2" id="reserver" aria-labelledby="t-resa">
+  <div class="wrap">
+    <div class="tete-sec">
+      <h2 id="t-resa">Réserver en ligne</h2>
+    </div>
+    <div class="resa-grille">
+      <div class="carte-resa" id="carte-resa" tabindex="-1" aria-live="polite"></div>
+      <aside class="cote" aria-label="Votre réservation">
+        <div class="well"><h3>Votre réservation</h3><div id="resume"><p class="vide">Rien de choisi pour l'instant.</p></div></div>
+        <div class="well astuce">
+          <h3>Bon à savoir</h3>
+          <ul>
+            <li>Anniversaire : réservez environ 5 semaines avant, au plus tard une semaine avant.</li>
+            <li>Nombre de joueurs modifiable jusqu'à 8 jours avant.</li>
+            <li>Vous pouvez apporter votre gâteau en plus du pack.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Activités : photo de maxxparc.com/lasermaxx, puis la carte des prix -->
+<figure class="bande">
+  <picture class="ecran">
+    <source media="(min-width: 760px)" srcset="images/bande-lasermaxx.webp" width="1400" height="700">
+    <img src="images/bande-lasermaxx-telephone.webp" width="800" height="600" loading="lazy" alt="Un joueur de LaserMaxx, gilet allumé, accroupi dans l'arène">
+  </picture>
+  <figcaption>L'arène LaserMaxx</figcaption>
+</figure>
+<section class="bloc" id="activites" aria-labelledby="t-acts">
+  <div class="wrap">
+    <div class="tete-sec">
+      <h2 id="t-acts">Les prix, sans anniversaire aussi</h2>
+    </div>
+    <ul class="rangees">
+      <li><h3>LaserMaxx</h3><p>Partie de 20 minutes ; 7 € les suivantes</p><span class="px">9<small>€</small></span></li>
+      <li><h3>Laserkids</h3><p>Le laser des petits, partie de 10 minutes ; 3 parties 10 €</p><span class="px">4<small>€</small></span></li>
+      <li><h3>AsteroGolf</h3><p>Minigolf intérieur fluo ; entrée payante même sans jouer</p><span class="px">8<small>€</small></span></li>
+      <li><h3>Laserbox</h3><p>À 2 ou en solo ; 15 € les 15 minutes</p><span class="px">2<small>€</small></span></li>
+      <li><h3>Néo One</h3><p>Mur interactif, de 1 à 10 joueurs, 5 minutes</p><span class="px">5<small>€</small></span></li>
+      <li class="curseur"><h3>Méga Pack</h3><p>2 LaserMaxx, 1 AsteroGolf, 1 Laserbox, tous les jours</p><span class="px">22<small>€</small></span></li>
+      <li><h3>No Limit</h3><p>LaserMaxx illimité vendredi et samedi soir, une partie sur deux de 19 h à 23 h 30</p><span class="px">19<small>€</small></span></li>
+    </ul>
+    <p class="note-acts">Prix par personne. Du mardi au jeudi, hors vacances scolaires et jours fériés : 2 parties de LaserMaxx achetées, la 3<sup>e</sup> offerte.</p>
+  </div>
+</section>
+
+<!-- 5. Carte fidélité -->
+<section class="bloc bande-2" id="carte" aria-labelledby="t-carte">
+  <div class="wrap club">
+    <div class="carte-pts" aria-label="Exemple de carte de fidélité dans le téléphone">
+      <div class="haut"><img src="images/logo-maxxparc.png" alt="MaxxParc" width="302" height="79"><span class="vk-mention">exemple</span></div>
+      <p class="score">7<small>parties sur 10</small></p>
+      <div class="jauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+      <p>Encore 3 parties et la suivante est offerte.</p>
+    </div>
+    <div>
+      <div class="tete-sec">
+        <h2 id="t-carte">Vos parties vous rapportent des points</h2>
+        <p>Votre carte MaxxParc vit dans votre téléphone, sans application à installer.</p>
+      </div>
+      <ul>
+        <li><b>Des points à chaque partie</b>LaserMaxx, Laserkids, AsteroGolf : tout compte.</li>
+        <li><b>Vos invités aussi</b>En fin de fête, chaque famille ouvre sa carte sur son téléphone.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Horaires de la semaine, vacances, accès, puis Réserver (photo de maxxparc.com/neo_one) -->
+<figure class="bande">
+  <picture class="ecran">
+    <source media="(min-width: 760px)" srcset="images/bande-neo-one.webp" width="1400" height="700">
+    <img src="images/bande-neo-one-telephone.webp" width="800" height="600" loading="lazy" alt="Des enfants lancent des balles sur le mur interactif Néo One">
+  </picture>
+  <figcaption>Néo One, dès 4 ans</figcaption>
+</figure>
+<section class="bloc" id="horaires" aria-labelledby="t-hor">
+  <div class="wrap">
+    <div class="tete-sec">
+      <h2 id="t-hor">Horaires et accès</h2>
+      <p id="periode-txt">Horaires selon la période scolaire, zone B.</p>
+    </div>
+    <div class="horaires">
+      <div>
+        <div class="periodes" role="group" aria-label="Période" id="periodes">
+          <button type="button" data-p="hors">Hors vacances</button>
+          <button type="button" data-p="vac">Vacances</button>
+          <button type="button" data-p="ete">Été</button>
+        </div>
+        <table class="tab-h" id="tab-h">
+          <caption id="cap-h">Hors vacances scolaires</caption>
+          <thead><tr><th scope="col">Jour</th><th scope="col">Horaires</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="notes-h">
+          <p>Jours fériés : 13 h 45 – 19 h. Fermé le 25 décembre. Pont de l'Ascension (7 mai 2027) : à confirmer. Hors de ces horaires : dès 15 personnes, sur réservation.</p>
+          <p id="prochaines-vac"></p>
+        </div>
+      </div>
+      <div class="acces">
+        <p class="adr">15 avenue du Danemark, 37100 Tours nord</p>
+        <p>Bus Fil Bleu 2, 14 et 66, arrêt Thalès, 4 min à pied. Tram A, arrêt Coppée, 10 min à pied.</p>
+        <p>Voiture : A19, sortie Tours Nord. Parking, accès handicapé.</p>
+        <a class="tel" href="tel:+33247443793">02 47 44 37 93</a>
+        <a class="btn fin-resa" href="#reserver" data-go="debut">Réserver en ligne</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="wrap">
+    <div>
+      <img src="images/logo-maxxparc.png" alt="MaxxParc" width="302" height="79" loading="lazy">
+      <p>Lasermaxx Tours, 15 avenue du Danemark, 37100 Tours</p>
+      <div class="reseaux"><a href="https://www.facebook.com/maxxparc" rel="noopener">Facebook</a><a href="https://www.instagram.com/maxxparc/" rel="noopener">Instagram</a></div>
+    </div>
+    <p data-petit>Aperçu non commandé. Logo et photos appartiennent au parc ; retrait sur simple demande. Page préparée par Vong Studio à partir de maxxparc.com (lu le 10/11/2026) ; réservation et paiement simulés. Les valeurs marquées « exemple » sont à caler avec le parc.</p>
+    <details class="gerant" id="gerant">
+      <summary>Pour le gérant</summary>
+      <ol>
+        <li><b>Réserver sans téléphoner.</b> Aujourd'hui, « Réserver » renvoie au 02 47 44 37 93. Ici, le parent réserve un anniversaire, une partie de LaserMaxx ou d'AsteroGolf, à toute heure, en suivant vos horaires, vos vacances (zone B) et vos règles (une semaine avant, Big Mercredi, LaserPizza). Il paie un acompte en ligne : le taux de 30 % est un exemple, à caler avec vous.</li>
+        <li><b>Un accueil léger.</b> Votre accueil lance une vidéo de 360 Mo. Ici, une photo de votre parc s'affiche tout de suite : la page entière, polices comprises, pèse moins de 0,4 Mo sur téléphone.</li>
+        <li><b>Faire revenir les familles.</b> La carte fidélité MaxxParc, dans le téléphone : des points à chaque partie et des bons. Les règles affichées sont des exemples.</li>
+      </ol>
+      <p>Laserkids et Laserbox ne sont pas proposés à la réservation, comme sur votre site aujourd'hui.</p>
+    </details>
+  </div>
+</footer>
+
+<div class="barre cachee" id="barre">
+  <a class="btn" href="#reserver" data-go="debut">Réserver en ligne</a>
+</div>
+
+<script src="vong-kit.js"></script>
+<script>
+(function () {
+"use strict";
+var K = VongKit;
+/* Date simulée pour les tests : ?t=2027-02-24T15:00 */
+var q = new URLSearchParams(location.search);
+var MAINTENANT = q.get("t") ? new Date(q.get("t")) : new Date();
+var AUJ = K.jourSeul(MAINTENANT);
+
+/* ====== Horaires lus sur https://www.maxxparc.com/informations_pratiques le 10/11/2026 (relevé dans sources/) ======
+   Hors vacances : lundi privatisations uniquement ; mardi 18h-22h ; mercredi 13h45-22h ; jeudi 16h-22h ;
+   vendredi 16h-minuit ; samedi 13h45-minuit ; dimanche 10h-19h.
+   Vacances scolaires : lundi 13h45-20h ; mardi à jeudi 13h45-22h ; vendredi, samedi 13h45-minuit ; dimanche 13h45-19h.
+   Vacances d'été : lundi 14h-18h ; mardi à jeudi 14h-20h ; vendredi, samedi 14h-23h ; dimanche 14h-18h.
+   Jours fériés : 13h45-19h. Fermé le 25 décembre. Zone B (académie d'Orléans-Tours). */
+var HORS = [[[10, 19]], null, [[18, 22]], [[13.75, 22]], [[16, 22]], [[16, 24]], [[13.75, 24]]];
+var VAC = [[[13.75, 19]], [[13.75, 20]], [[13.75, 22]], [[13.75, 22]], [[13.75, 22]], [[13.75, 24]], [[13.75, 24]]];
+var ETE = [[[14, 18]], [[14, 18]], [[14, 20]], [[14, 20]], [[14, 20]], [[14, 23]], [[14, 23]]];
+var exceptions = {};
+for (var d0 = new Date(2027, 6, 3); K.cle(d0) <= "2027-08-31"; d0 = K.plus(d0, 1)) {
+  if (!K.FERIES[K.cle(d0)]) exceptions[K.cle(d0)] = ETE[d0.getDay()];
+}
+var H = new K.Horaires({ zone: "B", hors: HORS, vac: VAC, ferie: [[13.75, 19]],
+  fermetures: { "2026-12-25": "fermé le 25 décembre" }, exceptions: exceptions,
+  joursAConfirmer: { "2027-05-07": "pont de l'Ascension : horaires à confirmer avec le parc" },
+  motifsFermeture: { 1: "privatisations uniquement" } });
+function ete(d) { var k = K.cle(d); return k >= "2027-07-03" && k <= "2027-09-01"; }
+function horsVac(d) { return !H.vacance(d); }
+
+K.bandeau(document.getElementById("bandeau"), { horaires: H, maintenant: MAINTENANT, lienHoraires: "#horaires" });
+
+/* ====== Formules anniversaire lues sur https://www.maxxparc.com/anniversaire le 10/11/2026 ====== */
+var FORMULES = [
+  { id: "laserkids", nom: "Laserkids, 4 à 7 ans", min: 4, max: 7, prix: 15, duree: 1.75, details: ["1 h 45 : 3 parties de 10 minutes, 1 jeton Néo One par tranche de 4 enfants"], neo: true },
+  { id: "asterogolf", nom: "AsteroGolf, 4 à 15 ans", min: 4, max: 15, prix: 15, duree: 2, details: ["2 h : 1 AsteroGolf, 1 Laserbox, 1 jeton Néo One par tranche de 4 enfants"], neo: true },
+  { id: "lasermaxx", nom: "LaserMaxx, 7 à 15 ans", min: 7, max: 15, prix: 19, duree: 2, details: ["2 h : 2 parties de LaserMaxx (3 le mercredi après-midi et le week-end matin, hors vacances)"] },
+  { id: "bigmercredi", nom: "Big Mercredi, 7 à 15 ans", min: 7, max: 15, prix: 19, duree: 3.5, details: ["3 h 30 : 2 parties de LaserMaxx, 1 partie d'AsteroGolf, 1 partie de Laserbox ou 1 jeton de Néo One par tranche de 4 enfants"], note: "Mercredi après-midi, hors vacances" },
+  { id: "lasergolf", nom: "Laser & Golf, 7 à 15 ans", min: 7, max: 15, prix: 23, duree: 3, details: ["3 h : 2 parties de LaserMaxx et 1 AsteroGolf"] },
+  { id: "laserpizza", nom: "LaserPizza, 7 à 15 ans", min: 7, max: 15, prix: 25, duree: 2.5, details: ["2 h 30 : 3 parties de LaserMaxx et des pizzas"], note: "Week-end matin, hors vacances" }
+];
+/* Parties à l'unité, https://www.maxxparc.com/tarifs (10/11/2026) */
+var PARTIES = {
+  lasermaxx: { nom: "LaserMaxx", sous: "9 € la 1re partie de 20 min, 7 € les suivantes" },
+  asterogolf: { nom: "AsteroGolf", sous: "8 € la partie, minigolf intérieur fluo" }
+};
+var ACOMPTE = 0.3; /* exemple, à caler avec le parc */
+var nbEnfants = 8;
+
+function dureeTxt(h) { var x = Math.floor(h), m = Math.round((h - x) * 60); return x + " h" + (m ? " " + String(m).padStart(2, "0") : ""); }
+
+/* ====== Section Anniversaires : total pour N enfants ====== */
+var lf = document.getElementById("formules");
+function rendreFormules(el, choisie) {
+  el.innerHTML = FORMULES.map(function (f) {
+    var html = K.carteFormule({ id: f.id, nom: f.nom, prix: f.prix, details: f.details, note: f.note }, choisie === f.id);
+    var tot = '<span class="vk-f-note">Pour ' + nbEnfants + " enfant" + (nbEnfants > 1 ? "s" : "") + ' : <span class="tot">' + K.euros(nbEnfants * f.prix) + "</span></span>";
+    return html.replace("</button>", tot + "</button>");
+  }).join("");
+}
+rendreFormules(lf, null);
+document.querySelector(".compte").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-nb]"); if (!b) return;
+  nbEnfants = Math.max(1, Math.min(30, nbEnfants + +b.dataset.nb));
+  document.getElementById("nb").value = nbEnfants;
+  E.enfants = nbEnfants;
+  rendreFormules(lf, null);
+});
+lf.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-formule]"); if (!b) return;
+  E = etatVide(); E.activite = "anniv"; E.formule = trouver(b.dataset.formule); E.enfants = nbEnfants;
+  aller(2); defiler();
+});
+function trouver(id) { return FORMULES.filter(function (f) { return f.id === id; })[0]; }
+
+/* ====== Parcours de réservation ====== */
+function etatVide() { return { etape: 0, activite: null, formule: null, parties: 2, date: null, creneau: null, enfants: nbEnfants, adultes: 0, joueurs: 4, laserbox: 0, golf: false, neo: 0 }; }
+var E = etatVide();
+var carte = document.getElementById("carte-resa");
+var ETAPES = ["Activité", "Formule", "Date", "Heure", "Participants", "Récapitulatif", "Confirmation"];
+
+function jamais2sans3(d) { var j = d.getDay(); return j >= 2 && j <= 4 && horsVac(d) && !H.ferie(d); }
+function duree() {
+  if (E.activite === "anniv") return E.formule.duree;
+  if (E.activite === "lasermaxx") return E.parties === 1 ? 0.5 : E.parties === 2 ? 1.5 : 2.5; /* 20 min par partie + pauses ; « environ 2h30 » pour 3 parties (page Tarifs) */
+  return 1; /* AsteroGolf : « entre 45 minutes et 2 heures » ; créneau d'arrivée calculé sur 1 h */
+}
+function lignes() {
+  var l = [], d = E.date;
+  if (E.activite === "anniv") {
+    l.push({ libelle: "Formule " + E.formule.nom.split(",")[0] + " (" + E.formule.prix + " €)", quantite: E.enfants, prixUnitaire: E.formule.prix });
+    if (E.adultes) l.push({ libelle: "Adultes qui jouent (" + E.formule.prix + " €)", quantite: E.adultes, prixUnitaire: E.formule.prix });
+    if (E.laserbox) l.push({ libelle: "Laserbox, 15 minutes (15 €)", quantite: E.laserbox, prixUnitaire: 15 });
+    if (E.golf) l.push({ libelle: "+1 AsteroGolf (6 €)", quantite: E.enfants + E.adultes, prixUnitaire: 6 });
+    if (E.neo) l.push({ libelle: "Jeton Néo One (5 €)", quantite: E.neo, prixUnitaire: 5 });
+  } else if (E.activite === "lasermaxx") {
+    l.push({ libelle: "1re partie de LaserMaxx (9 €)", quantite: E.joueurs, prixUnitaire: 9 });
+    if (E.parties > 1) {
+      var suiv = E.parties - 1, off = E.parties === 3 && d && jamais2sans3(d);
+      l.push({ libelle: (off ? "2e partie (7 €), la 3e offerte" : suiv + " partie" + (suiv > 1 ? "s" : "") + " suivante" + (suiv > 1 ? "s" : "") + " (7 €)"), quantite: E.joueurs, prixUnitaire: off ? 7 : 7 * suiv });
+    }
+  } else {
+    l.push({ libelle: "Partie d'AsteroGolf (8 €)", quantite: E.joueurs, prixUnitaire: 8 });
+  }
+  return l;
+}
+function recapData() { return { lignes: lignes(), tauxAcompte: ACOMPTE, acompteExemple: true }; }
+
+/* Règles du parc pour le calendrier (page Anniversaire, FAQ) */
+function regle(d) {
+  var k = K.cle(d), j = d.getDay();
+  if (E.activite === "anniv") {
+    if (d < K.plus(AUJ, 7)) return "trop proche : un anniversaire se réserve au plus tard une semaine avant";
+    var f = E.formule.id;
+    if (f === "bigmercredi" && !(j === 3 && horsVac(d))) return "Big Mercredi : le mercredi après-midi, hors vacances scolaires";
+    if (f === "laserpizza") {
+      if (!horsVac(d)) return "LaserPizza : hors vacances scolaires";
+      if (j === 6) return "LaserPizza le samedi matin : horaire à confirmer avec le parc, réservable par téléphone";
+      if (j !== 0) return "LaserPizza : le week-end matin";
+    }
+    if (!K.creneaux({ horaires: H, date: d, duree: duree(), dernierDebut: dernierDebut(d), maintenant: MAINTENANT }).length)
+      return "aucun horaire d'anniversaire ce jour-là (fin avant 20 h)";
+  }
+  if (!H.ferie(d) && K.hache("j" + k + (E.activite || "")) % 13 === 0) return "complet (exemple)";
+  return null;
+}
+function dernierDebut(d) {
+  if (E.activite === "anniv") {
+    if (E.formule.id === "laserpizza") return 11;      /* le matin */
+    return 20 - E.formule.duree;                        /* pas d'anniversaire d'enfants qui finit après 20 h */
+  }
+  return undefined;
+}
+
+function aller(n) {
+  E.etape = n;
+  carte.innerHTML = "";
+  var w = document.createElement("div");
+  var total = E.activite && E.activite !== "anniv" ? 6 : 7;
+  var num = E.activite && E.activite !== "anniv" && n >= 2 ? n : n + 1;
+  if (n < 6) w.innerHTML = '<div class="progres"><span class="etape">Étape ' + num + " sur " + (total - 1) + "</span><span class=\"barre-p\" aria-hidden=\"true\"><i style=\"width:" + Math.round(num / (total - 1) * 100) + '%"></i></span></div>';
+  carte.appendChild(w);
+  [etActivite, etFormule, etDate, etCreneau, etParticipants, etRecap, etConfirme][n](w);
+  rendreResume();
+}
+function defiler() {
+  var r = carte.getBoundingClientRect();
+  if (r.top < 60 || r.top > innerHeight * 0.5) carte.scrollIntoView({ block: "start" });
+  carte.focus({ preventScroll: true });
+}
+function suite(n) { aller(n); defiler(); }
+function titre(w, t, aide) {
+  var h = document.createElement("h3"); h.textContent = t; w.appendChild(h);
+  if (aide) { var p = document.createElement("p"); p.className = "aide"; p.textContent = aide; w.appendChild(p); }
+}
+function navigation(w, precedente, libelle, valider, suivante) {
+  var n = document.createElement("div"); n.className = "nav-etape";
+  if (precedente !== null) { var r = document.createElement("button"); r.type = "button"; r.className = "btn sec retour"; r.textContent = "Retour"; r.onclick = function () { suite(precedente); }; n.appendChild(r); }
+  if (libelle) {
+    var s = document.createElement("button"); s.type = "button"; s.className = "btn"; s.textContent = libelle; s.id = "suivant";
+    n.appendChild(s);
+    s.onclick = function () { var m = valider ? valider() : null; if (m) { K.erreur(s, m); return; } K.erreur(s, ""); suivante(); };
+  }
+  w.appendChild(n);
+}
+function choix(w, liste, actif, surChoix) {
+  var c = document.createElement("div"); c.className = "choix";
+  liste.forEach(function (o) {
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-pressed", String(actif === o.id));
+    b.innerHTML = '<span class="t">' + o.t + '</span><span class="p">' + o.p + '</span><span class="d">' + o.d + "</span>";
+    b.onclick = function () { surChoix(o.id); };
+    c.appendChild(b);
+  });
+  w.appendChild(c);
+}
+
+/* Étape 1 : activité */
+function etActivite(w) {
+  titre(w, "Que réservez-vous ?", "Touchez votre choix pour continuer.");
+  choix(w, [
+    { id: "anniv", t: "Anniversaire", p: "dès 15 €", d: "6 formules de 4 à 15 ans, par enfant" },
+    { id: "lasermaxx", t: "LaserMaxx", p: "9 €", d: "la 1re partie de 20 min, 7 € les suivantes" },
+    { id: "asterogolf", t: "AsteroGolf", p: "8 €", d: "la partie de minigolf fluo" }
+  ], E.activite, function (id) {
+    if (E.activite !== id) { E.date = null; E.creneau = null; E.formule = null; }
+    E.activite = id; suite(id === "asterogolf" ? 2 : 1);
+  });
+}
+/* Étape 2 : formule (anniversaire) ou nombre de parties (LaserMaxx) */
+function etFormule(w) {
+  if (E.activite === "lasermaxx") {
+    titre(w, "Combien de parties ?", "Par joueur, 20 minutes chacune.");
+    choix(w, [
+      { id: 1, t: "1 partie", p: "9 €", d: "environ 30 minutes sur place" },
+      { id: 2, t: "2 parties", p: "16 €", d: "9 € + 7 €" },
+      { id: 3, t: "3 parties", p: "23 €", d: "16 € du mardi au jeudi hors vacances et jours fériés : la 3e offerte" }
+    ], E.parties, function (id) { E.parties = id; E.creneau = null; suite(2); });
+    navigation(w, 0);
+    return;
+  }
+  titre(w, "Quelle formule ?", "Prix par enfant, pack anniversaire compris.");
+  var c = document.createElement("div"); c.className = "formules";
+  rendreFormules(c, E.formule && E.formule.id);
+  c.onclick = function (e) { var b = e.target.closest("[data-formule]"); if (!b) return; var f = trouver(b.dataset.formule); if (f !== E.formule) { E.date = null; E.creneau = null; } E.formule = f; suite(2); };
+  w.appendChild(c);
+  navigation(w, 0);
+}
+/* Étape 3 : date (calendrier du kit, horaires et règles du parc) */
+function etDate(w) {
+  var nom = E.activite === "anniv" ? "l'anniversaire" : "la partie";
+  titre(w, "Quel jour ?", "Les jours barrés ne sont pas possibles pour " + nom + " : touchez-les pour savoir pourquoi.");
+  var el = document.createElement("div"); w.appendChild(el);
+  K.calendrier(el, { horaires: H, debut: MAINTENANT, choisi: E.date, mois: 10, regle: regle,
+    surChoix: function (d) { if (!E.date || K.cle(d) !== K.cle(E.date)) E.creneau = null; E.date = d; rendreResume(); setTimeout(function () { suite(3); }, 350); } });
+  navigation(w, E.activite === "asterogolf" ? 0 : 1);
+}
+/* Étape 4 : heure d'arrivée (créneaux du kit) */
+function etCreneau(w) {
+  var d = E.date, dj = H.jour(d);
+  titre(w, "À quelle heure ?", K.dateLongue(d) + " : ouvert " + H.texteJour(d) + (dj.motif ? " (" + dj.motif + ")" : dj.periode ? " (" + dj.periode + ")" : "") + ". Fin indiquée sous l'heure.");
+  var el = document.createElement("div"); w.appendChild(el);
+  var dur = duree(), id = E.activite + (E.formule ? E.formule.id : "") + E.parties;
+  var liste = K.creneaux({ horaires: H, date: d, duree: dur, pas: 0.5, dernierDebut: dernierDebut(d), maintenant: MAINTENANT,
+    places: function (dd, t) { return K.hache(K.cle(dd) + t + id) % 5 === 0 && !H.ferie(dd) ? 0 : null; } });
+  liste.forEach(function (c) { if (!c.complet && !c.passe) c.texte = K.heureCourte(c.debut); });
+  var info = document.createElement("p"); info.className = "vk-cal-info"; info.setAttribute("aria-live", "polite");
+  K.rendreCreneaux(el, liste, { choisi: E.creneau && E.creneau.debut, vide: "Aucune heure possible ce jour-là. Revenez au calendrier pour choisir un autre jour.",
+    surChoix: function (c) { E.creneau = c; rendreResume(); setTimeout(function () { suite(4); }, 250); },
+    surRefus: function (c) { info.textContent = c.passe ? "Cette heure est passée." : "L'heure de " + K.heureCourte(c.debut) + " est complète. Choisissez une autre heure, ou un autre jour avec Retour."; } });
+  el.querySelectorAll(".vk-creneau").forEach(function (b, i) { var c = liste[i]; if (!c.complet && !c.passe) b.insertAdjacentHTML("beforeend", "<span>fin " + K.heureCourte(c.fin) + "</span>"); });
+  w.appendChild(info);
+  if (liste.length) { var dp = document.createElement("p"); dp.className = "dispo"; dp.innerHTML = 'Heures complètes : <span class="vk-mention">exemple</span>'; w.appendChild(dp); }
+  if (liste.length && liste.every(function (c) { return c.complet || c.passe; })) info.textContent = "Toutes les heures de ce jour sont prises. Revenez au calendrier pour choisir un autre jour.";
+  navigation(w, 2);
+}
+/* Étape 5 : participants (+ options pour un anniversaire) */
+function compteur(w, label, sous, val, min, max, set) {
+  var r = document.createElement("div"); r.className = "ligne-compte";
+  var id = "c" + Math.random().toString(36).slice(2, 7);
+  r.innerHTML = '<div><b id="' + id + '">' + label + "</b><span>" + sous + '</span></div><div class="pm"><button type="button" aria-label="' + label + ' : un de moins">−</button><output aria-labelledby="' + id + '" aria-live="polite">' + val + '</output><button type="button" aria-label="' + label + ' : un de plus">+</button></div>';
+  var b = r.querySelectorAll("button"), o = r.querySelector("output");
+  b[0].onclick = function () { var v = Math.max(min, +o.value - 1); o.value = v; set(v); rendreResume(); };
+  b[1].onclick = function () { var v = Math.min(max, +o.value + 1); o.value = v; set(v); rendreResume(); };
+  w.appendChild(r);
+}
+function etParticipants(w) {
+  if (E.activite !== "anniv") {
+    titre(w, "Combien de joueurs ?", "Prix par joueur.");
+    compteur(w, "Joueurs", (E.activite === "lasermaxx" ? E.parties + " partie" + (E.parties > 1 ? "s" : "") + " chacun" : "1 partie chacun"), E.joueurs, 1, 30, function (v) { E.joueurs = v; });
+  } else {
+    titre(w, "Qui vient ?", "Modifiable jusqu'à 8 jours avant la fête.");
+    compteur(w, "Enfants", E.formule.prix + " € par enfant, " + E.formule.min + " à " + E.formule.max + " ans", E.enfants, 1, 30, function (v) { E.enfants = v; });
+    compteur(w, "Adultes qui jouent", "même prix ; gratuit s'il ne joue pas", E.adultes, 0, 10, function (v) { E.adultes = v; });
+    var o = document.createElement("h3"); o.textContent = "Options"; o.style.margin = "18px 0 4px"; w.appendChild(o);
+    compteur(w, "Laserbox", "15 € les 15 minutes", E.laserbox, 0, 4, function (v) { E.laserbox = v; });
+    var lab = document.createElement("label"); lab.className = "case";
+    lab.innerHTML = '<input type="checkbox"' + (E.golf ? " checked" : "") + '><span><b>+1 partie d\'AsteroGolf</b><span>6 € par joueur</span></span><span></span>';
+    lab.querySelector("input").onchange = function (e) { E.golf = e.target.checked; rendreResume(); };
+    w.appendChild(lab);
+    compteur(w, "Néo One", "5 € le jeton" + (E.formule.neo ? " ; déjà 1 jeton compris par tranche de 4 enfants" : ""), E.neo, 0, 10, function (v) { E.neo = v; });
+  }
+  navigation(w, 3, "Voir le récapitulatif", function () { if (E.activite === "anniv" ? E.enfants < 1 : E.joueurs < 1) return "Indiquez au moins un participant."; }, function () { suite(5); });
+}
+/* Étape 6 : récapitulatif + acompte (kit) */
+function etRecap(w) {
+  titre(w, "Récapitulatif et acompte", K.dateLongue(E.date) + ", arrivée " + K.heureCourte(E.creneau.debut) + ", fin " + K.heureCourte(E.creneau.fin) + ".");
+  var el = document.createElement("div"); w.appendChild(el);
+  var c = K.recapitulatif(el, recapData());
+  navigation(w, 4, "Payer l'acompte : " + K.euros(c.acompte) + " (simulé)", null, function () { suite(6); });
+}
+/* Étape 7 : confirmation + agenda (kit) */
+function etConfirme(w) {
+  var c = K.calculRecap(recapData());
+  var nom = E.activite === "anniv" ? "Anniversaire " + E.formule.nom.split(",")[0] : E.activite === "lasermaxx" ? "LaserMaxx, " + E.parties + " partie" + (E.parties > 1 ? "s" : "") : "AsteroGolf";
+  var el = document.createElement("div"); w.appendChild(el);
+  K.confirmation(el, { numero: K.numero("MXP"), date: E.date, debut: E.creneau.debut, duree: duree(), titre: nom + " au MaxxParc",
+    lieu: "MaxxParc, 15 avenue du Danemark, 37100 Tours",
+    resume: nom + " · acompte payé " + K.euros(c.acompte) + " (exemple), reste " + K.euros(c.reste) + " sur place." });
+  var n = document.createElement("div"); n.className = "nav-etape";
+  var r = document.createElement("button"); r.type = "button"; r.className = "btn sec"; r.textContent = "Nouvelle réservation";
+  r.onclick = function () { E = etatVide(); suite(0); };
+  n.appendChild(r); w.appendChild(n);
+}
+function rendreResume() {
+  var rows = [];
+  if (E.activite === "anniv") rows.push(["Activité", "Anniversaire"]);
+  else if (E.activite) rows.push(["Activité", PARTIES[E.activite].nom]);
+  if (E.formule) rows.push(["Formule", E.formule.nom.split(",")[0]]);
+  if (E.activite === "lasermaxx" && E.etape >= 2) rows.push(["Parties", String(E.parties)]);
+  if (E.date) rows.push(["Date", K.dateLongue(E.date)]);
+  if (E.creneau) rows.push(["Heure", K.heureCourte(E.creneau.debut) + " – " + K.heureCourte(E.creneau.fin)]);
+  if (E.etape >= 4 && E.creneau) { var c = K.calculRecap(recapData()); rows.push(["Total", K.euros(c.total)]); rows.push(["Acompte", K.euros(c.acompte) + " (exemple)"]); }
+  document.getElementById("resume").innerHTML = rows.length ? "<dl>" + rows.map(function (x) { return "<dt>" + x[0] + "</dt><dd>" + K.esc(x[1]) + "</dd>"; }).join("") + "</dl>" : '<p class="vide">Rien de choisi pour l\'instant.</p>';
+}
+aller(0);
+
+/* Liens « Réserver » : ouvrent le parcours au début */
+document.addEventListener("click", function (e) {
+  var a = e.target.closest('[data-go="debut"]'); if (!a) return;
+  if (E.etape === 6) E = etatVide();
+  if (E.etape !== 0 && !E.activite) aller(0);
+  fermerMenu();
+  setTimeout(function () { carte.focus({ preventScroll: true }); }, 400);
+});
+
+/* ====== Horaires de la semaine ====== */
+var tb = document.querySelector("#tab-h tbody"), ORD = [1, 2, 3, 4, 5, 6, 0];
+var JN = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+function plageTxt(p) { return p ? p.map(function (x) { return K.heure(x[0]) + " – " + K.heure(x[1]); }).join(", ") : "Privatisations uniquement"; }
+var NOMS = { hors: "Hors vacances scolaires", vac: "Vacances scolaires (zone B)", ete: "Vacances d'été" };
+var perAuj = ete(AUJ) ? "ete" : H.vacance(AUJ) ? "vac" : "hors";
+function rendreHoraires(p) {
+  var t = { hors: HORS, vac: VAC, ete: ETE }[p];
+  document.getElementById("cap-h").textContent = NOMS[p] + (p === perAuj ? " : la période en cours" : "");
+  tb.innerHTML = ORD.map(function (j) {
+    var ici = p === perAuj && j === AUJ.getDay(), txt = plageTxt(t[j]);
+    if (ici) { /* la ligne du jour suit H.jour (fériés, 25 décembre, jours à confirmer), comme le bandeau */
+      var dj = H.jour(AUJ);
+      txt = dj.ouvert ? H.texteJour(AUJ) + (dj.motif ? " (" + dj.motif + ")" : "") : /^(fermé|privatisations)/.test(dj.motif) || dj.aConfirmer ? dj.motif.charAt(0).toUpperCase() + dj.motif.slice(1) : "Fermé (" + dj.motif + ")";
+    }
+    return "<tr" + (ici ? ' class="ici"' : "") + '><th scope="row">' + JN[j] + (ici ? " (aujourd'hui)" : "") + "</th><td>" + txt + "</td></tr>";
+  }).join("");
+  document.querySelectorAll("#periodes button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.p === p)); });
+}
+document.getElementById("periodes").onclick = function (e) { var b = e.target.closest("[data-p]"); if (b) rendreHoraires(b.dataset.p); };
+rendreHoraires(perAuj);
+(function () {
+  var v = H.vacances, k = K.cle(AUJ), txt = "";
+  function jm(d) { return (d.getDate() === 1 ? "1er" : d.getDate()) + " " + K.MOIS[d.getMonth()]; }
+  for (var i = 0; i < v.length; i++) {
+    if (v[i][1] >= k && v[i][0] !== v[i][1]) {
+      var a = K.deCle(v[i][0]), b = K.deCle(v[i][1]);
+      txt = (v[i][0] <= k ? "En ce moment : " : "Prochaines vacances (zone B) : ") + v[i][2] + ", du " + jm(a) + " au " + jm(b) + ".";
+      break;
+    }
+  }
+  document.getElementById("prochaines-vac").textContent = txt;
+})();
+
+/* ====== Menu téléphone ====== */
+var tete = document.getElementById("tete"), bm = document.getElementById("bouton-menu");
+function fermerMenu() { tete.classList.remove("ouvert"); bm.setAttribute("aria-expanded", "false"); }
+bm.onclick = function () { var o = !tete.classList.contains("ouvert"); tete.classList.toggle("ouvert", o); bm.setAttribute("aria-expanded", String(o)); };
+document.getElementById("menu").addEventListener("click", function (e) { if (e.target.closest("a")) fermerMenu(); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape") fermerMenu(); });
+document.querySelectorAll("[data-ouvre-gerant]").forEach(function (a) { a.addEventListener("click", function () { document.getElementById("gerant").open = true; fermerMenu(); }); });
+if (location.hash === "#gerant") document.getElementById("gerant").open = true;
+
+/* ====== Barre basse : cachée sur le premier écran et pendant la réservation ====== */
+if ("IntersectionObserver" in window) {
+  var vis = {}, barre = document.getElementById("barre");
+  var io = new IntersectionObserver(function (en) {
+    en.forEach(function (x) { vis[x.target.id || "hero"] = x.isIntersecting; });
+    barre.classList.toggle("cachee", !!(vis.hero || vis.reserver || vis.horaires));
+  }, { threshold: 0.02 });
+  io.observe(document.querySelector(".hero")); io.observe(document.getElementById("reserver")); io.observe(document.getElementById("horaires"));
+}
+})();
+</script>
+</body>
+</html>
