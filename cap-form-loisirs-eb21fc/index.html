@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cap Form Loisirs · aperçu de réservation</title>
+<meta name="description" content="Aperçu non commandé : bowling, karting, VR, quiz et simulateurs de Cap Form Loisirs (Laval) dans un seul panneau de réservation.">
+<link rel="icon" href="images/logo-cap-form.svg">
+<style>
+@font-face{font-family:"Bungee";font-style:normal;font-weight:400;font-display:swap;src:url(polices/bungee-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Bungee";font-style:normal;font-weight:400;font-display:swap;src:url(polices/bungee-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:100 900;font-display:swap;src:url(polices/montserrat-latin-wght-normal.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Montserrat";font-style:normal;font-weight:100 900;font-display:swap;src:url(polices/montserrat-latin-ext-wght-normal.woff2) format("woff2-variations");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  /* Couleurs relevées dans la feuille de style et le logo de capformloisirs-53.fr */
+  --nuit:#01035c;      /* bleu nuit des titres et du pied de page */
+  --bleu:#0000ff;      /* bleu électrique du logo */
+  --violet:#660099;    /* violet du logo */
+  --orange:#ff6600;    /* orange du logo */
+  --jaune:#ffce43;     /* jaune d'accent du site */
+  --fond:#f4f2fb;
+  --carte:#ffffff;
+  --texte:#14153a;
+  --doux:#545677;
+  --trait:#dcd9ee;
+  --ok:#0b7a43;
+  --erreur:#b3261e;
+  --degrade:linear-gradient(90deg,#0000ff 0%,#660099 52%,#ff6600 100%);
+  --r:14px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--fond);color:var(--texte);font:500 16px/1.5 "Montserrat",system-ui,sans-serif}
+img{max-width:100%;display:block}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--jaune);outline-offset:2px}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.titre{font-family:"Bungee",system-ui,sans-serif;font-weight:400;letter-spacing:.01em;line-height:1.08}
+.ex{display:inline-block;font-size:.72em;font-weight:700;letter-spacing:.02em;text-transform:uppercase;background:#fff3c4;color:#6a4b00;border-radius:6px;padding:1px 6px;vertical-align:.08em;white-space:nowrap}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ===== Bandeau d'aperçu ===== */
+.apercu{background:#0b0c2e;color:#e8e6ff;font-size:12.5px;line-height:1.35;text-align:center;padding:6px 16px}
+.apercu b{color:#fff}
+@media (max-width:599px){.apercu .long{display:none}}
+
+/* ===== En-tête ===== */
+.tete{background:#fff;border-bottom:1px solid var(--trait)}
+.tete .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+.logo{display:flex;align-items:center;min-height:44px}
+.logo img{height:46px;width:auto}
+@media (min-width:900px){.logo img{height:52px}}
+.tete nav{display:flex;gap:4px;align-items:center}
+.tete nav a{display:none;text-decoration:none;font-weight:700;font-size:14px;color:var(--nuit);padding:12px 10px;border-radius:10px;min-height:44px}
+.tete nav a:hover{background:var(--fond)}
+.tel{display:inline-flex !important;align-items:center;gap:8px;min-height:44px;padding:0 14px !important;border:2px solid var(--nuit);border-radius:999px;text-decoration:none;font-weight:800;color:var(--nuit)}
+.tel svg{width:18px;height:18px}
+@media (min-width:900px){.tete nav a{display:inline-flex;align-items:center}}
+
+/* ===== Premier écran : onglets + panneau ===== */
+.scene{background:var(--nuit);color:#fff;position:relative;overflow:hidden;padding:12px 0 18px}
+.scene::before{content:"";position:absolute;inset:auto -10% -60px -10%;height:140px;background:radial-gradient(60% 100% at 50% 100%,rgba(255,102,0,.35),transparent 70%);pointer-events:none}
+.scene .wrap{position:relative}
+.accroche{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 8px}
+.accroche h1{margin:0;font-size:clamp(17px,4.6vw,26px);color:#fff}
+.accroche h1 span{background:linear-gradient(90deg,#8fa2ff,#d38cff 50%,#ff8c42);-webkit-background-clip:text;background-clip:text;color:transparent}
+.accroche p{margin:0;font-size:13px;color:#c9c8f0;display:none}
+@media (min-width:900px){.accroche p{display:block}}
+
+.onglets{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 10px;margin:0 -2px;scrollbar-width:none}
+.onglets::-webkit-scrollbar{display:none}
+.onglet{flex:0 0 auto;scroll-snap-align:start;display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 16px 6px 8px;border-radius:999px;border:2px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#fff;font-weight:800;font-size:15px;cursor:pointer;transition:background .2s,border-color .2s,transform .15s}
+.onglet:hover{border-color:rgba(255,255,255,.6)}
+.onglet:active{transform:scale(.97)}
+.onglet .pic{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;flex:0 0 34px}
+.onglet .pic img{width:24px;height:24px;object-fit:contain}
+.onglet[aria-selected="true"]{background:var(--orange);border-color:var(--orange);color:var(--nuit)}
+.onglet .neuf{font-size:10px;letter-spacing:.04em;text-transform:uppercase;background:var(--jaune);color:var(--nuit);border-radius:6px;padding:2px 5px}
+.onglet[aria-selected="true"] .neuf{background:var(--nuit);color:var(--jaune)}
+@media (min-width:900px){.onglets{overflow:visible}.onglet{flex:1 1 0;justify-content:center}}
+
+.panneau{background:var(--carte);color:var(--texte);border-radius:20px;box-shadow:0 18px 40px rgba(0,0,30,.35);overflow:hidden}
+.p-tete{position:relative;display:flex;align-items:flex-end;min-height:58px;padding:8px 14px;color:#fff;background:#111 center/cover no-repeat}
+.p-tete::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(1,3,92,.92) 0%,rgba(1,3,92,.65) 55%,rgba(1,3,92,.15) 100%)}
+.p-tete > *{position:relative}
+.p-tete h2{margin:0;font-size:18px}
+.p-tete p{margin:1px 0 0;font-size:12px;font-weight:600;color:#e6e4ff}
+.fleches{position:absolute;right:14px;top:12px;display:flex;gap:5px}
+.fleches i{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:10px solid var(--jaune);opacity:.9}
+.fleches i:nth-child(2){border-bottom-color:var(--orange)}
+.p-corps{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:12px 14px 14px}
+@media (min-width:900px){.p-corps{grid-template-columns:minmax(0,1.05fr) minmax(0,1.25fr);gap:14px 22px;padding:16px 20px 18px}.p-gauche{border-right:1px solid var(--trait);padding-right:22px}}
+.p-gauche,.p-droite{min-width:0}
+.etiq{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--doux);margin:0 0 6px;display:flex;justify-content:space-between;gap:8px}
+.etiq span{text-transform:none;letter-spacing:0;font-weight:600}
+
+.jours{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:3px 0 4px}
+.jours::-webkit-scrollbar{display:none}
+.jour{flex:0 0 48px;min-height:64px;border-radius:24px;border:0;background:var(--fond);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer;padding:6px 0;line-height:1.15;position:relative;transition:background .15s}
+.jour small{font-size:10.5px;font-weight:800;color:var(--doux);text-transform:uppercase;letter-spacing:.02em}
+.jour b{font-family:"Bungee";font-weight:400;font-size:18px;color:var(--nuit)}
+.jour em{font-style:normal;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.02em;color:var(--violet)}
+.jour:hover{background:#e7e3fb}
+.jour[aria-pressed="true"]{background:var(--degrade);color:#fff}
+.jour[aria-pressed="true"] small,.jour[aria-pressed="true"] em,.jour[aria-pressed="true"] b{color:#fff}
+.jour.ferme{background:repeating-linear-gradient(135deg,#f3f2f7 0 5px,#e8e6f0 5px 10px);color:#8b8aa5}
+.jour.ferme b,.jour.ferme em,.jour.ferme small{color:#8b8aa5}
+
+.joueurs{display:flex;align-items:center;gap:10px;margin-top:8px}
+.pas{flex:0 0 auto;display:flex;align-items:center;border:1.5px solid var(--trait);border-radius:12px;overflow:hidden}
+.pas button{width:44px;height:44px;border:0;background:#fff;font-size:22px;font-weight:700;cursor:pointer;color:var(--nuit)}
+.pas button:hover{background:var(--fond)}
+.pas button:disabled{color:#c3c2d3;cursor:not-allowed}
+.pas output{min-width:38px;text-align:center;font-weight:800;font-size:18px}
+.joueurs p{margin:0;font-size:13px;color:var(--doux);line-height:1.35;min-width:0}
+.joueurs p b{color:var(--texte)}
+
+.creneaux{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (min-width:560px){.creneaux{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.cr{min-width:0;min-height:48px;border-radius:10px;border:1.5px solid var(--trait);background:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;padding:4px 2px}
+.cr b{font-size:14.5px;font-weight:800}
+.cr small{font-size:10.5px;font-weight:700;color:var(--ok)}
+.cr.peu small{color:#9a4d00}
+.cr:hover{border-color:var(--orange)}
+.cr[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:var(--nuit)}
+.cr[aria-pressed="true"] small{color:var(--nuit)}
+.cr.complet{background:#f3f2f7;color:#9998ad;text-decoration:line-through;cursor:not-allowed}
+.cr.complet small{color:#9998ad;text-decoration:none}
+.plus-cr{margin-top:6px;font-size:12.5px;color:var(--doux)}
+.plus-cr button{background:none;border:0;padding:12px 4px;margin:-12px 0;min-height:44px;color:var(--violet);font-weight:800;text-decoration:underline;cursor:pointer}
+
+.frise{position:relative;height:40px;border-radius:10px;background:repeating-linear-gradient(90deg,#f1f0f8 0 calc(100%/16 - 1px),#e2e0ef calc(100%/16 - 1px) calc(100%/16));overflow:hidden}
+.frise .ouv{position:absolute;top:6px;bottom:6px;border-radius:7px;background:var(--degrade)}
+.frise-h{display:flex;justify-content:space-between;font-size:10.5px;font-weight:700;color:var(--doux);margin-top:3px}
+.faits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:8px 0 0}
+.faits div{min-width:0;background:var(--fond);border-radius:10px;padding:6px 8px;font-size:11.5px;line-height:1.3;color:var(--doux)}
+.faits b{display:block;color:var(--texte);font-size:13.5px}
+.seul-ordi{display:none}
+@media (min-width:900px){.seul-ordi{display:grid}}
+
+.p-action{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;border:0;background:var(--orange);color:var(--nuit);font-weight:800;font-size:15.5px;text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .2s}
+.btn:hover{box-shadow:0 6px 18px rgba(255,102,0,.35)}
+.btn:active{transform:translateY(1px)}
+.btn.nuit{background:var(--nuit);color:#fff}
+.btn.ligne{background:#fff;color:var(--nuit);border:2px solid var(--nuit)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.p-action .btn{flex:1 1 auto}
+@media (min-width:900px){.p-action .btn{flex:0 0 auto}}
+.p-note{font-size:12px;color:var(--doux);line-height:1.35;margin:0;flex:1 1 220px;min-width:0}
+@media (max-width:559px){.p-note.bowl{display:none}.p-note.bowl.err{display:block}}
+
+/* Pastilles des 3 réponses */
+.pastilles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.pastille{min-width:0;display:flex;flex-direction:column;gap:2px;min-height:64px;padding:9px 10px;border-radius:14px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.18);color:#fff;text-decoration:none;cursor:pointer;text-align:left;transition:background .2s,border-color .2s}
+.pastille:hover{background:rgba(255,255,255,.14);border-color:var(--jaune)}
+.pastille .n{font-family:"Bungee";font-size:11px;color:var(--jaune)}
+.pastille b{font-size:13px;line-height:1.2}
+.pastille small{font-size:11.5px;color:#cfcdf4;line-height:1.25}
+.pastille .ct{display:none}
+@media (max-width:360px){.pastilles{gap:6px}.pastille{padding:8px 7px;min-height:56px}.pastille b{font-size:11.5px !important}.pastille .lg{display:none}.pastille .ct{display:inline}}
+@media (max-width:420px){.pastille small{display:none}.pastille b{font-size:12.5px}}
+@media (max-width:360px){.p-tete p{display:none}.p-tete{min-height:44px}.accroche{margin-bottom:6px}.onglet{min-height:44px}.scene{padding-top:8px}}
+@media (min-width:900px){.pastille{flex-direction:row;align-items:center;gap:12px;padding:12px 16px}.pastille .n{font-size:20px}.pastille span{display:flex;flex-direction:column}}
+
+/* ===== Sections ===== */
+section.bloc{padding:44px 0}
+.bloc h2{margin:0 0 6px;font-size:clamp(22px,5vw,32px);color:var(--nuit)}
+.bloc .chapo{margin:0 0 20px;color:var(--doux);max-width:62ch}
+.trait-deg{display:block;width:84px;height:6px;border-radius:6px;background:var(--degrade);margin-bottom:12px}
+
+.anniv{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media (min-width:900px){.anniv{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}}
+.tableau{background:#fff;border-radius:var(--r);border:1px solid var(--trait);overflow:hidden}
+.tableau table{width:100%;border-collapse:collapse;font-size:14px}
+.tableau th,.tableau td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--trait);vertical-align:top}
+.tableau thead th{background:var(--nuit);color:#fff;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.tableau td.px{white-space:nowrap;font-weight:800;text-align:right}
+.tableau th.px{text-align:right}
+.tableau tr.grp td{background:var(--fond);font-weight:800;color:var(--violet);font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+.tableau tr:last-child td{border-bottom:0}
+.inclus{background:#fff;border-radius:var(--r);border:1px solid var(--trait);padding:16px}
+.inclus h3{margin:0 0 8px;font-size:16px;color:var(--nuit)}
+.inclus ul{margin:0 0 12px;padding-left:18px}
+.inclus li{margin:3px 0}
+.inclus .btn{width:100%}
+.inclus p{font-size:13px;color:var(--doux);margin:10px 0 0}
+
+.fid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+@media (min-width:900px){.fid{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}}
+.etapes{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.etapes li{display:flex;gap:12px;background:#fff;border:1px solid var(--trait);border-radius:var(--r);padding:12px 14px}
+.etapes .num{flex:0 0 40px;height:40px;border-radius:50%;background:var(--degrade);color:#fff;display:grid;place-items:center;font-family:"Bungee";font-size:16px}
+.etapes b{display:block;color:var(--nuit)}
+.etapes p{margin:2px 0 0;font-size:14px;color:var(--doux)}
+.carte-fid{border-radius:20px;padding:18px;color:#fff;background:linear-gradient(135deg,#0000ff,#660099 55%,#ff6600);box-shadow:0 14px 30px rgba(102,0,153,.3)}
+.carte-fid .h{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;opacity:.9}
+.carte-fid .pts{font-family:"Bungee";font-size:44px;line-height:1;margin:16px 0 4px}
+.carte-fid .barre{height:8px;border-radius:8px;background:rgba(255,255,255,.3);overflow:hidden;margin:12px 0 6px}
+.carte-fid .barre i{display:block;height:100%;width:62%;background:var(--jaune)}
+.carte-fid small{font-size:12px;opacity:.95}
+.citation{margin:12px 0 0;font-size:13px;color:var(--doux);border-left:4px solid var(--orange);padding-left:10px}
+
+.amis{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+@media (min-width:700px){.amis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.formule{background:#fff;border:1px solid var(--trait);border-radius:var(--r);padding:14px;min-width:0}
+.formule h3{margin:0;font-size:15px;color:var(--violet)}
+.formule .px{font-family:"Bungee";font-size:28px;color:var(--nuit);margin:4px 0}
+.formule p{margin:0;font-size:13.5px;color:var(--doux)}
+.amis-note{font-size:13px;color:var(--doux);margin:12px 0 0}
+.amis-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+
+.galerie{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:900px){.galerie{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.vignette{position:relative;border-radius:var(--r);overflow:hidden;background:#222;aspect-ratio:4/5;color:#fff;text-decoration:none;display:block;min-height:44px}
+.vignette img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.vignette:hover img{transform:scale(1.05)}
+.vignette span{position:absolute;inset:auto 0 0 0;padding:28px 10px 10px;background:linear-gradient(transparent,rgba(1,3,92,.92));font-weight:800;font-size:14px;line-height:1.25}
+.vignette span small{display:block;font-weight:600;font-size:11.5px;color:#d9d7ff}
+.galerie .vignette:first-child{grid-column:span 2;aspect-ratio:auto}
+@media (min-width:900px){.galerie .vignette:first-child{grid-column:span 1;aspect-ratio:4/5}}
+
+.horaires{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+@media (min-width:900px){.horaires{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.infos{background:#fff;border:1px solid var(--trait);border-radius:var(--r);padding:16px}
+.infos h3{margin:0 0 6px;color:var(--nuit);font-size:16px}
+.infos p{margin:4px 0;font-size:14px}
+.infos a.lien{display:inline-flex;align-items:center;min-height:44px;font-weight:800;color:var(--violet)}
+.aujourdhui{display:inline-block;background:var(--jaune);color:var(--nuit);font-weight:800;border-radius:8px;padding:2px 8px;font-size:13px}
+
+details.gerant{margin:0 auto;background:#fff;border:1px dashed #b9b5d8;border-radius:var(--r);padding:0 16px}
+details.gerant summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:800;color:var(--nuit);list-style:none}
+details.gerant summary::-webkit-details-marker{display:none}
+details.gerant summary::before{content:"+";display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--fond);margin-right:10px;font-weight:800}
+details.gerant[open] summary::before{content:"–"}
+details.gerant ul{margin:0 0 14px;padding-left:20px;font-size:14px;color:var(--doux)}
+details.gerant li{margin:6px 0}
+
+footer{background:var(--nuit);color:#e2e1ff;padding:32px 0 96px;font-size:14px}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+@media (min-width:900px){footer .wrap{grid-template-columns:1fr 1fr 1.4fr}}
+footer a{color:#fff;display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+footer .mention{font-size:12.5px;color:#bdbbe6;border-top:1px solid rgba(255,255,255,.18);padding-top:12px}
+@media (min-width:900px){footer .mention{border-top:0;padding-top:0}}
+
+/* ===== Parcours (fenêtre) ===== */
+.voile{position:fixed;inset:0;background:rgba(5,6,40,.6);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.voile[hidden]{display:none}
+.fenetre{background:#fff;width:100%;max-width:640px;max-height:100dvh;height:100dvh;display:flex;flex-direction:column;border-radius:0;overflow:hidden}
+@media (min-width:700px){.voile{align-items:center}.fenetre{height:auto;max-height:min(860px,94vh);border-radius:22px}}
+.f-tete{display:flex;align-items:center;gap:10px;padding:10px 12px 8px 16px;border-bottom:1px solid var(--trait)}
+.f-tete h2{margin:0;font-size:16px;color:var(--nuit);flex:1;min-width:0}
+.fermer{width:44px;height:44px;border-radius:50%;border:0;background:var(--fond);font-size:22px;cursor:pointer;flex:0 0 44px}
+.progression{display:flex;gap:4px;padding:8px 16px 0}
+.progression i{flex:1;height:5px;border-radius:5px;background:#e6e4f2}
+.progression i.fait{background:var(--degrade)}
+.etape-nom{padding:6px 16px 0;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--violet)}
+.f-corps{padding:10px 16px 16px;overflow-y:auto;flex:1;min-height:0}
+.f-corps h3{margin:4px 0 4px;font-size:21px;color:var(--nuit)}
+.f-corps .aide{margin:0 0 12px;color:var(--doux);font-size:14px}
+.f-pied{border-top:1px solid var(--trait);padding:10px 16px 14px;background:#fff}
+.f-pied .ligne-btn{display:flex;gap:10px}
+.f-pied .ligne-btn .btn{flex:1}
+.f-pied .btn.retour{flex:0 0 auto;background:#fff;border:2px solid var(--trait);color:var(--nuit)}
+.erreur{color:var(--erreur);font-weight:700;font-size:13.5px;margin:8px 0 0;min-height:0}
+.erreur:empty{display:none}
+.total-barre{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--doux);margin-bottom:8px;gap:8px}
+.total-barre b{font-size:17px;color:var(--texte)}
+
+.choix{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.option{width:100%;text-align:left;display:flex;gap:12px;align-items:center;min-height:56px;padding:10px 12px;border-radius:14px;border:2px solid var(--trait);background:#fff;cursor:pointer;min-width:0}
+.option:hover{border-color:var(--violet)}
+.option[aria-pressed="true"]{border-color:var(--orange);background:#fff6ef}
+.option .pic{flex:0 0 44px;height:44px;border-radius:12px;background:var(--fond);display:grid;place-items:center}
+.option .pic img{width:28px;height:28px}
+.option span{min-width:0;flex:1}
+.option b{display:block;color:var(--nuit);font-size:15px}
+.option small{display:block;color:var(--doux);font-size:13px;line-height:1.35}
+.option .px{flex:0 0 auto;font-weight:800;color:var(--nuit);font-size:15px;text-align:right}
+.option.off{opacity:.55;cursor:not-allowed}
+a.option{text-decoration:none;color:inherit}
+.sep{font-size:12px;font-weight:800;color:var(--doux);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 2px}
+
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.cal-nav b{text-transform:capitalize;color:var(--nuit)}
+.cal-nav button{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--trait);background:#fff;cursor:pointer;font-size:18px}
+.cal-nav button:disabled{opacity:.35;cursor:not-allowed}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .js{font-size:11px;font-weight:800;text-align:center;color:var(--doux);padding:2px 0}
+.cal button{min-width:0;height:46px;border-radius:10px;border:1.5px solid transparent;background:#fff;cursor:pointer;font-weight:700;font-size:15px;position:relative;padding:0}
+.cal button.vac{background:#fff4cc}
+.cal button.ferie::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--violet)}
+.cal button.non{color:#a9a8bb;text-decoration:line-through;background:#f5f5f8;cursor:not-allowed}
+.cal button.non.vac{background:#f8f2dc}
+.cal button.plein{color:#a9a8bb;background:repeating-linear-gradient(45deg,#f3f2f7 0 4px,#e9e7f1 4px 8px)}
+.cal button:not(.non):not(.plein):hover{border-color:var(--violet)}
+.cal button[aria-pressed="true"]{background:var(--nuit);color:#fff}
+@media (max-width:360px){.cal{gap:0;margin-inline:-13px}.cal button{border:2px solid #fff;border-radius:12px}.cal button[aria-pressed="true"]{border-color:#fff}}
+.legende{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--doux);margin:8px 0 0}
+.legende i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:4px}
+.info-jour{margin:10px 0 0;font-size:14px;background:var(--fond);border-radius:12px;padding:10px 12px}
+.info-jour:empty{display:none}
+.lien-44{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:0 2px;font-weight:800;color:var(--violet)}
+
+.ligne-pers{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--trait)}
+.ligne-pers span{min-width:0}
+.ligne-pers b{display:block;color:var(--nuit)}
+.ligne-pers small{color:var(--doux);font-size:12.5px}
+.champ{display:flex;flex-direction:column;gap:4px;margin:10px 0}
+.champ label{font-weight:700;font-size:14px;color:var(--nuit)}
+.champ input,.champ select{min-height:48px;border:1.5px solid var(--trait);border-radius:12px;padding:0 12px;background:#fff;width:100%}
+.coche{display:flex;gap:10px;align-items:flex-start;padding:10px 0;font-size:14px;cursor:pointer;min-height:44px}
+.coche input{width:22px;height:22px;flex:0 0 22px;margin:1px 0 0;accent-color:var(--orange)}
+.grille2{display:grid;grid-template-columns:minmax(0,1fr);gap:0 12px}
+@media (min-width:520px){.grille2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.recap{border:1px solid var(--trait);border-radius:14px;overflow:hidden}
+.recap div{display:flex;justify-content:space-between;gap:12px;padding:9px 12px;border-bottom:1px solid var(--trait);font-size:14px}
+.recap div span:first-child{min-width:0;color:var(--doux)}
+.recap div span:last-child{font-weight:700;text-align:right;white-space:nowrap}
+.recap .tot{background:var(--fond);font-size:16px}
+.recap .tot span{color:var(--texte) !important;font-weight:800}
+.recap .acompte{background:#fff6ef}
+.recap .acompte span{color:var(--nuit) !important;font-weight:800}
+.simule{display:flex;gap:10px;align-items:flex-start;background:#eef0ff;border:1px solid #c9ccff;border-radius:12px;padding:10px 12px;font-size:13px;margin:12px 0 0}
+.fid-recap{font-size:13px;color:var(--doux);margin:10px 0 0}
+
+.confirm{text-align:center;padding:10px 0}
+.confirm .ok{width:72px;height:72px;border-radius:50%;margin:6px auto 10px;background:var(--degrade);display:grid;place-items:center}
+.confirm .ok svg{width:36px;height:36px}
+.confirm .numero{font-family:"Bungee";font-size:24px;color:var(--nuit);margin:4px 0}
+.confirm p{color:var(--doux);font-size:14px;margin:6px 0}
+.confirm .btns{display:grid;gap:8px;margin-top:14px}
+
+@media (prefers-reduced-motion:reduce){*{transition:none !important;scroll-behavior:auto !important}}
+</style>
+</head>
+<body>
+
+<div class="apercu"><b>Aperçu non commandé</b><span class="long"> préparé par Vong Studio</span> · réservation et paiement simulés<span class="long"> · disponibilités fictives</span></div>
+
+<header class="tete">
+  <div class="wrap">
+    <a class="logo" href="#haut" aria-label="Cap Form Loisirs, retour en haut"><img src="images/logo-cap-form.svg" alt="Cap Form Loisirs, créateur de souvenirs" width="58" height="47"></a>
+    <nav aria-label="Menu principal">
+      <a href="#anniversaires">Anniversaires</a>
+      <a href="#amis">Groupes</a>
+      <a href="#fidelite">Fidélité</a>
+      <a href="#infos">Tarifs et horaires</a>
+      <a class="tel" href="tel:+33243028989"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg><span>02 43 02 89 89</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="haut">
+<section class="scene" aria-label="Réserver une activité">
+  <div class="wrap">
+    <div class="accroche">
+      <h1 class="titre">Réservez <span>votre activité</span></h1>
+      <p>64 rue Henri Bâtard, Laval · 20 pistes de bowling, karting, VR, quiz et simulateurs</p>
+    </div>
+
+    <div class="onglets" role="tablist" aria-label="Activités">
+      <button class="onglet" role="tab" id="t-bowling" aria-controls="panneau" aria-selected="true" data-act="bowling"><span class="pic"><img src="images/picto-bowling.svg" alt=""></span>Bowling<span class="neuf">en ligne</span></button>
+      <button class="onglet" role="tab" id="t-karting" aria-controls="panneau" aria-selected="false" tabindex="-1" data-act="karting"><span class="pic"><img src="images/picto-karting.svg" alt=""></span>Karting</button>
+      <button class="onglet" role="tab" id="t-vr" aria-controls="panneau" aria-selected="false" tabindex="-1" data-act="vr"><span class="pic"><img src="images/picto-realite-virtuelle.svg" alt=""></span>Réalité virtuelle</button>
+      <button class="onglet" role="tab" id="t-quiz" aria-controls="panneau" aria-selected="false" tabindex="-1" data-act="quiz"><span class="pic"><img src="images/picto-quiz-game.svg" alt=""></span>Quiz Game</button>
+      <button class="onglet" role="tab" id="t-simu" aria-controls="panneau" aria-selected="false" tabindex="-1" data-act="simu"><span class="pic"><img src="images/picto-simulateur.svg" alt=""></span>Simulateurs</button>
+    </div>
+
+    <div class="panneau" id="panneau" role="tabpanel" aria-labelledby="t-bowling">
+      <div class="p-tete" id="p-tete">
+        <div><h2 class="titre" id="p-titre">Bowling</h2><p id="p-sous">20 pistes · un espace vintage années 80, un espace moderne</p></div>
+        <div class="fleches" aria-hidden="true"><i></i><i></i><i></i></div>
+      </div>
+      <div class="p-corps">
+        <div class="p-gauche">
+          <p class="etiq">Jour <span id="p-periode"></span></p>
+          <div class="jours" id="jours" role="group" aria-label="Choisir un jour"></div>
+          <div class="joueurs">
+            <div class="pas" role="group" aria-label="Nombre de joueurs">
+              <button type="button" id="j-moins" aria-label="Un joueur de moins">−</button>
+              <output id="j-nb" aria-live="polite">4</output>
+              <button type="button" id="j-plus" aria-label="Un joueur de plus">+</button>
+            </div>
+            <p id="j-info"></p>
+          </div>
+          <div class="faits seul-ordi" id="p-faits"></div>
+        </div>
+        <div class="p-droite">
+          <p class="etiq" id="cr-etiq">Pistes libres <span><span class="ex">exemple</span></span></p>
+          <div id="p-zone"></div>
+          <div class="p-action">
+            <button class="btn" type="button" id="p-go">Choisir un créneau</button>
+            <p class="p-note" id="p-note"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pastilles" aria-label="Ce qui change">
+      <button class="pastille" type="button" data-ouvrir="bowling"><span class="n">1</span><span><b>Bowling en ligne</b><small>20 pistes, créneaux libres en direct</small></span></button>
+      <button class="pastille" type="button" data-ouvrir="anniv"><span class="n">2</span><span><b><span class="lg">Anniversaire</span><span class="ct">Fête d'enfant</span> : date + acompte</b><small>dates libres, formules et prix sans PDF</small></span></button>
+      <a class="pastille" href="#amis"><span class="n">3</span><span><b>Groupes : réserver en ligne</b><small>moins de 20, sans venir sur place</small></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="anniversaires">
+  <div class="wrap">
+    <span class="trait-deg" aria-hidden="true"></span>
+    <h2 class="titre">Un anniversaire unique pour votre enfant</h2>
+    <p class="chapo">Les mercredis, samedis et dimanches. Vous voyez les dates libres, vous choisissez la formule selon l'âge, et l'acompte bloque la place tout de suite.</p>
+    <div class="anniv">
+      <div class="tableau">
+        <table>
+          <caption class="sr">Formules anniversaire, prix par enfant</caption>
+          <thead><tr><th scope="col">Formule (prix par enfant)</th><th scope="col" class="px">Mercredi</th><th scope="col" class="px">Week-end et fériés</th></tr></thead>
+          <tbody id="t-anniv"></tbody>
+        </table>
+      </div>
+      <div class="inclus">
+        <h3>Chaque formule comprend</h3>
+        <ul>
+          <li>Espace anniversaire avec une table nominative</li>
+          <li>Boissons à volonté (carafe d'eau avec du sirop)</li>
+          <li>Bonbons et 1 jeton par enfant</li>
+          <li>Moelleux au chocolat en option : 15 €</li>
+        </ul>
+        <button class="btn" type="button" data-ouvrir="anniv">Voir les dates libres</button>
+        <p>Minimum 5 enfants. Arrivée le mercredi entre 14 h et 16 h, le week-end entre 13 h et 14 h 30. Tickets CSE non acceptés pour ces formules.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="amis" style="background:#fff">
+  <div class="wrap">
+    <span class="trait-deg" aria-hidden="true"></span>
+    <h2 class="titre">Groupes et sorties entre amis</h2>
+    <p class="chapo">Moins de 20 personnes ? Plus besoin de venir sur place pour trouver un créneau : choisissez la formule et l'heure, en semaine.</p>
+    <div class="amis">
+      <div class="formule"><h3>Formule 1</h3><div class="px">25 €</div><p>2 parties de bowling + 1 session de karting</p></div>
+      <div class="formule"><h3>Formule 2</h3><div class="px">29 €</div><p>1 partie de bowling + 2 sessions de karting</p></div>
+      <div class="formule"><h3>Formule 3</h3><div class="px">36 €</div><p>2 parties de bowling + 2 sessions de karting</p></div>
+    </div>
+    <p class="amis-note">Prix par personne, chaussures comprises, sessions de karting de 8 minutes. Scolaires et étudiants : −2 € par formule. Valable en semaine, hors week-end, vacances scolaires et jours fériés.</p>
+    <div class="amis-actions">
+      <button class="btn" type="button" data-ouvrir="amis">Réserver une formule</button>
+      <a class="btn ligne" href="https://capformloisirs-53.fr/organisez-vos-evenements/" rel="noopener">20 personnes et plus : nous écrire</a>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="fidelite">
+  <div class="wrap">
+    <span class="trait-deg" aria-hidden="true"></span>
+    <h2 class="titre">Votre fidélité est récompensée</h2>
+    <p class="chapo">Chaque partie jouée chez Cap Form vous rapporte des points à utiliser sur votre prochaine visite. Voici comment ça marche, en trois étapes.</p>
+    <div class="fid">
+      <ol class="etapes">
+        <li><span class="num">1</span><div><b>Je m'inscris</b><p>À l'accueil ou en réservant en ligne : votre carte est créée avec votre téléphone ou votre e-mail. <span class="ex">à confirmer</span></p></div></li>
+        <li><span class="num">2</span><div><b>Je cumule à chaque partie</b><p>Bowling, et les autres activités si le parc le décide. Barème affiché ici : <span class="ex">à confirmer avec le parc</span></p></div></li>
+        <li><span class="num">3</span><div><b>J'utilise mes points à la visite suivante</b><p>Vos points se déduisent lors d'une prochaine visite. Où consulter son solde : <span class="ex">à confirmer avec le parc</span></p></div></li>
+      </ol>
+      <div>
+        <div class="carte-fid" role="img" aria-label="Exemple de carte de fidélité : 320 points">
+          <div class="h"><span>MA CARTE CAP FORM</span><span class="ex" style="background:rgba(255,255,255,.9)">exemple</span></div>
+          <div class="pts">320 pts</div>
+          <small>Valeur et paliers à confirmer avec le parc</small>
+          <div class="barre"><i></i></div>
+          <small>Encore 180 pts avant votre prochaine partie offerte <span class="ex" style="background:rgba(255,255,255,.9)">exemple</span></small>
+        </div>
+        <p class="citation">« Notre programme récompense chaque partie jouée avec des points à utiliser sur votre prochaine visite. » Page bowling de Cap Form Loisirs</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" style="background:#fff;padding-bottom:36px">
+  <div class="wrap">
+    <span class="trait-deg" aria-hidden="true"></span>
+    <h2 class="titre">Tout le complexe</h2>
+    <p class="chapo">Plus de 30 ans à Laval, et toujours de nouvelles activités.</p>
+    <div class="galerie">
+      <a class="vignette" href="https://capformloisirs-53.fr/activites-et-reservations/bowling-laval/" rel="noopener"><img src="images/bowling-pistes.webp" alt="Les pistes de bowling modernes de Cap Form Loisirs" loading="lazy"><span>Bowling<small>20 pistes, 2 ambiances</small></span></a>
+      <a class="vignette" href="https://capformloisirs-53.fr/activites-et-reservations/karting-laval/" rel="noopener"><img src="images/karting.webp" alt="Deux karts électriques sur la piste de Cap Form" loading="lazy"><span>Karting électrique<small>dès 7 ans et 1,30 m</small></span></a>
+      <a class="vignette" href="https://capformloisirs-53.fr/activites-et-reservations/realite-virtuelle-laval/" rel="noopener"><img src="images/realite-virtuelle.webp" alt="Casque de réalité virtuelle" loading="lazy"><span>Réalité virtuelle<small>jusqu'à 4 par jeu</small></span></a>
+      <a class="vignette" href="https://capformloisirs-53.fr/activites-et-reservations/quiz-game/" rel="noopener"><img src="images/quiz-game.webp" alt="Écran et buzzers du Quiz Game" loading="lazy"><span>Quiz Game<small>4 à 12 joueurs</small></span></a>
+      <a class="vignette" href="https://capformloisirs-53.fr/activites-et-reservations/simulateurs-de-courses/" rel="noopener"><img src="images/simulateur.webp" alt="Volant d'un simulateur de course" loading="lazy"><span>Simulateurs<small>5 simulateurs sur vérins</small></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="infos">
+  <div class="wrap">
+    <span class="trait-deg" aria-hidden="true"></span>
+    <h2 class="titre">Horaires et infos</h2>
+    <p class="chapo" id="h-chapo"></p>
+    <div class="horaires">
+      <div class="tableau">
+        <table>
+          <caption class="sr">Horaires du bowling, du billard, du bar et des jeux d'arcade</caption>
+          <thead><tr><th scope="col">Bowling</th><th scope="col">Hors vacances</th><th scope="col">Vacances (zone B)</th></tr></thead>
+          <tbody id="t-horaires"></tbody>
+        </table>
+      </div>
+      <div class="infos">
+        <h3>Cap Form Loisirs</h3>
+        <p>64 rue Henri Bâtard, 53000 Laval</p>
+        <p><a class="lien" href="tel:+33243028989">02 43 02 89 89</a></p>
+        <p>Paiement : CB, espèces, chèques ANCV.</p>
+        <p>Bowling : 6 € la partie en semaine, 7 € le week-end (adulte), +2 € de chaussures. 1 partie achetée = 1 partie offerte pour un enfant de moins de 6 ans.</p>
+        <p>Karting, VR, quiz et simulateurs ont leurs propres horaires : ils s'affichent dans le panneau en haut de page, jour par jour.</p>
+        <p><a class="lien" href="https://capformloisirs-53.fr/tarifs-et-horaires/" rel="noopener">Tous les tarifs et horaires</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" style="padding-top:0">
+  <div class="wrap">
+    <details class="gerant">
+      <summary>Pour la direction : ce qui change avec cette page</summary>
+      <ul>
+        <li><b>Le bowling entre enfin dans la réservation en ligne</b> : la page bowling actuelle promet de « réserver en ligne sur notre page internet », mais le module en ligne ne propose que karting, quiz, VR et simulateurs. Ici, les 20 pistes ont leurs créneaux et leur acompte.</li>
+        <li><b>Rien ne change pour ce qui marche déjà</b> : karting, VR, quiz et simulateurs continuent de se réserver dans votre module actuel, ouvert depuis le même panneau.</li>
+        <li><b>Les anniversaires ne sont plus une demande à traiter à la main</b> : les dates libres s'affichent, les prix du PDF sont dans la page, l'acompte bloque la place (taux à choisir avec vous).</li>
+        <li><b>Le programme de fidélité devient visible</b> partout où l'on réserve, au lieu d'un paragraphe sur la page bowling. Barème et récompenses à définir avec vous.</li>
+        <li>Les groupes de moins de 20 réservent leur formule bowling + karting sans venir sur place.</li>
+      </ul>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <img src="images/logo-cap-form.svg" alt="Cap Form Loisirs" width="74" height="60" style="width:74px;height:auto;background:#fff;border-radius:12px;padding:6px;margin-bottom:8px">
+      <p style="margin:0">64 rue Henri Bâtard, 53000 Laval</p>
+      <a href="tel:+33243028989">02 43 02 89 89</a>
+    </div>
+    <div>
+      <p style="margin:0 0 4px"><b>Paiements acceptés</b></p>
+      <p style="margin:0">CB, espèces, chèques ANCV.</p>
+      <a href="https://capformloisirs-53.fr/rejoignez-lequipe/" rel="noopener">Rejoignez l'équipe</a>
+    </div>
+    <div class="mention">
+      <b>Aperçu non commandé.</b> Logo et photos appartiennent au parc ; retrait sur simple demande. Page préparée par Vong Studio à partir des informations publiques de capformloisirs-53.fr (lues le 10/11/2026). Réservation, disponibilités et paiement sont simulés ; le taux d'acompte et le barème de fidélité sont des exemples.
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Parcours de réservation ===== -->
+<div class="voile" id="voile" hidden>
+  <div class="fenetre" role="dialog" aria-modal="true" aria-labelledby="f-titre">
+    <div class="f-tete">
+      <h2 id="f-titre">Réserver</h2>
+      <button class="fermer" type="button" id="f-fermer" aria-label="Fermer la réservation">×</button>
+    </div>
+    <div class="progression" id="f-prog" aria-hidden="true"></div>
+    <div class="etape-nom" id="f-etape"></div>
+    <div class="f-corps" id="f-corps" tabindex="-1"></div>
+    <div class="f-pied" id="f-pied"></div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   Données lues sur capformloisirs-53.fr le 10/11/2026
+   (pages Tarifs et horaires, Bowling, Karting, Réalité virtuelle, Quiz Game,
+   Simulateurs de courses, FAQ, Organisez vos événements, PDF « formules anniversaires »)
+   ===================================================================== */
+
+/* Vacances scolaires zone B (académie de Nantes), du premier au dernier jour sans classe.
+   Source officielle : https://data.education.gouv.fr/explore/dataset/fr-en-calendrier-scolaire/
+   (dates recopiées pour la maquette MaxxParc le 26/10/2026, même zone B ; à revérifier avant mise en ligne). */
+var VACANCES=[
+ ["2026-10-17","2026-11-01","vacances de la Toussaint"],
+ ["2026-12-19","2027-01-03","vacances de Noël"],
+ ["2027-02-20","2027-03-07","vacances d'hiver"],
+ ["2027-04-17","2027-05-02","vacances de printemps"],
+ ["2027-07-03","2027-08-31","vacances d'été"]
+];
+var FERIES={"2026-11-11":"11 Novembre","2026-12-25":"Noël","2027-01-01":"Jour de l'an","2027-03-29":"lundi de Pâques","2027-05-01":"1er Mai","2027-05-06":"Ascension","2027-05-08":"8 Mai","2027-05-17":"lundi de Pentecôte","2027-07-14":"14 Juillet","2027-08-15":"15 Août"};
+var LIMITE="2027-08-31";
+var ACOMPTE=0.30; /* exemple, à caler avec le parc */
+
+/* Horaires par activité ; index 0 = dimanche ; heures décimales (26 = 2 h du matin) ; null = fermé */
+var H={
+ bowling:{hors:[[14,20],null,[15,24],[14,24],[15,24],[15,26],[14,26]], vac:[[14,20],[10,19],[10,24],[10,24],[10,24],[10,26],[14,26]]},
+ karting:{hors:[[14,20],null,[18,23],[14,23],[18,23],[15,25],[14,26]], vac:[[14,20],[13,19],[13,24],[13,24],[13,24],[13,25],[14,26]]},
+ vr:     {hors:[[15,19],null,[18,23],[15,23],[18,23],[18,25],[15,25]], vac:[[14,19],[14,18],[14,23],[14,23],[14,23],[14,25],[14,25]]},
+ quiz:   {hors:[[15,19],null,[18,23],[15,23],[18,23],[18,25],[15,25]], vac:[[14,19],[14,18],[14,23],[14,23],[14,23],[14,25],[14,25]]},
+ simu:   {hors:[[15,19],null,[18,23],[15,23],[18,23],[15,25],[15,25]], vac:[[14,19],[14,18],[14,23],[14,23],[14,23],[14,25],[14,25]]}
+};
+/* Bowling, prix par partie et par personne : [1re partie, partie supplémentaire] */
+var BOWL={
+ sem:{adulte:[6,3],etudiant:[4,3],retraite:[3,3]},
+ we: {adulte:[7,6],etudiant:[6,5],retraite:[6,5]}
+};
+var CHAUSSURES=2, PISTES=20, MAX_PISTE=14, PAR_PISTE=6 /* répartition conseillée : exemple */;
+var PRECISION=20; /* Formule Précision : bowling illimité + billard illimité, hors vacances, week-end et fériés */
+var ANNIV=[ /* [id, nom, âge min, mercredi, week-end et fériés, karting ?] */
+ ["b1","1 partie de bowling",3,8,10,0],
+ ["b2","2 parties de bowling",3,12,15,0],
+ ["bk1","1 partie de bowling et 1 session de karting",7,18,20,1],
+ ["bk2","1 partie de bowling et 2 sessions de karting",7,25,29,1],
+ ["k2","2 sessions de karting",7,20,22,1],
+ ["bq","1 partie de bowling et 1 session de quiz game",10,18,20,0],
+ ["kq","1 session de karting et 1 session de quiz game",10,20,22,1],
+ ["bkq","1 partie de bowling, 1 session de karting et 1 session de quiz game",10,28,32,1]
+];
+var GATEAU=15;
+var AMIS=[["f1","Formule 1","2 parties de bowling + 1 session de karting",25],["f2","Formule 2","1 partie de bowling + 2 sessions de karting",29],["f3","Formule 3","2 parties de bowling + 2 sessions de karting",36]];
+var MODULE="https://capformloisirs-53.fr/activites-et-reservations/#reservation_activites";
+
+var ACT={
+ bowling:{nom:"Bowling",photo:"images/bowling-pistes.webp",sous:"20 pistes · un espace vintage années 80, un espace moderne",min:1,max:28,def:4},
+ karting:{nom:"Karting électrique",photo:"images/karting.webp",sous:"Le plus grand circuit de Mayenne · sessions de 8 min",min:1,max:8,def:4},
+ vr:{nom:"Réalité virtuelle",photo:"images/realite-virtuelle.webp",sous:"Jusqu'à 4 joueurs dans le même jeu",min:1,max:4,def:2},
+ quiz:{nom:"Quiz Game",photo:"images/quiz-game.webp",sous:"Cap Quiz : 8 manches, environ 1 h de jeu",min:4,max:12,def:6},
+ simu:{nom:"Simulateurs de courses",photo:"images/simulateur.webp",sous:"5 simulateurs sur vérins, retour de force dans le volant",min:1,max:5,def:2}
+};
+
+/* ===== Dates ===== */
+var JOURS=["dim.","lun.","mar.","mer.","jeu.","ven.","sam."];
+var JOURS_L=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+var MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+function cle(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function deCle(k){var p=k.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function plus(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)}
+function auj(){var n=new Date();return new Date(n.getFullYear(),n.getMonth(),n.getDate())}
+function vacance(d){var k=cle(d);for(var i=0;i<VACANCES.length;i++){if(k>=VACANCES[i][0]&&k<=VACANCES[i][1])return VACANCES[i][2]}return null}
+function ferie(d){return FERIES[cle(d)]||null}
+function veilleFerie(d){return !!FERIES[cle(plus(d,1))]}
+function weekend(d){var j=d.getDay();return j===0||j===6}
+function horaire(act,d){return H[act][vacance(d)?"vac":"hors"][d.getDay()]}
+function hh(x){var h=Math.floor(x)%24,m=Math.round((x-Math.floor(x))*60);return h===0&&m===0&&x>=24?"minuit":h+" h"+(m?" "+String(m).padStart(2,"0"):"")}
+function hc(x){var h=Math.floor(x)%24,m=Math.round((x-Math.floor(x))*60);return h+"h"+(m?String(m).padStart(2,"0"):"")}
+function dateLongue(d){return JOURS_L[d.getDay()]+" "+d.getDate()+" "+MOIS[d.getMonth()]}
+function eur(x){return (Math.round(x*100)/100).toFixed(x%1?2:0).replace(".",",")+"\u00a0€"}
+function maintenant(){var n=new Date();return n.getHours()+n.getMinutes()/60}
+function hache(s){var x=7;for(var i=0;i<s.length;i++)x=(x*31+s.charCodeAt(i))>>>0;return x}
+
+/* Disponibilités fictives (exemple) */
+function pistesLibres(d,t){
+  var soir=t>=20, we=d.getDay()===5||d.getDay()===6, base=(we?(soir?15:9):(soir?8:3))+(vacance(d)?3:0);
+  return Math.max(0,PISTES-base-(hache(cle(d)+t)%7));
+}
+function placesAnniv(d,t){return hache("a"+cle(d)+t)%4} /* 0 = complet */
+function annivJourPlein(d){return d.getDay()===6&&hache("p"+cle(d))%3===1}
+
+function periodeTxt(d){var v=vacance(d),f=ferie(d);return (f?f+" · ":"")+(v?"vacances scolaires":"hors vacances")}
+
+/* ================= PANNEAU DU PREMIER ÉCRAN ================= */
+var P={act:"bowling",jour:0,nb:4,cr:null,plus:false};
+function joursPanneau(){var t=auj(),a=[];for(var i=0;i<14;i++)a.push(plus(t,i));return a}
+
+function rendrePanneau(){
+  var a=ACT[P.act], jours=joursPanneau(), d=jours[P.jour], h=horaire(P.act,d);
+  document.getElementById("p-titre").textContent=a.nom;
+  document.getElementById("p-sous").textContent=a.sous;
+  document.getElementById("p-tete").style.backgroundImage="url("+a.photo+")";
+  document.getElementById("p-periode").textContent=periodeTxt(d);
+  /* bande de dates */
+  var zj=document.getElementById("jours");zj.innerHTML="";
+  jours.forEach(function(x,i){
+    var hx=horaire(P.act,x),b=document.createElement("button");b.type="button";b.className="jour"+(hx?"":" ferme");
+    b.setAttribute("aria-pressed",i===P.jour?"true":"false");
+    var lab=i===0?"auj.":JOURS[x.getDay()];
+    b.innerHTML="<small>"+lab+"</small><b>"+x.getDate()+"</b><em>"+(hx?(ferie(x)?"férié":(vacance(x)?"vacances":"&nbsp;")):"fermé")+"</em>";
+    b.setAttribute("aria-label",dateLongue(x)+(hx?"":", fermé"));
+    b.onclick=function(){P.jour=i;P.cr=null;P.plus=false;rendrePanneau()};
+    zj.appendChild(b);
+  });
+  /* joueurs */
+  P.nb=Math.min(Math.max(P.nb,a.min),a.max);
+  document.getElementById("j-nb").textContent=P.nb;
+  document.getElementById("j-moins").disabled=P.nb<=a.min;
+  document.getElementById("j-plus").disabled=P.nb>=a.max;
+  var info=document.getElementById("j-info"), zone=document.getElementById("p-zone"), et=document.getElementById("cr-etiq"), go=document.getElementById("p-go"), note=document.getElementById("p-note");
+  zone.innerHTML="";
+  document.getElementById("p-faits").innerHTML=P.act==="bowling"?"<div><b>14 max</b>joueurs par piste</div><div><b>&lt; 6 ans</b>1 partie offerte par partie achetée</div><div><b>PMR</b>accessible, pointures dès 22</div>":"";
+  if(P.act==="bowling"){
+    var pistes=Math.ceil(P.nb/PAR_PISTE), dur=Math.ceil(P.nb/pistes)*10;
+    var tarif=(weekend(d)||vacance(d)||ferie(d))?BOWL.we:BOWL.sem;
+    info.innerHTML="<b>"+P.nb+" joueur"+(P.nb>1?"s":"")+"</b> · "+pistes+" piste"+(pistes>1?"s":"")+"<br>"+eur(tarif.adulte[0])+" la partie"+(ferie(d)?" <span class=\"ex\">à confirmer</span>":" · chaussures 2 €");
+    et.innerHTML="Pistes libres <span><span class=\"ex\">exemple</span></span>";
+    if(!h){zone.innerHTML="<p class=\"info-jour\" style=\"margin:0\">Le bowling est fermé le lundi hors vacances scolaires. Choisissez un autre jour.</p>";go.disabled=true;go.textContent="Choisir un créneau";note.textContent="";return}
+    var g=document.createElement("div");g.className="creneaux";
+    var liste=[];for(var t=h[0];t<=h[1]-1;t+=0.5){if(P.jour===0&&t<=maintenant()+0.5)continue;liste.push(t)}
+    if(!liste.length){zone.innerHTML="<p class=\"info-jour\" style=\"margin:0\">Plus de créneau aujourd'hui : regardez demain.</p>";go.disabled=true;note.textContent="";return}
+    var nbm=matchMedia("(max-width:360px)").matches?4:(matchMedia("(max-width:559px)").matches?8:12);
+    var montres=P.plus?liste:liste.filter(function(t){return t>=17||liste.length<=nbm}).slice(0,nbm);
+    if(montres.length<4)montres=liste.slice(-nbm);
+    montres.forEach(function(t){
+      var l=pistesLibres(d,t),c=document.createElement("button");c.type="button";
+      var ok=l>=pistes;c.className="cr"+(l===0?" complet":(l<=3?" peu":""));
+      c.innerHTML="<b>"+hc(t)+"</b><small>"+(l===0?"complet":l+" libre"+(l>1?"s":""))+"</small>";
+      c.setAttribute("aria-label",hc(t)+", "+(l===0?"complet":l+" pistes libres"));
+      c.setAttribute("aria-pressed",P.cr===t?"true":"false");
+      if(l===0){c.disabled=true}
+      c.onclick=function(){if(!ok){note.textContent="À "+hc(t)+", il reste "+l+" piste"+(l>1?"s":"")+" : il en faut "+pistes+" pour "+P.nb+" joueurs.";note.style.color="var(--erreur)";note.className="p-note bowl err";return}P.cr=t;rendrePanneau()};
+      g.appendChild(c);
+    });
+    zone.appendChild(g);
+    if(montres.length<liste.length){var pc=document.createElement("p");pc.className="plus-cr";pc.innerHTML="Ouvert de "+hh(h[0])+" à "+hh(h[1])+". <button type=\"button\">Voir tous les créneaux</button>";pc.querySelector("button").onclick=function(){P.plus=true;rendrePanneau()};zone.appendChild(pc)}
+    go.disabled=false;note.style.color="";note.className="p-note bowl";
+    go.textContent=P.cr!==null?"Réserver "+pistes+" piste"+(pistes>1?"s":"")+" à "+hc(P.cr):"Réserver une piste";
+    note.textContent=P.cr!==null?dateLongue(d)+" · acompte en ligne, le reste sur place.":"Choisissez une heure, ou continuez pour tout régler pas à pas.";
+  } else {
+    var px=prixActivite(P.act,d);
+    info.innerHTML="<b>"+P.nb+" "+(P.act==="karting"?"pilote":"joueur")+(P.nb>1?"s":"")+"</b> · ≈ <b>"+eur(px.unit*P.nb)+"</b><br>"+px.court;
+    et.innerHTML="Horaires de ce jour <span>"+(h?hh(h[0])+" – "+hh(h[1]):"fermé")+(P.act==="karting"&&vacance(d)&&h?" <span class=\"ex\">à confirmer</span>":"")+"</span>";
+    var fr=document.createElement("div");
+    fr.innerHTML="<div class=\"frise\" role=\"img\" aria-label=\""+(h?"Ouvert de "+hh(h[0])+" à "+hh(h[1]):"Fermé ce jour")+"\">"+(h?"<span class=\"ouv\" style=\"left:"+((h[0]-10)/16*100)+"%;width:"+((h[1]-h[0])/16*100)+"%\"></span>":"")+"</div><div class=\"frise-h\"><span>10h</span><span>14h</span><span>18h</span><span>22h</span><span>2h</span></div>";
+    zone.appendChild(fr);
+    var f=document.createElement("div");f.className="faits";f.innerHTML=px.faits.map(function(x){return "<div><b>"+x[0]+"</b>"+x[1]+"</div>"}).join("");
+    zone.appendChild(f);
+    go.disabled=!h;note.style.color="";note.className="p-note";
+    go.textContent=h?"Réserver en ligne ↗":"Fermé ce jour";
+    note.textContent=h?"Déjà réservable en ligne : votre module actuel reste en place.":"Fermé le lundi hors vacances scolaires.";
+  }
+}
+
+function prixActivite(act,d){
+  var v=vacance(d),w=weekend(d),f=ferie(d),dim=d.getDay()===0;
+  if(act==="karting"){
+    var haut=v||w||f||veilleFerie(d);
+    return {unit:haut?17:14,court:(haut?"17 €":"14 €")+" la 1re session adulte",pour:"pour la 1re session",
+      faits:[["8 min","la session"],["8 karts","max"],["dès 7 ans","et 1,30 m"]]};
+  }
+  var demi=v&&dim;
+  if(act==="quiz"){
+    var u=demi?7.5:15;
+    return {unit:u,court:(demi?"7,50 € (−50 %, dimanche de vacances)":"15 € par personne"),pour:"la partie",
+      faits:[["4 à 12","joueurs"],["≈ 1 h","8 manches"],["dès 10 ans","accompagné"]]};
+  }
+  var u2=demi?6:12;
+  if(act==="vr")return {unit:u2,court:(demi?"6 € les 20 min (−50 %, dimanche de vacances)":"12 € les 20 min par personne"),pour:"pour 20 minutes",
+      faits:[["20 min","40 min : 23 €"],["4 joueurs","max par jeu"],["dès 13 ans","selon le jeu"]]};
+  return {unit:u2,court:(demi?"6 € les 20 min (−50 %, dimanche de vacances)":"12 € les 20 min par personne"),pour:"pour 20 minutes",
+      faits:[["20 min","40 min : 23 €"],["5 places","par session"],["dès 13 ans","course et vol"]]};
+}
+
+/* Onglets (clavier : flèches gauche/droite) */
+var onglets=[].slice.call(document.querySelectorAll(".onglet"));
+function choisirOnglet(b,focus){
+  onglets.forEach(function(o){var s=o===b;o.setAttribute("aria-selected",s?"true":"false");o.tabIndex=s?0:-1});
+  document.getElementById("panneau").setAttribute("aria-labelledby",b.id);
+  P.act=b.dataset.act;P.cr=null;P.plus=false;P.nb=ACT[P.act].def;
+  rendrePanneau();if(focus)b.focus();
+  b.scrollIntoView({block:"nearest",inline:"nearest"});
+}
+onglets.forEach(function(b,i){
+  b.onclick=function(){choisirOnglet(b)};
+  b.onkeydown=function(e){if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();var n=onglets[(i+(e.key==="ArrowRight"?1:-1)+onglets.length)%onglets.length];choisirOnglet(n,true)}};
+});
+document.getElementById("j-moins").onclick=function(){P.nb--;P.cr=null;rendrePanneau()};
+document.getElementById("j-plus").onclick=function(){P.nb++;P.cr=null;rendrePanneau()};
+document.getElementById("p-go").onclick=function(){
+  if(P.act!=="bowling"){window.open(MODULE,"_blank","noopener");return}
+  var d=joursPanneau()[P.jour];
+  ouvrir("bowling",{date:cle(d),cr:P.cr,nb:P.nb});
+};
+[].forEach.call(document.querySelectorAll("[data-ouvrir]"),function(b){b.onclick=function(){var t=b.dataset.ouvrir;ouvrir(t==="bowling"?"bowling":t,{})}});
+
+/* ================= PARCOURS ================= */
+var ETAPES=["Activité","Formule","Date","Créneau","Participants","Options","Récapitulatif","Confirmation"];
+var R,derniereEtape=-1;
+function neuf(){return {act:null,formule:null,parties:1,date:null,cr:null,pers:{adulte:0,etudiant:0,retraite:0,enfant:0},enfants:8,age:"",taille:false,eleves:0,nbAmis:6,gateau:false,barrieres:false,nom:"",tel:"",mail:"",prenomEnfant:"",cgv:false,etape:0,mois:null,num:null}}
+var voile=document.getElementById("voile"),corps=document.getElementById("f-corps"),pied=document.getElementById("f-pied"),dernierFocus=null;
+
+function ouvrir(act,pre){
+  R=neuf();dernierFocus=document.activeElement;
+  if(act){R.act=act;R.etape=1}
+  if(pre.date){R.date=pre.date}
+  if(pre.cr!==undefined&&pre.cr!==null){R.cr=pre.cr}
+  if(pre.nb){R.pers.adulte=pre.nb}
+  if(act==="bowling"&&!pre.nb)R.pers.adulte=4;
+  voile.hidden=false;document.body.style.overflow="hidden";derniereEtape=-1;
+  rendre();
+}
+function fermer(){voile.hidden=true;document.body.style.overflow="";if(dernierFocus)dernierFocus.focus()}
+document.getElementById("f-fermer").onclick=fermer;
+voile.addEventListener("click",function(e){if(e.target===voile)fermer()});
+document.addEventListener("keydown",function(e){
+  if(voile.hidden)return;
+  if(e.key==="Escape"){fermer();return}
+  if(e.key==="Tab"){var f=[].slice.call(voile.querySelectorAll("button:not([disabled]),a[href],input,select,[tabindex='0']"));if(!f.length)return;var a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}
+});
+
+function titreAct(){return R.act==="bowling"?"Bowling":R.act==="anniv"?"Anniversaire d'enfant":R.act==="amis"?"Formule entre amis":"Réserver"}
+function el(html){var d=document.createElement("div");d.innerHTML=html;return d}
+
+function rendre(){
+  document.getElementById("f-titre").textContent=titreAct()+(R.date&&R.etape>2&&R.etape<7?" · "+dateLongue(deCle(R.date)):"");
+  var pr=document.getElementById("f-prog");pr.innerHTML="";for(var i=0;i<ETAPES.length;i++){var x=document.createElement("i");if(i<=R.etape)x.className="fait";pr.appendChild(x)}
+  document.getElementById("f-etape").textContent="Étape "+(R.etape+1)+" sur "+ETAPES.length+" · "+ETAPES[R.etape];
+  corps.innerHTML="";pied.innerHTML="";
+  [etActivite,etFormule,etDate,etCreneau,etPersonnes,etOptions,etRecap,etConfirm][R.etape]();
+  corps.scrollTop=0;
+  if(R.etape!==derniereEtape){derniereEtape=R.etape;var h=corps.querySelector("h3");if(h){h.tabIndex=-1;h.focus({preventScroll:true})}}
+}
+function navigation(valider,suivantTxt){
+  var tot=totaux();
+  if(R.etape>=1&&R.etape<=5&&R.date&&tot&&tot.total>0){pied.appendChild(el("<div class=\"total-barre\"><span>Total estimé · acompte "+Math.round(ACOMPTE*100)+" % <span class=\"ex\">exemple</span></span><b>"+eur(tot.total)+"</b></div>").firstChild)}
+  var l=document.createElement("div");l.className="ligne-btn";
+  if(R.etape>0){var r=document.createElement("button");r.type="button";r.className="btn retour";r.textContent="Retour";r.setAttribute("aria-label","Étape précédente");r.onclick=function(){R.etape--;rendre()};l.appendChild(r)}
+  var s=document.createElement("button");s.type="button";s.className="btn";s.textContent=suivantTxt||"Continuer";
+  var err=document.createElement("p");err.className="erreur";err.setAttribute("role","alert");
+  s.onclick=function(){var m=valider();if(m){err.textContent=m;return}R.etape++;rendre()};
+  l.appendChild(s);pied.appendChild(l);pied.appendChild(err);
+}
+
+/* --- 1. Activité --- */
+function etActivite(){
+  corps.appendChild(el("<h3>Que voulez-vous réserver ?</h3><p class=\"aide\">Tout Cap Form au même endroit. Le bowling et les formules se réservent ici ; les autres activités gardent leur module en ligne actuel.</p>"));
+  var c=document.createElement("div");c.className="choix";
+  [["bowling","Bowling","20 pistes, à la partie ou formule Précision","dès 6 €","picto-bowling.svg"],
+   ["anniv","Anniversaire d'enfant","Mercredi, samedi ou dimanche, dès 5 enfants","dès 8 €/enfant","picto-bowling.svg"],
+   ["amis","Entre amis : bowling + karting","Formules 1 à 3, moins de 20 personnes, en semaine","dès 25 €","picto-karting.svg"]].forEach(function(o){
+    var b=document.createElement("button");b.type="button";b.className="option";b.setAttribute("aria-pressed",R.act===o[0]?"true":"false");
+    b.innerHTML="<span class=\"pic\"><img src=\"images/"+o[4]+"\" alt=\"\"></span><span><b>"+o[1]+"</b><small>"+o[2]+"</small></span><span class=\"px\">"+o[3]+"</span>";
+    b.onclick=function(){var garde=R.act===o[0];if(!garde){var n=neuf();n.act=o[0];if(o[0]==="bowling")n.pers.adulte=4;R=n}R.etape=1;rendre()};
+    c.appendChild(b);
+  });
+  c.appendChild(el("<p class=\"sep\">Déjà réservables en ligne</p>").firstChild);
+  [["Karting","picto-karting.svg"],["Réalité virtuelle","picto-realite-virtuelle.svg"],["Quiz Game","picto-quiz-game.svg"],["Simulateurs de courses","picto-simulateur.svg"]].forEach(function(o){
+    var a=document.createElement("a");a.className="option";a.href=MODULE;a.target="_blank";a.rel="noopener";
+    a.innerHTML="<span class=\"pic\"><img src=\"images/"+o[1]+"\" alt=\"\"></span><span><b>"+o[0]+"</b><small>Ouvre votre module de réservation actuel</small></span><span class=\"px\" aria-hidden=\"true\">↗</span>";
+    c.appendChild(a);
+  });
+  corps.appendChild(c);
+  navigation(function(){if(!R.act)return "Choisissez une activité pour continuer."});
+}
+
+/* --- 2. Formule --- */
+function etFormule(){
+  var c=document.createElement("div");c.className="choix";
+  if(R.act==="bowling"){
+    corps.appendChild(el("<h3>Votre formule bowling</h3><p class=\"aide\">Prix par personne. Le tarif week-end s'applique aussi pendant les vacances scolaires.</p>"));
+    [["partie","À la partie","Semaine 6 € · week-end 7 € (adulte), parties suivantes 3 € / 6 €, +2 € de chaussures","dès 6 €"],
+     ["precision","Formule Précision","Bowling illimité et billard illimité. Hors vacances scolaires, week-end et jours fériés.","20 €"]].forEach(function(o){
+      var b=document.createElement("button");b.type="button";b.className="option";b.setAttribute("aria-pressed",R.formule===o[0]?"true":"false");
+      b.innerHTML="<span><b>"+o[1]+"</b><small>"+o[2]+"</small></span><span class=\"px\">"+o[3]+"</span>";
+      b.onclick=function(){R.formule=o[0];if(o[0]==="precision"&&R.date&&!jourOk(deCle(R.date)).ok){R.date=null;R.cr=null}rendre()};
+      c.appendChild(b);
+    });
+    corps.appendChild(c);
+    if(R.formule==="partie"){
+      var p=el("<div class=\"ligne-pers\"><span><b>Nombre de parties</b><small>≈ 10 min par joueur et par partie (indication du site) <span class=\"ex\">à confirmer</span></small></span><div class=\"pas\"><button type=\"button\" aria-label=\"Une partie de moins\">−</button><output>"+R.parties+"</output><button type=\"button\" aria-label=\"Une partie de plus\">+</button></div></div>").firstChild;
+      var bt=p.querySelectorAll("button");bt[0].disabled=R.parties<=1;bt[1].disabled=R.parties>=3;
+      bt[0].onclick=function(){R.parties--;rendre()};bt[1].onclick=function(){R.parties++;rendre()};
+      corps.appendChild(p);
+    }
+    if(R.formule==="precision")corps.appendChild(el("<p class=\"info-jour\">Durée de la piste pour la formule Précision : 2 h <span class=\"ex\">exemple</span>, à caler avec le parc.</p>"));
+  } else if(R.act==="anniv"){
+    corps.appendChild(el("<h3>La formule de la fête</h3><p class=\"aide\">Prix par enfant, minimum 5 enfants. Attention à l'âge minimum de chaque formule.</p>"));
+    var grp=null;
+    ANNIV.forEach(function(o){
+      var g=o[2]===3?"Dès 3 ans":o[2]===7?"Dès 7 ans et 1,30 m (karting)":"Dès 10 ans (quiz game)";
+      if(g!==grp){grp=g;c.appendChild(el("<p class=\"sep\">"+g+"</p>").firstChild)}
+      var b=document.createElement("button");b.type="button";b.className="option";b.setAttribute("aria-pressed",R.formule===o[0]?"true":"false");
+      b.innerHTML="<span><b>"+o[1]+"</b><small>Mercredi "+o[3]+" € · week-end et fériés "+o[4]+" €</small></span><span class=\"px\">dès "+o[3]+" €</span>";
+      b.onclick=function(){R.formule=o[0];rendre()};
+      c.appendChild(b);
+    });
+    corps.appendChild(c);
+  } else {
+    corps.appendChild(el("<h3>Votre formule entre amis</h3><p class=\"aide\">Prix par personne, chaussures comprises. Sessions de karting de 8 minutes. Scolaires et étudiants : −2 €.</p>"));
+    AMIS.forEach(function(o){
+      var b=document.createElement("button");b.type="button";b.className="option";b.setAttribute("aria-pressed",R.formule===o[0]?"true":"false");
+      b.innerHTML="<span><b>"+o[1]+"</b><small>"+o[2]+"</small></span><span class=\"px\">"+o[3]+" €</span>";
+      b.onclick=function(){R.formule=o[0];rendre()};c.appendChild(b);
+    });
+    corps.appendChild(c);
+    corps.appendChild(el("<p class=\"info-jour\">Valable du mardi au vendredi, hors vacances scolaires et jours fériés. 20 personnes et plus : formulaire groupes.</p>"));
+  }
+  navigation(function(){if(!R.formule)return "Choisissez une formule pour continuer."});
+}
+
+/* --- 3. Date --- */
+function jourOk(d){
+  var t=auj();
+  if(d<t)return {ok:false,raison:"Ce jour est passé."};
+  if(cle(d)>LIMITE)return {ok:false,raison:"Réservations ouvertes jusqu'au 31 août 2027."};
+  var v=vacance(d),f=ferie(d),j=d.getDay();
+  if(R.act==="bowling"){
+    if(!horaire("bowling",d))return {ok:false,raison:dateLongue(d)+" : le bowling est fermé le lundi hors vacances scolaires."};
+    if(R.formule==="precision"&&(v||f||weekend(d)))return {ok:false,raison:"La formule Précision n'est pas proposée "+(v?"pendant les vacances scolaires":f?"les jours fériés":"le week-end")+". Choisissez un jour de semaine, ou la formule à la partie."};
+  }
+  if(R.act==="anniv"){
+    if(j!==3&&j!==6&&j!==0)return {ok:false,raison:"Les anniversaires d'enfants ont lieu le mercredi, le samedi ou le dimanche."};
+    if(annivJourPlein(d))return {ok:false,plein:true,raison:dateLongue(d)+" est complet pour les anniversaires (exemple). Les autres jours restent libres : choisissez-en un."};
+  }
+  if(R.act==="amis"){
+    if(v)return {ok:false,raison:"Les formules entre amis ne sont pas proposées pendant les vacances scolaires."};
+    if(f)return {ok:false,raison:"Les formules entre amis ne sont pas proposées les jours fériés."};
+    if(j===0||j===6)return {ok:false,raison:"Les formules entre amis sont valables en semaine uniquement."};
+    if(j===1)return {ok:false,raison:"Le complexe est fermé le lundi hors vacances scolaires."};
+  }
+  if(cle(d)===cle(t)&&!creneauxDu(d).some(function(c){return c.libre}))return {ok:false,raison:"Plus de créneau disponible aujourd'hui."};
+  return {ok:true};
+}
+function etDate(){
+  corps.appendChild(el("<h3>Quel jour ?</h3><p class=\"aide\">Le calendrier suit les horaires du parc, les vacances scolaires de la zone B et les jours fériés.</p>"));
+  var t=auj(),base=R.mois?deCle(R.mois):(R.date?deCle(R.date):t);base=new Date(base.getFullYear(),base.getMonth(),1);R.mois=cle(base);
+  var nav=el("<div class=\"cal-nav\"><button type=\"button\" aria-label=\"Mois précédent\">‹</button><b aria-live=\"polite\">"+MOIS[base.getMonth()]+" "+base.getFullYear()+"</b><button type=\"button\" aria-label=\"Mois suivant\">›</button></div>").firstChild;
+  var bn=nav.querySelectorAll("button");
+  bn[0].disabled=base<=new Date(t.getFullYear(),t.getMonth(),1);
+  bn[1].disabled=cle(new Date(base.getFullYear(),base.getMonth()+1,1))>LIMITE;
+  bn[0].onclick=function(){R.mois=cle(new Date(base.getFullYear(),base.getMonth()-1,1));rendre()};
+  bn[1].onclick=function(){R.mois=cle(new Date(base.getFullYear(),base.getMonth()+1,1));rendre()};
+  corps.appendChild(nav);
+  var g=document.createElement("div");g.className="cal";g.setAttribute("role","group");g.setAttribute("aria-label","Calendrier");
+  ["lun","mar","mer","jeu","ven","sam","dim"].forEach(function(x){g.appendChild(el("<span class=\"js\" aria-hidden=\"true\">"+x+"</span>").firstChild)});
+  var dec=(base.getDay()+6)%7;for(var i=0;i<dec;i++)g.appendChild(document.createElement("span"));
+  var info=document.createElement("p");info.className="info-jour";info.setAttribute("aria-live","polite");
+  var nbj=new Date(base.getFullYear(),base.getMonth()+1,0).getDate();
+  for(var j=1;j<=nbj;j++)(function(d){
+    var st=jourOk(d),b=document.createElement("button");b.type="button";b.textContent=d.getDate();
+    b.className=(vacance(d)?"vac ":"")+(ferie(d)?"ferie ":"")+(st.ok?"":(st.plein?"plein":"non"));
+    b.setAttribute("aria-pressed",R.date===cle(d)?"true":"false");
+    b.setAttribute("aria-label",dateLongue(d)+(ferie(d)?", férié":"")+(vacance(d)?", vacances":"")+(st.ok?"":", indisponible"));
+    if(!st.ok)b.setAttribute("aria-disabled","true");
+    b.onclick=function(){if(!st.ok){info.textContent=cap(st.raison);return}if(R.date!==cle(d))R.cr=null;R.date=cle(d);rendre()};
+    g.appendChild(b);
+  })(new Date(base.getFullYear(),base.getMonth(),j));
+  corps.appendChild(g);
+  corps.appendChild(el("<div class=\"legende\"><span><i style=\"background:#fff4cc\"></i>vacances (zone B)</span><span><i style=\"background:var(--violet);border-radius:50%\"></i>férié</span><span><i style=\"background:repeating-linear-gradient(45deg,#f3f2f7 0 3px,#e1dfeb 3px 6px)\"></i>complet <span class=\"ex\">exemple</span></span><span>barré : fermé ou non proposé</span></div>").firstChild);
+  if(R.date){var d=deCle(R.date),h=horaire(R.act==="amis"?"karting":"bowling",d);
+    info.innerHTML=cap(dateLongue(d))+" ("+periodeTxt(d)+") : "+(R.act==="anniv"?(d.getDay()===3?"arrivée entre 14 h et 16 h, tarif mercredi.":"arrivée entre 13 h et 14 h 30, tarif week-end et fériés."):(R.act==="amis"?"karting ouvert de "+hh(h[0])+" à "+hh(h[1])+".":"bowling ouvert de "+hh(h[0])+" à "+hh(h[1])+"."))+(ferie(d)?" Horaires des jours fériés <span class=\"ex\">à confirmer</span>.":"");}
+  corps.appendChild(info);
+  navigation(function(){if(!R.date)return "Choisissez un jour dans le calendrier.";if(!jourOk(deCle(R.date)).ok)return jourOk(deCle(R.date)).raison});
+}
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+
+/* --- 4. Créneau --- */
+function creneauxDu(d){
+  var l=[],t0=auj(),aujd=cle(d)===cle(t0),now=maintenant();
+  if(R.act==="bowling"){var h=horaire("bowling",d);if(!h)return l;var fin=R.formule==="precision"?h[1]-2:h[1]-0.5;
+    for(var t=h[0];t<=fin;t+=0.5){if(aujd&&t<=now+0.5)continue;var p=pistesLibres(d,t);l.push({t:t,libre:p>0,txt:p===0?"complet":p+" piste"+(p>1?"s":"")+" libre"+(p>1?"s":""),n:p})}}
+  else if(R.act==="anniv"){var j=d.getDay(),a=j===3?14:13,b=j===3?16:14.5;
+    for(var u=a;u<=b;u+=0.25){if(aujd&&u<=now+1)continue;var n=placesAnniv(d,u);l.push({t:u,libre:n>0,txt:n===0?"complet":(n===1?"dernière place":n+" places"),n:n})}}
+  else {var k=horaire("karting",d);if(!k)return l;for(var s=k[0];s<=k[1]-2;s+=0.5){if(aujd&&s<=now+1)continue;var q=pistesLibres(d,s)>2;l.push({t:s,libre:q,txt:q?"libre":"complet"})}}
+  return l;
+}
+function etCreneau(){
+  var d=deCle(R.date);
+  corps.appendChild(el("<h3>"+(R.act==="anniv"?"Heure d'arrivée":"À quelle heure ?")+"</h3><p class=\"aide\">"+cap(dateLongue(d))+". Disponibilités affichées à titre d'<span class=\"ex\">exemple</span>.</p>"));
+  var l=creneauxDu(d),g=document.createElement("div");g.className="creneaux";
+  var info=document.createElement("p");info.className="info-jour";info.setAttribute("aria-live","polite");
+  l.forEach(function(c){var b=document.createElement("button");b.type="button";b.className="cr"+(c.libre?(c.n!==undefined&&c.n<=1?" peu":""):" complet");
+    b.innerHTML="<b>"+hc(c.t)+"</b><small>"+c.txt+"</small>";b.setAttribute("aria-pressed",R.cr===c.t?"true":"false");
+    b.setAttribute("aria-label",hc(c.t)+", "+c.txt);
+    if(!c.libre)b.setAttribute("aria-disabled","true");
+    b.onclick=function(){if(!c.libre){info.textContent="À "+hc(c.t)+", c'est complet. Choisissez une autre heure ou un autre jour.";return}R.cr=c.t;rendre()};
+    g.appendChild(b)});
+  corps.appendChild(g);
+  if(R.act==="bowling")info.textContent="Pistes de 14 joueurs au maximum. Ouvert jusqu'à "+hh(horaire("bowling",d)[1])+".";
+  if(R.act==="anniv")info.textContent="Les places sont limitées : l'acompte bloque la vôtre dès la réservation.";
+  if(R.act==="amis")info.textContent="Heure de début de la formule. Prévoir environ 1 h 30 sur place (exemple).";
+  corps.appendChild(info);
+  if(R.cr!==null&&!l.some(function(c){return c.t===R.cr&&c.libre}))R.cr=null;
+  navigation(function(){if(R.cr===null)return "Choisissez une heure."});
+}
+
+/* --- 5. Participants --- */
+function stepper(lab,sous,val,min,max,set){
+  var p=el("<div class=\"ligne-pers\"><span><b>"+lab+"</b><small>"+sous+"</small></span><div class=\"pas\"><button type=\"button\" aria-label=\"Moins : "+lab+"\">−</button><output aria-live=\"polite\">"+val+"</output><button type=\"button\" aria-label=\"Plus : "+lab+"\">+</button></div></div>").firstChild;
+  var b=p.querySelectorAll("button");b[0].disabled=val<=min;b[1].disabled=val>=max;
+  b[0].onclick=function(){set(val-1);rendre()};
+  b[1].onclick=function(){set(val+1);rendre()};
+  return p;
+}
+function nbBowl(){var p=R.pers;return p.adulte+p.etudiant+p.retraite+p.enfant}
+function payants(){var p=R.pers;return p.adulte+p.etudiant+p.retraite}
+function etPersonnes(){
+  var d=deCle(R.date);
+  if(R.act==="bowling"){
+    var tr=(weekend(d)||vacance(d)||ferie(d))?BOWL.we:BOWL.sem,pc=R.formule==="precision";
+    corps.appendChild(el("<h3>Qui joue ?</h3><p class=\"aide\">"+(pc?"Formule Précision : 20 € par personne.":"Tarif "+((weekend(d)||vacance(d)||ferie(d))?"week-end / vacances":"semaine")+", par partie et par personne."+(ferie(d)?" Jour férié : le site ne donne pas de tarif, celui du week-end est appliqué <span class=\"ex\">à confirmer</span>.":""))+"</p>"));
+    corps.appendChild(stepper("Adultes",pc?"20 €":eur(tr.adulte[0])+" puis "+eur(tr.adulte[1]),R.pers.adulte,0,28,function(v){R.pers.adulte=v}));
+    corps.appendChild(stepper("Étudiants",(pc?"20 €":eur(tr.etudiant[0])+" puis "+eur(tr.etudiant[1]))+" · carte demandée",R.pers.etudiant,0,28,function(v){R.pers.etudiant=v}));
+    corps.appendChild(stepper("Retraités et PSH",pc?"20 €":eur(tr.retraite[0])+" puis "+eur(tr.retraite[1]),R.pers.retraite,0,28,function(v){R.pers.retraite=v}));
+    corps.appendChild(stepper("Enfants de moins de 6 ans","partie offerte avec 1 partie achetée",R.pers.enfant,0,28,function(v){R.pers.enfant=v}));
+    var n=nbBowl();
+    if(n){var pistes=Math.ceil(n/PAR_PISTE),dur=pc?120:Math.ceil(n/pistes)*10*R.parties;
+      corps.appendChild(el("<p class=\"info-jour\"><b>"+pistes+" piste"+(pistes>1?"s":"")+"</b> pour "+n+" joueur"+(n>1?"s":"")+" (6 par piste conseillé <span class=\"ex\">exemple</span>, 14 au maximum) · fin estimée vers <b>"+hc(R.cr+dur/60)+"</b> <span class=\"ex\">à confirmer</span> (≈ 10 min par joueur et par partie).</p>").firstChild)}
+    navigation(function(){
+      var n=nbBowl();if(!n)return "Ajoutez au moins un joueur.";
+      if(!payants())return "Un enfant de moins de 6 ans joue avec un adulte qui paie sa partie.";
+      if(!pc&&R.pers.enfant>payants())return "1 partie offerte par partie achetée : ajoutez un joueur payant ou retirez un enfant.";
+      var pistes=Math.ceil(n/PAR_PISTE),libres=pistesLibres(d,R.cr);
+      if(pistes>libres)return "À "+hc(R.cr)+", il reste "+libres+" piste"+(libres>1?"s":"")+" : il en faut "+pistes+". Changez d'heure ou de nombre de joueurs.";
+      var dur=pc?2:Math.ceil(n/pistes)*10*R.parties/60;
+      if(R.cr+dur>horaire("bowling",d)[1])return "D'après la durée estimée (à confirmer), la partie finirait après la fermeture ("+hh(horaire("bowling",d)[1])+") : choisissez une heure plus tôt ou moins de parties.";
+    });
+  } else if(R.act==="anniv"){
+    var f=ANNIV.filter(function(x){return x[0]===R.formule})[0];
+    corps.appendChild(el("<h3>Les invités</h3><p class=\"aide\">"+f[1]+" · dès "+f[2]+" ans"+(f[5]?" et 1,30 m":"")+".</p>"));
+    corps.appendChild(stepper("Nombre d'enfants","minimum 5, enfant fêté compris",R.enfants,5,20,function(v){R.enfants=v}));
+    var ch=el("<div class=\"grille2\"><div class=\"champ\"><label for=\"pe\">Prénom de l'enfant fêté</label><input id=\"pe\" autocomplete=\"off\" value=\""+R.prenomEnfant.replace(/"/g,"&quot;")+"\"></div><div class=\"champ\"><label for=\"ag\">Âge qu'il ou elle va fêter</label><select id=\"ag\"><option value=\"\">Choisir</option></select></div></div>").firstChild;
+    var sel=ch.querySelector("select");for(var a=3;a<=15;a++){var o=document.createElement("option");o.value=a;o.textContent=a+" ans";if(String(R.age)===String(a))o.selected=true;sel.appendChild(o)}
+    ch.querySelector("input").oninput=function(e){R.prenomEnfant=e.target.value};
+    sel.onchange=function(e){R.age=e.target.value};
+    corps.appendChild(ch);
+    if(f[5]){var cb=el("<label class=\"coche\"><input type=\"checkbox\" "+(R.taille?"checked":"")+"><span>Tous les enfants qui feront du karting ont au moins 7 ans et mesurent au moins 1,30 m.</span></label>").firstChild;cb.querySelector("input").onchange=function(e){R.taille=e.target.checked};corps.appendChild(cb)}
+    corps.appendChild(el("<p class=\"info-jour\">Au-delà de 20 enfants (limite donnée en <span class=\"ex\">exemple</span>), appelez l'accueil : 02 43 02 89 89.</p>").firstChild);
+    navigation(function(){
+      if(!R.age)return "Indiquez l'âge de l'enfant fêté.";
+      if(+R.age<f[2])return "Cette formule est proposée dès "+f[2]+" ans : revenez à l'étape Formule pour en choisir une autre.";
+      if(f[5]&&!R.taille)return "Confirmez l'âge et la taille des enfants pour le karting.";
+    });
+  } else {
+    corps.appendChild(el("<h3>Combien êtes-vous ?</h3><p class=\"aide\">Moins de 20 personnes. Karting dès 7 ans et 1,30 m (kart adulte dès 14 ans).</p>"));
+    corps.appendChild(stepper("Participants","formule nominative",R.nbAmis,1,19,function(v){R.nbAmis=v;if(R.eleves>v)R.eleves=v}));
+    corps.appendChild(stepper("Dont scolaires ou étudiants","−2 € par formule, carte demandée",R.eleves,0,R.nbAmis,function(v){R.eleves=v}));
+    var cb2=el("<label class=\"coche\"><input type=\"checkbox\" "+(R.taille?"checked":"")+"><span>Tous les participants ont au moins 7 ans et mesurent au moins 1,30 m.</span></label>").firstChild;cb2.querySelector("input").onchange=function(e){R.taille=e.target.checked};corps.appendChild(cb2);
+    navigation(function(){if(!R.taille)return "Confirmez l'âge et la taille des participants pour le karting."});
+  }
+}
+
+/* --- 6. Options et coordonnées --- */
+function etOptions(){
+  corps.appendChild(el("<h3>Options et coordonnées</h3><p class=\"aide\">Pour vous envoyer la confirmation. Aucune donnée n'est envoyée : c'est un aperçu.</p>"));
+  if(R.act==="anniv"){
+    var g=el("<label class=\"coche\"><input type=\"checkbox\" "+(R.gateau?"checked":"")+"><span><b>Moelleux au chocolat</b> : 15 €. Allergènes : œufs, gluten ; peut contenir fruits à coque, poisson, moutarde, sulfites. Sans gâteau, vous apportez le vôtre.</span></label>").firstChild;
+    g.querySelector("input").onchange=function(e){R.gateau=e.target.checked;rendre()};corps.appendChild(g);
+    corps.appendChild(el("<p class=\"info-jour\">Carton d'invitation à imprimer : <a href=\"https://capformloisirs-53.fr/wp-content/uploads/2023/04/RVB-INVITATION-ANNIV.pdf\" rel=\"noopener\" class=\"lien-44\">télécharger le carton</a>. Consommations extérieures interdites, sauf gâteau et bonbons.</p>").firstChild);
+  }
+  if(R.act==="bowling"){
+    var b=el("<label class=\"coche\"><input type=\"checkbox\" "+(R.barrieres?"checked":"")+"><span><b>Barrières et toboggan</b> pour les enfants (FAQ du site ; tarif éventuel <span class=\"ex\">à confirmer</span>)</span></label>").firstChild;
+    b.querySelector("input").onchange=function(e){R.barrieres=e.target.checked};corps.appendChild(b);
+  }
+  var ch=el("<div><div class=\"champ\"><label for=\"cn\">Nom et prénom</label><input id=\"cn\" autocomplete=\"name\"></div><div class=\"grille2\"><div class=\"champ\"><label for=\"ct\">Téléphone</label><input id=\"ct\" type=\"tel\" autocomplete=\"tel\" inputmode=\"tel\"></div><div class=\"champ\"><label for=\"cm\">E-mail</label><input id=\"cm\" type=\"email\" autocomplete=\"email\"></div></div></div>").firstChild;
+  var ins=ch.querySelectorAll("input");ins[0].value=R.nom;ins[1].value=R.tel;ins[2].value=R.mail;
+  ins[0].oninput=function(e){R.nom=e.target.value};ins[1].oninput=function(e){R.tel=e.target.value};ins[2].oninput=function(e){R.mail=e.target.value};
+  corps.appendChild(ch);
+  navigation(function(){
+    if(R.nom.trim().length<2)return "Indiquez votre nom.";
+    if(!/^[0-9 +.]{10,}$/.test(R.tel.trim())&&!/^\S+@\S+\.\S+$/.test(R.mail.trim()))return "Indiquez un téléphone ou un e-mail valide.";
+  },"Voir le récapitulatif");
+}
+
+/* --- Calcul --- */
+function totaux(){
+  if(!R||!R.act||!R.formule)return null;
+  var lignes=[],total=0,d=R.date?deCle(R.date):null;
+  if(R.act==="bowling"){
+    if(!d)return null;
+    var we=weekend(d)||vacance(d)||ferie(d),tr=we?BOWL.we:BOWL.sem,n=nbBowl();
+    if(R.formule==="precision"){var np=payants()+R.pers.enfant;if(np){lignes.push(["Formule Précision × "+np,np*PRECISION]);total+=np*PRECISION}}
+    else{
+      [["adulte","Adulte"],["etudiant","Étudiant"],["retraite","Retraité / PSH"]].forEach(function(c){var q=R.pers[c[0]];if(!q)return;var u=tr[c[0]][0]+(R.parties-1)*tr[c[0]][1];lignes.push([c[1]+" × "+q+" ("+R.parties+" partie"+(R.parties>1?"s":"")+")",q*u]);total+=q*u});
+      if(R.pers.enfant)lignes.push(["Enfant de moins de 6 ans × "+R.pers.enfant+" (offert)",0]);
+    }
+    if(n){lignes.push(["Chaussures × "+n,n*CHAUSSURES]);total+=n*CHAUSSURES}
+    if(ferie(d)&&R.formule!=="precision")lignes.push(["Jour férié : tarif week-end appliqué (à confirmer)",0]);
+  } else if(R.act==="anniv"){
+    var f=ANNIV.filter(function(x){return x[0]===R.formule})[0];
+    var u=d?((d.getDay()===3&&!ferie(d))?f[3]:f[4]):f[3];
+    lignes.push([f[1]+" × "+R.enfants+" enfants ("+(d?((d.getDay()===3&&!ferie(d))?"mercredi":"week-end"):"mercredi")+")",R.enfants*u]);total+=R.enfants*u;
+    if(R.gateau){lignes.push(["Moelleux au chocolat",GATEAU]);total+=GATEAU}
+  } else {
+    var a=AMIS.filter(function(x){return x[0]===R.formule})[0];
+    lignes.push([a[1]+" × "+R.nbAmis,R.nbAmis*a[3]]);total+=R.nbAmis*a[3];
+    if(R.eleves){lignes.push(["Scolaires / étudiants × "+R.eleves,-2*R.eleves]);total-=2*R.eleves}
+  }
+  return {lignes:lignes,total:total,acompte:Math.round(total*ACOMPTE*100)/100};
+}
+
+/* --- 7. Récapitulatif + acompte --- */
+function etRecap(){
+  var d=deCle(R.date),t=totaux();
+  corps.appendChild(el("<h3>Récapitulatif</h3><p class=\"aide\">Vérifiez avant de payer l'acompte.</p>"));
+  var r=document.createElement("div");r.className="recap";
+  var quoi=R.act==="bowling"?"Bowling, "+(R.formule==="precision"?"formule Précision":R.parties+" partie"+(R.parties>1?"s":""))+" · "+Math.ceil(nbBowl()/PAR_PISTE)+" piste(s)":R.act==="anniv"?"Anniversaire"+(R.prenomEnfant?" de "+esc(R.prenomEnfant):"")+" ("+R.age+" ans)":"Formule entre amis";
+  r.innerHTML="<div><span>Réservation</span><span>"+quoi+"</span></div><div><span>Date</span><span>"+cap(dateLongue(d))+" à "+hc(R.cr)+"</span></div>"+
+    t.lignes.map(function(l){return "<div><span>"+l[0]+"</span><span>"+eur(l[1])+"</span></div>"}).join("")+
+    "<div class=\"tot\"><span>Total</span><span>"+eur(t.total)+"</span></div>"+
+    "<div class=\"acompte\"><span>Acompte à payer maintenant ("+Math.round(ACOMPTE*100)+" %, <span class=\"ex\">exemple</span>)</span><span>"+eur(t.acompte)+"</span></div>"+
+    "<div><span>Reste à régler sur place (CB, espèces, ANCV)</span><span>"+eur(t.total-t.acompte)+"</span></div>";
+  corps.appendChild(r);
+  corps.appendChild(el("<p class=\"fid-recap\">Programme de fidélité : cette visite vous rapporte des points à utiliser la prochaine fois (barème <span class=\"ex\">à confirmer</span>).</p>").firstChild);
+  var cg=el("<label class=\"coche\"><input type=\"checkbox\" "+(R.cgv?"checked":"")+"><span>J'accepte le règlement intérieur de Cap Form Loisirs"+(R.act==="anniv"?" et les conditions de responsabilité des enfants pendant l'événement":"")+".</span></label>").firstChild;
+  cg.querySelector("input").onchange=function(e){R.cgv=e.target.checked};corps.appendChild(cg);
+  corps.appendChild(el("<div class=\"simule\"><span aria-hidden=\"true\">ⓘ</span><span><b>Paiement simulé.</b> Cet aperçu ne demande aucune carte et n'envoie rien. Le taux d'acompte de 30 % est un exemple à choisir avec le parc.</span></div>").firstChild);
+  navigation(function(){if(!R.cgv)return "Cochez l'acceptation du règlement pour continuer.";R.num="CF-"+R.date.slice(2).replace(/-/g,"")+"-"+String(1000+hache(R.nom+R.date+R.cr)%9000)},"Payer "+eur(t.acompte)+" · simulé");
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]})}
+
+/* --- 8. Confirmation --- */
+function etConfirm(){
+  var d=deCle(R.date),t=totaux();
+  corps.appendChild(el("<div class=\"confirm\"><div class=\"ok\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg></div><h3>C'est réservé !</h3><p>Numéro de réservation</p><div class=\"numero\">"+R.num+"</div><p>"+cap(dateLongue(d))+" à "+hc(R.cr)+" · acompte de "+eur(t.acompte)+" <span class=\"ex\">simulé</span></p><p>Présentez ce numéro à l'accueil, 64 rue Henri Bâtard à Laval.</p><div class=\"btns\"><button type=\"button\" class=\"btn\" id=\"ics\">Ajouter à mon agenda (.ics)</button><button type=\"button\" class=\"btn ligne\" id=\"fin\">Terminer</button></div></div>"));
+  document.getElementById("ics").onclick=telechargerIcs;
+  document.getElementById("fin").onclick=fermer;
+}
+function telechargerIcs(){
+  var d=deCle(R.date),dur=R.act==="anniv"?2:R.act==="amis"?1.5:(R.formule==="precision"?2:Math.max(0.5,Math.ceil(nbBowl()/Math.ceil(nbBowl()/PAR_PISTE))*10*R.parties/60));
+  function stamp(x){var j=plus(d,Math.floor(x/24)),h=Math.floor(x%24),m=Math.round((x%1)*60);return cle(j).replace(/-/g,"")+"T"+String(h).padStart(2,"0")+String(m).padStart(2,"0")+"00"}
+  var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Apercu Cap Form Loisirs//FR","BEGIN:VEVENT","UID:"+R.num+"@apercu-capform","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z","DTSTART:"+stamp(R.cr),"DTEND:"+stamp(R.cr+dur),"SUMMARY:"+titreAct()+" · Cap Form Loisirs ("+R.num+")","LOCATION:Cap Form Loisirs\\, 64 rue Henri Bâtard\\, 53000 Laval","DESCRIPTION:Réservation "+R.num+" (aperçu\\, paiement simulé). Tél. 02 43 02 89 89","END:VEVENT","END:VCALENDAR"].join("\r\n");
+  var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([ics],{type:"text/calendar"}));a.download=R.num+".ics";document.body.appendChild(a);a.click();a.remove();
+}
+
+/* ===== Contenus calculés ===== */
+(function(){
+  var tb=document.getElementById("t-anniv"),grp=null;
+  ANNIV.forEach(function(o){var g=o[2]===3?"Dès 3 ans":o[2]===7?"Dès 7 ans et 1,30 m":"Dès 10 ans";
+    if(g!==grp){grp=g;tb.insertAdjacentHTML("beforeend","<tr class=\"grp\"><td colspan=\"3\">"+g+"</td></tr>")}
+    tb.insertAdjacentHTML("beforeend","<tr><td>"+o[1]+"</td><td class=\"px\">"+o[3]+" €</td><td class=\"px\">"+o[4]+" €</td></tr>")});
+  var th=document.getElementById("t-horaires"),t=auj(),ord=[2,3,4,5,6,0,1];
+  ord.forEach(function(j){var a=H.bowling.hors[j],b=H.bowling.vac[j];
+    th.insertAdjacentHTML("beforeend","<tr"+(t.getDay()===j?" style=\"background:#fff8de\"":"")+"><th scope=\"row\" style=\"text-transform:capitalize\">"+JOURS_L[j]+(t.getDay()===j?" <span class=\"aujourdhui\">auj.</span>":"")+"</th><td>"+(a?hh(a[0])+" – "+hh(a[1]):"Fermé")+"</td><td>"+(b?hh(b[0])+" – "+hh(b[1]):"Fermé")+"</td></tr>")});
+  var v=vacance(t),h=horaire("bowling",t),prochaines=VACANCES.filter(function(x){return x[0]>cle(t)})[0];
+  document.getElementById("h-chapo").innerHTML="Aujourd'hui, "+dateLongue(t)+" ("+(v?v:"hors vacances")+") : bowling "+(h?"ouvert de "+hh(h[0])+" à "+hh(h[1]):"fermé")+"."+(prochaines&&!v?" Prochaines vacances (zone B) : "+prochaines[2]+", à partir du "+deCle(prochaines[0]).getDate()+" "+MOIS[deCle(prochaines[0]).getMonth()]+".":"")+" Bar et jeux d'arcade : fermeture 30 minutes avant celle de l'établissement.";
+})();
+rendrePanneau();
+</script>
+</body>
+</html>

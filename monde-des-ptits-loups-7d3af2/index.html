@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Le Monde des petits loups · Laval · aperçu</title>
+<meta name="description" content="Aperçu non commandé d'une page d'accueil pour le parc de jeux couvert Le Monde des petits loups à Laval.">
+<style>
+@font-face{font-family:"Philosopher";src:url(polices/philosopher-latin-700-normal.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Philosopher";src:url(polices/philosopher-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Figtree";src:url(polices/figtree-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Figtree";src:url(polices/figtree-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Figtree";src:url(polices/figtree-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+:root{
+  --cyan:#0099cc;        /* bandeau du site du parc */
+  --cyan-fonce:#00668a;  /* même teinte, assombrie pour le texte (contraste AA) */
+  --cyan-fond:#007aa6;   /* cyan du parc assombri derrière le texte blanc : 4,84:1 (blanc), 4,51:1 (jaune) */
+  --jaune:#ffff00;       /* jaune du logo et du site */
+  --jaune-doux:#fff7a8;
+  --foret:#2f7a2a;       /* feuillage du logo */
+  --foret-clair:#e3f1dc;
+  --nuit:#26357a;        /* « Petits Loups » du logo */
+  --encre:#1b2440;
+  --gris:#5a6178;
+  --papier:#fffdf3;
+  --ciel:#e6f6fc;
+  --rouge:#b3261e;
+  --ok:#1e7a35;
+  --r:18px;
+  --ombre:0 1px 0 rgba(27,36,64,.06),0 10px 30px -12px rgba(27,36,64,.25);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font-family:Figtree,system-ui,sans-serif;color:var(--encre);background:var(--ciel);font-size:16px;line-height:1.5}
+img{max-width:100%;display:block}
+a{color:var(--cyan-fonce)}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--nuit);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Bandeau d'aperçu */
+.apercu{background:var(--encre);color:#fff;font-size:12.5px;line-height:1.35}
+.apercu .wrap{display:flex;gap:10px;align-items:center;justify-content:space-between;min-height:36px;padding-top:4px;padding-bottom:4px}
+.apercu p{margin:0;min-width:0}
+.apercu .court{display:none}
+@media (max-width:760px){.apercu .long{display:none}.apercu .court{display:inline}.apercu{font-size:12px}}
+.apercu a{color:var(--jaune);white-space:nowrap;display:inline-flex;align-items:center;min-height:44px;padding:0 4px}
+
+/* En-tête */
+.tete{background:var(--cyan-fond);color:#fff;position:relative}
+.tete .wrap{display:flex;align-items:center;gap:12px;min-height:58px}
+.marque{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;min-width:0;min-height:44px}
+.marque img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 38%;border:3px solid #fff;background:var(--jaune);flex:none}
+.marque b{font-family:Philosopher,serif;font-weight:700;font-size:19px;line-height:1.05;letter-spacing:.2px}
+.marque b span{color:var(--jaune)}
+.nav{margin-left:auto;display:flex;gap:2px;align-items:center}
+.nav a{color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:0 12px;min-height:44px;display:inline-flex;align-items:center;border-radius:999px}
+.nav a:hover{background:rgba(255,255,255,.16)}
+.nav .tel{background:var(--jaune);color:var(--encre)}
+.nav .tel:hover{background:#fff}
+@media (max-width:760px){.nav a:not(.tel){display:none}.marque b{font-size:17px}}
+
+/* ===== Premier écran : la carte d'invitation ===== */
+.scene{position:relative;padding:10px 0 18px;background:linear-gradient(180deg,var(--cyan-fond) 0 64px,var(--ciel) 64px)}
+.scene::before{content:"";position:absolute;inset:0 0 auto 0;height:64px;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 24 24' fill='%23fff'%3E%3Cellipse cx='12' cy='16' rx='5' ry='4.2'/%3E%3Ccircle cx='5.5' cy='10' r='2.2'/%3E%3Ccircle cx='9.5' cy='6.5' r='2.2'/%3E%3Ccircle cx='14.5' cy='6.5' r='2.2'/%3E%3Ccircle cx='18.5' cy='10' r='2.2'/%3E%3C/svg%3E");background-size:46px 46px;pointer-events:none}
+.scene .wrap{position:relative}
+.accroche{display:none}
+.scene .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.invit{position:relative;background:var(--papier);border-radius:var(--r);box-shadow:var(--ombre);padding:16px 16px 14px;min-width:0;
+  border:2px solid #fff;outline:2px dashed rgba(0,153,204,.45);outline-offset:-9px}
+.invit .timbre{position:absolute;top:-6px;right:12px;width:62px;height:62px;border-radius:50%;background:var(--jaune);border:3px solid #fff;box-shadow:0 4px 10px -4px rgba(0,0,0,.35);overflow:hidden;transform:rotate(8deg)}
+.invit .timbre img{width:100%;height:100%;object-fit:cover;object-position:50% 36%}
+.sur{font-size:11.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--foret);margin:0 74px 6px 0}
+.phrase{font-family:Philosopher,serif;font-weight:700;font-size:22px;line-height:1.5;margin:0 0 8px;color:var(--nuit)}
+.champ{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:44px;min-width:44px;padding:0 8px;margin:1px 0;border:0;border-bottom:3px dashed var(--cyan);
+  background:linear-gradient(transparent 55%,var(--jaune-doux) 55%);color:var(--encre);font-family:Philosopher,serif;font-weight:700;font-size:inherit;line-height:1.1;cursor:pointer;border-radius:6px 6px 0 0;vertical-align:baseline;transition:background .15s}
+.champ:hover,.champ:focus-visible{background:linear-gradient(transparent 0%,var(--jaune) 0%)}
+.champ svg{width:14px;height:14px;opacity:.55;flex:none}
+input.champ{cursor:text;width:6.2em;max-width:100%;text-align:center}
+input.champ::placeholder{color:#8a7f4a;opacity:1}
+.calcul{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 10px;font-size:14px;margin:0 0 10px;padding:7px 12px;background:#fff;border-radius:12px;border:1px solid #e7e3cf}
+.calcul span{min-width:0}
+.calcul b{text-align:right;white-space:nowrap}
+.calcul .tot{font-weight:800}
+.calcul .det{color:var(--gris);font-size:13px;grid-column:1/-1}
+.calcul .ac{color:var(--foret);font-weight:800}
+.ex{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:#ffe9a8;color:#6a4b00;border-radius:999px;padding:1px 7px;vertical-align:1px;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border:0;border-radius:14px;background:var(--foret);color:#fff;font-weight:800;font-size:17px;text-decoration:none;cursor:pointer;box-shadow:0 6px 0 -1px #1d5219;transition:transform .12s,box-shadow .12s;width:100%}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 -1px #1d5219}
+.btn.second{background:#fff;color:var(--cyan-fonce);box-shadow:inset 0 0 0 2px var(--cyan-fonce)}
+.err{color:var(--rouge);font-weight:600;font-size:14px;margin:8px 0 0;min-height:0}
+.err:empty{display:none}
+.petit-lien{display:flex;justify-content:center;margin-top:2px}
+.petit-lien button{background:none;border:0;color:var(--cyan-fonce);font-weight:700;text-decoration:underline;min-height:44px;padding:0 8px;cursor:pointer;font-size:15px}
+
+/* Les trois réponses sous la carte */
+.trois{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;min-width:0}
+.tuile{display:grid;grid-template-columns:32px minmax(0,1fr) 12px;gap:10px;align-items:center;background:#fff;border-radius:14px;padding:6px 12px;text-decoration:none;color:var(--encre);box-shadow:0 1px 0 rgba(27,36,64,.06);min-height:52px;border:1px solid #d6ecf4;transition:border-color .15s,transform .15s}
+.tuile:hover{border-color:var(--cyan);transform:translateY(-1px)}
+.tuile .ico{width:32px;height:32px;border-radius:12px;display:grid;place-items:center;background:var(--ciel);color:var(--cyan-fonce)}
+.tuile .ico svg{width:20px;height:20px}
+.tuile small{display:none}
+.tuile small{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.tuile strong{display:block;font-size:14.5px;line-height:1.25}
+.tuile .m{display:inline}
+@media (min-width:900px){.tuile .m{display:none}.tuile{grid-template-columns:40px minmax(0,1fr) 16px}.tuile .ico{width:40px;height:40px}}
+.tuile .fl{color:var(--gris)}
+.pastille{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.pastille.on{background:var(--ok);box-shadow:0 0 0 3px rgba(30,122,53,.18)}
+.pastille.off{background:var(--rouge)}
+.pastille.conf{background:#c98a00}
+
+@media (min-width:900px){
+  .scene{padding:34px 0 40px;background:linear-gradient(180deg,var(--cyan-fond) 0 190px,var(--ciel) 190px)}
+  .scene::before{height:190px}
+  .accroche{display:block;color:#fff;margin:0 0 14px;padding-top:8px}
+  .accroche b{display:block;font-family:Philosopher,serif;font-size:30px;line-height:1.15}
+  .accroche b span{color:var(--jaune)}
+  .accroche p{margin:6px 0 0;font-size:16px;opacity:.95}
+  .scene .wrap{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:28px;align-items:start}
+  .invit{padding:30px 34px 24px;outline-offset:-12px}
+  .invit .timbre{width:92px;height:92px;right:26px;top:-14px}
+  .sur{font-size:13px;margin-right:110px}
+  .calcul{gap:2px 10px;padding:10px 14px}
+  .phrase{font-size:34px;line-height:1.6}
+  .champ svg{width:18px;height:18px}
+  .calcul{font-size:15.5px}
+  .btn{width:auto}
+  .actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .trois{padding-top:0}
+  .trois .tuile small{display:block}
+  .tuile{padding:14px 16px;min-height:84px}
+  .tuile strong{font-size:16px}
+}
+
+/* Sections */
+section.bloc{padding:44px 0}
+.bloc h2{font-family:Philosopher,serif;font-weight:700;font-size:30px;line-height:1.15;margin:0 0 6px;color:var(--nuit)}
+.bloc .chapo{color:var(--gris);margin:0 0 20px;max-width:62ch}
+.blanc{background:#fff}
+.papier{background:var(--papier)}
+
+/* Horaires */
+.hor{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.table-h{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border-radius:14px;overflow:hidden;border:1px solid #d6ecf4;font-size:15px}
+.table-h th,.table-h td{padding:10px 12px;text-align:left;border-bottom:1px solid #edf3f6}
+.table-h thead th{background:var(--ciel);font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--cyan-fonce)}
+.table-h th[data-actif="1"]{background:var(--cyan-fonce);color:#fff}
+.table-h tr.auj td,.table-h tr.auj th{background:var(--jaune-doux);font-weight:700}
+.table-h td.ferme{color:var(--gris)}
+.notes{background:#fff;border-radius:14px;padding:14px 16px;border:1px solid #d6ecf4;font-size:15px}
+.notes p{margin:0 0 8px}
+.notes p:last-child{margin:0}
+@media (min-width:900px){.hor{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}}
+
+/* Prix : un seul tableau */
+.prix{width:100%;max-width:820px;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;font-size:15px;box-shadow:var(--ombre)}
+.prix th,.prix td{padding:12px 14px;border-bottom:1px solid #f0ecd8;text-align:left;vertical-align:top}
+.prix thead th{background:var(--nuit);color:#fff;font-size:13px;letter-spacing:.05em;text-transform:uppercase}
+.prix td:last-child{text-align:right;white-space:nowrap;font-weight:800}
+.prix .grp th{background:var(--foret-clair);color:var(--foret);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
+.prix td.aconf{font-weight:700;color:#7a5600;white-space:normal;font-size:13.5px}
+.prix small{display:block;color:var(--gris);font-weight:400}
+.prix-note{font-size:14px;color:var(--gris);margin:12px 0 0}
+
+/* Le parc */
+.parc{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.mosaique{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.mosaique figure{margin:0;position:relative;border-radius:14px;overflow:hidden;background:var(--foret-clair);aspect-ratio:1/1}
+.mosaique img{width:100%;height:100%;object-fit:cover}
+.mosaique figcaption{position:absolute;left:8px;bottom:8px;background:rgba(255,253,243,.94);color:var(--encre);font-size:12.5px;font-weight:700;padding:3px 8px;border-radius:999px}
+.afournir{display:grid;place-items:center;text-align:center;padding:12px;border:2px dashed #9cc7a0;color:var(--foret);font-weight:700;font-size:14px}
+.liste-parc{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.liste-parc li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:8px;align-items:start;background:#fff;border-radius:12px;padding:10px 12px;border:1px solid #e7e3cf}
+.patte{width:22px;height:22px;color:var(--foret);margin-top:1px}
+@media (min-width:900px){.parc{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}.mosaique{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* La fête */
+.fete{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.ticket{background:#fff;border-radius:var(--r);padding:18px;border:2px solid var(--jaune);box-shadow:var(--ombre);min-width:0}
+.ticket h3{font-family:Philosopher,serif;font-size:24px;margin:0 0 4px;color:var(--nuit)}
+.ticket .p{font-size:30px;font-weight:800;color:var(--foret);margin:0 0 10px}
+.ticket ul{margin:0;padding-left:20px}
+.ticket li{margin:3px 0}
+@media (min-width:900px){.fete{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+/* Carte famille */
+.famille{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:center}
+.carte-f{background:linear-gradient(135deg,var(--nuit),#3b4fa8);color:#fff;border-radius:20px;padding:18px;box-shadow:var(--ombre);max-width:420px;min-width:0}
+.carte-f .l1{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.carte-f .l1 b{font-family:Philosopher,serif;font-size:20px}
+.carte-f .enf{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;margin:14px 0;background:rgba(255,255,255,.1);border-radius:12px;padding:10px 12px;font-size:14.5px}
+.carte-f .pts{font-size:13.5px;opacity:.92}
+.carte-f .barre{height:8px;background:rgba(255,255,255,.2);border-radius:99px;margin:6px 0 4px;overflow:hidden}
+.carte-f .barre i{display:block;height:100%;width:60%;background:var(--jaune)}
+@media (min-width:900px){.famille{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+
+/* Infos pratiques */
+.infos{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.infos .c{background:#fff;border-radius:14px;padding:14px 16px;border:1px solid #d6ecf4;min-width:0}
+.infos h3{margin:0 0 6px;font-size:16px}
+.infos a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;word-break:break-word}
+@media (min-width:900px){.infos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+footer{background:var(--encre);color:#d9def0;padding:26px 0 30px;font-size:14px}
+footer a{color:var(--jaune);display:inline-flex;min-height:44px;align-items:center}
+footer p{margin:0 0 8px}
+details.gerant{background:#fff;border:1px dashed #9aa3bf;border-radius:14px;margin:20px 0 0;color:var(--encre)}
+details.gerant summary{cursor:pointer;min-height:48px;display:flex;align-items:center;padding:0 16px;font-weight:800}
+details.gerant div{padding:0 16px 14px;font-size:14.5px}
+details.gerant li{margin:4px 0}
+
+/* ===== Parcours de réservation ===== */
+.voile{position:fixed;inset:0;background:rgba(17,24,48,.55);display:none;z-index:50}
+.voile.ouvert{display:block}
+.panneau{position:fixed;inset:0;background:var(--papier);z-index:51;display:none;flex-direction:column;overflow:hidden}
+.panneau.ouvert{display:flex}
+@media (min-width:700px){.panneau{inset:4vh auto 4vh 50%;transform:translateX(-50%);width:600px;border-radius:22px;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}}
+.p-tete{display:flex;align-items:center;gap:10px;padding:10px 12px 8px 16px;background:var(--cyan-fond);color:#fff}
+.p-tete h2{font-family:Philosopher,serif;font-size:20px;margin:0;flex:1;min-width:0}
+.fermer{width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:24px;cursor:pointer;flex:none}
+.progres{display:flex;gap:4px;padding:0 16px 10px;background:var(--cyan-fond)}
+.progres i{flex:1;height:5px;border-radius:9px;background:rgba(255,255,255,.35)}
+.progres i.f{background:var(--jaune)}
+.simul{background:#fff3c4;color:#5c4300;font-size:13px;font-weight:700;padding:6px 16px;text-align:center}
+.p-corps{flex:1;overflow:auto;padding:16px 16px 8px;min-height:0}
+.p-pied{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:10px;padding:10px 16px 14px;background:#fff;border-top:1px solid #ece6cc}
+.p-pied .btn{width:100%;font-size:16px}
+.p-pied .err{grid-column:1/-1;margin:0}
+.etape-t{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--foret);margin:0 0 2px}
+.p-corps h3{font-family:Philosopher,serif;font-size:24px;margin:0 0 6px;color:var(--nuit)}
+.p-corps .aide{color:var(--gris);font-size:14.5px;margin:0 0 14px}
+.choix{display:grid;gap:10px}
+.opt{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;text-align:left;background:#fff;border:2px solid #e2dcc0;border-radius:14px;padding:12px 14px;cursor:pointer;min-height:56px;width:100%}
+.opt[aria-pressed="true"],.opt[aria-checked="true"]{border-color:var(--foret);background:var(--foret-clair)}
+.opt b{font-size:16px}
+.opt small{grid-column:1/-1;color:var(--gris);font-size:13.5px}
+.opt .pr{font-weight:800;white-space:nowrap}
+
+/* Calendrier */
+.cal-tete{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.cal-tete b{font-size:17px;text-transform:capitalize}
+.cal-tete button{width:44px;height:44px;border-radius:12px;border:1px solid #d9d2b4;background:#fff;cursor:pointer;font-size:20px}
+.cal-tete button:disabled{opacity:.35;cursor:default}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .js{font-size:12px;font-weight:800;color:var(--gris);text-align:center;padding:2px 0}
+.cal button{position:relative;min-height:46px;border-radius:10px;border:1px solid #e3ddc3;background:#fff;cursor:pointer;font-weight:700;font-size:15px;padding:0}
+.cal button.vac{box-shadow:inset 0 -5px 0 var(--jaune)}
+.cal button.fer{color:#5f6577;text-decoration:line-through;background:#f6f4ea;font-weight:400}
+.cal button.comp{background:#fbe4e2;color:#7d1f19}
+.cal button.conf{background:#fff1cc}
+.cal button.fe::after{content:"";position:absolute;top:5px;right:5px;width:6px;height:6px;border-radius:50%;background:var(--cyan-fonce)}
+.cal button[aria-pressed="true"]{background:var(--foret);color:#fff;border-color:var(--foret)}
+.cal button:disabled{opacity:.35;cursor:default;text-decoration:none}
+@media (max-width:419px){.cal{margin:0 -16px;gap:2px}.cal button{border-radius:6px}}
+.legende{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--gris);margin:10px 0 6px}
+.legende i{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.info-j{background:#fff;border-radius:12px;padding:10px 12px;border:1px solid #e3ddc3;font-size:14.5px;margin-top:6px;min-height:44px}
+.creneaux{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.creneaux button{min-height:56px;border-radius:12px;border:2px solid #e2dcc0;background:#fff;cursor:pointer;font-weight:800;font-size:16px;padding:4px}
+.creneaux button small{display:block;font-weight:600;font-size:12px;color:var(--gris)}
+.creneaux button[aria-pressed="true"]{border-color:var(--foret);background:var(--foret-clair)}
+.creneaux button.complet{background:#f4f1e4;color:#5f6577;cursor:not-allowed}
+.creneaux button.complet small{color:#8a2f28}
+.ligne{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;background:#fff;border:1px solid #e3ddc3;border-radius:14px;padding:10px 12px;margin-bottom:10px}
+.ligne label,.ligne .lab{font-weight:700}
+.ligne small{display:block;color:var(--gris);font-weight:400;font-size:13px}
+.pas{display:flex;align-items:center;gap:6px}
+.pas button{width:44px;height:44px;border-radius:12px;border:1px solid #d9d2b4;background:#fff;font-size:22px;cursor:pointer}
+.pas button:disabled{opacity:.35}
+.pas output{min-width:32px;text-align:center;font-weight:800;font-size:18px}
+.champ-txt{width:100%;min-height:48px;border-radius:12px;border:2px solid #d9d2b4;padding:0 12px;font-size:17px;background:#fff}
+.ages{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:6px}
+.ages button{min-height:44px;border-radius:10px;border:2px solid #e2dcc0;background:#fff;font-weight:800;cursor:pointer}
+.ages button[aria-pressed="true"]{border-color:var(--foret);background:var(--foret-clair)}
+.recap{background:#fff;border-radius:14px;border:1px solid #e3ddc3;padding:6px 14px;margin-bottom:12px}
+.recap div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:8px 0;border-bottom:1px dashed #e8e2c8;font-size:15px}
+.recap div:last-child{border-bottom:0}
+.recap .t{font-weight:800;font-size:17px}
+.recap b{text-align:right}
+.paiement{background:var(--foret-clair);border-radius:14px;padding:12px 14px;font-size:14.5px}
+.confirm{text-align:center;padding:10px 0}
+.confirm .num{display:inline-block;font-family:Philosopher,serif;font-size:28px;background:var(--jaune);padding:4px 16px;border-radius:12px;margin:8px 0}
+.confirm .btn{margin-top:10px}
+
+/* Feuille d'édition d'un champ de la carte */
+.feuille{position:fixed;left:0;right:0;bottom:0;z-index:61;background:var(--papier);border-radius:22px 22px 0 0;box-shadow:0 -20px 60px -20px rgba(0,0,0,.45);display:none;max-height:88vh;overflow:auto;padding:12px 16px 18px}
+.feuille.ouvert{display:block}
+.feuille .poignee{width:44px;height:5px;border-radius:9px;background:#d6cfae;margin:0 auto 10px}
+.feuille h3{font-family:Philosopher,serif;font-size:22px;margin:0 0 10px;color:var(--nuit)}
+.feuille .ok{margin-top:12px}
+.voile2{position:fixed;inset:0;background:rgba(17,24,48,.45);display:none;z-index:60}
+.voile2.ouvert{display:block}
+@media (min-width:700px){.feuille{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-50%);width:520px;border-radius:22px}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="apercu" role="note">
+  <div class="wrap">
+    <p><span class="long">Aperçu non commandé, préparé par Vong Studio. Logo et photos appartiennent au parc ; retrait sur simple demande. Réservation et paiement simulés.</span><span class="court">Aperçu non commandé · logo et photos du parc, retrait sur simple demande · paiement simulé</span></p>
+    <a href="#gerant">Pour le gérant</a>
+  </div>
+</div>
+
+<header class="tete">
+  <div class="wrap">
+    <a class="marque" href="#haut" aria-label="Le Monde des petits loups, accueil">
+      <img src="images/logo-loup.jpg" alt="" width="46" height="46">
+      <b>Le Monde <span>des petits loups</span></b>
+    </a>
+    <nav class="nav" aria-label="Menu">
+      <a href="#horaires">Horaires</a>
+      <a href="#prix">Prix</a>
+      <a href="#parc">Le parc</a>
+      <a href="#anniversaire">Anniversaire</a>
+      <a class="tel" href="tel:+33243569937" aria-label="Appeler le parc : 02 43 56 99 37">Appeler</a>
+    </nav>
+  </div>
+</header>
+
+<main id="haut">
+<section class="scene" aria-labelledby="t-invit">
+  <div class="wrap">
+    <div style="min-width:0">
+    <div class="accroche"><b>Le Monde <span>des petits loups</span></b><p>Parc de jeux couvert de 1 200 m² à Laval, pour les enfants de 0 à 12 ans.</p></div>
+    <div class="invit">
+      <div class="timbre" aria-hidden="true"><img src="images/logo-loup.jpg" alt=""></div>
+      <p class="sur" id="t-invit">Invitation d'anniversaire</p>
+      <p class="phrase" id="phrase">
+        Pour les
+        <button type="button" class="champ" data-champ="age" aria-label="Âge de l'enfant : modifier"><span id="v-age">6</span>&nbsp;ans</button>
+        de
+        <input class="champ" id="v-prenom" type="text" maxlength="18" placeholder="prénom" aria-label="Prénom de l'enfant" autocomplete="off">,
+        on fête ça le
+        <button type="button" class="champ" data-champ="date" aria-label="Date de la fête : modifier"><span id="v-date">samedi 21 novembre</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        à
+        <button type="button" class="champ" data-champ="heure" aria-label="Heure de la fête : modifier"><span id="v-heure">14 h</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        avec
+        <button type="button" class="champ" data-champ="copains" aria-label="Nombre de copains invités : modifier"><span id="v-copains">10</span></button>
+        copains.
+      </p>
+      <div class="calcul" aria-live="polite" id="calcul"></div>
+      <div class="actions">
+        <button type="button" class="btn" id="go">Réserver la fête · payer l'acompte</button>
+      </div>
+      <p class="err" id="err-carte" role="alert"></p>
+      <div class="petit-lien"><button type="button" id="go-visite">Juste venir jouer ? Préparer une visite</button></div>
+    </div>
+    </div>
+
+    <div class="trois" aria-label="En un coup d'œil">
+      <a class="tuile" href="#horaires" id="tuile-auj">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span><small id="auj-titre">Aujourd'hui</small><strong id="auj-txt">…</strong></span>
+        <span class="fl" aria-hidden="true">›</span>
+      </a>
+      <a class="tuile" href="#prix">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v10H3z"/><path d="M7 12h4M15 10v4"/></svg></span>
+        <span><small>Prix · une seule grille</small><strong><span class="m">Prix unique · </span>Anniversaire 92&nbsp;€, copain en plus 10&nbsp;€</strong></span>
+        <span class="fl" aria-hidden="true">›</span>
+      </a>
+      <a class="tuile" href="#famille">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg></span>
+        <span><small>Carte famille <span class="ex">exemple</span></small><strong><span class="m">Carte famille <span class="ex">exemple</span> · </span>Vos visites comptent, et le prochain anniversaire aussi</strong></span>
+        <span class="fl" aria-hidden="true">›</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="bloc blanc" id="horaires" aria-labelledby="t-hor">
+  <div class="wrap">
+    <h2 id="t-hor">Horaires</h2>
+    <p class="chapo" id="hor-chapo">Les horaires changent pendant les vacances scolaires (zone B). La colonne en couleur est celle de la semaine en cours.</p>
+    <div class="hor">
+      <table class="table-h" id="table-h">
+        <thead><tr><th scope="col">Jour</th><th scope="col" data-p="hors">Hors vacances</th><th scope="col" data-p="vac">Vacances scolaires</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="notes">
+        <p id="prochaines-vac"></p>
+        <p><b>Jours fériés</b> : 10 h – 19 h. Fermé le 1er janvier. 24 et 25 décembre : <span class="ex">à confirmer avec le parc</span></p>
+        <p><b>Chaussettes obligatoires</b> pour les enfants, par mesure d'hygiène.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc papier" id="prix" aria-labelledby="t-prix">
+  <div class="wrap">
+    <h2 id="t-prix">Les prix</h2>
+    <p class="chapo">Une seule grille, la même partout sur le site. Les accompagnateurs entrent gratuitement.</p>
+    <table class="prix">
+      <thead><tr><th scope="col">Entrée</th><th scope="col" style="text-align:right">Prix</th></tr></thead>
+      <tbody>
+        <tr class="grp"><th colspan="2" scope="colgroup">Entrée enfant</th></tr>
+        <tr><td>Bébés <small>âge limite de gratuité à confirmer</small></td><td>Gratuit</td></tr>
+        <tr><td>Jusqu'à 3 ans</td><td class="aconf">tarif à confirmer avec le parc</td></tr>
+        <tr><td>4 à 12 ans</td><td class="aconf">tarif à confirmer avec le parc</td></tr>
+        <tr><td>Accompagnateurs</td><td>Gratuit</td></tr>
+        <tr class="grp"><th colspan="2" scope="colgroup">Tarifs réduits et carnets</th></tr>
+        <tr><td>Jeudi et vendredi, hors vacances <small>jusqu'à 3 ans · 4 à 12 ans</small></td><td class="aconf">tarif à confirmer avec le parc</td></tr>
+        <tr><td>Dernière heure</td><td class="aconf">tarif à confirmer avec le parc</td></tr>
+        <tr><td>Carnet 10 entrées <small>jusqu'à 3 ans · 4 à 12 ans</small></td><td class="aconf">tarif à confirmer avec le parc</td></tr>
+        <tr class="grp"><th colspan="2" scope="colgroup">Anniversaire</th></tr>
+        <tr><td>Formule les P'tits Loups <small>6 copains + l'enfant fêté + 1 adulte accompagnant</small></td><td>92 €</td></tr>
+        <tr><td>Copain en plus</td><td>10 €</td></tr>
+      </tbody>
+    </table>
+    <p class="prix-note">Les lignes « à confirmer » attendent le tarif retenu par le parc.</p>
+  </div>
+</section>
+
+<section class="bloc blanc" id="anniversaire" aria-labelledby="t-fete">
+  <div class="wrap">
+    <h2 id="t-fete">L'anniversaire, avec Garou</h2>
+    <p class="chapo">Le Monde des petits loups organise l'anniversaire de vos enfants dans un espace réservé. Garou la mascotte anime la fête, puis emmène les enfants dans la salle disco pour la mini-boum.</p>
+    <div class="fete">
+      <div class="ticket">
+        <h3>Formule les P'tits Loups</h3>
+        <p class="p">92 €</p>
+        <ul>
+          <li>6 enfants + l'enfant invitant + 1 adulte accompagnant</li>
+          <li>Location d'un boxe</li>
+          <li>Cartons d'invitation</li>
+          <li>Gâteau, sirops (2 pichets), jeux à volonté</li>
+          <li>7 jetons karting</li>
+          <li>Cadeau surprise</li>
+          <li>Enfant supplémentaire : 10 €</li>
+        </ul>
+        <p style="margin:14px 0 0"><button type="button" class="btn" data-go="fete">Choisir une date</button></p>
+      </div>
+      <div class="mosaique" style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <figure class="afournir">Photo à fournir : Garou la mascotte</figure>
+        <figure class="afournir">Photo à fournir : la salle disco</figure>
+        <figure class="afournir">Photo à fournir : un boxe d'anniversaire</figure>
+        <figure class="afournir">Photo à fournir : le gâteau</figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc papier" id="parc" aria-labelledby="t-parc">
+  <div class="wrap">
+    <h2 id="t-parc">Un parc de jeux couvert de 1 200 m², sur le thème de la forêt</h2>
+    <p class="chapo">Climatisé, pour les enfants de 0 à 12 ans, à Laval (zone des Bozées).</p>
+    <div class="parc">
+      <div class="mosaique">
+        <figure><img src="images/structure-filets.jpg" alt="La grande structure tubulaire et ses filets" width="400" height="400"><figcaption>Grande structure</figcaption></figure>
+        <figure><img src="images/toboggan-tube.jpg" alt="Un toboggan tube vert dans la structure" width="400" height="400"><figcaption>Toboggans</figcaption></figure>
+        <figure><img src="images/piscine-a-balles.jpg" alt="Le coin des petits, avec piscine à balles et toboggan" width="400" height="400"><figcaption>Coin des petits</figcaption></figure>
+        <figure><img src="images/espace-tout-petits.jpg" alt="Un espace de jeu sous la fresque de la forêt, avec tables pour les parents" width="430" height="230"><figcaption>Sous la fresque</figcaption></figure>
+        <figure class="afournir">Photo à fournir : mini-kartings électriques</figure>
+        <figure class="afournir">Photo à fournir : jeux gonflables</figure>
+      </div>
+      <ul class="liste-parc">
+        <li><svg class="patte" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="9.5" cy="6.5" r="2.2"/><circle cx="14.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/></svg><span><b>Structure tubulaire, jeux gonflables, trampoline, mini-kartings électriques</b></span></li>
+        <li><svg class="patte" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="9.5" cy="6.5" r="2.2"/><circle cx="14.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/></svg><span><b>Espace détente pour les parents</b> : revues, jeux de société, jeux en bois</span></li>
+        <li><svg class="patte" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="9.5" cy="6.5" r="2.2"/><circle cx="14.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/></svg><span><b>Cafétéria</b> : déjeuner (service jusqu'à 14 h), crêpes et gaufres pour le goûter</span></li>
+        <li><svg class="patte" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="9.5" cy="6.5" r="2.2"/><circle cx="14.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/></svg><span><b>Un lieu pédagogique</b> : les enfants découvrent la vie des loups en milieu naturel</span></li>
+        <li><svg class="patte" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="12" cy="16" rx="5" ry="4.2"/><circle cx="5.5" cy="10" r="2.2"/><circle cx="9.5" cy="6.5" r="2.2"/><circle cx="14.5" cy="6.5" r="2.2"/><circle cx="18.5" cy="10" r="2.2"/></svg><span><b>Jean-Charles Henry et son équipe d'animateurs</b> vous accueillent</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="bloc blanc" id="famille" aria-labelledby="t-fam">
+  <div class="wrap">
+    <div class="famille">
+      <div>
+        <h2 id="t-fam">La carte famille <span class="ex">exemple</span></h2>
+        <p class="chapo" style="margin-bottom:10px">Une carte sur le téléphone des parents, sans application à installer. Chaque visite rapporte des points, échangés contre des bons à utiliser au parc. Les enfants y sont enregistrés avec leur date de naissance : un mois avant le prochain anniversaire, le parc peut vous proposer de le refêter ici.</p>
+        <p class="chapo" style="font-size:14px">Points, bons et rappel : règles à fixer avec le parc.</p>
+      </div>
+      <div class="carte-f" aria-label="Exemple de carte famille">
+        <div class="l1"><b>Famille Martin</b><span class="ex">exemple</span></div>
+        <div class="enf"><span>Léa · 6 ans le 21 nov.</span><span></span><span>Tom · 3 ans le 4 mars</span><span></span></div>
+        <div class="pts">340 points · encore 160 points pour le prochain bon</div>
+        <div class="barre"><i></i></div>
+        <div class="pts">Prochaine fête de Tom : rappel prévu le 4 février</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc papier" aria-labelledby="t-info">
+  <div class="wrap">
+    <h2 id="t-info">Venir au parc</h2>
+    <div class="infos">
+      <div class="c"><h3>Adresse</h3><p style="margin:0">1 rue de Bruxelles, zone des Bozées, 53000 Laval</p></div>
+      <div class="c"><h3>Téléphone</h3><a href="tel:+33243569937">02 43 56 99 37</a></div>
+      <div class="c"><h3>Mail</h3><a href="mailto:mondedespetitsloups@sfr.fr">mondedespetitsloups@sfr.fr</a></div>
+    </div>
+    <p class="chapo" style="margin-top:16px">Les enfants restent sous la surveillance de leurs parents ou accompagnateurs. Boissons et goûters extérieurs non admis (sauf pour bébé) : la cafétéria est là pour ça.</p>
+    <p class="chapo">À venir : la Magie de Noël au Monde des petits loups, <span class="ex">date à confirmer avec le parc</span></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Le Monde des petits loups</b> · parc de jeux couvert · Laval</p>
+    <p>Aperçu non commandé, préparé par Vong Studio. Logo et photos appartiennent au parc ; retrait sur simple demande. Aucune réservation ni aucun paiement réel ne passe par cette page.</p>
+    <details class="gerant" id="gerant">
+      <summary>Ce qui change pour vous (gérant)</summary>
+      <div>
+        <ul>
+          <li><b>Une seule grille de prix</b>, reprise partout ; les prix retenus sont à nous transmettre.</li>
+          <li><b>L'anniversaire se réserve en ligne</b>, le soir comme le dimanche, avec un acompte qui bloque le créneau (taux de 30 % donné en exemple). Vous recevez la demande complète : âge, prénom, nombre d'enfants, options.</li>
+          <li><b>Des informations qui se mettent à jour seules</b> : l'état « ouvert / fermé » et les horaires se calculent chaque jour à partir de vos horaires et des vacances de la zone B.</li>
+          <li><b>La carte famille</b> garde le contact des parents et la date de naissance des enfants, pour proposer la fête suivante.</li>
+          <li>À nous transmettre : les prix retenus, la durée d'une fête, le nombre maximum d'enfants par boxe, les photos de Garou et de la salle disco.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</footer>
+
+<!-- Parcours de réservation -->
+<div class="voile" id="voile"></div>
+<div class="panneau" id="panneau" role="dialog" aria-modal="true" aria-labelledby="p-titre">
+  <div class="p-tete"><h2 id="p-titre">Réserver</h2><button type="button" class="fermer" id="fermer" aria-label="Fermer">×</button></div>
+  <div class="progres" id="progres" aria-hidden="true"></div>
+  <div class="simul">Aperçu : réservation et paiement simulés</div>
+  <div class="p-corps" id="p-corps" tabindex="-1"></div>
+  <div class="p-pied" id="p-pied"></div>
+</div>
+
+<!-- Feuille d'édition d'un champ de l'invitation -->
+<div class="voile2" id="voile2"></div>
+<div class="feuille" id="feuille" role="dialog" aria-modal="true" aria-labelledby="f-titre"></div>
+
+<script>
+(function(){
+"use strict";
+/* ------- Données du parc (site du parc, pages Accueil, Contact, Anniversaire, Cafétéria, lues le 10/11/2026) ------- */
+var FORMULE={nom:"Formule les P'tits Loups",prix:92,inclus:6,sup:10};
+var ACOMPTE_TAUX=0.30; /* exemple, à confirmer avec le parc */
+var DUREE_FETE=120;    /* minutes, exemple : durée non indiquée sur le site */
+var MAX_COPAINS=20;    /* exemple : capacité du boxe à confirmer */
+var OPTIONS=[ /* prix de la cafétéria du parc ; pour une fête : à confirmer */
+ {id:"sirop",nom:"Pichet de sirop à l'eau en plus (1 l)",prix:2.70,parEnfant:false},
+ {id:"diabolo",nom:"Pichet de diabolo (1 l)",prix:3.70,parEnfant:false},
+ {id:"crepe",nom:"Une crêpe au sucre par enfant",prix:1.60,parEnfant:true}
+];
+/* Vacances scolaires zone B (académie de Nantes, comme Orléans-Tours), du premier au dernier jour sans classe.
+   Source : export officiel https://fr.ftp.opendatasoft.com/openscol/fr-en-calendrier-scolaire/Zone-B.ics
+   (dates vérifiées par le contrôle qualité le 10/11/2026). */
+var VACANCES=[
+ ["2026-10-17","2026-11-01","vacances de la Toussaint"],
+ ["2026-12-19","2027-01-03","vacances de Noël"],
+ ["2027-02-20","2027-03-07","vacances d'hiver"],
+ ["2027-04-17","2027-05-02","vacances de printemps"]
+];
+/* Jours fériés : https://calendrier.api.gouv.fr/jours-feries/metropole/2027.json (lu le 10/11/2026) */
+var FERIES={"2026-11-11":"11 Novembre","2026-12-25":"Noël","2027-01-01":"Jour de l'an","2027-03-29":"lundi de Pâques","2027-05-01":"1er Mai","2027-05-06":"Ascension","2027-05-08":"8 Mai","2027-05-17":"lundi de Pentecôte","2027-07-14":"14 Juillet","2027-08-15":"15 Août"};
+var FERME={"01-01":"fermé le 1er janvier"};
+var A_CONFIRMER={"12-24":"24 décembre : ouverture à confirmer avec le parc","12-25":"25 décembre : ouverture à confirmer avec le parc"};
+/* Horaires du site (index 0 = dimanche). null = fermé */
+var HOR={
+ hors:[[600,1140],null,null,[600,1140],[960,1140],[960,1140],[600,1140]],
+ vac:[[600,1140],[840,1140],[600,1140],[600,1140],[600,1140],[600,1140],[600,1140]]
+};
+var JOURS=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+var JC=["L","M","M","J","V","S","D"];
+var MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+
+function z(n){return (n<10?"0":"")+n}
+function cle(d){return d.getFullYear()+"-"+z(d.getMonth()+1)+"-"+z(d.getDate())}
+function deCle(k){var p=k.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function md(d){return z(d.getMonth()+1)+"-"+z(d.getDate())}
+function jour0(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function plus(d,n){return new Date(d.getFullYear(),d.getMonth(),d.getDate()+n)}
+function hh(m){var h=Math.floor(m/60),mi=m%60;return h+" h"+(mi?" "+z(mi):"")}
+function euros(x){return x.toFixed(2).replace(".",",").replace(",00","")+" €"}
+function euros2(x){return x.toFixed(2).replace(".",",")+" €"}
+function dateCourte(d){return JOURS[d.getDay()]+" "+(d.getDate()===1?"1er":d.getDate())+" "+MOIS[d.getMonth()]}
+function dateLongue(d){return dateCourte(d)+" "+d.getFullYear()}
+function enVacances(d){var k=cle(d);for(var i=0;i<VACANCES.length;i++){if(k>=VACANCES[i][0]&&k<=VACANCES[i][1])return VACANCES[i]}return null}
+/* L'état d'un jour, calculé uniquement à partir des règles ci-dessus */
+function etatJour(d){
+  var k=cle(d),m=md(d),vac=enVacances(d),fer=FERIES[k]||null;
+  if(FERME[m])return {etat:"ferme",raison:"Le parc est "+FERME[m]+".",vac:vac,ferie:fer};
+  if(A_CONFIRMER[m])return {etat:"conf",raison:A_CONFIRMER[m]+".",vac:vac,ferie:fer};
+  var h;
+  if(fer&&!vac)h=[600,1140]; else h=(vac?HOR.vac:HOR.hors)[d.getDay()];
+  if(fer&&vac)h=[600,1140];
+  if(!h)return {etat:"ferme",raison:"Fermé le "+JOURS[d.getDay()]+" hors vacances scolaires.",vac:vac,ferie:fer};
+  return {etat:"ouvert",o:h[0],f:h[1],vac:vac,ferie:fer};
+}
+/* « Complet » : valeurs d'exemple, fixes pour une date donnée */
+function hache(s){var h=7;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%100003;return h}
+function jourComplet(d){var e=etatJour(d);return e.etat==="ouvert"&&(d.getDay()===6||d.getDay()===0)&&hache(cle(d))%9===4}
+function creneaux(d){
+  var e=etatJour(d),r=[];if(e.etat!=="ouvert")return r;
+  var fin=Math.min(e.f,20*60); /* pas de fête après 20 h */
+  for(var m=e.o;m+DUREE_FETE<=fin;m+=60){
+    var plein=jourComplet(d)||hache(cle(d)+m)%5===0;
+    r.push({m:m,fin:m+DUREE_FETE,complet:plein});
+  }
+  return r;
+}
+
+/* ------- État de la réservation ------- */
+var auj=jour0(new Date());
+var E={mode:"fete",age:6,prenom:"",date:null,heure:null,copains:10,adultes:1,options:{},petits:0,grands:2,bebes:0,accomp:1,etape:0};
+(function defaut(){
+  var d=plus(auj,10);while(d.getDay()!==6)d=plus(d,1);
+  for(var i=0;i<12;i++){
+    var c=creneaux(d).filter(function(x){return !x.complet});
+    if(c.length){E.date=cle(d);var pref=c.filter(function(x){return x.m===840})[0]||c.filter(function(x){return x.m>=840})[0]||c[0];E.heure=pref.m;return}
+    d=plus(d,7);
+  }
+})();
+var MIN_JOUR=plus(auj,1),MAX_JOUR=plus(auj,180);
+
+function totalFete(){
+  var sup=Math.max(0,E.copains-FORMULE.inclus)*FORMULE.sup,opt=0,lignes=[];
+  OPTIONS.forEach(function(o){if(E.options[o.id]){var q=o.parEnfant?(E.copains+1):1;opt+=o.prix*q;lignes.push([o.nom+(o.parEnfant?" ×"+q:""),o.prix*q])}});
+  var t=FORMULE.prix+sup+opt;return {base:FORMULE.prix,sup:sup,opt:opt,lignes:lignes,total:t,acompte:Math.round(t*ACOMPTE_TAUX*100)/100};
+}
+
+/* ------- Carte d'invitation ------- */
+var $=function(id){return document.getElementById(id)};
+function majCarte(){
+  $("v-age").textContent=E.age;
+  $("v-date").textContent=E.date?dateCourte(deCle(E.date)):"choisir";
+  $("v-heure").textContent=E.heure!=null?hh(E.heure):"choisir";
+  $("v-copains").textContent=E.copains;
+  var t=totalFete(),sup=E.copains-FORMULE.inclus;
+  $("calcul").innerHTML='<span class="det">'+FORMULE.nom+' 92 € (6 copains)'+(sup>0?' + '+sup+'\u00a0×\u00a010\u00a0€':'')+(t.opt?' + options '+euros2(t.opt)+' (à confirmer)':'')+'</span>'+
+   '<span class="tot">Total</span><b class="tot">'+euros2(t.total)+'</b>'+
+   '<span class="ac">Acompte en ligne <span class="ex">exemple 30 %</span></span><b class="ac">'+euros2(t.acompte)+'</b>';
+  var p=$("v-prenom");p.size=Math.max(6,(p.value||p.placeholder).length+1);
+}
+$("v-prenom").addEventListener("input",function(){E.prenom=this.value.trim();$("err-carte").textContent="";majCarte()});
+
+/* Feuille d'édition */
+var feuille=$("feuille"),voile2=$("voile2"),dernierFocus=null;
+function ouvrirFeuille(titre,contenu,apres){
+  dernierFocus=document.activeElement;
+  feuille.innerHTML='<div class="poignee" aria-hidden="true"></div><h3 id="f-titre">'+titre+'</h3>';
+  feuille.appendChild(contenu);
+  var ok=document.createElement("button");ok.type="button";ok.className="btn ok";ok.textContent="C'est noté";
+  ok.onclick=function(){fermerFeuille();if(apres)apres()};feuille.appendChild(ok);
+  feuille.classList.add("ouvert");voile2.classList.add("ouvert");
+  var f=feuille.querySelector("button[aria-pressed='true'],button:not([disabled]),input");if(f)f.focus();
+}
+function fermerFeuille(){feuille.classList.remove("ouvert");voile2.classList.remove("ouvert");majCarte();if(dernierFocus)dernierFocus.focus()}
+voile2.onclick=fermerFeuille;
+
+function blocAge(maj){
+  var w=document.createElement("div"),g=document.createElement("div");g.className="ages";
+  for(var a=1;a<=12;a++)(function(a){var b=document.createElement("button");b.type="button";b.textContent=a;b.setAttribute("aria-label",a+" ans");b.setAttribute("aria-pressed",String(E.age===a));
+    b.onclick=function(){E.age=a;g.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");if(maj)maj()};g.appendChild(b)})(a);
+  var p=document.createElement("p");p.className="aide";p.style.margin="0 0 8px";p.textContent="Le parc accueille les enfants de 0 à 12 ans.";
+  w.appendChild(p);w.appendChild(g);return w;
+}
+function pas(lab,aide,val,min,max,set,id){
+  var l=document.createElement("div");l.className="ligne";
+  l.innerHTML='<div><span class="lab" id="'+id+'-l">'+lab+'</span>'+(aide?'<small>'+aide+'</small>':'')+'</div><div class="pas" role="group" aria-labelledby="'+id+'-l"><button type="button" aria-label="Moins">−</button><output aria-live="polite">'+val+'</output><button type="button" aria-label="Plus">+</button></div>';
+  var bs=l.querySelectorAll("button"),o=l.querySelector("output");
+  function rf(){bs[0].disabled=val<=min;bs[1].disabled=val>=max;o.textContent=val}
+  bs[0].onclick=function(){if(val>min){val--;set(val);rf()}};bs[1].onclick=function(){if(val<max){val++;set(val);rf()}};rf();return l;
+}
+function blocCopains(maj){
+  return pas("Copains invités","Formule de base : 6 copains. Au-delà, 10 € par enfant. Moins de 6 copains, ou plus de "+MAX_COPAINS+" : à confirmer avec le parc.",E.copains,FORMULE.inclus,MAX_COPAINS,function(v){E.copains=v;if(maj)maj()},"pc");
+}
+
+/* Calendrier, partagé par la carte et le parcours */
+var moisVu=null;
+function blocCalendrier(surChoix){
+  var w=document.createElement("div");
+  if(!moisVu){var d0=E.date?deCle(E.date):MIN_JOUR;moisVu=new Date(d0.getFullYear(),d0.getMonth(),1)}
+  var info=document.createElement("div");info.className="info-j";info.setAttribute("aria-live","polite");
+  function dessine(){
+    w.innerHTML="";
+    var t=document.createElement("div");t.className="cal-tete";
+    var prec=document.createElement("button");prec.type="button";prec.textContent="‹";prec.setAttribute("aria-label","Mois précédent");
+    var suiv=document.createElement("button");suiv.type="button";suiv.textContent="›";suiv.setAttribute("aria-label","Mois suivant");
+    var titre=document.createElement("b");titre.textContent=MOIS[moisVu.getMonth()]+" "+moisVu.getFullYear();
+    prec.disabled=moisVu<=new Date(MIN_JOUR.getFullYear(),MIN_JOUR.getMonth(),1);
+    suiv.disabled=moisVu>=new Date(MAX_JOUR.getFullYear(),MAX_JOUR.getMonth(),1);
+    prec.onclick=function(){moisVu=new Date(moisVu.getFullYear(),moisVu.getMonth()-1,1);dessine()};
+    suiv.onclick=function(){moisVu=new Date(moisVu.getFullYear(),moisVu.getMonth()+1,1);dessine()};
+    t.appendChild(prec);t.appendChild(titre);t.appendChild(suiv);w.appendChild(t);
+    var g=document.createElement("div");g.className="cal";g.setAttribute("role","group");g.setAttribute("aria-label","Calendrier de "+titre.textContent);
+    JC.forEach(function(j){var s=document.createElement("span");s.className="js";s.setAttribute("aria-hidden","true");s.textContent=j;g.appendChild(s)});
+    var dec=(moisVu.getDay()+6)%7;for(var i=0;i<dec;i++)g.appendChild(document.createElement("span"));
+    var nb=new Date(moisVu.getFullYear(),moisVu.getMonth()+1,0).getDate();
+    for(var j=1;j<=nb;j++)(function(d){
+      var b=document.createElement("button");b.type="button";b.textContent=d.getDate();
+      var e=etatJour(d),hors=d<MIN_JOUR||d>MAX_JOUR,cp=E.mode==="fete"&&jourComplet(d);
+      if(e.vac)b.classList.add("vac");if(e.ferie)b.classList.add("fe");
+      var etiq=dateLongue(d);
+      if(hors){b.disabled=true;etiq+=", indisponible"}
+      else if(e.etat==="ferme"){b.classList.add("fer");etiq+=", fermé"}
+      else if(e.etat==="conf"){b.classList.add("conf");etiq+=", ouverture à confirmer"}
+      else if(cp){b.classList.add("comp");etiq+=", complet"}
+      if(e.vac)etiq+=", "+e.vac[2];if(e.ferie)etiq+=", férié";
+      b.setAttribute("aria-label",etiq);b.setAttribute("aria-pressed",String(E.date===cle(d)));
+      b.onclick=function(){
+        if(e.etat==="ferme"){info.textContent=dateCourte(d)+" : "+e.raison.charAt(0).toLowerCase()+e.raison.slice(1)+" Choisissez un autre jour.";return}
+        if(e.etat==="conf"){info.textContent=e.raison+" Choisissez un autre jour ou appelez le parc.";return}
+        if(cp){info.textContent=dateCourte(d)+" : complet pour les anniversaires (exemple). Choisissez un autre jour.";return}
+        E.date=cle(d);
+        if(E.heure!=null&&!creneaux(d).some(function(c){return c.m===E.heure&&!c.complet}))E.heure=null;
+        dessine();texteInfo();if(surChoix)surChoix();
+        var sel=w.querySelector('.cal button[aria-pressed="true"]');if(sel)sel.focus();
+      };
+      g.appendChild(b);
+    })(new Date(moisVu.getFullYear(),moisVu.getMonth(),j));
+    w.appendChild(g);
+    var lg=document.createElement("div");lg.className="legende";
+    lg.innerHTML='<span><i style="background:var(--jaune)"></i>vacances scolaires (zone B)</span><span><i style="background:var(--cyan-fonce);width:8px;height:8px;border-radius:50%"></i>férié</span>'+(E.mode==="fete"?'<span><i style="background:#fbe4e2"></i>complet (exemple)</span>':'')+'<span>barré : fermé</span>';
+    w.appendChild(lg);w.appendChild(info);
+  }
+  function texteInfo(){
+    if(!E.date){info.textContent="Choisissez un jour.";return}
+    var d=deCle(E.date),e=etatJour(d);
+    info.textContent=dateCourte(d)+(e.ferie?" (férié)":"")+(e.vac?" ("+e.vac[2]+")":"")+" : ouvert de "+hh(e.o)+" à "+hh(e.f)+".";
+  }
+  dessine();texteInfo();return w;
+}
+function blocCreneaux(surChoix){
+  var w=document.createElement("div");
+  if(!E.date){w.innerHTML='<p class="aide">Choisissez d\'abord une date.</p>';return w}
+  var d=deCle(E.date),cs=creneaux(d),e=etatJour(d);
+  var p=document.createElement("p");p.className="aide";
+  p.textContent=dateCourte(d)+" : ouvert de "+hh(e.o)+" à "+hh(e.f)+". Une fête dure environ 2 h (exemple, durée à confirmer avec le parc).";
+  w.appendChild(p);
+  var g=document.createElement("div");g.className="creneaux";
+  cs.forEach(function(c){var b=document.createElement("button");b.type="button";
+    b.innerHTML=hh(c.m)+'<small>'+(c.complet?"complet (exemple)":"jusqu'à "+hh(c.fin))+'</small>';
+    b.setAttribute("aria-pressed",String(E.heure===c.m));
+    if(c.complet){b.classList.add("complet");b.setAttribute("aria-disabled","true");b.setAttribute("aria-label",hh(c.m)+", complet")}
+    b.onclick=function(){if(c.complet){msg.textContent=hh(c.m)+" est complet (exemple) : choisissez un autre horaire.";return}
+      E.heure=c.m;g.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");msg.textContent="";if(surChoix)surChoix()};
+    g.appendChild(b)});
+  w.appendChild(g);
+  var msg=document.createElement("p");msg.className="err";msg.setAttribute("role","alert");w.appendChild(msg);
+  if(!cs.some(function(c){return !c.complet})){msg.textContent="Plus aucun créneau ce jour-là : choisissez une autre date."}
+  return w;
+}
+
+document.querySelectorAll(".champ[data-champ]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var c=b.getAttribute("data-champ");E.mode="fete";
+    if(c==="age")ouvrirFeuille("L'âge fêté",blocAge(majCarte));
+    if(c==="copains")ouvrirFeuille("Combien de copains ?",blocCopains(majCarte));
+    if(c==="date"){moisVu=null;ouvrirFeuille("Le jour de la fête",blocCalendrier(majCarte),function(){if(E.heure==null)setTimeout(function(){document.querySelector('.champ[data-champ="heure"]').click()},0)})}
+    if(c==="heure")ouvrirFeuille("L'heure de la fête",blocCreneaux(majCarte));
+  });
+});
+
+/* ------- Parcours ------- */
+var panneau=$("panneau"),voile=$("voile"),corps=$("p-corps"),pied=$("p-pied");
+var ETAPES_FETE=["Formule","Date","Créneau","Enfants","Options","Récapitulatif","Confirmation"];
+var ETAPES_VISITE=["Formule","Date","Enfants","Récapitulatif","Confirmation"];
+function etapes(){return E.mode==="fete"?ETAPES_FETE:ETAPES_VISITE}
+function ouvrir(mode,etape){
+  E.mode=mode;E.etape=etape||0;dernierFocus=document.activeElement;
+  panneau.classList.add("ouvert");voile.classList.add("ouvert");document.body.style.overflow="hidden";rendre();
+}
+function fermer(){panneau.classList.remove("ouvert");voile.classList.remove("ouvert");document.body.style.overflow="";majCarte();if(dernierFocus)dernierFocus.focus()}
+$("fermer").onclick=fermer;voile.onclick=fermer;
+document.addEventListener("keydown",function(ev){if(ev.key==="Escape"){if(feuille.classList.contains("ouvert"))fermerFeuille();else if(panneau.classList.contains("ouvert"))fermer()}});
+
+$("go").onclick=function(){
+  if(!E.prenom){$("err-carte").textContent="Écrivez le prénom de l'enfant dans l'invitation.";$("v-prenom").focus();return}
+  if(!E.date||E.heure==null){$("err-carte").textContent="Choisissez la date et l'heure de la fête.";return}
+  ouvrir("fete",0);
+};
+$("go-visite").onclick=function(){ouvrir("visite",0)};
+document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){ouvrir("fete",0)}});
+
+function entete(t,aide){
+  var et=etapes();
+  corps.innerHTML='<p class="etape-t">Étape '+(E.etape+1)+' sur '+et.length+' · '+et[E.etape]+'</p><h3>'+t+'</h3>'+(aide?'<p class="aide">'+aide+'</p>':'');
+}
+function piedNav(valider,libelle){
+  pied.innerHTML="";
+  var r=document.createElement("button");r.type="button";r.className="btn second";r.textContent="Retour";
+  r.onclick=function(){if(E.etape===0)fermer();else{E.etape--;rendre()}};
+  var s=document.createElement("button");s.type="button";s.className="btn";s.textContent=libelle||"Continuer";
+  var er=document.createElement("p");er.className="err";er.setAttribute("role","alert");
+  s.onclick=function(){var m=valider?valider():"";if(m){er.textContent=m;return}E.etape++;rendre()};
+  pied.appendChild(r);pied.appendChild(s);pied.appendChild(er);
+}
+function rendre(){
+  var et=etapes();
+  $("progres").innerHTML=et.map(function(_,i){return '<i class="'+(i<=E.etape?"f":"")+'"></i>'}).join("");
+  $("p-titre").textContent=E.mode==="fete"?"Réserver l'anniversaire":"Préparer une visite";
+  var nom=et[E.etape];
+  ({Formule:etFormule,Date:etDate,"Créneau":etCreneau,Enfants:etEnfants,Options:etOptions,"Récapitulatif":etRecap,Confirmation:etConfirm})[nom]();
+  corps.scrollTop=0;corps.focus({preventScroll:true});
+}
+function etFormule(){
+  entete("Que voulez-vous faire ?");
+  var c=document.createElement("div");c.className="choix";
+  [["fete",FORMULE.nom,"92 €","Anniversaire dans un boxe réservé, animé par Garou : 6 copains + l'enfant fêté + 1 adulte. Copain en plus : 10 €."],
+   ["visite","Juste venir jouer","sur place","Préparez votre venue : jour, horaires et nombre d'enfants. L'entrée se règle à l'accueil."]].forEach(function(o){
+    var b=document.createElement("button");b.type="button";b.className="opt";b.setAttribute("aria-pressed",String(E.mode===o[0]));
+    b.innerHTML='<b>'+o[1]+'</b><span class="pr">'+o[2]+'</span><small>'+o[3]+'</small>';
+    b.onclick=function(){E.mode=o[0];rendre()};c.appendChild(b)});
+  corps.appendChild(c);piedNav();
+}
+function etDate(){
+  entete(E.mode==="fete"?"Le jour de la fête":"Le jour de votre visite","Les jours barrés sont fermés. Les horaires suivent les vacances scolaires de la zone B.");
+  corps.appendChild(blocCalendrier());
+  piedNav(function(){
+    if(!E.date)return "Choisissez un jour dans le calendrier.";
+    var d=deCle(E.date),e=etatJour(d);if(e.etat!=="ouvert")return "Ce jour-là n'est pas réservable : choisissez-en un autre.";
+    if(E.mode==="fete"&&jourComplet(d))return "Ce jour est complet (exemple) : choisissez-en un autre.";
+  });
+}
+function etCreneau(){
+  entete("L'heure de la fête");
+  corps.appendChild(blocCreneaux());
+  piedNav(function(){if(E.heure==null)return "Choisissez un horaire."});
+}
+function etEnfants(){
+  if(E.mode==="fete"){
+    entete("Les invités");
+    var l=document.createElement("div");l.className="ligne";l.style.display="block";
+    l.innerHTML='<label for="pr2">Prénom de l\'enfant fêté</label>';
+    var i=document.createElement("input");i.id="pr2";i.className="champ-txt";i.maxLength=18;i.value=E.prenom;i.autocomplete="off";i.style.marginTop="6px";
+    i.oninput=function(){E.prenom=i.value.trim();$("v-prenom").value=i.value};l.appendChild(i);corps.appendChild(l);
+    var la=document.createElement("div");la.className="ligne";la.style.display="block";la.innerHTML='<span class="lab">Âge fêté</span>';la.appendChild(blocAge());corps.appendChild(la);
+    corps.appendChild(blocCopains());
+    corps.appendChild(pas("Adultes accompagnants","1 adulte compris dans la formule ; les accompagnateurs entrent gratuitement.",E.adultes,1,6,function(v){E.adultes=v},"pa"));
+    piedNav(function(){if(!E.prenom)return "Écrivez le prénom de l'enfant fêté."});
+  }else{
+    entete("Qui vient ?","Le prix de l'entrée est à confirmer avec le parc : il sera affiché ici dès qu'il sera fixé.");
+    corps.appendChild(pas("Enfants de 4 à 12 ans","",E.grands,0,12,function(v){E.grands=v},"pg"));
+    corps.appendChild(pas("Enfants jusqu'à 3 ans","",E.petits,0,12,function(v){E.petits=v},"pp"));
+    corps.appendChild(pas("Accompagnateurs","Entrée gratuite.",E.accomp,1,8,function(v){E.accomp=v},"pac"));
+    piedNav(function(){if(E.grands+E.petits<1)return "Indiquez au moins un enfant."});
+  }
+}
+function etOptions(){
+  entete("Des options ?","Prix de la cafétéria du parc. Pour une fête : à confirmer avec le parc.");
+  var c=document.createElement("div");c.className="choix";
+  OPTIONS.forEach(function(o){var b=document.createElement("button");b.type="button";b.className="opt";b.setAttribute("role","checkbox");b.setAttribute("aria-checked",String(!!E.options[o.id]));
+    var q=o.parEnfant?(E.copains+1):1;
+    b.innerHTML='<b>'+o.nom+'</b><span class="pr">+ '+euros2(o.prix*q)+'</span>'+(o.parEnfant?'<small>'+euros2(o.prix)+' × '+q+' enfants</small>':'');
+    b.onclick=function(){E.options[o.id]=!E.options[o.id];b.setAttribute("aria-checked",String(!!E.options[o.id]))};c.appendChild(b)});
+  corps.appendChild(c);piedNav();
+}
+function etRecap(){
+  var d=deCle(E.date);
+  if(E.mode==="fete"){
+    var t=totalFete();
+    entete("Votre récapitulatif");
+    var r=document.createElement("div");r.className="recap";
+    var h='<div><span>Anniversaire de '+esc(E.prenom)+', '+E.age+' ans</span><b></b></div>'+
+      '<div><span>'+dateLongue(d)+', '+hh(E.heure)+' – '+hh(E.heure+DUREE_FETE)+' <span class="ex">durée exemple</span></span><b></b></div>'+
+      '<div><span>'+FORMULE.nom+' (6 copains + '+esc(E.prenom)+' + 1 adulte)</span><b>'+euros2(FORMULE.prix)+'</b></div>';
+    if(t.sup)h+='<div><span>'+(E.copains-6)+' copain'+(E.copains-6>1?'s':'')+' en plus × 10 €</span><b>'+euros2(t.sup)+'</b></div>';
+    t.lignes.forEach(function(l){h+='<div><span>'+l[0]+' <span class="ex">à confirmer</span></span><b>'+euros2(l[1])+'</b></div>'});
+    if(E.adultes>1)h+='<div><span>'+(E.adultes-1)+' accompagnateur'+(E.adultes>2?'s':'')+' en plus</span><b>gratuit</b></div>';
+    h+='<div class="t"><span>Total de la fête</span><b>'+euros2(t.total)+'</b></div>'+
+       '<div class="t" style="color:var(--foret)"><span>Acompte à payer maintenant <span class="ex">exemple 30 %</span></span><b>'+euros2(t.acompte)+'</b></div>'+
+       '<div><span>Reste à régler au parc le jour de la fête</span><b>'+euros2(t.total-t.acompte)+'</b></div>';
+    r.innerHTML=h;corps.appendChild(r);
+    var p=document.createElement("div");p.className="paiement";
+    p.innerHTML='<b>Paiement simulé.</b> Sur le vrai site, l\'acompte se paie ici par carte bancaire et bloque le créneau. Dans cet aperçu, aucune carte n\'est demandée et rien n\'est débité.';
+    corps.appendChild(p);
+    piedNav(null,"Payer "+euros2(t.acompte)+" (simulé)");
+  }else{
+    entete("Votre visite");
+    var e=etatJour(d),r2=document.createElement("div");r2.className="recap";
+    r2.innerHTML='<div><span>'+dateLongue(d)+'</span><b>'+hh(e.o)+' – '+hh(e.f)+'</b></div>'+
+      (E.grands?'<div><span>'+E.grands+' enfant'+(E.grands>1?'s':'')+' de 4 à 12 ans</span><b class="ex">à confirmer</b></div>':'')+
+      (E.petits?'<div><span>'+E.petits+' enfant'+(E.petits>1?'s':'')+' jusqu\'à 3 ans</span><b class="ex">à confirmer</b></div>':'')+
+      '<div><span>'+E.accomp+' accompagnateur'+(E.accomp>1?'s':'')+'</span><b>gratuit</b></div>'+
+      '<div class="t"><span>À payer maintenant</span><b>0 €</b></div>';
+    corps.appendChild(r2);
+    var p2=document.createElement("p");p2.className="aide";p2.textContent="L'entrée se règle à l'accueil. Pensez aux chaussettes pour les enfants.";corps.appendChild(p2);
+    piedNav(null,"Valider ma visite");
+  }
+}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var numero=null;
+function etConfirm(){
+  var d=deCle(E.date);
+  if(!numero)numero="LOUP-"+String(d.getFullYear()).slice(2)+z(d.getMonth()+1)+z(d.getDate())+"-"+(100+hache(E.prenom+E.date+E.heure)%900);
+  corps.innerHTML='<p class="etape-t">Étape '+(E.etape+1)+' sur '+etapes().length+' · Confirmation</p>';
+  var c=document.createElement("div");c.className="confirm";
+  var quoi=E.mode==="fete"?"L'anniversaire de "+esc(E.prenom)+" est réservé":"Votre visite est notée";
+  var quand=E.mode==="fete"?dateLongue(d)+" à "+hh(E.heure):dateLongue(d);
+  c.innerHTML='<h3>'+quoi+'</h3><p class="aide" style="margin:0">'+quand+'</p><div class="num">'+numero+'</div>'+
+    '<p class="aide">Numéro de réservation (exemple). '+(E.mode==="fete"?'Acompte de '+euros2(totalFete().acompte)+' : paiement simulé, rien n\'a été débité.':'Rien n\'a été payé.')+'</p>';
+  var a=document.createElement("button");a.type="button";a.className="btn";a.textContent="Ajouter à mon agenda";a.onclick=ics;c.appendChild(a);
+  corps.appendChild(c);
+  pied.innerHTML="";var f=document.createElement("button");f.type="button";f.className="btn second";f.style.gridColumn="1/-1";f.textContent="Fermer";f.onclick=function(){numero=null;fermer()};pied.appendChild(f);
+}
+function ics(){
+  var d=deCle(E.date),e=etatJour(d),deb=E.mode==="fete"?E.heure:e.o,fin=E.mode==="fete"?E.heure+DUREE_FETE:e.f;
+  function t(m){return ""+d.getFullYear()+z(d.getMonth()+1)+z(d.getDate())+"T"+z(Math.floor(m/60))+z(m%60)+"00"}
+  var titre=E.mode==="fete"?"Anniversaire de "+E.prenom+" au Monde des petits loups":"Visite au Monde des petits loups";
+  var txt=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Apercu//Monde des petits loups//FR","BEGIN:VEVENT","UID:"+numero+"@apercu","DTSTAMP:"+t(0).slice(0,8)+"T000000","DTSTART:"+t(deb),"DTEND:"+t(fin),
+    "SUMMARY:"+titre,"LOCATION:1 rue de Bruxelles\\, zone des Bozées\\, 53000 Laval","DESCRIPTION:Réservation "+numero+" (aperçu\\, exemple). Chaussettes obligatoires pour les enfants.","END:VEVENT","END:VCALENDAR"].join("\r\n");
+  var u=URL.createObjectURL(new Blob([txt],{type:"text/calendar"})),l=document.createElement("a");l.href=u;l.download=numero+".ics";document.body.appendChild(l);l.click();l.remove();setTimeout(function(){URL.revokeObjectURL(u)},2000);
+}
+
+/* ------- Aujourd'hui, horaires, vacances : calculés sur la date du jour ------- */
+function prochaineOuverture(d){for(var i=1;i<15;i++){var x=plus(d,i),e=etatJour(x);if(e.etat==="ouvert")return {d:x,e:e,i:i}}return null}
+function majAujourdhui(){
+  var now=new Date(),d=jour0(now),e=etatJour(d),m=now.getHours()*60+now.getMinutes(),txt,cls;
+  $("auj-titre").textContent="Aujourd'hui, "+dateCourte(d);
+  function suite(){var p=prochaineOuverture(d);if(!p)return "";return " · rouvre "+(p.i===1?"demain":JOURS[p.d.getDay()]+" "+p.d.getDate())+(p.e.ferie?" (férié)":"")+" à "+hh(p.e.o)}
+  if(e.etat==="conf"){cls="conf";txt="Ouverture à confirmer avec le parc"}
+  else if(e.etat==="ferme"){cls="off";txt="Fermé"+suite()}
+  else if(m<e.o){cls="off";txt="Ouvre à "+hh(e.o)+", jusqu'à "+hh(e.f)}
+  else if(m<e.f){cls="on";txt="Ouvert jusqu'à "+hh(e.f)}
+  else{cls="off";txt="Fermé pour aujourd'hui"+suite()}
+  $("auj-txt").innerHTML='<span class="pastille '+cls+'" aria-hidden="true"></span>'+txt;
+  /* Tableau */
+  var vac=enVacances(d),per=vac?"vac":"hors",tb=document.querySelector("#table-h tbody"),ordre=[1,2,3,4,5,6,0],h="";
+  document.querySelectorAll("#table-h thead th[data-p]").forEach(function(th){th.setAttribute("data-actif",th.getAttribute("data-p")===per?"1":"0")});
+  ordre.forEach(function(j){
+    function cell(p){var x=HOR[p][j];return x?'<td>'+hh(x[0])+' – '+hh(x[1])+'</td>':'<td class="ferme">fermé</td>'}
+    h+='<tr'+(j===d.getDay()?' class="auj"':'')+'><th scope="row">'+JOURS[j].charAt(0).toUpperCase()+JOURS[j].slice(1)+'</th>'+cell("hors")+cell("vac")+'</tr>';
+  });
+  tb.innerHTML=h;
+  var k=cle(d),txtv="";
+  function sauf(v){return v[0].slice(5,7)==="12"?" (sauf le 1er janvier ; 24 et 25 décembre à confirmer)":""}
+  if(vac)txtv="<b>En ce moment : "+vac[2]+"</b>, jusqu'au "+dateCourte(deCle(vac[1]))+". Ouvert tous les jours, le lundi à partir de 14 h"+sauf(vac)+".";
+  else{for(var i=0;i<VACANCES.length;i++){if(VACANCES[i][0]>k){var v=VACANCES[i];txtv="<b>Prochaines vacances</b> : "+v[2]+", du "+dateCourte(deCle(v[0]))+" au "+dateCourte(deCle(v[1]))+". Ouvert tous les jours, le lundi à partir de 14 h"+sauf(v)+".";break}}}
+  $("prochaines-vac").innerHTML=txtv;
+}
+majAujourdhui();majCarte();
+setInterval(majAujourdhui,60000);
+})();
+</script>
+</body>
+</html>

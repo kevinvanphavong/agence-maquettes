@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Le Silver · Bowling et laser game à Beaucouzé (aperçu)</title>
+<link rel="icon" href="data:,">
+<meta name="description" content="Aperçu non commandé d'une page d'accueil pour le Silver, complexe de loisirs à Beaucouzé : réservation en ligne du bowling et du laser game.">
+<style>
+@font-face{font-family:"Dosis";src:url("polices/dosis-latin-wght-normal.woff2") format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Raleway";src:url("polices/raleway-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --noir:#111111; --carbone:#1b1b1b; --ardoise:#262626; --trait:#3a3a3a;
+  --magenta:#ff00ff; --violet:#6f22ff; --violet-clair:#a77bff; --orange:#ff5800; --menthe:#00ffb1;
+  --blanc:#f5f5f5; --gris:#bdbdbd; --gris2:#9a9a9a;
+  --papier:#f4f1ea; --encre:#141414;
+  --r:10px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--noir);color:var(--blanc);font-family:"Raleway",system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,h4{font-family:"Dosis",sans-serif;line-height:1.1;margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--menthe);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* Bandeau aperçu */
+.apercu{background:#000;color:var(--gris);font-size:12.5px;line-height:1.35;padding:7px 0;border-bottom:1px solid #222}
+.apercu .wrap{display:flex;gap:6px 14px;flex-wrap:wrap;align-items:center}
+.apercu b{color:var(--menthe);font-weight:700}
+
+/* En-tête */
+.entete{position:sticky;top:0;z-index:20;background:rgba(17,17,17,.94);backdrop-filter:blur(6px);border-bottom:1px solid #222}
+.entete .wrap{display:flex;align-items:center;gap:18px;min-height:60px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
+.logo img{height:30px;width:auto}
+.logo span{font-family:"Dosis";font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gris);line-height:1.15;max-width:120px}
+.nav{display:flex;gap:2px;margin-left:auto}
+.nav a{font-family:"Dosis";font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:14px;text-decoration:none;padding:0 12px;min-height:44px;display:flex;align-items:center;border-radius:6px;color:var(--gris)}
+.nav a:hover{color:#fff;background:#1f1f1f}
+.tel{font-family:"Dosis";font-weight:700;font-size:16px;text-decoration:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid #333;border-radius:999px;white-space:nowrap}
+.tel:hover{border-color:var(--magenta)}
+.tel svg{width:16px;height:16px}
+@media (max-width:980px){.nav{display:none}.tel{margin-left:auto}}
+@media (max-width:420px){.logo span{display:none}.tel{font-size:15px;padding:0 10px}}
+
+/* ===== Feuille de score (haut de page) ===== */
+.feuille-zone{padding:26px 0 34px;background:
+  radial-gradient(900px 300px at 15% -10%,rgba(255,0,255,.16),transparent 60%),
+  radial-gradient(700px 300px at 95% 0%,rgba(111,34,255,.22),transparent 60%),var(--noir)}
+.feuille-tete{display:flex;align-items:flex-end;justify-content:space-between;gap:10px 20px;flex-wrap:wrap;margin-bottom:14px}
+.feuille-tete h1{font-weight:300;font-size:clamp(26px,3.4vw,40px);letter-spacing:.04em;text-transform:uppercase}
+.feuille-tete h1 b{font-weight:800}
+.feuille-tete p{margin:2px 0 0;color:var(--gris);font-size:14.5px}
+.traits{display:block;width:62px;height:30px}
+.sheet{background:var(--papier);color:var(--encre);border-radius:6px;box-shadow:0 0 0 1px #000,0 18px 50px rgba(255,0,255,.18),0 0 0 6px #1d1d1d;display:grid;
+  grid-template-columns:116px minmax(0,1.6fr) minmax(0,1.6fr) minmax(0,1.6fr) repeat(6,minmax(0,.92fr)) minmax(0,1.6fr);overflow:hidden}
+.joueur{grid-row:span 1;border-right:2px solid var(--encre);display:flex;flex-direction:column;justify-content:space-between;padding:12px 12px 10px;background:#111;color:#fff}
+.joueur small{font-family:"Dosis";font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gris)}
+.joueur img{width:92px;margin:8px 0}
+.joueur .date{font-family:"Dosis";font-weight:600;font-size:13px;color:var(--menthe);line-height:1.25}
+.frame{position:relative;border-right:1px solid #2b2b2b;display:flex;flex-direction:column;min-width:0;text-decoration:none;color:inherit;background:var(--papier);transition:background .2s}
+.frame:last-child{border-right:0}
+a.frame:hover{background:#fffaf0}
+.f-num{display:flex;align-items:stretch;justify-content:space-between;border-bottom:1px solid #2b2b2b;height:30px}
+.f-num span{font-family:"Dosis";font-weight:700;font-size:13px;padding:0 8px;display:flex;align-items:center;letter-spacing:.05em}
+.lances{display:flex}
+.lances i{font-style:normal;width:26px;border-left:1px solid #2b2b2b;display:flex;align-items:center;justify-content:center;font-family:"Dosis";font-weight:800;font-size:15px;color:var(--encre)}
+.lances i.x{color:#c400c4}
+.f-corps{padding:12px 12px 10px;flex:1;display:flex;flex-direction:column;gap:6px;min-width:0}
+.f-kick{font-family:"Dosis";font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7a1fd0}
+.f-titre{font-family:"Dosis";font-weight:800;font-size:21px;line-height:1.08}
+.f-txt{font-size:13.5px;line-height:1.4;color:#333;margin:0}
+.f-txt b{color:#000}
+.f-score{border-top:1px solid #2b2b2b;font-family:"Dosis";font-weight:800;font-size:20px;text-align:right;padding:2px 10px;height:34px;display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.f-score small{font-weight:600;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#777;margin-right:auto}
+.mini .f-corps{align-items:flex-start;padding:10px 9px}
+.mini .lances i{width:20px}
+.mini .f-num span{padding:0 5px}
+.mini .f-big{font-family:"Dosis";font-weight:800;font-size:24px;line-height:1}
+.mini .f-txt{font-size:12.5px;line-height:1.3}
+.f-rule{display:inline-block;margin-top:auto;font-size:12.5px;line-height:1.35;background:#fff;border-left:3px solid var(--orange);padding:5px 7px;color:#222}
+.f-today{margin-top:4px;display:grid;gap:3px;font-size:13px}
+.f-today div{display:flex;justify-content:space-between;gap:6px;border-bottom:1px dashed #cfc8b8;padding-bottom:2px}
+.f-today div:last-child{border-bottom:0}
+.f-today b{font-family:"Dosis";font-size:15px;white-space:nowrap}
+.dixieme{background:#111;color:#fff}
+a.dixieme:hover{background:#161616}
+.dixieme .f-num{border-color:#444}
+.dixieme .f-num span{color:#fff}
+.dixieme .lances i{border-color:#444;color:var(--magenta)}
+.dixieme .f-corps{justify-content:center;align-items:stretch;gap:10px;padding:14px}
+.dixieme .f-kick{color:var(--menthe)}
+.btn-res{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:10px 8px;border-radius:8px;background:var(--magenta);color:#111;font-family:"Dosis";font-weight:800;font-size:19px;letter-spacing:.04em;text-transform:uppercase;text-decoration:none;text-align:center;box-shadow:0 0 0 2px #111,0 0 22px rgba(255,0,255,.55);transition:transform .15s,box-shadow .2s}
+.dixieme:hover .btn-res,.btn-res:hover{transform:translateY(-1px);box-shadow:0 0 0 2px #111,0 0 30px rgba(255,0,255,.8)}
+.dixieme .f-txt{color:#cfcfcf;font-size:12.5px}
+.dixieme .f-score{border-color:#444;color:var(--magenta)}
+.dixieme .f-score small{color:#999}
+.sous-feuille{display:flex;justify-content:space-between;gap:8px 20px;flex-wrap:wrap;margin-top:12px;font-size:13px;color:var(--gris)}
+.sous-feuille a{min-height:44px;display:inline-flex;align-items:center;color:var(--menthe)}
+
+/* Téléphone : 2 rangées de cases */
+@media (max-width:860px){
+  .feuille-zone{padding:16px 0 22px}
+  .feuille-tete{margin-bottom:10px}
+  .feuille-tete h1{font-size:23px}
+  .feuille-tete p{font-size:13px}
+  .traits{display:none}
+  .sheet{grid-template-columns:repeat(6,minmax(0,1fr)) minmax(0,1.15fr) minmax(0,1.15fr) minmax(0,1.15fr) minmax(0,1.15fr);grid-template-rows:auto auto auto}
+  .joueur{grid-column:1/-1;flex-direction:row;align-items:center;gap:10px;padding:8px 10px;border-right:0;border-bottom:2px solid var(--encre)}
+  .joueur img{width:84px;margin:0}
+  .joueur small{display:none}
+  .joueur .date{margin-left:auto;text-align:right;font-size:12.5px}
+  .r1{grid-row:2;border-bottom:2px solid var(--encre)}
+  .f1{grid-column:1/4}.f2{grid-column:4/8}.f3{grid-column:8/11}
+  .mini{grid-row:3}
+  .dixieme{grid-row:3;grid-column:7/11}
+  .f-num{height:26px}
+  .f-num span{font-size:12px;padding:0 6px}
+  .lances i{width:20px;font-size:13px}
+  .f-corps{padding:8px 7px 7px;gap:4px}
+  .f-kick{font-size:10px;letter-spacing:.08em}
+  .f-titre{font-size:16px;line-height:1.08}
+  .f-txt{font-size:12px;line-height:1.32}
+  .r1 .f-txt.long{display:none}
+  .f-rule{font-size:11.5px;padding:4px 5px}
+  .f-today{font-size:11.5px}
+  .f-today .lg{display:none}
+  .f-today b{font-size:13px}
+  .f-score{height:26px;font-size:15px;padding:0 6px}
+  .f-score small{display:none}
+  .mini .f-corps{padding:6px 2px;align-items:center;justify-content:center}
+  .mini .f-big{font-size:15px}
+  .mini .f-txt{display:none}
+  .mini .f-num{justify-content:center}
+  .mini .f-num span{padding:0}
+  .mini .lances{display:none}
+  .mini .f-mini-label{display:block}
+  .dixieme .f-corps{padding:8px}
+  .dixieme .f-txt{display:none}
+  .btn-res{min-height:50px;font-size:17px}
+}
+.f-mini-label{display:none;font-size:10px;line-height:1.15;text-align:center;color:#444;font-weight:600}
+@media (max-width:360px){.mini .f-big{white-space:nowrap;font-size:11.5px!important}.f-today div{flex-wrap:wrap;gap:0 4px}.f-titre{font-size:14.5px}.f-txt{font-size:11.5px}.mini .f-big{font-size:13px}.f-mini-label{font-size:8.5px;letter-spacing:-.02em}}
+
+/* ===== Sections ===== */
+section{scroll-margin-top:70px}
+.bloc{padding:64px 0;border-top:1px solid #1f1f1f}
+.bloc h2{font-size:clamp(28px,4vw,44px);font-weight:300;text-transform:uppercase;letter-spacing:.03em}
+.bloc h2 b{font-weight:800}
+.chapo{color:var(--gris);max-width:62ch;margin:10px 0 0}
+.eyebrow{font-family:"Dosis";font-weight:700;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--magenta);display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.eyebrow::before{content:"";width:28px;height:2px;background:linear-gradient(90deg,var(--orange),var(--magenta))}
+
+/* Réservation */
+#reserver{background:linear-gradient(180deg,#151515,#111 70%)}
+.resa{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:22px;margin-top:26px;align-items:start}
+.resa-carte{background:var(--carbone);border:1px solid #2c2c2c;border-radius:14px;padding:22px;min-width:0}
+.etapes{display:flex;gap:4px;margin:0 0 18px;padding:0;list-style:none;counter-reset:e}
+.etapes li{flex:1;min-width:0;height:6px;border-radius:3px;background:#333}
+.etapes li.ok{background:var(--magenta)}
+.etapes li.ici{background:linear-gradient(90deg,var(--magenta),var(--violet))}
+.etape-lib{font-family:"Dosis";font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);margin:0 0 4px}
+.resa h3{font-size:26px;font-weight:700;margin-bottom:6px}
+.aide{color:var(--gris);font-size:14.5px;margin:0 0 16px}
+.choix{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}
+.choix button,.opt{appearance:none;text-align:left;background:#222;border:1.5px solid #333;color:#fff;border-radius:10px;padding:14px;min-height:56px;cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:3px;min-width:0;transition:border-color .15s,background .15s}
+.choix button:hover{border-color:#666}
+.choix button[aria-pressed="true"]{border-color:var(--magenta);background:#2a1530;box-shadow:inset 0 0 0 1px var(--magenta)}
+.choix button[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.choix .t{font-family:"Dosis";font-weight:800;font-size:19px;letter-spacing:.02em}
+.choix .p{font-family:"Dosis";font-weight:700;color:var(--menthe);font-size:16px}
+.choix .d{font-size:13.5px;color:var(--gris);line-height:1.35}
+.choix .img{height:110px;border-radius:7px;overflow:hidden;margin:-4px -4px 6px}
+.choix .img img{width:100%;height:100%;object-fit:cover}
+.nav-etape{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;align-items:center}
+.b1,.b2{appearance:none;font-family:"Dosis";font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:16px;min-height:48px;padding:0 20px;border-radius:8px;cursor:pointer;border:0}
+.b1{background:var(--magenta);color:#111}
+.b1:hover{filter:brightness(1.1)}
+.b1[disabled]{background:#444;color:#999;cursor:not-allowed}
+.b2{background:transparent;color:#fff;border:1.5px solid #444}
+.b2:hover{border-color:#888}
+.msg{width:100%;margin:10px 0 0;font-size:14px;color:#ffb38a;min-height:0}
+.msg:empty{display:none}
+.info{background:#241a10;border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 8px 8px 0;font-size:14px;margin:12px 0;color:#f3dccb}
+.info.vert{background:#0f2420;border-color:var(--menthe);color:#cdf5ea}
+.info.violet{background:#1d1430;border-color:var(--violet-clair);color:#e2d6ff}
+.ex{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:#3a2a00;color:#ffd36b;border-radius:4px;padding:1px 6px;vertical-align:middle;white-space:nowrap}
+/* Calendrier */
+.cal-tete{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.cal-tete b{font-family:"Dosis";font-size:20px;text-transform:capitalize}
+.cal-tete button{width:44px;height:44px;border-radius:8px;border:1.5px solid #444;background:transparent;color:#fff;font-size:20px;cursor:pointer}
+.cal-tete button[disabled]{opacity:.3;cursor:not-allowed}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.cal .js{font-family:"Dosis";font-size:12px;text-align:center;color:var(--gris2);text-transform:uppercase;letter-spacing:.08em}
+.cal button{min-width:0;min-height:48px;border-radius:8px;border:1.5px solid #333;background:#222;color:#fff;font-family:"Dosis";font-weight:700;font-size:17px;cursor:pointer;position:relative;padding:2px}
+.cal button.vac{background:#14233a;border-color:#27456e}
+.cal button.fer{background:#331a10;border-color:#7a3a1a}
+.cal button[aria-disabled="true"]{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.cal button.auj{box-shadow:inset 0 0 0 2px var(--menthe)}
+.cal button[aria-pressed="true"]{background:var(--magenta);border-color:var(--magenta);color:#111;opacity:1}
+.legende{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12.5px;color:var(--gris);margin-top:10px}
+.legende i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.jour-info{margin-top:10px;font-size:14px;color:var(--gris)}
+/* Créneaux */
+.creneaux{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.creneaux button{min-height:52px;border-radius:8px;border:1.5px solid #3a3a3a;background:#222;color:#fff;font-family:"Dosis";font-weight:800;font-size:18px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05;padding:4px}
+.creneaux button small{font-family:"Raleway";font-weight:600;font-size:10.5px;color:var(--gris)}
+.creneaux button[aria-pressed="true"]{background:var(--magenta);border-color:var(--magenta);color:#111}
+.creneaux button[aria-pressed="true"] small{color:#111}
+.creneaux button.complet{opacity:.45;cursor:not-allowed;text-decoration:line-through}
+.surplace-bloc{margin-top:12px;border:1.5px dashed var(--orange);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:3px;color:#ffcfb3;font-size:14px}
+.surplace-bloc b{font-family:"Dosis";font-size:20px;color:#ffb38a}
+.groupe-titre{font-family:"Dosis";font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--gris);margin:14px 0 8px}
+/* Compteurs */
+.ligne{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #2c2c2c;flex-wrap:wrap}
+.ligne .l{min-width:0;flex:1 1 180px}
+.ligne .l b{display:block;font-family:"Dosis";font-size:18px}
+.ligne .l span{font-size:13.5px;color:var(--gris)}
+.compteur{display:flex;align-items:center;gap:6px}
+.compteur button{width:48px;height:48px;border-radius:8px;border:1.5px solid #444;background:#222;color:#fff;font-size:22px;cursor:pointer}
+.compteur button[disabled]{opacity:.35;cursor:not-allowed}
+.compteur output{min-width:44px;text-align:center;font-family:"Dosis";font-weight:800;font-size:24px}
+.case{display:flex;gap:10px;align-items:flex-start;padding:10px 0;font-size:14.5px;cursor:pointer;min-height:44px}
+.case input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--magenta)}
+.opt{flex-direction:row;align-items:flex-start;gap:12px;width:100%;margin-bottom:8px}
+.opt input{width:22px;height:22px;flex:none;margin-top:2px;accent-color:var(--magenta)}
+.opt .t{font-family:"Dosis";font-weight:800;font-size:17px;display:block}
+.opt .d{font-size:13.5px;color:var(--gris);display:block}
+.opt:has(input:checked){border-color:var(--magenta);background:#2a1530}
+.champs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}
+.champs label{display:flex;flex-direction:column;gap:5px;font-size:13.5px;color:var(--gris);min-width:0}
+.champs .large{grid-column:1/-1}
+.champs input,.champs textarea{font:inherit;color:#fff;background:#151515;border:1.5px solid #3a3a3a;border-radius:8px;padding:11px 12px;min-height:48px;width:100%}
+.champs input:focus,.champs textarea:focus{border-color:var(--magenta);outline:none}
+@media (max-width:560px){.champs{grid-template-columns:minmax(0,1fr)}}
+/* Récap */
+.recap{width:100%;border-collapse:collapse;font-size:14.5px}
+.recap td{padding:9px 0;border-bottom:1px solid #2c2c2c;vertical-align:top}
+.recap td:last-child{text-align:right;white-space:nowrap;padding-left:10px;font-family:"Dosis";font-weight:700;font-size:17px}
+.recap tr.tot td{border-bottom:0;font-size:17px;padding-top:12px}
+.recap tr.tot td:last-child{font-size:24px;color:var(--menthe)}
+.recap tr.acompte td{color:#ffd36b}
+.recap .sub{display:block;color:var(--gris);font-size:12.5px}
+.simu{display:flex;gap:10px;align-items:flex-start;background:#1e1e1e;border:1px dashed #555;border-radius:10px;padding:12px;font-size:13.5px;color:#ddd;margin-top:14px}
+/* Résumé latéral */
+.resume{background:#161616;border:1px solid #2c2c2c;border-radius:14px;padding:18px;position:sticky;top:76px}
+.resume h4{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--gris);margin-bottom:10px}
+.resume dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:7px 12px;font-size:14px}
+.resume dt{color:var(--gris2)}
+.resume dd{margin:0;font-weight:600;text-align:right;overflow-wrap:anywhere}
+.resume .total{margin-top:14px;padding-top:12px;border-top:1px solid #333;display:flex;justify-content:space-between;align-items:baseline;font-family:"Dosis";font-weight:800;font-size:22px}
+.resume .total span{font-size:13px;color:var(--gris);font-family:"Raleway";font-weight:500}
+.resume .ac{font-size:13px;color:#ffd36b;text-align:right}
+@media (max-width:980px){.resa{grid-template-columns:minmax(0,1fr)}.resume{position:static;order:-1;padding:12px 14px}.resume dl{font-size:13px}.resume h4{display:none}}
+@media (max-width:560px){.resa-carte{padding:16px 14px}.resa h3{font-size:22px}}
+@media (max-width:419px){.cal{width:100vw;margin-left:calc(50% - 50vw);padding:0 6px;gap:3px}.cal button{min-height:48px}}
+@media (max-width:360px){.cal{padding:0;gap:2px}}
+/* Confirmation */
+.confirm-num{font-family:"Dosis";font-weight:800;font-size:clamp(26px,6vw,38px);letter-spacing:.06em;color:var(--menthe);margin:6px 0 12px;overflow-wrap:anywhere}
+
+/* Activités */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:28px}
+.act{background:var(--carbone);border:1px solid #2a2a2a;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.act-photo{aspect-ratio:16/8;overflow:hidden;position:relative}
+.act-photo img{width:100%;height:100%;object-fit:cover}
+.act-photo span{position:absolute;left:14px;bottom:12px;font-family:"Dosis";font-weight:800;font-size:30px;text-transform:uppercase;letter-spacing:.04em;text-shadow:0 2px 16px #000}
+.act-corps{padding:18px 20px 22px;display:flex;flex-direction:column;gap:12px}
+.puces{display:flex;flex-wrap:wrap;gap:6px}
+.puces span{font-size:13px;border:1px solid #3a3a3a;border-radius:999px;padding:4px 10px;color:#ddd}
+.grille{width:100%;border-collapse:collapse;font-size:14px}
+.grille th{font-family:"Dosis";text-align:left;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gris2);font-weight:700;padding:6px 6px 6px 0;border-bottom:1px solid #333}
+.grille td{padding:7px 6px 7px 0;border-bottom:1px solid #262626}
+.grille td.px{font-family:"Dosis";font-weight:800;font-size:17px;white-space:nowrap}
+.grille tr.auj td{color:var(--menthe)}
+.note{font-size:13px;color:var(--gris)}
+@media (max-width:860px){.duo{grid-template-columns:minmax(0,1fr)}}
+
+/* Formules */
+.formules{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:14px;margin-top:26px}
+.formule{background:var(--carbone);border:1px solid #2a2a2a;border-top:3px solid var(--c,var(--magenta));border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.formule h3{font-size:22px;font-weight:800}
+.formule .px{font-family:"Dosis";font-weight:800;font-size:28px;color:var(--c,var(--magenta))}
+.formule .px small{font-size:14px;color:var(--gris);font-weight:600}
+.formule p{margin:0;font-size:14px;color:#d4d4d4}
+.formule .quand{font-size:13px;color:var(--gris)}
+
+/* Anniversaires */
+.anniv{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:26px;margin-top:26px;align-items:start}
+.anniv-cartes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.anniv-cartes .formule{border-top-color:var(--c)}
+.quand-anniv{background:var(--carbone);border:1px solid #2a2a2a;border-radius:12px;padding:18px}
+.quand-anniv h3{font-size:20px;margin-bottom:8px}
+.quand-anniv ul{margin:0;padding-left:18px;font-size:14.5px;color:#ddd}
+.quand-anniv li{margin:5px 0}
+@media (max-width:860px){.anniv{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:480px){.anniv-cartes{grid-template-columns:minmax(0,1fr)}}
+
+/* Horaires */
+.semaine{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:24px}
+.jour{background:var(--carbone);border:1px solid #2a2a2a;border-radius:10px;padding:12px 10px;min-width:0}
+.jour.auj{border-color:var(--menthe);box-shadow:inset 0 0 0 1px var(--menthe)}
+.jour b{display:block;font-family:"Dosis";font-size:15px;text-transform:uppercase;letter-spacing:.08em}
+.jour .d{font-size:12px;color:var(--gris2)}
+.jour .h{font-family:"Dosis";font-weight:800;font-size:19px;margin-top:6px}
+.jour .n{font-size:12px;color:#ffb38a;margin-top:4px;line-height:1.3}
+@media (max-width:860px){.semaine{grid-template-columns:minmax(0,1fr)}.jour{display:grid;grid-template-columns:110px minmax(0,1fr);align-items:center;gap:2px 12px;padding:10px 12px}.jour .h{margin:0;text-align:right}.jour .n{grid-column:1/-1}}
+
+/* Fidélité */
+.fidel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:center;margin-top:24px}
+.carte-fid{aspect-ratio:1.6;max-width:420px;width:100%;border-radius:16px;padding:20px;background:linear-gradient(135deg,#1a1a1a 0%,#2a0f33 55%,#1b0d40 100%);border:1px solid #3a2a4a;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 20px 50px rgba(111,34,255,.25);position:relative;overflow:hidden}
+.carte-fid::after{content:"";position:absolute;right:-30px;top:20px;width:160px;height:80px;background:url("images/traits-silver.svg") no-repeat center/contain;opacity:.9}
+.carte-fid img{width:110px}
+.carte-fid .pts{font-family:"Dosis";font-weight:800;font-size:34px}
+.carte-fid .pts small{font-size:14px;color:var(--gris);font-weight:600}
+.barre{height:8px;border-radius:4px;background:#333;overflow:hidden}
+.barre i{display:block;height:100%;width:62%;background:linear-gradient(90deg,var(--orange),var(--magenta))}
+.fidel ul{padding-left:18px;color:#ddd;font-size:15px}
+.fidel li{margin:6px 0}
+@media (max-width:860px){.fidel{grid-template-columns:minmax(0,1fr)}}
+
+/* Entreprises / accès */
+.pro{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}
+.pro div{background:var(--carbone);border:1px solid #2a2a2a;border-radius:12px;padding:18px}
+.pro h3{font-size:20px;margin-bottom:6px}
+.pro p{margin:0;font-size:14px;color:#d4d4d4}
+.lien-btn{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:8px;border:1.5px solid var(--magenta);color:#fff;text-decoration:none;font-family:"Dosis";font-weight:800;letter-spacing:.05em;text-transform:uppercase;margin-top:16px}
+.lien-btn:hover{background:#2a1530}
+@media (max-width:860px){.pro{grid-template-columns:minmax(0,1fr)}}
+.acces{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.acces img{border-radius:14px;aspect-ratio:16/9;object-fit:cover;width:100%}
+.acces address{font-style:normal;font-size:17px;line-height:1.6}
+.acces a{min-height:44px;display:inline-flex;align-items:center}
+@media (max-width:860px){.acces{grid-template-columns:minmax(0,1fr)}}
+
+/* Encart gérant */
+.gerant{margin:0 auto;max-width:900px;background:#141414;border:1px dashed #555;border-radius:12px}
+.gerant summary{cursor:pointer;list-style:none;padding:14px 18px;min-height:48px;display:flex;align-items:center;gap:10px;font-family:"Dosis";font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:14px;color:var(--gris)}
+.gerant summary::-webkit-details-marker{display:none}
+.gerant summary::before{content:"+";font-size:20px;color:var(--magenta);width:16px}
+.gerant[open] summary::before{content:"–"}
+.gerant .in{padding:0 18px 18px;font-size:14.5px;color:#ddd}
+.gerant li{margin:6px 0}
+.tel-txt{display:inline-block;padding:12px 0;margin:-12px 0;color:var(--menthe)}
+footer{padding:34px 0 40px;border-top:1px solid #222;color:var(--gris2);font-size:13px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+footer a{min-height:44px;display:inline-flex;align-items:center}
+</style>
+</head>
+<body>
+<div class="apercu" role="note"><div class="wrap"><span><b>Aperçu non commandé</b> préparé par Vong Studio. Logo et photos appartiennent au Silver ; retrait sur simple demande.</span><span>Réservation et paiement simulés : rien n'est enregistré.</span></div></div>
+
+<header class="entete">
+  <div class="wrap">
+    <a class="logo" href="#haut" aria-label="Silver, retour en haut"><img src="images/logo-silver.svg" alt="Silver, complexe de loisirs et de fun" width="100" height="30"></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#activites">Bowling &amp; laser</a><a href="#anniversaires">Anniversaires</a><a href="#formules">Formules</a><a href="#horaires">Horaires</a><a href="#entreprises">Entreprises</a>
+    </nav>
+    <a class="tel" href="tel:+33241730505"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg>02 41 73 05 05</a>
+  </div>
+</header>
+
+<main id="haut">
+<!-- ===== Premier écran : la feuille de score ===== -->
+<section class="feuille-zone" aria-labelledby="titre-page">
+  <div class="wrap">
+    <div class="feuille-tete">
+      <div>
+        <h1 id="titre-page"><b>Silver</b> · bowling &amp; laser game</h1>
+        <p>24 pistes, laser game, billards et arcades, à 10 minutes d'Angers.</p>
+      </div>
+      <img class="traits" src="images/traits-silver.svg" alt="" width="62" height="30">
+    </div>
+
+    <div class="sheet" role="group" aria-label="Feuille de score du Silver : dix cases, les trois premières résument ce que vous pouvez faire ici, la dixième lance la réservation">
+      <div class="joueur">
+        <small>Joueur</small>
+        <img src="images/logo-silver.svg" alt="Silver" width="118" height="35">
+        <span class="date" id="date-feuille">Partie du jour</span>
+      </div>
+
+      <!-- Case 1 : constat 1 (lien Google -> tables du MooM) -->
+      <a class="frame r1 f1" href="#reserver" data-go="1">
+        <div class="f-num"><span>1</span><span class="lances"><i class="x">X</i><i></i></span></div>
+        <div class="f-corps">
+          <span class="f-kick">Fiche Google · à relier</span>
+          <span class="f-titre">Un lien « Réserver » pour les pistes</span>
+          <p class="f-txt long">Le lien de la fiche Google est à faire pointer vers cette réservation du bowling et du laser, à côté de celui du MooM.</p>
+        </div>
+        <div class="f-score"><small>Strike</small>30</div>
+      </a>
+
+      <!-- Case 2 : constat 2 (téléphone seulement, ligne débordée le week-end) -->
+      <a class="frame r1 f2" href="#reserver" data-go="2">
+        <div class="f-num"><span>2</span><span class="lances"><i class="x">X</i><i></i></span></div>
+        <div class="f-corps">
+          <span class="f-kick">Sans appeler</span>
+          <span class="f-titre">Piste, laser, anniversaire : à toute heure</span>
+          <p class="f-txt long">Vous choisissez le créneau, l'acompte bloque la place. Le week-end, plus besoin d'attendre que la ligne se libère.</p>
+          <span class="f-rule"><b>Samedi dès 17h30 :</b> pas de réservation bowling, venez sur place.</span>
+        </div>
+        <div class="f-score"><small>Strike</small>60</div>
+      </a>
+
+      <!-- Case 3 : constat 3 (ancien site, anciens horaires et prix) -->
+      <a class="frame r1 f3" href="#horaires" data-go="3">
+        <div class="f-num"><span>3</span><span class="lances"><i class="x">X</i><i></i></span></div>
+        <div class="f-corps">
+          <span class="f-kick" id="kick-auj">Aujourd'hui</span>
+          <span class="f-titre">Horaires et prix du jour</span>
+          <div class="f-today" id="f-today" aria-live="polite"></div>
+        </div>
+        <div class="f-score"><small>Strike</small>90</div>
+      </a>
+
+      <div class="frame mini"><div class="f-num"><span>4</span><span class="lances"><i class="x">X</i><i></i></span></div><div class="f-corps"><span class="f-big">24</span><span class="f-mini-label">pistes</span><p class="f-txt">pistes, dès 3&nbsp;ans</p></div><div class="f-score">120</div></div>
+      <div class="frame mini"><div class="f-num"><span>5</span><span class="lances"><i class="x">X</i><i></i></span></div><div class="f-corps"><span class="f-big">20′</span><span class="f-mini-label">laser</span><p class="f-txt">de laser, 8&nbsp;€, dès 8&nbsp;ans</p></div><div class="f-score">150</div></div>
+      <div class="frame mini"><div class="f-num"><span>6</span><span class="lances"><i class="x">X</i><i></i></span></div><div class="f-corps"><span class="f-big">10&nbsp;€</span><span class="f-mini-label">anniv.</span><p class="f-txt">anniversaire enfant MÉGA</p></div><div class="f-score">180</div></div>
+      <div class="frame mini"><div class="f-num"><span>7</span><span class="lances"><i class="x">X</i><i></i></span></div><div class="f-corps"><span class="f-big">18&nbsp;€</span><span class="f-mini-label">/ pers.</span><p class="f-txt">Apéro, Striker, Sniper, EVJF/G</p></div><div class="f-score">210</div></div>
+      <div class="frame mini"><div class="f-num"><span>8</span><span class="lances"><i class="x">X</i><i></i></span></div><div class="f-corps"><span class="f-big">120</span><span class="f-mini-label">points</span><p class="f-txt">points = 10&nbsp;€ de remise</p></div><div class="f-score">240</div></div>
+      <div class="frame mini"><div class="f-num"><span>9</span><span class="lances"><i class="x">X</i><i></i></span></div><div class="f-corps"><span class="f-big">80</span><span class="f-mini-label">pros</span><p class="f-txt">pers. en salle Golden</p></div><div class="f-score">270</div></div>
+
+      <!-- Case 10 : réservation -->
+      <a class="frame dixieme" href="#reserver" data-go="10">
+        <div class="f-num"><span>10</span><span class="lances"><i>X</i><i>X</i><i>X</i></span></div>
+        <div class="f-corps">
+          <span class="f-kick">Dernière case</span>
+          <span class="btn-res">Réserver</span>
+          <p class="f-txt">Bowling ou laser, anniversaire compris. Acompte en ligne.</p>
+        </div>
+        <div class="f-score"><small>Partie parfaite</small>300</div>
+      </a>
+    </div>
+
+    <div class="sous-feuille">
+      <span>Avenue Paul Prosper Guilhem, 49070 Beaucouzé · Ouvert 7 jours sur 7</span>
+      <a href="#horaires">Voir les horaires de la semaine</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Réservation ===== -->
+<section id="reserver" class="bloc" aria-labelledby="t-resa">
+  <div class="wrap">
+    <p class="eyebrow">Réservation en ligne</p>
+    <h2 id="t-resa"><b>Réservez</b> votre piste ou votre session</h2>
+    <p class="chapo">Le calendrier suit les horaires du Silver, les vacances scolaires (zone B) et les jours fériés. Les tarifs sont ceux affichés au Silver.</p>
+    <div class="resa">
+      <div class="resa-carte" id="tunnel" aria-live="polite"></div>
+      <aside class="resume" aria-label="Votre réservation">
+        <h4>Votre réservation</h4>
+        <dl id="resume-dl"></dl>
+        <div class="total"><span>Total estimé</span><b id="resume-total">–</b></div>
+        <div class="ac" id="resume-ac"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Activités ===== -->
+<section id="activites" class="bloc" aria-labelledby="t-act">
+  <div class="wrap">
+    <p class="eyebrow">Les activités</p>
+    <h2 id="t-act"><b>Bowling</b> &amp; laser game</h2>
+    <div class="duo">
+      <article class="act">
+        <div class="act-photo"><img src="images/pistes-neon.webp" alt="Les pistes du Silver éclairées en néon" loading="lazy" width="1024" height="683"><span>Bowling</span></div>
+        <div class="act-corps">
+          <div class="puces"><span>24 pistes</span><span>dès 3 ans ou pointure 26</span><span>barrières et toboggans pour les petits</span></div>
+          <p class="note" style="margin:0">Tarif par personne et par partie, selon l'heure de <b>fin</b> de partie. Veilles et jours fériés : tarifs du samedi. Location de chaussures : 2 €.</p>
+          <table class="grille" id="grille-bowling"><thead><tr><th>Jour</th><th>Créneau</th><th>Partie</th></tr></thead><tbody></tbody></table>
+          <p class="note" style="margin:0">Le samedi à partir de 17h30, aucune réservation bowling : venez directement. Mineurs : présence d'un adulte obligatoire.</p>
+        </div>
+      </article>
+      <article class="act">
+        <div class="act-photo"><img src="images/laser-tableau.webp" alt="La salle de laser game du Silver" loading="lazy" width="1024" height="683"><span>Laser game</span></div>
+        <div class="act-corps">
+          <div class="puces"><span>sessions de 20 min</span><span>6 joueurs minimum</span><span>dès 8 ans</span><span>20 joueurs maximum</span></div>
+          <table class="grille"><thead><tr><th>Du lundi au dimanche</th><th>Par personne</th></tr></thead>
+            <tbody><tr><td>1 session</td><td class="px">8 €</td></tr><tr><td>2 sessions</td><td class="px">15 €</td></tr><tr><td>Scolaires, étudiants (justificatif), hors samedi, veilles et fériés</td><td class="px">6 €</td></tr></tbody></table>
+          <p class="note" style="margin:0">Votre groupe peut partager la session avec un autre groupe semblable. Dès 8 ans, accompagné de ses parents.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Anniversaires ===== -->
+<section id="anniversaires" class="bloc" aria-labelledby="t-anniv">
+  <div class="wrap">
+    <p class="eyebrow">C'est ton anniversaire ?</p>
+    <h2 id="t-anniv"><b>Anniversaires</b> enfants</h2>
+    <p class="chapo">Au bowling (6 à 16 ans, 4 enfants minimum) ou au laser game (8 à 16 ans, 6 enfants minimum ; âge minimum 8 ou 10 ans selon les pages du site, <span class="ex">à confirmer</span>). Envie de prolonger ? Une activité en plus pour 5 € par enfant.</p>
+    <div class="anniv">
+      <div class="anniv-cartes">
+        <div class="formule" style="--c:var(--menthe)"><h3>MÉGA</h3><div class="px">10 € <small>/ enfant</small></div><p>1 partie de bowling (chaussures incluses) ou 1 session de laser de 20 min, 1 part de marbré, 1 boisson, des bonbons.</p></div>
+        <div class="formule" style="--c:var(--magenta)"><h3>GIGA</h3><div class="px">13 € <small>/ enfant</small></div><p>1 partie de bowling (chaussures incluses) ou 1 session de laser, gâteau d'anniversaire au chocolat, boissons à volonté, des bonbons.</p></div>
+      </div>
+      <div class="quand-anniv">
+        <h3>Quand fêter ton anniversaire ?</h3>
+        <ul>
+          <li><b>Bowling</b> : samedi à 14h ou à 16h ; mercredi et dimanche entre 14h et 17h ; vacances scolaires : tous les jours, à 14h ou à 16h.</li>
+          <li><b>Laser game</b> : mercredi, samedi et dimanche à partir de 14h ; tous les jours pendant les vacances scolaires. Pour les 10-12 ans, un adulte accompagne dans la salle (offert).</li>
+        </ul>
+        <a class="lien-btn" href="#reserver" data-formule="anniv">Réserver un anniversaire</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Formules ===== -->
+<section id="formules" class="bloc" aria-labelledby="t-form">
+  <div class="wrap">
+    <p class="eyebrow">Entre amis</p>
+    <h2 id="t-form"><b>Formules</b> du Silver</h2>
+    <div class="formules">
+      <div class="formule" style="--c:var(--orange)"><h3>Apéro</h3><div class="px">18 € <small>/ pers.</small></div><p>2 parties de bowling, 1 verre apéritif, 5 bouchées à partager par personne.</p><span class="quand">Du mardi au vendredi, de 19h à 21h. Sur réservation. Ne fait pas office de repas.</span></div>
+      <div class="formule" style="--c:var(--magenta)"><h3>Striker</h3><div class="px">18 € <small>/ pers.</small></div><p>3 parties de bowling et 1 boisson (soda, jus de fruits ou bière pression), chaussures incluses.</p><span class="quand">Du lundi au mercredi, hors veilles et jours fériés.</span></div>
+      <div class="formule" style="--c:var(--menthe)"><h3>Sniper</h3><div class="px">18 € <small>/ pers.</small></div><p>3 sessions de laser de 20 minutes, Pepsi ou jus d'orange à volonté. 6 personnes minimum.</p><span class="quand">« Du lundi au vendredi 18h », sur réservation. Créneaux exacts <span class="ex">à confirmer</span></span></div>
+      <div class="formule" style="--c:var(--violet-clair)"><h3>EVJF/G &amp; anniversaire adulte</h3><div class="px">18 € <small>/ pers.</small></div><p>2 parties au choix, bowling et/ou laser game, et 1 boisson, chaussures incluses.</p><span class="quand">Tous les jours (jusqu'à 17h le samedi), sur réservation.</span></div>
+      <div class="formule" style="--c:#ffd36b"><h3>Étudiants &amp; moins de 18 ans</h3><div class="px">9 € <small>/ 11 €</small></div><p>2 parties de bowling, chaussures comprises : 9 € du lundi au vendredi avant 18h, 11 € après 18h (et le dimanche).</p><span class="quand">Sur justificatif, hors veilles et jours fériés.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Horaires ===== -->
+<section id="horaires" class="bloc" aria-labelledby="t-hor">
+  <div class="wrap">
+    <p class="eyebrow">Cette semaine</p>
+    <h2 id="t-hor"><b>Horaires</b> du bowling</h2>
+    <p class="chapo" id="hor-chapo">Les horaires de la semaine en cours, calculés chaque jour. Fermetures variables selon l'affluence.</p>
+    <div class="semaine" id="semaine"></div>
+  </div>
+</section>
+
+<!-- ===== Fidélité ===== -->
+<section id="fidelite" class="bloc" aria-labelledby="t-fid">
+  <div class="wrap">
+    <p class="eyebrow">Carte Silver &amp; MooM</p>
+    <h2 id="t-fid"><b>Votre carte</b>, créée depuis votre téléphone</h2>
+    <div class="fidel">
+      <div class="carte-fid" aria-hidden="true">
+        <img src="images/logo-silver.svg" alt="">
+        <div><div class="pts">74 <small>points · exemple</small></div><div class="barre"><i></i></div><div class="note" style="margin-top:6px">Encore 46 points avant 10 € de remise</div></div>
+      </div>
+      <div>
+        <ul>
+          <li><b>1 € = 1 point</b> à chaque passage en caisse, au Silver comme au MooM.</li>
+          <li><b>120 points = 10 € de remise</b>, avec un bon d'achat numérique.</li>
+          <li>Cadeaux d'anniversaire pour vous et jusqu'à 3 enfants inscrits sur la carte.</li>
+          <li><b>Nouveau sur cette page</b> : la carte se crée en ligne, au moment de réserver ou ici, sans passer par l'accueil. <span class="ex">à confirmer</span></li>
+        </ul>
+        <a class="lien-btn" href="#reserver" data-fid="1">Créer ma carte en réservant</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Entreprises ===== -->
+<section id="entreprises" class="bloc" aria-labelledby="t-pro">
+  <div class="wrap">
+    <p class="eyebrow">Pour les pros</p>
+    <h2 id="t-pro"><b>Séminaires</b>, afterworks, arbres de Noël</h2>
+    <div class="pro">
+      <div><h3>2 salles de réunion</h3><p>Copper, 45 m², jusqu'à 25 personnes. Golden, 100 m², de 25 à 80 personnes. Grand écran, wifi, terrasse privative.</p></div>
+      <div><h3>Repas et cocktails</h3><p>Menus complets ou cocktails dînatoires au MooM, midi et soir. Sur devis.</p></div>
+      <div><h3>Privatisation</h3><p>Le complexe entier pour un comité d'entreprise ou un arbre de Noël. Billetterie Meyclub et CEZAM.</p></div>
+    </div>
+    <p class="chapo">Notre commerciale vous répond du lundi au vendredi, de 10h à 16h, au <a class="tel-txt" href="tel:+33241730929">02 41 73 09 29</a>.</p>
+    <a class="lien-btn" href="mailto:commercial@complexe-silver.fr?subject=Demande%20de%20devis">Demander un devis</a>
+  </div>
+</section>
+
+<!-- ===== Accès ===== -->
+<section class="bloc" aria-labelledby="t-acces">
+  <div class="wrap acces">
+    <div>
+      <p class="eyebrow">Venir au Silver</p>
+      <h2 id="t-acces"><b>À 10 minutes</b> d'Angers</h2>
+      <address>Avenue Paul Prosper Guilhem<br>49070 Beaucouzé<br><a href="tel:+33241730505">02 41 73 05 05</a></address>
+      <p class="note">Parking privatif, ligne de bus, grands axes routiers.</p>
+    </div>
+    <img src="images/salle-pistes.webp" alt="La salle des pistes du Silver" loading="lazy" width="338" height="327">
+  </div>
+</section>
+
+<section class="bloc" aria-label="Note pour le gérant">
+  <div class="wrap">
+    <details class="gerant">
+      <summary>Ce qui change pour vous (note pour le gérant)</summary>
+      <div class="in">
+        <ul>
+          <li><b>Le bouton « Réserver » de votre fiche Google</b> ouvre aujourd'hui les tables du MooM. Avec cette page, un second lien mène directement aux pistes et au laser : il est à ajouter sur la fiche, à côté de celui du MooM.</li>
+          <li><b>Le samedi soir et le week-end</b> : vos clients réservent sans appeler, à toute heure, avec un acompte. Votre règle du samedi (aucune réservation bowling à partir de 17h30) est appliquée et expliquée dans le parcours : ces créneaux restent « sur place ».</li>
+          <li><b>Un seul site à jour</b> : horaires et prix du jour se calculent à partir de votre grille (veilles et fériés au tarif du samedi). L'ancienne adresse silverbowl.fr, qui affiche encore d'anciens horaires et tarifs, serait à rediriger vers ce site.</li>
+          <li><b>Votre carte de fidélité reste la vôtre</b> : la page propose seulement de la créer en ligne plutôt qu'à l'accueil. Le branchement sur votre programme actuel est à voir avec vous.</li>
+          <li>À caler ensemble : taux d'acompte (30 % ici, exemple), durée estimée d'une partie, joueurs par piste, délai minimum de réservation, créneaux du laser, horaires des jours fériés autres que le 11 novembre.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Silver, complexe de loisirs &amp; de fun · Beaucouzé</span>
+    <span>Aperçu non commandé réalisé par Vong Studio. Logo et photos appartiennent au Silver ; retrait sur simple demande.</span>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* =========================================================================
+   Données du Silver, lues sur complexe-silver.fr le 10/11/2026
+   (pages Accueil, Bowling, Laser game, Entreprises, Carte de fidélité).
+   ========================================================================= */
+// Horaires bowling de l'accueil, index 0 = dimanche. Minutes depuis minuit ; 1440 = minuit, 1560 = 2h du matin.
+var HORAIRES={0:[600,1140],1:[720,1260],2:[720,1440],3:[720,1440],4:[720,1440],5:[720,1560],6:[840,1560]};
+var NOMS_J=["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+var MOIS=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+// Vacances scolaires zone B (académie de Nantes, Maine-et-Loire), premier et dernier jour sans classe.
+// Source : https://data.education.gouv.fr/explore/dataset/fr-en-calendrier-scolaire (année 2026-2027, location Nantes).
+var VACANCES=[
+  ["2026-10-17","2026-11-01","de la Toussaint"],
+  ["2026-12-19","2027-01-03","de Noël"],
+  ["2027-02-20","2027-03-07","d'hiver"],
+  ["2027-04-17","2027-05-02","de printemps"],
+  ["2027-07-03","2027-08-31","d'été"]
+];
+// Jours fériés. 11/11 : « le Silver vous accueille de 14h à 20h » (accueil du site). Autres : horaires à confirmer.
+var FERIES={
+  "2026-11-11":{nom:"11 Novembre",h:[840,1200],lu:true},
+  "2026-12-25":{nom:"Noël",ferme:true},
+  "2027-01-01":{nom:"Jour de l'an",ferme:true},
+  "2027-03-29":{nom:"lundi de Pâques"},"2027-05-01":{nom:"1er Mai"},"2027-05-06":{nom:"Ascension"},
+  "2027-05-08":{nom:"8 Mai"},"2027-05-17":{nom:"lundi de Pentecôte"},"2027-07-14":{nom:"14 Juillet"},"2027-08-15":{nom:"15 Août"}
+};
+var LIMITE="2027-08-31";
+var CHAUSSURES=2;
+var ACOMPTE=0.30;        // exemple, à caler avec le Silver
+var JOUEURS_PISTE=6;     // à confirmer
+var MIN_PAR_JOUEUR=10;   // durée estimée d'une partie : 10 min par joueur sur la piste, à confirmer
+var SAMEDI_LIMITE=17*60+30; // « Aucune réservation bowling n'est prise le samedi à partir de 17h30 »
+var ADRESSE="Silver, Avenue Paul Prosper Guilhem, 49070 Beaucouzé";
+
+/* ---------- Dates ---------- */
+function pad(n){return (n<10?"0":"")+n}
+function iso(d){return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function parse(s){var p=s.split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+function ajoute(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x}
+function hm(m){m=m%1440;var h=Math.floor(m/60),mi=m%60;return pad(h)+"h"+pad(mi)}
+function hmc(m){var h=Math.floor(m/60)%24,mi=m%60;return h+"h"+(mi?pad(mi):"")}
+function maintenant(){return new Date()}
+function aujourdhui(){var n=maintenant();return new Date(n.getFullYear(),n.getMonth(),n.getDate())}
+function vacancesDe(s){for(var i=0;i<VACANCES.length;i++){if(s>=VACANCES[i][0]&&s<=VACANCES[i][1])return VACANCES[i]}return null}
+function ferie(s){return FERIES[s]||null}
+function veille(s){return !!FERIES[iso(ajoute(parse(s),1))]}
+function tarifSamedi(s){return !!ferie(s)||veille(s)}
+function horairesDu(s){var f=ferie(s);if(f){if(f.ferme)return null;if(f.h)return f.h}return HORAIRES[parse(s).getDay()]}
+function dateLongue(s){var d=parse(s);return NOMS_J[d.getDay()]+" "+d.getDate()+" "+MOIS[d.getMonth()]}
+
+/* ---------- Tarifs bowling (page Bowling) : selon l'heure de FIN de partie ---------- */
+function prixPartie(s,fin){
+  var j=parse(s).getDay(); if(tarifSamedi(s)) j=6;
+  if(j>=1&&j<=4) return fin<=840?4:(fin<=1080?6:7);
+  if(j===5) return fin<=840?4:(fin<=1080?6:8);
+  if(j===6) return fin<=1080?6:8;
+  return fin<=840?4:6; // dimanche : 10h-14h 4 €, jusqu'à 20h 6 €
+}
+function libTarif(s){
+  var j=parse(s).getDay(),sam=tarifSamedi(s); if(sam) j=6;
+  if(j>=1&&j<=4) return [["jusqu'à 14h","4 €"],["avant 18h","6 €"],["après 18h","7 €"]];
+  if(j===5) return [["jusqu'à 14h","4 €"],["avant 18h","6 €"],["après 18h","8 €"]];
+  if(j===6) return [["avant 18h","6 €"],["après 18h","8 €"]];
+  return [["10h – 14h","4 €"],["jusqu'à 20h","6 €"]];
+}
+
+/* ---------- Formules ---------- */
+var ACTS={
+  bowling:{nom:"Bowling",img:"images/joueur-lancer.webp",d:"24 pistes, dès 3 ans. Tarif selon l'heure de fin de partie.",p:"dès 4 € la partie"},
+  laser:{nom:"Laser game",img:"images/laser-tableau.webp",d:"Sessions de 20 min, 6 à 20 joueurs, dès 8 ans.",p:"8 € la session"}
+};
+var FORMULES={
+ bowling:[
+  {id:"partie",nom:"Partie(s) de bowling",p:"4 à 8 € / partie",d:"1 à 3 parties, tarif selon l'heure de fin. Chaussures 2 €.",min:1,max:36,chaussures:true,parties:true},
+  {id:"anniv-mega",nom:"Anniversaire MÉGA",p:"10 € / enfant",d:"6 à 16 ans, 4 enfants minimum. 1 partie, marbré, boisson, bonbons.",min:4,max:30,prix:10,anniv:"bowling"},
+  {id:"anniv-giga",nom:"Anniversaire GIGA",p:"13 € / enfant",d:"6 à 16 ans, 4 enfants minimum. 1 partie, gâteau, boissons à volonté.",min:4,max:30,prix:13,anniv:"bowling"},
+  {id:"striker",nom:"Formule Striker",p:"18 € / pers.",d:"3 parties + 1 boisson. Du lundi au mercredi, hors veilles et fériés.",min:1,max:36,prix:18,jours:[1,2,3],horsFerie:true,parties3:true},
+  {id:"apero",nom:"Formule Apéro",p:"18 € / pers.",d:"2 parties, 1 verre, 5 bouchées. Du mardi au vendredi, 19h à 21h.",min:1,max:36,prix:18,jours:[2,3,4,5],horsFerie:true},
+  {id:"evjf-b",nom:"EVJF/G, anniversaire adulte",p:"18 € / pers.",d:"2 parties + 1 boisson. Tous les jours, jusqu'à 17h le samedi.",min:1,max:36,prix:18,horsFerie:true},
+  {id:"etudiant",nom:"Étudiants et moins de 18 ans",p:"9 € ou 11 €",d:"2 parties, chaussures comprises. Sur justificatif, hors samedi, veilles et fériés.",min:1,max:36,jours:[0,1,2,3,4,5],horsFerie:true}
+ ],
+ laser:[
+  {id:"s1",nom:"1 session",p:"8 € / pers.",d:"20 minutes de jeu.",min:6,max:20,prix:8,sessions:1},
+  {id:"s2",nom:"2 sessions",p:"15 € / pers.",d:"2 × 20 minutes.",min:6,max:20,prix:15,sessions:2},
+  {id:"anniv-mega",nom:"Anniversaire MÉGA",p:"10 € / enfant",d:"8 à 16 ans (âge à confirmer), 6 enfants minimum. 1 session, marbré, boisson, bonbons.",min:6,max:20,prix:10,anniv:"laser",sessions:1},
+  {id:"anniv-giga",nom:"Anniversaire GIGA",p:"13 € / enfant",d:"8 à 16 ans (âge à confirmer), 6 enfants minimum. 1 session, gâteau, boissons à volonté.",min:6,max:20,prix:13,anniv:"laser",sessions:1},
+  {id:"sniper",nom:"Formule Sniper",p:"18 € / pers.",d:"3 sessions + boissons à volonté. Du lundi au vendredi (« 18h » sur le site : créneaux jusqu'à 17h, à confirmer), 6 personnes minimum.",min:6,max:20,prix:18,jours:[1,2,3,4,5],horsFerie:true,sessions:3},
+  {id:"evjf-l",nom:"EVJF/G, anniversaire adulte",p:"18 € / pers.",d:"2 parties bowling et/ou laser + 1 boisson. Jusqu'à 17h le samedi.",min:6,max:20,prix:18,horsFerie:true,sessions:2},
+  {id:"scolaire",nom:"Scolaires, étudiants",p:"6 € / pers.",d:"1 session, sur justificatif. Hors samedi, veilles et fériés.",min:6,max:20,prix:6,jours:[0,1,2,3,4,5],horsFerie:true,sessions:1}
+ ]
+};
+
+/* ---------- État ---------- */
+var E={etape:1,act:null,f:null,date:null,mois:null,cr:null,n:0,parties:1,chauss:0,supp:"aucun",fid:"plus-tard",nom:"",tel:"",mail:"",enfant:"",num:null};
+var ETAPES=["Activité","Formule","Date","Créneau","Joueurs","Options","Récapitulatif","Confirmation"];
+function F(){if(!E.act||!E.f)return null;var l=FORMULES[E.act];for(var i=0;i<l.length;i++)if(l[i].id===E.f)return l[i];return null}
+
+/* ---------- Disponibilité d'un jour pour la formule ---------- */
+function raisonJour(s){
+  var auj=iso(aujourdhui()); if(s<auj) return "Date passée.";
+  if(s>LIMITE) return "Réservation ouverte jusqu'au 31 août 2027 dans cet aperçu.";
+  var fe=ferie(s); if(fe&&fe.ferme) return fe.nom+" : ouverture à confirmer avec le Silver.";
+  var f=F(), d=parse(s).getDay(), vac=!!vacancesDe(s);
+  if(!f) return null;
+  if(f.horsFerie&&(fe||veille(s))) return f.nom+" : hors veilles et jours fériés. Choisissez un autre jour, ou une partie au tarif normal.";
+  if(f.jours&&f.jours.indexOf(d)<0) return f.nom+" : pas le "+NOMS_J[d]+".";
+  if(f.anniv&&fe) return "Anniversaires les jours fériés : à confirmer avec le Silver.";
+  if(f.anniv==="bowling"&&!vac&&[0,3,6].indexOf(d)<0) return "Anniversaire bowling : samedi, mercredi ou dimanche (tous les jours pendant les vacances scolaires).";
+  if(f.anniv==="laser"&&!vac&&[0,3,6].indexOf(d)<0) return "Anniversaire laser : mercredi, samedi ou dimanche (tous les jours pendant les vacances scolaires).";
+  if(creneauxDu(s).filter(function(c){return c.etat==="libre"}).length===0) return "Plus aucun créneau réservable en ligne ce jour-là.";
+  return null;
+}
+/* Pseudo-hasard stable pour simuler des créneaux complets (exemple) */
+function hash(t){var h=0;for(var i=0;i<t.length;i++){h=(h*31+t.charCodeAt(i))|0}return Math.abs(h)}
+function creneauxDu(s){
+  var f=F(); var h=horairesDu(s); if(!f||!h) return [];
+  var d=parse(s).getDay(), vac=!!vacancesDe(s), sam=d===6, L=[];
+  var o=h[0], c=h[1];
+  function push(m,lib){L.push({m:m,lib:lib||""})}
+  if(f.anniv==="bowling"){
+    var t=[]; if(vac||sam) t=[840,960]; if(!sam&&(d===3||d===0)) t=[840,900,960,1020];
+    t.forEach(function(m){if(m>=o&&m+120<=Math.min(c,1200)) push(m)});
+  } else if(f.anniv==="laser"){
+    [840,900,960,1020].forEach(function(m){if(m>=o&&m+120<=Math.min(c,1200)) push(m)});
+  } else if(f.id==="apero"){
+    [1140,1170,1200].forEach(function(m){if(m+60<=c) push(m)});
+  } else {
+    var duree=E.act==="laser"?(f.sessions||1)*20+10:60;
+    for(var m=o;m+duree<=c&&m<=c-30;m+=30){push(m)}
+    if(f.id==="evjf-b"||f.id==="evjf-l"){if(sam) L=L.filter(function(x){return x.m<=960})}
+    if(f.id==="sniper") L=L.filter(function(x){return x.m<=1020});
+    if(f.id==="etudiant"&&d===0) L=L.filter(function(x){return x.m>=1080});
+  }
+  var maint=maintenant(), estAuj=s===iso(aujourdhui()), mnow=maint.getHours()*60+maint.getMinutes();
+  L.forEach(function(x){
+    x.etat="libre";
+    if(E.act==="bowling"&&sam&&x.m>=SAMEDI_LIMITE) x.etat="surplace";
+    else if(estAuj&&x.m<mnow+60) x.etat="passe";
+    else if(hash(s+E.act+x.m)%7===0) x.etat="complet";
+  });
+  // Samedi soir bowling : on montre les créneaux « sur place » jusqu'à la fermeture
+  if(E.act==="bowling"&&sam&&!f.anniv&&f.id!=="evjf-b"){
+    for(var m2=Math.max(SAMEDI_LIMITE,o);m2<=c-60;m2+=30){ if(!L.some(function(x){return x.m===m2})) L.push({m:m2,etat:"surplace"}) }
+    L.sort(function(a,b){return a.m-b.m});
+  }
+  return L.filter(function(x){return x.etat!=="passe"});
+}
+
+/* ---------- Calcul du prix ---------- */
+function calcul(){
+  var f=F(); if(!f||!E.date||E.cr===null||!E.n) return null;
+  var lignes=[], tot=0, fin=null, pistes=null;
+  if(E.act==="bowling"){
+    pistes=Math.ceil(E.n/JOUEURS_PISTE);
+    var parPiste=Math.ceil(E.n/pistes);
+    var nbParties=f.parties?E.parties:(f.parties3?3:(f.anniv?1:2));
+    var duree=Math.ceil(nbParties*parPiste*MIN_PAR_JOUEUR/5)*5;
+    fin=E.cr+duree;
+  } else { fin=E.cr+(f.sessions||1)*20; }
+  if(f.id==="partie"){
+    var p=prixPartie(E.date,fin);
+    lignes.push([E.n+" joueur"+(E.n>1?"s":"")+" × "+E.parties+" partie"+(E.parties>1?"s":"")+" × "+p+" €","Fin estimée vers "+hmc(fin)+(tarifSamedi(E.date)?" · tarif du samedi (veille ou jour férié)":""),E.n*E.parties*p]);
+    if(E.chauss>0) lignes.push([E.chauss+" location"+(E.chauss>1?"s":"")+" de chaussures × 2 €","",E.chauss*CHAUSSURES]);
+  } else if(f.id==="etudiant"){
+    var pe=E.cr<1080?9:11;
+    lignes.push([E.n+" × formule Étudiants, 2 parties × "+pe+" €","Justificatif à présenter à l'accueil",E.n*pe]);
+  } else {
+    lignes.push([E.n+" × "+f.nom+" × "+f.prix+" €",f.anniv?"Enfants de "+(f.anniv==="laser"?"8":"6")+" à 16 ans":"",E.n*f.prix]);
+    if(f.anniv&&E.supp!=="aucun") lignes.push([E.n+" × activité en plus ("+(E.supp==="bowling"?"1 partie de bowling":"1 session de laser")+") × 5 €","",E.n*5]);
+  }
+  lignes.forEach(function(l){tot+=l[2]});
+  var ac=Math.round(tot*ACOMPTE*100)/100;
+  return {lignes:lignes,tot:tot,ac:ac,fin:fin,pistes:pistes};
+}
+function eur(x){return (Math.round(x*100)/100).toFixed(2).replace(".",",").replace(",00","")+" €"}
+
+/* ---------- Rendu du parcours ---------- */
+var T=document.getElementById("tunnel");
+function entete(n,titre,aide){
+  var h='<ol class="etapes" aria-hidden="true">';
+  for(var i=1;i<=8;i++) h+='<li class="'+(i<n?"ok":(i===n?"ici":""))+'"></li>';
+  h+='</ol><p class="etape-lib">Étape '+n+' sur 8 · '+ETAPES[n-1]+'</p><h3 tabindex="-1" id="h-etape">'+titre+'</h3>';
+  if(aide) h+='<p class="aide">'+aide+'</p>';
+  return h;
+}
+function navBas(ok,txt){
+  return '<div class="nav-etape">'+(E.etape>1?'<button type="button" class="b2" data-act="prec">Retour</button>':'')+
+    '<button type="button" class="b1" data-act="suiv"'+(ok?'':' aria-disabled="true"')+'>'+(txt||"Continuer")+'</button><p class="msg" id="msg" role="alert"></p></div>';
+}
+function rendu(focus){
+  var f=F(), h="";
+  if(E.etape===1){
+    h+=entete(1,"Bowling ou laser game ?","Les deux activités se réservent ici, anniversaires compris.");
+    h+='<div class="choix">';
+    ["bowling","laser"].forEach(function(k){var a=ACTS[k];
+      h+='<button type="button" data-act="act" data-v="'+k+'" aria-pressed="'+(E.act===k)+'"><span class="img"><img src="'+a.img+'" alt="" loading="lazy"></span><span class="t">'+a.nom+'</span><span class="p">'+a.p+'</span><span class="d">'+a.d+'</span></button>'});
+    h+='</div>'+navBas(!!E.act);
+  }
+  else if(E.etape===2){
+    h+=entete(2,"Quelle formule ?","Les prix sont ceux affichés au Silver, par personne.");
+    h+='<div class="choix">';
+    FORMULES[E.act].forEach(function(x){h+='<button type="button" data-act="f" data-v="'+x.id+'" aria-pressed="'+(E.f===x.id)+'"><span class="t">'+x.nom+'</span><span class="p">'+x.p+'</span><span class="d">'+x.d+'</span></button>'});
+    h+='</div>'+navBas(!!E.f);
+  }
+  else if(E.etape===3){
+    h+=entete(3,"Quel jour ?","Jours barrés : indisponibles pour cette formule. Touchez-les pour savoir pourquoi.");
+    h+=calendrier();
+    h+='<p class="jour-info" id="jour-info">'+(E.date?infoJour(E.date):"")+'</p>';
+    h+=navBas(!!E.date&&!raisonJour(E.date));
+  }
+  else if(E.etape===4){
+    var L=creneauxDu(E.date);
+    h+=entete(4,"À quelle heure ?",dateLongue(E.date)+". "+(E.act==="bowling"?"Tarif calculé sur l'heure de fin de partie.":"Sessions de 20 minutes."));
+    var sam=parse(E.date).getDay()===6;
+    if(E.act==="bowling"&&sam) h+='<div class="info"><b>Samedi à partir de 17h30 : aucune réservation bowling.</b> C\'est la règle du Silver. Venez directement sur place, sans réservation.</div>';
+    if(E.act==="laser"&&sam) h+='<div class="info violet">Laser le samedi soir : règle de réservation à confirmer avec le Silver.</div>';
+    if(E.act==="laser") h+='<p class="note">Créneaux du laser calqués sur les horaires du bowling (une session toutes les 30 min) <span class="ex">à confirmer</span>'+(f.id==="sniper"?' · Sniper : départs jusqu\'à 17h pour finir vers 18h <span class="ex">à confirmer</span>':'')+'</p>';
+    var libres=L.filter(function(c){return c.etat!=="surplace"}), sp=L.filter(function(c){return c.etat==="surplace"});
+    h+='<div class="creneaux">';
+    libres.forEach(function(c){
+      var dis=c.etat==="complet";
+      h+='<button type="button" data-act="cr" data-v="'+c.m+'" class="'+(dis?"complet":"")+'"'+(dis?' aria-disabled="true"':'')+' aria-pressed="'+(E.cr===c.m)+'">'+hm(c.m)+'<small>'+(dis?"complet":"libre")+'</small></button>'});
+    h+='</div>';
+    if(!libres.length) h+='<p class="aide">Aucun créneau réservable en ligne ce jour-là.</p>';
+    if(sp.length){
+      h+='<div class="surplace-bloc"><b>'+hm(sp[0].m)+' → '+hm(sp[sp.length-1].m+60)+'</b><span>Sans réservation : venez directement sur place.</span></div>';
+    }
+    h+='<div class="legende"><span>« complet » : exemple de créneau déjà pris</span></div>';
+    h+=navBas(E.cr!==null);
+  }
+  else if(E.etape===5){
+    h+=entete(5,f.anniv?"Combien d'enfants ?":"Combien de joueurs ?",regleJoueurs(f));
+    h+='<div class="ligne"><div class="l"><b>'+(f.anniv?"Enfants":"Joueurs")+'</b><span>'+f.min+' minimum, '+f.max+' maximum en ligne</span></div>'+compteur("n",E.n,f.min,f.max)+'</div>';
+    if(f.parties) h+='<div class="ligne"><div class="l"><b>Parties</b><span>par joueur</span></div>'+compteur("parties",E.parties,1,3)+'</div>';
+    if(E.act==="bowling"){var c=calcul(), hf=horairesDu(E.date); if(c){ h+='<p class="aide" style="margin-top:12px">'+c.pistes+' piste'+(c.pistes>1?"s":"")+' · fin estimée vers '+hmc(c.fin)+' <span class="ex">estimation à confirmer</span></p>'; if(c.fin>hf[1]) h+='<div class="info">Fin estimée après la fermeture ('+hmc(hf[1]%1440)+') : retirez une partie ou revenez à un créneau plus tôt.</div>';}}
+    h+='<label class="case"><input type="checkbox" id="ok-age"'+(E.okAge?" checked":"")+'><span>'+caseAge(f)+'</span></label>';
+    if(E.n>f.max-1) h+='<div class="info vert">Plus de '+f.max+' personnes ? Demandez un devis groupe : <a href="mailto:commercial@complexe-silver.fr">commercial@complexe-silver.fr</a></div>';
+    h+=navBas(E.n>=f.min&&E.okAge);
+  }
+  else if(E.etape===6){
+    h+=entete(6,"Options","Rien d'obligatoire ici.");
+    if(f.chaussures) h+='<div class="ligne"><div class="l"><b>Location de chaussures</b><span>2 € par paire, à régler sur place si vous changez d\'avis</span></div>'+compteur("chauss",E.chauss,0,E.n)+'</div>';
+    else if(E.act==="bowling") h+='<p class="aide">Chaussures incluses dans cette formule.</p>';
+    if(f.anniv){
+      h+='<p class="groupe-titre">Prolonger la fête : +5 € par enfant</p>';
+      [["aucun","Non merci",""],["bowling","1 partie de bowling","+5 € par enfant"],["laser","1 session de laser game","+5 € par enfant, dès 8 ans"]].forEach(function(o){
+        h+='<label class="opt"><input type="radio" name="supp" value="'+o[0]+'"'+(E.supp===o[0]?" checked":"")+'><span><span class="t">'+o[1]+'</span><span class="d">'+o[2]+'</span></span></label>'});
+      h+='<div class="champs"><label class="large">Prénom de l\'enfant qui fête son anniversaire (facultatif)<input type="text" id="enfant" value="'+esc(E.enfant)+'" autocomplete="off"></label></div>';
+    }
+    h+='<p class="groupe-titre">Carte de fidélité Silver &amp; MooM</p>';
+    [["deja","J'ai déjà la carte","Je la présente en caisse : 1 € = 1 point."],["creer","Je crée ma carte maintenant, en ligne","Plus besoin de passer à l'accueil pour l'ouvrir. 120 points = 10 € de remise."],["plus-tard","Pas maintenant",""]].forEach(function(o){
+      h+='<label class="opt"><input type="radio" name="fid" value="'+o[0]+'"'+(E.fid===o[0]?" checked":"")+'><span><span class="t">'+o[1]+'</span><span class="d">'+o[2]+'</span></span></label>'});
+    h+='<p class="note">Création en ligne de la carte : branchement sur le programme actuel du Silver <span class="ex">à confirmer</span></p>';
+    h+=navBas(true);
+  }
+  else if(E.etape===7){
+    var c=calcul();
+    h+=entete(7,"Récapitulatif et acompte","Vérifiez, laissez vos coordonnées, et l'acompte bloque votre créneau.");
+    h+='<table class="recap"><tbody>';
+    h+='<tr><td>'+ACTS[E.act].nom+' · '+f.nom+'<span class="sub">'+dateLongue(E.date)+' à '+hm(E.cr)+(c.pistes?" · "+c.pistes+" piste"+(c.pistes>1?"s":""):"")+'</span></td><td></td></tr>';
+    c.lignes.forEach(function(l){h+='<tr><td>'+l[0]+(l[1]?'<span class="sub">'+l[1]+'</span>':'')+'</td><td>'+eur(l[2])+'</td></tr>'});
+    if(E.fid==="creer") h+='<tr><td>Carte Silver &amp; MooM créée avec la réservation<span class="sub">Gratuit · branchement à confirmer</span></td><td>0 €</td></tr>';
+    h+='<tr class="tot"><td>Total</td><td>'+eur(c.tot)+'</td></tr>';
+    h+='<tr class="acompte"><td>Acompte à régler maintenant (30 %) <span class="ex">exemple</span><span class="sub">Le reste, '+eur(c.tot-c.ac)+', se règle sur place.</span></td><td>'+eur(c.ac)+'</td></tr>';
+    h+='</tbody></table>';
+    h+='<div class="champs"><label>Nom et prénom<input type="text" id="nom" autocomplete="name" value="'+esc(E.nom)+'"></label><label>Téléphone<input type="tel" id="tel" autocomplete="tel" inputmode="tel" value="'+esc(E.tel)+'"></label><label class="large">E-mail (pour recevoir la confirmation)<input type="email" id="mail" autocomplete="email" value="'+esc(E.mail)+'"></label></div>';
+    h+='<div class="simu"><span aria-hidden="true">⚠</span><span><b>Paiement simulé.</b> Cet aperçu n\'encaisse rien et ne demande aucune carte bancaire. Sur le vrai site, l\'acompte se paierait ici par carte.</span></div>';
+    h+=navBas(true,"Payer l'acompte de "+eur(c.ac)+" (simulation)");
+  }
+  else if(E.etape===8){
+    var c2=calcul();
+    h+=entete(8,"C'est réservé !","Exemple de confirmation : rien n'a été enregistré ni payé.");
+    h+='<p class="etape-lib">Numéro de réservation</p><p class="confirm-num">'+E.num+'</p>';
+    h+='<table class="recap"><tbody><tr><td>'+ACTS[E.act].nom+' · '+f.nom+'<span class="sub">'+dateLongue(E.date)+' à '+hm(E.cr)+' · '+E.n+' '+(f.anniv?"enfants":"joueur"+(E.n>1?"s":""))+'</span></td><td>'+eur(c2.tot)+'</td></tr>';
+    h+='<tr class="acompte"><td>Acompte réglé (simulation) <span class="ex">exemple</span></td><td>'+eur(c2.ac)+'</td></tr><tr><td>Reste à régler sur place</td><td>'+eur(c2.tot-c2.ac)+'</td></tr></tbody></table>';
+    if(E.fid==="creer") h+='<div class="info vert">Votre carte Silver &amp; MooM serait créée avec cette réservation. Vos points s\'ajoutent à chaque passage en caisse. <span class="ex">à confirmer</span></div>';
+    h+='<div class="nav-etape"><button type="button" class="b1" data-act="ics">Ajouter à mon agenda</button><button type="button" class="b2" data-act="recommencer">Nouvelle réservation</button></div>';
+    h+='<p class="note" style="margin-top:12px">Merci d\'arriver 15 minutes avant votre créneau. <span class="ex">à confirmer</span></p>';
+  }
+  T.innerHTML=h;
+  resume();
+  if(focus){var t=document.getElementById("h-etape"); if(t) t.focus({preventScroll:true});}
+}
+function esc(s){return String(s||"").replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function compteur(k,v,min,max){
+  return '<div class="compteur"><button type="button" data-act="moins" data-k="'+k+'" aria-label="Retirer"'+(v<=min?" disabled":"")+'>−</button><output aria-live="polite">'+v+'</output><button type="button" data-act="plus" data-k="'+k+'" aria-label="Ajouter"'+(v>=max?" disabled":"")+'>+</button></div>';
+}
+function regleJoueurs(f){
+  if(f.anniv==="bowling") return "Anniversaire bowling : de 6 à 16 ans, 4 enfants minimum. Un adulte présent dans l'établissement.";
+  if(f.anniv==="laser") return "Anniversaire laser : de 8 à 16 ans (le site indique aussi 10 ans pour les anniversaires : âge à confirmer), 6 enfants minimum. Pour les 10-12 ans, un adulte accompagne dans la salle (offert).";
+  if(E.act==="laser") return "6 joueurs minimum, 20 au maximum par session. Votre groupe peut partager la session avec un autre groupe.";
+  return "Jusqu'à "+JOUEURS_PISTE+" joueurs par piste (à confirmer) ; au-delà, une piste de plus.";
+}
+function caseAge(f){
+  if(f.anniv==="laser") return "Tous les enfants ont entre 8 et 16 ans, et un adulte sera présent.";
+  if(f.anniv==="bowling") return "Tous les enfants ont entre 6 et 16 ans, et un adulte sera présent.";
+  if(E.act==="laser") return "Tous les joueurs ont 8 ans ou plus (les mineurs viennent avec un adulte).";
+  return "Les joueurs mineurs viennent avec un adulte (obligatoire au Silver).";
+}
+function infoJour(s){
+  var r=raisonJour(s); if(r) return r;
+  var h=horairesDu(s), fe=ferie(s), v=vacancesDe(s), t=[];
+  t.push(dateLongue(s).replace(/^./,function(c){return c.toUpperCase()})+" : ouvert "+hmc(h[0])+" – "+hmc(h[1]%1440)+".");
+  if(fe) t.push(fe.nom+(fe.lu?" (horaires annoncés par le Silver)":" : horaires à confirmer avec le Silver")+", tarifs du samedi.");
+  else if(veille(s)) t.push("Veille de jour férié : tarifs du samedi.");
+  if(v) t.push("Vacances "+v[2]+" (zone B).");
+  return t.join(" ");
+}
+function calendrier(){
+  var auj=aujourdhui(); if(!E.mois){var b=E.date?parse(E.date):auj;E.mois=new Date(b.getFullYear(),b.getMonth(),1)}
+  var m=E.mois, prem=new Date(m.getFullYear(),m.getMonth(),1), dec=(prem.getDay()+6)%7, nb=new Date(m.getFullYear(),m.getMonth()+1,0).getDate();
+  var minM=new Date(auj.getFullYear(),auj.getMonth(),1), maxM=new Date(2027,7,1);
+  var h='<div class="cal-tete"><button type="button" data-act="mois" data-v="-1" aria-label="Mois précédent"'+(m<=minM?" disabled":"")+'>‹</button><b aria-live="polite">'+MOIS[m.getMonth()]+' '+m.getFullYear()+'</b><button type="button" data-act="mois" data-v="1" aria-label="Mois suivant"'+(m>=maxM?" disabled":"")+'>›</button></div>';
+  h+='<div class="cal" role="grid">';
+  ["lu","ma","me","je","ve","sa","di"].forEach(function(j){h+='<span class="js">'+j+'</span>'});
+  for(var i=0;i<dec;i++) h+='<span></span>';
+  for(var d=1;d<=nb;d++){
+    var s=iso(new Date(m.getFullYear(),m.getMonth(),d)), r=raisonJour(s), cl=[];
+    if(vacancesDe(s)) cl.push("vac"); if(ferie(s)) cl.push("fer"); if(s===iso(auj)) cl.push("auj");
+    h+='<button type="button" data-act="jour" data-v="'+s+'" class="'+cl.join(" ")+'"'+(r?' aria-disabled="true"':'')+' aria-pressed="'+(E.date===s)+'" aria-label="'+dateLongue(s)+(r?", indisponible":"")+'">'+d+'</button>';
+  }
+  h+='</div><div class="legende"><span><i style="background:#14233a;border:1px solid #27456e"></i>vacances scolaires (zone B)</span><span><i style="background:#331a10;border:1px solid #7a3a1a"></i>jour férié</span><span><i style="box-shadow:inset 0 0 0 2px #00ffb1"></i>aujourd\'hui</span><span>barré : indisponible</span></div>';
+  return h;
+}
+function resume(){
+  var f=F(), dl=document.getElementById("resume-dl"), h="";
+  h+='<dt>Activité</dt><dd>'+(E.act?ACTS[E.act].nom:"–")+'</dd>';
+  h+='<dt>Formule</dt><dd>'+(f?f.nom:"–")+'</dd>';
+  h+='<dt>Date</dt><dd>'+(E.date&&E.etape>3?dateLongue(E.date):(E.date&&!raisonJour(E.date)?dateLongue(E.date):"–"))+'</dd>';
+  h+='<dt>Heure</dt><dd>'+(E.cr!==null?hm(E.cr):"–")+'</dd>';
+  h+='<dt>'+(f&&f.anniv?"Enfants":"Joueurs")+'</dt><dd>'+(E.etape>=5&&E.n?E.n:"–")+'</dd>';
+  dl.innerHTML=h;
+  var c=E.etape>=5?calcul():null;
+  document.getElementById("resume-total").textContent=c?eur(c.tot):"–";
+  document.getElementById("resume-ac").innerHTML=c?'Acompte 30 % <span class="ex">exemple</span> : '+eur(c.ac):"";
+}
+function msg(t){var m=document.getElementById("msg"); if(m) m.textContent=t}
+function lireChamps(){
+  ["nom","tel","mail","enfant"].forEach(function(k){var el=document.getElementById(k); if(el) E[k]=el.value.trim()});
+}
+function suivant(){
+  var f=F();
+  if(E.etape===1&&!E.act) return msg("Choisissez une activité.");
+  if(E.etape===2&&!E.f) return msg("Choisissez une formule.");
+  if(E.etape===3){ if(!E.date) return msg("Choisissez un jour dans le calendrier."); var r=raisonJour(E.date); if(r) return msg(r); }
+  if(E.etape===4&&E.cr===null) return msg("Choisissez une heure.");
+  if(E.etape===5){ if(E.n<f.min) return msg("Il faut au moins "+f.min+" "+(f.anniv?"enfants":"joueurs")+"."); if(!E.okAge) return msg("Merci de cocher la case de confirmation."); var cc=calcul(), hf=horairesDu(E.date); if(cc&&hf&&cc.fin>hf[1]) return msg("La partie finirait vers "+hmc(cc.fin)+", après la fermeture ("+hmc(hf[1]%1440)+") : moins de parties ou un créneau plus tôt."); if(f.chaussures&&E.chauss===0) E.chauss=E.n; }
+  if(E.etape===7){
+    lireChamps();
+    if(!E.nom||!E.tel||!E.mail) return msg("Indiquez votre nom, votre téléphone et votre e-mail.");
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(E.mail)) return msg("L'adresse e-mail semble incomplète.");
+    if(E.tel.replace(/\D/g,"").length<10) return msg("Le numéro de téléphone semble incomplet.");
+    E.num="SIL-"+E.date.slice(2).replace(/-/g,"")+"-"+(1000+hash(E.nom+E.cr+E.n)%9000);
+  }
+  if(E.etape===6) lireChamps();
+  E.etape++; rendu(true);
+  document.getElementById("reserver").scrollIntoView({block:"start"});
+}
+function ics(){
+  var f=F(), c=calcul(), d=E.date.replace(/-/g,"");
+  function t(m){var dd=parse(E.date); dd.setMinutes(m); return dd.getFullYear()+pad(dd.getMonth()+1)+pad(dd.getDate())+"T"+pad(dd.getHours())+pad(dd.getMinutes())+"00"}
+  var txt=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Silver apercu//FR","BEGIN:VEVENT","UID:"+E.num+"@apercu-silver","DTSTAMP:"+d+"T000000","DTSTART:"+t(E.cr),"DTEND:"+t(Math.max(c.fin,E.cr+60)),
+    "SUMMARY:"+ACTS[E.act].nom+" au Silver ("+f.nom+")","LOCATION:"+ADRESSE.replace(/,/g,"\\,"),"DESCRIPTION:Réservation "+E.num+" (exemple\\, aperçu non commandé). Tél. 02 41 73 05 05","END:VEVENT","END:VCALENDAR"].join("\r\n");
+  var a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([txt],{type:"text/calendar"})); a.download="silver-"+E.num+".ics"; document.body.appendChild(a); a.click(); a.remove();
+}
+T.addEventListener("click",function(e){
+  var b=e.target.closest("[data-act]"); if(!b) return;
+  var a=b.getAttribute("data-act"), v=b.getAttribute("data-v");
+  if(a==="act"){ if(E.act!==v){E.act=v;E.f=null;E.date=null;E.cr=null;E.n=0} rendu(); return; }
+  if(a==="f"){ if(E.f!==v){E.f=v;E.cr=null;var f=F();E.n=f.min;E.parties=1;E.chauss=0;E.okAge=false; if(E.date&&raisonJour(E.date)) E.date=null;} rendu(); return; }
+  if(a==="mois"){ E.mois=new Date(E.mois.getFullYear(),E.mois.getMonth()+(+v),1); rendu(); return; }
+  if(a==="jour"){ var r=raisonJour(v); if(r){ E.date=null; rendu(); document.getElementById("jour-info").textContent=r; return; } E.date=v; E.cr=null; rendu(); return; }
+  if(a==="cr"){ if(b.getAttribute("aria-disabled")==="true"){msg("Ce créneau est complet (exemple). Choisissez-en un autre.");return} E.cr=+v; rendu(); return; }
+  if(a==="plus"||a==="moins"){ var k=b.getAttribute("data-k"), f2=F(), lim={n:[f2.min,f2.max],parties:[1,3],chauss:[0,E.n]}[k]; E[k]=Math.max(lim[0],Math.min(lim[1],E[k]+(a==="plus"?1:-1))); if(k==="n"&&E.chauss>E.n) E.chauss=E.n; rendu(); return; }
+  if(a==="prec"){ lireChamps(); E.etape--; rendu(true); return; }
+  if(a==="suiv"){ suivant(); return; }
+  if(a==="ics"){ ics(); return; }
+  if(a==="recommencer"){ E={etape:1,act:null,f:null,date:null,mois:null,cr:null,n:0,parties:1,chauss:0,supp:"aucun",fid:"plus-tard",nom:"",tel:"",mail:"",enfant:"",num:null}; rendu(true); return; }
+});
+T.addEventListener("input",function(){msg("")});
+T.addEventListener("change",function(e){
+  var t=e.target;
+  if(t.id==="ok-age"){E.okAge=t.checked; rendu(); var c=document.getElementById("ok-age"); if(c) c.focus(); return}
+  if(t.name==="supp"){E.supp=t.value; resume(); return}
+  if(t.name==="fid"){E.fid=t.value; return}
+});
+/* Liens de la page qui pré-remplissent le parcours */
+document.querySelectorAll("[data-formule]").forEach(function(a){a.addEventListener("click",function(){ if(E.etape<=2){E.act="bowling";E.etape=2;rendu()} })});
+document.querySelectorAll("[data-fid]").forEach(function(a){a.addEventListener("click",function(){E.fid="creer"})});
+
+/* ---------- Contenus calculés de la page ---------- */
+function remplirPage(){
+  var auj=iso(aujourdhui()), d=aujourdhui(), h=horairesDu(auj), fe=ferie(auj);
+  document.getElementById("date-feuille").textContent="Partie du "+dateLongue(auj);
+  // Case 3 : horaires et prix du jour
+  var kick=document.getElementById("kick-auj"); kick.textContent="Aujourd'hui, "+NOMS_J[d.getDay()];
+  var ft=document.getElementById("f-today"), t="";
+  if(!h){ t='<div><span>'+fe.nom+'</span><b>à confirmer</b></div>'; }
+  else{
+    t+='<div><span>Bowling</span><b>'+hmc(h[0])+' – '+hmc(h[1]%1440)+'</b></div>';
+    var tar=libTarif(auj); t+='<div><span><span class="lg">Partie </span>'+tar[0][0]+'</span><b>'+tar[0][1]+'</b></div>';
+    if(tar.length>1) t+='<div><span><span class="lg">Partie </span>'+tar[tar.length-1][0]+'</span><b>'+tar[tar.length-1][1]+'</b></div>';
+    t+='<div><span>Laser<span class="lg"> 20 min</span></span><b>8 €</b></div>';
+  }
+  if(fe) t+='<div><span>'+fe.nom+' : tarif du samedi</span></div>'; else if(veille(auj)) t+='<div><span>Veille de férié<span class="lg"> : tarif du samedi</span></span></div>';
+  ft.innerHTML=t;
+  // Grille bowling
+  var rows=[["Lundi au jeudi",[["jusqu'à 14h","4 €"],["avant 18h","6 €"],["après 18h","7 €"]],[1,2,3,4]],["Vendredi",[["jusqu'à 14h","4 €"],["avant 18h","6 €"],["après 18h","8 €"]],[5]],["Samedi, veilles et fériés",[["avant 18h","6 €"],["après 18h","8 €"]],[6]],["Dimanche",[["10h – 14h","4 €"],["jusqu'à 20h","6 €"]],[0]]];
+  var jour=tarifSamedi(auj)?6:d.getDay(), gb="";
+  rows.forEach(function(r){r[1].forEach(function(c,i){gb+='<tr class="'+(r[2].indexOf(jour)>=0?"auj":"")+'"><td>'+(i===0?r[0]:"")+'</td><td>'+c[0]+'</td><td class="px">'+c[1]+'</td></tr>'})});
+  document.querySelector("#grille-bowling tbody").innerHTML=gb;
+  // Semaine
+  var lundi=ajoute(d,-((d.getDay()+6)%7)), sem="";
+  for(var i=0;i<7;i++){
+    var s=iso(ajoute(lundi,i)), hh=horairesDu(s), f2=ferie(s), v=vacancesDe(s), n="";
+    if(f2) n=f2.nom+(f2.lu?" : horaires annoncés par le Silver":" : à confirmer")+" · tarif du samedi";
+    else if(veille(s)) n="Veille de férié : tarif du samedi";
+    if(parse(s).getDay()===6) n=(n?n+" · ":"")+"Dès 17h30 : sans réservation, sur place";
+    if(v) n=(n?n+" · ":"")+"Vacances "+v[2];
+    sem+='<div class="jour'+(s===auj?" auj":"")+'"><div><b>'+NOMS_J[parse(s).getDay()]+'</b><span class="d">'+parse(s).getDate()+' '+MOIS[parse(s).getMonth()]+'</span></div><div class="h">'+(hh?hmc(hh[0])+" – "+hmc(hh[1]%1440):"à confirmer")+'</div>'+(n?'<div class="n">'+n+'</div>':'')+'</div>';
+  }
+  document.getElementById("semaine").innerHTML=sem;
+  // Prochaines vacances
+  var pro=null; for(var j=0;j<VACANCES.length;j++){ if(VACANCES[j][1]>=auj){pro=VACANCES[j];break} }
+  if(pro){var a=parse(pro[0]),b=parse(pro[1]),en=auj>=pro[0];
+    document.getElementById("hor-chapo").textContent="Les horaires de la semaine en cours, calculés chaque jour. Fermetures variables selon l'affluence. "+(en?"En ce moment : vacances ":"Prochaines vacances (zone B) : vacances ")+pro[2]+", du "+a.getDate()+" "+MOIS[a.getMonth()]+" au "+b.getDate()+" "+MOIS[b.getMonth()]+" : anniversaires possibles tous les jours.";}
+}
+remplirPage();
+rendu();
+</script>
+</body>
+</html>
