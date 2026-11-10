@@ -37,6 +37,11 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | Cap Karting (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-karting-v3-161c85/` |
 | La Récré des Pirates (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/recre-des-pirates-v3-f167ce/` |
 | Kid's Paradise (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/kids-paradise-v3-fd827f/` |
+| MaxxParc (v3, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/maxxparc-v3-cd32d3/` |
+| Le Silver (v3, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v3-86289e/` |
+| Cap Form Loisirs (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-eb21fc/` |
+| Espace Games (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-f12eef/` |
+| Le Monde des P'tits Loups (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-7d3af2/` |
 
 À chaque prospect, on envoie **uniquement le lien direct de sa maquette** — jamais le lien portfolio (qui liste toutes les maquettes).
 
