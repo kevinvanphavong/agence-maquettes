@@ -49,6 +49,7 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | Espace Games (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-f12eef/` |
 | Espace Games (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-v4-12c8d6/` |
 | Espace Games (v6, 12/11/2026, identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-v6-34e89e/` |
+| Bowling de Bressuire, Bocabowl (v6, 12/11/2026, identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/bowling-bressuire-v6-0cf0e6/` |
 | Le Monde des P'tits Loups (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-7d3af2/` |
 | Le Monde des P'tits Loups (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-v4-77a4cd/` |
 
