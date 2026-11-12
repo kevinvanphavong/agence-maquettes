@@ -47,6 +47,7 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | Cap Form Loisirs (v6, 12/11/2026, nouvelle identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-v6-6f7245/` |
 | Espace Games (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-f12eef/` |
 | Espace Games (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-v4-12c8d6/` |
+| Espace Games (v6, 12/11/2026, identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/espace-games-v6-34e89e/` |
 | Le Monde des P'tits Loups (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-7d3af2/` |
 | Le Monde des P'tits Loups (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-v4-77a4cd/` |
 
