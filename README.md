@@ -39,6 +39,7 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | Kid's Paradise (v3, 24/10/2026) | `https://kevinvanphavong.github.io/agence-maquettes/kids-paradise-v3-fd827f/` |
 | MaxxParc (v3, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/maxxparc-v3-cd32d3/` |
 | MaxxParc (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/maxxparc-v4-3622bd/` |
+| MaxxParc (v6, 12/11/2026, identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/maxxparc-v6-10d589/` |
 | Le Silver (v3, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v3-86289e/` |
 | Le Silver (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v4-1e80c6/` |
 | Le Silver (v6, 12/11/2026, identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v6-5dc22b/` |

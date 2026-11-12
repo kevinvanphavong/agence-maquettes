@@ -1,0 +1,1152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0a0a0d">
+<title>MaxxParc · Laser game à Tours nord (aperçu)</title>
+<meta name="description" content="Aperçu non commandé d'une nouvelle page d'accueil pour le MaxxParc, à Tours nord : anniversaires, LaserMaxx et AsteroGolf réservables en ligne.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="polices/bricolage-grotesque-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="vong-kit.css">
+<!-- Maquette v6 · MaxxParc · Vong Studio, 12/11/2026. Direction « Nuit électrique », recolorée aux couleurs du site : rouge #ff3b44 des cadres LaserMaxx, bleu clair #6fd0f5 du logo. Photos : maxxparc.com. -->
+<style>
+@font-face{font-family:"Bricolage";font-weight:200 800;font-stretch:75% 100%;font-display:swap;src:url(polices/bricolage-grotesque-latin-var.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:100 900;font-display:swap;src:url(polices/inter-latin-var.woff2) format("woff2")}
+:root{
+  --nuit:#0e1119; --nuit-2:#171c28; --nuit-3:#222a3a; --ligne:rgba(255,255,255,.12);
+  --texte:#f6f6f8; --doux2:#a6a6b4; --rose:#ff3b44; --rose-2:#ff6168; --menthe:#6fd0f5; --jaune:#ffe14d;
+  --titre:"Bricolage",ui-sans-serif,system-ui,sans-serif; --corps:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --r:28px; --ease:cubic-bezier(.2,.8,.2,1);
+  /* jetons du parcours de réservation (repris de la v4) */
+  --sol:#0e1119; --sol-2:#171c28; --sol-3:#24242c; --encre:#f6f6f8; --encre-2:#cfcfd8; --doux:#a6a6b4; --trait:rgba(255,255,255,.14);
+  --blanc:#ffffff; --noir:#0e1119; --ombre:0 20px 40px -24px rgba(0,0,0,.9); --r-carte:20px; --r-photo:24px;
+  --f-titre:var(--titre); --f-texte:var(--corps);
+  --paper:#0e1119; --paper-2:#171c28; --paper-3:#222a3a; --ink:#f4f7fb; --ink-2:#cfd6e2; --muted:#a3adbf; --rule:rgba(255,255,255,.14); --accent:#ff3b44; --accent-ink:#fff; --accent-2:#6fd0f5; --accent-2-ink:#0e1119; --bar:1.5px; --radius:18px; --body:var(--corps); --display:var(--titre); --figure:var(--titre);
+  --vk-fond:#171c28; --vk-texte:#f6f6f8; --vk-doux:#a6a6b4; --vk-trait:rgba(255,255,255,.18);
+  --vk-accent:#ff3b44; --vk-sur-accent:#0e1119; --vk-ok:#00d496; --vk-ferme:#77778a; --vk-vac:#123f33; --vk-fer:#4a1442; --vk-rayon:12px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:90px}
+[id]{scroll-margin-top:90px}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--nuit);color:var(--texte);font:400 1rem/1.6 var(--corps);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-underline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+p{margin:0}
+:focus-visible{outline:3px solid var(--menthe);outline-offset:3px}
+h1,h2,h3{font-family:var(--titre);font-weight:800;letter-spacing:-.035em;margin:0;line-height:.95;font-stretch:85%}
+.cadre,.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.sur{display:inline-flex;align-items:center;gap:8px;font:600 .8125rem/1 var(--corps);letter-spacing:.14em;text-transform:uppercase;color:var(--menthe)}
+.sur::before{content:"";width:22px;height:2px;background:currentColor}
+.neon{color:var(--rose);text-shadow:0 0 24px rgba(255,59,68,.55)}
+
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border:0;border-radius:999px;background:transparent;color:inherit;font:650 1rem/1 var(--corps);text-decoration:none;cursor:pointer;transition:transform .25s var(--ease),background-color .2s,box-shadow .25s var(--ease)}
+.btn-p,.btn--primaire{background:var(--rose);color:#fff;box-shadow:0 12px 30px -10px rgba(255,59,68,.8)}
+.btn-p:hover,.btn--primaire:hover{transform:translateY(-2px);background:var(--rose-2);box-shadow:0 0 0 6px rgba(255,59,68,.2),0 16px 36px -10px rgba(255,59,68,.9)}
+.btn .fl{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.15);transition:transform .25s var(--ease)}
+.btn:hover .fl{transform:translateX(3px)}
+.btn-ghost,.btn--secondaire{box-shadow:inset 0 0 0 1.5px var(--ligne);background:rgba(255,255,255,.04)}
+.btn-ghost:hover,.btn--secondaire:hover{background:rgba(255,255,255,.1)}
+.tel-lien{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+
+.apercu{background:#000;color:var(--doux2);text-align:center;font-size:.8125rem;line-height:1.3;padding:7px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.apercu b{color:var(--menthe)}
+
+/* En-tête flottant en verre */
+.tete{position:sticky;top:10px;z-index:30;margin-top:10px}
+.tete .cadre{display:flex;align-items:center;gap:12px;min-height:64px;padding:8px 8px 8px 20px;border-radius:999px;background:rgba(20,20,24,.62);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:inset 0 0 0 1px var(--ligne),0 20px 40px -24px rgba(0,0,0,.8)}
+.logo{display:flex;align-items:center;min-height:44px;margin-right:auto}
+.logo img{height:26px;width:auto}
+.nav{display:none;gap:2px}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:550;color:var(--doux2);transition:color .2s,background-color .2s}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.tel{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:999px;background:rgba(255,255,255,.06)}
+.tel svg{width:19px;height:19px}
+.tete .btn-p{display:none;min-height:48px;padding:0 22px}
+.menu-btn{min-height:44px;min-width:44px;padding:0 16px;border-radius:999px;border:0;background:rgba(255,255,255,.08);color:#fff;font-weight:600;cursor:pointer}
+.tiroir{margin:8px 16px 0;border-radius:24px;background:rgba(20,20,24,.96);backdrop-filter:blur(18px);box-shadow:inset 0 0 0 1px var(--ligne);padding:8px 14px}
+.tiroir[hidden]{display:none}
+.tiroir a{display:flex;align-items:center;min-height:50px;font-weight:600;font-size:1.125rem;text-decoration:none;border-bottom:1px solid var(--ligne)}
+.tiroir a:last-child{border:0}
+@media (min-width:1000px){.nav{display:flex}.tete .btn-p{display:inline-flex}.menu-btn,.tiroir{display:none!important}}
+
+/* ===== Premier écran ===== */
+.heros{position:relative;margin-top:-74px;padding-top:74px;min-height:min(100svh,920px);display:grid;align-items:end;isolation:isolate;overflow:hidden}
+.heros-fond{position:absolute;inset:0;z-index:-2;overflow:hidden}
+.heros-fond img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.heros::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(10,10,13,.5) 0%,rgba(10,10,13,.1) 30%,rgba(10,10,13,.62) 64%,var(--nuit) 100%),linear-gradient(90deg,rgba(10,10,13,.85) 0%,rgba(10,10,13,.2) 62%,transparent 100%)}
+.heros .cadre{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;align-items:end;padding-block:120px 64px}
+.heros h1{font-size:clamp(3.2rem,8.2vw,7.4rem);line-height:.88}
+.rot{display:inline-grid;vertical-align:bottom;overflow:hidden;clip-path:inset(0);height:1em;padding-bottom:.08em}
+.rot span{grid-area:1/1;transform:translateY(140%);transition:transform .7s var(--ease)}
+.rot span.on{transform:translateY(0)}
+.rot span.off{transform:translateY(-140%)}
+.heros .lead{font-size:clamp(1.0625rem,1.4vw,1.25rem);color:#dedee6;max-width:40ch;margin:22px 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta .btn-p{min-height:60px;padding:0 10px 0 28px;font-size:1.0625rem}
+.carte-verre{justify-self:end;width:min(100%,400px);border-radius:var(--r);padding:20px;background:rgba(20,20,24,.66);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);box-shadow:inset 0 0 0 1px var(--ligne),0 30px 60px -30px rgba(0,0,0,.9)}
+.carte-verre .haut{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.carte-verre .haut b{font:800 1.25rem/1.1 var(--titre);letter-spacing:-.02em}
+.direct{display:inline-flex;align-items:center;gap:7px;font-size:.8125rem;font-weight:600;color:var(--menthe)}
+.direct i{width:8px;height:8px;border-radius:50%;background:var(--menthe);animation:pouls 2s infinite}
+@keyframes pouls{0%{box-shadow:0 0 0 0 rgba(111,208,245,.6)}70%{box-shadow:0 0 0 8px rgba(111,208,245,0)}100%{box-shadow:0 0 0 0 rgba(111,208,245,0)}}
+.carte-verre .vk-bandeau{color:var(--doux2);font-size:.9375rem}
+.carte-verre .vk-bandeau .vk-lien{color:#fff}
+.vk-ouvert .vk-pastille{background:var(--menthe)}
+.vk-bientot .vk-pastille{background:var(--jaune)}
+.prochains{margin:14px 0 4px;font-size:.875rem;color:var(--doux2)}
+.creneaux-vite{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0 12px}
+.creneaux-vite button{display:grid;gap:2px;min-height:62px;padding:8px 6px;border:0;border-radius:16px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--ligne);cursor:pointer;transition:background-color .2s,transform .2s var(--ease)}
+.creneaux-vite button:hover{background:rgba(255,59,68,.18);transform:translateY(-2px)}
+.creneaux-vite b{font:800 1.25rem/1 var(--titre)}
+.creneaux-vite span{font-size:.8125rem;color:var(--doux2)}
+.creneaux-vite button:disabled{opacity:.4;cursor:default;transform:none}
+.carte-verre .pied-carte{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.9375rem;color:var(--doux2)}
+.carte-verre .pied-carte b{color:#fff;font:800 1.5rem/1 var(--titre)}
+
+/* Défilant */
+.defile{border-block:1px solid var(--ligne);overflow:hidden;padding:18px 0}
+.defile ul{display:flex;gap:44px;list-style:none;margin:0;padding:0;width:max-content;animation:defile 40s linear infinite}
+.defile li{display:flex;align-items:center;gap:44px;font:800 clamp(1.5rem,3vw,2.4rem)/1 var(--titre);letter-spacing:-.03em;white-space:nowrap}
+.defile li::after{content:"✦";color:var(--rose);font-size:.6em}
+.defile li:nth-child(even){color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.55)}
+@keyframes defile{to{transform:translateX(-50%)}}
+
+/* Sections */
+section.bloc{padding-block:120px;border:0}
+.tete-bloc,.bloc-tete{display:grid;gap:16px;margin-bottom:44px;max-width:820px}
+.tete-bloc h2,.bloc-tete h2{font-size:clamp(2.6rem,6vw,5rem)}
+.tete-bloc p,.bloc-tete p{margin:0;font-size:1.125rem;color:var(--doux2);max-width:52ch}
+.legende{color:var(--doux2);font-size:.9375rem;margin-top:14px}
+.vk-mention{border-radius:999px!important;white-space:nowrap}
+
+/* Sélecteur d'activités */
+.selecteur{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:stretch}
+.onglets{display:grid;gap:8px;align-content:start}
+.onglet{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;align-items:center;width:100%;min-height:84px;padding:14px 20px;border:0;border-radius:22px;background:transparent;text-align:left;cursor:pointer;box-shadow:inset 0 0 0 1px var(--ligne);transition:background-color .3s,box-shadow .3s}
+.onglet b{display:block;font:800 1.5rem/1.05 var(--titre);letter-spacing:-.025em}
+.onglet small{display:block;color:var(--doux2);font-size:.9375rem}
+.onglet em{font-style:normal;font-weight:650;white-space:nowrap}
+.onglet:hover{background:rgba(255,255,255,.04)}
+.onglet[aria-selected="true"]{background:linear-gradient(100deg,rgba(255,59,68,.22),rgba(111,208,245,.08));box-shadow:inset 0 0 0 1.5px rgba(255,59,68,.75)}
+.scene{position:relative;border-radius:34px;overflow:hidden;min-height:560px;background:var(--nuit-2);isolation:isolate}
+.scene figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity .6s var(--ease)}
+.scene figure.on{opacity:1}
+.scene figure img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 1.4s var(--ease)}
+.scene figure.on img{transform:scale(1)}
+.scene::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,transparent 35%,rgba(10,10,13,.94) 100%);pointer-events:none}
+.scene .info-scene{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px;display:grid;gap:12px}
+.scene h3{font-size:clamp(2.2rem,4vw,3.4rem)}
+.scene p{color:#e2e2ea;max-width:46ch}
+.scene .rangee{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:6px}
+.badge{display:inline-flex;align-items:center;min-height:34px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);font-size:.875rem;font-weight:600}
+.badge[hidden]{display:none}
+.badge--neuf{background:var(--menthe);color:#0e1119}
+.scene .tag{position:absolute;top:20px;left:20px;z-index:2}
+
+/* Réserver */
+#reserver .bloc-tete{margin-bottom:28px}
+
+/* Parcours : habillage « Nuit électrique » par-dessus les règles de la v4 */
+.parcours{background:var(--nuit-2);border-radius:34px;box-shadow:inset 0 0 0 1px var(--ligne);padding:28px}
+.etapes li .n{font-family:var(--corps);font-weight:700}
+.etapes li.ici .n{background:var(--rose);color:#0e1119}
+.parcours h3{font-size:1.75rem}
+.seg{box-shadow:inset 0 0 0 1.5px var(--ligne);font-weight:650}
+.seg[aria-pressed="true"]{background:#fff;color:#0e1119}
+.vk-formule{background:rgba(255,255,255,.03);border:1.5px solid var(--ligne);border-radius:18px}
+.vk-formule.vk-choisi{border-color:var(--rose);box-shadow:inset 0 0 0 1.5px var(--rose)}
+.vk-f-prix{font-weight:800}
+.ligne-reg{border-bottom:1px solid var(--ligne)}
+.pas button{background:rgba(255,255,255,.1);color:#fff}
+.pas button:hover:not(:disabled){background:var(--rose);color:#0e1119}
+.recap-boite{border:0;box-shadow:inset 0 0 0 1px var(--ligne);background:rgba(255,255,255,.03);border-radius:22px}
+.champ input{border:1.5px solid var(--ligne);border-radius:14px;background:rgba(255,255,255,.04)}
+.vk-confirmation{border:0;box-shadow:none;border-radius:22px}
+.refus,.note.alerte{background:var(--menthe);color:#0e1119}
+
+/* Prix */
+.acts{display:grid;gap:20px;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+.act{border-radius:34px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);overflow:hidden}
+.act-photo{aspect-ratio:16/8;overflow:hidden}
+.act-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.act:hover .act-photo img{transform:scale(1.04)}
+.act .corps-act{padding:24px 26px 28px}
+.act h3{font-size:2.2rem;margin-bottom:8px}
+.act p{color:var(--doux2)}
+.grille{width:100%;border-collapse:collapse;margin-top:16px}
+.grille th,.grille td{padding:12px 6px;border-bottom:1px solid var(--ligne);text-align:right}
+.grille th:first-child{text-align:left;padding-left:0}
+.grille thead th{color:var(--doux2);font:600 .75rem/1.2 var(--corps);letter-spacing:.1em;text-transform:uppercase}
+.grille tbody th{font-weight:600}
+.grille td{font:800 1.3rem/1 var(--titre)}
+.grille tr.auj{background:rgba(255,59,68,.1)}
+.grille tr.auj th{box-shadow:inset 3px 0 0 var(--rose);padding-left:10px}
+.lignes{list-style:none;margin:16px 0 0;padding:0}
+.lignes li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--ligne)}
+.lignes h3{font:600 1rem/1.3 var(--corps);letter-spacing:0;margin:0}
+.lignes .px{font:800 2rem/1 var(--titre);letter-spacing:-.03em}
+.lignes p{grid-column:1/-1;font-size:.9375rem}
+
+/* Anniversaires */
+.anniv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:stretch}
+.anniv-gauche{position:relative;border-radius:34px;overflow:hidden;background:radial-gradient(70% 60% at 50% 35%,rgba(255,59,68,.35),transparent 70%),var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:34px;display:flex;flex-direction:column;gap:18px}
+.anniv-gauche img{width:min(100%,380px);margin:0 auto;border-radius:50%;aspect-ratio:1/1;object-fit:cover;box-shadow:0 0 0 8px rgba(255,255,255,.06),0 30px 70px -20px rgba(255,59,68,.6)}
+.anniv-gauche h2{font-size:clamp(2.6rem,5vw,4.2rem)}
+.anniv-gauche p{color:var(--doux2)}
+.calc{border-radius:34px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:30px;display:flex;flex-direction:column;gap:6px;rotate:0deg;border:0}
+.calc .choix-seg{margin:6px 0 10px}
+.calc .seg{color:#fff}
+.calc .seg[aria-pressed="true"]{background:#fff;color:#0e1119}
+.calc .pas button{background:rgba(255,255,255,.1);color:#fff}
+.calc .ligne-reg{border-bottom-color:var(--ligne)}
+.total{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:10px 0 6px}
+.total .fig{font:800 clamp(3.4rem,6vw,5rem)/1 var(--titre);letter-spacing:-.05em;color:#fff}
+.total p{color:var(--doux2);font-weight:500}
+.formules-anniv{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:10px}
+.fa{border-radius:22px;padding:18px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--ligne)}
+.fa h3{display:flex;justify-content:space-between;gap:10px;font-size:1.5rem;margin-bottom:6px}
+.fa h3 span:last-child{color:var(--rose)}
+.fa p{color:var(--doux2);font-size:.9375rem}
+.calc .regles{color:var(--doux2);font-size:.875rem;margin:14px 0 18px}
+.calc .btn{align-self:flex-start;margin-top:auto}
+
+/* Carte de fidélité : bento */
+.bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.case{position:relative;border-radius:var(--r);overflow:hidden;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:26px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px;min-height:220px;isolation:isolate}
+.case>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .8s var(--ease)}
+.case:hover>img{transform:scale(1.05)}
+.case.photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 30%,rgba(10,10,13,.92))}
+.case h3{font-size:clamp(1.5rem,2.4vw,2.2rem)}
+.case p{color:var(--doux2)}
+.gros{font:800 clamp(3.6rem,8vw,7rem)/.82 var(--titre);letter-spacing:-.06em}
+.c-rose{background:linear-gradient(140deg,var(--rose),#ff8a3d 120%);box-shadow:none}
+.c-rose p{color:#ffe1e3}
+.c-menthe{background:linear-gradient(140deg,var(--menthe),#3d7bff 130%);box-shadow:none;color:#0e1119}
+.c-menthe p{color:#06293a}
+.c1{grid-column:span 5}.c2{grid-column:span 4}.c3{grid-column:span 3}
+.glow{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,59,68,.45),transparent);pointer-events:none;z-index:-1;opacity:0;transition:opacity .3s;transform:translate(-50%,-50%)}
+.case:hover .glow{opacity:1}
+
+/* Entreprises */
+.pros-grille{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.pros-grille .case{min-height:300px}
+.p1{grid-column:span 7}.p2{grid-column:span 5}
+.pros-bas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:16px}
+.pros-bas div{border-radius:22px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:22px}
+.pros-bas h3{font-size:1.6rem;margin-bottom:6px}
+.pros-bas p{color:var(--doux2)}
+.pros-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:22px}
+
+/* Horaires et accès */
+.fin{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:start}
+.panneau{border-radius:var(--r);background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:28px}
+.panneau h2{font-size:2.6rem;margin-bottom:8px}
+.semaine{width:100%;border-collapse:collapse;margin-top:10px}
+.semaine th,.semaine td{padding:12px 0;border-bottom:1px solid var(--ligne);text-align:left;vertical-align:top}
+.semaine td{text-align:right;color:#e2e2ea}
+.semaine th{font-weight:600}
+.semaine tr.auj{background:rgba(255,59,68,.1)}
+.semaine tr.auj th{box-shadow:inset 3px 0 0 var(--rose);padding-left:10px}
+.semaine small{display:block;color:var(--doux2);font-size:.875rem;font-weight:400}
+.adresse{font:800 1.6rem/1.15 var(--titre);letter-spacing:-.02em;margin:10px 0}
+.acces p{color:var(--doux2)}
+.acces .btn-p{margin-top:22px}
+.au-revoir{position:relative;text-align:center;padding:110px 0 60px;overflow:hidden;isolation:isolate}
+.au-revoir::before{content:"";position:absolute;width:900px;height:900px;left:50%;top:-260px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(255,59,68,.3),transparent);z-index:-1}
+.au-revoir h2{font-size:clamp(3rem,9vw,8rem);line-height:.86}
+.au-revoir .cta{justify-content:center;margin-top:26px}
+.gerant{margin:40px auto 0;max-width:860px;border-radius:var(--r);background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:0 22px;text-align:left}
+.gerant summary{min-height:60px;display:flex;align-items:center;font-weight:650;cursor:pointer;box-shadow:none;padding:0}
+.gerant .corps{padding:4px 0 18px;color:#d9d9e2}
+.gerant ol{padding-left:22px;margin:8px 0 12px}
+.gerant li{margin:6px 0}
+.gerant b{color:#fff}
+.pied{border-top:1px solid var(--ligne);padding:26px 0 110px;color:var(--doux2)}
+.pied p{margin:4px 0}
+.pied [data-petit]{font-size:.8125rem}
+
+/* Barre collante (téléphone) */
+.barre-resa{position:fixed;left:12px;right:12px;bottom:12px;z-index:25;display:none;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(20,20,24,.84);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 0 0 1px var(--ligne),0 20px 40px -16px rgba(0,0,0,.9);transform:translateY(140%);transition:transform .45s var(--ease)}
+.barre-resa.vue{transform:none}
+.barre-resa span{flex:1;min-width:0;font-size:.875rem;color:var(--doux2);line-height:1.25}
+.barre-resa span b{display:block;color:#fff;font:800 1.125rem/1.1 var(--titre)}
+.barre-resa .btn{min-height:50px;padding:0 22px}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.vu{opacity:1;transform:none}
+
+@media (max-width:999px){
+  .heros{min-height:auto}
+  .heros .cadre{grid-template-columns:minmax(0,1fr);padding-block:110px 40px;gap:26px}
+  .carte-verre{justify-self:stretch;width:100%}
+  .selecteur,.anniv,.acts,.fin{grid-template-columns:minmax(0,1fr)}
+  .onglets{grid-auto-flow:column;grid-auto-columns:minmax(200px,70%);overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:2px 16px 6px}
+  .onglet{scroll-snap-align:start}
+  .scene{min-height:460px}
+  .c1,.c2,.c3,.p1,.p2{grid-column:span 12}
+  .pros-bas{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  section.bloc{padding-block:76px}
+  .tete-bloc,.bloc-tete{margin-bottom:26px}
+  .heros h1{font-size:clamp(2.7rem,13vw,3.6rem)}
+  .cta .btn-p{width:100%;justify-content:space-between}
+  .scene{min-height:440px;border-radius:26px}
+  .scene::after{background:linear-gradient(180deg,rgba(10,10,13,.1) 10%,rgba(10,10,13,.96) 60%)}
+  .scene .info-scene{padding:20px}
+  .parcours{padding:20px 16px;border-radius:26px}
+  .calc,.anniv-gauche,.panneau{padding:20px;border-radius:26px}
+  .act{border-radius:26px}
+  .act .corps-act{padding:18px}
+  .formules-anniv{grid-template-columns:minmax(0,1fr)}
+  .barre-resa{display:flex}
+  .au-revoir{padding:80px 0 40px}
+}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.defile ul{animation:none}.heros-fond img{transform:none!important}}
+.compte{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:10px 14px;border:var(--bar) solid var(--accent-2);border-radius:var(--radius);background:var(--paper);margin-bottom:16px}
+.compte b{display:block;font-weight:900;font-size:1.125rem}
+.compte span{color:var(--muted)}
+.pm{display:flex;align-items:center;gap:6px}
+.pm button{width:48px;height:48px;border:var(--bar) solid var(--ink);border-radius:var(--radius);background:var(--paper-3);color:var(--ink);font:700 1.5rem/1 var(--body);cursor:pointer;box-shadow:3px 3px 0 var(--accent-2)}
+.pm button:active{translate:2px 2px;box-shadow:1px 1px 0 var(--accent-2)}
+.pm output{min-width:64px;text-align:center;font:700 2.5rem/1 var(--figure);color:var(--accent-2);font-variant-numeric:tabular-nums}
+.formules{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.formules .vk-formule{background:var(--paper);border:var(--bar) solid var(--rule);padding:12px 14px;gap:2px;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:baseline}
+.formules .vk-formule:hover{border-color:var(--accent-2)}
+.formules .vk-f-nom{font-weight:900;font-size:1.1875rem;grid-column:1;min-width:0}
+.formules .vk-f-prix{grid-column:2;grid-row:1;white-space:nowrap}
+.formules .vk-f-details,.formules .vk-f-note{grid-column:1/-1}
+.formules .vk-f-details{color:var(--ink-2)}
+.formules .vk-f-note{color:var(--ink);font-weight:700}
+.formules .vk-f-note .tot{color:var(--accent-2)}
+.pack{margin-top:18px;color:var(--ink-2)}
+.pack strong{color:var(--ink)}
+@media (min-width:760px){.formules{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.resa-grille{display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
+.carte-resa{background:var(--paper-2);border:var(--bar) solid var(--rule);border-radius:var(--radius);padding:18px 16px;min-width:0}
+.progres{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.progres .etape{font-weight:700;color:var(--ink-2)}
+.progres .barre-p{flex:1;height:8px;background:var(--paper-3);border-radius:2px;overflow:hidden}
+.progres .barre-p i{display:block;height:100%;background:var(--accent-2)}
+.carte-resa h3{font-size:1.5rem;margin-bottom:6px}
+.carte-resa .aide{color:var(--ink-2);margin-bottom:14px}
+.choix{display:grid;gap:10px;grid-template-columns:minmax(0,1fr)}
+.choix button{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:baseline;text-align:left;min-height:64px;padding:12px 16px;border:var(--bar) solid var(--rule);border-radius:var(--radius);background:var(--paper);color:var(--ink);font:inherit;cursor:pointer}
+.choix button:hover{border-color:var(--accent-2)}
+.choix button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--ink)}
+.choix .t{font-weight:900;font-size:1.125rem;min-width:0}
+.choix .p{font-weight:700;white-space:nowrap}
+.choix .d{grid-column:1/-1;color:var(--ink-2);min-width:0}
+.choix button[aria-pressed="true"] .d{color:var(--accent-ink)}
+.carte-resa .formules{grid-template-columns:minmax(0,1fr)}
+.nav-etape{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;align-items:flex-start}
+.nav-etape .btn{flex:1 1 180px}
+.nav-etape .retour{flex:0 0 auto}
+.vk-erreur{color:#ffb3b8;flex-basis:100%}
+.vk-calendrier{max-width:none}
+.vk-cal-tete strong{font-weight:900;text-transform:capitalize}
+.vk-cal-nav{border-width:var(--bar)}
+.vk-cal-js{font-size:1rem}
+.vk-jour{font-weight:700}
+.vk-jour.vk-choisi{box-shadow:3px 3px 0 var(--ink)}
+.vk-cal-legende{font-size:1rem}
+.vk-cal-info{color:var(--ink);font-weight:700}
+.vk-creneau{border-width:var(--bar);background:var(--paper)}
+.vk-creneau strong{font-size:1.125rem}
+.vk-creneau span{font-size:1rem}
+.dispo{color:var(--muted);margin:10px 0 0}
+.ligne-compte{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--rule)}
+.ligne-compte b{display:block;font-weight:900}
+.ligne-compte span{color:var(--ink-2)}
+.ligne-compte .pm output{font:900 1.5rem/1 var(--body);color:var(--accent-2);min-width:40px}
+.ligne-compte .pm button{width:44px;height:44px;font-size:1.25rem}
+.case{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;min-height:56px;padding:6px 0;border-bottom:1px solid var(--rule);cursor:pointer}
+.case input{width:24px;height:24px;margin:0 10px;accent-color:var(--accent-2)}
+.case b{font-weight:900;display:block}
+.case span{color:var(--ink-2)}
+.vk-recap{font-size:1.0625rem}
+.vk-recap .vk-acompte{color:var(--accent-2)}
+.vk-recap .vk-total{border-top-color:var(--rule)}
+.vk-simule,.vk-cal-legende .vk-mention{color:var(--ink-2)}
+.vk-confirmation{padding:16px;border:var(--bar) solid #5be37a;border-radius:var(--radius);background:var(--paper)}
+.vk-c-titre{font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:1.75rem}
+.vk-agenda{border-width:var(--bar);margin:12px 0 4px;min-height:48px}
+.cote{display:grid;gap:12px;align-content:start;min-width:0}
+.cote .astuce{display:none}
+@media (min-width:980px){.cote .astuce{display:block}}
+.cote .well{background:var(--paper);border:var(--bar) solid var(--rule);border-radius:var(--radius);padding:16px}
+.cote h3{margin-bottom:8px}
+.cote ul{margin:0;padding-left:20px;color:var(--ink-2)}
+.cote li{margin-bottom:6px}
+.cote dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;margin:0}
+.cote dt{color:var(--muted)}
+.cote dd{margin:0;font-weight:700;min-width:0}
+.horaires{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.tab-h{width:100%;border-collapse:collapse;table-layout:fixed}
+.tab-h caption{text-align:left;font-weight:900;font-size:1.125rem;margin-bottom:8px}
+.tab-h th,.tab-h td{padding:10px 6px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+.tab-h thead th{font-weight:700;color:var(--ink-2)}
+.tab-h tbody th{font-weight:900}
+.tab-h tr.ici th,.tab-h tr.ici td{background:var(--accent);color:var(--accent-ink)}
+.tab-h td.hors-per{color:var(--muted)}
+.periodes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.periodes button{min-height:44px;padding:0 14px;border:var(--bar) solid var(--rule);border-radius:var(--radius);background:transparent;color:var(--ink);font:700 1rem/1 var(--body);cursor:pointer}
+.periodes button[aria-pressed="true"]{background:var(--accent-2);color:var(--accent-2-ink);border-color:var(--accent-2)}
+.notes-h{color:var(--ink-2);margin-top:12px;display:grid;gap:6px}
+.acces{display:grid;gap:12px;align-content:start}
+.acces .adr{font-weight:900;font-size:1.25rem}
+.acces p{color:var(--ink-2)}
+.acces .tel{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+.fin-resa{margin-top:8px}
+
+/* ===== MaxxParc v6 : habillage par-dessus les règles de la v4 ===== */
+.logo img{height:38px}
+.tete.ouvert .menu{display:block}
+.menu{display:none}
+.menu ul{display:flex;gap:2px;list-style:none;margin:0;padding:0}
+.menu a{display:flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;text-decoration:none;font-weight:550;color:var(--doux2)}
+.menu a:hover{color:#fff;background:rgba(255,255,255,.07)}
+.menu .gerant-lien{display:none}
+@media (min-width:1000px){.menu{display:block;margin-left:auto}.logo{margin-right:0}}
+@media (max-width:999px){.tete .cadre{position:relative}.tete.ouvert .menu{position:absolute;left:16px;right:16px;top:calc(100% + 8px);border-radius:24px;background:rgba(23,28,40,.97);backdrop-filter:blur(18px);box-shadow:inset 0 0 0 1px var(--ligne);padding:8px}.tete.ouvert .menu ul{flex-direction:column}.tete.ouvert .menu a{min-height:50px;font-size:1.125rem;color:#fff}.tete.ouvert .menu .gerant-lien{display:flex}}
+.vk-mention{border-radius:999px!important}
+
+/* Boutons générés par le parcours (classe « btn » de la v4) */
+.carte-resa .btn,.fin-resa{background:var(--rose);color:#fff;border:0;border-radius:999px;box-shadow:0 12px 30px -10px rgba(255,59,68,.7);font:650 1rem/1 var(--corps)}
+.carte-resa .btn:hover{translate:0 -2px;background:#ff6168;box-shadow:0 16px 36px -10px rgba(255,59,68,.85)}
+.carte-resa .btn.sec{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px var(--ligne)}
+.carte-resa .btn.sec:hover{box-shadow:inset 0 0 0 1.5px #fff;translate:none}
+
+/* Parcours */
+.carte-resa{border:0;border-radius:34px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne)}
+.carte-resa h3{font-size:1.9rem}
+.progres .etape{font-size:.8125rem;letter-spacing:.08em;text-transform:uppercase}
+.progres .barre-p{border-radius:999px;height:6px}
+.progres .barre-p i{background:linear-gradient(90deg,var(--rose),var(--menthe));border-radius:999px}
+.choix button{border:0;border-radius:20px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1.5px var(--ligne);transition:box-shadow .2s,background-color .2s}
+.choix button:hover{box-shadow:inset 0 0 0 1.5px var(--menthe)}
+.choix button[aria-pressed="true"]{background:rgba(255,59,68,.16);color:#fff;box-shadow:inset 0 0 0 2px var(--rose)}
+.choix .t{font:800 1.4rem/1.05 var(--titre);letter-spacing:-.02em}
+.choix .p{font:800 1.4rem/1 var(--titre);color:var(--menthe)}
+.vk-formule,.formules .vk-formule{border:0!important;border-radius:20px;background:rgba(255,255,255,.04)!important;box-shadow:inset 0 0 0 1.5px var(--ligne)}
+.formules .vk-formule:hover{box-shadow:inset 0 0 0 1.5px var(--menthe)}
+.formules .vk-f-nom{font:800 1.3rem/1.1 var(--titre);letter-spacing:-.02em}
+.formules .vk-f-prix{font:800 1.6rem/1 var(--titre);color:#fff}
+.vk-jour.vk-choisi{box-shadow:none}
+.vk-jour{border-radius:12px}
+.vk-cal-nav{border-radius:50%}
+.vk-creneau{border:0;border-radius:14px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--ligne)}
+.vk-creneau strong{font-family:var(--titre)}
+.ligne-compte .pm button,.pm button{border:0;border-radius:50%;background:rgba(255,255,255,.1);box-shadow:none;color:#fff}
+.pm button:hover{background:var(--rose)}
+.pm output,.ligne-compte .pm output{font-family:var(--titre);font-weight:800;color:#fff}
+.vk-confirmation{border:0;border-radius:22px;box-shadow:inset 0 0 0 1.5px #5be37a}
+.vk-c-titre{font-family:var(--titre);text-transform:none;font-weight:800}
+.cote .well{border:0;border-radius:24px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne)}
+.cote h3{font-size:1.4rem}
+
+/* Anniversaires */
+.anniv-haut{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:stretch;margin-bottom:22px}
+.anniv-photo{position:relative;border-radius:34px;overflow:hidden;min-height:420px;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;padding:30px}
+.anniv-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.anniv-photo::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(14,17,25,.2) 0%,rgba(14,17,25,.96) 70%)}
+.anniv-photo h2{font-size:clamp(2.6rem,5vw,4.2rem)}
+.anniv-photo p{color:#dfe5ee;margin-top:10px}
+.anniv-calc{border-radius:34px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:28px;display:flex;flex-direction:column;gap:14px}
+.compte{border:0;border-radius:22px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1.5px rgba(111,208,245,.5);margin:0}
+.dès{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.dès b{font:800 clamp(3.4rem,6vw,5rem)/1 var(--titre);letter-spacing:-.05em}
+.dès span{color:var(--doux2)}
+.pack-liste{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;list-style:none;margin:0;padding:0}
+.pack-liste li{border-radius:18px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--ligne);padding:14px;text-align:center;font-size:.9375rem;color:#dfe5ee}
+.pack-liste b{display:block;font:800 1.6rem/1 var(--titre);margin-bottom:6px}
+
+/* Fidélité */
+.fid-v6{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:28px;align-items:center}
+.tel-maquette{justify-self:center;width:min(100%,300px);aspect-ratio:9/18;border-radius:44px;padding:14px;background:#000;box-shadow:inset 0 0 0 2px #2a2f3c,0 40px 80px -30px rgba(255,59,68,.4)}
+.ecran{height:100%;border-radius:32px;background:radial-gradient(80% 50% at 50% 0%,rgba(255,59,68,.3),transparent 70%),var(--nuit-2);padding:26px 20px;display:flex;flex-direction:column;gap:14px}
+.ecran img{width:150px}
+.ecran .score{font:800 3.4rem/1 var(--titre);letter-spacing:-.05em;color:#fff}
+.ecran .score small{font:500 .9375rem/1 var(--corps);color:var(--doux2);letter-spacing:0;margin-left:6px}
+.ecran .jauge{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.ecran .jauge i{height:12px;border-radius:4px;background:rgba(255,255,255,.12)}
+.ecran .jauge i.on{background:linear-gradient(90deg,var(--rose),var(--menthe))}
+.ecran p{margin:0;color:var(--doux2);font-size:.9375rem}
+.ecran .qr{margin-top:auto;align-self:center;width:110px;height:110px;border-radius:14px;background:repeating-conic-gradient(#fff 0 25%,#171c28 0 50%) 0 0/22px 22px;box-shadow:0 0 0 8px #fff}
+.etapes-fid{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+.etapes-fid li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start;color:#dfe5ee}
+.etapes-fid li i{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;font-style:normal;font-weight:800;background:var(--rose);color:#fff}
+
+/* Horaires */
+.horaires{border-radius:34px;background:var(--nuit-2);box-shadow:inset 0 0 0 1px var(--ligne);padding:28px}
+.periodes button{border:0;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ligne)}
+.periodes button[aria-pressed="true"]{background:#fff;color:#0e1119;box-shadow:none}
+.tab-h caption{font-family:var(--titre);font-size:1.4rem}
+.tab-h tr.ici th,.tab-h tr.ici td{background:rgba(255,59,68,.16);color:#fff}
+.tab-h tr.ici th{box-shadow:inset 3px 0 0 var(--rose)}
+.acces .adr{font:800 1.6rem/1.15 var(--titre)}
+.fin-resa{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;text-decoration:none;justify-self:start}
+
+/* Barre basse (gérée par le script de la v4) */
+.barre{position:fixed;z-index:25;display:flex;gap:8px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.barre .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+@media (min-width:900px){.barre{display:none}}
+.barre{left:12px;right:12px;bottom:12px;border:0;border-radius:999px;padding:8px;background:rgba(23,28,40,.86);backdrop-filter:blur(18px);box-shadow:inset 0 0 0 1px var(--ligne),0 20px 40px -16px rgba(0,0,0,.9)}
+.barre .btn{background:var(--rose);color:#fff;border:0;border-radius:999px;min-height:50px;font:650 1rem/1 var(--corps)}
+.barre.cachee{transform:translateY(140%)}
+
+@media (max-width:999px){.anniv-haut,.fid-v6{grid-template-columns:minmax(0,1fr)}.pack-liste{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.anniv-photo,.anniv-calc,.horaires,.carte-resa{border-radius:26px;padding:20px}.anniv-photo{min-height:360px}.tel-maquette{width:240px}}
+</style>
+</head>
+<body>
+<p class="apercu" data-petit><b>Aperçu non commandé</b> · nouvelle identité proposée · paiement simulé</p>
+
+<header class="tete" id="tete">
+  <div class="cadre">
+    <a class="logo" href="#haut"><img src="images/logo-maxxparc.png" alt="MaxxParc, accueil" width="115" height="30"></a>
+    <nav class="menu" id="menu" aria-label="Menu principal">
+      <ul>
+        <li><a href="#activites">Activités</a></li>
+        <li><a href="#anniversaires">Anniversaires</a></li>
+        <li><a href="#carte">Fidélité</a></li>
+        <li><a href="#horaires">Horaires</a></li>
+      </ul>
+      <a class="gerant-lien" href="#gerant" data-ouvre-gerant>Pour le gérant</a>
+    </nav>
+    <a class="tel" href="tel:+33247443793" aria-label="Appeler le MaxxParc au 02 47 44 37 93"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg></a>
+    <a class="btn btn-p" href="#reserver" data-go="debut">Réserver</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" id="bouton-menu">Menu</button>
+  </div>
+</header>
+
+<main id="haut">
+<section class="hero heros" aria-labelledby="titre">
+  <div class="heros-fond"><img id="heros-img" src="photos/arene-lasermaxx.webp" alt="" width="1800" height="1200" fetchpriority="high"></div>
+  <div class="cadre">
+    <div>
+      <p class="sur">Tours nord · 1 500 m² de jeux</p>
+      <h1 id="titre">Ce soir,<br>on fait du <span class="rot neon" aria-hidden="true"><span class="on">laser.</span><span>golf fluo.</span><span>Laserbox.</span><span>Néo One.</span></span><span class="sr">laser game, minigolf fluo, Laserbox ou Néo One.</span></h1>
+      <p class="lead">LaserMaxx, Laserkids, AsteroGolf, Laserbox et Néo One. Les parties et les anniversaires se réservent ici, à toute heure, avec un acompte. Sans attendre au téléphone.</p>
+      <div class="cta">
+        <a class="btn btn-p" href="#reserver" data-go="debut">Réserver en ligne <span class="fl" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost" href="#activites">Voir les activités</a>
+      </div>
+    </div>
+    <aside class="carte-verre" aria-labelledby="t-auj">
+      <div class="haut"><b id="t-auj">LaserMaxx, aujourd'hui</b><span class="direct"><i></i>en direct</span></div>
+      <div id="bandeau"></div>
+      <p class="prochains" id="prochains-lib">Prochaines parties libres</p>
+      <div class="creneaux-vite" id="creneaux-vite"></div>
+      <div class="pied-carte"><span>La partie de 20 min</span><b>9 €</b></div>
+    </aside>
+  </div>
+</section>
+
+<div class="defile" aria-hidden="true"><ul>
+  <li>LaserMaxx</li><li>Laserkids</li><li>AsteroGolf</li><li>Laserbox</li><li>Néo One</li><li>Anniversaires</li><li>No Limit</li><li>Arcade</li>
+  <li>LaserMaxx</li><li>Laserkids</li><li>AsteroGolf</li><li>Laserbox</li><li>Néo One</li><li>Anniversaires</li><li>No Limit</li><li>Arcade</li>
+</ul></div>
+
+<section class="bloc" id="activites" aria-labelledby="t-act">
+  <div class="cadre">
+    <div class="tete-bloc rv"><p class="sur">Les activités</p><h2 id="t-act">Cinq jeux, un espace 100 % futuriste.</h2><p>Jusqu'à 160 personnes, avec le bar et les jeux d'arcade entre deux parties.</p></div>
+    <div class="selecteur rv">
+      <div class="onglets" role="tablist" aria-label="Activités">
+        <button type="button" class="onglet" role="tab" aria-selected="true" aria-controls="scene"><span><b>LaserMaxx</b><small>20 min, dès 7 ans</small></span><em>9 €</em></button>
+        <button type="button" class="onglet" role="tab" aria-selected="false" aria-controls="scene"><span><b>Laserkids</b><small>le laser des petits, 10 min</small></span><em>4 €</em></button>
+        <button type="button" class="onglet" role="tab" aria-selected="false" aria-controls="scene"><span><b>AsteroGolf</b><small>minigolf intérieur fluo</small></span><em>8 €</em></button>
+        <button type="button" class="onglet" role="tab" aria-selected="false" aria-controls="scene"><span><b>Laserbox</b><small>à 2 ou en solo</small></span><em>15 € / 15 min</em></button>
+        <button type="button" class="onglet" role="tab" aria-selected="false" aria-controls="scene"><span><b>Néo One</b><small>mur interactif, dès 4 ans</small></span><em>5 €</em></button>
+      </div>
+      <div class="scene" id="scene" role="tabpanel" aria-live="polite">
+        <figure class="on"><img src="photos/joueur-lasermaxx.webp" alt="Un joueur de LaserMaxx, gilet allumé, dans l'arène" width="1800" height="1200" loading="lazy"></figure>
+        <figure><img src="photos/laserkids.webp" alt="Des enfants jouent au Laserkids, pistolets lumineux à la main" width="1800" height="1349" loading="lazy"></figure>
+        <figure><img src="photos/asterogolf.webp" alt="Le parcours fluo de l'AsteroGolf" width="1800" height="1350" loading="lazy"></figure>
+        <figure><img src="photos/laserbox.webp" alt="Un joueur esquive les faisceaux de la Laserbox" width="1800" height="1350" loading="lazy"></figure>
+        <figure><img src="photos/neo-one.webp" alt="Des enfants lancent des balles sur le mur interactif Néo One" width="1800" height="1200" loading="lazy"></figure>
+        <span class="badge badge--neuf tag" id="scene-tag">Réservable en ligne</span>
+        <div class="info-scene">
+          <h3 id="scene-titre">LaserMaxx</h3>
+          <p id="scene-texte"></p>
+          <div class="rangee"><span id="scene-cta"></span><span class="badge" id="scene-prix"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="anniversaires" style="padding-top:0" aria-labelledby="t-anniv">
+  <div class="cadre">
+    <div class="anniv-haut">
+      <div class="anniv-photo rv">
+        <img src="photos/neo-one-2.webp" alt="" width="1800" height="1200" loading="lazy">
+        <p class="sur">Anniversaires</p>
+        <h2 id="t-anniv">Six formules, de 4 à 15 ans.</h2>
+        <p>Pack anniversaire compris : muffins marbrés d'une pâtissière locale, sirops à volonté, bonbons et photo souvenir.</p>
+      </div>
+      <div class="anniv-calc rv">
+        <p class="sur">Votre total</p>
+        <div class="dès"><b>15 €</b><span>par enfant, pour commencer</span></div>
+        <div class="compte">
+          <div><b id="l-nb">Combien d'enfants ?</b><span>Fêté compris</span></div>
+          <div class="pm">
+            <button type="button" data-nb="-1" aria-label="Un enfant de moins">−</button>
+            <output id="nb" aria-labelledby="l-nb" aria-live="polite">8</output>
+            <button type="button" data-nb="1" aria-label="Un enfant de plus">+</button>
+          </div>
+        </div>
+        <ul class="pack-liste" aria-label="Le pack anniversaire">
+          <li><b>🧁</b>Muffins marbrés</li><li><b>🥤</b>Sirops à volonté</li><li><b>🍬</b>Bonbons</li><li><b>📸</b>Photo souvenir</li>
+        </ul>
+        <p style="color:var(--doux2);font-size:.9375rem">Choisissez une formule ci-dessous : le total pour votre groupe s'affiche, et un clic ouvre la réservation.</p>
+      </div>
+    </div>
+    <div class="formules rv" id="formules"></div>
+  </div>
+</section>
+
+<section class="bloc" id="reserver" style="padding-top:0" aria-labelledby="t-resa">
+  <div class="cadre">
+    <div class="tete-bloc rv"><p class="sur">Réserver</p><h2 id="t-resa">Sans appeler, à toute heure.</h2><p>Anniversaire, LaserMaxx ou AsteroGolf : l'acompte bloque la place, le reste se règle sur place.</p></div>
+    <div class="resa-grille">
+      <div class="carte-resa" id="carte-resa" tabindex="-1" aria-live="polite"></div>
+      <aside class="cote" aria-label="Votre réservation">
+        <div class="well"><h3>Votre réservation</h3><div id="resume"><p class="vide">Rien de choisi pour l'instant.</p></div></div>
+        <div class="well astuce">
+          <h3>Bon à savoir</h3>
+          <ul>
+            <li>Anniversaire : réservez environ 5 semaines avant, au plus tard une semaine avant.</li>
+            <li>Nombre de joueurs modifiable jusqu'à 8 jours avant.</li>
+            <li>Vous pouvez apporter votre gâteau en plus du pack.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="carte" style="padding-top:0" aria-labelledby="t-carte">
+  <div class="cadre fid-v6">
+    <div class="tel-maquette rv" aria-hidden="true"><div class="ecran">
+      <img src="images/logo-maxxparc.png" alt="" width="150" height="39">
+      <p>Carte de Léo <span class="vk-mention">exemple</span></p>
+      <p class="score">7<small>parties sur 10</small></p>
+      <div class="jauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+      <p>Encore 3 parties et la suivante est offerte.</p>
+      <span class="qr"></span>
+    </div></div>
+    <div class="rv">
+      <p class="sur">Fidélité</p>
+      <h2 id="t-carte" style="font-size:clamp(2.6rem,5vw,4.4rem)">Vos parties vous rapportent.</h2>
+      <p style="color:var(--doux2);font-size:1.125rem;margin-top:14px">Une carte MaxxParc dans le téléphone, sans application à installer.</p>
+      <ol class="etapes-fid">
+        <li><i>1</i><span>Des points à chaque partie : LaserMaxx, Laserkids, AsteroGolf, tout compte.</span></li>
+        <li><i>2</i><span>En fin d'anniversaire, chaque famille invitée ouvre sa carte : de nouveaux clients pour le parc.</span></li>
+        <li><i>3</i><span>10 parties : la suivante offerte <span class="vk-mention">exemple</span>.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="bloc" id="horaires" style="padding-top:0" aria-labelledby="t-hor">
+  <div class="cadre">
+    <div class="tete-bloc rv"><p class="sur">Horaires et accès</p><h2 id="t-hor">Quand venir ?</h2><p id="periode-txt">Horaires selon la période scolaire, zone B.</p></div>
+    <div class="horaires rv">
+      <div>
+        <div class="periodes" role="group" aria-label="Période" id="periodes">
+          <button type="button" data-p="hors">Hors vacances</button>
+          <button type="button" data-p="vac">Vacances</button>
+          <button type="button" data-p="ete">Été</button>
+        </div>
+        <table class="tab-h" id="tab-h">
+          <caption id="cap-h">Hors vacances scolaires</caption>
+          <thead><tr><th scope="col">Jour</th><th scope="col">Horaires</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="notes-h">
+          <p>Jours fériés : 13 h 45 – 19 h. Fermé le 25 décembre. Hors de ces horaires : dès 15 personnes, sur réservation.</p>
+          <p id="prochaines-vac"></p>
+        </div>
+      </div>
+      <div class="acces">
+        <p class="adr">15 avenue du Danemark, 37100 Tours nord</p>
+        <p>Bus Fil Bleu 2, 14 et 66, arrêt Thalès, 4 min à pied. Tram A, arrêt Coppée, 10 min à pied.</p>
+        <p>Voiture : A19, sortie Tours Nord. Parking, accès handicapé.</p>
+        <a class="tel-lien" href="tel:+33247443793">02 47 44 37 93</a>
+        <a class="fin-resa" href="#reserver" data-go="debut">Réserver en ligne</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="au-revoir" aria-labelledby="t-fin">
+  <div class="cadre">
+    <h2 id="t-fin" class="rv">On s'y voit<br><span class="neon">ce soir ?</span></h2>
+    <div class="cta rv"><a class="btn btn-p" href="#reserver" data-go="debut">Réserver <span class="fl" aria-hidden="true">→</span></a><a class="btn btn-ghost" href="tel:+33247443793">02 47 44 37 93</a></div>
+    <details class="gerant" id="gerant">
+      <summary>Pour le gérant : ce qui change</summary>
+      <div class="corps">
+        <ol>
+          <li><b>Réserver sans téléphoner.</b> Aujourd'hui, votre site dit « réservez vos parties par téléphone » et la page Réservation ne contient que des questions fréquentes. Ici, le parent réserve un anniversaire, une partie de LaserMaxx ou d'AsteroGolf à toute heure, en suivant vos horaires, vos vacances (zone B) et vos règles (une semaine avant pour un anniversaire, Big Mercredi, LaserPizza). Les prochaines parties libres sont visibles dès l'arrivée sur la page.</li>
+          <li><b>Faire revenir les familles</b> : une carte fidélité dans le téléphone, avec des points à chaque partie. Les règles affichées sont des exemples.</li>
+          <li><b>Une identité plus moderne</b>, aux couleurs de votre logo. Les photos sont celles de votre site.</li>
+        </ol>
+        <p>Laserkids, Laserbox et Néo One restent sur place, comme aujourd'hui. Taux d'acompte (30 %) : exemple à caler avec vous.</p>
+      </div>
+    </details>
+  </div>
+</section>
+</main>
+
+<footer class="pied">
+  <div class="cadre">
+    <p>MaxxParc, Lasermaxx Tours · 15 avenue du Danemark, 37100 Tours · <a href="https://www.facebook.com/maxxparc" rel="noopener">Facebook</a> · <a href="https://www.instagram.com/maxxparc/" rel="noopener">Instagram</a></p>
+    <p data-petit>Aperçu non commandé. Logo et photos appartiennent au parc (maxxparc.com) ; retrait sur simple demande. Réservation et paiement simulés. Les valeurs marquées « exemple » sont à caler avec le parc. Réalisé par Vong Studio.</p>
+  </div>
+</footer>
+
+<div class="barre cachee" id="barre">
+  <a class="btn" href="#reserver" data-go="debut">Réserver en ligne</a>
+</div>
+<script src="vong-kit.js"></script>
+<script>
+(function () {
+"use strict";
+var K = VongKit;
+/* Date simulée pour les tests : ?t=2027-02-24T15:00 */
+var q = new URLSearchParams(location.search);
+var MAINTENANT = q.get("t") ? new Date(q.get("t")) : new Date();
+var AUJ = K.jourSeul(MAINTENANT);
+
+/* ====== Horaires lus sur https://www.maxxparc.com/informations_pratiques le 10/11/2026 (relevé dans sources/) ======
+   Hors vacances : lundi privatisations uniquement ; mardi 18h-22h ; mercredi 13h45-22h ; jeudi 16h-22h ;
+   vendredi 16h-minuit ; samedi 13h45-minuit ; dimanche 10h-19h.
+   Vacances scolaires : lundi 13h45-20h ; mardi à jeudi 13h45-22h ; vendredi, samedi 13h45-minuit ; dimanche 13h45-19h.
+   Vacances d'été : lundi 14h-18h ; mardi à jeudi 14h-20h ; vendredi, samedi 14h-23h ; dimanche 14h-18h.
+   Jours fériés : 13h45-19h. Fermé le 25 décembre. Zone B (académie d'Orléans-Tours). */
+var HORS = [[[10, 19]], null, [[18, 22]], [[13.75, 22]], [[16, 22]], [[16, 24]], [[13.75, 24]]];
+var VAC = [[[13.75, 19]], [[13.75, 20]], [[13.75, 22]], [[13.75, 22]], [[13.75, 22]], [[13.75, 24]], [[13.75, 24]]];
+var ETE = [[[14, 18]], [[14, 18]], [[14, 20]], [[14, 20]], [[14, 20]], [[14, 23]], [[14, 23]]];
+var exceptions = {};
+for (var d0 = new Date(2027, 6, 3); K.cle(d0) <= "2027-08-31"; d0 = K.plus(d0, 1)) {
+  if (!K.FERIES[K.cle(d0)]) exceptions[K.cle(d0)] = ETE[d0.getDay()];
+}
+var H = new K.Horaires({ zone: "B", hors: HORS, vac: VAC, ferie: [[13.75, 19]],
+  fermetures: { "2026-12-25": "fermé le 25 décembre" }, exceptions: exceptions,
+  joursAConfirmer: { "2027-05-07": "pont de l'Ascension : horaires à confirmer avec le parc" },
+  motifsFermeture: { 1: "privatisations uniquement" } });
+function ete(d) { var k = K.cle(d); return k >= "2027-07-03" && k <= "2027-09-01"; }
+function horsVac(d) { return !H.vacance(d); }
+
+K.bandeau(document.getElementById("bandeau"), { horaires: H, maintenant: MAINTENANT, lienHoraires: "#horaires" });
+
+/* ====== Formules anniversaire lues sur https://www.maxxparc.com/anniversaire le 10/11/2026 ====== */
+var FORMULES = [
+  { id: "laserkids", nom: "Laserkids, 4 à 7 ans", min: 4, max: 7, prix: 15, duree: 1.75, details: ["1 h 45 : 3 parties de 10 minutes, 1 jeton Néo One par tranche de 4 enfants"], neo: true },
+  { id: "asterogolf", nom: "AsteroGolf, 4 à 15 ans", min: 4, max: 15, prix: 15, duree: 2, details: ["2 h : 1 AsteroGolf, 1 Laserbox, 1 jeton Néo One par tranche de 4 enfants"], neo: true },
+  { id: "lasermaxx", nom: "LaserMaxx, 7 à 15 ans", min: 7, max: 15, prix: 19, duree: 2, details: ["2 h : 2 parties de LaserMaxx (3 le mercredi après-midi et le week-end matin, hors vacances)"] },
+  { id: "bigmercredi", nom: "Big Mercredi, 7 à 15 ans", min: 7, max: 15, prix: 19, duree: 3.5, details: ["3 h 30 : 2 parties de LaserMaxx, 1 partie d'AsteroGolf, 1 partie de Laserbox ou 1 jeton de Néo One par tranche de 4 enfants"], note: "Mercredi après-midi, hors vacances" },
+  { id: "lasergolf", nom: "Laser & Golf, 7 à 15 ans", min: 7, max: 15, prix: 23, duree: 3, details: ["3 h : 2 parties de LaserMaxx et 1 AsteroGolf"] },
+  { id: "laserpizza", nom: "LaserPizza, 7 à 15 ans", min: 7, max: 15, prix: 25, duree: 2.5, details: ["2 h 30 : 3 parties de LaserMaxx et des pizzas"], note: "Week-end matin, hors vacances" }
+];
+/* Parties à l'unité, https://www.maxxparc.com/tarifs (10/11/2026) */
+var PARTIES = {
+  lasermaxx: { nom: "LaserMaxx", sous: "9 € la 1re partie de 20 min, 7 € les suivantes" },
+  asterogolf: { nom: "AsteroGolf", sous: "8 € la partie, minigolf intérieur fluo" }
+};
+var ACOMPTE = 0.3; /* exemple, à caler avec le parc */
+var nbEnfants = 8;
+
+function dureeTxt(h) { var x = Math.floor(h), m = Math.round((h - x) * 60); return x + " h" + (m ? " " + String(m).padStart(2, "0") : ""); }
+
+/* ====== Section Anniversaires : total pour N enfants ====== */
+var lf = document.getElementById("formules");
+function rendreFormules(el, choisie) {
+  el.innerHTML = FORMULES.map(function (f) {
+    var html = K.carteFormule({ id: f.id, nom: f.nom, prix: f.prix, details: f.details, note: f.note }, choisie === f.id);
+    var tot = '<span class="vk-f-note">Pour ' + nbEnfants + " enfant" + (nbEnfants > 1 ? "s" : "") + ' : <span class="tot">' + K.euros(nbEnfants * f.prix) + "</span></span>";
+    return html.replace("</button>", tot + "</button>");
+  }).join("");
+}
+rendreFormules(lf, null);
+document.querySelector(".compte").addEventListener("click", function (e) {
+  var b = e.target.closest("[data-nb]"); if (!b) return;
+  nbEnfants = Math.max(1, Math.min(30, nbEnfants + +b.dataset.nb));
+  document.getElementById("nb").value = nbEnfants;
+  E.enfants = nbEnfants;
+  rendreFormules(lf, null);
+});
+lf.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-formule]"); if (!b) return;
+  E = etatVide(); E.activite = "anniv"; E.formule = trouver(b.dataset.formule); E.enfants = nbEnfants;
+  aller(2); defiler();
+});
+function trouver(id) { return FORMULES.filter(function (f) { return f.id === id; })[0]; }
+
+/* ====== Parcours de réservation ====== */
+function etatVide() { return { etape: 0, activite: null, formule: null, parties: 2, date: null, creneau: null, enfants: nbEnfants, adultes: 0, joueurs: 4, laserbox: 0, golf: false, neo: 0 }; }
+var E = etatVide();
+var carte = document.getElementById("carte-resa");
+var ETAPES = ["Activité", "Formule", "Date", "Heure", "Participants", "Récapitulatif", "Confirmation"];
+
+function jamais2sans3(d) { var j = d.getDay(); return j >= 2 && j <= 4 && horsVac(d) && !H.ferie(d); }
+function duree() {
+  if (E.activite === "anniv") return E.formule.duree;
+  if (E.activite === "lasermaxx") return E.parties === 1 ? 0.5 : E.parties === 2 ? 1.5 : 2.5; /* 20 min par partie + pauses ; « environ 2h30 » pour 3 parties (page Tarifs) */
+  return 1; /* AsteroGolf : « entre 45 minutes et 2 heures » ; créneau d'arrivée calculé sur 1 h */
+}
+function lignes() {
+  var l = [], d = E.date;
+  if (E.activite === "anniv") {
+    l.push({ libelle: "Formule " + E.formule.nom.split(",")[0] + " (" + E.formule.prix + " €)", quantite: E.enfants, prixUnitaire: E.formule.prix });
+    if (E.adultes) l.push({ libelle: "Adultes qui jouent (" + E.formule.prix + " €)", quantite: E.adultes, prixUnitaire: E.formule.prix });
+    if (E.laserbox) l.push({ libelle: "Laserbox, 15 minutes (15 €)", quantite: E.laserbox, prixUnitaire: 15 });
+    if (E.golf) l.push({ libelle: "+1 AsteroGolf (6 €)", quantite: E.enfants + E.adultes, prixUnitaire: 6 });
+    if (E.neo) l.push({ libelle: "Jeton Néo One (5 €)", quantite: E.neo, prixUnitaire: 5 });
+  } else if (E.activite === "lasermaxx") {
+    l.push({ libelle: "1re partie de LaserMaxx (9 €)", quantite: E.joueurs, prixUnitaire: 9 });
+    if (E.parties > 1) {
+      var suiv = E.parties - 1, off = E.parties === 3 && d && jamais2sans3(d);
+      l.push({ libelle: (off ? "2e partie (7 €), la 3e offerte" : suiv + " partie" + (suiv > 1 ? "s" : "") + " suivante" + (suiv > 1 ? "s" : "") + " (7 €)"), quantite: E.joueurs, prixUnitaire: off ? 7 : 7 * suiv });
+    }
+  } else {
+    l.push({ libelle: "Partie d'AsteroGolf (8 €)", quantite: E.joueurs, prixUnitaire: 8 });
+  }
+  return l;
+}
+function recapData() { return { lignes: lignes(), tauxAcompte: ACOMPTE, acompteExemple: true }; }
+
+/* Règles du parc pour le calendrier (page Anniversaire, FAQ) */
+function regle(d) {
+  var k = K.cle(d), j = d.getDay();
+  if (E.activite === "anniv") {
+    if (d < K.plus(AUJ, 7)) return "trop proche : un anniversaire se réserve au plus tard une semaine avant";
+    var f = E.formule.id;
+    if (f === "bigmercredi" && !(j === 3 && horsVac(d))) return "Big Mercredi : le mercredi après-midi, hors vacances scolaires";
+    if (f === "laserpizza") {
+      if (!horsVac(d)) return "LaserPizza : hors vacances scolaires";
+      if (j === 6) return "LaserPizza le samedi matin : horaire à confirmer avec le parc, réservable par téléphone";
+      if (j !== 0) return "LaserPizza : le week-end matin";
+    }
+    if (!K.creneaux({ horaires: H, date: d, duree: duree(), dernierDebut: dernierDebut(d), maintenant: MAINTENANT }).length)
+      return "aucun horaire d'anniversaire ce jour-là (fin avant 20 h)";
+  }
+  if (!H.ferie(d) && K.hache("j" + k + (E.activite || "")) % 13 === 0) return "complet (exemple)";
+  return null;
+}
+function dernierDebut(d) {
+  if (E.activite === "anniv") {
+    if (E.formule.id === "laserpizza") return 11;      /* le matin */
+    return 20 - E.formule.duree;                        /* pas d'anniversaire d'enfants qui finit après 20 h */
+  }
+  return undefined;
+}
+
+function aller(n) {
+  E.etape = n;
+  carte.innerHTML = "";
+  var w = document.createElement("div");
+  var total = E.activite && E.activite !== "anniv" ? 6 : 7;
+  var num = E.activite && E.activite !== "anniv" && n >= 2 ? n : n + 1;
+  if (n < 6) w.innerHTML = '<div class="progres"><span class="etape">Étape ' + num + " sur " + (total - 1) + "</span><span class=\"barre-p\" aria-hidden=\"true\"><i style=\"width:" + Math.round(num / (total - 1) * 100) + '%"></i></span></div>';
+  carte.appendChild(w);
+  [etActivite, etFormule, etDate, etCreneau, etParticipants, etRecap, etConfirme][n](w);
+  rendreResume();
+}
+function defiler() {
+  var r = carte.getBoundingClientRect();
+  if (r.top < 60 || r.top > innerHeight * 0.5) carte.scrollIntoView({ block: "start" });
+  carte.focus({ preventScroll: true });
+}
+function suite(n) { aller(n); defiler(); }
+function titre(w, t, aide) {
+  var h = document.createElement("h3"); h.textContent = t; w.appendChild(h);
+  if (aide) { var p = document.createElement("p"); p.className = "aide"; p.textContent = aide; w.appendChild(p); }
+}
+function navigation(w, precedente, libelle, valider, suivante) {
+  var n = document.createElement("div"); n.className = "nav-etape";
+  if (precedente !== null) { var r = document.createElement("button"); r.type = "button"; r.className = "btn sec retour"; r.textContent = "Retour"; r.onclick = function () { suite(precedente); }; n.appendChild(r); }
+  if (libelle) {
+    var s = document.createElement("button"); s.type = "button"; s.className = "btn"; s.textContent = libelle; s.id = "suivant";
+    n.appendChild(s);
+    s.onclick = function () { var m = valider ? valider() : null; if (m) { K.erreur(s, m); return; } K.erreur(s, ""); suivante(); };
+  }
+  w.appendChild(n);
+}
+function choix(w, liste, actif, surChoix) {
+  var c = document.createElement("div"); c.className = "choix";
+  liste.forEach(function (o) {
+    var b = document.createElement("button"); b.type = "button"; b.setAttribute("aria-pressed", String(actif === o.id));
+    b.innerHTML = '<span class="t">' + o.t + '</span><span class="p">' + o.p + '</span><span class="d">' + o.d + "</span>";
+    b.onclick = function () { surChoix(o.id); };
+    c.appendChild(b);
+  });
+  w.appendChild(c);
+}
+
+/* Étape 1 : activité */
+function etActivite(w) {
+  titre(w, "Que réservez-vous ?", "Touchez votre choix pour continuer.");
+  choix(w, [
+    { id: "anniv", t: "Anniversaire", p: "dès 15 €", d: "6 formules de 4 à 15 ans, par enfant" },
+    { id: "lasermaxx", t: "LaserMaxx", p: "9 €", d: "la 1re partie de 20 min, 7 € les suivantes" },
+    { id: "asterogolf", t: "AsteroGolf", p: "8 €", d: "la partie de minigolf fluo" }
+  ], E.activite, function (id) {
+    if (E.activite !== id) { E.date = null; E.creneau = null; E.formule = null; }
+    E.activite = id; suite(id === "asterogolf" ? 2 : 1);
+  });
+}
+/* Étape 2 : formule (anniversaire) ou nombre de parties (LaserMaxx) */
+function etFormule(w) {
+  if (E.activite === "lasermaxx") {
+    titre(w, "Combien de parties ?", "Par joueur, 20 minutes chacune.");
+    choix(w, [
+      { id: 1, t: "1 partie", p: "9 €", d: "environ 30 minutes sur place" },
+      { id: 2, t: "2 parties", p: "16 €", d: "9 € + 7 €" },
+      { id: 3, t: "3 parties", p: "23 €", d: "16 € du mardi au jeudi hors vacances et jours fériés : la 3e offerte" }
+    ], E.parties, function (id) { E.parties = id; E.creneau = null; suite(2); });
+    navigation(w, 0);
+    return;
+  }
+  titre(w, "Quelle formule ?", "Prix par enfant, pack anniversaire compris.");
+  var c = document.createElement("div"); c.className = "formules";
+  rendreFormules(c, E.formule && E.formule.id);
+  c.onclick = function (e) { var b = e.target.closest("[data-formule]"); if (!b) return; var f = trouver(b.dataset.formule); if (f !== E.formule) { E.date = null; E.creneau = null; } E.formule = f; suite(2); };
+  w.appendChild(c);
+  navigation(w, 0);
+}
+/* Étape 3 : date (calendrier du kit, horaires et règles du parc) */
+function etDate(w) {
+  var nom = E.activite === "anniv" ? "l'anniversaire" : "la partie";
+  titre(w, "Quel jour ?", "Les jours barrés ne sont pas possibles pour " + nom + " : touchez-les pour savoir pourquoi.");
+  var el = document.createElement("div"); w.appendChild(el);
+  K.calendrier(el, { horaires: H, debut: MAINTENANT, choisi: E.date, mois: 10, regle: regle,
+    surChoix: function (d) { if (!E.date || K.cle(d) !== K.cle(E.date)) E.creneau = null; E.date = d; rendreResume(); setTimeout(function () { suite(3); }, 350); } });
+  navigation(w, E.activite === "asterogolf" ? 0 : 1);
+}
+/* Étape 4 : heure d'arrivée (créneaux du kit) */
+function etCreneau(w) {
+  var d = E.date, dj = H.jour(d);
+  titre(w, "À quelle heure ?", K.dateLongue(d) + " : ouvert " + H.texteJour(d) + (dj.motif ? " (" + dj.motif + ")" : dj.periode ? " (" + dj.periode + ")" : "") + ". Fin indiquée sous l'heure.");
+  var el = document.createElement("div"); w.appendChild(el);
+  var dur = duree(), id = E.activite + (E.formule ? E.formule.id : "") + E.parties;
+  var liste = K.creneaux({ horaires: H, date: d, duree: dur, pas: 0.5, dernierDebut: dernierDebut(d), maintenant: MAINTENANT,
+    places: function (dd, t) { return K.hache(K.cle(dd) + t + id) % 5 === 0 && !H.ferie(dd) ? 0 : null; } });
+  liste.forEach(function (c) { if (!c.complet && !c.passe) c.texte = K.heureCourte(c.debut); });
+  var info = document.createElement("p"); info.className = "vk-cal-info"; info.setAttribute("aria-live", "polite");
+  K.rendreCreneaux(el, liste, { choisi: E.creneau && E.creneau.debut, vide: "Aucune heure possible ce jour-là. Revenez au calendrier pour choisir un autre jour.",
+    surChoix: function (c) { E.creneau = c; rendreResume(); setTimeout(function () { suite(4); }, 250); },
+    surRefus: function (c) { info.textContent = c.passe ? "Cette heure est passée." : "L'heure de " + K.heureCourte(c.debut) + " est complète. Choisissez une autre heure, ou un autre jour avec Retour."; } });
+  el.querySelectorAll(".vk-creneau").forEach(function (b, i) { var c = liste[i]; if (!c.complet && !c.passe) b.insertAdjacentHTML("beforeend", "<span>fin " + K.heureCourte(c.fin) + "</span>"); });
+  w.appendChild(info);
+  if (liste.length) { var dp = document.createElement("p"); dp.className = "dispo"; dp.innerHTML = 'Heures complètes : <span class="vk-mention">exemple</span>'; w.appendChild(dp); }
+  if (liste.length && liste.every(function (c) { return c.complet || c.passe; })) info.textContent = "Toutes les heures de ce jour sont prises. Revenez au calendrier pour choisir un autre jour.";
+  navigation(w, 2);
+}
+/* Étape 5 : participants (+ options pour un anniversaire) */
+function compteur(w, label, sous, val, min, max, set) {
+  var r = document.createElement("div"); r.className = "ligne-compte";
+  var id = "c" + Math.random().toString(36).slice(2, 7);
+  r.innerHTML = '<div><b id="' + id + '">' + label + "</b><span>" + sous + '</span></div><div class="pm"><button type="button" aria-label="' + label + ' : un de moins">−</button><output aria-labelledby="' + id + '" aria-live="polite">' + val + '</output><button type="button" aria-label="' + label + ' : un de plus">+</button></div>';
+  var b = r.querySelectorAll("button"), o = r.querySelector("output");
+  b[0].onclick = function () { var v = Math.max(min, +o.value - 1); o.value = v; set(v); rendreResume(); };
+  b[1].onclick = function () { var v = Math.min(max, +o.value + 1); o.value = v; set(v); rendreResume(); };
+  w.appendChild(r);
+}
+function etParticipants(w) {
+  if (E.activite !== "anniv") {
+    titre(w, "Combien de joueurs ?", "Prix par joueur.");
+    compteur(w, "Joueurs", (E.activite === "lasermaxx" ? E.parties + " partie" + (E.parties > 1 ? "s" : "") + " chacun" : "1 partie chacun"), E.joueurs, 1, 30, function (v) { E.joueurs = v; });
+  } else {
+    titre(w, "Qui vient ?", "Modifiable jusqu'à 8 jours avant la fête.");
+    compteur(w, "Enfants", E.formule.prix + " € par enfant, " + E.formule.min + " à " + E.formule.max + " ans", E.enfants, 1, 30, function (v) { E.enfants = v; });
+    compteur(w, "Adultes qui jouent", "même prix ; gratuit s'il ne joue pas", E.adultes, 0, 10, function (v) { E.adultes = v; });
+    var o = document.createElement("h3"); o.textContent = "Options"; o.style.margin = "18px 0 4px"; w.appendChild(o);
+    compteur(w, "Laserbox", "15 € les 15 minutes", E.laserbox, 0, 4, function (v) { E.laserbox = v; });
+    var lab = document.createElement("label"); lab.className = "case";
+    lab.innerHTML = '<input type="checkbox"' + (E.golf ? " checked" : "") + '><span><b>+1 partie d\'AsteroGolf</b><span>6 € par joueur</span></span><span></span>';
+    lab.querySelector("input").onchange = function (e) { E.golf = e.target.checked; rendreResume(); };
+    w.appendChild(lab);
+    compteur(w, "Néo One", "5 € le jeton" + (E.formule.neo ? " ; déjà 1 jeton compris par tranche de 4 enfants" : ""), E.neo, 0, 10, function (v) { E.neo = v; });
+  }
+  navigation(w, 3, "Voir le récapitulatif", function () { if (E.activite === "anniv" ? E.enfants < 1 : E.joueurs < 1) return "Indiquez au moins un participant."; }, function () { suite(5); });
+}
+/* Étape 6 : récapitulatif + acompte (kit) */
+function etRecap(w) {
+  titre(w, "Récapitulatif et acompte", K.dateLongue(E.date) + ", arrivée " + K.heureCourte(E.creneau.debut) + ", fin " + K.heureCourte(E.creneau.fin) + ".");
+  var el = document.createElement("div"); w.appendChild(el);
+  var c = K.recapitulatif(el, recapData());
+  navigation(w, 4, "Payer l'acompte : " + K.euros(c.acompte) + " (simulé)", null, function () { suite(6); });
+}
+/* Étape 7 : confirmation + agenda (kit) */
+function etConfirme(w) {
+  var c = K.calculRecap(recapData());
+  var nom = E.activite === "anniv" ? "Anniversaire " + E.formule.nom.split(",")[0] : E.activite === "lasermaxx" ? "LaserMaxx, " + E.parties + " partie" + (E.parties > 1 ? "s" : "") : "AsteroGolf";
+  var el = document.createElement("div"); w.appendChild(el);
+  K.confirmation(el, { numero: K.numero("MXP"), date: E.date, debut: E.creneau.debut, duree: duree(), titre: nom + " au MaxxParc",
+    lieu: "MaxxParc, 15 avenue du Danemark, 37100 Tours",
+    resume: nom + " · acompte payé " + K.euros(c.acompte) + " (exemple), reste " + K.euros(c.reste) + " sur place." });
+  var n = document.createElement("div"); n.className = "nav-etape";
+  var r = document.createElement("button"); r.type = "button"; r.className = "btn sec"; r.textContent = "Nouvelle réservation";
+  r.onclick = function () { E = etatVide(); suite(0); };
+  n.appendChild(r); w.appendChild(n);
+}
+function rendreResume() {
+  var rows = [];
+  if (E.activite === "anniv") rows.push(["Activité", "Anniversaire"]);
+  else if (E.activite) rows.push(["Activité", PARTIES[E.activite].nom]);
+  if (E.formule) rows.push(["Formule", E.formule.nom.split(",")[0]]);
+  if (E.activite === "lasermaxx" && E.etape >= 2) rows.push(["Parties", String(E.parties)]);
+  if (E.date) rows.push(["Date", K.dateLongue(E.date)]);
+  if (E.creneau) rows.push(["Heure", K.heureCourte(E.creneau.debut) + " – " + K.heureCourte(E.creneau.fin)]);
+  if (E.etape >= 4 && E.creneau) { var c = K.calculRecap(recapData()); rows.push(["Total", K.euros(c.total)]); rows.push(["Acompte", K.euros(c.acompte) + " (exemple)"]); }
+  document.getElementById("resume").innerHTML = rows.length ? "<dl>" + rows.map(function (x) { return "<dt>" + x[0] + "</dt><dd>" + K.esc(x[1]) + "</dd>"; }).join("") + "</dl>" : '<p class="vide">Rien de choisi pour l\'instant.</p>';
+}
+aller(0);
+
+/* Liens « Réserver » : ouvrent le parcours au début */
+document.addEventListener("click", function (e) {
+  var a = e.target.closest('[data-go="debut"]'); if (!a) return;
+  if (E.etape === 6) E = etatVide();
+  if (E.etape !== 0 && !E.activite) aller(0);
+  fermerMenu();
+  setTimeout(function () { carte.focus({ preventScroll: true }); }, 400);
+});
+
+/* ====== Horaires de la semaine ====== */
+var tb = document.querySelector("#tab-h tbody"), ORD = [1, 2, 3, 4, 5, 6, 0];
+var JN = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+function plageTxt(p) { return p ? p.map(function (x) { return K.heure(x[0]) + " – " + K.heure(x[1]); }).join(", ") : "Privatisations uniquement"; }
+var NOMS = { hors: "Hors vacances scolaires", vac: "Vacances scolaires (zone B)", ete: "Vacances d'été" };
+var perAuj = ete(AUJ) ? "ete" : H.vacance(AUJ) ? "vac" : "hors";
+function rendreHoraires(p) {
+  var t = { hors: HORS, vac: VAC, ete: ETE }[p];
+  document.getElementById("cap-h").textContent = NOMS[p] + (p === perAuj ? " : la période en cours" : "");
+  tb.innerHTML = ORD.map(function (j) {
+    var ici = p === perAuj && j === AUJ.getDay(), txt = plageTxt(t[j]);
+    if (ici) { /* la ligne du jour suit H.jour (fériés, 25 décembre, jours à confirmer), comme le bandeau */
+      var dj = H.jour(AUJ);
+      txt = dj.ouvert ? H.texteJour(AUJ) + (dj.motif ? " (" + dj.motif + ")" : "") : /^(fermé|privatisations)/.test(dj.motif) || dj.aConfirmer ? dj.motif.charAt(0).toUpperCase() + dj.motif.slice(1) : "Fermé (" + dj.motif + ")";
+    }
+    return "<tr" + (ici ? ' class="ici"' : "") + '><th scope="row">' + JN[j] + (ici ? " (aujourd'hui)" : "") + "</th><td>" + txt + "</td></tr>";
+  }).join("");
+  document.querySelectorAll("#periodes button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.p === p)); });
+}
+document.getElementById("periodes").onclick = function (e) { var b = e.target.closest("[data-p]"); if (b) rendreHoraires(b.dataset.p); };
+rendreHoraires(perAuj);
+(function () {
+  var v = H.vacances, k = K.cle(AUJ), txt = "";
+  function jm(d) { return (d.getDate() === 1 ? "1er" : d.getDate()) + " " + K.MOIS[d.getMonth()]; }
+  for (var i = 0; i < v.length; i++) {
+    if (v[i][1] >= k && v[i][0] !== v[i][1]) {
+      var a = K.deCle(v[i][0]), b = K.deCle(v[i][1]);
+      txt = (v[i][0] <= k ? "En ce moment : " : "Prochaines vacances (zone B) : ") + v[i][2] + ", du " + jm(a) + " au " + jm(b) + ".";
+      break;
+    }
+  }
+  document.getElementById("prochaines-vac").textContent = txt;
+})();
+
+/* ====== Menu téléphone ====== */
+var tete = document.getElementById("tete"), bm = document.getElementById("bouton-menu");
+function fermerMenu() { tete.classList.remove("ouvert"); bm.setAttribute("aria-expanded", "false"); }
+bm.onclick = function () { var o = !tete.classList.contains("ouvert"); tete.classList.toggle("ouvert", o); bm.setAttribute("aria-expanded", String(o)); };
+document.getElementById("menu").addEventListener("click", function (e) { if (e.target.closest("a")) fermerMenu(); });
+document.addEventListener("keydown", function (e) { if (e.key === "Escape") fermerMenu(); });
+document.querySelectorAll("[data-ouvre-gerant]").forEach(function (a) { a.addEventListener("click", function () { document.getElementById("gerant").open = true; fermerMenu(); }); });
+if (location.hash === "#gerant") document.getElementById("gerant").open = true;
+
+/* ====== Barre basse : cachée sur le premier écran et pendant la réservation ====== */
+if ("IntersectionObserver" in window) {
+  var vis = {}, barre = document.getElementById("barre");
+  var io = new IntersectionObserver(function (en) {
+    en.forEach(function (x) { vis[x.target.id || "hero"] = x.isIntersecting; });
+    barre.classList.toggle("cachee", !!(vis.hero || vis.reserver || vis.horaires));
+  }, { threshold: 0.02 });
+  io.observe(document.querySelector(".hero")); io.observe(document.getElementById("reserver")); io.observe(document.getElementById("horaires"));
+}window.__mp = {
+  AUJ: AUJ,
+  ouvrir: function (act) { E = etatVide(); E.activite = act; suite(act === "asterogolf" ? 2 : 1); },
+  creneauxLaser: function (d) {
+    var s = E; E = etatVide(); E.activite = "lasermaxx"; E.parties = 1;
+    var res = [];
+    if (H.jour(d).ouvert && !regle(d)) {
+      var id = E.activite + E.parties;
+      res = K.creneaux({ horaires: H, date: d, duree: duree(), pas: 0.5, dernierDebut: dernierDebut(d), maintenant: MAINTENANT,
+        places: function (dd, t) { return K.hache(K.cle(dd) + t + id) % 5 === 0 && !H.ferie(dd) ? 0 : null; } });
+    }
+    E = s; return res;
+  },
+  preremplir: function (d, c) { E = etatVide(); E.activite = "lasermaxx"; E.parties = 1; E.date = d; E.creneau = c; suite(4); }
+};
+})();
+</script>
+<script>
+/* ===== Interactions de la nouvelle identité ===== */
+(function(){
+  var K = VongKit, M = window.__mp, reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var mots = [].slice.call(document.querySelectorAll(".rot span")), im = 0;
+  if (!reduit && mots.length) setInterval(function(){
+    var a = mots[im]; im = (im+1) % mots.length; var b = mots[im];
+    a.classList.remove("on"); a.classList.add("off"); b.classList.remove("off"); b.classList.add("on");
+    setTimeout(function(){ a.classList.remove("off"); }, 700);
+  }, 2200);
+
+  var hi = document.getElementById("heros-img");
+  if (!reduit) addEventListener("scroll", function(){ var y = Math.min(scrollY, 900); hi.style.transform = "scale("+(1.08+y/4000)+") translateY("+(y*0.12)+"px)"; }, { passive: true });
+
+  /* Prochaines parties de LaserMaxx réservables (horaires, règles et heures complètes d'exemple du parcours) */
+  var box = document.getElementById("creneaux-vite"), jour = null, L = [];
+  for (var i = 0; i < 14 && !jour; i++) {
+    var d = K.plus(M.AUJ, i), l = M.creneauxLaser(d).filter(function(c){ return !c.complet && !c.passe; });
+    if (l.length) { jour = d; L = l; }
+  }
+  if (jour) {
+    if (K.cle(jour) !== K.cle(M.AUJ)) document.getElementById("t-auj").textContent = "LaserMaxx, " + (K.cle(jour) === K.cle(K.plus(M.AUJ,1)) ? "demain" : K.dateLongue(jour));
+    var soir = L.filter(function(c){ return c.debut >= 18; }), choix = (soir.length >= 3 ? soir : L).slice(0, 6);
+    box.innerHTML = choix.map(function(c, k){ return '<button type="button" data-k="'+k+'" aria-label="Partie à '+K.heureCourte(c.debut)+', libre"><b>'+K.heureCourte(c.debut)+'</b><span>libre</span></button>'; }).join("");
+    box.addEventListener("click", function(e){ var b = e.target.closest("button[data-k]"); if (b) M.preremplir(jour, choix[+b.dataset.k]); });
+  } else document.getElementById("prochains-lib").textContent = "Réservez une partie dans le calendrier.";
+
+  var SC = [
+    { t:"LaserMaxx", x:"L'arène de laser game, gilets et pistolets dernière génération. 20 minutes de jeu, 7 € les parties suivantes. Vendredi et samedi soir : No Limit, parties illimitées.", p:"9 € la partie", act:"lasermaxx" },
+    { t:"Laserkids", x:"Le laser game des petits, dès 4 ans : parties de 10 minutes, 3 parties pour 10 €.", p:"4 € la partie" },
+    { t:"AsteroGolf", x:"Un minigolf intérieur fluo, au milieu des astéroïdes. Entre 45 minutes et 2 heures de jeu.", p:"8 € la partie", act:"asterogolf" },
+    { t:"Laserbox", x:"Traversez la salle sans toucher les faisceaux, à deux ou en solo.", p:"15 € les 15 minutes" },
+    { t:"Néo One", x:"Un mur interactif où l'on lance des balles, de 1 à 10 joueurs, dès 4 ans. Parties de 5 minutes.", p:"5 € le jeton" }
+  ];
+  var og = [].slice.call(document.querySelectorAll(".onglet")), fg = document.querySelectorAll(".scene figure");
+  function montrer(i){
+    og.forEach(function(o,k){ o.setAttribute("aria-selected", k===i); o.tabIndex = k===i ? 0 : -1; });
+    [].forEach.call(fg, function(f,k){ f.classList.toggle("on", k===i); });
+    var s = SC[i];
+    document.getElementById("scene-titre").textContent = s.t;
+    document.getElementById("scene-texte").textContent = s.x;
+    document.getElementById("scene-prix").textContent = s.p;
+    var tag = document.getElementById("scene-tag"); tag.textContent = s.act ? "Réservable en ligne" : "Sur place"; tag.className = "badge tag" + (s.act ? " badge--neuf" : "");
+    var cta = document.getElementById("scene-cta");
+    cta.innerHTML = s.act ? '<button type="button" class="btn btn-p">Réserver <span class="fl" aria-hidden="true">→</span></button>' : '<a class="btn btn-ghost" href="#horaires">Voir les horaires</a>';
+    if (s.act) cta.firstChild.onclick = function(){ M.ouvrir(s.act); };
+  }
+  og.forEach(function(o,k){
+    o.addEventListener("click", function(){ montrer(k); });
+    o.addEventListener("keydown", function(e){ var n = /Down|Right/.test(e.key) ? 1 : /Up|Left/.test(e.key) ? -1 : 0; if (n) { e.preventDefault(); var j=(k+n+og.length)%og.length; montrer(j); og[j].focus(); } });
+  });
+  montrer(0);
+
+  if ("IntersectionObserver" in window && !reduit) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add("vu"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -10% 0px" });
+    [].forEach.call(document.querySelectorAll(".rv"), function(el,i){ el.style.transitionDelay = (i%3*60)+"ms"; io.observe(el); });
+  } else [].forEach.call(document.querySelectorAll(".rv"), function(el){ el.classList.add("vu"); });
+})();
+</script>
+</body>
+</html>
