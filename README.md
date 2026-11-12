@@ -41,6 +41,7 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | MaxxParc (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/maxxparc-v4-3622bd/` |
 | Le Silver (v3, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v3-86289e/` |
 | Le Silver (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v4-1e80c6/` |
+| Le Silver (v6, 12/11/2026, identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/le-silver-v6-5dc22b/` |
 | Cap Form Loisirs (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-eb21fc/` |
 | Cap Form Loisirs (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-v4-fc034e/` |
 | Cap Form Loisirs (v6, 12/11/2026, nouvelle identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/cap-form-loisirs-v6-6f7245/` |
