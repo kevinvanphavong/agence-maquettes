@@ -1,0 +1,1113 @@
+{
+  "id": "demande-mariage-vecu",
+  "date": "2026-12-02 12:30",
+  "titre": "La demande en mariage",
+  "lieu": "bowling",
+  "_note": "v1 du 24/11/2026 : vécu de Kévin (ANECDOTES.md, 24/11). Système 3D de bon-cadeau-vecu (episode3d.js + locaux.js + troisd.mjs) ; nouveau : genoux articulés et pose « genou à terre » (locaux.js). Couple = noah (chemise blanche, sans casquette, peau pâle) et manon ; équipe = antoine, sophie, yann ; papi = gerard. Version muette, rythme 0,29 s/mot.",
+  "rythme": {
+    "parMot": 0.29,
+    "pause": 0.12,
+    "debut": 0.1
+  },
+  "question": "Et toi, c'est quoi le plus beau moment que tu as vécu avec un client ?",
+  "legende": "Il est arrivé au comptoir, tout pâle, un écrin caché dans la main.\nTout le bowling a fait semblant de jouer, et moi, j'avais 2 coupes de champagne prêtes… au cas où.\nEt toi, c'est quoi le plus beau moment que tu as vécu avec un client ?\n#bowling #demandeenmariage #relationclient #souvenirsdeterrain",
+  "couverture": {
+    "lieu": "BOWLING",
+    "lignes": [
+      "IL VA LA DEMANDER",
+      "*EN MARIAGE*"
+    ],
+    "t": 2.0,
+    "scene": {
+      "kx": 230,
+      "ky": 1500,
+      "ks": 0.98,
+      "kgesteFixe": "explique",
+      "kexprFixe": "emu",
+      "options": {
+        "large": true,
+        "vide": true,
+        "numeros": [
+          5,
+          6,
+          7
+        ],
+        "quilles": [
+          "debout",
+          "debout",
+          "debout"
+        ],
+        "accueil": {
+          "x": 240,
+          "y": 1560,
+          "s": 1.05
+        },
+        "profondeur": {
+          "k": 0.55,
+          "cy": 560,
+          "sol": 1060
+        },
+        "bulleKevin": {
+          "x": 90,
+          "y": 770,
+          "w": 350,
+          "px": 200,
+          "taille": 32,
+          "texte": "Oh la chanceuse !"
+        }
+      },
+      "figurants": [
+        {
+          "p": "manon",
+          "x": 540,
+          "y": 1008,
+          "s": 0.29,
+          "dos": 1,
+          "loin": 1,
+          "boule": "#7d4aa8",
+          "depart": "lancer"
+        },
+        {
+          "p": "emma",
+          "loin": 1,
+          "x": 860,
+          "y": 1004,
+          "s": 0.27,
+          "dos": 1,
+          "boule": "#f4b942",
+          "depart": "tientBoule"
+        },
+        {
+          "p": "noah",
+          "peau": "#f7e6d8",
+          "tete": {
+            "casquette": null
+          },
+          "tenue": {
+            "haut": "#eef2f8",
+            "pant": "#3a3f63",
+            "shoe": "#2b2b33"
+          },
+          "objets": {
+            "verre": "ecrinOuvert",
+            "bouteille": "ecrinFerme"
+          },
+          "x": 780,
+          "y": 1610,
+          "s": 1.05,
+          "flip": 1,
+          "depart": "montreKevin",
+          "expr": "gene",
+          "poses": [
+            {
+              "phrase": 0,
+              "decalage": 0,
+              "pose": "montreKevin"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "decor": "bowling",
+      "tenue": "gerant",
+      "kx": 250,
+      "ky": 1560,
+      "ks": 0.9,
+      "options": {
+        "large": true,
+        "vide": true,
+        "numeros": [
+          5,
+          6,
+          7
+        ],
+        "quilles": [
+          "debout",
+          "debout",
+          "debout"
+        ],
+        "accueil": {
+          "x": 250,
+          "y": 1620,
+          "s": 0.95
+        }
+      },
+      "figurants": [
+        {
+          "p": "manon",
+          "x": 540,
+          "y": 1440,
+          "s": 0.5,
+          "dos": 1,
+          "loin": 1,
+          "boule": "#7d4aa8",
+          "depart": "tientBoule"
+        },
+        {
+          "p": "lucas",
+          "loin": 1,
+          "x": 960,
+          "y": 1420,
+          "s": 0.46,
+          "dos": 1,
+          "boule": "#d8343f",
+          "depart": "tientBoule"
+        },
+        {
+          "p": "noah",
+          "peau": "#f7e6d8",
+          "tete": {
+            "casquette": null
+          },
+          "tenue": {
+            "haut": "#eef2f8",
+            "pant": "#3a3f63",
+            "shoe": "#2b2b33"
+          },
+          "objets": {
+            "verre": "ecrinOuvert",
+            "bouteille": "ecrinFerme"
+          },
+          "x": 760,
+          "y": 1650,
+          "s": 0.9,
+          "flip": 1,
+          "depart": "ecrinCache",
+          "expr": "gene"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "Un soir, au bowling.",
+          "geste": "explique",
+          "expr": "sourire",
+          "visuel": {
+            "type": "horloge",
+            "h": 21,
+            "m": 0,
+            "texte": "UN SOIR",
+            "dy": 300,
+            "s": 0.62
+          }
+        },
+        {
+          "text": "Un jeune homme vient me voir au comptoir, tout pâle, et me glisse : je vais demander ma copine en mariage.",
+          "geste": "reflechit",
+          "expr": "surpris",
+          "visuel": {
+            "type": "bague",
+            "texte": "LA DEMANDE",
+            "dy": 270,
+            "s": 0.8
+          }
+        },
+        {
+          "text": "Vous pouvez m'aider ?",
+          "geste": "oups",
+          "expr": "fige",
+          "visuel": {
+            "type": "question",
+            "texte": "IL A BESOIN D'AIDE",
+            "dy": 290,
+            "s": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "decor": "comptoir",
+      "tenue": "gerant",
+      "kx": 380,
+      "ky": 1420,
+      "ecran": "reservPiste",
+      "options": {
+        "caisse": "petite",
+        "plaque": "ACCUEIL"
+      },
+      "figurants": [
+        {
+          "p": "sophie",
+          "derriere": 1,
+          "x": 150,
+          "y": 1390,
+          "s": 1.0,
+          "flip": 0,
+          "depart": "neutre",
+          "apparait": {
+            "phrase": 1,
+            "decalage": 0.05
+          },
+          "poses": [
+            {
+              "phrase": 1,
+              "decalage": 0.3,
+              "pose": "pouce"
+            }
+          ]
+        },
+        {
+          "p": "antoine",
+          "derriere": 1,
+          "x": 650,
+          "y": 1390,
+          "s": 1.0,
+          "flip": 1,
+          "depart": "neutre",
+          "apparait": {
+            "phrase": 1,
+            "decalage": 0.2
+          },
+          "poses": [
+            {
+              "phrase": 1,
+              "decalage": 0.5,
+              "pose": "hanches"
+            }
+          ]
+        },
+        {
+          "p": "yann",
+          "derriere": 1,
+          "x": 830,
+          "y": 1390,
+          "s": 1.0,
+          "flip": 1,
+          "depart": "neutre",
+          "apparait": {
+            "phrase": 1,
+            "decalage": 0.35
+          },
+          "poses": [
+            {
+              "phrase": 1,
+              "decalage": 0.7,
+              "pose": "pouce"
+            }
+          ]
+        }
+      ],
+      "phrases": [
+        {
+          "text": "Évidemment, j'ai dit oui.",
+          "geste": "pouce",
+          "expr": "content",
+          "visuel": {
+            "type": "tampon",
+            "texte": "OUI !",
+            "couleur": "#2f9e6a",
+            "dy": 0,
+            "s": 0.85
+          }
+        },
+        {
+          "text": "Et là, toute l'équipe s'y est mise.",
+          "geste": "explique",
+          "expr": "malin",
+          "visuel": {
+            "type": "planSecret",
+            "dy": -10,
+            "s": 0.88
+          }
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "decor": "bowling",
+      "tenue": "gerant",
+      "kx": 220,
+      "ky": 1790,
+      "ks": 0.95,
+      "kdevant": true,
+      "options": {
+        "large": true,
+        "vide": true,
+        "numeros": [
+          5,
+          6,
+          7
+        ],
+        "quilles": [
+          "debout",
+          "debout",
+          "debout"
+        ]
+      },
+      "figurants": [
+        {
+          "p": "lucas",
+          "loin": 1,
+          "x": 200,
+          "y": 1450,
+          "s": 0.5,
+          "dos": 1,
+          "boule": "#d8343f",
+          "depart": "tientBoule"
+        },
+        {
+          "p": "emma",
+          "loin": 1,
+          "x": 880,
+          "y": 1460,
+          "s": 0.5,
+          "dos": 1,
+          "boule": "#f4b942",
+          "depart": "tientBoule"
+        },
+        {
+          "p": "hugo",
+          "x": 480,
+          "y": 1770,
+          "s": 0.8,
+          "flip": 1,
+          "expr": "surpris",
+          "exprs": [
+            {
+              "phrase": 1,
+              "decalage": 0.6,
+              "expr": "malin"
+            }
+          ],
+          "bulle": "Promis, motus !",
+          "bulleA": 2,
+          "bulleY": 1180
+        },
+        {
+          "p": "sophie",
+          "x": 760,
+          "y": 1790,
+          "s": 0.9,
+          "flip": 0,
+          "brasDevant": 1,
+          "depart": "chut",
+          "expr": "malin"
+        },
+        {
+          "p": "camille",
+          "x": 960,
+          "y": 1760,
+          "s": 0.86,
+          "flip": 1,
+          "expr": "surpris",
+          "exprs": [
+            {
+              "phrase": 1,
+              "decalage": 0.4,
+              "expr": "content"
+            }
+          ]
+        }
+      ],
+      "phrases": [
+        {
+          "text": "D'abord, on a prévenu les clients, piste par piste, tout doucement :",
+          "geste": "chut",
+          "expr": "malin",
+          "visuel": {
+            "type": "pistesUne",
+            "total": 6,
+            "de": 2,
+            "cible": 4,
+            "texte": "PISTE PAR PISTE",
+            "dy": 280,
+            "s": 0.78
+          }
+        },
+        {
+          "text": "dans 5 minutes, il se passe un truc sur la piste 6.",
+          "say": "dans cinq minutes, il se passe un truc sur la piste six.",
+          "geste": "montre",
+          "expr": "malin",
+          "visuel": {
+            "type": "tampon",
+            "texte": "PISTE 6",
+            "sous": "DANS 5 MINUTES",
+            "dy": 280,
+            "s": 0.85
+          }
+        },
+        {
+          "text": "Faites comme si de rien n'était.",
+          "geste": "chut",
+          "expr": "malin",
+          "visuel": {
+            "type": "chut",
+            "texte": "COMME SI DE RIEN N'ÉTAIT",
+            "dy": 250,
+            "s": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "s4",
+      "decor": "bowling",
+      "options": {
+        "large": true,
+        "vide": true,
+        "numeros": [
+          5,
+          6,
+          7
+        ],
+        "quilles": [
+          "debout",
+          "debout",
+          "debout"
+        ]
+      },
+      "figurants": [
+        {
+          "p": "manon",
+          "x": 540,
+          "y": 1440,
+          "s": 0.52,
+          "dos": 1,
+          "loin": 1,
+          "boule": "#7d4aa8",
+          "depart": "tientBoule"
+        },
+        {
+          "p": "lucas",
+          "x": 90,
+          "y": 1540,
+          "s": 0.6,
+          "flip": 0,
+          "boule": "#d8343f",
+          "depart": "tientBoule",
+          "expr": "coinOeil"
+        },
+        {
+          "p": "hugo",
+          "x": 220,
+          "y": 1620,
+          "s": 0.68,
+          "flip": 0,
+          "boule": "#3d9e7a",
+          "depart": "tientBoule",
+          "expr": "coinOeil"
+        },
+        {
+          "p": "emma",
+          "x": 910,
+          "y": 1560,
+          "s": 0.62,
+          "flip": 1,
+          "boule": "#f4b942",
+          "depart": "tientBoule",
+          "expr": "coinOeil"
+        },
+        {
+          "p": "camille",
+          "x": 740,
+          "y": 1670,
+          "s": 0.72,
+          "flip": 1,
+          "boule": "#e07a3f",
+          "depart": "tientBoule",
+          "expr": "coinOeil"
+        },
+        {
+          "p": "gerard",
+          "x": 400,
+          "y": 1640,
+          "s": 0.84,
+          "flip": 0,
+          "ag0": 1,
+          "depart": "lacet",
+          "expr": "coinOeil"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "Résultat : tout le bowling faisait semblant de jouer…",
+          "visuel": {
+            "type": "etiquettes",
+            "items": [
+              {
+                "texte": "ON JOUE…",
+                "x": 250,
+                "y": 1060
+              },
+              {
+                "texte": "…OU PAS",
+                "x": 830,
+                "y": 1060,
+                "couleur": "#ff8fb1"
+              }
+            ]
+          }
+        },
+        {
+          "text": "en regardant la piste 6 du coin de l'œil.",
+          "say": "en regardant la piste six du coin de l'œil.",
+          "visuel": {
+            "type": "oeil",
+            "texte": "PISTE 6",
+            "dir": 1,
+            "dy": 250,
+            "s": 0.8
+          }
+        }
+      ]
+    },
+    {
+      "id": "s5",
+      "decor": "comptoir",
+      "tenue": "gerant",
+      "kx": 250,
+      "ky": 1395,
+      "ks": 0.9,
+      "kdevant": true,
+      "options": {
+        "bar": true,
+        "devant": true,
+        "champagne": true,
+        "verres": 2,
+        "verresVides": true,
+        "remplir": {
+          "phrase": 0,
+          "decalage": 0.8,
+          "duree": 1.0
+        },
+        "console": {
+          "x": 400
+        }
+      },
+      "figurants": [
+        {
+          "p": "antoine",
+          "derriere": 1,
+          "x": 800,
+          "y": 1440,
+          "s": 0.9,
+          "flip": 1,
+          "depart": "bouteille",
+          "poses": [
+            {
+              "phrase": 0,
+              "decalage": 0.6,
+              "pose": "sert"
+            },
+            {
+              "phrase": 1,
+              "decalage": 0.2,
+              "pose": "bouteille"
+            }
+          ]
+        }
+      ],
+      "phrases": [
+        {
+          "text": "Pendant ce temps, au bar, on prépare 2 coupes de champagne.",
+          "say": "Pendant ce temps, au bar, on prépare deux coupes de champagne.",
+          "geste": "explique",
+          "expr": "content",
+          "visuel": {
+            "type": "coupes",
+            "dy": 40,
+            "s": 0.75
+          }
+        },
+        {
+          "text": "Et moi, je garde la main sur le bouton de la musique.",
+          "geste": "bouton",
+          "expr": "determine",
+          "visuel": {
+            "type": "bouton",
+            "dy": 60,
+            "s": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "s6",
+      "decor": "bowling",
+      "options": {
+        "large": true,
+        "vide": true,
+        "numeros": [
+          5,
+          6,
+          7
+        ],
+        "quilles": [
+          "debout",
+          "debout",
+          "debout"
+        ],
+        "boules": [
+          {
+            "piste": 1,
+            "c": "#7d4aa8",
+            "roule": {
+              "phrase": 1,
+              "decalage": 0.45
+            },
+            "duree": 2.0
+          }
+        ]
+      },
+      "coupure": {
+        "phrase": 3,
+        "decalage": 0.3
+      },
+      "figurants": [
+        {
+          "p": "hugo",
+          "loin": 1,
+          "x": 150,
+          "y": 1490,
+          "s": 0.5,
+          "flip": 0,
+          "boule": "#3d9e7a",
+          "depart": "tientBoule",
+          "expr": "coinOeil"
+        },
+        {
+          "p": "camille",
+          "loin": 1,
+          "x": 1010,
+          "y": 1470,
+          "s": 0.48,
+          "flip": 1,
+          "boule": "#e07a3f",
+          "depart": "tientBoule",
+          "expr": "coinOeil"
+        },
+        {
+          "p": "manon",
+          "x": 440,
+          "y": 1430,
+          "s": 0.6,
+          "dos": 1,
+          "boule": "#7d4aa8",
+          "depart": "tientBoule",
+          "poses": [
+            {
+              "phrase": 1,
+              "decalage": 0.05,
+              "pose": "lancer"
+            },
+            {
+              "phrase": 1,
+              "decalage": 0.4,
+              "pose": "lancerFin"
+            }
+          ],
+          "sort": {
+            "phrase": 1,
+            "decalage": 1.6
+          }
+        },
+        {
+          "p": "manon",
+          "x": 440,
+          "y": 1430,
+          "s": 0.6,
+          "flip": 0,
+          "depart": "oups",
+          "expr": "surpris",
+          "apparait": {
+            "phrase": 1,
+            "decalage": 1.6
+          },
+          "exprs": [
+            {
+              "phrase": 4,
+              "decalage": 0.1,
+              "expr": "emu"
+            }
+          ],
+          "poses": [
+            {
+              "phrase": 4,
+              "decalage": 0.2,
+              "pose": "mainsTete"
+            }
+          ]
+        },
+        {
+          "p": "noah",
+          "peau": "#f7e6d8",
+          "tete": {
+            "casquette": null
+          },
+          "tenue": {
+            "haut": "#eef2f8",
+            "pant": "#3a3f63",
+            "shoe": "#2b2b33"
+          },
+          "objets": {
+            "verre": "ecrinOuvert",
+            "bouteille": "ecrinFerme"
+          },
+          "x": 730,
+          "y": 1545,
+          "s": 0.76,
+          "flip": 1,
+          "depart": "ecrinCache",
+          "expr": "gene",
+          "genou": [
+            {
+              "phrase": 1,
+              "decalage": 0.9,
+              "ag": 1,
+              "duree": 0.9
+            }
+          ],
+          "poses": [
+            {
+              "phrase": 1,
+              "decalage": 1.2,
+              "pose": "demande",
+              "duree": 0.5
+            }
+          ],
+          "exprs": [
+            {
+              "phrase": 2,
+              "decalage": 0,
+              "expr": "sourire"
+            }
+          ]
+        }
+      ],
+      "phrases": [
+        {
+          "text": "Elle, elle était en train de jouer, dos à lui.",
+          "visuel": {
+            "type": "etiquettes",
+            "items": [
+              {
+                "texte": "ELLE",
+                "x": 440,
+                "y": 940,
+                "couleur": "#ff8fb1"
+              },
+              {
+                "texte": "LUI",
+                "x": 730,
+                "y": 980
+              }
+            ]
+          }
+        },
+        {
+          "text": "Elle lance sa boule, se retourne…",
+          "visuel": {
+            "type": "fleche",
+            "x": 440,
+            "y": 950,
+            "texte": "ELLE SE RETOURNE"
+          }
+        },
+        {
+          "text": "et il est là, un genou à terre.",
+          "visuel": {
+            "type": "bague",
+            "texte": "UN GENOU À TERRE",
+            "dy": 230,
+            "s": 0.8
+          }
+        },
+        {
+          "text": "Je coupe la musique.",
+          "visuel": {
+            "type": "bouton",
+            "off": true,
+            "dy": 250,
+            "s": 0.75
+          }
+        },
+        {
+          "text": "Silence total.",
+          "visuel": {
+            "type": "silence",
+            "dy": 270,
+            "s": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "s7",
+      "decor": "comptoir",
+      "tenue": "gerant",
+      "kx": 540,
+      "ky": 1430,
+      "ks": 1.3,
+      "camera": "avance",
+      "kpose": "coupes",
+      "options": {
+        "bar": true,
+        "devant": true,
+        "champagne": true,
+        "verres": 2,
+        "sansVerres": true
+      },
+      "phrases": [
+        {
+          "text": "Et là, une petite pensée me traverse :",
+          "geste": "coupes",
+          "expr": "fige",
+          "visuel": {
+            "type": "pensee",
+            "contenu": "?",
+            "bx": 520,
+            "by": 740,
+            "dx": 120,
+            "dy": -40,
+            "s": 0.85
+          }
+        },
+        {
+          "text": "euh… et si elle dit non ?",
+          "geste": "coupes",
+          "expr": "sueur",
+          "visuel": {
+            "type": "pensee",
+            "contenu": "non",
+            "bx": 520,
+            "by": 740,
+            "dx": 120,
+            "dy": -40,
+            "s": 0.85
+          }
+        },
+        {
+          "text": "On fait quoi, nous, avec les 2 coupes ?",
+          "say": "On fait quoi, nous, avec les deux coupes ?",
+          "geste": "coupes",
+          "expr": "sueur",
+          "visuel": {
+            "type": "pensee",
+            "contenu": "coupes",
+            "bx": 520,
+            "by": 740,
+            "dx": 120,
+            "dy": -40,
+            "s": 0.85
+          }
+        }
+      ]
+    },
+    {
+      "id": "s8",
+      "decor": "bowling",
+      "tenue": "gerant",
+      "kx": 290,
+      "ky": 1850,
+      "ks": 0.98,
+      "allume": true,
+      "options": {
+        "large": true,
+        "vide": true,
+        "numeros": [
+          5,
+          6,
+          7
+        ],
+        "quilles": [
+          "debout",
+          "debout",
+          "debout"
+        ]
+      },
+      "figurants": [
+        {
+          "p": "hugo",
+          "x": 90,
+          "y": 1540,
+          "s": 0.6,
+          "flip": 0,
+          "expr": "content",
+          "applaudit": {
+            "phrase": 1,
+            "decalage": 0
+          }
+        },
+        {
+          "p": "camille",
+          "x": 800,
+          "y": 1660,
+          "s": 0.72,
+          "flip": 1,
+          "expr": "content",
+          "applaudit": {
+            "phrase": 1,
+            "decalage": 0.1
+          }
+        },
+        {
+          "p": "emma",
+          "x": 930,
+          "y": 1560,
+          "s": 0.62,
+          "flip": 1,
+          "expr": "content",
+          "applaudit": {
+            "phrase": 1,
+            "decalage": 0.05
+          }
+        },
+        {
+          "p": "gerard",
+          "x": 985,
+          "y": 1790,
+          "s": 0.82,
+          "flip": 1,
+          "expr": "content",
+          "applaudit": {
+            "phrase": 1,
+            "decalage": 0.15
+          }
+        },
+        {
+          "p": "noah",
+          "peau": "#f7e6d8",
+          "tete": {
+            "casquette": null
+          },
+          "tenue": {
+            "haut": "#eef2f8",
+            "pant": "#3a3f63",
+            "shoe": "#2b2b33"
+          },
+          "objets": {
+            "verre": "ecrinOuvert",
+            "bouteille": "ecrinFerme"
+          },
+          "x": 580,
+          "y": 1570,
+          "s": 0.74,
+          "flip": 1,
+          "depart": "calin",
+          "expr": "emu"
+        },
+        {
+          "p": "manon",
+          "x": 485,
+          "y": 1580,
+          "s": 0.72,
+          "flip": 0,
+          "depart": "calin",
+          "expr": "emu",
+          "sauts": [
+            {
+              "phrase": 0,
+              "decalage": 0.2,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "phrases": [
+        {
+          "text": "Heureusement, elle a dit oui.",
+          "geste": "coupes",
+          "expr": "content",
+          "visuel": {
+            "type": "oui",
+            "dy": 250,
+            "s": 0.75
+          }
+        },
+        {
+          "text": "Tout le bowling a applaudi…",
+          "geste": "coupes",
+          "expr": "content",
+          "visuel": {
+            "type": "confettis",
+            "texte": "BRAVO !",
+            "y": 720
+          }
+        },
+        {
+          "text": "et les 2 coupes ont enfin servi.",
+          "say": "et les deux coupes ont enfin servi.",
+          "geste": "coupes",
+          "expr": "fier",
+          "visuel": {
+            "type": "trinque",
+            "dy": 250,
+            "s": 0.75
+          }
+        }
+      ]
+    },
+    {
+      "id": "s9",
+      "decor": "bowling",
+      "tenue": "gerant",
+      "kx": 540,
+      "ky": 1820,
+      "ks": 1.05,
+      "fin": "COMMENTAIRE",
+      "finTexte": "RACONTE-LE EN COMMENTAIRE",
+      "finY": 600,
+      "options": {
+        "large": true,
+        "vide": true,
+        "numeros": [
+          5,
+          6,
+          7
+        ],
+        "quilles": [
+          "debout",
+          "debout",
+          "debout"
+        ]
+      },
+      "figurants": [
+        {
+          "p": "noah",
+          "peau": "#f7e6d8",
+          "tete": {
+            "casquette": null
+          },
+          "tenue": {
+            "haut": "#eef2f8",
+            "pant": "#3a3f63",
+            "shoe": "#2b2b33"
+          },
+          "objets": {
+            "verre": "ecrinOuvert",
+            "bouteille": "ecrinFerme"
+          },
+          "x": 880,
+          "y": 1420,
+          "s": 0.48,
+          "loin": 1,
+          "flip": 1,
+          "depart": "calin",
+          "expr": "emu"
+        },
+        {
+          "p": "manon",
+          "x": 790,
+          "y": 1425,
+          "s": 0.47,
+          "loin": 1,
+          "flip": 0,
+          "depart": "calin",
+          "expr": "emu"
+        }
+      ],
+      "phrases": [
+        {
+          "text": "Et toi, c'est quoi le plus beau moment que tu as vécu avec un client ?",
+          "geste": "pointeCamera",
+          "expr": "content"
+        }
+      ]
+    }
+  ]
+}
