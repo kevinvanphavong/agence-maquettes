@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bowling Bergeracois · aperçu de page d'accueil</title>
+<meta name="description" content="Aperçu non commandé d'une page d'accueil pour le Bowling Bergeracois : réservation en ligne, horaires du jour, prix.">
+<link rel="preload" href="polices/big-shoulders-display-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/golos-text-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/golos-text-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="images/pistes-gros-plan-640.webp" as="image" type="image/webp" media="(max-width: 700px)">
+<link rel="stylesheet" href="vong-kit.css">
+<style>
+/* Matière : Hallmark « Carnival » (papier teinté, encre chaude, capitales Big Shoulders Display sur Golos Text,
+   filets de 2 px, ombre dure de 4 px, deux accents qui se répondent), recolorée aux couleurs du parc :
+   rouge du « O » de l'enseigne BOWLING (façade) et ardoise des boutons du site actuel. Curseur « Évolution ». */
+@font-face { font-family: "Big Shoulders Display"; font-weight: 800; font-display: swap; src: url(polices/big-shoulders-display-latin-800-normal.woff2) format("woff2"); }
+@font-face { font-family: "Golos Text"; font-weight: 400; font-display: swap; src: url(polices/golos-text-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Golos Text"; font-weight: 500; font-display: swap; src: url(polices/golos-text-latin-500-normal.woff2) format("woff2"); }
+:root {
+  --papier: #f7efe1; --papier-2: #eee3cf; --papier-3: #e2d3b8;
+  --encre: #1f1915; --encre-2: #3a312b; --doux: #4f463f;
+  --rouge: #c4161c;      /* accent 1 : le O rouge de l'enseigne */
+  --ardoise: #3c4b49;    /* accent 2 : l'ardoise du site actuel */
+  --sur-accent: #fbf6ec;
+  --filet: 2px; --ombre: 4px 4px 0 var(--encre); --rayon: 2px;
+  --titre: "Big Shoulders Display", Impact, "Arial Narrow", sans-serif;
+  --texte: "Golos Text", system-ui, sans-serif;
+  --vk-fond: var(--papier); --vk-texte: var(--encre); --vk-doux: var(--doux); --vk-trait: var(--encre);
+  --vk-accent: var(--rouge); --vk-sur-accent: var(--sur-accent); --vk-ok: #1d6b38; --vk-ferme: #6e655d;
+  --vk-vac: #f3d9a0; --vk-fer: #f2c4c0; --vk-rayon: 2px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } }
+body { margin: 0; background: var(--papier); color: var(--encre); font: 400 1rem/1.55 var(--texte); overflow-x: clip; -webkit-text-size-adjust: 100%; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--encre); text-decoration-color: var(--rouge); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--rouge); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--titre); font-weight: 800; text-transform: uppercase; letter-spacing: .015em; line-height: 1; margin: 0; }
+h2 { font-size: clamp(2.5rem, 9vw, 4.5rem); }
+h3 { font-size: 1.75rem; }
+p { margin: 0; }
+.enveloppe { width: min(1180px, 100%); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 700px) { .enveloppe { padding: 0 32px; } }
+.section { padding: 56px 0; border-top: var(--filet) solid var(--rouge); }
+.section > .enveloppe > h2 { margin-bottom: 12px; }
+.chapeau { font-size: 1.125rem; max-width: 40ch; margin-bottom: 24px; }
+.m { display: inline-block; font-size: .875rem; font-weight: 500; padding: 0 6px; border: 1px solid currentColor; border-radius: 2px; line-height: 1.5; vertical-align: .1em; white-space: nowrap; }
+
+/* Bandeau d'aperçu, une ligne */
+.apercu { background: var(--encre); color: var(--sur-accent); font-size: .875rem; text-align: center; padding: 6px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* En-tête */
+.tete { border-bottom: var(--filet) solid var(--encre); background: var(--papier); position: relative; z-index: 5; }
+.tete .enveloppe { display: flex; align-items: center; gap: 8px; min-height: 64px; }
+.marque { font-family: var(--titre); font-weight: 800; font-size: 1.5rem; line-height: .95; text-transform: uppercase; text-decoration: none; color: var(--encre); margin-right: auto; display: inline-flex; flex-direction: column; min-height: 44px; justify-content: center; }
+.marque b { color: var(--rouge); }
+.marque span:not(.l1) { font-size: 1rem; letter-spacing: .04em; }
+.nav-large { display: none; }
+.nav-large a, .tel, .menu-tel summary { min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-weight: 500; }
+.tel { gap: 6px; border: var(--filet) solid var(--encre); box-shadow: 2px 2px 0 var(--encre); text-decoration: none; background: var(--papier); min-width: 44px; justify-content: center; }
+.tel svg { width: 20px; height: 20px; flex: none; }
+.menu-tel { position: relative; }
+.menu-tel summary { list-style: none; cursor: pointer; border: var(--filet) solid var(--encre); box-shadow: 2px 2px 0 var(--encre); background: var(--papier); }
+.menu-tel summary::-webkit-details-marker { display: none; }
+.menu-tel[open] summary { background: var(--encre); color: var(--sur-accent); }
+.menu-tel nav { position: absolute; right: 0; top: calc(100% + 8px); background: var(--papier); border: var(--filet) solid var(--encre); box-shadow: var(--ombre); display: grid; min-width: 220px; }
+.menu-tel nav a { min-height: 52px; display: flex; align-items: center; padding: 0 16px; text-decoration: none; font-family: var(--titre); font-size: 1.5rem; text-transform: uppercase; border-bottom: var(--filet) solid var(--rouge); }
+.menu-tel nav a:last-child { border-bottom: 0; }
+.menu-tel nav a:hover { background: var(--rouge); color: var(--sur-accent); }
+@media (min-width: 900px) {
+  .nav-large { display: flex; gap: 4px; }
+  .nav-large a { text-decoration: none; }
+  .nav-large a:hover { text-decoration: underline; text-decoration-color: var(--rouge); }
+  .menu-tel { display: none; }
+}
+
+/* Boutons : la paire Carnival */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 24px; border: var(--filet) solid var(--encre); border-radius: var(--rayon); box-shadow: var(--ombre); background: var(--papier); color: var(--encre); font: 800 1.5rem/1 var(--titre); text-transform: uppercase; letter-spacing: .02em; text-decoration: none; cursor: pointer; }
+.btn--plein { background: var(--rouge); color: var(--sur-accent); }
+.btn--plein:hover { background: var(--encre); }
+.btn:not(.btn--plein):hover { background: var(--papier-3); }
+.btn:active { box-shadow: 1px 1px 0 var(--encre); transform: translate(3px, 3px); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* ---------- S11 Stat-Led : le chiffre du parc en très gros ---------- */
+.heros { padding: 20px 0 28px; }
+.heros .enveloppe { display: grid; gap: 22px; grid-template-columns: minmax(0, 1fr); }
+.heros h1 { font-size: clamp(2rem, 9.2vw, 3.6rem); max-width: 18ch; }
+.chiffre { display: grid; gap: 8px; }
+.chiffre strong { padding-bottom: .08em; }
+.chiffre strong { font-family: var(--titre); font-weight: 800; font-size: clamp(4rem, 25vw, 13rem); line-height: .82; letter-spacing: -.005em; color: var(--rouge); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.chiffre span { font-size: 1.125rem; font-weight: 500; max-width: 30ch; }
+.privilege-lien { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; }
+.heros .vk-bandeau { border: var(--filet) solid var(--encre); background: var(--papier-2); padding: 8px 12px; gap: 2px 10px; }
+.heros .vk-bandeau strong { font-weight: 500; }
+.vk-bandeau .vk-detail { color: var(--doux); }
+.vk-bandeau.vk-aconfirmer .vk-mention { display: none; }
+.actions-heros { display: grid; gap: 8px; justify-items: start; }
+.actions-heros .btn { width: 100%; }
+.anniv-lien { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; }
+.photo-heros { position: relative; margin: 6px 4px 0 0; }
+.photo-heros img { width: 100%; aspect-ratio: 1100 / 582; object-fit: cover; border: var(--filet) solid var(--encre); box-shadow: var(--ombre); transform: rotate(-1deg); background: var(--papier-3); }
+@media (min-width: 900px) {
+  .heros { padding: 48px 0 72px; }
+  .heros .enveloppe { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; column-gap: 56px; }
+  .heros .texte-heros { display: grid; gap: 14px; }
+  .heros { padding: 32px 0 56px; }
+  .heros h1 { font-size: 3.25rem; }
+  .chiffre strong { font-size: 9.5rem; }
+  .actions-heros .btn { width: auto; }
+  .photo-heros img { transform: rotate(1.5deg); }
+}
+@media (max-width: 899px) { .texte-heros { display: grid; gap: 16px; } }
+
+/* ---------- Bande des chiffres (accent 1) ---------- */
+.bande-rouge { background: var(--rouge); color: var(--sur-accent); border-top: var(--filet) solid var(--encre); border-bottom: var(--filet) solid var(--encre); padding: 48px 0; position: relative; overflow: hidden; }
+.bande-rouge::after { content: ""; position: absolute; right: 0; top: 0; width: 38%; height: 55%; background-image: radial-gradient(rgba(31,25,21,.55) 1.5px, transparent 1.5px); background-size: 12px 12px; pointer-events: none; }
+.bande-rouge h2 { color: var(--sur-accent); margin-bottom: 24px; position: relative; z-index: 1; }
+.chiffres { display: grid; grid-template-columns: minmax(0, 1fr); border-top: var(--filet) solid var(--encre); position: relative; z-index: 1; }
+.chiffres > div { padding: 16px 0; border-bottom: var(--filet) solid var(--encre); min-width: 0; }
+.chiffres b { display: block; font: 800 clamp(4rem, 16vw, 6.5rem)/.9 var(--titre); text-transform: uppercase; white-space: nowrap; }
+.chiffres span { font-size: 1.0625rem; font-weight: 500; }
+.bande-rouge .legende { margin-top: 16px; position: relative; z-index: 1; }
+@media (min-width: 900px) {
+  .chiffres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .chiffres > div { border-bottom: 0; padding: 16px 24px; border-left: var(--filet) solid var(--encre); }
+  .chiffres > div:first-child { border-left: 0; padding-left: 0; }
+}
+
+/* ---------- Prix ---------- */
+.onglets { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 20px; }
+.onglets button { min-height: 48px; padding: 0 16px; border: var(--filet) solid var(--encre); background: var(--papier); color: var(--encre); font: 800 1.25rem/1 var(--titre); text-transform: uppercase; cursor: pointer; box-shadow: 2px 2px 0 var(--encre); border-radius: var(--rayon); }
+.onglets button[aria-pressed="true"] { background: var(--encre); color: var(--sur-accent); }
+.grille-prix { border-top: var(--filet) solid var(--rouge); max-width: 760px; }
+.grille-prix div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: var(--filet) solid var(--rouge); }
+.grille-prix dt { font-size: 1.0625rem; min-width: 0; }
+.grille-prix dd { margin: 0; font: 800 2.25rem/1 var(--titre); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.note-prix { margin-top: 14px; max-width: 60ch; }
+
+/* ---------- Anniversaires ---------- */
+.anniv { display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); }
+.puits { border: var(--filet) solid var(--encre); box-shadow: var(--ombre); background: var(--papier-2); padding: 20px; min-width: 0; }
+.formule-titre { font: 800 1.75rem/1 var(--titre); text-transform: uppercase; margin-bottom: 8px; }
+.formule-liste { margin: 8px 0 16px; padding-left: 20px; }
+.formule-liste li { margin: 2px 0; }
+.compteur { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 8px 0 16px; }
+.compteur label, .compteur .etiquette { font-weight: 500; min-width: 0; }
+.pas { display: inline-flex; align-items: center; border: var(--filet) solid var(--encre); background: var(--papier); }
+.pas button { width: 48px; height: 48px; border: 0; background: transparent; font: 800 1.75rem/1 var(--titre); color: var(--encre); cursor: pointer; }
+.pas button:hover { background: var(--papier-3); }
+.pas output { min-width: 48px; text-align: center; font: 800 1.75rem/1 var(--titre); font-variant-numeric: tabular-nums; }
+.choix-jour { display: grid; gap: 8px; margin: 0 0 16px; border: 0; padding: 0; }
+.choix-jour legend { font-weight: 500; margin-bottom: 6px; padding: 0; }
+.choix-jour label { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 12px; border: var(--filet) solid var(--encre); background: var(--papier); cursor: pointer; }
+.choix-jour input { position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; }
+.choix-jour label { position: relative; }
+.choix-jour label::before { content: ""; width: 18px; height: 18px; border: var(--filet) solid currentColor; border-radius: 50%; flex: none; }
+.choix-jour label:has(input:checked)::before { background: var(--rouge); box-shadow: inset 0 0 0 3px var(--encre); }
+.choix-jour label:has(input:focus-visible) { outline: 3px solid var(--rouge); outline-offset: 3px; }
+.choix-jour label:has(input:checked) { background: var(--encre); color: var(--sur-accent); }
+.total-anniv { border-top: var(--filet) solid var(--rouge); padding-top: 12px; display: grid; gap: 2px; }
+.total-anniv b { font: 800 clamp(3.5rem, 15vw, 5rem)/.9 var(--titre); color: var(--rouge); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.anniv .btn { margin-top: 18px; width: 100%; }
+.photo-cadre img { border: var(--filet) solid var(--encre); box-shadow: var(--ombre); width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transform: rotate(.8deg); }
+@media (min-width: 900px) { .anniv { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } .anniv .btn { width: auto; } }
+
+/* ---------- Réservation ---------- */
+.etapes { display: grid; gap: 36px; grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.etape { min-width: 0; }
+.etape h3 { display: flex; gap: 12px; align-items: baseline; margin-bottom: 14px; }
+.etape h3 i { font-style: normal; background: var(--encre); color: var(--sur-accent); min-width: 36px; text-align: center; padding: 2px 6px 0; }
+.activites { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .activites { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.vk-formule { border: var(--filet) solid var(--encre); background: var(--papier); box-shadow: 3px 3px 0 var(--encre); }
+.vk-formule.vk-choisi { background: var(--encre); color: var(--sur-accent); box-shadow: 3px 3px 0 var(--rouge); }
+.vk-formule.vk-choisi .vk-f-details, .vk-formule.vk-choisi small { color: inherit; }
+.vk-f-nom { font: 800 1.5rem/1 var(--titre); text-transform: uppercase; }
+.vk-f-prix { font-weight: 500; }
+.vk-f-details { font-size: 1rem; }
+.reglages { display: grid; gap: 4px; margin-top: 14px; }
+.vk-calendrier { max-width: none; border: var(--filet) solid var(--encre); background: var(--papier); padding: 12px; box-shadow: var(--ombre); }
+@media (max-width: 419px) { .vk-calendrier { margin: 0 -16px; width: calc(100% + 32px); padding: 8px 2px; box-shadow: none; border-left: 0; border-right: 0; } .vk-cal-grille { gap: 1px; } .vk-cal-tete, .vk-cal-info, .vk-cal-legende { padding: 0 12px; } }
+.vk-cal-tete strong { font: 800 1.5rem/1 var(--titre); text-transform: uppercase; }
+.vk-cal-nav { border: var(--filet) solid var(--encre); border-radius: 2px; }
+.vk-cal-js { font-size: 1rem; color: var(--doux); }
+.vk-jour { font-weight: 500; }
+.vk-jour.vk-choisi { background: var(--rouge); }
+.vk-cal-legende { font-size: 1rem; }
+.vk-creneau { border: var(--filet) solid var(--encre); background: var(--papier); }
+.vk-creneau span { font-size: 1rem; color: var(--doux); }
+.vk-creneau.vk-choisi { background: var(--rouge); border-color: var(--encre); }
+.vk-vide { padding: 12px; border: var(--filet) dashed var(--doux); }
+.dispo-note { margin-top: 10px; }
+.recap-puits { border: var(--filet) solid var(--encre); background: var(--papier-2); box-shadow: var(--ombre); padding: 18px; }
+.vk-recap .vk-total { border-top: var(--filet) solid var(--rouge); font-size: 1.125rem; }
+.vk-recap dd.vk-total, .vk-recap dd.vk-acompte { font: 800 1.75rem/1 var(--titre); }
+.vk-recap .vk-acompte { color: var(--rouge); }
+.vk-simule { color: var(--doux); }
+.champs { display: grid; gap: 12px; margin-top: 16px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) { .champs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.champ { display: grid; gap: 4px; min-width: 0; }
+.champ label { font-weight: 500; min-height: 44px; display: flex; align-items: flex-end; }
+.champ input { min-height: 48px; width: 100%; padding: 0 12px; border: var(--filet) solid var(--encre); border-radius: 2px; background: var(--papier); color: var(--encre); font: inherit; }
+.payer { margin-top: 18px; width: 100%; }
+@media (min-width: 640px) { .payer { width: auto; } }
+.vk-erreur { color: #a3121a; }
+.vk-confirmation { border: var(--filet) solid var(--encre); background: var(--encre); color: var(--sur-accent); padding: 20px; box-shadow: 4px 4px 0 var(--rouge); display: grid; gap: 10px; margin-top: 20px; }
+.vk-confirmation .vk-simule { color: var(--sur-accent); }
+.vk-c-titre { font: 800 2.5rem/1 var(--titre); text-transform: uppercase; }
+.vk-agenda { border: var(--filet) solid currentColor; border-radius: 2px; font-weight: 500; justify-self: start; }
+.resume-choix { margin-bottom: 10px; font-weight: 500; }
+
+/* ---------- Carte Privilège (accent 2) ---------- */
+.bande-ardoise { background: var(--ardoise); color: var(--sur-accent); padding: 56px 0; border-top: var(--filet) solid var(--encre); border-bottom: var(--filet) solid var(--encre); }
+.bande-ardoise h2 { color: var(--sur-accent); max-width: 14ch; }
+.bande-ardoise a { color: var(--sur-accent); }
+.carte-grille { display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); margin-top: 20px; }
+.compare { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-top: var(--filet) solid var(--sur-accent); }
+.compare > div { padding: 12px 12px 12px 0; min-width: 0; }
+.compare > div + div { border-left: var(--filet) solid var(--sur-accent); padding-left: 12px; }
+.compare b { display: block; font: 800 clamp(2.5rem, 13vw, 5rem)/.9 var(--titre); white-space: nowrap; }
+.lien-grille { display: inline-flex; align-items: center; min-height: 44px; font-weight: 500; }
+.comment { margin: 14px 0 0; padding: 0; list-style: none; counter-reset: c; display: grid; gap: 6px; }
+.comment li { counter-increment: c; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; align-items: baseline; }
+.comment li::before { content: counter(c); font: 800 2rem/1 var(--titre); }
+.carte-tel { background: var(--papier); color: var(--encre); border: var(--filet) solid var(--encre); box-shadow: 4px 4px 0 var(--encre); padding: 20px; display: grid; gap: 12px; min-width: 0; }
+.carte-visuel { background: var(--rouge); color: var(--sur-accent); border: var(--filet) solid var(--encre); padding: 16px; display: grid; gap: 6px; aspect-ratio: 1.6; align-content: space-between; }
+.carte-visuel p:first-child { font: 800 1.75rem/1 var(--titre); text-transform: uppercase; }
+.carte-visuel .qr { width: 64px; height: 64px; background: repeating-linear-gradient(90deg, var(--sur-accent) 0 6px, transparent 6px 10px), repeating-linear-gradient(0deg, var(--sur-accent) 0 6px, transparent 6px 10px); background-blend-mode: normal; justify-self: end; opacity: .9; }
+.carte-tel .btn { width: 100%; }
+@media (min-width: 900px) { .carte-grille { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: start; } }
+
+/* ---------- Horaires ---------- */
+.semaine-tete { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.semaine-tete strong { font: 800 1.5rem/1 var(--titre); text-transform: uppercase; margin-right: auto; }
+.semaine-tete button { min-width: 48px; min-height: 48px; border: var(--filet) solid var(--encre); background: var(--papier); font: 800 1.5rem/1 var(--titre); cursor: pointer; }
+.semaine-tete button:disabled { opacity: .35; cursor: default; }
+.semaine { border-top: var(--filet) solid var(--rouge); max-width: 760px; margin: 0; }
+.semaine div { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; padding: 12px 0; border-bottom: var(--filet) solid var(--rouge); align-items: baseline; }
+.semaine dt { font-weight: 500; min-width: 0; }
+.semaine dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.semaine .auj { background: var(--papier-2); padding-left: 8px; padding-right: 8px; }
+.semaine .auj dt::after { content: " · aujourd'hui"; color: var(--rouge); }
+.semaine .ferme dd { color: var(--doux); }
+
+/* ---------- Accès + fin ---------- */
+.acces { display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); }
+.acces address { font-style: normal; font-size: 1.125rem; display: grid; gap: 4px; }
+.acces .liens { display: grid; gap: 4px; margin-top: 12px; }
+.acces .liens a { min-height: 44px; display: inline-flex; align-items: center; font-weight: 500; justify-self: start; }
+.fin-photo img { border: var(--filet) solid var(--encre); box-shadow: var(--ombre); width: 100%; aspect-ratio: 1100 / 602; object-fit: cover; transform: rotate(-.8deg); }
+.fin-cta { margin-top: 28px; display: grid; gap: 10px; justify-items: start; }
+.fin-cta .btn { width: 100%; }
+@media (min-width: 900px) { .acces { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } .fin-cta .btn { width: auto; } }
+
+/* ---------- Pied ---------- */
+.pied { background: var(--encre); color: var(--sur-accent); padding: 32px 0 40px; }
+.pied a, .pied summary { color: var(--sur-accent); }
+.pied .mention { font-size: .875rem; max-width: 70ch; }
+.gerant { margin-top: 20px; border: var(--filet) solid var(--sur-accent); }
+.gerant summary { min-height: 48px; display: flex; align-items: center; padding: 0 14px; cursor: pointer; font-weight: 500; }
+.gerant div { padding: 0 14px 16px; display: grid; gap: 8px; }
+.gerant ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+
+/* ---------- Téléphone : page plus courte ---------- */
+@media (max-width: 899px) {
+  .section { padding: 40px 0; }
+  .bande-rouge, .bande-ardoise { padding: 40px 0; }
+  .chiffres > div { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 0; }
+  .chiffres b { font-size: 3.5rem; }
+  .bande-rouge h2 { margin-bottom: 16px; }
+  .anniv .photo-cadre, .fin-photo { display: none; }
+  .grille-prix div { padding: 10px 0; gap: 12px; }
+  .grille-prix dd { font-size: 1.875rem; }
+  .activites { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .vk-formule { padding: 12px; }
+  .vk-f-nom { font-size: 1.375rem; }
+  .carte-visuel { aspect-ratio: auto; grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+  .carte-visuel .qr { grid-row: span 2; width: 52px; height: 52px; }
+  .etapes { gap: 28px; }
+  .chapeau { margin-bottom: 18px; }
+  .section { padding: 32px 0; }
+  .bande-rouge, .bande-ardoise { padding: 32px 0; }
+  .vk-f-details { display: none; }
+  .reglages { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .reglages .compteur { display: grid; gap: 4px; margin: 0; }
+  .champs, .carte-tel .duo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .semaine div { padding: 8px 0; }
+  .onglets { gap: 8px; }
+  .onglets button { padding: 0 10px; font-size: 1.125rem; }
+}
+</style>
+</head>
+<body>
+<p class="apercu" data-petit>Aperçu non commandé · paiement simulé</p>
+
+<header class="tete">
+  <div class="enveloppe">
+    <a class="marque" href="#haut" aria-label="Bowling Bergeracois, haut de page"><span class="l1">B<b>O</b>WLING</span><span>Bergeracois</span></a>
+    <nav class="nav-large" aria-label="Menu principal" data-ux="menu">
+      <a href="#prix">Prix</a><a href="#anniversaires">Anniversaires</a><a href="#carte">Carte Privilège</a><a href="#horaires">Horaires</a>
+    </nav>
+    <a class="tel" href="tel:+33553578258" aria-label="Appeler le bowling au 05 53 57 82 58"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="tel-txt">Appeler</span></a>
+    <details class="menu-tel">
+      <summary>Menu</summary>
+      <nav aria-label="Menu principal (téléphone)">
+        <a href="#prix">Prix</a><a href="#anniversaires">Anniversaires</a><a href="#carte">Carte Privilège</a><a href="#horaires">Horaires</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main id="haut">
+  <!-- S11 Stat-Led : le prix de la partie en très gros, sa phrase, la photo dessous -->
+  <section class="heros" aria-labelledby="titre-heros">
+    <div class="enveloppe">
+      <div class="texte-heros">
+        <h1 id="titre-heros">Votre piste, réservée en ligne.</h1>
+        <p class="chiffre" data-ux="prix"><strong>5,50 €</strong><span>la partie, du lundi au samedi de 15 h à 20 h.</span></p>
+        <a class="privilege-lien" href="#carte">4,50 € avec la Carte Privilège</a>
+        <div id="bandeau" data-ux="horaires"></div>
+        <div class="actions-heros">
+          <a class="btn btn--plein" href="#reserver" data-ux="reserver" id="btn-heros">Réserver une piste</a>
+          <a class="anniv-lien" href="#anniversaires">Anniversaire : dès 11 € par enfant&nbsp;<span class="vk-mention">exemple</span></a>
+        </div>
+      </div>
+      <figure class="photo-heros" style="margin:0">
+        <picture>
+          <source media="(max-width: 700px)" srcset="images/pistes-gros-plan-640.webp">
+          <img src="images/pistes-gros-plan.webp" width="1100" height="582" alt="Les pistes du Bowling Bergeracois, fresque colorée au fond" data-ux="photo" fetchpriority="high">
+        </picture>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Les chiffres du parc (accent 1) -->
+  <section class="bande-rouge" aria-labelledby="titre-chiffres">
+    <div class="enveloppe">
+      <h2 id="titre-chiffres">Le bowling en 3 chiffres.</h2>
+      <div class="chiffres">
+        <div><b>12</b><span>pistes informatisées, avec barrières automatiques pour les enfants</span></div>
+        <div><b>15 h</b><span>ouverture jusqu'au 18 décembre, sauf mardi et jeudi à 17 h</span></div>
+        <div><b>2 h</b><span>du matin : fermeture le vendredi et le samedi</span></div>
+      </div>
+      <p class="legende">Chiffres de l'office de tourisme du Pays de Bergerac <span class="vk-mention">à confirmer</span></p>
+    </div>
+  </section>
+
+  <!-- Prix : la grille du site, mot pour mot -->
+  <section class="section" id="prix" aria-labelledby="titre-prix">
+    <div class="enveloppe">
+      <h2 id="titre-prix">Prix de la partie.</h2>
+      <p class="chapeau">Par personne, selon le jour et l'heure.</p>
+      <div class="onglets" role="group" aria-label="Choisir le tarif">
+        <button type="button" data-tarif="open" aria-pressed="true">Open</button>
+        <button type="button" data-tarif="privilege" aria-pressed="false">Carte Privilège</button>
+        <button type="button" data-tarif="groupe" aria-pressed="false">Groupes &amp; CE</button>
+      </div>
+      <dl class="grille-prix" id="grille-prix" aria-live="polite"></dl>
+      <p class="note-prix" id="note-prix"></p>
+    </div>
+  </section>
+
+  <!-- Anniversaires : une formule avec son prix -->
+  <section class="section" id="anniversaires" aria-labelledby="titre-anniv">
+    <div class="enveloppe">
+      <h2 id="titre-anniv">Anniversaires au bowling.</h2>
+            <div class="anniv">
+        <div class="puits">
+          <p class="formule-titre">Anniversaire 2 parties <span class="vk-mention">exemple</span></p>
+          <ul class="formule-liste">
+            <li>2 parties par enfant, au prix de la grille</li>
+            <li>Piste réservée à l'heure choisie, entre 15 h et 20 h</li>
+          </ul>
+          <div class="compteur">
+            <span class="etiquette" id="lab-enfants">Enfants, avec celui qu'on fête</span>
+            <span class="pas" role="group" aria-labelledby="lab-enfants">
+              <button type="button" data-pas="-1" aria-label="Un enfant de moins">−</button>
+              <output id="nb-enfants" aria-live="polite">8</output>
+              <button type="button" data-pas="1" aria-label="Un enfant de plus">+</button>
+            </span>
+          </div>
+          <fieldset class="choix-jour">
+            <legend>Quand ?</legend>
+            <label><input type="radio" name="jour-anniv" value="semaine" checked> Du lundi au samedi : 11 € par enfant</label>
+            <label><input type="radio" name="jour-anniv" value="dimanche"> Dimanche : 15 € par enfant</label>
+          </fieldset>
+          <p class="total-anniv" aria-live="polite"><span>Total</span><b id="total-anniv">88 €</b><span id="detail-anniv">8 enfants × 11 €</span></p>
+          <button type="button" class="btn" id="btn-anniv">Réserver l'anniversaire</button>
+        </div>
+        <figure class="photo-cadre" style="margin:0"><img src="images/salle-pistes.webp" width="1000" height="667" loading="lazy" alt="La salle des pistes du Bowling Bergeracois"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Réservation -->
+  <section class="section" id="reserver" aria-labelledby="titre-resa">
+    <div class="enveloppe">
+      <h2 id="titre-resa">Réservez. Acompte en ligne.</h2>
+      <p class="chapeau">Votre piste est gardée, le reste se règle sur place.</p>
+      <div class="etapes">
+        <div class="etape">
+          <h3><i>1</i>Quoi ?</h3>
+          <div class="activites" id="activites"></div>
+          <div class="reglages" id="reglages"></div>
+        </div>
+        <div class="etape" id="etape-jour">
+          <h3><i>2</i>Quel jour ?</h3>
+          <p class="resume-choix" id="resume-choix"></p>
+          <div id="calendrier"></div>
+        </div>
+        <div class="etape" id="etape-heure">
+          <h3><i>3</i>Quelle heure ?</h3>
+          <div id="creneaux"></div>
+          <p class="dispo-note" id="dispo-note">Places restantes <span class="vk-mention">exemple</span></p>
+        </div>
+        <div class="etape" id="etape-recap">
+          <h3><i>4</i>Récapitulatif</h3>
+          <div class="recap-puits">
+            <div id="recap"><p class="vk-vide">Choisissez un jour et une heure : le prix et l'acompte s'affichent ici.</p></div>
+            <div class="champs">
+              <div class="champ"><label for="nom">Nom</label><input id="nom" autocomplete="name" required></div>
+              <div class="champ"><label for="telephone">Téléphone</label><input id="telephone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+            </div>
+            <button type="button" class="btn btn--plein payer" id="payer">Payer l'acompte</button>
+          </div>
+          <div id="confirmation"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Carte Privilège (accent 2) -->
+  <section class="bande-ardoise" id="carte" aria-labelledby="titre-carte">
+    <div class="enveloppe">
+      <h2 id="titre-carte">La Carte Privilège. Dans le téléphone.</h2>
+      <div class="carte-grille">
+        <div>
+          <div class="compare">
+            <div><b>4,50 €</b><span>avec la carte</span></div>
+            <div><b>5,50 €</b><span>sans la carte</span></div>
+          </div>
+          <p>La partie, du lundi au samedi de 15 h à 20 h.</p>
+          <a class="lien-grille" href="#prix">Voir toute la grille des prix</a>
+          <ol class="comment">
+            <li>Inscrivez-vous en ligne, en une minute.</li>
+            <li>Elle vit dans votre téléphone, dans l'appli du bowling.</li>
+            <li>Montrez-la à l'accueil : tarif Privilège.</li>
+          </ol>
+          <p style="margin-top:14px">Prix et conditions de la carte <span class="vk-mention">à confirmer</span></p>
+        </div>
+        <div class="carte-tel" id="carte-tel">
+          <div class="carte-visuel" aria-hidden="true"><p>Carte Privilège</p><p>Bowling Bergeracois</p><span class="qr"></span></div>
+          <div class="duo champs" style="margin-top:0">
+            <div class="champ"><label for="prenom-carte">Prénom</label><input id="prenom-carte" autocomplete="given-name"></div>
+            <div class="champ"><label for="mail-carte">E-mail</label><input id="mail-carte" type="email" autocomplete="email"></div>
+          </div>
+          <button type="button" class="btn" id="btn-carte">Créer ma carte</button>
+          <p id="carte-ok" role="status" hidden></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Horaires de la semaine -->
+  <section class="section" id="horaires" aria-labelledby="titre-horaires">
+    <div class="enveloppe">
+      <h2 id="titre-horaires">Horaires de la semaine.</h2>
+      <p class="chapeau">Repris de l'office de tourisme <span class="vk-mention">à confirmer</span></p>
+      <div class="semaine-tete">
+        <strong id="semaine-titre"></strong>
+        <button type="button" id="sem-prec" aria-label="Semaine précédente">‹</button>
+        <button type="button" id="sem-suiv" aria-label="Semaine suivante">›</button>
+      </div>
+      <dl class="semaine" id="semaine" aria-live="polite"></dl>
+      <p class="note-prix" id="periode-note"></p>
+    </div>
+  </section>
+
+  <!-- Accès + Réserver -->
+  <section class="section" id="acces" aria-labelledby="titre-acces">
+    <div class="enveloppe acces">
+      <div>
+        <h2 id="titre-acces">Venir au bowling.</h2>
+        <address>
+          <span>Route de Bordeaux, 7 Zone de Loisirs</span>
+          <span>24100 Saint-Laurent-des-Vignes (Bergerac)</span>
+        </address>
+        <div class="liens">
+          <a href="tel:+33553578258">05 53 57 82 58</a>
+          <p>Numéro repris de l'office de tourisme <span class="vk-mention">à confirmer</span></p>
+          <a href="mailto:bowlingbergeracois@orange.fr">bowlingbergeracois@orange.fr</a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=44.834255,0.441341" rel="noopener" target="_blank">Itinéraire</a>
+        </div>
+        <div class="fin-cta">
+          <p id="fin-horaire"></p>
+          <a class="btn btn--plein" href="#reserver">Réserver une piste</a>
+        </div>
+      </div>
+      <figure class="fin-photo" style="margin:0"><img src="images/facade.webp" width="1100" height="602" loading="lazy" alt="La façade du Bowling Bergeracois et son enseigne"></figure>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="enveloppe">
+    <p class="mention" data-petit>Aperçu non commandé. Logo et photos appartiennent au parc ; retrait sur simple demande. Paiement simulé. Les valeurs marquées « exemple » sont à caler avec le parc, celles « à confirmer » à vérifier avec lui.</p>
+    <details class="gerant">
+      <summary>Pour le gérant</summary>
+      <div>
+        <ul>
+          <li>Un bouton « Réserver » mène à un vrai parcours : jour, heure, prix calculé avec votre grille, acompte en ligne. L'acompte de 30 % est un exemple.</li>
+          <li>La formule anniversaire « 2 parties » est un exemple construit avec vos prix : contenu et prix à caler avec vous.</li>
+          <li>Horaires : votre site affiche encore « horaires d'été » ; ceux de cette page viennent de l'office de tourisme (période du 2 novembre au 3 janvier). À confirmer, puis modifiables par vous à chaque saison.</li>
+          <li>Le numéro de téléphone et les 12 pistes viennent aussi de l'office de tourisme : à confirmer.</li>
+          <li>Carte Privilège : votre grille existe déjà ; ici, le client crée sa carte en ligne et la garde dans son téléphone. Prix et conditions à caler avec vous.</li>
+          <li>Le logo est recomposé en texte d'après l'enseigne (O rouge) : votre fichier de logo est à fournir.</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</footer>
+
+<script src="vong-kit.js"></script>
+<script>
+(function () {
+  "use strict";
+  var K = VongKit, q = new URLSearchParams(location.search);
+  var maintenant = q.get("t") ? new Date(q.get("t")) : new Date();
+  var aujourd = K.jourSeul(maintenant);
+  var reduit = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- Horaires ----------
+     Le site du parc (https://www.bowlingbergeracois.com/nos-horaires, lu le 16/11/2026) n'affiche que
+     « HORAIRES D'ETE : ouverture à 14h00 du lundi au vendredi, samedi et dimanche 14h30 », sans fermeture.
+     Horaires ci-dessous : office de tourisme du Pays de Bergerac, lu le 16/11/2026,
+     https://www.pays-bergerac-tourisme.com/fr/diffusio/bergerac/bowling-bergeracois_TFOLOIAQU024FS0001C
+       du 02/11/2026 au 18/12/2026 : lun 15-01, mar 17-01, mer 15-01, jeu 17-01, ven 15-02, sam 15-02, dim 15-00
+       du 19/12/2026 au 03/01/2027 : lun-jeu 14-01, ven 14-02, sam 15-02, dim 15-01 (= vacances de Noël, zone A, Dordogne)
+     Après le 03/01/2027 : rien de publié → jours « à confirmer ». Tout est marqué « à confirmer » (aConfirmer). */
+  var joursAConfirmer = { "2026-12-25": "Noël : ouverture à confirmer", "2027-01-01": "Jour de l'an : ouverture à confirmer" };
+  for (var d0 = K.deCle("2027-01-04"); K.cle(d0) <= K.LIMITE; d0 = K.plus(d0, 1)) joursAConfirmer[K.cle(d0)] = "horaires après le 3 janvier pas encore publiés : à confirmer";
+  var H = new K.Horaires({
+    zone: "A",
+    hors: [[[15, 24]], [[15, 25]], [[17, 25]], [[15, 25]], [[17, 25]], [[15, 26]], [[15, 26]]],
+    vac: [[[15, 25]], [[14, 25]], [[14, 25]], [[14, 25]], [[14, 25]], [[14, 26]], [[15, 26]]],
+    joursAConfirmer: joursAConfirmer,
+    aConfirmer: true
+  });
+  K.bandeau(document.getElementById("bandeau"), { horaires: H, maintenant: maintenant, lienHoraires: "#horaires" });
+
+  /* ---------- Prix : https://www.bowlingbergeracois.com/nos-tarifs (lu le 16/11/2026), recopiés mot pour mot ---------- */
+  var LIGNES = [
+    { id: "sj", lib: "Du lundi au samedi de 15h00 à 20h00", open: 5.5, privilege: 4.5, groupe: 5 },
+    { id: "ss", lib: "Du lundi au jeudi de 20h00 à 02h00", open: 6.5, privilege: 5.5, groupe: 6 },
+    { id: "vs", lib: "Vendredi soir", open: 7, privilege: 6, groupe: 6.5 },
+    { id: "sa", lib: "Samedi soir et veilles de fêtes", open: 7.5, privilege: 7.5, groupe: 7.5 },
+    { id: "dj", lib: "Dimanche et jours fériés de 15h00 à 20h00", open: 7.5, privilege: 6.5, groupe: 7 },
+    { id: "ds", lib: "Dimanche et jours fériés de 20h00 à minuit", open: 7.5, privilege: 6, groupe: 6.5 }
+  ];
+  var VEILLES = { "2026-12-24": 1, "2026-12-31": 1 };
+  function ligneTarif(d, h) {
+    var j = d.getDay(), fer = H.ferie(d);
+    if (j === 0 || fer) return h < 20 ? "dj" : "ds";
+    if (h < 20) return "sj";
+    if (VEILLES[K.cle(d)] || j === 6) return "sa";
+    if (j === 5) return "vs";
+    return "ss";
+  }
+  function prix(d, h, tarif) { var id = ligneTarif(d, h); return LIGNES.filter(function (l) { return l.id === id; })[0][tarif || "open"]; }
+
+  var NOTES = {
+    open: "Tarif sans carte. Veilles de fêtes (24 et 31 décembre) : à confirmer.",
+    privilege: "Sur présentation de la Carte Privilège. Prix et conditions de la carte, veilles de fêtes : à confirmer.",
+    groupe: "Pour les groupes et comités d'entreprise. Taille minimale du groupe, veilles de fêtes : à confirmer."
+  };
+  function rendrePrix(t) {
+    document.getElementById("grille-prix").innerHTML = LIGNES.map(function (l) { return "<div><dt>" + K.esc(l.lib) + "</dt><dd>" + K.euros(l[t]) + "</dd></div>"; }).join("");
+    document.getElementById("note-prix").textContent = NOTES[t];
+    document.querySelectorAll("[data-tarif]").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.tarif === t); });
+  }
+  document.querySelector(".onglets").onclick = function (e) { var b = e.target.closest("[data-tarif]"); if (b) rendrePrix(b.dataset.tarif); };
+  rendrePrix("open");
+
+  /* ---------- Anniversaire (formule d'exemple : 2 parties au tarif Open de la grille) ---------- */
+  var enfants = 8;
+  function majAnniv() {
+    var dim = document.querySelector("input[name=jour-anniv]:checked").value === "dimanche";
+    var p = 2 * (dim ? 7.5 : 5.5);
+    document.getElementById("nb-enfants").textContent = enfants;
+    document.getElementById("total-anniv").textContent = K.euros(enfants * p);
+    document.getElementById("detail-anniv").textContent = enfants + (enfants > 1 ? " enfants" : " enfant") + " × " + K.euros(p) + " (2 parties à " + K.euros(p / 2) + ")";
+  }
+  document.querySelector(".pas").onclick = function (e) { var b = e.target.closest("[data-pas]"); if (!b) return; enfants = Math.min(30, Math.max(1, enfants + +b.dataset.pas)); majAnniv(); };
+  document.querySelectorAll("input[name=jour-anniv]").forEach(function (r) { r.onchange = majAnniv; });
+  majAnniv();
+
+  /* ---------- Réservation ---------- */
+  var etat = { activite: "piste", joueurs: 4, parties: 1, enfants: 8, date: null, creneau: null };
+  var ACTIVITES = [
+    { id: "piste", nom: "Partie de bowling", prix: 5.5, aPartirDe: true, unite: "la partie, par personne", details: ["prix selon le jour et l'heure"] },
+    { id: "anniv", nom: "Anniversaire 2 parties", prix: 11, aPartirDe: true, unite: "par enfant", details: ["de 15 h à 20 h"], exemple: true }
+  ];
+  function rendreActivites() {
+    document.getElementById("activites").innerHTML = ACTIVITES.map(function (a) { return K.carteFormule(a, a.id === etat.activite); }).join("");
+    var r = document.getElementById("reglages");
+    if (etat.activite === "piste") r.innerHTML = compteur("joueurs", "Joueurs", etat.joueurs) + compteur("parties", "Parties par joueur", etat.parties);
+    else r.innerHTML = compteur("enfants", "Enfants, avec celui qu'on fête", etat.enfants);
+    resume();
+  }
+  function compteur(cle, lib, v) {
+    return '<div class="compteur"><span class="etiquette" id="lab-' + cle + '">' + lib + '</span><span class="pas" role="group" aria-labelledby="lab-' + cle + '">' +
+      '<button type="button" data-c="' + cle + '" data-d="-1" aria-label="' + lib + ' : un de moins">−</button><output aria-live="polite">' + v + '</output>' +
+      '<button type="button" data-c="' + cle + '" data-d="1" aria-label="' + lib + ' : un de plus">+</button></span></div>';
+  }
+  var MAX = { joueurs: 30, parties: 3, enfants: 30 };
+  document.getElementById("activites").onclick = function (e) {
+    var b = e.target.closest("[data-formule]"); if (!b) return;
+    if (etat.activite !== b.dataset.formule) { etat.activite = b.dataset.formule; etat.creneau = null; rendreActivites(); rendreCreneaux(); recap(); }
+  };
+  document.getElementById("reglages").onclick = function (e) {
+    var b = e.target.closest("[data-c]"); if (!b) return;
+    var c = b.dataset.c; etat[c] = Math.min(MAX[c], Math.max(1, etat[c] + +b.dataset.d));
+    b.parentNode.querySelector("output").textContent = etat[c]; resume(); recap();
+  };
+  function resume() {
+    var t = etat.activite === "piste" ? "Partie de bowling · " + etat.joueurs + (etat.joueurs > 1 ? " joueurs" : " joueur") + " · " + etat.parties + (etat.parties > 1 ? " parties" : " partie")
+      : "Anniversaire · " + etat.enfants + (etat.enfants > 1 ? " enfants" : " enfant");
+    document.getElementById("resume-choix").textContent = t;
+  }
+
+  function placesExemple(d, t) { return [0, 2, 3, 4, 5][K.hache(K.cle(d) + "-" + t + etat.activite) % 5]; } /* jamais 1 : l'unité reste au pluriel */
+  var cal = K.calendrier(document.getElementById("calendrier"), {
+    horaires: H, debut: maintenant, mois: 3,
+    surChoix: function (d) {
+      etat.date = d; etat.creneau = null; rendreCreneaux(); recap();
+      document.getElementById("etape-heure").scrollIntoView({ behavior: reduit ? "auto" : "smooth", block: "start" });
+    }
+  });
+  function rendreCreneaux() {
+    var el = document.getElementById("creneaux");
+    if (!etat.date) { el.className = ""; el.innerHTML = '<p class="vk-vide">Choisissez d\'abord un jour.</p>'; return; }
+    var anniv = etat.activite === "anniv";
+    var liste = K.creneaux({ horaires: H, date: etat.date, duree: anniv ? 1.5 : 1, pas: 0.5, dernierDebut: anniv ? 18 : undefined, maintenant: maintenant, places: placesExemple })
+      .filter(function (c) { return c.debut >= 15; }); /* la grille des prix commence à 15 h : avant, prix à confirmer, pas de réservation en ligne */
+    K.rendreCreneaux(el, liste, {
+      unite: anniv ? " places" : " pistes libres",
+      vide: anniv ? "Pas d'anniversaire possible ce jour-là (de 15 h à 20 h seulement). Choisissez un autre jour." : "Plus de créneau ce jour-là. Choisissez un autre jour.",
+      surChoix: function (c) { etat.creneau = c; recap(); document.getElementById("etape-recap").scrollIntoView({ behavior: reduit ? "auto" : "smooth", block: "start" }); },
+      surRefus: function (c) { K.erreur(el, c.passe ? "Ce créneau est déjà passé." : "Ce créneau est complet : choisissez une autre heure."); }
+    });
+    K.erreur(el, "");
+  }
+  function recap() {
+    var el = document.getElementById("recap");
+    if (!etat.date || !etat.creneau) { el.innerHTML = '<p class="vk-vide">Choisissez un jour et une heure : le prix et l\'acompte s\'affichent ici.</p>'; return null; }
+    var d = etat.date, h = etat.creneau.debut, p = prix(d, h, "open"), lignes;
+    var veille = VEILLES[K.cle(d)] && ligneTarif(d, h) === "sa" ? " · tarif veille de fête à confirmer" : "";
+    if (etat.activite === "piste") lignes = [{ libelle: etat.joueurs + (etat.joueurs > 1 ? " joueurs" : " joueur") + " × " + etat.parties + (etat.parties > 1 ? " parties" : " partie") + " à " + K.euros(p) + veille, quantite: 1, prixUnitaire: Math.round(etat.joueurs * etat.parties * p * 100) / 100 }];
+    else lignes = [{ libelle: "Anniversaire, 2 parties à " + K.euros(p) + veille, quantite: etat.enfants, prixUnitaire: 2 * p, exemple: true }];
+    var c = K.recapitulatif(el, { lignes: lignes, tauxAcompte: 0.3, acompteExemple: true });
+    el.insertAdjacentHTML("afterbegin", '<p class="resume-choix">' + K.esc(K.dateLongue(d).replace(/^./, function (x) { return x.toUpperCase(); })) + " à " + K.heure(h) + ' · horaires <span class="vk-mention">à confirmer</span></p>');
+    return c;
+  }
+  document.getElementById("payer").onclick = function () {
+    var b = this, nom = document.getElementById("nom").value.trim(), tel = document.getElementById("telephone").value.trim();
+    if (!etat.date) { K.erreur(b, "Choisissez un jour (étape 2)."); return; }
+    if (!etat.creneau) { K.erreur(b, "Choisissez une heure (étape 3)."); return; }
+    if (!nom || tel.replace(/\D/g, "").length < 10) { K.erreur(b, "Indiquez votre nom et un numéro de téléphone à 10 chiffres."); return; }
+    K.erreur(b, "");
+    var c = recap(), anniv = etat.activite === "anniv";
+    K.confirmation(document.getElementById("confirmation"), {
+      numero: K.numero("BB"), date: etat.date, debut: etat.creneau.debut, duree: anniv ? 1.5 : 1,
+      titre: (anniv ? "Anniversaire" : "Bowling") + " au Bowling Bergeracois", lieu: "Bowling Bergeracois, Route de Bordeaux, 7 Zone de Loisirs, 24100 Saint-Laurent-des-Vignes",
+      resume: "Acompte payé : " + K.euros(c.acompte) + " (exemple). Reste sur place : " + K.euros(c.reste) + ". Horaires à confirmer avec le bowling."
+    });
+  };
+
+  /* Ouvrir la réservation déjà réglée sur l'anniversaire */
+  document.getElementById("btn-anniv").onclick = function () {
+    etat.activite = "anniv"; etat.enfants = enfants; etat.creneau = null; rendreActivites(); rendreCreneaux(); recap();
+    document.getElementById("etape-jour").scrollIntoView({ behavior: reduit ? "auto" : "smooth", block: "start" });
+  };
+  document.getElementById("btn-heros").addEventListener("click", function () {
+    if (etat.activite !== "piste") { etat.activite = "piste"; etat.creneau = null; rendreActivites(); rendreCreneaux(); recap(); }
+  });
+
+  /* ---------- Carte Privilège (aperçu) ---------- */
+  document.getElementById("btn-carte").onclick = function () {
+    var b = this, p = document.getElementById("prenom-carte").value.trim(), m = document.getElementById("mail-carte").value.trim();
+    if (!p || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)) { K.erreur(b, "Indiquez votre prénom et une adresse e-mail valide."); return; }
+    K.erreur(b, "");
+    var ok = document.getElementById("carte-ok"); ok.hidden = false;
+    ok.textContent = "C'est fait, " + p + " : votre carte vivrait dans votre téléphone. Aperçu : rien n'est enregistré.";
+  };
+
+  /* ---------- Horaires de la semaine : tout passe par H.jour / H.texteJour ---------- */
+  var lundi0 = K.plus(aujourd, -((aujourd.getDay() + 6) % 7)), decal = 0, MAXSEM = 7;
+  function rendreSemaine() {
+    var debut = K.plus(lundi0, decal * 7), h = [];
+    document.getElementById("semaine-titre").textContent = decal === 0 ? "Cette semaine" : "Semaine du " + debut.getDate() + " " + K.MOIS[debut.getMonth()];
+    for (var i = 0; i < 7; i++) {
+      var d = K.plus(debut, i), j = H.jour(d), cls = [];
+      if (K.cle(d) === K.cle(aujourd)) cls.push("auj");
+      if (!j.ouvert) cls.push("ferme");
+      var txt = j.ouvert ? H.texteJour(d) : (j.aConfirmer ? "à confirmer" : "Fermé");
+      var lib = K.dateLongue(d).replace(/^./, function (x) { return x.toUpperCase(); }) + (j.motif && j.ouvert ? " · " + j.motif : "");
+      h.push('<div class="' + cls.join(" ") + '"><dt>' + K.esc(lib) + "</dt><dd>" + K.esc(txt) + "</dd></div>");
+    }
+    document.getElementById("semaine").innerHTML = h.join("");
+    document.getElementById("sem-prec").disabled = decal <= 0;
+    document.getElementById("sem-suiv").disabled = decal >= MAXSEM;
+    var vac = H.vacance(K.plus(debut, 3)) || H.vacance(debut) || H.vacance(K.plus(debut, 6));
+    document.getElementById("periode-note").textContent = "Après minuit, l'heure de fermeture est celle de la nuit suivante." + (vac ? " Pendant les " + vac + ", horaires de vacances." : "");
+  }
+  document.getElementById("sem-prec").onclick = function () { if (decal > 0) { decal--; rendreSemaine(); } };
+  document.getElementById("sem-suiv").onclick = function () { if (decal < MAXSEM) { decal++; rendreSemaine(); } };
+  rendreSemaine();
+  var jA = H.jour(aujourd);
+  document.getElementById("fin-horaire").textContent = "Aujourd'hui : " + (jA.ouvert ? H.texteJour(aujourd) + " (à confirmer)." : (jA.aConfirmer ? "ouverture à confirmer." : "fermé (à confirmer)."));
+
+  rendreActivites(); rendreCreneaux();
+
+  /* Fermer le menu téléphone après un choix */
+  document.querySelectorAll(".menu-tel nav a").forEach(function (a) { a.addEventListener("click", function () { a.closest("details").open = false; }); });
+})();
+</script>
+</body>
+</html>

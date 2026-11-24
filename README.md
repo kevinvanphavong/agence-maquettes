@@ -52,6 +52,9 @@ En ligne : `https://kevinvanphavong.github.io/agence-maquettes/`
 | Bowling de Bressuire, Bocabowl (v6, 12/11/2026, identité « Nuit électrique ») | `https://kevinvanphavong.github.io/agence-maquettes/bowling-bressuire-v6-0cf0e6/` |
 | Le Monde des P'tits Loups (10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-7d3af2/` |
 | Le Monde des P'tits Loups (v4, 10/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/monde-des-ptits-loups-v4-77a4cd/` |
+| Bowling Bergeracois (v1, 24/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/bowling-bergeracois-v1-f171fc/` |
+| Laser Play (v1, 24/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/laser-play-v1-8cfaca/` |
+| Bax Bowling (v1, 24/11/2026) | `https://kevinvanphavong.github.io/agence-maquettes/bax-bowling-v1-1e73d4/` |
 
 À chaque prospect, on envoie **uniquement le lien direct de sa maquette** — jamais le lien portfolio (qui liste toutes les maquettes).
 

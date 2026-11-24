@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>BAX Brumath · réserver bowling et anniversaire (aperçu)</title>
+<meta name="description" content="Aperçu non commandé : la future page d'accueil du BAX à Brumath, bowling et anniversaires réservables en ligne avec acompte.">
+<link rel="preload" href="polices/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="polices/public-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="images/accueil-pistes-800.webp" as="image" type="image/webp" media="(max-width: 959px)">
+<link rel="stylesheet" href="vong-kit.css">
+<style>
+/* Matière : Hallmark « Manifesto » (feuille sombre, capitales Anton, filets, angles droits, un seul rouge),
+   recolorée avec le noir et le rouge du BAX (#FF0C3C, relevé dans la feuille de style du site, post-167.css). Curseur « Proche ».
+   Écart assumé au style : les photos restent en couleur (les néons des pistes sont l'identité du parc). */
+@font-face { font-family: "Anton"; src: url(polices/anton-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Public Sans"; src: url(polices/public-sans-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Public Sans"; src: url(polices/public-sans-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+:root {
+  --paper: #14110e; --paper-2: #1d1915; --paper-3: #28221c;
+  --ink: #f5f0e7; --ink-2: #dcd5c9; --muted: #a89f93; --rule: #3b342d;
+  --red: #ff0c3c; --red-btn: #d6002d; --red-btn-h: #b00026; --red-text: #ff4d6a;
+  --display: "Anton", Impact, "Arial Narrow", sans-serif; --body: "Public Sans", system-ui, sans-serif;
+  --vk-fond: var(--paper); --vk-texte: var(--ink); --vk-doux: var(--muted); --vk-trait: var(--rule);
+  --vk-accent: var(--red-btn); --vk-sur-accent: #fff; --vk-ok: #3ccf74; --vk-ferme: #8a8176; --vk-rayon: 0; --vk-police: var(--body);
+  --head: 64px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--head) + 8px); }
+html, body { overflow-x: clip; }
+body { margin: 0; background: var(--paper); color: var(--ink-2); font: 400 1rem/1.55 var(--body); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--red-text); }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 1.02; color: var(--ink); letter-spacing: .004em; margin: 0; }
+h2 { font-size: clamp(2.5rem, 9vw, 4.5rem); }
+h3 { font-size: 1.75rem; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--red-text); outline-offset: 2px; }
+.enveloppe { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+.mention { display: inline-block; font-size: .875rem; font-weight: 600; padding: 0 6px; border: 1px solid currentColor; line-height: 1.5; color: var(--ink-2); }
+
+/* Bandeau d'aperçu, une ligne */
+.apercu { background: var(--paper-2); color: var(--muted); font-size: .875rem; text-align: center; padding: 4px 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-bottom: 1px solid var(--rule); }
+
+/* En-tête : filet épais sous la barre (Manifesto) */
+.tete { position: sticky; top: 0; z-index: 20; background: var(--paper); border-bottom: 4px solid var(--ink); }
+.tete .enveloppe { display: flex; align-items: center; gap: 8px; height: var(--head); }
+.logo { display: flex; align-items: center; min-height: 44px; margin-right: auto; text-decoration: none; }
+.logo img { width: 104px; height: 38px; object-fit: contain; }
+.nav { display: none; }
+.nav a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; text-decoration: none; font-weight: 600; color: var(--ink); }
+.nav a:hover { color: var(--red-text); }
+.btn-icone, .btn-menu { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: none; border: 1px solid var(--rule); color: var(--ink); font: 600 1rem var(--body); cursor: pointer; padding: 0 12px; text-decoration: none; }
+.btn-icone:hover, .btn-menu:hover { border-color: var(--ink-2); color: var(--ink); }
+.btn-icone svg { width: 20px; height: 20px; }
+.tiroir { border-bottom: 1px solid var(--rule); background: var(--paper); }
+.tiroir[hidden] { display: none; }
+.tiroir ul { list-style: none; margin: 0; padding: 4px 16px 12px; }
+.tiroir a { display: flex; align-items: center; min-height: 52px; border-bottom: 1px solid var(--rule); font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; text-decoration: none; color: var(--ink); }
+
+/* Boutons carrés */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 28px; border: 1px solid transparent; border-radius: 0; font: 600 1.125rem var(--body); cursor: pointer; text-decoration: none; transition: background-color .15s, color .15s, border-color .15s; }
+.btn-rouge { background: var(--red-btn); color: #fff; }
+.btn-rouge:hover { background: var(--red-btn-h); color: #fff; }
+.btn-trait { border-color: var(--ink-2); color: var(--ink); background: none; min-height: 48px; padding: 0 20px; font-size: 1rem; }
+.btn-trait:hover { background: var(--red-btn); border-color: var(--red-btn); color: #fff; }
+.btn-plein { width: 100%; }
+
+/* ===== Premier écran : Feature Stack (S7) ===== */
+.une { padding: 18px 0 28px; }
+.une-grille { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+/* Téléphone : le carrousel des activités prend le centre de l'écran, entre la phrase et l'horaire du jour */
+.une-pan { display: contents; }
+.une h1 { order: 1; } .une .chapo { order: 2; } .une .pile { order: 3; } .une #bandeau { order: 4; } .une .une-cta { order: 5; }
+.une h1 { font-size: clamp(2.6rem, 11.2vw, 5.6rem); line-height: .98; }
+.une h1 .rouge { color: var(--red); white-space: nowrap; }
+.une h1 .ligne { display: block; }
+.une .chapo { font-size: 1.0625rem; color: var(--ink-2); max-width: 34ch; }
+.une .vk-bandeau { padding: 8px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.vk-bandeau strong { color: var(--ink); }
+.vk-bandeau .vk-lien { color: var(--ink); }
+.une-cta { display: grid; gap: 6px; }
+.une-cta .btn { width: 100%; }
+.une-cta .sous { color: var(--muted); font-size: 1rem; }
+
+/* Activités : carrousel horizontal sur téléphone, pile qui défile sur ordinateur */
+.pile { list-style: none; margin: 0 -16px; padding: 0 16px 6px; display: grid; grid-auto-flow: column; grid-auto-columns: min(76vw, 300px); gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--rule) transparent; overscroll-behavior-x: contain; }
+.carte { position: relative; scroll-snap-align: start; min-width: 0; display: grid; grid-template-rows: auto 1fr; background: var(--paper-2); border: 1px solid var(--rule); }
+.carte .visuel { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--paper-3); }
+.carte .visuel img { width: 100%; height: 100%; object-fit: cover; }
+.a-fournir { display: grid; place-items: center; height: 100%; color: var(--muted); font-weight: 600; border: 1px dashed var(--muted); margin: 10px; height: calc(100% - 20px); text-align: center; padding: 8px; }
+.carte .corps { display: grid; gap: 2px; padding: 10px 14px 12px; align-content: start; }
+.carte h3 { font-size: 1.625rem; }
+.carte .prix { color: var(--ink); font-weight: 600; }
+.carte .prix b { font-family: var(--display); font-weight: 400; font-size: 1.5rem; color: var(--ink); letter-spacing: .01em; }
+.carte .lien { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; color: var(--ink); }
+.carte .lien:hover { color: var(--red-text); }
+.carte .lien svg { width: 16px; height: 16px; margin-left: 6px; flex: none; }
+.carte .note { color: var(--muted); }
+
+/* Sections */
+section.bloc { padding: 56px 0; border-top: 1px solid var(--rule); }
+.bloc .titre { display: grid; gap: 10px; margin-bottom: 24px; }
+.bloc .titre p { max-width: 52ch; }
+
+/* Réservation (briques du kit habillées) */
+.resa { background: var(--paper-2); border-top: 4px solid var(--ink); }
+.resa-boite { max-width: 720px; }
+.etapes-fil { color: var(--muted); font-weight: 600; margin-bottom: 6px; }
+.etape { display: grid; gap: 16px; border: 0; padding: 0; margin: 0; min-width: 0; }
+.etape[hidden] { display: none; }
+.etape legend { font-family: var(--display); text-transform: uppercase; color: var(--ink); font-size: 2rem; line-height: 1.05; padding: 0; margin-bottom: 4px; }
+.choix-act { display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); }
+.choix-act button { display: grid; gap: 2px; text-align: left; min-height: 64px; padding: 12px 16px; background: var(--paper); border: 1px solid var(--rule); color: var(--ink); font: inherit; cursor: pointer; min-width: 0; }
+.choix-act button strong { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.5rem; line-height: 1.1; }
+.choix-act button span { color: var(--ink-2); }
+.choix-act button:hover { border-color: var(--ink-2); }
+.externes { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.externes a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; border-bottom: 1px solid var(--rule); text-decoration: none; font-weight: 600; }
+.externes a span { color: var(--muted); font-weight: 400; }
+.retour { justify-self: start; }
+.ligne-choix { display: grid; gap: 8px; }
+.ligne-choix label, .champ label { font-weight: 600; color: var(--ink); min-height: 44px; display: flex; align-items: flex-end; }
+@media (max-width: 420px) { #cal { margin: 0 -16px; width: calc(100% + 32px); } #cal .vk-cal-grille { gap: 2px 0; } #cal .vk-cal-tete, #cal .vk-cal-info, #cal .vk-cal-legende { padding: 0 16px; } }
+.compteur { display: flex; align-items: center; gap: 0; border: 1px solid var(--rule); width: max-content; background: var(--paper); }
+.compteur button { width: 48px; height: 52px; background: none; border: 0; color: var(--ink); font: 600 1.5rem var(--body); cursor: pointer; }
+.compteur button:hover { background: var(--paper-3); }
+.compteur output { min-width: 44px; text-align: center; font-family: var(--display); font-size: 1.75rem; color: var(--ink); }
+.coches { display: grid; gap: 4px; }
+.coche { display: flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; color: var(--ink); }
+.coche input { width: 22px; height: 22px; accent-color: var(--red-btn); flex: none; margin: 0; }
+select, input[type=text], input[type=tel] { width: 100%; min-height: 52px; padding: 0 14px; background: var(--paper); border: 1px solid var(--rule); border-radius: 0; color: var(--ink); font: 1rem var(--body); }
+select:focus-visible, input:focus-visible { outline: 3px solid var(--red-text); outline-offset: 1px; }
+.champ { display: grid; gap: 6px; min-width: 0; }
+.champs { display: grid; gap: 12px; grid-template-columns: minmax(0, 1fr); }
+#quantites { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+#quantites .coches { grid-column: 1 / -1; }
+.formules { display: grid; gap: 10px; grid-template-columns: minmax(0, 1fr); }
+.vk-formule { background: var(--paper); }
+.vk-formule .vk-f-nom { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.5rem; color: var(--ink); line-height: 1.1; }
+.vk-formule.vk-choisi { border-color: var(--red); box-shadow: inset 0 0 0 2px var(--red); }
+.vk-f-prix { color: var(--ink); }
+.vk-calendrier { max-width: 460px; }
+.vk-cal-tete strong { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.5rem; color: var(--ink); }
+.vk-cal-nav { border-color: var(--rule); color: var(--ink); }
+.vk-jour.vk-vac { background: var(--paper-3); color: var(--ink); box-shadow: inset 0 -3px 0 #e9c46a; }
+.vk-jour.vk-fer { background: var(--paper-3); color: var(--ink); box-shadow: inset 0 -3px 0 var(--red-text); }
+.vk-jour.vk-ferme { background: transparent; box-shadow: none; }
+.vk-jour.vk-aconf { background: transparent; box-shadow: none; }
+.vk-jour.vk-ferme { color: var(--vk-ferme); }
+.vk-jour.vk-choisi { background: var(--red-btn); color: #fff; box-shadow: none; }
+.vk-jour:not([aria-disabled]):hover { outline: 1px solid var(--ink-2); }
+.vk-l-vac { background: var(--paper-3); box-shadow: inset 0 -3px 0 #e9c46a; }
+.vk-l-fer { background: var(--paper-3); box-shadow: inset 0 -3px 0 var(--red-text); }
+.vk-cal-info { color: var(--ink); font-weight: 600; }
+.vk-cal-js, .vk-cal-legende, .vk-creneau span { font-size: 1rem; }
+.vk-creneau { background: var(--paper); }
+.vk-creneau strong { color: inherit; }
+.vk-creneau.vk-choisi { background: var(--red-btn); border-color: var(--red-btn); color: #fff; }
+.vk-recap { padding: 16px; background: var(--paper); border: 1px solid var(--rule); }
+.vk-recap dt, .vk-recap dd { color: var(--ink-2); }
+.vk-recap .vk-total { color: var(--ink); }
+.vk-recap .vk-acompte { color: var(--red-text); font-size: 1.125rem; }
+.vk-simule { color: var(--muted); }
+.vk-erreur { color: #ff8a8a; }
+.vk-vide { color: var(--muted); }
+.info-etape { color: var(--ink-2); }
+.vk-confirmation { padding: 20px; border: 1px solid var(--rule); border-top: 4px solid var(--red); background: var(--paper); display: grid; gap: 10px; }
+.vk-c-titre { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 2.25rem; color: var(--ink); }
+.vk-agenda { border-color: var(--ink-2); color: var(--ink); justify-self: start; }
+.vk-agenda:hover { background: var(--red-btn); border-color: var(--red-btn); color: #fff; }
+
+/* Anniversaires : le registre (rangées sous filets) */
+.registre { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.registre li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.registre .nom { font-family: var(--display); text-transform: uppercase; font-size: 1.75rem; color: var(--ink); line-height: 1.05; }
+.registre .detail { grid-column: 1 / -1; color: var(--ink-2); }
+.registre .total { font-family: var(--display); font-size: 1.75rem; color: var(--ink); text-align: right; white-space: nowrap; }
+.registre .total small { font-family: var(--body); font-size: 1rem; color: var(--muted); display: block; text-align: right; }
+.calcul { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin: 0 0 16px; }
+.calcul p { color: var(--ink); font-weight: 600; }
+.regles { margin: 20px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.regles li { padding-left: 18px; position: relative; }
+.regles li::before { content: ""; position: absolute; left: 0; top: .7em; width: 8px; height: 2px; background: var(--ink-2); }
+.anniv-bas { display: grid; gap: 16px; margin-top: 24px; }
+.anniv-bas .acompte { font-family: var(--display); text-transform: uppercase; color: var(--ink); font-size: 2rem; line-height: 1.05; }
+
+/* Prix du bowling */
+.tableau { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.tableau th, .tableau td { padding: 10px 6px; border-bottom: 1px solid var(--rule); text-align: right; }
+.tableau th:first-child, .tableau td:first-child { text-align: left; padding-left: 0; }
+.tableau thead th { color: var(--muted); font-weight: 600; }
+.tableau tbody th { color: var(--ink); font-weight: 600; }
+.tableau td { color: var(--ink); }
+.tableau tr.auj th, .tableau tr.auj td { color: var(--red-text); }
+.petits-plus { margin-top: 16px; display: grid; gap: 4px; }
+
+/* Venir : horaires de la semaine + adresse + Réserver */
+.venir-grille { display: grid; gap: 32px; }
+.semaine { width: 100%; border-collapse: collapse; }
+.semaine th, .semaine td { padding: 10px 0; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.semaine td { text-align: right; color: var(--ink); }
+.semaine tr.auj th, .semaine tr.auj td { color: var(--red-text); font-weight: 600; }
+.semaine th { color: var(--ink); font-weight: 600; }
+.adresse { display: grid; gap: 10px; }
+.adresse .grande { font-family: var(--display); text-transform: uppercase; font-size: 2rem; color: var(--ink); line-height: 1.05; }
+.adresse a { display: inline-flex; align-items: center; min-height: 44px; }
+.autres-h { color: var(--ink-2); margin-top: 14px; }
+
+/* Pour le gérant (repliable) + pied */
+.gerant { border: 1px solid var(--rule); background: var(--paper-2); }
+.gerant summary { min-height: 52px; display: flex; align-items: center; padding: 0 16px; cursor: pointer; font-weight: 600; color: var(--ink); }
+.gerant .contenu { padding: 0 16px 16px; display: grid; gap: 10px; }
+.gerant ol { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.pied { padding: 32px 0 48px; color: var(--muted); }
+.pied .enveloppe { display: grid; gap: 16px; }
+.pied p { font-size: 1rem; }
+.pied [data-petit] { font-size: .875rem; }
+
+/* Ordinateur : colonne collante à gauche, activités qui défilent à droite */
+@media (min-width: 960px) {
+  :root { --head: 76px; }
+  .nav { display: flex; gap: 4px; margin-right: 8px; }
+  .btn-menu { display: none; }
+  .logo img { width: 128px; height: 46px; }
+  .une { padding: 40px 0 64px; }
+  .une-grille { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 56px; align-items: start; }
+  .une-pan { display: grid; position: sticky; top: calc(var(--head) + 32px); gap: 20px; min-width: 0; }
+  .une .pile { order: 0; }
+  .une h1 { font-size: clamp(4rem, 5.6vw, 5.6rem); }
+  .une .chapo { font-size: 1.25rem; }
+  .pile { margin: 0; padding: 0; grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); overflow: visible; gap: 20px; }
+  .carte.large { grid-column: 1 / -1; }
+  .carte.large .visuel { aspect-ratio: 16 / 9; }
+  .carte h3 { font-size: 2rem; }
+  .bloc .titre { margin-bottom: 32px; }
+  .choix-act { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .formules { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .champs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .anniv-grille { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: start; }
+  .venir-grille { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; }
+  .prix-grille { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; }
+}
+@media (max-width: 380px) { .une h1 { font-size: 2.45rem; } .carte h3 { font-size: 1.5rem; } .carte .visuel { aspect-ratio: 2 / 1; } }
+@media (prefers-reduced-motion: no-preference) {
+  .une h1 { animation: essuie .7s cubic-bezier(.2, .7, .2, 1) both; }
+  @keyframes essuie { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0); } }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<p class="apercu" data-petit>Aperçu non commandé · paiement simulé</p>
+
+<header class="tete">
+  <div class="enveloppe">
+    <a class="logo" href="#haut" aria-label="BAX, accueil"><img src="images/logo-bax.png" width="320" height="116" alt="BAX"></a>
+    <nav class="nav" data-ux="menu" aria-label="Menu principal">
+      <a href="#activites">Activités</a>
+      <a href="#anniversaires">Anniversaires</a>
+      <a href="#prix">Prix</a>
+      <a href="#horaires">Horaires</a>
+    </nav>
+    <a class="btn-icone" href="tel:+33390299220" aria-label="Appeler le BAX au 03 90 29 92 20"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2"/></svg></a>
+    <button class="btn-menu" type="button" aria-expanded="false" aria-controls="tiroir">Menu</button>
+  </div>
+  <div class="tiroir" id="tiroir" hidden>
+    <ul>
+      <li><a href="#activites">Activités</a></li>
+      <li><a href="#anniversaires">Anniversaires</a></li>
+      <li><a href="#prix">Prix</a></li>
+      <li><a href="#horaires">Horaires</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="haut">
+  <!-- S7 Feature Stack : à gauche (ordinateur) ou en haut (téléphone) le titre, l'horaire du jour et le bouton ;
+       les activités défilent à droite (ordinateur) ou en carrousel horizontal (téléphone). -->
+  <section class="une" id="activites" aria-labelledby="titre-une">
+    <div class="enveloppe une-grille">
+      <div class="une-pan">
+        <h1 id="titre-une"><span class="ligne">Votre piste</span> <span class="ligne">de bowling,</span> <span class="ligne">réservée <span class="rouge">en ligne</span></span></h1>
+        <p class="chapo">Bowling ou anniversaire : l'heure choisie, l'acompte payé, c'est fait.</p>
+        <div id="bandeau" data-ux="horaires"></div>
+        <div class="une-cta">
+          <a class="btn btn-rouge" href="#reserver" data-ux="reserver" data-ouvre="">Réserver</a>
+        </div>
+      </div>
+
+      <ul class="pile" aria-label="Les activités du BAX">
+        <li class="carte large">
+          <div class="visuel"><img data-ux="photo" src="images/accueil-pistes-800.webp" srcset="images/accueil-pistes-800.webp 800w, images/accueil-pistes-1400.webp 1400w" sizes="(min-width: 960px) 640px, 76vw" width="800" height="533" alt="Les 28 pistes du BAX sous les néons" fetchpriority="high"></div>
+          <div class="corps">
+            <h3>Bowling · 28 pistes</h3>
+            <p class="prix" data-ux="prix">dès <b>3,60 €</b> la partie</p>
+            <a class="lien" href="#reserver" data-ouvre="bowling">Choisir mon heure</a>
+          </div>
+        </li>
+        <li class="carte">
+          <div class="visuel"><img src="images/groupe-pistes.webp" width="640" height="853" alt="Un groupe sur les pistes du BAX" loading="lazy" style="object-position: 50% 30%"></div>
+          <div class="corps">
+            <h3>Anniversaire enfant</h3>
+            <p class="prix">dès <b>16 €</b> par enfant</p>
+            <a class="lien" href="#anniversaires">Calculer le prix</a>
+          </div>
+        </li>
+        <li class="carte">
+          <div class="visuel"><img src="images/karting.webp" width="640" height="853" alt="Les karts électriques du BAX Kart" loading="lazy"></div>
+          <div class="corps">
+            <h3>Karting</h3>
+            <p class="note">Dès 11 ans</p>
+            <a class="lien" href="https://karting.baxbowling.fr/" target="_blank" rel="noopener" aria-label="Réserver le karting sur le site karting (nouvel onglet)">Site karting<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </li>
+        <li class="carte">
+          <div class="visuel"><img src="images/laser.webp" width="640" height="427" alt="Le labyrinthe du laser game en lumière noire" loading="lazy"></div>
+          <div class="corps">
+            <h3>Laser games</h3>
+            <p class="prix"><b>8 €</b> la partie</p>
+          </div>
+        </li>
+        <li class="carte">
+          <div class="visuel"><img src="images/mini-golf.webp" width="640" height="427" alt="Le mini golf fluorescent et sa girafe" loading="lazy"></div>
+          <div class="corps">
+            <h3>Mini golf</h3>
+            <p class="prix"><b>8 €</b> adulte</p>
+          </div>
+        </li>
+        <li class="carte">
+          <div class="visuel"><div class="a-fournir">Photo à fournir</div></div>
+          <div class="corps">
+            <h3>Quiz Room</h3>
+            <a class="lien" href="https://www.quiz-room.com/reservation/brumath" target="_blank" rel="noopener" aria-label="Réserver la Quiz Room (nouvel onglet)">Réservation en ligne<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </li>
+        <li class="carte">
+          <div class="visuel"><div class="a-fournir">Photo à fournir</div></div>
+          <div class="corps">
+            <h3>Escape games</h3>
+            <a class="lien" href="https://baxbowling.fr/escape-game/" target="_blank" rel="noopener" aria-label="Réserver un escape game (nouvel onglet)">Réservation en ligne<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Réservation : bowling et anniversaire en ligne avec acompte (briques du kit) -->
+  <section class="bloc resa" id="reserver" aria-labelledby="titre-resa">
+    <div class="enveloppe resa-boite">
+      <div class="titre">
+        <h2 id="titre-resa">Réserver</h2>
+        <p>Créneau, prix et acompte tout de suite, sans formulaire à déposer.</p>
+      </div>
+      <p class="etapes-fil" id="fil" aria-live="polite">Étape 1</p>
+
+      <fieldset class="etape" id="e-activite">
+        <legend>Vous venez pour…</legend>
+        <div class="choix-act">
+          <button type="button" data-act="bowling"><strong>Bowling</strong><span>Une ou plusieurs pistes, dès 3,60 € la partie</span></button>
+          <button type="button" data-act="anniv"><strong>Anniversaire enfant</strong><span>De 3 à 18 ans, dès 16 € par enfant</span></button>
+        </div>
+        <p class="info-etape">Déjà réservables en ligne, sur leur propre module :</p>
+        <div class="externes">
+          <a href="https://karting.baxbowling.fr/" target="_blank" rel="noopener">Karting <span>site karting, nouvel onglet</span></a>
+          <a href="https://www.quiz-room.com/reservation/brumath" target="_blank" rel="noopener">Quiz Room <span>nouvel onglet</span></a>
+          <a href="https://baxbowling.fr/escape-game/" target="_blank" rel="noopener">Escape games <span>nouvel onglet</span></a>
+        </div>
+      </fieldset>
+
+      <fieldset class="etape" id="e-formule" hidden>
+        <legend>La formule anniversaire</legend>
+        <div class="formules" id="formules"></div>
+        <div id="choix-activites" class="champs"></div>
+        <p class="info-etape">Le goûter suit les activités, table réservée environ 45 min. Goûter au choix : liste à fournir par le parc.</p>
+        <button type="button" class="btn btn-trait" id="suite-formule">Continuer</button>
+        <button type="button" class="btn-icone retour" data-retour>Retour</button>
+      </fieldset>
+
+      <fieldset class="etape" id="e-date" hidden>
+        <legend>Quel jour, quelle heure ?</legend>
+        <div id="cal"></div>
+        <div>
+          <p class="info-etape" id="info-creneaux">Choisissez un jour pour voir les heures libres.</p>
+          <div id="creneaux"></div>
+        </div>
+        <button type="button" class="btn-icone retour" data-retour>Retour</button>
+      </fieldset>
+
+      <fieldset class="etape" id="e-recap" hidden>
+        <legend id="titre-recap">Votre réservation</legend>
+        <p class="info-etape" id="quand"></p>
+        <div id="quantites" class="champs"></div>
+        <div id="recap"></div>
+        <p class="info-etape" id="note-recap"></p>
+        <div class="champs">
+          <div class="champ"><label for="nom">Nom</label><input id="nom" type="text" autocomplete="name"></div>
+          <div class="champ"><label for="tel">Téléphone</label><input id="tel" type="tel" autocomplete="tel" inputmode="tel"></div>
+        </div>
+        <button type="button" class="btn btn-rouge btn-plein" id="payer">Payer l'acompte (simulé)</button>
+        <button type="button" class="btn-icone retour" data-retour>Retour</button>
+      </fieldset>
+
+      <div id="conf"></div>
+    </div>
+  </section>
+
+  <section class="bloc" id="anniversaires" aria-labelledby="titre-anniv">
+    <div class="enveloppe anniv-grille">
+      <div>
+        <div class="titre">
+          <h2 id="titre-anniv">Son anniversaire au BAX</h2>
+          <p>Activités, goûter, table : on s'occupe de tout. Vous réservez d'ici.</p>
+        </div>
+        <div class="calcul">
+          <div class="compteur" role="group" aria-label="Nombre d'enfants">
+            <button type="button" id="moins" aria-label="Un enfant de moins">−</button>
+            <output id="nb-enfants" aria-live="polite">8</output>
+            <button type="button" id="plus" aria-label="Un enfant de plus">+</button>
+          </div>
+          <p id="lib-enfants">enfants, fêté compris</p>
+        </div>
+        <ul class="registre" id="registre"></ul>
+      </div>
+      <div class="anniv-bas">
+        <p class="acompte">Acompte de 55 € payé en ligne</p>
+        <ul class="regles">
+          <li>De 3 à 18 ans, 6 enfants minimum (sous 6, 6 enfants sont facturés).</li>
+          <li>Activités au choix : bowling, laser games, Kids Park (3 h max), mini golf (1 partie).</li>
+          <li>Un accompagnateur majeur minimum pour 5 enfants.</li>
+          <li>Modification possible jusqu'à 48 h avant.</li>
+        </ul>
+        <button type="button" class="btn btn-trait" data-ouvre="anniv">Réserver cet anniversaire</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloc" id="prix" aria-labelledby="titre-prix">
+    <div class="enveloppe prix-grille">
+      <div>
+        <div class="titre">
+          <h2 id="titre-prix">Prix du bowling</h2>
+          <p>Par partie et par personne, dès 3 ans.</p>
+        </div>
+        <table class="tableau" id="grille-prix">
+          <thead><tr><th scope="col">Jour</th><th scope="col">avant 19 h</th><th scope="col">après 19 h</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="petits-plus">
+        <p>Location de chaussures : 2 €. Paire de chaussettes : 1 €. Chaussettes propres obligatoires, pointures du 22 au 52.</p>
+        <p>En cas de conflit entre deux tarifs, le plus cher des deux s'applique.</p>
+        <p>Laser games : 8 € la partie, 15 € les 2, 20 € les 3. Mini golf : 8 € adulte, 7 € tarif réduit, gratuit sous 90 cm.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bloc" id="horaires" aria-labelledby="titre-venir">
+    <div class="enveloppe venir-grille">
+      <div>
+        <div class="titre">
+          <h2 id="titre-venir">Horaires de la semaine</h2>
+          <p id="validite"></p>
+        </div>
+        <table class="semaine" id="semaine"><caption class="vk-sr">Horaires du bowling, des 7 prochains jours</caption><tbody></tbody></table>
+        <p class="autres-h">Laser games et mini golf : fermeture à 23 h (1 h 30 le vendredi et le samedi). Kids Park : jusqu'à 23 h. Dernières parties 30 min avant la fermeture.</p>
+      </div>
+      <div class="adresse">
+        <p class="grande">21 rue de l'Industrie, 67170 Brumath</p>
+        <p>À 20 min de Strasbourg. Parking gratuit, établissement climatisé.</p>
+        <p><a href="tel:+33390299220">03 90 29 92 20</a> · <a href="mailto:contact@baxbowling.fr">contact@baxbowling.fr</a></p>
+        <p><a href="https://www.openstreetmap.org/search?query=21%20rue%20de%20l%27Industrie%2067170%20Brumath" target="_blank" rel="noopener">Voir sur la carte<span class="vk-sr"> (nouvel onglet)</span></a></p>
+        <a class="btn btn-rouge" href="#reserver" data-ux="reserver" data-ouvre="">Réserver</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="pied">
+  <div class="enveloppe">
+    <details class="gerant">
+      <summary>Pour la gérante : ce qui change</summary>
+      <div class="contenu">
+        <ol>
+          <li><strong>Bowling réservable en ligne</strong> : créneau, nombre de joueurs, prix du jour calculé sur votre grille et acompte payé tout de suite, à la place de la demande 72 h à l'avance. Le seuil « plus de 8 personnes » et le taux d'acompte (30 % ici, exemple) sont à régler avec vous.</li>
+          <li><strong>Anniversaire enfant en ligne</strong> : formule, activités, date, nombre d'enfants et acompte de 55 € payés depuis le téléphone, sans formulaire à imprimer ni passage à l'accueil. Le programme reste ajusté par votre équipe.</li>
+          <li><strong>Page légère</strong> : moins de 1 Mo tout compris, photos compressées, un seul bouton « Réserver » qui mène à toutes les activités. Karting, Quiz Room et escape games gardent leur module actuel.</li>
+        </ol>
+        <p>Le lien de la fiche Google est à relier à la nouvelle page. Disponibilités affichées : exemple.</p>
+      </div>
+    </details>
+    <p>Les valeurs marquées « exemple » sont à caler avec le parc. Horaires, prix et règles relevés sur baxbowling.fr le 23/11/2026.</p>
+    <p data-petit>Aperçu non commandé, préparé par Vong Studio. Logo et photos appartiennent au BAX (SARL BRUMBOWL) ; retrait sur simple demande. Paiement simulé : rien n'est débité, rien n'est enregistré.</p>
+  </div>
+</footer>
+
+<script src="vong-kit.js"></script>
+<script>
+(function () {
+  "use strict";
+  var K = VongKit, $ = function (s) { return document.querySelector(s); };
+  var params = new URLSearchParams(location.search);
+  var maintenant = params.get("t") ? new Date(params.get("t")) : new Date();
+  var aujourd = K.jourSeul(maintenant);
+
+  /* Jours fériés propres à l'Alsace-Moselle (Brumath, Bas-Rhin) : 26 décembre et Vendredi saint.
+     Source : https://calendrier.api.gouv.fr/jours-feries/alsace-moselle/2027.json et 2026.json (26/12/2026, Vendredi saint 26/03/2027), lus le 23/11/2026. */
+  K.FERIES["2026-12-26"] = "2e jour de Noël (férié en Alsace)";
+  K.FERIES["2027-03-26"] = "Vendredi saint (férié en Alsace)";
+
+  /* Horaires du bowling (bar, billard, arcade) : affiche « HORAIRES du 02/11/26 au 18/12/26 inclus »,
+     https://baxbowling.fr/horaires/ (image Horaires-4, lue le 23/11/2026). 24 = minuit, 25,5 = 1 h 30.
+     Fermeture = portes fermées ; dernières parties 30 min avant (image « Précisions horaires », même page). */
+  var FIN_GRILLE = "2026-12-18";
+  var joursAConfirmer = {};
+  /* Vacances scolaires zone B (académie de Strasbourg) : celles du kit, vérifiées le 23/11/2026 sur
+     https://fr.ftp.opendatasoft.com/openscol/fr-en-calendrier-scolaire/Zone-B.ics
+     Le parc publie des horaires spéciaux de vacances (affiche « vacances de Noël 2025 ») : pas encore publiés, donc à confirmer. */
+  K.VACANCES.B.forEach(function (v) {
+    if (v[1] <= FIN_GRILLE) return;
+    for (var d = K.deCle(v[0]); K.cle(d) <= v[1]; d = K.plus(d, 1)) if (K.cle(d) > FIN_GRILLE) joursAConfirmer[K.cle(d)] = v[2] + " : horaires pas encore publiés";
+  });
+  Object.keys(K.FERIES).forEach(function (k) { if (k > FIN_GRILLE && !joursAConfirmer[k]) joursAConfirmer[k] = K.FERIES[k] + " : ouverture à confirmer"; });
+  var H = new K.Horaires({
+    zone: "B",
+    hors: [[[10, 24]], [[14, 24]], [[14, 24]], [[10, 24]], [[14, 24]], [[14, 25.5]], [[10, 25.5]]],
+    joursAConfirmer: joursAConfirmer
+  });
+  /* Après le 18/12 (hors vacances et fériés) : on garde la grille de la semaine, marquée « horaires à confirmer » partout. */
+  var jourKit = K.Horaires.prototype.jour;
+  function horsGrille(d) { return K.cle(d) > FIN_GRILLE; }
+  H.jour = function (d) {
+    var j = jourKit.call(this, d);
+    if (j.ouvert && horsGrille(d)) j = { ouvert: true, plages: j.plages, motif: (j.motif ? j.motif + " · " : "") + "horaires à confirmer", periode: j.periode };
+    return j;
+  };
+
+  /* Prix du bowling : https://baxbowling.fr/bowling/ (affiche « BOWLING Tarifs », lue le 23/11/2026).
+     Par partie et par personne ; « en cas de conflit entre deux tarifs, le + cher des deux sera appliqué ». */
+  var GRILLE = { 1: [3.6, 4.9], 2: [3.6, 4.9], 3: [3.6, 4.9], 4: [3.6, 4.9], 5: [3.8, 6.3], 6: [5.2, 6.5], 0: [5.2, 4.9] };
+  var VEILLE = [3.8, 6.5], FERIE = [5.2, 5.2], VAC = [5.2, 5.2];
+  function prixPartie(d, h) {
+    var i = h >= 19 ? 1 : 0, c = [GRILLE[d.getDay()][i]];
+    if (H.vacance(d)) c.push(VAC[i]);
+    if (H.ferie(d)) c.push(FERIE[i]);
+    if (H.ferie(K.plus(d, 1))) c.push(VEILLE[i]);
+    return Math.max.apply(null, c);
+  }
+
+  /* ---------- Bandeau du jour ---------- */
+  K.bandeau($("#bandeau"), { horaires: H, maintenant: maintenant, lienHoraires: "#horaires" });
+
+  /* ---------- Menu téléphone ---------- */
+  var bMenu = $(".btn-menu"), tiroir = $("#tiroir");
+  bMenu.onclick = function () { var o = tiroir.hidden; tiroir.hidden = !o; bMenu.setAttribute("aria-expanded", String(o)); };
+  tiroir.onclick = function (e) { if (e.target.closest("a")) { tiroir.hidden = true; bMenu.setAttribute("aria-expanded", "false"); } };
+
+  /* ---------- Grille des prix (tableau) ---------- */
+  var NOMS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"], ORDRE = [1, 2, 3, 4, 5, 6, 0];
+  $("#grille-prix tbody").innerHTML = ORDRE.map(function (j, i) {
+    return '<tr' + (j === aujourd.getDay() ? ' class="auj"' : "") + '><th scope="row">' + NOMS[i] + '</th><td>' + K.euros(GRILLE[j][0]) + '</td><td>' + K.euros(GRILLE[j][1]) + "</td></tr>";
+  }).join("") + '<tr><th scope="row">Veille de jour férié</th><td>3,80 €</td><td>6,50 €</td></tr><tr><th scope="row">Jour férié</th><td>5,20 €</td><td>5,20 €</td></tr><tr><th scope="row">Vacances scolaires</th><td>5,20 €</td><td>5,20 €</td></tr>';
+
+  /* ---------- Horaires des 7 prochains jours (une seule source : H.jour / H.texteJour) ---------- */
+  var lignes = [];
+  for (var i = 0; i < 7; i++) {
+    var d = K.plus(aujourd, i), j = H.jour(d), txt;
+    if (j.aConfirmer) txt = "à confirmer";
+    else if (!j.ouvert) txt = "Fermé";
+    else txt = H.texteJour(d) + (horsGrille(d) ? " · à confirmer" : "");
+    var nom = i === 0 ? "Aujourd'hui" : K.JOURS_L[d.getDay()].charAt(0).toUpperCase() + K.JOURS_L[d.getDay()].slice(1) + " " + d.getDate();
+    var info = j.aConfirmer ? j.motif : (j.periode || (j.motif && !horsGrille(d) ? j.motif : ""));
+    lignes.push('<tr' + (i === 0 ? ' class="auj"' : "") + '><th scope="row">' + K.esc(nom) + (info ? '<br><span style="font-weight:400;color:var(--muted)">' + K.esc(info) + "</span>" : "") + "</th><td>" + K.esc(txt) + "</td></tr>");
+  }
+  $("#semaine tbody").innerHTML = lignes.join("");
+  $("#validite").textContent = K.cle(aujourd) <= FIN_GRILLE
+    ? "Bowling, bar, billard et arcade. Horaires publiés jusqu'au 18 décembre ; vacances de Noël à confirmer."
+    : "Bowling, bar, billard et arcade. Les horaires après le 18 décembre sont à confirmer avec le parc.";
+
+  /* ---------- Anniversaires : formules et calcul ---------- */
+  /* https://baxbowling.fr/anniversaires/ (lue le 23/11/2026) : « À PARTIR DE 16 € / enfant, 1 partie au choix + le goûter »,
+     22 € (2 parties), 28 € (3 parties) ; minimum 6 enfants (sous 6, 6 facturés) ; acompte de 55 € TTC. */
+  var FORMULES = [
+    { id: "f1", nom: "1 partie + goûter", prix: 16, parties: 1, unite: "par enfant", aPartirDe: true },
+    { id: "f2", nom: "2 parties + goûter", prix: 22, parties: 2, unite: "par enfant", aPartirDe: true },
+    { id: "f3", nom: "3 parties + goûter", prix: 28, parties: 3, unite: "par enfant", aPartirDe: true }
+  ];
+  var nbEnfants = 8;
+  function factures(n) { return Math.max(6, n); }
+  function rendreRegistre() {
+    $("#nb-enfants").textContent = nbEnfants;
+    $("#lib-enfants").textContent = (nbEnfants > 1 ? "enfants" : "enfant") + ", fêté compris" + (nbEnfants < 6 ? " (6 facturés)" : "");
+    $("#registre").innerHTML = FORMULES.map(function (f) {
+      return '<li><span class="nom">' + f.nom + '</span><span class="total">dès ' + K.euros(f.prix * factures(nbEnfants)) + "<small>" + K.euros(f.prix) + " par enfant</small></span>" +
+        '<span class="detail">' + (f.parties === 1 ? "1 activité au choix" : f.parties + " activités au choix") + ", puis le goûter.</span></li>";
+    }).join("");
+  }
+  $("#moins").onclick = function () { if (nbEnfants > 1) { nbEnfants--; rendreRegistre(); } };
+  $("#plus").onclick = function () { if (nbEnfants < 40) { nbEnfants++; rendreRegistre(); } };
+  rendreRegistre();
+
+  /* ---------- Parcours de réservation ---------- */
+  var etat = { act: null, formule: "f1", activites: ["bowling", "bowling", "bowling"], date: null, creneau: null, joueurs: 4, parties: 1, chaussures: true, chaussettes: false, enfants: 8, age: 8 };
+  var ACT_ANNIV = [["bowling", "Bowling"], ["laser", "Laser games (dès 6-7 ans)"], ["kids", "Kids Park (3 h max)"], ["golf", "Mini golf (1 partie)"]];
+  var parcours = { bowling: ["e-activite", "e-date", "e-recap"], anniv: ["e-activite", "e-formule", "e-date", "e-recap"] };
+  var courante = "e-activite";
+  function montrer(id, defiler) {
+    courante = id;
+    ["e-activite", "e-formule", "e-date", "e-recap"].forEach(function (x) { document.getElementById(x).hidden = x !== id; });
+    $("#conf").innerHTML = "";
+    var p = etat.act ? parcours[etat.act] : parcours.bowling, n = p.indexOf(id) + 1;
+    $("#fil").textContent = "Étape " + n + (etat.act ? " sur " + p.length + (etat.act === "anniv" ? " · anniversaire" : " · bowling") : "");
+    if (defiler) $("#fil").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  }
+  function suivante() { var p = parcours[etat.act]; montrer(p[p.indexOf(courante) + 1], true); }
+  document.querySelectorAll("[data-retour]").forEach(function (b) {
+    b.onclick = function () { var p = parcours[etat.act] || parcours.bowling, i = p.indexOf(courante); montrer(p[Math.max(0, i - 1)], true); };
+  });
+  function choisirActivite(a) {
+    etat.act = a; etat.date = null; etat.creneau = null;
+    if (a === "anniv") { etat.enfants = nbEnfants; rendreFormules(); montrer("e-formule", true); }
+    else { preparerDate(); montrer("e-date", true); }
+  }
+  document.querySelectorAll("[data-act]").forEach(function (b) { b.onclick = function () { choisirActivite(b.dataset.act); }; });
+  document.querySelectorAll("[data-ouvre]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var v = a.dataset.ouvre;
+      if (v) { e.preventDefault(); choisirActivite(v); }
+      else if (!etat.act || $("#conf").innerHTML) { etat.act = null; montrer("e-activite", false); }
+    });
+  });
+
+  function rendreFormules() {
+    $("#formules").innerHTML = FORMULES.map(function (f) { return K.carteFormule(f, f.id === etat.formule); }).join("");
+    var f = formule(), h = [];
+    for (var i = 0; i < f.parties; i++) {
+      h.push('<div class="champ"><label for="act' + i + '">Partie ' + (i + 1) + '</label><select id="act' + i + '" data-partie="' + i + '">' +
+        ACT_ANNIV.map(function (a) { return '<option value="' + a[0] + '"' + (etat.activites[i] === a[0] ? " selected" : "") + ">" + a[1] + "</option>"; }).join("") + "</select></div>");
+    }
+    $("#choix-activites").innerHTML = h.join("");
+  }
+  function formule() { return FORMULES.filter(function (x) { return x.id === etat.formule; })[0]; }
+  $("#formules").onclick = function (e) { var b = e.target.closest("[data-formule]"); if (b) { etat.formule = b.dataset.formule; rendreFormules(); } };
+  $("#choix-activites").onchange = function (e) { var s = e.target.closest("[data-partie]"); if (s) etat.activites[+s.dataset.partie] = s.value; };
+  $("#suite-formule").onclick = function () {
+    var b = this, choisies = etat.activites.slice(0, formule().parties);
+    if (choisies.filter(function (a) { return a === "golf"; }).length > 1) { K.erreur(b, "Le mini golf compte pour une seule partie : choisissez une autre activité."); return; }
+    if (choisies.filter(function (a) { return a === "kids"; }).length > 1) { K.erreur(b, "Le Kids Park se choisit une seule fois (3 h maximum)."); return; }
+    K.erreur(b, ""); preparerDate(); suivante();
+  };
+
+  /* Durées : bowling = créneau d'1 h (exemple) ; anniversaire = 45 min par partie + 45 min de goûter (exemple, heure de fin donnée par l'équipe). */
+  function duree() { return etat.act === "anniv" ? formule().parties * 0.75 + 0.75 : 1; }
+  var cal;
+  function preparerDate() {
+    cal = K.calendrier($("#cal"), { horaires: H, debut: maintenant, choisi: etat.date, mois: 6,
+      surChoix: function (d) { etat.date = d; etat.creneau = null; rendreLesCreneaux(); } });
+    rendreLesCreneaux();
+  }
+  function rendreLesCreneaux() {
+    var el = $("#creneaux"), info = $("#info-creneaux");
+    if (!etat.date) { el.innerHTML = ""; el.className = ""; info.textContent = "Choisissez un jour pour voir les heures libres."; return; }
+    var anniv = etat.act === "anniv";
+    var liste = K.creneaux({ horaires: H, date: etat.date, duree: duree(), pas: anniv ? 1 : 0.5, dernierDebut: anniv ? 17 : undefined, maintenant: maintenant,
+      places: function (d, t) { var x = K.hache(K.cle(d) + (anniv ? "a" : "b") + t); return anniv ? [0, 2, 3][x % 3] : [0, 2, 3, 5, 7][x % 5]; } });
+    info.textContent = anniv ? "Heure d'arrivée (dernier départ 17 h). Disponibilités : exemple." : "Heure de début de partie, pistes libres : exemple." + (horsGrille(etat.date) ? " Horaires à confirmer." : "");
+    K.rendreCreneaux(el, liste, { unite: anniv ? " tables libres" : " pistes libres", vide: anniv ? "Pas d'anniversaire possible ce jour-là. Choisissez un autre jour." : "Plus de créneau ce jour-là. Choisissez un autre jour.",
+      surRefus: function (c) { info.textContent = c.complet ? c.texte + " est complet. Choisissez une autre heure." : c.texte + " est déjà passé. Choisissez une autre heure."; },
+      surChoix: function (c) { etat.creneau = c; preparerRecap(); suivante(); } });
+  }
+
+  /* ---------- Récapitulatif ---------- */
+  function compteur(id, label, val, min, max) {
+    return '<div class="champ"><span id="l-' + id + '" style="font-weight:600;color:var(--ink)">' + label + '</span><div class="compteur" role="group" aria-labelledby="l-' + id + '">' +
+      '<button type="button" data-moins="' + id + '" aria-label="' + label + ' : moins">−</button><output id="v-' + id + '" aria-live="polite">' + val + '</output>' +
+      '<button type="button" data-plus="' + id + '" aria-label="' + label + ' : plus">+</button></div></div>';
+  }
+  var BORNES = { joueurs: [1, 40], parties: [1, 3], enfants: [1, 40] };
+  function nuit(h, d) { return h >= 24 ? " (dans la nuit du " + K.JOURS_L[d.getDay()] + " au " + K.JOURS_L[K.plus(d, 1).getDay()] + ")" : ""; }
+  function preparerRecap() {
+    var q = $("#quantites"), d = etat.date, c = etat.creneau, aConf = horsGrille(d) ? " (horaires à confirmer)" : "";
+    $("#quand").textContent = K.dateLongue(d).replace(/^./, function (x) { return x.toUpperCase(); }) + " à " + K.heure(c.debut) + nuit(c.debut, d) + aConf + (etat.act === "anniv" ? ". Arrivez 15 à 30 min en avance pour accueillir vos invités." : ". Présentez-vous 15 min avant à l'accueil.");
+    if (etat.act === "bowling") {
+      $("#titre-recap").textContent = "Votre partie de bowling";
+      q.innerHTML = compteur("joueurs", "Joueurs", etat.joueurs) + compteur("parties", "Parties", etat.parties) +
+        '<div class="coches"><label class="coche"><input type="checkbox" id="chaussures"' + (etat.chaussures ? " checked" : "") + '> Chaussures de location (2 € par joueur)</label>' +
+        '<label class="coche"><input type="checkbox" id="chaussettes"' + (etat.chaussettes ? " checked" : "") + '> Chaussettes (1 € par joueur)</label></div>';
+    } else {
+      $("#titre-recap").textContent = "L'anniversaire";
+      var ages = ""; for (var a = 3; a <= 18; a++) ages += '<option value="' + a + '"' + (a === etat.age ? " selected" : "") + ">" + a + " ans</option>";
+      q.innerHTML = compteur("enfants", "Enfants, fêté compris", etat.enfants) + '<div class="champ"><label for="age">Âge de l\'enfant fêté</label><select id="age">' + ages + "</select></div>";
+    }
+    calculer();
+  }
+  $("#quantites").onclick = function (e) {
+    var m = e.target.closest("[data-moins]"), p = e.target.closest("[data-plus]"), k = (m || p) && (m || p).dataset[m ? "moins" : "plus"];
+    if (!k) return;
+    etat[k] = Math.min(BORNES[k][1], Math.max(BORNES[k][0], etat[k] + (p ? 1 : -1)));
+    $("#v-" + k).textContent = etat[k]; calculer();
+  };
+  $("#quantites").onchange = function (e) {
+    if (e.target.id === "chaussures") etat.chaussures = e.target.checked;
+    if (e.target.id === "chaussettes") etat.chaussettes = e.target.checked;
+    if (e.target.id === "age") etat.age = +e.target.value;
+    calculer();
+  };
+  function calculer() {
+    var d = etat.date, c = etat.creneau, r;
+    if (etat.act === "bowling") {
+      var pu = prixPartie(d, c.debut), lg = [{ libelle: "Partie de bowling à " + K.euros(pu) + (c.debut >= 19 ? " (après 19 h)" : " (avant 19 h)"), quantite: etat.joueurs * etat.parties, prixUnitaire: pu }];
+      if (etat.chaussures) lg.push({ libelle: "Chaussures", quantite: etat.joueurs, prixUnitaire: 2 });
+      if (etat.chaussettes) lg.push({ libelle: "Chaussettes", quantite: etat.joueurs, prixUnitaire: 1 });
+      r = K.recapitulatif($("#recap"), { lignes: lg, tauxAcompte: 0.3, acompteExemple: true });
+      $("#note-recap").textContent = "Prix du jour lus sur la grille du parc. Pistes attribuées à l'accueil." + (horsGrille(d) ? " Horaires à confirmer." : "");
+    } else {
+      var f = formule(), n = factures(etat.enfants);
+      r = K.recapitulatif($("#recap"), { lignes: [{ libelle: "Formule " + f.nom + (etat.enfants < 6 ? " (6 enfants facturés)" : ""), quantite: n, prixUnitaire: f.prix }], acompteFixe: 55 });
+      var ch = etat.activites.slice(0, f.parties), ages = "";
+      /* Règles d'âge recopiées en information, sans blocage : https://baxbowling.fr/mini-golf/ et /laser-games/ (lues le 23/11/2026) */
+      if (etat.age < 6 && ch.indexOf("golf") >= 0) ages += " Mini golf : accessible à partir de 6 ans, mais également aux plus petits avec l'aide des parents.";
+      if (etat.age < 7 && ch.indexOf("laser") >= 0) ages += " Laser games : dès 6/7 ans, voyez avec l'accueil.";
+      $("#note-recap").textContent = "Prix de départ de la formule ; le goûter choisi peut le faire varier (à confirmer). Un accompagnateur majeur pour 5 enfants." + ages + (horsGrille(d) ? " Horaires à confirmer." : "");
+    }
+    return r;
+  }
+  $("#payer").onclick = function () {
+    var b = this;
+    if (!$("#nom").value.trim() || $("#tel").value.replace(/\D/g, "").length < 10) { K.erreur(b, "Indiquez votre nom et un numéro de téléphone à 10 chiffres."); return; }
+    K.erreur(b, "");
+    var r = calculer(), anniv = etat.act === "anniv";
+    document.getElementById("e-recap").hidden = true;
+    $("#fil").textContent = "C'est fait";
+    K.confirmation($("#conf"), { numero: K.numero("BAX"), date: etat.date, debut: etat.creneau.debut, duree: duree(),
+      titre: anniv ? "Anniversaire au BAX" : "Bowling au BAX", lieu: "BAX, 21 rue de l'Industrie, 67170 Brumath",
+      resume: (anniv ? "Anniversaire, " + etat.enfants + " enfants, formule " + formule().nom : "Bowling, " + etat.joueurs + " joueurs, " + etat.parties + " partie" + (etat.parties > 1 ? "s" : "")) +
+        nuit(etat.creneau.debut, etat.date) + ". Acompte payé : " + K.euros(r.acompte) + (r.acompteExemple ? " (exemple)" : "") + ", reste sur place : " + K.euros(r.reste) + "." + (horsGrille(etat.date) ? " Horaires à confirmer." : "") });
+  };
+
+  montrer("e-activite", false);
+})();
+</script>
+</body>
+</html>
